@@ -48,41 +48,30 @@
                 <div class="c_detail">
                     <div style="background-color:#fff;" class="c_logo">
                         <a title="上传公司LOGO" id="logoShow" class="inline cboxElement" href="#logoUploader">
-                            <img width="190" height="190" alt="公司logo" src="style/images/logo_default.png">
+                            <img width="190" height="190" alt="公司logo" src="${pageContext.request.contextPath}/style/images/logo_default.png">
 
                             <span>更换公司图片<br>190px*190px 小于5M</span>
                         </a>
                     </div>
 
-                    <!--  			                <div class="c_logo" style="background-color:#fff;">
-                            <div id="logoShow">
-                                <img src="style/images/logo_default.png" width="190" height="190" alt="公司logo" />
-                                <span>更换公司图片<br />190px*190px 小于5M</span>
-                            </div>
-                            <input onchange="img_check(this,'http://www.lagou.com/cd/saveProfileLogo.json',25927,'logo');" type="file" id="logo" name="logo" title="支持jpg、jpeg、gif、png格式，文件小于5M" />
-
-                        </div>
-                        <span class="error" id="logo_error" style="display:none;"></span>
-                         -->
-
                     <div class="c_box companyName">
                         <h2 title="公司名称">公司名称</h2>
 
                         <em class="unvalid"></em>
-                        <span class="va dn" style="display: none;">拉勾未认证企业</span>
+                        <span class="valid dn" style="display: none;">拉勾未认证企业</span>
                         <a class="applyC" href="#">认证通过</a>
                         <div class="clear"></div>
 
                         <h1 title="福建平潭协创进出口贸易有限公司" class="fullname">福建平潭协创进出口贸易有限公司</h1>
 
                         <form class="clear editDetail dn" id="editDetailForm" style="display: none;">
-                            <input type="text" placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" value="测试的发打发打发大范德萨发" name="companyFeatures" id="companyFeatures" class="valid"><span for="companyFeatures" generated="true" class="error" style="display: none;">请输入5-50字的一句话介绍</span>
+                            <input type="text" placeholder="写明公司详细地址，限25字" maxlength="50" value="" name="companyFeatures" id="companyFeatures" class="valid"><span for="companyFeatures" generated="true" class="error" style="display: none;">请输入5-50字的一句话介绍</span>
                             <input type="hidden" value="25927" id="companyId" name="companyId">
                             <input type="submit" value="保存" id="saveDetail" class="btn_small">
                             <a id="cancelDetail" class="btn_cancel_s" >取消</a>
                         </form>
 
-                        <div class="clear oneword" style="display: block;"><img width="17" height="15" src="style/images/quote_l.png">&nbsp; <span>公司名称公司名称公司名称</span> &nbsp;<img width="17" height="15" src="style/images/quote_r.png"></div>
+                        <div class="clear oneword" style="display: block;"><img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_l.png">&nbsp; <span>请输入公司地址</span> &nbsp;<img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_r.png"></div>
                         <h3 class="dn">已选择标签</h3>
                         <ul style="overflow:auto" id="hasLabels" class="reset clearfix">
                             <li><span>年终分红</span></li>
@@ -105,6 +94,40 @@
                     <a title="编辑基本信息" class="c_edit" id="editCompanyDetail" href="javascript:void(0);" style="display: block;"></a>
                     <div class="clear"></div>
                 </div>
+
+                <div class="c_breakline"></div>
+
+                <div id="coreValue">
+                    <div class="profile_wrap">
+                        <!--编辑介绍-->
+                        <dl class="c_section newIntro dn" style="display: none;" id="valuesComp">
+                            <dt>
+                                <h2><em></em>公司核心价值</h2>
+                            </dt>
+                            <dd>
+                                <form id="companyValueForm">
+                                    <textarea placeholder="请分段详细描述公司简介、企业文化等" name="companyProfile" id="newValue" class="valid" style="height: 15%">法嘎嘎法嘎嘎</textarea>
+                                    <div class="word_count fr">你还可以输入 <span>955</span> 字</div>
+                                    <div class="clear"></div>
+                                    <input type="submit" value="保存" id="submitValue" class="btn_small">
+                                    <a id="delValue" class="btn_cancel_s" onclick="hiddenValue()">取消</a>
+                                </form>
+                            </dd>
+                        </dl>
+
+                        <!--有介绍-->
+                        <dl class="c_section" style="display: block;" id="realValue">
+                            <dt>
+                                <h2><em></em>公司核心价值</h2>
+                            </dt>
+                            <dd>
+                                <div class="c_intro">afdsafs</div>
+                                <a title="编辑公司介绍" id="editValue" class="c_edit" href="#" onclick="showValue()"></a>
+                            </dd>
+                        </dl>
+                    </div>
+
+                </div><!-- end #Profile -->
 
                 <div class="c_breakline"></div>
 
@@ -144,7 +167,7 @@
                                 <h2><em></em>公司介绍</h2>
                             </dt>
                             <dd>
-                                <div class="c_intro">随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写</div>
+                                <div class="c_intro">afdsafs</div>
                                 <a title="编辑公司介绍" id="editIntro" class="c_edit" href="javascript:void(0)"></a>
                             </dd>
                         </dl>
@@ -360,8 +383,17 @@
 
 <script>
     function showProduct() {
-        alert("123")
         $("#products").css("display","block");
+    }
+
+    function showValue() {
+        $("#valuesComp").css("display","block");
+        $("#realValue").css("display","none");
+    }
+
+    function hiddenValue() {
+        $("#valuesComp").css("display","none");
+        $("#realValue").css("display","block");
     }
 </script>
 </html>
