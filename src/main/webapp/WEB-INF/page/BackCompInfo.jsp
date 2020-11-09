@@ -108,84 +108,6 @@
 
                 <div class="c_breakline"></div>
 
-                <div id="Product">
-
-                    <div class="product_wrap">
-
-                        <!--无产品 -->
-                        <dl class="c_section dn">
-                            <dt>
-                                <h2><em></em>公司产品</h2>
-                            </dt>
-                            <dd>
-                                <div class="addnew">
-                                    酒香不怕巷子深已经过时啦！<br>
-                                    把自己优秀的产品展示出来吸引人才围观吧！<br>
-                                    <a class="product_edit" href="javascript:void(0)">+添加公司产品</a>
-                                </div>
-                            </dd>
-                        </dl>
-
-                        <!--产品编辑-->
-                        <dl id="newProduct" class="newProduct dn">
-                            <dt>
-                                <h2><em></em>公司产品</h2>
-                            </dt>
-                            <dd>
-                                <form method="post" class="productForm">
-                                    <div class="new_product">
-
-                                        <div class="product_upload dn productNo">
-                                            <div style="background-color: rgb(147, 183, 187);">
-                                                <span>上传产品图片</span>
-                                                <br>
-                                                尺寸：380*220px  	大小：小于5M
-                                            </div>
-                                        </div>
-                                        <div class="product_upload productShow">
-                                            <img width="380" height="220" src="style/images/product_default.png">
-                                            <span>更换产品图片<br>380*220px 小于5M</span>
-                                        </div>
-
-                                        <input type="file" title="支持jpg、jpeg、gif、png格式，文件小于5M" onchange="product_check(this,'http://www.lagou.com/c/upload.json','productNo','productShow','type','productInfos');" name="myfiles" id="myfiles0">
-                                        <input type="hidden" value="3" name="type" class="type">
-                                        <input type="hidden" value="images/product_default.png" name="productPicUrl" class="productInfos">
-                                    </div>
-
-                                    <div class="cp_intro">
-                                        <input type="text" placeholder="请输入产品名称" value="发大发" name="product" class="valid">
-                                        <input type="text" placeholder="请输入产品网址" value="http://www.weimob.com" name="productUrl" class="valid">
-                                        <textarea placeholder="请简短描述该产品定位、产品特色、用户群体等" maxlength="500" value="发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf" class="s_textarea valid" name="productProfile">随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写</textarea>
-                                        <div class="word_count fr">你还可以输入 <span>437</span> 字</div>
-                                        <div class="clear"></div>
-                                        <input type="submit" value="保存" class="btn_small">
-                                        <a class="btn_cancel_s product_delete" href="javascript:void(0)">删除</a>
-                                        <input type="hidden" value="11867" class="product_id">
-                                    </div>
-                                </form>
-                            </dd>
-                        </dl>
-                        <!--有产品-->
-                        <dl class="c_product">
-                            <dt>
-                                <h2><em></em>公司产品</h2>
-                            </dt>
-                            <dd>
-                                <img width="380" height="220" alt="发大发" src="style/images/product_default.png">
-                                <div class="cp_intro">
-                                    <h3><a target="_blank" href="http://www.zmtpost.com">随便写</a></h3>
-                                    <div class="scroll-pane" style="overflow: hidden; padding: 0px; width: 260px;">
-
-                                        <div class="jspContainer" style="width: 260px; height: 140px;"><div class="jspPane" style="padding: 0px; top: 0px; width: 260px;"><div>随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写随便写</div></div></div></div>
-                                </div>
-                                <a title="编辑公司产品" class="c_edit product_edit" href="javascript:void(0)"></a>
-                                <a title="新增公司产品" class="c_add product_add" href="javascript:void(0)"></a>
-                            </dd>
-                        </dl>
-
-                    </div>
-                </div>   <!-- end #Product -->
-
                 <div id="Profile">
                     <div class="profile_wrap">
                         <!--无介绍 -->
@@ -258,11 +180,7 @@
                                     <td>
                                         <input type="hidden" value="移动互联网" id="industryField" name="industryField" class="valid">
                                         <input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="移动互联网" id="select_ind" class="select_tags">
-                                        <!-- <div id="box_ind" class="selectBox dn">
-                                            <ul class="reset">
-                                                                                                                                                            <li class="current">移动互联网</li>
-                                                                                                                                                </ul>
-                                        </div>	 -->
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -334,6 +252,26 @@
                         </form>
                     </dd>
                 </dl><!-- end .c_stages -->
+
+
+                <dl class="c_section ">
+                    <dt>
+                        <h2><em></em>公司产品</h2>
+                        <a title="产品介绍编辑" class="c_edit" href="#" onclick="showProduct()"></a>
+                    </dt>
+                    <dd>
+                        <ul class="reset stageshow">
+                            <textarea placeholder="请简短描述该产品定位、产品特色、用户群体等" maxlength="500" value="" class="s_textarea valid" name="productProfile" style="width: 100%"></textarea>
+                        </ul>
+                        <form id="products" style="display:none;">
+
+                            <input type="submit" value="保存" class="btn_small">
+                            <a id="cancelProducts" class="btn_cancel_s" >取消</a>
+                            <div class="clear"></div>
+
+                        </form>
+                    </dd>
+                </dl>
         </div>
 
         <!-------------------------------------弹窗lightbox  ----------------------------------------->
@@ -419,4 +357,11 @@
     <div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div>
 </div>
 </body>
+
+<script>
+    function showProduct() {
+        alert("123")
+        $("#products").css("display","block");
+    }
+</script>
 </html>
