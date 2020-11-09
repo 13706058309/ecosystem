@@ -10,7 +10,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
         System.out.println("人才生态圈");
         System.out.println("哈哈");
-        System.out.println("狗狗好可怜");
+        System.out.println("狗狗");
 
 
     }
