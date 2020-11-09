@@ -12,6 +12,7 @@ public class DemoApplication {
         System.out.println("lsjlfjslk");
         System.out.println("lsjlfj11");
         System.out.println("好好学习，天天向上");
+        System.out.println("ls2222");
     }
 
 }
