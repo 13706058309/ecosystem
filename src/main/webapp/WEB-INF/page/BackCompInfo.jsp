@@ -6,19 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns:wb="http://open.weibo.com/wb"><head>
-    <script type="text/javascript" async="" src="style/js/conversion.js"></script>
-    <script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
+    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>
+    <script src="${pageContext.request.contextPath}/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
     <style type="text/css"></style>
     <meta content="no-siteapp" http-equiv="Cache-Control">
     <link  media="handheld" rel="alternate">
     <!-- end 云适配 -->
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>平潭协创进出口贸易有限公司-拉勾网-最专业的互联网招聘平台</title>
-    <meta content="23635710066417756375" property="qc:admins">
-    <meta name="description" content="平潭协创进出口贸易有限公司 福建平潭协创进出口贸易有限公司 上海 移动互联网 天使轮 150-500人 测试的发打发打发大范德萨发">
-    <meta name="keywords" content="平潭协创进出口贸易有限公司 福建平潭协创进出口贸易有限公司 上海 移动互联网 天使轮 150-500人 测试的发打发打发大范德萨发">
-    <meta content="QIQ6KC1oZ6" name="baidu-site-verification">
 
     <!-- <div class="web_root"  style="display:none">http://www.lagou.com</div> -->
     <script type="text/javascript">
@@ -26,21 +22,21 @@
         console.log(1);
     </script>
     <link href="http://www.lagou.com/images/favicon.ico" rel="Shortcut Icon">
-    <link href="style/css/style.css" type="text/css" rel="stylesheet">
-    <link href="style/css/external.min.css" type="text/css" rel="stylesheet">
-    <link href="style/css/popup.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="style/js/jquery.1.10.1.min.js"></script>
-    <script src="style/js/jquery.lib.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="style/js/ajaxfileupload.js"></script>
-    <script src="style/js/additional-methods.js" type="text/javascript"></script>
+    <link href="${pageContext.request.contextPath}/style/css/style.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/css/external.min.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/css/popup.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/jquery.1.10.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/style/js/jquery.lib.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/ajaxfileupload.js"></script>
+    <script src="${pageContext.request.contextPath}/style/js/additional-methods.js" type="text/javascript"></script>
     <!--[if lte IE 8]>
-    <script type="text/javascript" src="style/js/excanvas.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/excanvas.js"></script>
     <![endif]-->
     <script type="text/javascript">
         var youdao_conv_id = 271546;
     </script>
-    <script src="style/js/conv.js" type="text/javascript"></script>
-    <script src="style/js/ajaxCross.json" charset="UTF-8"></script></head>
+    <script src="${pageContext.request.contextPath}/style/js/conv.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script></head>
 <body>
 <div id="body">
 
@@ -74,13 +70,12 @@
 
                         <em class="unvalid"></em>
                         <span class="va dn" style="display: none;">拉勾未认证企业</span>
-                        <a target="_blank" class="applyC" href="http://www.lagou.com/c/auth.html">申请认证</a>
+                        <a class="applyC" href="#">认证通过</a>
                         <div class="clear"></div>
 
                         <h1 title="福建平潭协创进出口贸易有限公司" class="fullname">福建平潭协创进出口贸易有限公司</h1>
 
                         <form class="clear editDetail dn" id="editDetailForm" style="display: none;">
-                            <input type="text" placeholder="请输入公司简称" maxlength="15" value="平潭协创进出口贸易有限公司" name="companyShortName" id="companyShortName" class="valid">
                             <input type="text" placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" value="测试的发打发打发大范德萨发" name="companyFeatures" id="companyFeatures" class="valid"><span for="companyFeatures" generated="true" class="error" style="display: none;">请输入5-50字的一句话介绍</span>
                             <input type="hidden" value="25927" id="companyId" name="companyId">
                             <input type="submit" value="保存" id="saveDetail" class="btn_small">
@@ -237,19 +232,6 @@
 
                 <!--[if IE 7]> <br /> <![endif]-->
 
-                <!--无招聘职位-->
-                <dl id="noJobs" class="c_section">
-                    <dt>
-                        <h2><em></em>招聘职位</h2>
-                    </dt>
-                    <dd>
-                        <div class="addnew">
-                            发布需要的人才信息，让伯乐和千里马尽快相遇……<br>
-                            <a href="create.html">+添加招聘职位</a>
-                        </div>
-                    </dd>
-                </dl>
-
                 <input type="hidden" value="" name="hasNextPage" id="hasNextPage">
                 <input type="hidden" value="" name="pageNo" id="pageNo">
                 <input type="hidden" value="" name="pageSize" id="pageSize">
@@ -334,177 +316,24 @@
                                 <input type="button" value="天使轮" id="select_fin" class="select_tags_short fl">
                                 <div class="selectBoxShort dn" id="box_fin" style="display: none;">
                                     <ul class="reset">
-
                                         <li>未融资</li>
-
-
                                         <li class="current">天使轮</li>
-
-
                                         <li>A轮</li>
-
-
                                         <li>B轮</li>
-
-
                                         <li>C轮</li>
-
-
                                         <li>D轮及以上</li>
-
-
                                         <li>上市公司</li>
-
                                     </ul>
                                 </div>
                             </div>
-                            <ul id="stagesList" class="reset">
-                                <li>
-                                    <label>融资阶段</label>
-                                    <input type="hidden" class="select_invest_hidden" name="select_invest_hidden">
-                                    <input type="button" value="融资阶段" class="select_tags_short select_invest">
-                                    <div class="selectBoxShort dn" style="display: none;">
-                                        <ul class="reset">
-                                            <li>天使轮</li>
-                                            <li>A轮</li>
-                                            <li>B轮</li>
-                                            <li>C轮</li>
-                                            <li>D轮及以上</li>
-                                            <li>上市公司</li>
-                                        </ul>
-                                    </div>
-                                    <label>投资机构</label>
-                                    <input type="text" placeholder="如真格基金" name="stageorg" value="">
-                                </li>
-                            </ul>
+
                             <input type="submit" value="保存" class="btn_small">
                             <a id="cancelStages" class="btn_cancel_s" href="javascript:void(0)">取消</a>
                             <div class="clear"></div>
 
-                            <div class="dn" id="cloneInvest">
-                                <label>融资阶段</label>
-                                <input type="hidden" class="select_invest_hidden" name="select_invest_hidden">
-                                <input type="button" value="发展阶段" class="select_tags_short select_invest">
-                                <div class="selectBoxShort dn" style="display: none;">
-                                    <ul class="reset">
-                                        <li>天使轮</li>
-                                        <li>A轮</li>
-                                        <li>B轮</li>
-                                        <li>C轮</li>
-                                        <li>D轮及以上</li>
-                                        <li>上市公司</li>
-                                    </ul>
-                                </div>
-                                <label>投资机构</label>
-                                <input type="text" placeholder="如真格基金" name="stageorg">
-                            </div>
                         </form>
                     </dd>
                 </dl><!-- end .c_stages -->
-
-
-                <div id="Member">
-                    <!--有创始团队-->
-                    <dl class="c_section c_member">
-                        <dt>
-                            <h2><em></em>创始团队</h2>
-                            <a title="添加创始人" class="c_add" href="javascript:void(0)"></a>
-                        </dt>
-                        <dd>
-
-                            <div class="member_wrap">
-
-                                <!-- 无创始人 -->
-                                <div class="member_info addnew_right dn">
-                                    展示公司的领导班子，<br>提升诱人指数！<br>
-                                    <a class="member_edit" href="javascript:void(0)">+添加成员</a>
-                                </div>
-
-                                <!-- 编辑创始人 -->
-                                <div class="member_info newMember dn">
-                                    <form class="memberForm">
-                                        <div class="new_portrait">
-                                            <div class="portrait_upload dn portraitNo">
-                                                <span>上传创始人头像</span>
-                                            </div>
-                                            <div class="portraitShow">
-                                                <img width="120" height="120" src="style/images/leader_default.png">
-                                                <span>更换头像</span>
-                                            </div>
-                                            <input type="file" value="" title="支持jpg、jpeg、gif、png格式，文件小于5M" onchange="member_check(this,'http://www.lagou.com/c/upload.json','portraitNo','portraitShow','type','leaderInfos');" name="myfiles" id="profiles0">
-                                            <input type="hidden" value="7" name="type" class="type">
-                                            <input type="hidden" value="images/leader_default.png" name="photo" class="leaderInfos">
-                                            <em>
-                                                尺寸：120*120px <br>
-                                                大小：小于5M
-                                            </em>
-                                        </div>
-                                        <input type="text" placeholder="请输入创始人姓名" value="孙泰英" name="name" class="valid">
-                                        <input type="text" placeholder="请输入创始人当前职位" value="ceo" name="position">
-                                        <input type="text" placeholder="请输入创始人新浪微博地址" value="http://weimob.weibo.com" name="weibo" class="valid">
-                                        <textarea placeholder="请输入创始人个人简介" maxlength="500" class="s_textarea valid" name="remark">发放的发达范德萨范德萨范德萨发的复大发大水发生的</textarea>
-                                        <div class="word_count fr">你还可以输入 <span>476</span> 字</div>
-                                        <div class="clear"></div>
-                                        <input type="submit" value="保存" class="btn_small">
-                                        <a class="btn_cancel_s member_delete" href="javascript:void(0)">删除</a>
-                                        <input type="hidden" value="11493" class="leader_id">
-                                    </form>
-                                </div>
-
-                                <!-- 显示创始人 -->
-                                <div class="member_info">
-                                    <a title="编辑创始人" class="c_edit member_edit" href="javascript:void(0)"></a>
-                                    <div class="m_portrait">
-                                        <div></div>
-                                        <img width="120" height="120" alt="孙泰英" src="style/images/leader_default.png">
-                                    </div>
-                                    <div class="m_name">随便写<a target="_blank" class="weibo" href="http://www.zmtpost.com"></a></div>
-                                    <div class="m_position">ceo</div>
-                                    <div class="m_intro">随便写随便写随便写随便写随便写随便写随便写随便写</div>
-                                </div>
-
-                            </div><!-- end .member_wrap -->
-                        </dd>
-                    </dl>
-                </div> <!-- end #Member -->
-
-
-                <!--公司深度报道-->
-                <div id="Reported">
-                    <!--无报道-->
-                    <dl class="c_section c_reported">
-                        <dt>
-                            <h2><em></em>公司深度报道</h2>
-                            <a title="添加报道" class="c_add dn" href="javascript:void(0)"></a>
-                        </dt>
-                        <dd>
-                            <!-- 编辑报道 -->
-                            <ul class="reset dn"></ul>
-
-                            <!-- 无报道 -->
-                            <div class="addnew_right reported_info">
-                                展示外界对公司的深度报道，<br>便于求职者了解公司！<br>
-                                <a class="report_edit" href="javascript:void(0)">+添加报道</a>
-                            </div>
-
-                            <ul class="newReport dn">
-                                <li>
-                                    <a style="display:none;" class="article" title="" target="_blank" ></a>
-                                    <a title="编辑报道" class="c_edit dn" href="javascript:;"></a>
-                                    <form class="reportForm">
-                                        <input type="text" placeholder="请输入文章标题" value="" name="articleTitle">
-                                        <input type="text" placeholder="请输入文章链接" value="" name="articleUrl">
-                                        <input type="submit" value="保存" class="btn_small">
-                                        <a class="btn_cancel_s report_cancel" href="javascript:;">取消</a>
-                                        <input type="hidden" value="" class="article_id">
-                                    </form>
-                                </li>
-                            </ul>
-                        </dd>
-                    </dl><!-- end .c_reported -->
-                </div><!-- end #Reported -->
-
-            </div>
         </div>
 
         <!-------------------------------------弹窗lightbox  ----------------------------------------->
@@ -538,7 +367,7 @@
         </div>
         <!------------------------------------- end ----------------------------------------->
 
-        <script src="style/js/company.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/style/js/company.min.js" type="text/javascript"></script>
         <script>
             var avatar = {};
             avatar.uploadComplate = function( data ){
@@ -554,20 +383,40 @@
         <a rel="nofollow" title="回到顶部" id="backtop" style="display: none;"></a>
     </div><!-- end #container -->
 </div><!-- end #body -->
-<div id="footer">
-    <div class="wrapper">
-        <a rel="nofollow" target="_blank" href="about.html">联系我们</a>
-        <a target="_blank" href="http://www.lagou.com/af/zhaopin.html">互联网公司导航</a>
-        <a rel="nofollow" target="_blank" href="http://e.weibo.com/lagou720">拉勾微博</a>
-        <a rel="nofollow" href="javascript:void(0)" class="footer_qr">拉勾微信<i></i></a>
-        <div class="copyright">&copy;2013-2014 Lagou <a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" target="_blank">京ICP备14023790号-2</a></div>
-    </div>
-</div>
 
-<script src="style/js/core.min.js" type="text/javascript"></script>
-<script src="style/js/popup.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/style/js/core.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/style/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
 
 
-<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div></body></html>
+<div id="cboxOverlay" style="display: none;"></div>
+<div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;">
+    <div id="cboxWrapper">
+        <div id="cboxTopLeft" style="float: left;"></div>
+        <div id="cboxTopCenter" style="float: left;"></div>
+        <div id="cboxTopRight" style="float: left;"></div>
+    </div>
+        <div style="clear: left;">
+            <div id="cboxMiddleLeft" style="float: left;"></div>
+            <div id="cboxContent" style="float: left;">
+                <div id="cboxTitle" style="float: left;"></div>
+                <div id="cboxCurrent" style="float: left;"></div>
+                <button type="button" id="cboxPrevious"></button>
+                <button type="button" id="cboxNext"></button>
+                <button id="cboxSlideshow"></button>
+                <div id="cboxLoadingOverlay" style="float: left;"></div>
+                <div id="cboxLoadingGraphic" style="float: left;"></div>
+            </div>
+            <div id="cboxMiddleRight" style="float: left;"></div>
+        </div>
+        <div style="clear: left;">
+            <div id="cboxBottomLeft" style="float: left;"></div>
+            <div id="cboxBottomCenter" style="float: left;"></div>
+            <div id="cboxBottomRight" style="float: left;"></div>
+        </div>
+    </div>
+    <div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div>
+</div>
+</body>
+</html>
