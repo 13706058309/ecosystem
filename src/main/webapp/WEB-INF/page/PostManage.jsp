@@ -9,11 +9,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>后台日志管理</title>
+    <title>岗位管理</title>
     <meta name="renderer" content="webkit">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" media="all">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     <input id="path" type="hidden" value="${pageContext.request.contextPath}">
 
 </head>
@@ -26,16 +27,20 @@
 
 <form class="layui-form" action="denglujieguo" method="post">
     <div class="container">
-        <div class="layui-form-item">
-            查询条件：
+        <div class="layui-form-item" style="margin-top: 20px;margin-left: 20px">行业：<input type="text">
+<%--            <select style="width: 100px;height: 30px">--%>
+<%--                <option>--</option>--%>
+<%--                <option>IT</option>--%>
+<%--                <option>嵌入式</option>--%>
+<%--            </select>--%>
         </div>
 
         <div class="layui-form-item">
-            &nbsp;&nbsp;&nbsp;日志时间：<input type="text" style="height: 30px">&nbsp;至&nbsp;<input type="text"style="height: 30px">
+            <button type="submit" style="margin-left: 250px;margin-top: -40px;width: 75px;height: 30px">搜索</button>
         </div>
 
-        <div class="layui-form-item">
-            <button type="submit" style="margin-left: 500px;margin-top: -30px;width: 75px">查询</button>
+        <div class="layui-form-item" style="height: 30px;margin-left: 300px;margin-top: -20px">
+            <button type="submit" style="margin-left: 100px;margin-top: -35px;width: 75px;height: 30px">添加岗位</button>
         </div>
         <table id="demo" lay-filter="test"></table>
         <script>
@@ -49,14 +54,16 @@
                     ,page: true //开启分页
                     ,cols: [[ //表头
                         {field: '1', title: '序列', width:80, sort: true, fixed: 'left'}
-                        ,{field: '2', title: '操作人', width:80}
-                        ,{field: '3', title: '操作时间', width:80, sort: true}
-                        ,{field: '5', title: '操作事项', width: 177}
+                        ,{field: '2', title: '类型名称', width:80}
+                        ,{field: '3', title: '上一级', width:80, sort: true}
+                        ,{field: '5', title: '操作', width: 177}
                     ]]
                 });
             });
         </script>
-<%--        <div style="margin-left: 200px;">上一页</div>--%>
+
+<%--        <div style="margin-left: 150px;">上一页</div>--%>
+<%--        <div style="margin-left: 235px;margin-top: -20px">1/1</div>--%>
 <%--        <div style="margin-left: 300px;margin-top: -20px">下一页</div>--%>
         </div>
 </form>
