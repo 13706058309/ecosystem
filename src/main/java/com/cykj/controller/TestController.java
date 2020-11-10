@@ -9,4 +9,9 @@ public class TestController {
     public String test(){
         return "BackCompInfo";
     }
+
+    @RequestMapping("/changePwd")
+    public String changePwd(){
+        return "BackChangePwd";
+    }
 }
