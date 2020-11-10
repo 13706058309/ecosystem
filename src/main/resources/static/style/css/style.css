@@ -564,9 +564,7 @@ span.error {
 }
 
 #search_box {
-    margin: 50px 370px 3px 370px;
-    width: 900px;
-    height: 300px;
+    margin: 35px 300px 5px 300px;
     position: relative;
 }
 
@@ -574,8 +572,8 @@ span.error {
     border: 2px solid #747778;
     border-right: none;
     width: 574px;
-    height: 23px;
-    line-height: 23px;
+    height: 50px;
+    line-height: 50px;
     float: left;
     font-size: 16px;
     padding: 7px 8px;
@@ -599,15 +597,15 @@ span.error {
 
 #search_box {
     border: 2px solid #44d0c7;
-    width: 740px;
+    width: 870px;
     height: 50px;
     position: relative;
 }
 
 #search_input {
     width: 476px;
-    height: 23px;
-    line-height: 23px;
+    height: 50px;
+    line-height: 50px;
     float: left;
     font-size: 16px;
     padding: 7px 8px 7px 10px;
@@ -616,7 +614,7 @@ span.error {
 }
 
 #search_button {
-    height: 37px;
+    height: 50px;
     width: 152px;
     color: #FFF;
     font-size: 18px;
@@ -652,11 +650,11 @@ span.error {
 }
 
 #searchType li.type_selected {
-    height: 38px;
+    height: 36px;
     border-left: 2px solid #44d0c7;
     border-right: 2px solid #44d0c7;
     border-top: 0;
-    border-bottom: 0;
+    border-bottom: 2px solid #44d0c7;
     display: block;
 }
 
@@ -6701,12 +6699,15 @@ a.greylink {
 }
 
 .hotSearch dt, .hotSearch dd {
+
     float: left;
 }
 
 .hotSearch dt {
+    margin-left: 350px;
     width: 90px;
     font-size: 16px;
+    color: darkgrey;
 }
 
 .hotSearch dd {
@@ -6715,6 +6716,7 @@ a.greylink {
 
 .hotSearch dd a:hover {
     text-decoration: underline;
+    color: #44d0c7;
 }
 
 .breakline {
