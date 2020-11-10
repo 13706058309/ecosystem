@@ -27,6 +27,23 @@ public class TestController {
         return "EnterpriseManage";
     }
 
+    @RequestMapping("/changePwd")
+    public String changePwd(){
+        return "BackChangePwd";
+    }
 
+    @RequestMapping("/backUniverTalent")
+    public String backUniverTalent(){
+        return "BackUniversityTalent";
+    }
+
+    @RequestMapping("/backCompFindUser")
+    public String backCompFindUser(){
+        return "BackCompFindUser";
+    }
+
+    @RequestMapping("/findPwd")
+    public String findPwd(){
+        return "BackFindPwd";
+    }
 }
-
