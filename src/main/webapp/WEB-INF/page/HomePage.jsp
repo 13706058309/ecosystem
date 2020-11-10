@@ -55,9 +55,9 @@
                 <li><a href="create.html" rel="nofollow">发布职位</a></li>
             </ul>
             <ul class="loginTop">
-                <li><a href="login.html" rel="nofollow">登录</a></li>
+                <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
                 <li>|</li>
-                <li><a href="register.html" rel="nofollow">注册</a></li>
+                <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
             </ul>
         </div>
     </div><!-- end #header -->
