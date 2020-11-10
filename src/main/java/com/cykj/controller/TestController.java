@@ -29,4 +29,9 @@ public class TestController {
     public String findPwd(){
         return "BackFindPwd";
     }
+
+    @RequestMapping("/compReg")
+    public String compReg(){
+        return "BackCompReg";
+    }
 }
