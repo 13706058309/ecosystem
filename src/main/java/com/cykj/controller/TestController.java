@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
     @RequestMapping("/testComp")
     public String test(){
-        return "BackCompInfo";
+        return "findJob";
     }
 }
