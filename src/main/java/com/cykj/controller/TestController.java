@@ -17,7 +17,7 @@ public class TestController {
 
     @RequestMapping("/backUniverTalent")
     public String backUniverTalent(){
-        return "BackUniversityTalent";
+        return "comp/BackUniversityTalent";
     }
 
     @RequestMapping("/backCompFindUser")
@@ -32,7 +32,12 @@ public class TestController {
 
     @RequestMapping("/compReg")
     public String compReg(){
-        return "BackCompReg";
+        return "comp/BackCompReg";
+    }
+
+    @RequestMapping("/postPosition")
+    public String postPosition(){
+        return "comp/BackPostPosition";
     }
 }
 
