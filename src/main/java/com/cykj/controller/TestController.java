@@ -19,4 +19,9 @@ public class TestController {
     public String backUniverTalent(){
         return "BackUniversityTalent";
     }
+
+    @RequestMapping("/backCompFindUser")
+    public String backCompFindUser(){
+        return "BackCompFindUser";
+    }
 }
