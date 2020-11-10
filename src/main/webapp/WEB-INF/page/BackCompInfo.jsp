@@ -186,7 +186,30 @@
             <div class="content_r">
                 <div id="Tags">
                     <div id="c_tags_show" class="c_tags solveWrap" style="display: block;">
-                        <table><tbody><tr><td>地点</td><td>上海</td></tr><tr><td>领域</td><td>移动互联网</td></tr><tr><td>规模</td><td>150-500人</td></tr><tr><td>主页</td><td><a target="_blank" href="http://www.zmtpost.com">http://www.zmtpost.com</a></td></tr></tbody></table>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>地点</td>
+                                <td>上海</td>
+                            </tr>
+                            <tr>
+                                <td>领域</td>
+                                <td>移动互联网</td>
+                            </tr>
+                            <tr>
+                                <td>邮箱</td>
+                                <td>移动互联网</td>
+                            </tr>
+                            <tr>
+                                <td>规模</td>
+                                <td>150-500人</td>
+                            </tr>
+                            <tr>
+                                <td>主页</td>
+                                <td><a target="_blank" href="http://www.zmtpost.com">http://www.zmtpost.com</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
                         <a id="editTags" class="c_edit" href="javascript:void(0)"></a>
                     </div>
                     <div id="c_tags_edit" class="c_tags editTags dn" style="display: none;">
@@ -206,6 +229,16 @@
 
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <td>邮箱</td><!-- 支持多选 -->
+                                    <td>
+                                        <input type="hidden" value="邮箱" id="email" name="eamil" class="valid">
+                                        <input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="移动互联网" id="select_ind" class="select_tags">
+
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <td>规模</td>
                                     <td>

@@ -9,8 +9,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>后台日志管理</title>
+    <title>企业管理</title>
     <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../JS/layui/css/layui.css">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" media="all">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -23,19 +27,20 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script charset="UTF-8" src="${pageContext.request.contextPath}/js/value.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
-
 <form class="layui-form" action="denglujieguo" method="post">
     <div class="container">
-        <div class="layui-form-item">
-            查询条件：
+        <div class="layui-form-item" style="margin-top: 20px;margin-left: 20px">企业名称：<input type="text"></div>
+
+        <div class="layui-form-item" style="height: 30px;margin-left: 300px;margin-top: -35px">状态：<input type="text">
+<%--            <select style="width: 180px">--%>
+<%--             <option>---</option>--%>
+<%--                <option>禁用</option>--%>
+<%--                <option>启用</option>--%>
+<%--            </select>--%>
         </div>
 
         <div class="layui-form-item">
-            &nbsp;&nbsp;&nbsp;日志时间：<input type="text" style="height: 30px">&nbsp;至&nbsp;<input type="text"style="height: 30px">
-        </div>
-
-        <div class="layui-form-item">
-            <button type="submit" style="margin-left: 500px;margin-top: -30px;width: 75px">查询</button>
+            <button type="submit" style="margin-left: 550px;margin-top: -35px;width: 75px">搜索</button>
         </div>
         <table id="demo" lay-filter="test"></table>
         <script>
@@ -49,14 +54,17 @@
                     ,page: true //开启分页
                     ,cols: [[ //表头
                         {field: '1', title: '序列', width:80, sort: true, fixed: 'left'}
-                        ,{field: '2', title: '操作人', width:80}
-                        ,{field: '3', title: '操作时间', width:80, sort: true}
-                        ,{field: '5', title: '操作事项', width: 177}
+                        ,{field: '2', title: '企业名称', width:80}
+                        ,{field: '3', title: '联系方式', width:80, sort: true}
+                        ,{field: '5', title: '申请人', width: 177}
+                        ,{field: '5', title: '申请时间', width: 177}
+                        ,{field: '5', title: '操作', width: 177}
                     ]]
                 });
             });
         </script>
-<%--        <div style="margin-left: 200px;">上一页</div>--%>
+<%--        <div style="margin-left: 150px;">上一页</div>--%>
+<%--        <div style="margin-left: 235px;margin-top: -20px">1/1</div>--%>
 <%--        <div style="margin-left: 300px;margin-top: -20px">下一页</div>--%>
         </div>
 </form>
