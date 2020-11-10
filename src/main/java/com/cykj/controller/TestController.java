@@ -9,8 +9,13 @@ public class TestController {
         @RequestMapping("/testComp")
         public String test() {
                 System.out.println("运行界面");
-                return "Main_Page";
+                return "BackCompInfo";
         }
+    @RequestMapping("/mainPage")
+    public String mainPage() {
+        System.out.println("运行界面");
+        return "Main_Page";
+    }
 
         @RequestMapping("/userManage")
         public String userManage ()
