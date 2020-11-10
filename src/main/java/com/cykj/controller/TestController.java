@@ -14,4 +14,9 @@ public class TestController {
     public String changePwd(){
         return "BackChangePwd";
     }
+
+    @RequestMapping("/backUniverTalent")
+    public String backUniverTalent(){
+        return "BackUniversityTalent";
+    }
 }
