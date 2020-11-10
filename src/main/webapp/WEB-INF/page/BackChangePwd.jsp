@@ -25,6 +25,7 @@
     </script>
 <%--    <link href="h/images/favicon.ico" rel="Shortcut Icon">--%>
     <link href="${pageContext.request.contextPath}/style/css/style.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/BackChangePwd.css" type="text/css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/style/css/external.min.css" type="text/css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/style/css/popup.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/jquery.1.10.1.min.js"></script>
@@ -43,7 +44,7 @@
 <div id="body">
     <div id="container">
         <input type="hidden" id="hasSidebar" value="1">
-        <div class="content user_modifyContent">
+        <div id="changePwdDiv">
         <dl class="c_section">
             <dt>
                 <h2><em></em>修改密码</h2>
