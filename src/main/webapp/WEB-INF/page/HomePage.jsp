@@ -42,7 +42,7 @@
 </head>
 <body>
 <div id="body">
-    <div id="header" style="height:130px;">
+    <div id="header">
         <div class="wrapper">
             <a class="logo">
                 <img src="../style/images/logo.png" width="350" height="130" alt="钱程无忧-关注你的钱程"/>
