@@ -42,14 +42,14 @@
     <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script></head>
 <body>
 <div id="body" style="background-color: #5dfffc">
-    <div id="header">
+    <div id="header" style="background-color: grey">
     <div class="wrapper">
-        <a class="logo" href="index.html">
+        <a class="logo" href="#">
             <img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="${pageContext.request.contextPath}/imgs/logo.png">
         </a>
     </div>
 </div><!-- end #header -->
-    <div id="container" style="margin-top: 5%">
+    <div id="container" style="margin-top: 1%">
 
         <div class="content_mid">
             <dl class="c_section c_section_mid">
