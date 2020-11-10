@@ -24,4 +24,9 @@ public class TestController {
     public String backCompFindUser(){
         return "BackCompFindUser";
     }
+
+    @RequestMapping("/findPwd")
+    public String findPwd(){
+        return "BackFindPwd";
+    }
 }
