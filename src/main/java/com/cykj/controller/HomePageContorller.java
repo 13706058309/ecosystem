@@ -11,11 +11,6 @@ public class HomePageContorller {
         return "HomePage";
     }
 
-    @RequestMapping("/naviga")
-    public String naviga(){
-        return "HomePageNaviga";
-    }
-
     @RequestMapping("/A")
     public String aEnd(){
         return "AEndToEnd";
