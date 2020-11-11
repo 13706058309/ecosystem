@@ -42,7 +42,7 @@
 </head>
 <body>
 <div id="body">
-    <div id="header" style="height:130px;">
+    <div id="header">
         <div class="wrapper">
             <a class="logo">
                 <img src="../style/images/logo.png" width="350" height="130" alt="钱程无忧-关注你的钱程"/>
@@ -61,7 +61,7 @@
             </ul>
         </div>
     </div><!-- end #header -->
-<%-----------------------------------------------------------------------------------------------------------------------------搜索框--%>
+    <%-----------------------------------------------------------------------------------------------------------------------------搜索框--%>
     <div id="search_box">
         <form id="searchForm" name="searchForm" action="list.html" method="get">
             <ul id="searchType">
@@ -89,11 +89,10 @@
         <dd><a href="list.html?gx=实习&city=">实习</a></dd>
     </dl>
 
-<%---------------------------------------------------------------------------------------------------------   左侧三级菜单--%>
+    <%---------------------------------------------------------------------------------------------------------   左侧三级菜单--%>
     <div id="container">
         <div id="sidebar">
             <div class="mainNavs">
-
                 <div class="menu_box">
                     <div class="menu_main">
                         <h2>技术 <span></span></h2>
@@ -201,7 +200,8 @@
                                 </a>
                             </dt>
                             <dd>
-                                <a href="h/jobs/list_%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86?labelWords=label" class="curr">项目经理</a>
+                                <a href="h/jobs/list_%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86?labelWords=label"
+                                   class="curr">项目经理</a>
                             </dd>
                         </dl>
                         <dl class="reset">
@@ -211,7 +211,8 @@
                                 </a>
                             </dt>
                             <dd>
-                                <a href="h/jobs/list_%E6%8A%80%E6%9C%AF%E7%BB%8F%E7%90%86?labelWords=label" class="curr">技术经理</a>
+                                <a href="h/jobs/list_%E6%8A%80%E6%9C%AF%E7%BB%8F%E7%90%86?labelWords=label"
+                                   class="curr">技术经理</a>
                                 <a href="h/jobs/list_%E6%8A%80%E6%9C%AF%E6%80%BB%E7%9B%91?labelWords=label">技术总监</a>
                                 <a href="h/jobs/list_%E6%B5%8B%E8%AF%95%E7%BB%8F%E7%90%86?labelWords=label">测试经理</a>
                                 <a href="h/jobs/list_%E6%9E%B6%E6%9E%84%E5%B8%88?labelWords=label" class="curr">架构师</a>
@@ -237,13 +238,16 @@
                                 </a>
                             </dt>
                             <dd>
-                                <a href="h/jobs/list_%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86?labelWords=label" class="curr">产品经理</a>
+                                <a href="h/jobs/list_%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86?labelWords=label"
+                                   class="curr">产品经理</a>
                                 <a href="h/jobs/list_%E7%BD%91%E9%A1%B5%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86?labelWords=label">网页产品经理</a>
                                 <a href="h/jobs/list_%E7%A7%BB%E5%8A%A8%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86?labelWords=label">移动产品经理</a>
-                                <a href="h/jobs/list_%E4%BA%A7%E5%93%81%E5%8A%A9%E7%90%86?labelWords=label" class="curr">产品助理</a>
+                                <a href="h/jobs/list_%E4%BA%A7%E5%93%81%E5%8A%A9%E7%90%86?labelWords=label"
+                                   class="curr">产品助理</a>
                                 <a href="h/jobs/list_%E6%95%B0%E6%8D%AE%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86?labelWords=label">数据产品经理</a>
                                 <a href="h/jobs/list_%E7%94%B5%E5%95%86%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86?labelWords=label">电商产品经理</a>
-                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92?labelWords=label" class="curr">游戏策划</a>
+                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92?labelWords=label"
+                                   class="curr">游戏策划</a>
                             </dd>
                         </dl>
                         <dl class="reset">
@@ -355,43 +359,16 @@
                                 </a>
                             </dt>
                             <dd>
-                                <a href="h/jobs/list_%E7%94%A8%E6%88%B7%E8%BF%90%E8%90%A5?labelWords=label"
-
-
-                                >用户运营</a>
-                                <a href="h/jobs/list_%E4%BA%A7%E5%93%81%E8%BF%90%E8%90%A5?labelWords=label"
-
-
-                                >产品运营</a>
-                                <a href="h/jobs/list_%E6%95%B0%E6%8D%AE%E8%BF%90%E8%90%A5?labelWords=label"
-
-
-                                >数据运营</a>
-                                <a href="h/jobs/list_%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5?labelWords=label"
-
-
-                                >内容运营</a>
-                                <a href="h/jobs/list_%E6%B4%BB%E5%8A%A8%E8%BF%90%E8%90%A5?labelWords=label"
-
-
-                                >活动运营</a>
-                                <a href="h/jobs/list_%E5%95%86%E5%AE%B6%E8%BF%90%E8%90%A5?labelWords=label"
-
-
-                                >商家运营</a>
-                                <a href="h/jobs/list_%E5%93%81%E7%B1%BB%E8%BF%90%E8%90%A5?labelWords=label"
-
-
-                                >品类运营</a>
+                                <a href="h/jobs/list_%E7%94%A8%E6%88%B7%E8%BF%90%E8%90%A5?labelWords=label">用户运营</a>
+                                <a href="h/jobs/list_%E4%BA%A7%E5%93%81%E8%BF%90%E8%90%A5?labelWords=label">产品运营</a>
+                                <a href="h/jobs/list_%E6%95%B0%E6%8D%AE%E8%BF%90%E8%90%A5?labelWords=label">数据运营</a>
+                                <a href="h/jobs/list_%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5?labelWords=label">内容运营</a>
+                                <a href="h/jobs/list_%E6%B4%BB%E5%8A%A8%E8%BF%90%E8%90%A5?labelWords=label">活动运营</a>
+                                <a href="h/jobs/list_%E5%95%86%E5%AE%B6%E8%BF%90%E8%90%A5?labelWords=label">商家运营</a>
+                                <a href="h/jobs/list_%E5%93%81%E7%B1%BB%E8%BF%90%E8%90%A5?labelWords=label">品类运营</a>
                                 <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E8%BF%90%E8%90%A5?labelWords=label"
-
-                                   class="curr"
-
-                                >游戏运营</a>
-                                <a href="h/jobs/list_%E7%BD%91%E7%BB%9C%E6%8E%A8%E5%B9%BF?labelWords=label"
-
-
-                                >网络推广</a>
+                                   class="curr">游戏运营</a>
+                                <a href="h/jobs/list_%E7%BD%91%E7%BB%9C%E6%8E%A8%E5%B9%BF?labelWords=label">网络推广</a>
                             </dd>
                         </dl>
                         <dl class="reset">
@@ -401,14 +378,8 @@
                                 </a>
                             </dt>
                             <dd>
-                                <a href="h/jobs/list_%E5%89%AF%E4%B8%BB%E7%BC%96?labelWords=label"
-
-
-                                >副主编</a>
-                                <a href="h/jobs/list_%E5%86%85%E5%AE%B9%E7%BC%96%E8%BE%91?labelWords=label"
-
-
-                                >内容编辑</a>
+                                <a href="h/jobs/list_%E5%89%AF%E4%B8%BB%E7%BC%96?labelWords=label">副主编</a>
+                                <a href="h/jobs/list_%E5%86%85%E5%AE%B9%E7%BC%96%E8%BE%91?labelWords=label">内容编辑</a>
                             </dd>
                         </dl>
                         <dl class="reset">
@@ -418,389 +389,30 @@
                                 </a>
                             </dt>
                             <dd>
-                                <a href="h/jobs/list_%E5%94%AE%E5%89%8D%E5%92%A8%E8%AF%A2?labelWords=label"
-
-
-                                >售前咨询</a>
-                                <a href="h/jobs/list_%E5%94%AE%E5%90%8E%E5%AE%A2%E6%9C%8D?labelWords=label"
-
-
-                                >售后客服</a>
+                                <a href="h/jobs/list_%E5%94%AE%E5%89%8D%E5%92%A8%E8%AF%A2?labelWords=label">售前咨询</a>
+                                <a href="h/jobs/list_%E5%94%AE%E5%90%8E%E5%AE%A2%E6%9C%8D?labelWords=label">售后客服</a>
                             </dd>
                         </dl>
                         <dl class="reset">
                             <dt>
-                                <a href="h/jobs/list_高端运营职位?labelWords=label">
-                                    高端职位
-                                </a>
+                                <a href="h/jobs/list_高端运营职位?labelWords=label">高端职位</a>
                             </dt>
                             <dd>
-                                <a href="h/jobs/list_%E4%B8%BB%E7%BC%96?labelWords=label"
-
-
-                                >主编</a>
-                                <a href="h/jobs/list_%E8%BF%90%E8%90%A5%E6%80%BB%E7%9B%91?labelWords=label"
-
-
-                                >运营总监</a>
-                                <a href="h/jobs/list_COO?labelWords=label"
-
-
-                                >COO</a>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-                <div class="menu_box">
-                    <div class="menu_main">
-                        <h2>市场与销售 <span></span></h2>
-                        <a href="h/jobs/list_市场推广?labelWords=label">市场推广</a>
-                        <a href="h/jobs/list_市场策划?labelWords=label">市场策划</a>
-                        <a href="h/jobs/list_活动策划?labelWords=label">活动策划</a>
-                        <a href="h/jobs/list_BD?labelWords=label">BD</a>
-                        <a href="h/jobs/list_销售经理?labelWords=label">销售经理</a>
-                    </div>
-                    <div class="menu_sub dn">
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_市场 营销?labelWords=label">
-                                    市场/营销
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80?labelWords=label"
-
-
-                                >市场营销</a>
-                                <a href="h/jobs/list_%E5%B8%82%E5%9C%BA%E7%AD%96%E5%88%92?labelWords=label"
-
-                                   class="curr"
-
-                                >市场策划</a>
-                                <a href="h/jobs/list_%E5%B8%82%E5%9C%BA%E9%A1%BE%E9%97%AE?labelWords=label"
-
-
-                                >市场顾问</a>
-                                <a href="h/jobs/list_%E5%B8%82%E5%9C%BA%E6%8E%A8%E5%B9%BF?labelWords=label"
-
-                                   class="curr"
-
-                                >市场推广</a>
-                                <a href="h/jobs/list_SEO?labelWords=label"
-
-
-                                >SEO</a>
-                                <a href="h/jobs/list_SEM?labelWords=label"
-
-
-                                >SEM</a>
-                                <a href="h/jobs/list_%E5%95%86%E5%8A%A1%E6%B8%A0%E9%81%93?labelWords=label"
-
-
-                                >商务渠道</a>
-                                <a href="h/jobs/list_%E5%95%86%E4%B8%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90?labelWords=label"
-
-
-                                >商业数据分析</a>
-                                <a href="h/jobs/list_%E6%B4%BB%E5%8A%A8%E7%AD%96%E5%88%92?labelWords=label"
-
-                                   class="curr"
-
-                                >活动策划</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_公关?labelWords=label">
-                                    公关
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E5%AA%92%E4%BB%8B%E7%BB%8F%E7%90%86?labelWords=label"
-
-
-                                >媒介经理</a>
-                                <a href="h/jobs/list_%E5%B9%BF%E5%91%8A%E5%8D%8F%E8%B0%83?labelWords=label"
-
-
-                                >广告协调</a>
-                                <a href="h/jobs/list_%E5%93%81%E7%89%8C%E5%85%AC%E5%85%B3?labelWords=label"
-
-
-                                >品牌公关</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_销售?labelWords=label">
-                                    销售
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E9%94%80%E5%94%AE%E4%B8%93%E5%91%98?labelWords=label"
-
-
-                                >销售专员</a>
-                                <a href="h/jobs/list_%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86?labelWords=label"
-
-                                   class="curr"
-
-                                >销售经理</a>
-                                <a href="h/jobs/list_%E5%AE%A2%E6%88%B7%E4%BB%A3%E8%A1%A8?labelWords=label"
-
-
-                                >客户代表</a>
-                                <a href="h/jobs/list_%E5%A4%A7%E5%AE%A2%E6%88%B7%E4%BB%A3%E8%A1%A8?labelWords=label"
-
-
-                                >大客户代表</a>
-                                <a href="h/jobs/list_BD%E7%BB%8F%E7%90%86?labelWords=label"
-
-
-                                >BD经理</a>
-                                <a href="h/jobs/list_%E5%95%86%E5%8A%A1%E6%B8%A0%E9%81%93?labelWords=label"
-
-
-                                >商务渠道</a>
-                                <a href="h/jobs/list_%E6%B8%A0%E9%81%93%E9%94%80%E5%94%AE?labelWords=label"
-
-
-                                >渠道销售</a>
-                                <a href="h/jobs/list_%E4%BB%A3%E7%90%86%E5%95%86%E9%94%80%E5%94%AE?labelWords=label"
-
-
-                                >代理商销售</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_高端市场职位?labelWords=label">
-                                    高端职位
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E5%B8%82%E5%9C%BA%E6%80%BB%E7%9B%91?labelWords=label"
-
-
-                                >市场总监</a>
-                                <a href="h/jobs/list_%E9%94%80%E5%94%AE%E6%80%BB%E7%9B%91?labelWords=label"
-
-
-                                >销售总监</a>
-                                <a href="h/jobs/list_%E5%95%86%E5%8A%A1%E6%80%BB%E7%9B%91?labelWords=label"
-
-
-                                >商务总监</a>
-                                <a href="h/jobs/list_CMO?labelWords=label"
-
-
-                                >CMO</a>
-                                <a href="h/jobs/list_%E5%85%AC%E5%85%B3%E6%80%BB%E7%9B%91?labelWords=label"
-
-
-                                >公关总监</a>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-                <div class="menu_box">
-                    <div class="menu_main">
-                        <h2>职能 <span></span></h2>
-                        <a href="h/jobs/list_HR?labelWords=label">HR</a>
-                        <a href="h/jobs/list_行政?labelWords=label">行政</a>
-                        <a href="h/jobs/list_会计?labelWords=label">会计</a>
-                        <a href="h/jobs/list_出纳?labelWords=label">出纳</a>
-                    </div>
-                    <div class="menu_sub dn">
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_人力资源?labelWords=label">
-                                    人力资源
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90?labelWords=label"
-
-
-                                >人力资源</a>
-                                <a href="h/jobs/list_%E6%8B%9B%E8%81%98?labelWords=label"
-
-
-                                >招聘</a>
-                                <a href="h/jobs/list_HRBP?labelWords=label"
-
-
-                                >HRBP</a>
-                                <a href="h/jobs/list_%E4%BA%BA%E4%BA%8B+HR?labelWords=label"
-
-
-                                >人事/HR</a>
-                                <a href="h/jobs/list_%E5%9F%B9%E8%AE%AD%E7%BB%8F%E7%90%86?labelWords=label"
-
-
-                                >培训经理</a>
-                                <a href="h/jobs/list_%E8%96%AA%E8%B5%84%E7%A6%8F%E5%88%A9%E7%BB%8F%E7%90%86?labelWords=label"
-
-
-                                >薪资福利经理</a>
-                                <a href="h/jobs/list_%E7%BB%A9%E6%95%88%E8%80%83%E6%A0%B8%E7%BB%8F%E7%90%86?labelWords=label"
-
-
-                                >绩效考核经理</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_行政?labelWords=label">
-                                    行政
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E5%8A%A9%E7%90%86?labelWords=label"
-
-
-                                >助理</a>
-                                <a href="h/jobs/list_%E5%89%8D%E5%8F%B0?labelWords=label"
-
-
-                                >前台</a>
-                                <a href="h/jobs/list_%E6%B3%95%E5%8A%A1?labelWords=label"
-
-
-                                >法务</a>
-                                <a href="h/jobs/list_%E8%A1%8C%E6%94%BF?labelWords=label"
-
-                                   class="curr"
-
-                                >行政</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_财务?labelWords=label">
-                                    财务
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E4%BC%9A%E8%AE%A1?labelWords=label"
-
-                                   class="curr"
-
-                                >会计</a>
-                                <a href="h/jobs/list_%E5%87%BA%E7%BA%B3?labelWords=label"
-
-                                   class="curr"
-
-                                >出纳</a>
-                                <a href="h/jobs/list_%E8%B4%A2%E5%8A%A1?labelWords=label"
-
-
-                                >财务</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_高端职能职位?labelWords=label">
-                                    高端职位
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E8%A1%8C%E6%94%BF%E6%80%BB%E7%9B%91+%E7%BB%8F%E7%90%86?labelWords=label"
-
-
-                                >行政总监/经理</a>
-                                <a href="h/jobs/list_%E8%B4%A2%E5%8A%A1%E6%80%BB%E7%9B%91+%E7%BB%8F%E7%90%86?labelWords=label"
-
-
-                                >财务总监/经理</a>
-                                <a href="h/jobs/list_HRD+HRM?labelWords=label"
-
-
-                                >HRD/HRM</a>
-                                <a href="h/jobs/list_CFO?labelWords=label"
-
-
-                                >CFO</a>
+                                <a href="h/jobs/list_%E4%B8%BB%E7%BC%96?labelWords=label">主编</a>
+                                <a href="h/jobs/list_%E8%BF%90%E8%90%A5%E6%80%BB%E7%9B%91?labelWords=label">运营总监</a>
+                                <a href="h/jobs/list_COO?labelWords=label">COO</a>
                             </dd>
                         </dl>
                     </div>
                 </div>
             </div>
-            <a class="subscribe" href="subscribe.html" target="_blank">订阅职位</a>
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <%------------------------------------------------------------------------------------------------------------------------轮播图--%>
         <div class="content">
             <script type="text/javascript" src="../style/js/search.min.js"></script>
             <style>
-                .ui-autocomplete {
-                    width: 488px;
-                    background: #fafafa !important;
-                    position: relative;
-                    z-index: 10;
-                    border: 2px solid #91cebe;
-                }
-
-                .ui-autocomplete-category {
-                    font-size: 16px;
-                    color: #999;
-                    width: 50px;
-                    position: absolute;
-                    z-index: 11;
-                    right: 0px; /*top: 6px; */
-                    text-align: center;
-                    border-top: 1px dashed #e5e5e5;
-                    padding: 5px 0;
-                }
-
-                .ui-menu-item {
-                    *width: 439px;
-                    vertical-align: middle;
-                    position: relative;
-                    margin: 0px;
-                    margin-right: 50px !important;
-                    background: #fff;
-                    border-right: 1px dashed #ededed;
-                }
-
                 .ui-menu-item a {
                     display: block;
                     overflow: hidden;
@@ -810,20 +422,31 @@
                 <ul class="banner_bg">
                     <li class="banner_bg_1 current">
                         <a href="h/subject/s_buyfundation.html?utm_source=DH__lagou&utm_medium=banner&utm_campaign=haomai"
-                           target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="612"
+                           target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="646"
                                                 height="160" alt="好买基金——来了就给100万"/></a>
                     </li>
                     <li class="banner_bg_2">
                         <a href="h/subject/s_worldcup.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=wc"
-                           target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="612"
+                           target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="646"
                                                 height="160" alt="世界杯放假看球，老板我也要！"/></a>
                     </li>
                     <li class="banner_bg_3">
                         <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
-                           target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="612"
+                           target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
+                                                height="160" alt="出北京记——第一站厦门"/></a>
+                    </li>
+                    <li class="banner_bg_4">
+                        <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
+                           target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
+                                                height="160" alt="出北京记——第一站厦门"/></a>
+                    </li>
+                    <li class="banner_bg_4">
+                        <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
+                           target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
                                                 height="160" alt="出北京记——第一站厦门"/></a>
                     </li>
                 </ul>
+                <%--                ------------------------------------------------------------------------------企业小方块--%>
                 <div class="banner_control">
                     <em></em>
                     <ul class="thumbs">
@@ -839,6 +462,10 @@
                             <i></i>
                             <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="42"/>
                         </li>
+                        <li class="thumbs_3">
+                            <i></i>
+                            <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="42"/>
+                        </li>
                     </ul>
                 </div>
             </div><!--/#main_banner-->
@@ -846,7 +473,8 @@
             <ul id="da-thumbs" class="da-thumbs">
                 <li>
                     <a href="h/c/1650.html" target="_blank">
-                        <img src="../style/images/a254b11ecead45bda166afa8aaa9c8bc.jpg" width="113" height="113" alt="联想"/>
+                        <img src="../style/images/a254b11ecead45bda166afa8aaa9c8bc.jpg" width="113" height="113"
+                             alt="联想"/>
                         <div class="hot_info">
                             <h2 title="联想">联想</h2>
                             <em></em>
@@ -858,7 +486,8 @@
                 </li>
                 <li>
                     <a href="h/c/9725.html" target="_blank">
-                        <img src="../style/images/c75654bc2ab141df8218983cfe5c89f9.jpg" width="113" height="113" alt="淘米"/>
+                        <img src="../style/images/c75654bc2ab141df8218983cfe5c89f9.jpg" width="113" height="113"
+                             alt="淘米"/>
                         <div class="hot_info">
                             <h2 title="淘米">淘米</h2>
                             <em></em>
@@ -896,7 +525,8 @@
                 </li>
                 <li>
                     <a href="h/c/2700.html" target="_blank">
-                        <img src="../style/images/5caf8f9631114bf990f87bb11360653e.png" width="113" height="113" alt="奇猫"/>
+                        <img src="../style/images/5caf8f9631114bf990f87bb11360653e.png" width="113" height="113"
+                             alt="奇猫"/>
                         <div class="hot_info">
                             <h2 title="奇猫">奇猫</h2>
                             <em></em>
@@ -920,161 +550,161 @@
                     </a>
                 </li>
             </ul>
+        </div>
+    </div>
 
-            <ul class="reset hotabbing">
-                <li class="current">热门职位</li>
-                <li>最新职位</li>
+    <%--        ------------------------------------------------------------------------------------热门职业、最新职业--%>
+        <div id="hotList" align="center">
+            <ul class="hot_pos reset">
+                <div style="font-size: 15px"><h1>——热门企业——</h1></div>
+                <li class="clearfix">
+                    <div class="hot_pos_l">
+                        <div class="mb10">
+                            <a href="h/jobs/147822.html" target="_blank">运营总监</a>
+                            &nbsp;
+                            <span class="c9">[北京]</span>
+                        </div>
+                        <span><em class="c7">月薪： </em>15k-20k</span>
+                        <span><em class="c7">经验：</em> 3-5年</span>
+                        <span><em class="c7">最低学历： </em>本科</span>
+                        <br/>
+                        <span><em class="c7">职位诱惑：</em>发展前景</span>
+                        <br/>
+                        <span>1天前发布</span>
+                        <!-- <a  class="wb">分享到微博</a> -->
+                    </div>
+                    <div class="hot_pos_r">
+                        <div class="mb10 recompany"><a href="h/c/399.html" target="_blank">节操精选</a></div>
+                        <span><em class="c7">领域：</em> 移动互联网</span>
+                        <span><em class="c7">创始人：</em>陈桦</span>
+                        <br/>
+                        <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
+                        <span><em class="c7">规模：</em>少于15人</span>
+                        <ul class="companyTags reset">
+                            <li>移动互联网</li>
+                            <li>五险一金</li>
+                            <li>扁平管理</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="odd clearfix">
+                    <div class="hot_pos_l">
+                        <div class="mb10">
+                            <a href="h/jobs/148429.html" target="_blank">葡萄酒内容运营专员</a>
+                            &nbsp;
+                            <span class="c9">[广州]</span>
+                        </div>
+                        <span><em class="c7">月薪： </em>5k-8k</span>
+                        <span><em class="c7">经验：</em> 1-3年</span>
+                        <span><em class="c7">最低学历： </em>本科</span>
+                        <br/>
+                        <span><em class="c7">职位诱惑：</em>喝着世界美酒快乐地工作！</span>
+                        <br/>
+                        <span>1天前发布</span>
+                        <!-- <a  class="wb">分享到微博</a> -->
+                    </div>
+                    <div class="hot_pos_r">
+                        <div class="mb10 recompany"><a href="h/c/4474.html" target="_blank">酒咔嚓</a></div>
+                        <span><em class="c7">领域：</em> 移动互联网,生活服务</span>
+                        <br/>
+                        <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
+                        <span><em class="c7">规模：</em>15-50人</span>
+                        <ul class="companyTags reset">
+                            <li>五险一金</li>
+                            <li>股票期权</li>
+                            <li>带薪年假</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <div class="hot_pos_l">
+                        <div class="mb10">
+                            <a href="h/jobs/1221.html" target="_blank">百度移动游戏UI designer</a>
+                            &nbsp;
+                            <span class="c9">[北京]</span>
+                        </div>
+                        <span><em class="c7">月薪： </em>7k-14k</span>
+                        <span><em class="c7">经验：</em> 1-3年</span>
+                        <span><em class="c7">最低学历： </em>本科</span>
+                        <br/>
+                        <span><em class="c7">职位诱惑：</em>喜欢游戏，喜欢生活，游戏生活~</span>
+                        <br/>
+                        <span>1天前发布</span>
+                        <!-- <a  class="wb">分享到微博</a> -->
+                    </div>
+                    <div class="hot_pos_r">
+                        <div class="mb10 recompany"><a href="h/c/323.html" target="_blank">百度移动游戏</a></div>
+                        <span><em class="c7">领域：</em> 移动互联网</span>
+                        <span><em class="c7">创始人：</em>李彦宏</span>
+                        <br/>
+                        <span><em class="c7">阶段：</em> 上市公司</span>
+                        <span><em class="c7">规模：</em>2000人以上</span>
+                        <ul class="companyTags reset">
+                            <li>年终分红</li>
+                            <li>绩效奖金</li>
+                            <li>股票期权</li>
+                        </ul>
+                    </div>
+                </li>
+                <a href="list.html?city=%E5%85%A8%E5%9B%BD" class="btn fr" target="_blank">查看更多</a>
             </ul>
-            <div id="hotList">
-                <ul class="hot_pos reset">
-                    <li class="clearfix">
-                        <div class="hot_pos_l">
-                            <div class="mb10">
-                                <a href="h/jobs/147822.html" target="_blank">运营总监</a>
-                                &nbsp;
-                                <span class="c9">[北京]</span>
-                            </div>
-                            <span><em class="c7">月薪： </em>15k-20k</span>
-                            <span><em class="c7">经验：</em> 3-5年</span>
-                            <span><em class="c7">最低学历： </em>本科</span>
-                            <br/>
-                            <span><em class="c7">职位诱惑：</em>发展前景</span>
-                            <br/>
-                            <span>1天前发布</span>
-                            <!-- <a  class="wb">分享到微博</a> -->
-                        </div>
-                        <div class="hot_pos_r">
-                            <div class="mb10 recompany"><a href="h/c/399.html" target="_blank">节操精选</a></div>
-                            <span><em class="c7">领域：</em> 移动互联网</span>
-                            <span><em class="c7">创始人：</em>陈桦</span>
-                            <br/>
-                            <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
-                            <span><em class="c7">规模：</em>少于15人</span>
-                            <ul class="companyTags reset">
-                                <li>移动互联网</li>
-                                <li>五险一金</li>
-                                <li>扁平管理</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="odd clearfix">
-                        <div class="hot_pos_l">
-                            <div class="mb10">
-                                <a href="h/jobs/148429.html" target="_blank">葡萄酒内容运营专员</a>
-                                &nbsp;
-                                <span class="c9">[广州]</span>
-                            </div>
-                            <span><em class="c7">月薪： </em>5k-8k</span>
-                            <span><em class="c7">经验：</em> 1-3年</span>
-                            <span><em class="c7">最低学历： </em>本科</span>
-                            <br/>
-                            <span><em class="c7">职位诱惑：</em>喝着世界美酒快乐地工作！</span>
-                            <br/>
-                            <span>1天前发布</span>
-                            <!-- <a  class="wb">分享到微博</a> -->
-                        </div>
-                        <div class="hot_pos_r">
-                            <div class="mb10 recompany"><a href="h/c/4474.html" target="_blank">酒咔嚓</a></div>
-                            <span><em class="c7">领域：</em> 移动互联网,生活服务</span>
-                            <br/>
-                            <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
-                            <span><em class="c7">规模：</em>15-50人</span>
-                            <ul class="companyTags reset">
-                                <li>五险一金</li>
-                                <li>股票期权</li>
-                                <li>带薪年假</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="hot_pos_l">
-                            <div class="mb10">
-                                <a href="h/jobs/1221.html" target="_blank">百度移动游戏UI designer</a>
-                                &nbsp;
-                                <span class="c9">[北京]</span>
-                            </div>
-                            <span><em class="c7">月薪： </em>7k-14k</span>
-                            <span><em class="c7">经验：</em> 1-3年</span>
-                            <span><em class="c7">最低学历： </em>本科</span>
-                            <br/>
-                            <span><em class="c7">职位诱惑：</em>喜欢游戏，喜欢生活，游戏生活~</span>
-                            <br/>
-                            <span>1天前发布</span>
-                            <!-- <a  class="wb">分享到微博</a> -->
-                        </div>
-                        <div class="hot_pos_r">
-                            <div class="mb10 recompany"><a href="h/c/323.html" target="_blank">百度移动游戏</a></div>
-                            <span><em class="c7">领域：</em> 移动互联网</span>
-                            <span><em class="c7">创始人：</em>李彦宏</span>
-                            <br/>
-                            <span><em class="c7">阶段：</em> 上市公司</span>
-                            <span><em class="c7">规模：</em>2000人以上</span>
-                            <ul class="companyTags reset">
-                                <li>年终分红</li>
-                                <li>绩效奖金</li>
-                                <li>股票期权</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <a href="list.html?city=%E5%85%A8%E5%9B%BD" class="btn fr" target="_blank">查看更多</a>
-                </ul>
-            </div>
-
-            <div class="clear"></div>
-
-
-<%------------------------------------------------------------------------------------------------------------------友情连接--%>
-            <div id="linkbox">
-                <dl>
-                    <dt>友情链接</dt>
-                    <dd>
-                        <a href="http://www.zhuqu.com/" target="_blank">住趣家居网</a> <span>|</span>
-                        <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
-                        <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
-                        <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
-                        <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
-                        <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
-                        <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
-                        <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
-                        <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
-                        <a href="h/af/flink.html" target="_blank" class="more">更多</a>
-                    </dd>
-                </dl>
-            </div>
         </div>
-        <input type="hidden" value="" name="userid" id="userid"/>
 
-        <!-------------------------------------弹窗lightbox  ----------------------------------------->
-        <div style="display:none;">
-            <!-- 登录框 -->
-            <div id="loginPop" class="popup" style="height:240px;">
-                <form id="loginForm">
-                    <input type="text" id="email" name="email" tabindex="1" placeholder="请输入登录邮箱地址"/>
-                    <input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码"/>
-                    <span class="error" style="display:none;" id="beError"></span>
-                    <label class="fl" for="remember"><input type="checkbox" id="remember" value="" checked="checked"
-                                                            name="autoLogin"/> 记住我</label>
-                    <a href="h/reset.html" class="fr">忘记密码？</a>
-                    <input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录"/>
-                </form>
-                <div class="login_right">
-                    <div>还没有钱程帐号？</div>
-                    <a href="register.html" class="registor_now">立即注册</a>
-                    <div class="login_others">使用以下帐号直接登录:</div>
-                    <a href="h/ologin/auth/sina.html" target="_blank" id="icon_wb" class="icon_wb"
-                       title="使用新浪微博帐号登录"></a>
-                    <a href="h/ologin/auth/qq.html" class="icon_qq" id="icon_qq" target="_blank" title="使用腾讯QQ帐号登录"></a>
-                </div>
-            </div><!--/#loginPop-->
-        </div>
-        <!------------------------------------- end ----------------------------------------->
-        <script type="text/javascript" src="../style/js/Chart.min.js"></script>
-        <script type="text/javascript" src="../style/js/home.min.js"></script>
-        <script type="text/javascript" src="../style/js/count.js"></script>
         <div class="clear"></div>
-        <input type="hidden" id="resubmitToken" value=""/>
-        <a id="backtop" title="回到顶部" rel="nofollow"></a>
-    </div><!-- end #container -->
+
+
+        <%------------------------------------------------------------------------------------------------------------------友情连接--%>
+        <div id="linkbox">
+            <dl>
+                <dt>友情链接</dt>
+                <dd>
+                    <a href="http://www.zhuqu.com/" target="_blank">住趣家居网</a> <span>|</span>
+                    <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+                    <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+                    <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+                    <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+                    <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+                    <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+                    <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+                    <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+                    <a href="h/af/flink.html" target="_blank" class="more">更多</a>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <input type="hidden" value="" name="userid" id="userid"/>
+
+    <!-------------------------------------弹窗lightbox  ----------------------------------------->
+    <div style="display:none;">
+        <!-- 登录框 -->
+        <div id="loginPop" class="popup" style="height:240px;">
+            <form id="loginForm">
+                <input type="text" id="email" name="email" tabindex="1" placeholder="请输入登录邮箱地址"/>
+                <input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码"/>
+                <span class="error" style="display:none;" id="beError"></span>
+                <label class="fl" for="remember"><input type="checkbox" id="remember" value="" checked="checked"
+                                                        name="autoLogin"/> 记住我</label>
+                <a href="h/reset.html" class="fr">忘记密码？</a>
+                <input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录"/>
+            </form>
+            <div class="login_right">
+                <div>还没有钱程帐号？</div>
+                <a href="register.html" class="registor_now">立即注册</a>
+                <div class="login_others">使用以下帐号直接登录:</div>
+                <a href="h/ologin/auth/sina.html" target="_blank" id="icon_wb" class="icon_wb"
+                   title="使用新浪微博帐号登录"></a>
+                <a href="h/ologin/auth/qq.html" class="icon_qq" id="icon_qq" target="_blank" title="使用腾讯QQ帐号登录"></a>
+            </div>
+        </div><!--/#loginPop-->
+    </div>
+    <!------------------------------------- end ----------------------------------------->
+    <script type="text/javascript" src="../style/js/Chart.min.js"></script>
+    <script type="text/javascript" src="../style/js/home.min.js"></script>
+    <script type="text/javascript" src="../style/js/count.js"></script>
+    <div class="clear"></div>
+    <input type="hidden" id="resubmitToken" value=""/>
+    <a id="backtop" title="回到顶部" rel="nofollow"></a>
+</div><!-- end #container -->
 </div><!-- end #body -->
 <div id="footer">
     <div class="wrapper">
