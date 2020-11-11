@@ -63,4 +63,9 @@ public class TestController {
     public String deterResume(){
         return "comp/BackDeterResume";
     }
+
+    @RequestMapping("/waitResume")
+    public String waitResume(){
+        return "comp/BackWaitResume";
+    }
 }

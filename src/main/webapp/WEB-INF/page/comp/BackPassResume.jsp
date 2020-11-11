@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2020/11/11
-  Time: 17:54
+  Time: 18:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -43,30 +43,23 @@
     <a class="layui-btn layui-btn-xs" lay-event="down">下载</a>
 </script>
 
-<h1 style="text-align: center">待处理简历</h1>
+<h1 style="text-align: center">通知面试简历</h1>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
 <div class="demoTable layui-form" style="margin-left: 27%">
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">投递时间</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="beginTime"  placeholder="yyyy-MM-dd">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">至</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd">
-            </div>
-        </div>
 
-    </div>
     <div class="layui-form-item">
 
         <div class="layui-inline">
             <label class="layui-form-label" style="width:100px">发布岗位名称:</label>
             <div class="layui-input-inline">
                 <input type="tel" id="topic" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">名字:</label>
+            <div class="layui-input-inline">
+                <input type="tel" id="userName" lay-verify="required|phone" autocomplete="off" class="layui-input">
             </div>
         </div>
 
