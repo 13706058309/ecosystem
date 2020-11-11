@@ -22,4 +22,10 @@ public class LoginController {
     public String forget(){
         return "ForgetPass";
     }
+
+//    @RequestMapping("/admin")
+//    public String admin(){
+//        return "adminLog";
+//    }
+
 }
