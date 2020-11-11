@@ -8,6 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns:wb="http://open.weibo.com/wb"><head>
+    <style>
+        .head-input{
+            width: 70px;
+            height: 70px;
+            position: relative;
+            top: -70px;
+            opacity: 0;
+        }
+        .display-hide{
+            display: none;
+        }
+        </style>
 <%--    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>--%>
     <script src="${pageContext.request.contextPath}/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
     <style type="text/css"></style>
@@ -37,9 +49,7 @@
     </script>
     <script src="${pageContext.request.contextPath}/style/js/conv.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script>
-    <link href="${pageContext.request.contextPath}/css/vendor.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/app.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/index.css" type="text/css" rel="stylesheet">
+
 </head>
 <body>
 <div id="body">
@@ -50,22 +60,23 @@
 
             <div class="content_l">
                 <div class="c_detail">
-<%--                    <div style="background-color:#fff;" class="c_logo">--%>
+                    <div style="background-color:#fff;" class="c_logo">
 <%--                        <a title="上传公司LOGO" id="logoShow" class="inline cboxElement" href="#logoUploader">--%>
 <%--                            <img width="190" height="190" alt="公司logo" src="${pageContext.request.contextPath}/style/images/logo_default.png">--%>
 
 <%--                            <span>更换公司图片<br>190px*190px 小于5M</span>--%>
 <%--                        </a>--%>
-<%--                    </div>--%>
     <div class="info-flex-item header-upload">
         <div class="header-box">
             <div class="header-mask"></div><img id="headImg"
-                                                src="https://paimgcdn.baidu.com/2986AD9ACAF1B0B1?src=http%3A%2F%2Fms.bdimg.com%2Fdsp-image%2F3256454903.jpg&rz=urar_2_968_600&v=0"
-                                                class="header-img">
+                                                src="${pageContext.request.contextPath}/style/images/logo_default.png"
+                                                class="header-img" style="width:100%;height: 100%">
             <input type="file" onchange="selectFile()" class="head-input"
                    accept="image/*" />
+            <span style="display: block">点击替换logo</span>
         </div>
     </div>
+                    </div>
 
                     <div class="c_box companyName">
                         <h2 title="公司名称">公司名称</h2>
