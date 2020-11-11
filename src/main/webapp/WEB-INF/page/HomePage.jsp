@@ -25,6 +25,7 @@
     </script>
     <link rel="Shortcut Icon" href="h/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../style/css/style.css"/>
+    <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="../style/css/external.min.css"/>
     <link rel="stylesheet" type="text/css" href="../style/css/popup.css"/>
     <script src="../style/js/jquery.1.10.1.min.js" type="text/javascript"></script>
@@ -42,7 +43,7 @@
     <div id="header">
         <div class="wrapper">
             <a class="logo">
-                <img src="../style/images/logo.png" width="310" height="110" alt="钱程无忧-关注你的钱程"/>
+                <img src="../style/images/logo.png" width="200" height="80" alt="钱程无忧-关注你的钱程"/>
             </a>
             <ul class="reset" id="navheader">
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
@@ -57,6 +58,7 @@
                 <li>|</li>
                 <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
             </ul>
+            <i class="layui-icon layui-icon-location" style="font-size: 15px; color: #0C0C0C;">全国</i>
         </div>
     </div><!-- end #header -->
     <%-----------------------------------------------------------------------------------------------------------------------------搜索框--%>
