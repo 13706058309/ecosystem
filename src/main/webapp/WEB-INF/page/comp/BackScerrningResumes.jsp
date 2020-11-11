@@ -102,7 +102,36 @@
 
 <table id="userTable" lay-filter="test"></table>
 <div class="layui-input-inline" style="margin-left: 50%">
-    <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="returnMain()" >返回</button>
+    <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="oper()" >返回</button>
+</div>
+<div id="changeDiv" style="display: none">
+    <table class="layui-table">
+        <tr >
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td rowspan="4"></td>
+        </tr>
+        <tr >
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr >
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr >
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+    </table>
 </div>
 </body>
 <script>
@@ -214,6 +243,15 @@
 
     function returnMain() {
         location.href = path+"/front/main";
+    }
+
+    function oper() {
+        layer.open({
+            type:1,
+            area:['80%','70%'],
+            offset: ['5%', '10%'],
+            content:$("#changeDiv"),
+        })
     }
 
 </script>

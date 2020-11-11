@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
     @RequestMapping("/testComp")
     public String test(){
-        return "BackCompInfo";
+        return "comp/BackCompInfo";
     }
 
     @RequestMapping("/changePwd")
     public String changePwd(){
-        return "BackChangePwd";
+        return "comp/BackChangePwd";
     }
 
     @RequestMapping("/backUniverTalent")
@@ -22,12 +22,12 @@ public class TestController {
 
     @RequestMapping("/backCompFindUser")
     public String backCompFindUser(){
-        return "BackCompFindUser";
+        return "comp/BackCompFindUser";
     }
 
     @RequestMapping("/findPwd")
     public String findPwd(){
-        return "BackFindPwd";
+        return "comp/BackFindPwd";
     }
 
     @RequestMapping("/compReg")
