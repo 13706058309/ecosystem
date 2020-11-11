@@ -15,4 +15,9 @@ public class HomePageContorller {
     public String aEnd(){
         return "AEndToEnd";
     }
+
+    @RequestMapping("/companylist")
+    public String company(){
+        return "Companylist";
+    }
 }

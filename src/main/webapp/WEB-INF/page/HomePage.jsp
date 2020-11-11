@@ -42,15 +42,15 @@
     <div id="header">
         <div class="wrapper">
             <a class="logo">
-                <img src="../style/images/logo.png" width="350" height="130" alt="钱程无忧-关注你的钱程"/>
+                <img src="../style/images/logo.png" width="310" height="110" alt="钱程无忧-关注你的钱程"/>
             </a>
             <ul class="reset" id="navheader">
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li><a href="">公司</a></li>
-                <li><a href="" target="_blank">校招</a></li>
-                <li><a href="" target="_blank">课程</a></li>
-                <li><a href="" rel="nofollow">我的简历</a></li>
-                <li><a href="" rel="nofollow">发布职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                <li><a href="h/toForum.html" target="_blank">校招</a></li>
+                <li><a href="h/toForum.html" target="_blank">课程</a></li>
+                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
+                <li><a href="create.html" rel="nofollow">发布职位</a></li>
             </ul>
             <ul class="loginTop">
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
@@ -554,7 +554,7 @@
     <%--        ------------------------------------------------------------------------------------热门职业、最新职业--%>
         <div id="hotList" align="center">
             <ul class="hot_pos reset">
-                <div style="font-size: 15px"><h1>——热门企业——</h1></div>
+                <div style="font-size: 25px;color:#44D0C7">——热门企业——</div>
                 <li class="clearfix">
                     <div class="hot_pos_l">
                         <div class="mb10">
