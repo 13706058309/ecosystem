@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageContorller {
     @RequestMapping("/home")
     public String home(){
+
         return "HomePage";
     }
 }
