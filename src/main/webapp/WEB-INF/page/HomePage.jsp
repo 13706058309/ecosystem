@@ -34,10 +34,7 @@
     <!--[if lte IE 8]>
     <script type="text/javascript" src="../style/js/excanvas.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-
-
-    </script>
+    <script type="text/javascript"></script>
     <script type="text/javascript" src="../style/js/conv.js"></script>
 </head>
 <body>
@@ -48,11 +45,12 @@
                 <img src="../style/images/logo.png" width="350" height="130" alt="钱程无忧-关注你的钱程"/>
             </a>
             <ul class="reset" id="navheader">
-                <li class="current"><a href="index.html">首页</a></li>
-                <li><a href="companylist.html">公司</a></li>
-                <li><a href="h/toForum.html" target="_blank">论坛</a></li>
-                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
-                <li><a href="create.html" rel="nofollow">发布职位</a></li>
+                <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li><a href="">公司</a></li>
+                <li><a href="" target="_blank">校招</a></li>
+                <li><a href="" target="_blank">课程</a></li>
+                <li><a href="" rel="nofollow">我的简历</a></li>
+                <li><a href="" rel="nofollow">发布职位</a></li>
             </ul>
             <ul class="loginTop">
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
@@ -706,17 +704,7 @@
     <a id="backtop" title="回到顶部" rel="nofollow"></a>
 </div><!-- end #container -->
 </div><!-- end #body -->
-<div id="footer">
-    <div class="wrapper">
-        <a href="h/about.html" target="_blank" rel="nofollow">联系我们</a>
-        <a href="h/af/zhaopin.html" target="_blank">互联网公司导航</a>
-        <a href="http://e.weibo.com/lagou720" target="_blank" rel="nofollow">钱程微博</a>
-        <a class="footer_qr" href="javascript:void(0)" rel="nofollow">钱程微信<i></i></a>
-        <div class="copyright">&copy;2013-2014 Lagou <a target="_blank"
-                                                        href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action">京ICP备14023790号-2</a>
-        </div>
-    </div>
-</div>
+
 
 <script type="text/javascript" src="../style/js/core.min.js"></script>
 <script type="text/javascript" src="../style/js/popup.min.js"></script>
