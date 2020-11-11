@@ -1,7 +1,7 @@
 
 #postPositionDiv{
     border: 2px solid #2cffda;
-    margin:auto;
+    margin:5% auto 5% auto;
     border-radius: 20px;
     position: relative;
     z-index: 1;
