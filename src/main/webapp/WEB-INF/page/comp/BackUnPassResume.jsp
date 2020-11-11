@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2020/11/11
-  Time: 10:34
+  Time: 17:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -43,68 +43,31 @@
     <a class="layui-btn layui-btn-xs" lay-event="down">下载</a>
 </script>
 
-<h1 style="text-align: center">简历过滤</h1>
+<h1 style="text-align: center">未通过简历</h1>
+<br>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<div class="demoTable layui-form" style="margin-left: 10%">
+<div class="demoTable layui-form" style="margin-left: 30%">
     <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">投递时间</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="beginTime"  placeholder="yyyy-MM-dd">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">至</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd">
-            </div>
-        </div>
 
         <div class="layui-inline">
-            <label class="layui-form-label">专业:</label>
+            <label class="layui-form-label" style="width:100px">发布岗位名称:</label>
             <div class="layui-input-inline">
                 <input type="tel" id="topic" lay-verify="required|phone" autocomplete="off" class="layui-input">
             </div>
         </div>
 
-    </div>
-    <div class="layui-form-item">
-
-
-        <label class="layui-form-label">学历</label>
-        <div class="layui-input-inline">
-                <select class="layui-input" id="evdu">
-                    <option>不限</option>
-                    <option>中专及以下</option>
-                    <option>大专及以下</option>
-                    <option>本科及以下</option>
-                    <option>硕士及以下</option>
-                    <option>博士</option>
-                </select>
-        </div>
-
-        <label class="layui-form-label">工作经验</label>
-        <div class="layui-input-inline">
-            <select class="layui-input" id="wrokExp">
-                <option>不限</option>
-                <option>1至3年</option>
-                <option>3至5年</option>
-                <option>5至10年</option>
-                <option>10年以上</option>
-            </select>
-        </div>
-
-        <div class="layui-input-inline" style="margin-left: 8%">
-            <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="margin-top: -2%">
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+            </div>
         </div>
     </div>
+
 </div>
 
 <table id="userTable" lay-filter="test"></table>
-<div class="layui-input-inline" style="margin-left: 50%">
-    <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="oper()" >返回</button>
-</div>
-<div id="changeDiv" style="display: none">
+
+<div id="resumesDetailDiv" style="display: none">
     <table class="layui-table">
         <tr >
             <td width="19%">姓名</td>
@@ -282,7 +245,7 @@
             type:1,
             area:['80%','70%'],
             offset: ['5%', '10%'],
-            content:$("#changeDiv"),
+            content:$("#resumesDetailDiv"),
         })
     }
 
