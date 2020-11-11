@@ -8,7 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageContorller {
     @RequestMapping("/home")
     public String home(){
-        System.out.println("汤鑫杰");
         return "HomePage";
+    }
+
+    @RequestMapping("/naviga")
+    public String naviga(){
+        return "HomePageNaviga";
+    }
+
+    @RequestMapping("/A")
+    public String aEnd(){
+        return "AEndToEnd";
     }
 }
