@@ -39,6 +39,16 @@ public class TestController {
     public String postPosition(){
         return "comp/BackPostPosition";
     }
+
+    @RequestMapping("/backScerrningResumes")
+    public String backScerrningResumes(){
+        return "comp/BackScerrningResumes";
+    }
+
+    @RequestMapping("/backOffline")
+    public String backOffline(){
+        return "comp/BackOfflinePosition";
+    }
 }
 
 
