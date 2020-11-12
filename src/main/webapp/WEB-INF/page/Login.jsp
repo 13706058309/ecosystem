@@ -50,16 +50,15 @@
 
     <input type="hidden" id="resubmitToken" value="" />
     <div class="login_box">
-        <form id="loginForm" action="">
-            <input type="text" id="email" name="email" value="" tabindex="1" placeholder="请输入账号登录" />
-            <input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码" />
+        <form id="loginForm" action="log" method="post">
+            <input type="text" id="email" name="account" value="" tabindex="1" placeholder="请输入账号登录" />
+            <input type="password" id="pwd" name="password" tabindex="2" placeholder="请输入密码" />
 <%--            <input type="text" id="vCode" name="vCode" placeholder="请输入验证码" />--%>
             <span class="error" style="display:none;" id="beError"></span>
             <label class="fl" for="remember"><input type="checkbox" id="remember" value="" checked="checked" name="autoLogin" /> 记住密码</label>
             <a href="${pageContext.request.contextPath}/golog/forget" class="fr" target="_blank">忘记密码？</a>
-
-            <!--<input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录" />-->
-            <a style="color:#fff;" href="index.html" class="submitLogin" title="登 &nbsp; &nbsp; 录"/>登 &nbsp; &nbsp; 录</a>
+            <input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录" />
+<%--            <a style="color:#fff;" href="index.html" class="submitLogin" title="登 &nbsp; &nbsp; 录"/>登 &nbsp; &nbsp; 录</a>--%>
 
 
             <input type="hidden" id="callback" name="callback" value=""/>

@@ -1,8 +1,11 @@
 package com.cykj.entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 前台用户
  */
+@Component
 public class UserInfo {
 
   private long userId; //用户Id

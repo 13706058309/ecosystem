@@ -1,8 +1,11 @@
 package com.cykj.entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 后台用户
  */
+@Component
 public class BackUser {
 
   private long bUserId; //后台用户ID
