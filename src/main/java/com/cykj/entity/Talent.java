@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import java.util.Date;
+
 /**
  *人才表
  */
@@ -15,7 +17,8 @@ public class Talent {
   private String workExp;
   private String jobPlan;
   private String selfEva;
-  private java.sql.Date entryTime;
+  private String education;
+  private Date entryTime;
 
   public Talent() {
   }
@@ -109,13 +112,19 @@ public class Talent {
     this.selfEva = selfEva;
   }
 
-
-  public java.sql.Date getEntryTime() {
+  public Date getEntryTime() {
     return entryTime;
   }
 
-  public void setEntryTime(java.sql.Date entryTime) {
+  public void setEntryTime(Date entryTime) {
     this.entryTime = entryTime;
   }
 
+  public String getEducation() {
+    return education;
+  }
+
+  public void setEducation(String education) {
+    this.education = education;
+  }
 }

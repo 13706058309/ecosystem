@@ -1,6 +1,8 @@
 package com.cykj.entity;
 
 
+import java.util.Date;
+
 /**
  * 观看历史
  */
@@ -9,7 +11,7 @@ public class WatchHistory {
   private long courseId;
   private long historyId;
   private long userId;
-  private java.sql.Date wacthTime;
+  private Date wacthTime;
 
   public WatchHistory() {
   }
@@ -40,13 +42,11 @@ public class WatchHistory {
     this.userId = userId;
   }
 
-
-  public java.sql.Date getWacthTime() {
+  public Date getWacthTime() {
     return wacthTime;
   }
 
-  public void setWacthTime(java.sql.Date wacthTime) {
+  public void setWacthTime(Date wacthTime) {
     this.wacthTime = wacthTime;
   }
-
 }

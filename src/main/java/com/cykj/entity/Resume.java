@@ -14,8 +14,8 @@ public class Resume {
   private String birthday;
   private String contactInfo;
   private String school;
-  private String education;
-  private long professionId;
+  private long educationId;
+  private String profession;
   private String wrokYear;
   private String qualiCer;
   private String selfEva;
@@ -107,24 +107,21 @@ public class Resume {
     this.school = school;
   }
 
-
-  public String getEducation() {
-    return education;
+  public long getEducationId() {
+    return educationId;
   }
 
-  public void setEducation(String education) {
-    this.education = education;
+  public void setEducationId(long educationId) {
+    this.educationId = educationId;
   }
 
-
-  public long getProfessionId() {
-    return professionId;
+  public String getProfession() {
+    return profession;
   }
 
-  public void setProfessionId(long professionId) {
-    this.professionId = professionId;
+  public void setProfession(String profession) {
+    this.profession = profession;
   }
-
 
   public String getWrokYear() {
     return wrokYear;
