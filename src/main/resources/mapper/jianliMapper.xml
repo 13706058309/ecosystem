@@ -11,8 +11,22 @@
            and r.userid=#{userid}
     </select>
     <resultMap id="findResume" type="com.cykj.entity.Resume">
-        <id property="resumeid" column="resumeid"></id>
-        <result property="realname" column="realname"></result>
+        <id property="resumeId" column="resumeId"></id>
+        <result property="realName" column="realName"></result>
+        <result property="clan" column="clan"></result>
+        <result property="photo" column="photo"></result>
+        <result property="politicalStatus" column="politicalStatus"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="school" column="school"></result>
+        <result property="education" column="education"></result>
+        <result property="profession" column="profession"></result>
+        <result property="wrokYear" column="wrokYear"></result>
+        <result property="selfEva" column="selfEva"></result>
+        <result property="isShow" column="isShow"></result>
+        <result property="address" column="address"></result>
+        <result property="updateTime" column="updateTime"></result>
+        <result property="isGraduate" column="isGraduate"></result>
     </resultMap>
 
 
