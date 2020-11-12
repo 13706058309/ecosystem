@@ -110,11 +110,16 @@
             id: 'testReload',
             cols:[[
                 {type: 'checkbox', fixed: 'left'},
-                {field:'doc_Name',title:'文档标题',sort:true},
+                {field:'talentName',title:'姓名'},
+                {field:'school',title:'学校'},
+                {field:'birthday',title:'出生年月日'},
+                {field:'contactInfo',title:'联系方式'},
+                {field:'profession',title:'专业'},
+                {field:'politicalStatus',title:'政治面貌'},
+                {field:'workExp',title:'工作经历',hide:'true'},
+                {field:'jobPlan',title:'职业规划',hide:'true'},
+                {field:'selfEva',title:'自我评价',hide:'true'},
                 {field:'user_Name',title:'上传人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
-                {field:'up_Time',title:'上传时间',sort:true},
-                {field:'dow_Score',title:'下载积分',sort:true},
-                {field:'doc_type',title:'文档类型',templet:'<div>{{d.docConfig.doc_Type}}</div>'},
                 {title:'操作',toolbar:'#btns',width:250}
             ]]
         });
