@@ -32,10 +32,15 @@
             width:100%;
             /*background-color: cornflowerblue;*/
             font-family:'华文楷体';
-            font-size: 1.2em;
+            font-size: 16px;
             text-align: center;
             padding:20px 0px;
+            height: 394px;
             border-bottom:1px solid black;
+        }
+        .transfer-box-main{
+            overflow-y:auto;
+            height: 394px;
         }
         .transfer-btnBox{
             width: 100px;
@@ -44,8 +49,10 @@
             float: left;
         }
         .transfer-box-item{
+            /*overflow-y:auto;*/
             /*background-color: darkcyan;*/
             font-family:'华文楷体';
+            height: 440px;
         }
         .transfer-btnBox-button{
             width: 80px;
@@ -64,7 +71,7 @@
                 已分配菜单
             </div>
             <div class="transfer-box-main">
-                <div id="tree1"></div>
+                <ul id="tree1"></ul>
             </div>
         </div>
         <div class="transfer-btnBox">
@@ -78,7 +85,7 @@
                 未分配菜单
             </div>
             <div class="transfer-box-main">
-                <div id="tree2"></div>
+                <ul id="tree2"></ul>
             </div>
         </div>
     </div>
