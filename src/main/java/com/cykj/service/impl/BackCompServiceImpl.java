@@ -1,9 +1,7 @@
 package com.cykj.service.impl;
 
-import com.cykj.entity.TableInfo;
-import com.cykj.entity.Talent;
-import com.cykj.mapper.CompAndtalentMapper;
-import com.cykj.mapper.TalentMapper;
+import com.cykj.entity.*;
+import com.cykj.mapper.*;
 import com.cykj.service.BackCompService;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +16,21 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Resource
     private CompAndtalentMapper compAndtalentMapper;
+
+    @Resource
+    private IndustryMapper industryMapper;
+
+    @Resource
+    private DepartMapper departMapper;
+
+    @Resource
+    private PositionMapper positionMapper;
+
+    @Resource
+    private ProvinceMapper provinceMapper;
+
+    @Resource
+    private CityMapper cityMapper;
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
         List<Talent> unviTalentOnPage = talentMapper.findUnviTalentOnPage(map);
@@ -33,5 +46,30 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public int delUnviTalent(int standID, int compAndTalId) {
         return compAndtalentMapper.delUnviTalent(standID,compAndTalId);
+    }
+
+    @Override
+    public List<Industry> findAll() {
+        return industryMapper.findAll();
+    }
+
+    @Override
+    public List<Depart> findDepartByID(int industryID) {
+        return departMapper.findDepartByID(industryID);
+    }
+
+    @Override
+    public List<Position> findPositionByID(int dapartID) {
+        return positionMapper.findPositionByID(dapartID);
+    }
+
+    @Override
+    public List<Province> findAllProvince() {
+        return provinceMapper.findAllProvince();
+    }
+
+    @Override
+    public List<City> findCityByID(int provinceID) {
+        return cityMapper.findCityByID(provinceID);
     }
 }

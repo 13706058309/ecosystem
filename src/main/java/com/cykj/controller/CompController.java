@@ -18,6 +18,7 @@ public class CompController {
     @Resource
     private BackCompService backCompService;
 
+
     @RequestMapping("/findUnviTalent")
     public @ResponseBody String findUnviTalent(PageBean pageBean, Talent talent){
         Map<String,Object> map = new HashMap<>();
@@ -53,5 +54,31 @@ public class CompController {
             msg="删除失败";
         }
         return msg;
+    }
+
+    @RequestMapping("/findAllIndustry")
+    public @ResponseBody String findAllIndustry(){
+        return new Gson().toJson(backCompService.findAll());
+    }
+
+    @RequestMapping("/findDepartByID")
+    public @ResponseBody String findDepartByID(int industryID){
+        return new Gson().toJson(backCompService.findDepartByID(industryID));
+    }
+
+
+    @RequestMapping("/findPositionByID")
+    public @ResponseBody String findPositionByID(int departID){
+        return  new Gson().toJson(backCompService.findPositionByID(departID));
+    }
+
+    @RequestMapping("/findAllProvince")
+    public @ResponseBody String findAllProvince(){
+        return  new Gson().toJson(backCompService.findAllProvince());
+    }
+
+    @RequestMapping("/findCityByID")
+    public @ResponseBody String findCityByID(int provinceID){
+        return  new Gson().toJson(backCompService.findCityByID(provinceID));
     }
 }

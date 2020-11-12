@@ -21,7 +21,7 @@
 
     </head>
 <body>
-
+    <input type="hidden" value="${pageContext.request.contextPath}" id="path">
     <div class="layui-container layui-fluid" id="postPositionDiv">
         <br>
         <h1 style="text-align: center">岗位发布</h1>
@@ -30,17 +30,17 @@
         <div class="layui-form-item" >
             <label class="layui-form-label">职位类别</label>
             <div class="layui-input-inline">
-                <select name="quiz1">
+                <select name="industry" id="industry" lay-filter="industry">
+
+                </select>
+            </div>
+            <div class="layui-input-inline" >
+                <select name="depart" id="depart" lay-filter="depart">
 
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select name="quiz2">
-
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="quiz3">
+                <select name="position" id="position" lay-filter="position">
 
                 </select>
             </div>
@@ -89,13 +89,15 @@
 
             <div class="layui-form-item" >
                 <label class="layui-form-label">工作城市</label>
+
                 <div class="layui-input-inline">
-                    <select name="quiz1">
+                    <select name="province" id="province" lay-filter="province">
 
                     </select>
                 </div>
+
                 <div class="layui-input-inline">
-                    <select name="quiz2">
+                    <select name="city" id="city" lay-filter="city">
 
                     </select>
                 </div>
@@ -107,6 +109,7 @@
                 <div class="layui-input-inline">
                     <input type="text" id="address" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
                 </div>
+                <label class="layui-form-label">具体地址:</label>
             </div>
 
             <div class="layui-form-item">
