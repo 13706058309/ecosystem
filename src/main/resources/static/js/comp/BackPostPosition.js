@@ -114,6 +114,11 @@ $(function () {
 
 function findDepart(ID) {
     alert(ID);
+
+}
+
+function sumb() {
+    alert($("#position").val());
 }
 
 

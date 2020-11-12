@@ -26,7 +26,7 @@
         <br>
         <h1 style="text-align: center">岗位发布</h1>
         <br>
-        <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
+        <form class="layui-form" action="#" style="margin-left: 15%;margin-right: 15%">
         <div class="layui-form-item" >
             <label class="layui-form-label">职位类别</label>
             <div class="layui-input-inline">
@@ -49,8 +49,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="account" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
-                    <label class="layui-form-label" style="color: red;display: none">skfsadsads</label>
+                    <input type="text" id="account" name="account"  autocomplete="off" class="layui-input" >
+<%--                    <label class="layui-form-label" style="color: red;display: none">skfsadsads</label>--%>
                 </div>
 
             </div>
@@ -58,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属部门:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="department" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="department" name="account"  autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
@@ -67,9 +67,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">工作性质</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="sex" value="全职" title="全职" checked="">
-                    <input type="radio" name="sex" value="兼职" title="兼职">
-                    <input type="radio" name="sex" value="实习" title="实习" >
+                    <input type="radio" name="work" value="全职" title="全职" checked="">
+                    <input type="radio" name="work" value="兼职" title="兼职">
+                    <input type="radio" name="work" value="实习" title="实习" >
                 </div>
             </div>
 
@@ -77,11 +77,11 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">月薪范围</label>
                     <div class="layui-input-inline" style="width: 200px;">
-                        <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input">
+                        <input type="text" name="priceMin" placeholder="￥" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid">-</div>
                     <div class="layui-input-inline" style="width: 200px;">
-                        <input type="text" name="price_max" placeholder="￥" autocomplete="off" class="layui-input">
+                        <input type="text" name="priceMax" placeholder="￥" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid">k</div>
                 </div>
@@ -166,8 +166,8 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">招聘预览</button>
+                    <button type="" class="layui-btn" onclick="sumb()">立即提交</button>
+                    <button type="" class="layui-btn" >招聘预览</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
