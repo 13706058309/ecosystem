@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="${pageContext.request.contextPath}/static/js/jquery-3.5.1.js"></script>
-<script src="${pageContext.request.contextPath}/static/layui/layui.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/layui/css/layui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/BackUniversityTalent.css">
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/BackUniversityTalent.css">
 <html>
 <head>
     <title>Title</title>
@@ -20,12 +20,20 @@
 <body>
 <script id="btns" type="text/html">
 
-    <a class="layui-btn layui-btn-xs" lay-event="down">下载简历</a>
-    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="go">查看详情</a>
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="pass">删除</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+
 </script>
 
-<h1 style="text-align: center">文档管理</h1>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
+
+<h1 style="text-align: center">高校人才推荐</h1>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
 <div class="demoTable layui-form" style="margin-left: 10%">
     <div class="layui-form-item">
@@ -89,29 +97,11 @@
         });
     })
 
-    $(function () {
-        $.ajax({
-            url:path+"/docConfig/findAll",
-            type:"post",
-            typeData:"text",
-            success:function (data) {
-                var arr = JSON.parse(data);
-                $("#type").empty();
-                var $sel = $("<option>"+'请选择'+"</option>");
-                $("#type").append($sel)
-                for(var i=0;i<arr.length;i++){
-                    var $option = $("<option>"+arr[i].doc_Type+"</option>");
-                    $("#type").append($option);
-                }
-                form.render();
-            },
-        });
-    })
-
     layui.use('table',function () {
         var table = layui.table;
         table.render({
             elem:'#userTable',
+            toolbar: '#toolbarDemo',
             height:312,
             limits:[3,6],
             limit:3,
@@ -119,6 +109,7 @@
             page:true,
             id: 'testReload',
             cols:[[
+                {type: 'checkbox', fixed: 'left'},
                 {field:'doc_Name',title:'文档标题',sort:true},
                 {field:'user_Name',title:'上传人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
                 {field:'up_Time',title:'上传时间',sort:true},
