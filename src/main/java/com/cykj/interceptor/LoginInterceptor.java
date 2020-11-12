@@ -12,6 +12,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        httpServletRequest.setCharacterEncoding("UTF-8");
+        httpServletResponse.setContentType("text/html;charset=UTF-8");
         boolean flag = true;
         return flag;
     }

@@ -1,0 +1,10 @@
+.head-input{
+    width: 70px;
+    height: 70px;
+    position: relative;
+    top: -70px;
+    opacity: 0;
+}
+.display-hide{
+    display: none;
+}
