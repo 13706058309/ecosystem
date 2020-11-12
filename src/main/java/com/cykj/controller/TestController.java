@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/test")
 public class TestController {
+
     @RequestMapping("/testComp")
     public String test(){
         return "comp/BackCompInfo";
@@ -26,7 +27,7 @@ public class TestController {
         return "EnterpriseManage";
     }
 
-    @RequestMapping("angePwd")
+    @RequestMapping("/changePwd")
     public String changePwd(){
         return "comp/BackChangePwd";
     }
@@ -59,12 +60,18 @@ public class TestController {
         return "BackFindPwd";
     }
 
-//    @RequestMapping("/tt")
-//    public String tt(){
-//        return "tts";
-//    }
-@RequestMapping("/Cs")
-public String Cs(){
-    return "CSKuang";
-}
+    @RequestMapping("/deterResume")
+    public String deterResume(){
+        return "comp/BackDeterResume";
+    }
+
+    @RequestMapping("/waitResume")
+    public String waitResume(){
+        return "comp/BackWaitResume";
+    }
+
+    @RequestMapping("/unviTalent")
+    public String unviTalent(){
+        return "comp/BackUniversityTalent";
+    }
 }
