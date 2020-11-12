@@ -19,4 +19,8 @@ public class CenterController {
     public String jianli(){
         return "jianli";
     }
+    @RequestMapping("/accountSet")
+    public String accountSet(){
+        return "AccountSet";
+    }
 }
