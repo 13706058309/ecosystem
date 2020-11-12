@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script id="allmobilize" charset="utf-8" src="../style/js/allmobilize.min.js"></script>
+    <script id="allmobilize" charset="utf-8" src="${pageContext.request.contextPath}/style/js/allmobilize.min.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="alternate" media="handheld"  />
     <!-- end 云适配 -->
@@ -26,26 +26,26 @@
         console.log(1);
     </script>
     <link rel="Shortcut Icon" href="h/images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../style/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/style.css"/>
 
-    <script src="../style/js/jquery.1.10.1.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/style/js/jquery.1.10.1.min.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="../style/js/jquery.lib.min.js"></script>
-    <script type="text/javascript" src="../style/js/core.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/jquery.lib.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/core.min.js"></script>
 
 
     <script type="text/javascript">
         var youdao_conv_id = 271546;
     </script>
-    <script type="text/javascript" src="../style/js/conv.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/conv.js"></script>
 </head>
 
 <body id="login_bg">
 <div class="login_wrapper">
     <div class="login_header">
-        <a href="#"><img src="../style/images/logo.png" width="500" height="150" alt="钱程无忧" /></a>
-        <div id="cloud_s"><img src="../style/images/cloud_s.png" width="81" height="52" alt="cloud" /></div>
-        <div id="cloud_m"><img src="../style/images/cloud_m.png" width="136" height="95"  alt="cloud" /></div>
+        <a href="#"><img src="${pageContext.request.contextPath}/style/images/logo.png" width="500" height="150" alt="钱程无忧" /></a>
+        <div id="cloud_s"><img src="${pageContext.request.contextPath}/style/images/cloud_s.png" width="81" height="52" alt="cloud" /></div>
+        <div id="cloud_m"><img src="${pageContext.request.contextPath}/style/images/cloud_m.png" width="136" height="95"  alt="cloud" /></div>
     </div>
 
     <input type="hidden" id="resubmitToken" value="" />
@@ -71,8 +71,8 @@
             <div>还没有钱程无忧帐号？</div>
             <a  href="${pageContext.request.contextPath}/golog/reg"  class="registor_now">立即注册</a>
             <div class="login_others">使用以下帐号直接登录:</div>
-            <a  href="h/ologin/auth/sina.html"  target="_blank" class="icon_wb" title="使用新浪微博帐号登录"></a>
-            <a  href="h/ologin/auth/qq.html"  class="icon_qq" target="_blank" title="使用腾讯QQ帐号登录"></a>
+            <a  src="${pageContext.request.contextPath}/imgs/phone.png"  target="_blank" class="icon_wb" title="使用手机号登录"></a>
+            <%--<a  href="h/ologin/auth/qq.html"  class="icon_qq" target="_blank" title="使用腾讯QQ帐号登录"></a>--%>
         </div>
     </div>
     <div class="login_box_btm"></div>

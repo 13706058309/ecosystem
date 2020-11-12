@@ -58,6 +58,8 @@
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
                 <li>|</li>
                 <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+                <li>|</li>
+                <li><a href="${pageContext.request.contextPath}/test/compReg" rel="nofollow">企业入驻</a></li>
             </ul>
         </div>
     </div><!-- end #header -->

@@ -10,12 +10,7 @@ public class TestController {
     public String test(){
         return "comp/BackCompInfo";
     }
-    @RequestMapping("/testComp")
-    public String test()
-    {
-        System.out.println("运行界面");
-        return "Main_Page";
-    }
+
 
     @RequestMapping("/userManage")
     public String userManage()
@@ -31,7 +26,7 @@ public class TestController {
         return "EnterpriseManage";
     }
 
-    @RequestMapping("/changePwd")
+    @RequestMapping("angePwd")
     public String changePwd(){
         return "comp/BackChangePwd";
     }
@@ -56,11 +51,20 @@ public class TestController {
     public String backOffline(){
         return "comp/BackOfflinePosition";
     }
-}
+
 
 
     @RequestMapping("/findPwd")
     public String findPwd(){
         return "BackFindPwd";
     }
+
+//    @RequestMapping("/tt")
+//    public String tt(){
+//        return "tts";
+//    }
+@RequestMapping("/Cs")
+public String Cs(){
+    return "CSKuang";
+}
 }

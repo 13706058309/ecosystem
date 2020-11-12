@@ -7,12 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/zsgl")
 public class ZSController {
 
-
-    @RequestMapping("/zs")
-    public String zs(){
-        return "ZSGL";
-    }
-
+    //证书管理表格跳转
     @RequestMapping("/tb")
     public String table(){
         return "table";

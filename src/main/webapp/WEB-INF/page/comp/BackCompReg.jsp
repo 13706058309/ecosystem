@@ -15,7 +15,7 @@
     <link  media="handheld" rel="alternate">
     <!-- end 云适配 -->
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>基本信息-招聘服务-拉勾网-最专业的互联网招聘平台</title>
+    <title>钱程无忧</title>
 
     <!-- <div class="web_root"  style="display:none">http://www.lagou.com</div> -->
     <script type="text/javascript">
@@ -42,13 +42,6 @@
     <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script></head>
 <body>
 <div id="body" style="background-color: #5dfffc">
-    <div id="header" style="background-color: grey">
-    <div class="wrapper">
-        <a class="logo" href="#">
-            <img width="229" height="43" src="${pageContext.request.contextPath}/imgs/logo.png">
-        </a>
-    </div>
-</div><!-- end #header -->
     <div id="container" style="margin-top: 1%">
 
         <div class="content_mid">
@@ -154,7 +147,7 @@
 </div><!-- end #body -->
 <div id="footer">
     <div class="wrapper">
-        <a rel="nofollow" target="_blank" href="about.html">联系我们</a>
+        <a rel="nofollow" target="_blank" href="#">联系我们</a>
         <a target="_blank" href="http://www.lagou.com/af/zhaopin.html">互联网公司导航</a>
         <a rel="nofollow" target="_blank" href="http://e.weibo.com/lagou720">拉勾微博</a>
         <a rel="nofollow" href="javascript:void(0)" class="footer_qr">拉勾微信<i></i></a>
