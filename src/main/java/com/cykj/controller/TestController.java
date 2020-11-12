@@ -1,19 +1,16 @@
 package com.cykj.controller;
 
-import com.cykj.entity.Talent;
-import com.cykj.service.TalentService;
+import com.cykj.service.BackCompService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
     @Resource
-    private TalentService talentServiceImpl;
+    private BackCompService backCompServiceImpl;
 
     @RequestMapping("/testComp")
     public String test(){

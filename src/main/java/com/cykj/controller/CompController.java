@@ -2,7 +2,7 @@ package com.cykj.controller;
 
 import com.cykj.entity.PageBean;
 import com.cykj.entity.Talent;
-import com.cykj.service.TalentService;
+import com.cykj.service.BackCompService;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/rec")
 public class CompController {
     @Resource
-    private TalentService talentService;
+    private BackCompService backCompService;
 
     @RequestMapping("/findUnviTalent")
     public @ResponseBody String findUnviTalent(PageBean pageBean, Talent talent){
@@ -40,12 +40,12 @@ public class CompController {
         }
         map.put("limit",pageBean.getLimit());
         map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
-        return new Gson().toJson(talentService.findUnviTalent(map));
+        return new Gson().toJson(backCompService.findUnviTalent(map));
     }
 
     @RequestMapping("/delUnviTalent")
     public @ResponseBody String delUnviTalent(int compAndTalId){
-        int n = talentService.delUnviTalent(15,compAndTalId);
+        int n = backCompService.delUnviTalent(15,compAndTalId);
         String msg = "";
         if(n>0){
             msg="删除成功";

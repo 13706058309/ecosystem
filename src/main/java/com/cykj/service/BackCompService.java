@@ -6,7 +6,7 @@ import com.cykj.entity.Talent;
 import java.util.List;
 import java.util.Map;
 
-public interface TalentService {
+public interface BackCompService {
     TableInfo findUnviTalent(Map<String,Object> map);
     int delUnviTalent(int standID,int compAndTalId);
 }

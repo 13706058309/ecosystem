@@ -73,13 +73,61 @@
         </div>
     </div>
 </div>
+<div id="detailTalent" style="display: none;padding: 3%">
+    <table class="layui-table" >
+        <tr>
+            <td  colspan="6"><h2>高校简历查看</h2></td>
+        </tr>
+        <tr >
+            <td>姓名</td>
+            <td id="tName"></td>
+            <td>出生年月日</td>
+            <td id="tBirthday"></td>
+            <td>政治面貌</td>
+            <td id="tpolistat"></td>
+        </tr>
 
+        <tr >
+            <td>毕业学校</td>
+            <td id="tSchool"></td>
+            <td>学历</td>
+            <td id="tEducation"></td>
+            <td>专业</td>
+            <td id="tProfession"></td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">联系方式</td>
+            <td colspan="5" id="tAddress"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">工作经验</td>
+            <td colspan="5" id="tWorkExp"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">职业规划</td>
+            <td colspan="5" id="tWorkPlan"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">自我评价</td>
+            <td colspan="5" id="tSelfEva"> </td>
+        </tr>
+
+    </table>
+    <div class="layui-input-inline" style="margin-left: 50%">
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" >简历导出</button>
+    </div>
+</div>
 <table id="userTable" lay-filter="test"></table>
 </body>
 <script>
     var layer;
     var path = $("#path").val();
     var objs;
+    var data;
     var index;
     var form;
     layui.use(['laydate','layer','form'],function () {
@@ -100,9 +148,9 @@
         table.render({
             elem:'#userTable',
             toolbar: '#toolbarDemo',
-            height:312,
-            limits:[3,6],
-            limit:3,
+            height:330,
+            limits:[5],
+            limit:5,
             url:"${pageContext.request.contextPath}/rec/findUnviTalent",
             page:true,
             id: 'testReload',
@@ -113,6 +161,7 @@
                 {field:'birthday',title:'出生年月日'},
                 {field:'contactInfo',title:'联系方式'},
                 {field:'profession',title:'专业'},
+                {field:'education',title:'学历'},
                 {field:'politicalStatus',title:'政治面貌'},
                 {field:'workExp',title:'工作经历',hide:'true'},
                 {field:'jobPlan',title:'职业规划',hide:'true'},
@@ -123,7 +172,7 @@
         });
 
         table.on('tool(test)', function(obj){
-            var data = obj.data;
+            data = obj.data;
             var compAndTalId = data.compAndtalent.compAndTalId;
 
             if(obj.event === 'del'){
@@ -143,26 +192,14 @@
                             }
                         },
                     })
-                },function () {
-
                 })
-
-
-            } else if(obj.event === 'pass'){
-                $.ajax({
-                    url:path+"/doc/changeDocStand",
-                    data:"doc_ID="+docID+"&standID=6",
-                    type:"get",
-                    typeData:"text",
-                    beforeSend:function () {
-                        return confirm("确定不通过");
-                    },
-                    success:function (info) {
-                        layer.msg(info);
-                        if(info=='修改成功'){
-                            obj.del();
-                        }
-                    },
+            } else if(obj.event === 'detail'){
+                addResume();
+                layer.open({
+                    type:1,
+                    area:['70%','70%'],
+                    offset: ['10%', '15%'],
+                    content:$("#detailTalent"),
                 })
             }
         });
@@ -210,6 +247,20 @@
     })
     function closeLayer() {
         layer.close(index);
+    }
+
+
+    function addResume() {
+        $("#tName").text(data.talentName);
+        $("#tBirthday").text(data.birthday);
+        $("#tpolistat").text(data.politicalStatus);
+        $("#tSchool").text(data.school);
+        $("#tEducation").text(data.education);
+        $("#tProfession").text(data.profession);
+        $("#tAddress").text(data.contactInfo);
+        $("#tWorkExp").text(data.workExp);
+        $("#tWorkPlan").text(data.jobPlan);
+        $("#tSelfEva").text(data.selfEva);
     }
 
 </script>

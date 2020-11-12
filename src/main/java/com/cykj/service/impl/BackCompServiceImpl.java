@@ -1,11 +1,10 @@
 package com.cykj.service.impl;
 
-import com.cykj.entity.CompAndtalent;
 import com.cykj.entity.TableInfo;
 import com.cykj.entity.Talent;
 import com.cykj.mapper.CompAndtalentMapper;
 import com.cykj.mapper.TalentMapper;
-import com.cykj.service.TalentService;
+import com.cykj.service.BackCompService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class TalentServiceImpl implements TalentService {
+public class BackCompServiceImpl implements BackCompService {
     @Resource
     private TalentMapper talentMapper;
 
