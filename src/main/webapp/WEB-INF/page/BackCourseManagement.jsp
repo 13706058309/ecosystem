@@ -72,7 +72,8 @@
                             //return false 开启该代码可禁止点击该按钮关闭
                         }
                         ,type:1
-                        ,content:'<select name="city" style="width: 150px;margin:10px 160px" >\n' +
+                        ,content:'<style>input,select{ border-radius: 10px;padding: 6px 0px;}</style>'+
+                            '<select name="city" style="width: 150px;margin:10px 160px" >\n' +
                             '                    <option value="">--请选择领域--</option>\n' +
                             '                    <option value="0">JAVA</option>\n' +
                             '                    <option value="1">HTML</option>\n' +
@@ -120,8 +121,37 @@
             //监听提交【修改课程  按钮的监听】
             form.on('submit(ReviseCourse)', function(data){
                 console.log(data);
-                alert("修改完毕")
+                //alert("修改完毕")
+                layui.use('layer', function(){
+                    var layer = layui.layer;
 
+                    layer.open({
+                        title: '增加'
+                        ,area: ['500px', '300px']//设定弹窗的宽、高
+                        ,btn:[ '确认提交', '取消']//设定按钮组
+                        ,shade: [0.7, '#393D49']
+                        ,closeBtn:2
+                        ,yes: function(index, layero){
+                            //按钮【按钮一】的回调
+                            alert("增加成功！")
+                            layer.close(index); //如果设定了yes回调，需进行手工关闭
+                        }
+                        ,btn2: function(index, layero){
+                            //按钮【按钮二】的回调
+                            alert("取消提交按钮被触发")
+
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        }
+                        ,type:1
+                        ,content:'<style>' +
+                            'input{ border-radius: 10px;padding: 8px 0px;}</style>'+
+                            '<input placeholder="请输入修改后的课程名"  style="width: 200px;margin:5px 135px ;">' +
+                            '<input placeholder="请输入课程图片路径"  style="width: 200px;margin:5px 135px">' +
+                            '<input type="file" id="upload_file" style="display: none;" accept="image/jpeg, image/gif" />' +
+                            '<input placeholder="请输入课程介绍"  style="width: 200px;margin:5px 135px">' +
+                            '<script>   <'/'script>'
+                    });
+                });
                 return false;
             });
 
