@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import java.util.List;
+
 /**
  * 简历
  */
@@ -9,7 +11,7 @@ public class Resume {
   private long userId;
   private String realName;
   private String clan;
-  private String phone;
+  private String photo;
   private String politicalStatus;
   private String birthday;
   private String contactInfo;
@@ -23,6 +25,11 @@ public class Resume {
   private String address;
   private java.sql.Date updateTime;
   private long isGraduate;
+
+  private Education education;
+  private List<EducationalBackground> educationalBackgrounds;
+  private List<WorkExperience> workExperiences;
+  private List<ProjectExperience> projectExperiences;
 
   public Resume() {
   }
@@ -63,14 +70,13 @@ public class Resume {
   }
 
 
-  public String getPhone() {
-    return phone;
+  public String getPhoto() {
+    return photo;
   }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
-
 
   public String getPoliticalStatus() {
     return politicalStatus;
@@ -185,4 +191,35 @@ public class Resume {
     this.isGraduate = isGraduate;
   }
 
+  public Education getEducation() {
+    return education;
+  }
+
+  public void setEducation(Education education) {
+    this.education = education;
+  }
+
+  public List<EducationalBackground> getEducationalBackgrounds() {
+    return educationalBackgrounds;
+  }
+
+  public void setEducationalBackgrounds(List<EducationalBackground> educationalBackgrounds) {
+    this.educationalBackgrounds = educationalBackgrounds;
+  }
+
+  public List<WorkExperience> getWorkExperiences() {
+    return workExperiences;
+  }
+
+  public void setWorkExperiences(List<WorkExperience> workExperiences) {
+    this.workExperiences = workExperiences;
+  }
+
+  public List<ProjectExperience> getProjectExperiences() {
+    return projectExperiences;
+  }
+
+  public void setProjectExperiences(List<ProjectExperience> projectExperiences) {
+    this.projectExperiences = projectExperiences;
+  }
 }
