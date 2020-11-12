@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.JianliMapper">
+    <select id="resume" parameterType="java.lang.Integer" resultType="findResume">
+        select    from resume r,userinfo u,education e,educationalBackground eb,workExperience we,
+         projectExperience pe,resumeEduu re,resumeWork rw,resumePro rp
+           where r.userid=u.userid and r.resumeid=e.resumeid and r.resumeid=re.resumeid and r.resumeid=rw.resumeid and r.resumeid=rp.resumeid
+           and re.ebid=eb.ebid and rp.peid=pe.peid and rw.weid=we.weid
+           and r.userid=#{userid}
+    </select>
+    <resultMap id="findResume" type="com.cykj.entity.Resume">
+        <id property="resumeid" column="resumeid"></id>
+        <result property="realname" column="realname"></result>
+    </resultMap>
+
+
+        <select id="allDocument" parameterType="java.lang.Integer" resultMap="allDocumentMap">
+            select uname,d.* from userinfo u,document d where u.uid=d.uid ;
+        </select>
+        <resultMap id="allDocumentMap" type="com.cykj.bean.Userinfo">
+            <id property="uid" column="uid" ></id>
+            <result property="uname" column="uname"></result>
+            <collection property="documents" ofType="com.cykj.bean.Document">
+                <id property="did" column="did"></id>
+                <result property="uid" column="uid"></result>
+                <result property="pid" column="pid"></result>
+                <result property="dname" column="dname"></result>
+                <result property="dtype" column="dtype"></result>
+                <result property="dintro" column="dintro"></result>
+                <result property="durl" column="durl"></result>
+                <result property="dtime" column="dtime"></result>
+                <result property="ddownload" column="ddownload"></result>
+                <result property="dscore" column="dscore"></result>
+            </collection>
+        </resultMap>
+
+</mapper>
