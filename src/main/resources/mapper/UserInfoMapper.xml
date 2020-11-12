@@ -12,5 +12,4 @@
         select * from backuser where account = ${account} and pwd = ${pwd}
     </select>
 
-
 </mapper>
