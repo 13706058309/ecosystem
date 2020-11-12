@@ -1,11 +1,19 @@
 package com.cykj.controller;
 
+import com.cykj.entity.Talent;
+import com.cykj.service.TalentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
+    @Resource
+    private TalentService talentServiceImpl;
 
     @RequestMapping("/testComp")
     public String test(){
@@ -72,6 +80,7 @@ public class TestController {
 
     @RequestMapping("/unviTalent")
     public String unviTalent(){
+
         return "comp/BackUniversityTalent";
     }
 }

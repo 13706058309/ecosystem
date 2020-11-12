@@ -62,11 +62,11 @@
     <div class="layui-form-item">
         <label class="layui-form-label">专业:</label>
         <div class="layui-input-inline">
-            <input type="tel" id="topic" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            <input type="tel" id="profession" lay-verify="required|phone" autocomplete="off" class="layui-input">
         </div>
         <label class="layui-form-label">学校:</label>
         <div class="layui-input-inline">
-            <input type="tel" id="userName" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            <input type="tel" id="school" lay-verify="required|phone" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline" style="margin-left: 8%">
             <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
@@ -79,7 +79,6 @@
 <script>
     var layer;
     var path = $("#path").val();
-    var docID;
     var objs;
     var index;
     var form;
@@ -91,7 +90,6 @@
         laydate.render({
             elem:'#beginTime'
         });
-
         laydate.render({
             elem:'#endTime'
         });
@@ -105,7 +103,7 @@
             height:312,
             limits:[3,6],
             limit:3,
-            url:"${pageContext.request.contextPath}/doc/checkDoc",
+            url:"${pageContext.request.contextPath}/rec/findUnviTalent",
             page:true,
             id: 'testReload',
             cols:[[
@@ -119,32 +117,36 @@
                 {field:'workExp',title:'工作经历',hide:'true'},
                 {field:'jobPlan',title:'职业规划',hide:'true'},
                 {field:'selfEva',title:'自我评价',hide:'true'},
-                {field:'user_Name',title:'上传人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
+                {field:'recommendTime',title:'投递时间',templet:'<div>{{d.compAndtalent.recommendTime}}</div>'},
                 {title:'操作',toolbar:'#btns',width:250}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            docID = data.doc_ID;
-            var u_ID = data.u_ID;
-            var doc_Type_ID = data.doc_Type_ID;
-            if(obj.event === 'go'){
-                $.ajax({
-                    url:path+"/doc/changeDocStand",
-                    data:"doc_ID="+docID+"&standID=5&u_ID="+u_ID+"&doc_Type_ID="+doc_Type_ID,
-                    type:"get",
-                    typeData:"text",
-                    beforeSend:function () {
-                        return confirm("确定通过");
-                    },
-                    success:function (info) {
-                        layer.msg(info);
-                        if(info=='修改成功'){
-                            obj.del();
-                        }
-                    },
+            var compAndTalId = data.compAndtalent.compAndTalId;
+
+            if(obj.event === 'del'){
+                layer.confirm('是否删除',{
+                    btn:['删除','取消'],
+                    time:20000,
+                },function (index) {
+                    $.ajax({
+                        url:path+"/rec/delUnviTalent",
+                        data:"compAndTalId="+compAndTalId,
+                        type:"get",
+                        typeData:"text",
+                        success:function (info) {
+                            layer.msg(info);
+                            if(info=='删除成功'){
+                                obj.del();
+                            }
+                        },
+                    })
+                },function () {
+
                 })
+
 
             } else if(obj.event === 'pass'){
                 $.ajax({
@@ -162,9 +164,6 @@
                         }
                     },
                 })
-            }else if(obj.event==='down'){
-                var docPath = obj.data.path;
-                location.href = path+"/doc/downFile?docID="+docID;
             }
         });
 
@@ -194,11 +193,11 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        userName: $('#userName').val(),
+                        talentName: $('#talentName').val(),
                         beginTime:$('#beginTime').val(),
                         endTime:$('#endTime').val(),
-                        topic:$('#topic').val(),
-                        type:$('#type').val(),
+                        school:$('#school').val(),
+                        profession:$('#profession').val(),
                     }
                 }, 'data');
             }

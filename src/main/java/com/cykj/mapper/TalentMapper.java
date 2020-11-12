@@ -15,5 +15,5 @@ import java.util.Map;
 public interface TalentMapper {
 
     List<Talent>  findUnviTalentOnPage(Map<String,Object> map);
-
+    int findUnviTalentOnPageNum(Map<String,Object> map);
 }
