@@ -10,4 +10,9 @@ public class HomePageContorller {
     public String home(){
         return "HomePage";
     }
+
+    @RequestMapping("/A")
+    public String aEnd(){
+        return "AEndToEnd";
+    }
 }

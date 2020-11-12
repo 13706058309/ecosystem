@@ -10,8 +10,8 @@
 
 <html xmlns:wb="http://open.weibo.com/wb"><head>
 
-    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>
-    <script src="${pageContext.request.contextPath}/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
+    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/static/style/js/conversion.js"></script>
+    <script src="${pageContext.request.contextPath}/static/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
     <style type="text/css"></style>
     <meta content="no-siteapp" http-equiv="Cache-Control">
     <link  media="handheld" rel="alternate">
@@ -24,14 +24,14 @@
         console.log(1);
     </script>
 <%--    <link href="h/images/favicon.ico" rel="Shortcut Icon">--%>
-    <link href="${pageContext.request.contextPath}/style/css/style.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/BackChangePwd.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/style/css/external.min.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/style/css/popup.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/jquery.1.10.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/style/js/jquery.lib.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/ajaxfileupload.js"></script>
-    <script src="${pageContext.request.contextPath}/style/js/additional-methods.js" type="text/javascript"></script>
+    <link href="${pageContext.request.contextPath}/static/style/css/style.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/BackChangePwd.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/style/css/external.min.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/style/css/popup.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/style/js/jquery.1.10.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/style/js/jquery.lib.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/style/js/ajaxfileupload.js"></script>
+    <script src="${pageContext.request.contextPath}/static/style/js/additional-methods.js" type="text/javascript"></script>
     <!--[if lte IE 8]>
     <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/excanvas.js"></script>
     <![endif]-->

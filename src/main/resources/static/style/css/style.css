@@ -1,6 +1,6 @@
 ﻿@charset "utf-8";
 /*********************************************
-* CSS Document for lagou.com 拉勾招聘 
+* CSS Document for lagou.com 拉勾招聘
 * Start Time 2013-06-14
 * Author : Vee
 * Contect : vee@3wcoffee.com
@@ -547,7 +547,7 @@ span.error {
     min-width: 1024px;
     height: 140px;
     background: #44D0C7;
-    border-top: 3px solid #ffffff;
+    border-top: 3px solid #44D0C7;
 }
 
 #header .wrapper {
@@ -940,10 +940,10 @@ span.error {
     *float: left;
 }
 
-.fixed {
-    position: fixed !important; /* IE 6 不支持 fixed，只能用 absolute */
-    top: 0 !important;
-}
+/*.fixed {*/
+/*    position: fixed !important; !* IE 6 不支持 fixed，只能用 absolute *!*/
+/*    top: 0 !important;*/
+/*}*/
 
 #sidebar .mainNavs {
     background: #fafafa;
@@ -1170,8 +1170,8 @@ ul.hot_tags {
 
 /*home banner*/
 #home_banner {
-    width: 744px;
-    height: 160px;
+    width: 804px;
+    height: 335px;
     position: relative;
     margin: 0 0 18px;
     overflow: hidden;
@@ -1182,7 +1182,7 @@ ul.hot_tags {
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 612px;
+    width: 642px;
     height: 160px;
     overflow: hidden;
     position: relative;
@@ -1191,7 +1191,7 @@ ul.hot_tags {
 
 .banner_bg li {
     display: block;
-    width: 612px;
+    width: 642px;
     height: 160px;
 }
 
@@ -1275,6 +1275,10 @@ ul.hotabbing li i {
     right: -10px;
     top: -5px;
     background: url(img/icon_new.png) left top no-repeat;
+}
+
+.hotCompany{
+    float: bottom;
 }
 
 ul.hot_pos {
