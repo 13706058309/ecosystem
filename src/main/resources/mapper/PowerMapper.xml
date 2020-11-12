@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.PowerMapper">
+
+    <select id="findExistMenu"  resultType="com.cykj.entity.Menu">
+        select m.* from power as pm,menu as m where pm.menuId=m.id and pId=#{pId} and roleId=#{roleId} order by id;
+    </select>
+
+    <select id="findNotExistMenu"  resultType="com.cykj.entity.Menu">
+        <if test="pId==0">
+            select * from menu where id in(select pId from menu where id not in (select id  from power as pm ,menu m where pm.menuId=m.Id and pm.roleId=#{roleId} and pId!=0) and pId!=0) order by id;
+        </if>
+        <if test="pId!=0">
+            select id, title, url, pId from menu where id not in (select pm.menuId from power pm where pm.roleId=#{roleId}) and pId=#{pId} order by id
+        </if>
+    </select>
+
+    <select id="findRoles" resultType="com.cykj.entity.RoleInfo">
+        select * from roleInfo
+    </select>
+
+
+    <insert id="addPower">
+        insert into power(roleId,menuId)
+        values
+        <foreach collection="menuIds" item="menuId" separator="," >
+            (#{roleId},#{menuId})
+        </foreach>
+    </insert>
+
+
+    <delete id="delPower">
+        delete from power where roleId=#{roleId} and menuId in
+        <foreach collection="menuIds" item="menuId" close=")" open="(" separator=",">
+            #{menuId}
+        </foreach>
+
+    </delete>
+
+
+</mapper>
