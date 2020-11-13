@@ -53,7 +53,7 @@
                                                         class="prev-line"><i
                                                         class="fz-resume fz-experience"></i><label id="wrokYear9"></label>工作年限：${resume.wrokYear}年</span><span
                                                         class="prev-line"><i
-                                                        class="fz-resume fz-degree"></i><label id="education9"></label>专业：${resume.education.education}</span></p>
+                                                        class="fz-resume fz-degree"></i><label id="education9"></label>学历：${resume.education.education}</span></p>
                                                 <p><span class="prev-line"><i
                                                         class="fz-resume fz-status"></i><label id="profession9">专业：${resume.profession}</label></span><span class="prev-line"><i
                                                         class="fz-resume fz-experience"></i><label id="school9">毕业学校：${resume.school}</label></span><span
@@ -63,8 +63,12 @@
                                                     <!---->
                                                 </p>
                                                 <p><span class="prev-line"><i
-                                                        class="fz-resume fz-tel"></i><label id="contactInfo9">联系方式：${resume.contactInfo}</label></span><span class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i><label id="address9">现居住地：${resume.address}</label></span>
+                                                        class="fz-resume fz-tel"></i><label id="contactInfo9">联系方式：${resume.contactInfo}</label></span>
+                                                    <!---->
+                                                    <!---->
+                                                </p>
+                                                <p><span class="prev-line"><i
+                                                        class="fz-resume fz-place"></i><label id="address9">现居住地：${resume.address}</label></span>
                                                     <!---->
                                                     <!---->
                                                 </p>
@@ -485,12 +489,13 @@
                                     <li ka="user-resume-edit-expectation0" class="">
                                         <div class="primary-info">
                                             <div class="info-labels"><span class="prev-line"><span
-                                                    class="label-text"><i class="fz-resume fz-job"></i> web前端
-                                                        </span></span><span class="prev-line"><i
-                                                    class="fz-resume fz-salary"></i> 面议 </span><span
-                                                    class="prev-line"><i class="fz-resume fz-industry"></i>
-                                                        移动互联网·互联网·电子商务 </span><span class="prev-line"><i
-                                                    class="fz-resume fz-place"></i> 厦门 </span></div>
+                                                    class="label-text"><i class="fz-resume fz-job"></i> ${resume.expectWork}
+                                                        </span></span>
+<%--                                                <span class="prev-line"><i--%>
+<%--                                                    class="fz-resume fz-salary"></i> 面议 </span><span--%>
+<%--                                                    class="prev-line"><i class="fz-resume fz-industry"></i>--%>
+<%--                                                        移动互联网·互联网·电子商务 </span><span class="prev-line"><i--%>
+<%--                                                    class="fz-resume fz-place"></i> 厦门 </span></div>--%>
                                         </div>
 <%--                                        <div class="op op-show">--%>
 <%--                                            <!----><a href="javascript:;" ka="user-resume-edit-expectation0"--%>
@@ -642,36 +647,39 @@
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
                                 </svg><span onclick="projectUpdate()">添加</span></a></h3>
-                                <ul>
-                                    <li ka="user-resume-edit-project2" class="">
-                                        <div class="primary-info">
-                                            <!---->
-                                            <div class="info-text">
-                                                <h4 class="name">ITNM（IT网管系统）</h4><span
-                                                    class="gray period">2014.06-2016.03</span>
-                                            </div>
-                                            <div class="info-text">
-                                                <h4><span class="prev-line">java web开发</span></h4>
-                                            </div>
-                                            <div class="info-text"><span
-                                                    class="text-type">内容：</span>IT服务管理系统包括IT监控、服务管理、CMDB、运营分析等4个产品包，其中IT监控又包括IT基础设施监控以及云资源监控、应用软件监控、业务拨测、端到端流程监控和业务影响分析等产品包。
-                                            </div>
-                                            <div class="info-text"><span
-                                                    class="text-type">业绩：</span>1、负责多个省的前台开发任务，与现地工程点人员进行需求沟通，分析需求的可行性并实现功能
-                                                2.使用java、jsp、jquery、extjs等进行开发
-                                                3.进行数据库（设计表、写SQL、存储过程等）+JAVA+页面（根据原型做出页面）开发</div>
-                                            <!---->
-                                        </div>
-                                        <div class="op"><a href="javascript:;" ka="user-resume-del-project2"
-                                                           class="link-delete"><svg class="icon-svg">
-                                            <use xlink:href="#icon-svg-delete"></use>
-                                        </svg><span>删除</span></a><a href="javascript:;"
-                                                                    ka="user-resume-edit-project2" class="link-edit"><svg
-                                                class="icon-svg">
-                                            <use xlink:href="#icon-svg-edit"></use>
-                                        </svg><span >编辑</span></a></div>
-                                    </li>
-                                </ul>
+                                <c:if test="${not empty resume.projectExperiences}">
+                                    <c:forEach var="projects" items="${resume.projectExperiences}">
+                                        <ul>
+                                            <li ka="user-resume-edit-project2" class="">
+                                                <div class="primary-info">
+                                                    <!---->
+                                                    <div class="info-text">
+                                                        <h4 class="name">项目名称：${projects.proName}</h4><span
+                                                            class="gray period">${projects.proBeginTime}-${projects.proEndTime}</span>
+                                                    </div>
+                                                    <div class="info-text">
+                                                        <h4><span class="prev-line">担任职位：${projects.proPost}</span></h4>
+                                                    </div>
+                                                    <div class="info-text"><span
+                                                            class="text-type">内容：</span>${projects.proDescription}
+                                                    </div>
+                                                    <div class="info-text"><span
+                                                            class="text-type">业绩：</span>${projects.proPerformance}</div>
+                                                    <!---->
+                                                </div>
+                                                <div class="op"><a href="javascript:;" ka="user-resume-del-project2"
+                                                                   class="link-delete"><svg class="icon-svg">
+                                                    <use xlink:href="#icon-svg-delete"></use>
+                                                </svg><span>删除</span></a><a href="javascript:;"
+                                                                            ka="user-resume-edit-project2" class="link-edit"><svg
+                                                        class="icon-svg">
+                                                    <use xlink:href="#icon-svg-edit"></use>
+                                                </svg><span >编辑</span></a></div>
+                                            </li>
+                                        </ul>
+                                    </c:forEach>
+                                </c:if>
+
                             </div>
                             <!---->
                         </div>
@@ -734,34 +742,39 @@
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
                                 </svg><span onclick="educationtUpdate()">添加</span></a></h3>
-                                <ul>
-                                    <li ka="user-resume-edit-eduexp0" class="">
-                                        <div class="primary-info">
-                                            <!---->
-                                            <div class="info-text">
-                                                <h4 class="name">福建师范大学</h4>
-                                                <!----><span class="gray period">2010-2014</span>
-                                            </div>
-                                            <div class="info-text">
-                                                <h4><span class="prev-line">计算机科学与技术</span><span
-                                                        class="prev-line">本科
-                                                    <!----></span></h4>
-                                            </div>
-                                            <!---->
-                                        </div>
-                                        <div class="op">
-                                            <!----><a href="javascript:;" ka="user-resume-edit-eduexp0"
-                                                      class="link-edit"><svg class="icon-svg">
-                                            <use xlink:href="#icon-svg-edit"></use>
-                                        </svg><span>编辑</span></a></div>
-                                    </li>
-                                </ul>
+                                <c:if test="${not empty resume.educationalBackgrounds}">
+                                    <c:forEach var="educationalBackgrounds" items="${resume.educationalBackgrounds}">
+                                        <ul>
+                                            <li ka="user-resume-edit-eduexp0" class="">
+                                                <div class="primary-info">
+                                                    <!---->
+                                                    <div class="info-text">
+                                                        <h4 class="name">${educationalBackgrounds.ebSchool}</h4>
+                                                        <!----><span class="gray period">${educationalBackgrounds.schBeginTime}--${educationalBackgrounds.schEndTime}</span>
+                                                    </div>
+                                                    <div class="info-text">
+                                                        <h4><span class="prev-line">专业：${educationalBackgrounds.major}</span><span
+                                                                class="prev-line">学历：${educationalBackgrounds.ebEducation}
+                                                            <!----></span></h4>
+                                                    </div>
+                                                    <!---->
+                                                </div>
+                                                <div class="op">
+                                                    <!----><a href="javascript:;" ka="user-resume-edit-eduexp0"
+                                                              class="link-edit"><svg class="icon-svg">
+                                                    <use xlink:href="#icon-svg-edit"></use>
+                                                </svg><span>编辑</span></a></div>
+                                            </li>
+                                        </ul>
+                                    </c:forEach>
+                                </c:if>
+
                             </div>
                             <!---->
                         </div>
 
                         <div id="education-update" class="item-form display-hide">
-                            <h3 class="title">编辑项目经历</h3>
+                            <h3 class="title">编辑教育背景</h3>
                             <form class="layui-form">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"  style="width: 12%">学校</label>

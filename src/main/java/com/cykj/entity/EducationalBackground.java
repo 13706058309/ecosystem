@@ -6,9 +6,9 @@ package com.cykj.entity;
 public class EducationalBackground {
 
   private long ebId;
-  private String school;
+  private String ebSchool;
   private String major;
-  private String education;
+  private String ebEducation;
   private String schBeginTime;
   private String schEndTime;
   private String schExperience;
@@ -22,15 +22,29 @@ public class EducationalBackground {
     this.ebId = ebId;
   }
 
-
-  public String getSchool() {
-    return school;
+  public String getSchBeginTime() {
+    return schBeginTime;
   }
 
-  public void setSchool(String school) {
-    this.school = school;
+  public String getSchEndTime() {
+    return schEndTime;
   }
 
+  public String getEbSchool() {
+    return ebSchool;
+  }
+
+  public void setEbSchool(String ebSchool) {
+    this.ebSchool = ebSchool;
+  }
+
+  public String getEbEducation() {
+    return ebEducation;
+  }
+
+  public void setEbEducation(String ebEducation) {
+    this.ebEducation = ebEducation;
+  }
 
   public String getMajor() {
     return major;
@@ -41,13 +55,7 @@ public class EducationalBackground {
   }
 
 
-  public String getEducation() {
-    return education;
-  }
 
-  public void setEducation(String education) {
-    this.education = education;
-  }
 
   public void setSchBeginTime(String schBeginTime) {
     this.schBeginTime = schBeginTime;

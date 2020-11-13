@@ -28,6 +28,7 @@ public class Resume {
   private long jobStandId; //就业状态
   private String industry; //意向行业
   private String sex;
+  private String expectWork;
 
   private Education education;
   private List<EducationalBackground> educationalBackgrounds;
@@ -35,6 +36,14 @@ public class Resume {
   private List<ProjectExperience> projectExperiences;
 
   public Resume() {
+  }
+
+  public String getExpectWork() {
+    return expectWork;
+  }
+
+  public void setExpectWork(String expectWork) {
+    this.expectWork = expectWork;
   }
 
   public long getResumeId() {

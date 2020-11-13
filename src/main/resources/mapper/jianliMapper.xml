@@ -7,7 +7,7 @@
         select r.*,we.*,pe.*,eb.*,e.education   from resume r,education e,educationalBackground eb,workExperience we,
          projectExperience pe,resumeEduu re,resumeWork rw,resumePro rp
            where r.educationid=e.educationid and r.resumeid=re.resumeid and r.resumeid=rw.resumeid and r.resumeid=rp.resumeid
-           and re.ebid=eb.ebid and rp.peid=pe.peid and rw.weid=we.weid and r.educationid=e.educationid
+           and re.ebid=eb.ebid and rp.peid=pe.peid and rw.weid=we.weid
            and r.userid=#{userid}
     </select>
     <resultMap id="findResume" type="com.cykj.entity.Resume">
@@ -27,15 +27,19 @@
         <result property="address" column="address"></result>
         <result property="updateTime" column="updateTime"></result>
         <result property="isGraduate" column="isGraduate"></result>
+        <result property="sex" column="sex"></result>
+        <result property="expectWork" column="expectWork"></result>
+        <result property="jobStandId" column="jobStandId"></result>
+        <result property="industry" column="industry"></result>
         <association property="education" column="education" javaType="com.cykj.entity.Education">
             <id property="educationId" column="educationId"></id>
             <result property="education" column="education"></result>
         </association>
         <collection property="educationalBackgrounds" ofType="com.cykj.entity.EducationalBackground">
-            <id property="edId" column="edId"></id>
-            <result property="school" column="school"></result>
+            <id property="ebId" column="ebId"></id>
+            <result property="ebSchool" column="ebSchool"></result>
             <result property="major" column="major"></result>
-            <result property="education" column="education"></result>
+            <result property="ebEducation" column="ebEducation"></result>
             <result property="schBeginTime" column="schBeginTime"></result>
             <result property="schEndTime" column="schEndTime"></result>
             <result property="schExperience" column="schExperience"></result>
