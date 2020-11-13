@@ -27,6 +27,7 @@ public class Resume {
   private long isGraduate;
   private long jobStandId; //就业状态
   private String industry; //意向行业
+  private String sex;
 
   private Education education;
   private List<EducationalBackground> educationalBackgrounds;
@@ -53,6 +54,13 @@ public class Resume {
     this.userId = userId;
   }
 
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
 
   public String getRealName() {
     return realName;
