@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import java.util.Date;
+
 /**
  * 公司----人才
  */
@@ -9,6 +11,7 @@ public class CompAndtalent {
   private long talent;
   private long compId;
   private long stand;
+  private String recommendTime;
 
   public CompAndtalent() {
   }
@@ -48,4 +51,11 @@ public class CompAndtalent {
     this.stand = stand;
   }
 
+  public String getRecommendTime() {
+    return recommendTime;
+  }
+
+  public void setRecommendTime(String recommendTime) {
+    this.recommendTime = recommendTime;
+  }
 }

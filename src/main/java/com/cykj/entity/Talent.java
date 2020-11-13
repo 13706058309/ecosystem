@@ -18,7 +18,8 @@ public class Talent {
   private String jobPlan;
   private String selfEva;
   private String education;
-  private Date entryTime;
+  private String entryTime;
+  private CompAndtalent compAndtalent;
 
   public Talent() {
   }
@@ -112,11 +113,11 @@ public class Talent {
     this.selfEva = selfEva;
   }
 
-  public Date getEntryTime() {
+  public String getEntryTime() {
     return entryTime;
   }
 
-  public void setEntryTime(Date entryTime) {
+  public void setEntryTime(String entryTime) {
     this.entryTime = entryTime;
   }
 
@@ -126,5 +127,32 @@ public class Talent {
 
   public void setEducation(String education) {
     this.education = education;
+  }
+
+  public CompAndtalent getCompAndtalent() {
+    return compAndtalent;
+  }
+
+  public void setCompAndtalent(CompAndtalent compAndtalent) {
+    this.compAndtalent = compAndtalent;
+  }
+
+  @Override
+  public String toString() {
+    return "Talent{" +
+            "talentId=" + talentId +
+            ", talentName='" + talentName + '\'' +
+            ", school='" + school + '\'' +
+            ", birthday='" + birthday + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", profession='" + profession + '\'' +
+            ", politicalStatus='" + politicalStatus + '\'' +
+            ", workExp='" + workExp + '\'' +
+            ", jobPlan='" + jobPlan + '\'' +
+            ", selfEva='" + selfEva + '\'' +
+            ", education='" + education + '\'' +
+            ", entryTime=" + entryTime +
+            ", compAndtalent=" + compAndtalent +
+            '}';
   }
 }
