@@ -13,17 +13,15 @@
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/layui/layui.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" >
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/userManager.js"></script>
-    <script src="${pageContext.request.contextPath}/js/powerManager.js" charset="UTF-8"></script>
-
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/powerManager.js"></script>
     <style>
         .transfer-box{
             width: 660px;
-            height: 400px;
+            height: 450px;
         }
         .transfer-box-item{
             width: 250px;
-            height: 450px;
+            /*height: 450px;*/
             /*background-color: #ffa9bb;*/
             float: left;
             border:1px solid black;
@@ -35,12 +33,11 @@
             font-size: 16px;
             text-align: center;
             padding:20px 0px;
-            height: 394px;
             border-bottom:1px solid black;
         }
         .transfer-box-main{
             overflow-y:auto;
-            height: 394px;
+            height: 368px;
         }
         .transfer-btnBox{
             width: 100px;

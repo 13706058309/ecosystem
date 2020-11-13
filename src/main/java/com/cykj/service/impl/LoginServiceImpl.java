@@ -15,6 +15,7 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private UserInfoMapper userInfoMapper;
 
+
 //    @Override
 //    public UserInfo log(String account, String password) {
 //        return userInfoMapper.log(account, password);

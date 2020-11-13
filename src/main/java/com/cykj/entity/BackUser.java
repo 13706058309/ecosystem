@@ -27,6 +27,7 @@ public class BackUser {
   private Parameter states;//状态实体类 （iD 状态名称  类型）
 
   public BackUser() {
+
   }
 
   public long getbUserId() {

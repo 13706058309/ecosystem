@@ -18,11 +18,6 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
     <meta name="baidu-site-verification" content="QIQ6KC1oZ6"/>
-
-    <script type="text/javascript">
-        var ctx = "h";
-        console.log(1);
-    </script>
     <link rel="Shortcut Icon" href="h/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../style/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../style/css/external.min.css"/>
