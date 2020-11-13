@@ -547,7 +547,7 @@ span.error {
     min-width: 1024px;
     height: 140px;
     background: #44D0C7;
-    border-top: 3px solid #ffffff;
+    border-top: 3px solid #44D0C7;
 }
 
 #header .wrapper {

@@ -1,93 +1,97 @@
 package com.cykj.entity;
 
+
 public class Course {
-    private int courseId;
-    private String courseName;
-    private String ourseImgURL;
-    private String speakerName;
-    private String courseIntroduce;
-    private String uploadTime;
-    private int collectionNumber;
-    private int filedId;
-    private String speakerHeadImgURL;
+
+  private long courseId;
+  private String courseName;
+  private String courseImgUrl;
+  private String speakerName;
+  private String courseIntroduce;
+  private java.sql.Timestamp uploadTime;
+  private long collectionNumber;
+  private long fieldId;
+  private String speakerHeadImgUrl;
 
 
+  public long getCourseId() {
+    return courseId;
+  }
+
+  public void setCourseId(long courseId) {
+    this.courseId = courseId;
+  }
 
 
+  public String getCourseName() {
+    return courseName;
+  }
+
+  public void setCourseName(String courseName) {
+    this.courseName = courseName;
+  }
 
 
+  public String getCourseImgUrl() {
+    return courseImgUrl;
+  }
+
+  public void setCourseImgUrl(String courseImgUrl) {
+    this.courseImgUrl = courseImgUrl;
+  }
 
 
-    //--------------------------    getset方法    --------------------------\\
-    public int getCourseId() {
-        return courseId;
-    }
+  public String getSpeakerName() {
+    return speakerName;
+  }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
+  public void setSpeakerName(String speakerName) {
+    this.speakerName = speakerName;
+  }
 
-    public String getCourseName() {
-        return courseName;
-    }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
+  public String getCourseIntroduce() {
+    return courseIntroduce;
+  }
 
-    public String getOurseImgURL() {
-        return ourseImgURL;
-    }
+  public void setCourseIntroduce(String courseIntroduce) {
+    this.courseIntroduce = courseIntroduce;
+  }
 
-    public void setOurseImgURL(String ourseImgURL) {
-        this.ourseImgURL = ourseImgURL;
-    }
 
-    public String getSpeakerName() {
-        return speakerName;
-    }
+  public java.sql.Timestamp getUploadTime() {
+    return uploadTime;
+  }
 
-    public void setSpeakerName(String speakerName) {
-        this.speakerName = speakerName;
-    }
+  public void setUploadTime(java.sql.Timestamp uploadTime) {
+    this.uploadTime = uploadTime;
+  }
 
-    public String getCourseIntroduce() {
-        return courseIntroduce;
-    }
 
-    public void setCourseIntroduce(String courseIntroduce) {
-        this.courseIntroduce = courseIntroduce;
-    }
+  public long getCollectionNumber() {
+    return collectionNumber;
+  }
 
-    public String getUploadTime() {
-        return uploadTime;
-    }
+  public void setCollectionNumber(long collectionNumber) {
+    this.collectionNumber = collectionNumber;
+  }
 
-    public void setUploadTime(String uploadTime) {
-        this.uploadTime = uploadTime;
-    }
 
-    public int getCollectionNumber() {
-        return collectionNumber;
-    }
+  public long getFieldId() {
+    return fieldId;
+  }
 
-    public void setCollectionNumber(int collectionNumber) {
-        this.collectionNumber = collectionNumber;
-    }
+  public void setFieldId(long fieldId) {
+    this.fieldId = fieldId;
+  }
 
-    public int getFiledId() {
-        return filedId;
-    }
 
-    public void setFiledId(int filedId) {
-        this.filedId = filedId;
-    }
+  public String getSpeakerHeadImgUrl() {
+    return speakerHeadImgUrl;
+  }
 
-    public String getSpeakerHeadImgURL() {
-        return speakerHeadImgURL;
-    }
+  public void setSpeakerHeadImgUrl(String speakerHeadImgUrl) {
+    this.speakerHeadImgUrl = speakerHeadImgUrl;
+  }
 
-    public void setSpeakerHeadImgURL(String speakerHeadImgURL) {
-        this.speakerHeadImgURL = speakerHeadImgURL;
-    }
 }

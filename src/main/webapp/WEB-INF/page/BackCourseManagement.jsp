@@ -221,14 +221,14 @@
             ,height: 312
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: []//取消头部工具栏右侧的按钮
-            ,url: '/demo/table/user/' //数据接口
+            ,url: '../txjtext/findCourse' //数据接口
             ,page: true //开启分页
             ,cols: [[ //表头
-                {field: 'id', title: '序号', width:80, sort: true, fixed: 'left'}
-                ,{field: 'username', title: '课程所在领域', width:130}
-                ,{field: 'sex', title: '课程名称', width:130}
-                ,{field: 'city', title: '上传时间', width:130,sort: true}
-                ,{field: 'sign', title: '操作', width: 177,toolbar:'#barDemo'}
+                {field: 'courseId', title: '序号', width:80, sort: true, fixed: 'left'}
+                ,{field: 'fieldId', title: '课程所在领域', width:130}
+                ,{field: 'courseName', title: '课程名称', width:130}
+                ,{field: 'uploadTime', title: '上传时间', width:130,sort: true}
+                ,{field: '', title: '操作', width: 177,toolbar:'#barDemo'}
             ]]
 
         });
