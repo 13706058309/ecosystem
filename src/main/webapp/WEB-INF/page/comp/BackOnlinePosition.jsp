@@ -1,70 +1,28 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2020/11/10
-  Time: 10:42
+  Date: 2020/11/11
+  Time: 12:57
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/BackUniversityTalent.css">
 <html>
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-
 <body>
 <script id="btns" type="text/html">
-
-    <a class="layui-btn layui-btn-xs" lay-event="down">下载简历</a>
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="go">查看详情</a>
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="pass">删除</a>
 </script>
 
-<h1 style="text-align: center">文档管理</h1>
-<input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<div class="demoTable layui-form" style="margin-left: 10%">
-    <div class="layui-form-item">
-
-        <div class="layui-inline">
-            <label class="layui-form-label">推荐时间</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="beginTime"  placeholder="yyyy-MM-dd">
-            </div>
-        </div>
-
-        <div class="layui-inline">
-            <label class="layui-form-label">至</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd">
-            </div>
-        </div>
-
-        <div class="layui-inline">
-            <label class="layui-form-label">姓名:</label>
-            <div class="layui-input-inline">
-                <input type="tel" id="talentName" lay-verify="required|phone" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">专业:</label>
-        <div class="layui-input-inline">
-            <input type="tel" id="topic" lay-verify="required|phone" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">学校:</label>
-        <div class="layui-input-inline">
-            <input type="tel" id="userName" lay-verify="required|phone" autocomplete="off" class="layui-input">
-        </div>
-        <div class="layui-input-inline" style="margin-left: 8%">
-            <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
-        </div>
-    </div>
-</div>
+    <h1 style="text-align: center">已发布岗位</h1>
+    <br>
+    <input type="hidden" value="${pageContext.request.contextPath}" id="path">
 
 <table id="userTable" lay-filter="test"></table>
 </body>
@@ -80,13 +38,6 @@
         form.render();
         var laydate = layui.laydate;
         layer = layui.layer;
-        laydate.render({
-            elem:'#beginTime'
-        });
-
-        laydate.render({
-            elem:'#endTime'
-        });
     })
 
     $(function () {

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.JianliMapper">
+    <select id="resume" parameterType="java.lang.Long" resultMap="findResume">
+        select r.*,we.*,pe.*,eb.*,e.education   from resume r,education e,educationalBackground eb,workExperience we,
+         projectExperience pe,resumeEduu re,resumeWork rw,resumePro rp
+           where r.educationid=e.educationid and r.resumeid=re.resumeid and r.resumeid=rw.resumeid and r.resumeid=rp.resumeid
+           and re.ebid=eb.ebid and rp.peid=pe.peid and rw.weid=we.weid and r.educationid=e.educationid
+           and r.userid=#{userid}
+    </select>
+    <resultMap id="findResume" type="com.cykj.entity.Resume">
+        <id property="resumeId" column="resumeId"></id>
+        <result property="realName" column="realName"></result>
+        <result property="clan" column="clan"></result>
+        <result property="photo" column="photo"></result>
+        <result property="politicalStatus" column="politicalStatus"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="school" column="school"></result>
+        <result property="educationId" column="educationId"></result>
+        <result property="profession" column="profession"></result>
+        <result property="wrokYear" column="wrokYear"></result>
+        <result property="selfEva" column="selfEva"></result>
+        <result property="isShow" column="isShow"></result>
+        <result property="address" column="address"></result>
+        <result property="updateTime" column="updateTime"></result>
+        <result property="isGraduate" column="isGraduate"></result>
+        <association property="education" column="education" javaType="com.cykj.entity.Education">
+            <id property="educationId" column="educationId"></id>
+            <result property="education" column="education"></result>
+        </association>
+        <collection property="educationalBackgrounds" ofType="com.cykj.entity.EducationalBackground">
+            <id property="edId" column="edId"></id>
+            <result property="school" column="school"></result>
+            <result property="major" column="major"></result>
+            <result property="education" column="education"></result>
+            <result property="schBeginTime" column="schBeginTime"></result>
+            <result property="schEndTime" column="schEndTime"></result>
+            <result property="schExperience" column="schExperience"></result>
+        </collection>
+        <collection property="workExperiences" ofType="com.cykj.entity.WorkExperience">
+        <id property="weId" column="weId"></id>
+        <result property="companyName" column="companyName"></result>
+        <result property="companyTrade" column="companyTrade"></result>
+        <result property="companyPost" column="companyPost"></result>
+        <result property="beginTime" column="beginTime"></result>
+        <result property="endTime" column="endTime"></result>
+        <result property="duties" column="duties"></result>
+        <result property="performance" column="performance"></result>
+        </collection>
+        <collection property="projectExperiences" ofType="com.cykj.entity.ProjectExperience">
+            <id property="peId" column="peId"></id>
+            <result property="proName" column="proName"></result>
+            <result property="proPost" column="proPost"></result>
+            <result property="proBeginTime" column="proBeginTime"></result>
+            <result property="proEndTime" column="proEndTime"></result>
+            <result property="proDescription" column="proDescription"></result>
+            <result property="proPerformance" column="proPerformance"></result>
+        </collection>
+    </resultMap>
+
+
+
+
+</mapper>

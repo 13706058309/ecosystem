@@ -1,19 +1,16 @@
 package com.cykj;
 
+import com.cykj.entity.Resume;
+import com.cykj.service.impl.ResumeServiceImp;
+import com.google.gson.Gson;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class DemoApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
-        System.out.println("fdfdfv");
-        System.out.println("lsjlfjslk");
-        System.out.println("lsjlfj11");
-        System.out.println("ls2222");
-        System.out.println("ls2222");
+
 
     }
-
 }
