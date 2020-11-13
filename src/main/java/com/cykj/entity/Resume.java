@@ -26,12 +26,25 @@ public class Resume {
   private String updateTime;//更新时间
   private long isGraduate;//是否应届生
 
+  private long jobStandId; //就业状态
+  private String industry; //意向行业
+  private String sex;
+  private String expectWork;
+
   private Education education;
   private List<EducationalBackground> educationalBackgrounds;
   private List<WorkExperience> workExperiences;
   private List<ProjectExperience> projectExperiences;
 
   public Resume() {
+  }
+
+  public String getExpectWork() {
+    return expectWork;
+  }
+
+  public void setExpectWork(String expectWork) {
+    this.expectWork = expectWork;
   }
 
   public long getResumeId() {
@@ -51,6 +64,13 @@ public class Resume {
     this.userId = userId;
   }
 
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
 
   public String getRealName() {
     return realName;
@@ -173,6 +193,7 @@ public class Resume {
     this.address = address;
   }
 
+
   public String getUpdateTime() {
     return updateTime;
   }
@@ -181,12 +202,29 @@ public class Resume {
     this.updateTime = updateTime;
   }
 
+
   public long getIsGraduate() {
     return isGraduate;
   }
 
   public void setIsGraduate(long isGraduate) {
     this.isGraduate = isGraduate;
+  }
+
+  public long getJobStandId() {
+    return jobStandId;
+  }
+
+  public void setJobStandId(long jobStandId) {
+    this.jobStandId = jobStandId;
+  }
+
+  public String getIndustry() {
+    return industry;
+  }
+
+  public void setIndustry(String industry) {
+    this.industry = industry;
   }
 
   public Education getEducation() {

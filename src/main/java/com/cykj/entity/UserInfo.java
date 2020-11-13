@@ -11,10 +11,10 @@ public class UserInfo {
   private String pwd; //密码
   private String telephone; //手机号码
   private long accStandId; // 账号状态
-  private long jobStandId; //就业状态
+
   private String address; //地址
   private long isOpen; // 是否公开
-  private String industry; //意向行业
+
 
   public UserInfo() {
 
@@ -74,13 +74,7 @@ public class UserInfo {
   }
 
 
-  public long getJobStandId() {
-    return jobStandId;
-  }
 
-  public void setJobStandId(long jobStandId) {
-    this.jobStandId = jobStandId;
-  }
 
 
   public String getAddress() {
@@ -101,12 +95,6 @@ public class UserInfo {
   }
 
 
-  public String getIndustry() {
-    return industry;
-  }
 
-  public void setIndustry(String industry) {
-    this.industry = industry;
-  }
 
 }
