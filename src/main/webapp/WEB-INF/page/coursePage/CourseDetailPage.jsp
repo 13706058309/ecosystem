@@ -12,6 +12,7 @@
 <head>
     <!--<meta charset="UTF-8">-->
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>课程页面</title>
     <link rel="stylesheet" type="text/css" href="http://cymooc.org:80/common/css/course/index.css"/>
     <link rel="stylesheet" type="text/css" href="http://cymooc.org:80/common/css/bootstrap.css"/>

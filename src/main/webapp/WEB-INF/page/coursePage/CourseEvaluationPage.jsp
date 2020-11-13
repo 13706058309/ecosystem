@@ -24,134 +24,50 @@
 
     <link rel="stylesheet" href="//mc.stu.126.net/pub/s/pt_web_course_intro_2a9e16a12bedbda677f57d84227b34eb.css">
 
+    <style>
+        html,body{
+            overflow-x:hidden;
+        }
+    </style>
+
 </head>
 
-<body class="auto-1605070794559-parent" id="auto-id-1605070794519">
+<body class="auto-1605070794559-parent" id="auto-id-1605070794519" >
 <div class="g-mn2">
-    <div class="g-mn2 f-bgw m-infomation f-f0">
-        <div id="comment-section">
-            <div class="ux-mooc-comment-course-comment_comment-list">
-                <div class="ux-mooc-comment-course-comment_comment-list_item">
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_avatar">
-                        <!--Regular if83-->
-                        <a href="//www.icourse163.org/home.htm?userId=1144572502" target="_top"><img src="https://edu-image.nosdn.127.net/057B8DA26AAE0EECBB5F99BEF29EE3E6.png" width="40" height="40"></a>
+    <div class="g-mn2">
+        <div class="g-mn2 f-bgw m-infomation f-f0">
+            <ul class="flow-default" id="LAY_demo1">
+                <li>
+                    <div class="ux-mooc-comment-course-comment_comment-list">
+                        <div class="ux-mooc-comment-course-comment_comment-list_item">
+                            <div class="ux-mooc-comment-course-comment_comment-list_item_avatar">
+                                <!--Regular if83-->
+                                <a href="//www.icourse163.org/home.htm?userId=1144572502" target="_top"><img src="https://edu-image.nosdn.127.net/057B8DA26AAE0EECBB5F99BEF29EE3E6.png" width="40" height="40"></a>
+                            </div>
+                            <div class="ux-mooc-comment-course-comment_comment-list_item_body">
+                                <div class="ux-mooc-comment-course-comment_comment-list_item_body_user-info">
+                                    <!--Regular if84-->
+                                    <a class="primary-link ux-mooc-comment-course-comment_comment-list_item_body_user-info_name" href="//www.icourse163.org/home.htm?userId=1144572502" target="_top">ykt1535642204606</a>
+                                </div>
+
+
+                                <div class="ux-mooc-comment-course-comment_comment-list_item_body_content">
+                                    <span>很棒（此条五毛，括号内删除）</span>
+                                </div>
+
+                                <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info">
+                                    <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info_time">发表于 2019-09-02</div>
+                                </div>
+                                <!--Regular if93-->
+                            </div>
+                        </div>
                     </div>
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_body">
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_user-info">
-                            <!--Regular if84-->
-                            <a class="primary-link ux-mooc-comment-course-comment_comment-list_item_body_user-info_name" href="//www.icourse163.org/home.htm?userId=1144572502" target="_top">ykt1535642204606</a>
-                        </div>
-
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_content">
-                            <span>很棒（此条五毛，括号内删除）</span>
-                        </div>
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info">
-                            <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info_time">发表于 2019-09-02</div>
-                        </div>
-                        <!--Regular if93-->
-                    </div>
-                </div>
-
-                <div class="ux-mooc-comment-course-comment_comment-list_item">
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_avatar">
-                        <!--Regular if83-->
-                        <a href="//www.icourse163.org/home.htm?userId=1144572502" target="_top"><img src="https://edu-image.nosdn.127.net/057B8DA26AAE0EECBB5F99BEF29EE3E6.png" width="40" height="40"></a>
-                    </div>
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_body">
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_user-info">
-                            <!--Regular if84-->
-                            <a class="primary-link ux-mooc-comment-course-comment_comment-list_item_body_user-info_name" href="//www.icourse163.org/home.htm?userId=1144572502" target="_top">ykt1535642204606</a>
-                        </div>
-
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_content">
-                            <span>很棒（此条五毛，括号内删除）</span>
-                        </div>
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info">
-                            <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info_time">发表于 2019-09-02</div>
-                        </div>
-                        <!--Regular if93-->
-                    </div>
-                </div>
-
-                <div class="ux-mooc-comment-course-comment_comment-list_item">
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_avatar">
-                        <!--Regular if83-->
-                        <a href="//www.icourse163.org/home.htm?userId=1144572502" target="_top"><img src="https://edu-image.nosdn.127.net/057B8DA26AAE0EECBB5F99BEF29EE3E6.png" width="40" height="40"></a>
-                    </div>
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_body">
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_user-info">
-                            <!--Regular if84-->
-                            <a class="primary-link ux-mooc-comment-course-comment_comment-list_item_body_user-info_name" href="//www.icourse163.org/home.htm?userId=1144572502" target="_top">ykt1535642204606</a>
-                        </div>
-
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_content">
-                            <span>很棒（此条五毛，括号内删除）</span>
-                        </div>
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info">
-                            <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info_time">发表于 2019-09-02</div>
-                        </div>
-                        <!--Regular if93-->
-                    </div>
-                </div>
-
-                <div class="ux-mooc-comment-course-comment_comment-list_item">
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_avatar">
-                        <!--Regular if83-->
-                        <a href="//www.icourse163.org/home.htm?userId=1144572502" target="_top"><img src="https://edu-image.nosdn.127.net/057B8DA26AAE0EECBB5F99BEF29EE3E6.png" width="40" height="40"></a>
-                    </div>
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_body">
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_user-info">
-                            <!--Regular if84-->
-                            <a class="primary-link ux-mooc-comment-course-comment_comment-list_item_body_user-info_name" href="//www.icourse163.org/home.htm?userId=1144572502" target="_top">ykt1535642204606</a>
-                        </div>
-
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_content">
-                            <span>很棒（此条五毛，括号内删除）</span>
-                        </div>
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info">
-                            <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info_time">发表于 2019-09-02</div>
-                        </div>
-                        <!--Regular if93-->
-                    </div>
-                </div>
-
-                <div class="ux-mooc-comment-course-comment_comment-list_item">
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_avatar">
-                        <!--Regular if83-->
-                        <a href="//www.icourse163.org/home.htm?userId=1144572502" target="_top"><img src="https://edu-image.nosdn.127.net/057B8DA26AAE0EECBB5F99BEF29EE3E6.png" width="40" height="40"></a>
-                    </div>
-                    <div class="ux-mooc-comment-course-comment_comment-list_item_body">
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_user-info">
-                            <!--Regular if84-->
-                            <a class="primary-link ux-mooc-comment-course-comment_comment-list_item_body_user-info_name" href="//www.icourse163.org/home.htm?userId=1144572502" target="_top">ykt1535642204606</a>
-                        </div>
-
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_content">
-                            <span>很棒（此条五毛，括号内删除）</span>
-                        </div>
-
-                        <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info">
-                            <div class="ux-mooc-comment-course-comment_comment-list_item_body_comment-info_time">发表于 2019-09-02</div>
-                        </div>
-                        <!--Regular if93-->
-                    </div>
-                </div>
-            </div>
-
+                </li>
+            </ul>
         </div>
     </div>
-</div>
 
-<ul class="flow-default" id="LAY_demo1"></ul>
+</div>
 
 </body>
 

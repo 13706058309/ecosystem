@@ -9,7 +9,7 @@
 <html><head>
     <meta charset="UTF-8">
     <title>课程列表页面</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="http://cymooc.org:80/common/css/jquery.pagination.css">
 
     <link rel="stylesheet" type="text/css" href="http://cymooc.org:80/common/css/course/courseList.css">
