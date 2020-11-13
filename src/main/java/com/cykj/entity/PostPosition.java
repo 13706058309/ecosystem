@@ -1,5 +1,9 @@
 package com.cykj.entity;
 
+import com.cykj.utils.MyUtil;
+
+import java.util.Date;
+
 /**
  * 发布岗位表
  */
@@ -19,10 +23,39 @@ public class PostPosition {
   private String jobBenefits;
   private String jobDescription;
   private long postStandId;
-  private java.sql.Date releaseTime;
+  private String releaseTime;
   private String recruitsNum;
   private String province;
+  private String detailAddress;
+  private String contact;
+  private String contactEmail;
 
+
+  @Override
+  public String toString() {
+    return "PostPosition{" +
+            "pPostId=" + pPostId +
+            ", companyId=" + companyId +
+            ", postName='" + postName + '\'' +
+            ", workNature='" + workNature + '\'' +
+            ", postId=" + postId +
+            ", department='" + department + '\'' +
+            ", maxSalary=" + maxSalary +
+            ", minSalary=" + minSalary +
+            ", workCity='" + workCity + '\'' +
+            ", workYear='" + workYear + '\'' +
+            ", education='" + education + '\'' +
+            ", jobBenefits='" + jobBenefits + '\'' +
+            ", jobDescription='" + jobDescription + '\'' +
+            ", postStandId=" + postStandId +
+            ", releaseTime='" + releaseTime + '\'' +
+            ", recruitsNum='" + recruitsNum + '\'' +
+            ", province='" + province + '\'' +
+            ", detailAddress='" + detailAddress + '\'' +
+            ", contact='" + contact + '\'' +
+            ", contactEmail='" + contactEmail + '\'' +
+            '}';
+  }
 
   public PostPosition() {
   }
@@ -153,14 +186,13 @@ public class PostPosition {
   }
 
 
-  public java.sql.Date getReleaseTime() {
+  public String getReleaseTime() {
     return releaseTime;
   }
 
-  public void setReleaseTime(java.sql.Date releaseTime) {
-    this.releaseTime = releaseTime;
+  public void setReleaseTime(Date releaseTime) {
+    this.releaseTime = MyUtil.getFoatTime(releaseTime);
   }
-
 
   public String getRecruitsNum() {
     return recruitsNum;
@@ -179,4 +211,27 @@ public class PostPosition {
     this.province = province;
   }
 
+  public String getDetailAddress() {
+    return detailAddress;
+  }
+
+  public void setDetailAddress(String detailAddress) {
+    this.detailAddress = detailAddress;
+  }
+
+  public String getContact() {
+    return contact;
+  }
+
+  public void setContact(String contact) {
+    this.contact = contact;
+  }
+
+  public String getContactEmail() {
+    return contactEmail;
+  }
+
+  public void setContactEmail(String contactEmail) {
+    this.contactEmail = contactEmail;
+  }
 }

@@ -1,6 +1,7 @@
 package com.cykj.controller;
 
 import com.cykj.entity.PageBean;
+import com.cykj.entity.PostPosition;
 import com.cykj.entity.Talent;
 import com.cykj.service.BackCompService;
 import com.google.gson.Gson;
@@ -80,5 +81,11 @@ public class CompController {
     @RequestMapping("/findCityByID")
     public @ResponseBody String findCityByID(int provinceID){
         return  new Gson().toJson(backCompService.findCityByID(provinceID));
+    }
+
+    @RequestMapping("/postPosition")
+    public @ResponseBody String postPosition(PostPosition postPosition){
+        System.out.println(postPosition);
+        return null;
     }
 }

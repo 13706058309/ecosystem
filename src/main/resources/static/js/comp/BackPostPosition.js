@@ -14,7 +14,7 @@ layui.use('form',function () {
             success:function (info) {
                 var arr = JSON.parse(info);
                 $("#depart").empty();
-                $("#position").empty();
+                $("#postId").empty();
                 var $option1 = $("<option>"+'请选择'+"</option>");
                 $("#depart").append($option1);
                 for(var i=0;i<arr.length;i++){
@@ -35,12 +35,12 @@ layui.use('form',function () {
             typeData:"text",
             success:function (info) {
                 var arr = JSON.parse(info);
-                $("#position").empty();
+                $("#postId").empty();
                 var $option1 = $("<option>"+'请选择'+"</option>");
-                $("#position").append($option1);
+                $("#postId").append($option1);
                 for(var i=0;i<arr.length;i++){
                     var $option = $("<option value='"+arr[i].postId+"' >"+arr[i].postName+"</option>");
-                    $("#position").append($option);
+                    $("#postId").append($option);
                     form.render();
                 }
             },
@@ -55,12 +55,12 @@ layui.use('form',function () {
             typeData:"text",
             success:function (info) {
                 var arr = JSON.parse(info);
-                $("#city").empty();
+                $("#workCity").empty();
                 var $option1 = $("<option>"+'请选择'+"</option>");
-                $("#city").append($option1);
+                $("#workCity").append($option1);
                 for(var i=0;i<arr.length;i++){
                     var $option = $("<option value='"+arr[i].cityId+"' >"+arr[i].cityName+"</option>");
-                    $("#city").append($option);
+                    $("#workCity").append($option);
                     form.render();
                 }
             },
@@ -118,7 +118,19 @@ function findDepart(ID) {
 }
 
 function sumb() {
-    alert($("#position").val());
+    path = $("#path").val();
+    var form = new FormData(document.getElementById("postPosition"));
+    $.ajax({
+        url:path+"/rec/postPosition",
+        data:form,
+        processData:false,
+        contentType:false,
+        type:"post",
+        typeData:"text",
+        success:function (info) {
+
+        },
+    })
 }
 
 
