@@ -107,30 +107,62 @@
 <div id="changeDiv" style="display: none">
     <table class="layui-table">
         <tr >
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td rowspan="4"></td>
+            <td width="19%">姓名</td>
+            <td width="19%">2</td>
+            <td width="19%">民族</td>
+            <td width="19%">4</td>
+            <td rowspan="4" colspan="2"></td>
         </tr>
         <tr >
-            <td>1</td>
+            <td>政治面貌</td>
             <td>2</td>
-            <td>3</td>
-            <td>4</td>
-        </tr>
-        <tr >
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
+            <td>出生年月日</td>
             <td>4</td>
         </tr>
         <tr >
-            <td>1</td>
+            <td>毕业学校</td>
             <td>2</td>
-            <td>3</td>
+            <td>工作年限</td>
             <td>4</td>
         </tr>
+        <tr >
+            <td>学历</td>
+            <td>2</td>
+            <td>专业</td>
+            <td>4</td>
+        </tr>
+        <tr >
+            <td>学历</td>
+            <td>2</td>
+            <td>专业</td>
+            <td>4</td>
+        </tr>
+        <tr >
+            <td>地址</td>
+            <td colspan="2">2</td>
+            <td>联系方式</td>
+            <td colspan="2">4</td>
+        </tr>
+        <tr>
+            <td rowspan="1">教育背景</td>
+            <td colspan="5"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">工作经验</td>
+            <td colspan="5"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">项目经验</td>
+            <td colspan="5"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">自我评价</td>
+            <td colspan="5"> </td>
+        </tr>
+
     </table>
 </div>
 </body>

@@ -1,22 +1,22 @@
 package com.cykj.controller;
 
+import com.cykj.service.BackCompService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
+    @Resource
+    private BackCompService backCompServiceImpl;
+
     @RequestMapping("/testComp")
     public String test(){
         return "comp/BackCompInfo";
     }
 
-//    @RequestMapping("/testComp")
-//    public String test()
-//    {
-//        System.out.println("运行界面");
-//        return "Main_Page";
-//    }
 
     @RequestMapping("/userManage")
     public String userManage()
@@ -63,5 +63,21 @@ public class TestController {
     @RequestMapping("/findPwd")
     public String findPwd(){
         return "BackFindPwd";
+    }
+
+    @RequestMapping("/deterResume")
+    public String deterResume(){
+        return "comp/BackDeterResume";
+    }
+
+    @RequestMapping("/waitResume")
+    public String waitResume(){
+        return "comp/BackWaitResume";
+    }
+
+    @RequestMapping("/unviTalent")
+    public String unviTalent(){
+
+        return "comp/BackUniversityTalent";
     }
 }
