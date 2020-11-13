@@ -25,6 +25,8 @@ public class Resume {
   private String address;
   private java.sql.Date updateTime;
   private long isGraduate;
+  private long jobStandId; //就业状态
+  private String industry; //意向行业
 
   private Education education;
   private List<EducationalBackground> educationalBackgrounds;
@@ -189,6 +191,22 @@ public class Resume {
 
   public void setIsGraduate(long isGraduate) {
     this.isGraduate = isGraduate;
+  }
+
+  public long getJobStandId() {
+    return jobStandId;
+  }
+
+  public void setJobStandId(long jobStandId) {
+    this.jobStandId = jobStandId;
+  }
+
+  public String getIndustry() {
+    return industry;
+  }
+
+  public void setIndustry(String industry) {
+    this.industry = industry;
   }
 
   public Education getEducation() {

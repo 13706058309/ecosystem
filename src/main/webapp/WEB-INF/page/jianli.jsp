@@ -28,86 +28,105 @@
         <div id="container" class="resume-container">
             <div class="resume-content">
                 <!---->
+
                 <div class="resume-content-box">
                     <div class="update-time"><a href="javascript:;" ka="user_resume_preview"
-                                                class="link-preview">预览简历</a> 最后更新 2020.10.05 09:53 </div>
+                                                class="link-preview">预览简历</a> 最后更新 <label id="updateTime9">${resume.updateTime}</label> </div>
                     <div class="resume-box">
-                        <div id="userinfo" class="resume-item resume-userinfo">
-                            <div id="userinfo-show" class="item-primary">
-                                <!---->
-                                <div class="info-flex">
-                                    <div class="info-flex-item">
-                                        <h2 class="name">XXX <svg class="icon-svg">
-                                            <use xlink:href="#icon_man"></use>
-                                        </svg></h2>
-                                        <div class="info-labels">
-                                            <p><span class="prev-line"><i
-                                                    class="fz-resume fz-experience"></i>5年经验</span><span
-                                                    class="prev-line"><i
-                                                    class="fz-resume fz-degree"></i>本科学历</span><span
-                                                    class="prev-line"><i
-                                                    class="fz-resume fz-status"></i>在职-考虑机会</span></p>
-                                            <p><span class="prev-line"><i
-                                                    class="fz-resume fz-tel"></i>130XXXXXXXX</span>
-                                                <!---->
-                                                <!---->
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="info-flex-item header-upload">
-                                        <div class="header-box">
-                                            <div class="header-mask"></div><img id="headImg"
-                                                                                src="https://paimgcdn.baidu.com/2986AD9ACAF1B0B1?src=http%3A%2F%2Fms.bdimg.com%2Fdsp-image%2F3256454903.jpg&rz=urar_2_968_600&v=0"
-                                                                                class="header-img">
-                                            <input type="file" onchange="selectFile()" class="head-input"
-                                                   accept="image/*" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="op"><a data-url="/geek/user/info.json" href="javascript:;"
-                                                   ka="user-resume-edit-userinfo" class="link-edit"><svg class="icon-svg">
-                                    <use xlink:href="#icon-svg-edit"></use>
-                                </svg><span onclick="userInfoUpdate()">编辑</span></a></div>
-                                <div class="resume-cropper-upload"><input type="file" accept=""
-                                                                          class="upload-input">
-                                    <div class="custom-box">
-                                        <div></div>
-                                    </div>
-                                    <div class="cropper-win" style="display: none;">
-                                        <div class="custom-cropper-box">
-                                            <div class="vue-cropper">
-                                                <div class="cropper-box">
-                                                    <div class="cropper-box-canvas"
-                                                         style="width: 0px; height: 0px; transform: scale(1, 1) translate3d(0px, 0px, 0px) rotateZ(0deg); display: none;">
-                                                        <img src="" alt="cropper-img"></div>
-                                                </div>
-                                                <div class="cropper-drag-box cropper-move"></div>
-                                                <div class="cropper-crop-box"
-                                                     style="width: 0px; height: 0px; transform: translate3d(0px, 0px, 0px); display: none;">
-                                                        <span class="cropper-view-box"><img src="" alt="cropper-img"
-                                                                                            style="width: 0px; height: 0px; transform: scale(1, 1) translate3d(0px, 0px, 0px) rotateZ(0deg);"></span><span
-                                                        class="cropper-face cropper-move"></span><span
-                                                        class="crop-info" style="top: 0px;">0 × 0</span><span><span
-                                                        class="crop-line line-w"></span><span
-                                                        class="crop-line line-a"></span><span
-                                                        class="crop-line line-s"></span><span
-                                                        class="crop-line line-d"></span><span
-                                                        class="crop-point point1"></span><span
-                                                        class="crop-point point2"></span><span
-                                                        class="crop-point point3"></span><span
-                                                        class="crop-point point4"></span><span
-                                                        class="crop-point point5"></span><span
-                                                        class="crop-point point6"></span><span
-                                                        class="crop-point point7"></span><span
-                                                        class="crop-point point8"></span></span></div>
+<%--                        <c:if test="${not empty resume}">--%>
+<%--                            <c:set value="${resume}" var="resume">--%>
+
+
+                            <div id="userinfo" class="resume-item resume-userinfo">
+                                <div id="userinfo-show" class="item-primary">
+                                    <!---->
+                                    <div class="info-flex">
+                                        <div class="info-flex-item">
+                                            <h2 class="name"><label id="realName9"></label>${resume.realName} <svg class="icon-svg">
+                                                <use xlink:href="#icon_man"></use>
+                                            </svg></h2>
+                                            <div class="info-labels">
+                                                <p><span class="prev-line"><i
+                                                        class="fz-resume fz-experience"></i ><label id="clan9"></label>${resume.clan}族</span><span
+                                                        class="prev-line"><i
+                                                        class="fz-resume fz-experience"></i><label id="politicalStatus9"></label>政治面貌：${resume.politicalStatus}</span><span
+                                                        class="prev-line"><i
+                                                        class="fz-resume fz-experience"></i><label id="wrokYear9"></label>工作年限：${resume.wrokYear}年</span><span
+                                                        class="prev-line"><i
+                                                        class="fz-resume fz-degree"></i><label id="education9"></label>专业：${resume.education.education}</span></p>
+                                                <p><span class="prev-line"><i
+                                                        class="fz-resume fz-status"></i><label id="profession9">专业：${resume.profession}</label></span><span class="prev-line"><i
+                                                        class="fz-resume fz-experience"></i><label id="school9">毕业学校：${resume.school}</label></span><span
+                                                        class="prev-line"><i
+                                                        class="fz-resume fz-experience"></i><label id="birthday9">出生年月：${resume.birthday}</label></span>
+                                                    <!---->
+                                                    <!---->
+                                                </p>
+                                                <p><span class="prev-line"><i
+                                                        class="fz-resume fz-tel"></i><label id="contactInfo9">联系方式：${resume.contactInfo}</label></span><span class="prev-line"><i
+                                                        class="fz-resume fz-experience"></i><label id="address9">现居住地：${resume.address}</label></span>
+                                                    <!---->
+                                                    <!---->
+                                                </p>
                                             </div>
                                         </div>
-                                        <div class="btns-box"><button type="button"
-                                                                      class="btn btn-primary">确定</button><button type="button"
-                                                                                                                 class="btn">取消</button></div>
+                                        <div class="info-flex-item header-upload">
+                                            <div class="header-box">
+                                                <div class="header-mask"></div><img id="headImg"
+                                                                                    src="https://paimgcdn.baidu.com/2986AD9ACAF1B0B1?src=http%3A%2F%2Fms.bdimg.com%2Fdsp-image%2F3256454903.jpg&rz=urar_2_968_600&v=0"
+                                                                                    class="header-img">
+                                                <input type="file" onchange="selectFile()" class="head-input"
+                                                       accept="image/*" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="op"><a data-url="/geek/user/info.json" href="javascript:;"
+                                                       ka="user-resume-edit-userinfo" class="link-edit"><svg class="icon-svg">
+                                        <use xlink:href="#icon-svg-edit"></use>
+                                    </svg><span onclick="userInfoUpdate()">编辑</span></a></div>
+                                    <div class="resume-cropper-upload"><input type="file" accept=""
+                                                                              class="upload-input">
+                                        <div class="custom-box">
+                                            <div></div>
+                                        </div>
+                                        <div class="cropper-win" style="display: none;">
+                                            <div class="custom-cropper-box">
+                                                <div class="vue-cropper">
+                                                    <div class="cropper-box">
+                                                        <div class="cropper-box-canvas"
+                                                             style="width: 0px; height: 0px; transform: scale(1, 1) translate3d(0px, 0px, 0px) rotateZ(0deg); display: none;">
+                                                            <img src="" alt="cropper-img"></div>
+                                                    </div>
+                                                    <div class="cropper-drag-box cropper-move"></div>
+                                                    <div class="cropper-crop-box"
+                                                         style="width: 0px; height: 0px; transform: translate3d(0px, 0px, 0px); display: none;">
+                                                        <span class="cropper-view-box"><img src="" alt="cropper-img"
+                                                                                            style="width: 0px; height: 0px; transform: scale(1, 1) translate3d(0px, 0px, 0px) rotateZ(0deg);"></span><span
+                                                            class="cropper-face cropper-move"></span><span
+                                                            class="crop-info" style="top: 0px;">0 × 0</span><span><span
+                                                            class="crop-line line-w"></span><span
+                                                            class="crop-line line-a"></span><span
+                                                            class="crop-line line-s"></span><span
+                                                            class="crop-line line-d"></span><span
+                                                            class="crop-point point1"></span><span
+                                                            class="crop-point point2"></span><span
+                                                            class="crop-point point3"></span><span
+                                                            class="crop-point point4"></span><span
+                                                            class="crop-point point5"></span><span
+                                                            class="crop-point point6"></span><span
+                                                            class="crop-point point7"></span><span
+                                                            class="crop-point point8"></span></span></div>
+                                                </div>
+                                            </div>
+                                            <div class="btns-box"><button type="button"
+                                                                          class="btn btn-primary">确定</button><button type="button"
+                                                                                                                     class="btn">取消</button></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+<%--                                </c:set>--%>
+<%--                        </c:if>--%>
+
                             <div id="userinfo-update" class="item-form display-hide">
                                 <h3 class="title">编辑个人信息</h3>
                                 <form class="layui-form">
@@ -410,7 +429,7 @@
                                     <li ka="user-resume-edit-advantage" class="">
                                         <div class="primary-info">
                                             <div class="info-text advantage-text" style="white-space: normal;">
-                                                <p>1、熟悉前端模块化、组件化开发、项目优化</p>
+                                                <p>${resume.selfEva}</p>
                                             </div>
                                         </div>
                                         <div class="op op-show">
@@ -523,38 +542,38 @@
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
                                 </svg><span onclick="historyUpdate()">添加</span></a></h3>
-                                <ul>
-                                    <li ka="user-resume-edit-workexp3" class="">
-                                        <div class="primary-info">
-                                            <!---->
-                                            <div class="info-text">
-                                                <h4 class="name">XXX软件公司</h4><span
-                                                    class="gray period">2014.06-2016.03</span>
-                                            </div>
-                                            <h4><span class="prev-line">产品部</span><span
-                                                    class="prev-line">Java</span><span
-                                                    class="internship-experence-tag">实习</span></h4>
-                                            <div class="info-text" style="white-space: normal"><span
-                                                    class="text-type">内容：</span>
-                                                1.使用js+css+html（html5）、ajax、jquery、xml、json等开发技术
-                                                2.使用bootstrap、extjs、easyui等技术进行开发
-                                                3.使用部署weblogic应用服务器
-                                                4.使用Oracle数据库，编写sql语句、存储过程、函数、触发器和定时脚本
-                                                5.使用Spring框架、编写webservice接口等</div>
-                                            <div class="info-text"><span class="text-type">业绩：</span>曾获得最佳新人奖</div>
-                                            <div class="keywords"><span>java
-                                                        web</span><span>Java</span><span>jsp</span></div>
-                                        </div>
-                                        <div class="op"><a href="javascript:;" ka="user-resume-del-workexp3"
-                                                           class="link-delete"><svg class="icon-svg">
-                                            <use xlink:href="#icon-svg-delete"></use>
-                                        </svg><span>删除</span></a><a href="javascript:;"
-                                                                    ka="user-resume-edit-workexp3" class="link-edit"><svg
-                                                class="icon-svg">
-                                            <use xlink:href="#icon-svg-edit"></use>
-                                        </svg><span>编辑</span></a></div>
-                                    </li>
-                                </ul>
+                                <c:if test="${not empty resume.workExperiences}">
+                                    <c:forEach var="works" items="${resume.workExperiences}">
+                                        <ul>
+                                            <li ka="user-resume-edit-workexp3" class="">
+                                                <div class="primary-info">
+                                                    <!---->
+                                                    <div class="info-text">
+                                                        <h4 class="name">公司：${works.companyName}</h4><span
+                                                            class="gray period">项目时间：${works.beginTime}-${works.endTime}</span>
+                                                    </div>
+                                                    <h4><span class="prev-line">行业：${works.companyTrade}</span><span
+                                                            class="prev-line">担任角色：${works.companyPost}</span></h4>
+                                                    <div class="info-text" style="white-space: normal"><span
+                                                            class="text-type">内容：</span>
+                                                        ${works.duties}</div>
+                                                    <div class="info-text"><span class="text-type">业绩：</span>${works.performance}</div>
+<%--                                                    <div class="keywords"><span>java--%>
+<%--                                                        web</span><span>Java</span><span>jsp</span></div>--%>
+                                                </div>
+                                                <div class="op"><a href="javascript:;" ka="user-resume-del-workexp3"
+                                                                   class="link-delete"><svg class="icon-svg">
+                                                    <use xlink:href="#icon-svg-delete"></use>
+                                                </svg><span>删除</span></a><a href="javascript:;"
+                                                                            ka="user-resume-edit-workexp3" class="link-edit"><svg
+                                                        class="icon-svg">
+                                                    <use xlink:href="#icon-svg-edit"></use>
+                                                </svg><span>编辑</span></a></div>
+                                            </li>
+                                        </ul>
+                                    </c:forEach>
+                                </c:if>
+
                             </div>
                             <!---->
                         </div>
