@@ -77,11 +77,11 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">月薪范围</label>
                     <div class="layui-input-inline" style="width: 200px;">
-                        <input type="text" name="minSalary" placeholder="￥" autocomplete="off" class="layui-input">
+                        <input type="text" name="minSalary" placeholder="￥" autocomplete="off" class="layui-input" id="minSalary">
                     </div>
                     <div class="layui-form-mid">-</div>
                     <div class="layui-input-inline" style="width: 200px;">
-                        <input type="text" name="maxSalary" placeholder="￥" autocomplete="off" class="layui-input">
+                        <input type="text" name="maxSalary" placeholder="￥" autocomplete="off" class="layui-input" id="maxSalary">
                     </div>
                     <div class="layui-form-mid">k</div>
                 </div>
@@ -184,13 +184,66 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button  class="layui-btn" onclick="sumb()">立即提交</button>
-                    <button  class="layui-btn" >招聘预览</button>
+                    <input  type="button" class="layui-btn" onclick="sumb()" value="立即提交">  </input>
+                    <input  type="button" class="layui-btn" value="招聘预览" onclick="showDetail()"></input>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </form>
     </div>
 
+    <div id="postPositionDetailDiv" style="display: none;padding: 3%">
+        <table class="layui-table">
+            <tr>
+                <td  colspan="6"><h2>招聘岗位预览</h2></td>
+            </tr>
+            <tr>
+                <td class="ziti">岗位名称</td>
+                <td id="dPostName"></td>
+                <td class="ziti">所属部门</td>
+                <td id="dDepart"></td>
+                <td class="ziti">工作性质</td>
+                <td id="workType"></td>
+            </tr>
+
+            <tr>
+                <td class="ziti">月薪范围</td>
+                <td id="salary"></td>
+                <td class="ziti">工作城市</td>
+                <td id="dWorkCity"></td>
+                <td class="ziti">招收人数</td>
+                <td id="num"></td>
+            </tr>
+
+            <tr>
+                <td class="ziti">工作经验</td>
+                <td id="dWorkExp"></td>
+                <td class="ziti">学历</td>
+                <td id="dEducation"></td>
+                <td class="ziti">投递邮箱</td>
+                <td id="dEmail"></td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">联系方式</td>
+                <td colspan="5" id="dContact"> </td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">具体地址</td>
+                <td colspan="5" id="dAddress"> </td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">福利描述</td>
+                <td colspan="5" id="fuli"> </td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">工作描述</td>
+                <td colspan="5" id="workDes"> </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

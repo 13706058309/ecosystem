@@ -6,10 +6,10 @@ package com.cykj.entity;
 public class CompRecord {
 
   private long compRecId;
-  private long userId;
-  private long companyId;
-  private String recored;
-  private String recoredTime;
+  private long userId;//用户ID
+  private long companyId;//公司ID
+  private String recored;//聊天记录
+  private String recoredTime;//聊天时间
 
   public CompRecord() {
   }

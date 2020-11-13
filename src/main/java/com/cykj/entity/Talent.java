@@ -7,18 +7,18 @@ import java.util.Date;
  */
 public class Talent {
 
-  private long talentId;
-  private String talentName;
-  private String school;
-  private String birthday;
-  private String contactInfo;
-  private String profession;
-  private String politicalStatus;
-  private String workExp;
-  private String jobPlan;
-  private String selfEva;
-  private String education;
-  private String entryTime;
+  private long talentId;//人才ID
+  private String talentName;//名字
+  private String school;//学校
+  private String birthday;//出生年月日
+  private String contactInfo;//联系方式
+  private String profession;//专业
+  private String politicalStatus;//政治面貌
+  private String workExp;//工作经验
+  private String jobPlan;//职业规划
+  private String selfEva;//自我评价
+  private String education;//学历
+  private String entryTime;//上传时间
   private CompAndtalent compAndtalent;
 
   public Talent() {

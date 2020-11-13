@@ -9,26 +9,26 @@ import java.util.Date;
  */
 public class PostPosition {
 
-  private long pPostId;
-  private long companyId;
-  private String postName;
-  private String workNature;
-  private long postId;
-  private String department;
-  private long maxSalary;
-  private long minSalary;
-  private String workCity;
-  private String workYear;
-  private String education;
-  private String jobBenefits;
-  private String jobDescription;
-  private long postStandId;
-  private String releaseTime;
-  private String recruitsNum;
-  private String province;
-  private String detailAddress;
-  private String contact;
-  private String contactEmail;
+  private long pPostId;//主键ID
+  private long companyId;//公司ID
+  private String postName;//岗位名称
+  private String workNature;//工作性质
+  private long postId;//岗位ID
+  private String department;//部门
+  private long maxSalary;//最高工资
+  private long minSalary;//最低工资
+  private String workCity;//工资城市
+  private String workYear;//工资省份
+  private String education;//学历
+  private String jobBenefits;//工资福利
+  private String jobDescription;//工资描述
+  private long postStandId;//发聘岗位状态
+  private String releaseTime;//发布时间
+  private String recruitsNum;//招收人数
+  private String province;//省份
+  private String detailAddress;//详细地址
+  private String contact;//联系方式
+  private String contactEmail;//联系邮箱
 
 
   @Override
