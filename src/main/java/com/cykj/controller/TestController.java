@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/test")
 public class TestController {
     @RequestMapping("/testComp")
-    public String test(){
-        return "findJob";
-
     public String test()
     {
         System.out.println("运行界面");
