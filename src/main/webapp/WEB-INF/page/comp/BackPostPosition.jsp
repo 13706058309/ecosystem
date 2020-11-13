@@ -198,7 +198,7 @@
                 <td  colspan="6"><h2>招聘岗位预览</h2></td>
             </tr>
             <tr>
-                <td class="ziti">岗位名称</td>
+                <td class="ziti" width="16%">岗位名称</td>
                 <td id="dPostName"></td>
                 <td class="ziti">所属部门</td>
                 <td id="dDepart"></td>

@@ -3,5 +3,49 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.PostPositionMapper">
+    <insert id="addPostPosition" parameterType="com.cykj.entity.PostPosition">
+        insert into postPosition (companyID, postName, workNature, postID, department, maxSalary, minSalary, workCity, workYear, education, jobBenefits, jobDescription, postStandID, recruitsNum, province, detailAddress, contact, contactEmail) VALUES
+        (#{companyId},#{postName},#{workNature},#{postId},#{department},#{maxSalary},#{minSalary},#{workCity},#{workYear},#{education},#{jobBenefits},#{jobDescription},6,#{recruitsNum},#{province},#{detailAddress},#{contact},#{contactEmail})
+    </insert>
+
+    <select id="findOnlinePosition" parameterType="java.util.Map" resultType="com.cykj.entity.PostPosition">
+        select * from postPosition where companyId = #{compID} and postStandId = 6
+
+        <if test="beginTime!=null">
+            and releaseTime >= #{beginTime}
+        </if>
+
+        <if test="endTime!=null">
+            and releaseTime &lt;= #{endTime}
+        </if>
+
+        <if test="postName!=null">
+            and postName like #{postName}
+        </if>
+
+        order by releaseTime desc limit #{offset}, #{limit}
+    </select>
+
+    <select id="findOnlinePositionNum" parameterType="java.util.Map" resultType="int">
+        select count(*) from postPosition where companyId = #{compID} and postStandId = 6
+
+        <if test="beginTime!=null">
+            and releaseTime >= #{beginTime}
+        </if>
+
+        <if test="endTime!=null">
+            and releaseTime &lt;= #{endTime}
+        </if>
+
+        <if test="postName!=null">
+            and postName like #{postName}
+        </if>
+
+    </select>
+
+    <update id="changePostPositionStand" parameterType="java.util.Map">
+        update postPosition set postStandID = #{standID} where companyID = #{compID} and pPostID = #{pPostID}
+    </update>
+
 
 </mapper>

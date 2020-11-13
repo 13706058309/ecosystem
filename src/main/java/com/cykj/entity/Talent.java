@@ -19,6 +19,8 @@ public class Talent {
   private String selfEva;//自我评价
   private String education;//学历
   private String entryTime;//上传时间
+  private String address;
+  private String certificate;
   private CompAndtalent compAndtalent;
 
   public Talent() {
@@ -135,6 +137,22 @@ public class Talent {
 
   public void setCompAndtalent(CompAndtalent compAndtalent) {
     this.compAndtalent = compAndtalent;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getCertificate() {
+    return certificate;
+  }
+
+  public void setCertificate(String certificate) {
+    this.certificate = certificate;
   }
 
   @Override

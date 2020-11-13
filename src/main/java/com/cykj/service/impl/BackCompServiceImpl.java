@@ -31,6 +31,9 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Resource
     private CityMapper cityMapper;
+
+    @Resource
+    private PostPositionMapper postPositionMapper;
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
         List<Talent> unviTalentOnPage = talentMapper.findUnviTalentOnPage(map);
@@ -71,5 +74,29 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public List<City> findCityByID(int provinceID) {
         return cityMapper.findCityByID(provinceID);
+    }
+
+    @Override
+    public String postPosition(PostPosition postPosition) {
+        int provinceID = Integer.parseInt(postPosition.getProvince());
+        postPosition.setProvince(provinceMapper.findByID(provinceID).getProvinceName());
+        int n = postPositionMapper.addPostPosition(postPosition);
+        return n>0? "1":"2";
+    }
+
+    @Override
+    public TableInfo findOnlinePosition(Map<String, Object> map) {
+
+        List<PostPosition> positionOnPage = postPositionMapper.findOnlinePosition(map);
+        int num = postPositionMapper.findOnlinePositionNum(map);
+        TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num,positionOnPage );
+
+        return tableInfo;
+
+    }
+
+    @Override
+    public int changePostPositionStand(Map<String, Object> map) {
+        return postPositionMapper.changePostPositionStand(map);
     }
 }

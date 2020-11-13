@@ -236,7 +236,7 @@ function sumb() {
             }
         },
         success:function (info) {
-
+            alert(info);
         },
     })
 }

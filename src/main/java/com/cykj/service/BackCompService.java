@@ -20,5 +20,12 @@ public interface BackCompService {
     List<Province> findAllProvince();
     //通过省份ID查找到所有的市
     List<City> findCityByID(int provinceID);
+    //发布岗位
+    String postPosition(PostPosition postPosition);
+
+    //企业查询发布的岗位
+    TableInfo findOnlinePosition(Map<String,Object> map);
+    //修改状态
+    int changePostPositionStand(Map<String,Object> map);
 
 }

@@ -58,6 +58,11 @@ public class TestController {
         return "comp/BackOfflinePosition";
     }
 
+    @RequestMapping("/backOnline")
+    public String backOnline(){
+        return "comp/BackOnlinePosition";
+    }
+
 
 
     @RequestMapping("/findPwd")

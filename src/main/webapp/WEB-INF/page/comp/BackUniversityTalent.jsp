@@ -121,7 +121,7 @@
         <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" >简历导出</button>
     </div>
 </div>
-<table id="userTable" lay-filter="test"></table>
+    <table id="userTable" lay-filter="test"></table>
 </body>
 <script>
     var layer;

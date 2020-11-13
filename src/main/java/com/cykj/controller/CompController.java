@@ -85,7 +85,41 @@ public class CompController {
 
     @RequestMapping("/postPosition")
     public @ResponseBody String postPosition(PostPosition postPosition){
-        System.out.println(postPosition);
-        return null;
+        postPosition.setCompanyId(3);
+        String msg = backCompService.postPosition(postPosition);
+        return msg;
+    }
+
+    @RequestMapping("/findOnlinePosition")
+    public @ResponseBody String findOnlinePosition(PageBean pageBean,String postName){
+        Map<String,Object> map = new HashMap<>();
+        int compID = 3;
+        map.put("compID",compID);
+        if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
+            map.put("beginTime",pageBean.getBeginTime());
+        }
+        if(pageBean.getEndTime()!=null&&!pageBean.getEndTime().equals("")){
+            map.put("endTime",pageBean.getEndTime());
+        }
+        if(postName!=null&&!postName.equals("")){
+            map.put("postName","%"+postName+"%");
+        }
+        map.put("limit",pageBean.getLimit());
+        map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
+
+        return new Gson().toJson(backCompService.findOnlinePosition(map));
+    }
+
+    @RequestMapping("/delPositionStand")
+    public @ResponseBody String delPositionStand(int pPostId){
+
+        Map<String,Object> map = new HashMap<>();
+        int compID = 3;
+        map.put("compID",compID);
+        map.put("standID",8);
+        map.put("pPostID",pPostId);
+        int n = backCompService.changePostPositionStand(map);
+
+        return n>0?"删除成功":"删除失败";
     }
 }
