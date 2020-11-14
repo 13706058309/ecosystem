@@ -170,4 +170,15 @@ public class BackCompServiceImpl implements BackCompService {
         }
         return n;
     }
+
+    @Override
+    public int passResume(int deliID, int standID, String msg) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("standID",standID);
+        map.put("deliID",deliID);
+        map.put("feedTime",new Date());
+        map.put("feedInfo",msg);
+        int i = deliveryMapper.delResume(map);
+        return i>0?1:2;
+    }
 }

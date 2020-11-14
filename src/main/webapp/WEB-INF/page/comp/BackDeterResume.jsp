@@ -53,7 +53,14 @@
     </div>
 
 </div>
-
+<div style="display: none" id="passTime">
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">具体通知</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" style="width: 80%; height: 85%" id="passMsg" name="passMsg"></textarea>
+        </div>
+    </div>
+</div>
 <table id="userTable" lay-filter="test"></table>
 
 <div id="resumesDetailDiv" style="display: none">
@@ -184,7 +191,46 @@
                     })
                 })
             }else if(obj.event === 'pass'){
-
+                $("#passMsg").val("");
+                layer.open({
+                    type:1,
+                    title:"面试具体通知",
+                    area:['40%','40%'],
+                    offset: ['10%', '30%'],
+                    content:$("#passTime"),
+                    btn:['发送','取消'],
+                    btn1: function (index,layero) {
+                        var msg = $("#passMsg").val();
+                        $.ajax({
+                            url:path+"/rec/passResume",
+                            data:"deliID="+deliID+"&msg="+msg,
+                            type:"post",
+                            typeData:"text",
+                            beforeSend:function(){
+                                if(msg.length==0){
+                                    layer.alert("请填写面试通知");
+                                    return false;
+                                }
+                                if(msg.length>100){
+                                    layer.alert("面试通知长度不能超过100");
+                                    return false;
+                                }
+                            },
+                            success:function (info) {
+                                layer.close(index);
+                                if(info==1){
+                                    layer.alert("通知面试成功");
+                                    obj.del();
+                                }else{
+                                    layer.alert("网络繁忙，通知失败")
+                                }
+                            },
+                        })
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                })
             }
         });
 

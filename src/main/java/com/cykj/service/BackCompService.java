@@ -39,5 +39,7 @@ public interface BackCompService {
     int delResume(int deliID,int standID);
     //企业批量删除应聘者简历
     int delResume(List<Resume> list,int standID);
+    //企业通知应聘者面试
+    int passResume(int deliID,int standID,String msg);
 
 }

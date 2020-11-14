@@ -302,4 +302,11 @@ public class CompController {
 
         return new Gson().toJson(tableInfo);
     }
+
+    //通知面试简历
+    @RequestMapping("/passResume")
+    public @ResponseBody String passResume(int deliID,String msg){
+        int n = backCompService.passResume(deliID,12,msg);
+        return n+"";
+    }
 }
