@@ -6,6 +6,7 @@ import com.cykj.service.BackCompService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,11 +124,11 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public int changeDeliStand(List<Resume> list) {
+    public int changeDeliStand(List<Resume> list,int standID) {
         int n = 0;
         for (Resume resume : list) {
             Map<String,Object> map = new HashMap<>();
-            map.put("standID",10);
+            map.put("standID",standID);
             map.put("deliID",resume.getDelivery().getDeliveryId());
             int i = deliveryMapper.changeDeliStand(map);
             n = n+i;
@@ -142,5 +143,31 @@ public class BackCompServiceImpl implements BackCompService {
         map.put("deliID",deliID);
         int i = deliveryMapper.changeDeliStand(map);
         return i>0?1:2;
+    }
+
+    @Override
+    public int delResume(int deliID, int standID) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("standID",standID);
+        map.put("deliID",deliID);
+        map.put("feedTime",new Date());
+        map.put("feedInfo","您被企业拒绝，请再接再厉");
+        int i = deliveryMapper.delResume(map);
+        return i>0?1:2;
+    }
+
+    @Override
+    public int delResume(List<Resume> list, int standID) {
+        int n = 0;
+        for (Resume resume : list) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("standID",standID);
+            map.put("deliID",resume.getDelivery().getDeliveryId());
+            map.put("feedTime",new Date());
+            map.put("feedInfo","您被企业拒绝，请再接再厉");
+            int i = deliveryMapper.delResume(map);
+            n = n+i;
+        }
+        return n;
     }
 }

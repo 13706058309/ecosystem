@@ -6,4 +6,10 @@
         <update id="changeDeliStand" parameterType="java.util.Map">
                 update delivery set deliStandId = #{standID} where deliveryId = #{deliID}
         </update>
+
+        <update id="delResume" parameterType="java.util.Map">
+                update delivery
+                set deliStandId = #{standID}, feedBackTime = #{feedTime},feedBackInfo=#{feedInfo}
+                where deliveryId = #{deliID}
+        </update>
 </mapper>

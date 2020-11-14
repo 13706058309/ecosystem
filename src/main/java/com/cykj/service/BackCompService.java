@@ -32,8 +32,12 @@ public interface BackCompService {
     //查找企业收到的简历
     TableInfo findAllResume(Map<String,Object> map);
     //批量改变投机企业简历的状态
-    int changeDeliStand(List<Resume> list);
+    int changeDeliStand(List<Resume> list,int standID);
     //改变企业简历状态
     int changeDeliStand(int deliID,int standID);
+    //企业删除应聘者简历
+    int delResume(int deliID,int standID);
+    //企业批量删除应聘者简历
+    int delResume(List<Resume> list,int standID);
 
 }

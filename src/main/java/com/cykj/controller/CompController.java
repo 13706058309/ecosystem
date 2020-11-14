@@ -143,7 +143,7 @@ public class CompController {
 
         return n>0?"1":"2";
     }
-
+    //查找下线的岗位
     @RequestMapping("/findOfflinePosition")
     public @ResponseBody String findOfflinePosition(PageBean pageBean,String postName,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
@@ -166,14 +166,14 @@ public class CompController {
 
         return new Gson().toJson(backCompService.findPosition(map));
     }
-
+    //重新上线岗位
     @RequestMapping("/onLinePosition")
     public @ResponseBody String onLinePosition(String position){
         PostPosition postPosition = new Gson().fromJson(position,PostPosition.class);
         String result = backCompService.rePostPosition(postPosition);
         return result;
     }
-
+    //企业查询过滤简历
     @RequestMapping("/findScerResumes")
     public @ResponseBody String findScerResumes(PageBean pageBean, Resume resume,String postName){
         Map<String,Object> map = new HashMap<>();
@@ -207,18 +207,99 @@ public class CompController {
 
         return new Gson().toJson(tableInfo);
     }
-
+    //批量过滤简历
     @RequestMapping("/scerrResume")
     public @ResponseBody String scerrResume(String msg){
         List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
 
-        int successNum = backCompService.changeDeliStand(list);
+        int successNum = backCompService.changeDeliStand(list,10);
         return successNum+"";
     }
-
+    //过滤当个简历
     @RequestMapping("/scerrResumeOne")
     public @ResponseBody String scerrResumeOne(int deliID){
         int n = backCompService.changeDeliStand(deliID,10);
         return n+"";
+    }
+    //企业查询被过滤的简历
+    @RequestMapping("/findunPassResumes")
+    public @ResponseBody String findunPassResumes(PageBean pageBean, String postName){
+        Map<String,Object> map = new HashMap<>();
+//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
+        if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
+            map.put("beginTime",pageBean.getBeginTime());
+        }
+        if(pageBean.getEndTime()!=null&&!pageBean.getEndTime().equals("")){
+            map.put("endTime",pageBean.getEndTime());
+        }
+        if(postName!=null&&!postName.equals("")){
+            map.put("postName","%"+postName+"%");
+        }
+
+        map.put("limit",pageBean.getLimit());
+        map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
+        int compID = 3;
+        map.put("compID",compID);
+        map.put("standID",10);
+        TableInfo tableInfo = backCompService.findAllResume(map);
+
+        return new Gson().toJson(tableInfo);
+    }
+
+    //待定单个简历
+    @RequestMapping("/deterResumeOne")
+    public @ResponseBody String deterResumeOne(int deliID){
+        int n = backCompService.changeDeliStand(deliID,11);
+        return n+"";
+    }
+
+    //批量待定单个简历
+    @RequestMapping("/deterResume")
+    public @ResponseBody String deterResume(String msg){
+        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+
+        int successNum = backCompService.changeDeliStand(list,11);
+        return successNum+"";
+    }
+
+    //删除单个简历
+    @RequestMapping("/delResumeOne")
+    public @ResponseBody String delResumeOne(int deliID){
+        int n = backCompService.delResume(deliID,9);
+        return n+"";
+    }
+
+    //批量删除简历
+    @RequestMapping("/delResume")
+    public @ResponseBody String delResume(String msg){
+
+        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        int successNum = backCompService.delResume(list,9);
+        return successNum+"";
+    }
+
+    //企业查询被过滤的简历
+    @RequestMapping("/findDeterResumes")
+    public @ResponseBody String findDeterResumes(PageBean pageBean, String postName,String userName){
+        Map<String,Object> map = new HashMap<>();
+//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
+
+        if(postName!=null&&!postName.equals("")){
+            map.put("postName","%"+postName+"%");
+        }
+        if(userName!=null&&!userName.equals("")){
+            map.put("userName","%"+userName+"%");
+        }
+
+        map.put("limit",pageBean.getLimit());
+        map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
+        int compID = 3;
+        map.put("compID",compID);
+        map.put("standID",11);
+        TableInfo tableInfo = backCompService.findAllResume(map);
+
+        return new Gson().toJson(tableInfo);
     }
 }

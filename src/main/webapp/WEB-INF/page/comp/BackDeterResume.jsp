@@ -10,54 +10,43 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackUnPassResume.css">
+
 <html>
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-<style>
-    .layui-table th{
-        text-align: center;
-    }
-    .layui-table{
-        text-align: center;
-    }
-    .layui-form-select dl {
-        max-height:200px;
-    }
-    #lay{
-        font-size: 18px;
-    }
 
-    .layui-form-select dl {
-        max-height:200px;
-    }
-
-    .layui-table-page {
-        text-align: center;
-    }
-
-</style>
 <body>
 <script id="btns" type="text/html">
-    <a class="layui-btn layui-btn-xs" lay-event="down">下载</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看详情</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="pass">通知面试</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="refuse">拒绝</a>
 </script>
 
 <h1 style="text-align: center">待定简历</h1>
 <br>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<div class="demoTable layui-form" style="margin-left: 30%">
+<div class="demoTable layui-form" style="margin-left: 15%">
     <div class="layui-form-item">
 
         <div class="layui-inline">
-            <label class="layui-form-label" style="width:100px">发布岗位名称:</label>
+            <label class="layui-form-label" >岗位名称:</label>
             <div class="layui-input-inline">
-                <input type="tel" id="topic" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                <input type="tel" id="postName" class="layui-input">
             </div>
         </div>
 
         <div class="layui-inline">
-            <div class="layui-input-inline" style="margin-top: -2%">
+            <label class="layui-form-label" >姓名:</label>
+            <div class="layui-input-inline">
+                <input type="tel" id="userName"  class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="margin-top: -2%;margin-left: 35%">
                 <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
             </div>
         </div>
@@ -132,80 +121,70 @@
 <script>
     var layer;
     var path = $("#path").val();
-    var docID;
-    var objs;
     var index;
     var form;
     layui.use(['laydate','layer','form'],function () {
         form = layui.form;
         form.render();
-        var laydate = layui.laydate;
         layer = layui.layer;
-        laydate.render({
-            elem:'#beginTime'
-        });
 
-        laydate.render({
-            elem:'#endTime'
-        });
-    })
-
-    $(function () {
-        $.ajax({
-            url:path+"/fDoc/findAll",
-            type:"post",
-            typeData:"text",
-            success:function (data) {
-                var arr = JSON.parse(data);
-                $("#type").empty();
-                var $sel = $("<option>"+'请选择'+"</option>");
-                $("#type").append($sel)
-                for(var i=0;i<arr.length;i++){
-                    var $option = $("<option>"+arr[i].doc_Type+"</option>");
-                    $("#type").append($option);
-                }
-                form.render();
-            },
-        });
     })
 
     layui.use('table',function () {
         var table = layui.table;
         table.render({
             elem:'#userTable',
-            height:312,
-            limits:[3,6],
-            limit:3,
-            url:"${pageContext.request.contextPath}/fDoc/findDoc",
+            height:340,
+            limits:[5],
+            limit:5,
+            url:"${pageContext.request.contextPath}/rec/findDeterResumes",
             page:true,
             id: 'testReload',
             cols:[[
-                {field:'doc_Name',title:'文档标题',sort:true},
-                {field:'user_Name',title:'上传人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
-                {field:'up_Time',title:'上传时间',sort:true},
-                {field:'dow_Score',title:'下载积分',sort:true},
-                {field:'doc_type',title:'文档类型',templet:'<div>{{d.docConfig.doc_Type}}</div>'},
-                {field:'dow_Num',title:'下载次数',sort:true},
+                {field:'realName',title:'姓名'},
+                {field:'isGraduate',title:'是否应届生',templet:function (d) {
+                        if(d.isGraduate==1){
+                            res = "是";
+                        }else{
+                            res = "否";
+                        }
+                        return res;
+                    }},
+                {field:'profession',title:'应聘岗位',templet:'<div>{{d.postPosition.postName}}</div>'},
+                {field:'wrokYear',title:'工作时间',sort:true},
+                {field:'education',title:'学历',templet:'<div>{{d.education.education}}</div>'},
+                {field:'deliTime',title:'投递时间',sort:true,templet:'<div>{{d.delivery.deliTime}}</div>'},
                 {title:'操作',toolbar:'#btns',width:250}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            docID = data.doc_ID;
-            var u_ID = data.u_ID;
-            // var doc_Type_ID = data.doc_Type_ID;
-            var score = data.dow_Score;
-            var paths = data.path;
-            if(obj.event === 'down'){
-                if(userScore<score){
-                    layer.msg("积分不足无法下载")
-                    return false;
-                }
-                alert(docID);
-                if(confirm("确定下载")){
-                    location.href = path+"/fDoc/download?doc_ID="+docID;
-                }
+            var deliID = data.delivery.deliveryId;
+
+            if(obj.event === 'refuse'){
+                layer.confirm('是否拒绝选中的简历',{
+                    btn:['拒绝','取消'],
+                    time:20000,
+                },function (index) {
+                    $.ajax({
+                        url:path+"/rec/delResumeOne",
+                        data:"deliID="+deliID,
+                        type:"post",
+                        typeData:"text",
+                        success:function (info) {
+
+                            if(info==1){
+                                layer.alert("成功拒绝");
+                                obj.del();
+                            }else{
+                                layer.alert("网络繁忙，删除拒绝")
+                            }
+                        },
+                    })
+                })
+            }else if(obj.event === 'pass'){
+
             }
         });
 
@@ -217,11 +196,8 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        userName: $('#userName').val(),
-                        beginTime:$('#beginTime').val(),
-                        endTime:$('#endTime').val(),
-                        topic:$('#topic').val(),
-                        type:$('#type').val(),
+                        userName:$('#userName').val(),
+                        postName:$('#postName').val(),
                     }
                 }, 'data');
             }

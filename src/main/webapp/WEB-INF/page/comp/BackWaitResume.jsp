@@ -10,34 +10,14 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackUnPassResume.css">
+
 <html>
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-<style>
-    .layui-table th{
-        text-align: center;
-    }
-    .layui-table{
-        text-align: center;
-    }
-    .layui-form-select dl {
-        max-height:200px;
-    }
-    #lay{
-        font-size: 18px;
-    }
 
-    .layui-form-select dl {
-        max-height:200px;
-    }
-
-    .layui-table-page {
-        text-align: center;
-    }
-
-</style>
 <body>
 <script id="btns" type="text/html">
     <a class="layui-btn layui-btn-xs" lay-event="down">下载</a>

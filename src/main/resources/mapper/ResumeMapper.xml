@@ -30,6 +30,9 @@
         <if test="educationId!=null">
             and e.educationID >= #{educationId}
         </if>
+        <if test="userName!=null">
+            and r.realName >= #{userName}
+        </if>
 
         order by deliTime desc limit #{offset}, #{limit}
     </select>
@@ -124,6 +127,10 @@
         </if>
         <if test="educationId!=null">
             and e.educationID >= #{educationId}
+        </if>
+
+        <if test="userName!=null">
+            and r.realName like #{userName}
         </if>
 
     </select>

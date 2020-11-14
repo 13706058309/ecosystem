@@ -70,6 +70,11 @@ public class TestController {
         return "BackFindPwd";
     }
 
+    @RequestMapping("/unPass")
+    public String unPass(){
+        return "comp/BackUnPassResume";
+    }
+
     @RequestMapping("/deterResume")
     public String deterResume(){
         return "comp/BackDeterResume";

@@ -12,4 +12,5 @@ import java.util.Map;
  */
 public interface DeliveryMapper {
     int changeDeliStand(Map<String,Object> map);
+    int delResume(Map<String,Object> map);
 }
