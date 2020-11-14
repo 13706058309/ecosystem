@@ -22,10 +22,18 @@ public interface BackCompService {
     List<City> findCityByID(int provinceID);
     //发布岗位
     String postPosition(PostPosition postPosition);
+    //重新发布岗位
+    String rePostPosition(PostPosition postPosition);
 
     //企业查询发布的岗位
-    TableInfo findOnlinePosition(Map<String,Object> map);
+    TableInfo findPosition(Map<String,Object> map);
     //修改状态
     int changePostPositionStand(Map<String,Object> map);
+    //查找企业收到的简历
+    TableInfo findAllResume(Map<String,Object> map);
+    //批量改变投机企业简历的状态
+    int changeDeliStand(List<Resume> list);
+    //改变企业简历状态
+    int changeDeliStand(int deliID,int standID);
 
 }

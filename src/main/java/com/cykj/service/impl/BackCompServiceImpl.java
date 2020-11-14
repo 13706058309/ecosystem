@@ -6,6 +6,7 @@ import com.cykj.service.BackCompService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,12 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Resource
     private PostPositionMapper postPositionMapper;
+
+    @Resource
+    private ResumeMapper resumeMapper;
+
+    @Resource
+    private DeliveryMapper deliveryMapper;
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
         List<Talent> unviTalentOnPage = talentMapper.findUnviTalentOnPage(map);
@@ -85,10 +92,16 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public TableInfo findOnlinePosition(Map<String, Object> map) {
+    public String rePostPosition(PostPosition postPosition) {
+        int n = postPositionMapper.addPostPosition(postPosition);
+        return n>0? "1":"2";
+    }
 
-        List<PostPosition> positionOnPage = postPositionMapper.findOnlinePosition(map);
-        int num = postPositionMapper.findOnlinePositionNum(map);
+    @Override
+    public TableInfo findPosition(Map<String, Object> map) {
+
+        List<PostPosition> positionOnPage = postPositionMapper.findPosition(map);
+        int num = postPositionMapper.findPositionNum(map);
         TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num,positionOnPage );
 
         return tableInfo;
@@ -98,5 +111,36 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public int changePostPositionStand(Map<String, Object> map) {
         return postPositionMapper.changePostPositionStand(map);
+    }
+
+    @Override
+    public TableInfo findAllResume(Map<String, Object> map) {
+        List<Resume> resumes = resumeMapper.findAllResume(map);
+        List<Resume> num = resumeMapper.findAllResumeNum(map);
+        System.out.println(num.size());
+        TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num.size(),resumes );
+        return tableInfo;
+    }
+
+    @Override
+    public int changeDeliStand(List<Resume> list) {
+        int n = 0;
+        for (Resume resume : list) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("standID",10);
+            map.put("deliID",resume.getDelivery().getDeliveryId());
+            int i = deliveryMapper.changeDeliStand(map);
+            n = n+i;
+        }
+        return n;
+    }
+
+    @Override
+    public int changeDeliStand(int deliID,int standID) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("standID",standID);
+        map.put("deliID",deliID);
+        int i = deliveryMapper.changeDeliStand(map);
+        return i>0?1:2;
     }
 }

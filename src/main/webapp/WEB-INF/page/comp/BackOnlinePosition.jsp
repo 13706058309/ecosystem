@@ -19,9 +19,9 @@
 <body>
 
 <script id="btns" type="text/html">
-    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="offLine">下线</a>
-    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
 
     <h1 style="text-align: center">已发布岗位</h1>
@@ -117,21 +117,25 @@
                 })
 
 
-            } else if(obj.event === 'pass'){
-                $.ajax({
-                    url:path+"/doc/changeDocStand",
-                    data:"doc_ID="+docID+"&standID=6",
-                    type:"get",
-                    typeData:"text",
-                    beforeSend:function () {
-                        return confirm("确定不通过");
-                    },
-                    success:function (info) {
-                        layer.msg(info);
-                        if(info=='修改成功'){
-                            obj.del();
-                        }
-                    },
+            } else if(obj.event === 'offLine'){
+                layer.confirm('是否下线岗位',{
+                    btn:['下线','取消'],
+                    time:20000,
+                },function (index) {
+                    $.ajax({
+                        url:path+"/rec/offLinePosition",
+                        data:"pPostId="+pPostId,
+                        type:"post",
+                        typeData:"text",
+                        success:function (info) {
+                            if(info=='1'){
+                                layer.msg("下线成功");
+                                obj.del();
+                            }else{
+                                layer.msg("网络繁忙，下线失败");
+                            }
+                        },
+                    })
                 })
             }else if(obj.event==='down'){
                 var docPath = obj.data.path;

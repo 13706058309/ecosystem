@@ -10,6 +10,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackOfflinePosition.css">
 <html>
 <head>
     <title>Title</title>
@@ -17,16 +18,46 @@
 </head>
 <body>
 <script id="btns" type="text/html">
-    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="go">查看详情</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="onLine">重新上线</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
 
-<h1 style="text-align: center">已下线岗位</h1>
-<br>
-<input type="hidden" value="${pageContext.request.contextPath}" id="path">
+    <h1 style="text-align: center">已下线岗位</h1>
+    <br>
+    <input type="hidden" value="${pageContext.request.contextPath}" id="path">
+        <div class="demoTable layui-form" style="margin-left: 25%">
+            <div class="layui-form-item">
 
-<table id="userTable" lay-filter="test"></table>
+                <div class="layui-inline">
+                    <label class="layui-form-label">发布时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="beginTime" placeholder="yyyy-MM-dd">
+                    </div>
+                </div>
 
-<button onclick="oper()">dfds</button>
+                <div class="layui-inline">
+                    <label class="layui-form-label">至</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd">
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">岗位名称:</label>
+                <div class="layui-input-inline">
+                    <input type="tel" id="postName" class="layui-input">
+                </div>
+
+                <div class="layui-input-inline" style="margin-left: 8%">
+                    <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+                </div>
+            </div>
+        </div>
+    <table id="userTable" lay-filter="test"></table>
+
+<%--<button onclick="oper()">dfds</button>--%>
 <div id="changeDiv" style="display: none;margin-top: 3%">
     <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
         <div class="layui-form-item" >
@@ -186,82 +217,69 @@
         layer = layui.layer;
     })
 
-    $(function () {
-        $.ajax({
-            url:path+"/docConfig/findAll",
-            type:"post",
-            typeData:"text",
-            success:function (data) {
-                var arr = JSON.parse(data);
-                $("#type").empty();
-                var $sel = $("<option>"+'请选择'+"</option>");
-                $("#type").append($sel)
-                for(var i=0;i<arr.length;i++){
-                    var $option = $("<option>"+arr[i].doc_Type+"</option>");
-                    $("#type").append($option);
-                }
-                form.render();
-            },
-        });
-    })
-
     layui.use('table',function () {
         var table = layui.table;
         table.render({
             elem:'#userTable',
-            height:312,
-            limits:[3,6],
-            limit:3,
-            url:"${pageContext.request.contextPath}/doc/checkDoc",
+            height:332,
+            limits:[5],
+            limit:5,
+            url:"${pageContext.request.contextPath}/rec/findOfflinePosition",
             page:true,
             id: 'testReload',
             cols:[[
-                {field:'doc_Name',title:'文档标题',sort:true},
-                {field:'user_Name',title:'上传人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
-                {field:'up_Time',title:'上传时间',sort:true},
-                {field:'dow_Score',title:'下载积分',sort:true},
-                {field:'doc_type',title:'文档类型',templet:'<div>{{d.docConfig.doc_Type}}</div>'},
+                {field:'postName',title:'岗位名称',sort:true},
+                {field:'department',title:'部门'},
+                {field:'education',title:'学历'},
+                {field:'workNature',title:'工作性质'},
+                {field:'workYear',title:'工作时间'},
+                {field:'releaseTime',title:'发布时间'},
                 {title:'操作',toolbar:'#btns',width:250}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            docID = data.doc_ID;
-            var u_ID = data.u_ID;
-            var doc_Type_ID = data.doc_Type_ID;
-            if(obj.event === 'go'){
-                $.ajax({
-                    url:path+"/doc/changeDocStand",
-                    data:"doc_ID="+docID+"&standID=5&u_ID="+u_ID+"&doc_Type_ID="+doc_Type_ID,
-                    type:"get",
-                    typeData:"text",
-                    beforeSend:function () {
-                        return confirm("确定通过");
-                    },
-                    success:function (info) {
-                        layer.msg(info);
-                        if(info=='修改成功'){
-                            obj.del();
-                        }
-                    },
+            var pPostId = data.pPostId;
+            //删除岗位
+            if(obj.event === 'del'){
+                layer.confirm('是否删除',{
+                    btn:['删除','取消'],
+                    time:20000,
+                },function (index) {
+                    $.ajax({
+                        url:path+"/rec/delPositionStand",
+                        data:"pPostId="+pPostId,
+                        type:"post",
+                        typeData:"text",
+                        success:function (info) {
+                            layer.msg(info);
+                            if(info=='删除成功'){
+                                obj.del();
+                            }
+                        },
+                    })
                 })
-
-            } else if(obj.event === 'pass'){
-                $.ajax({
-                    url:path+"/doc/changeDocStand",
-                    data:"doc_ID="+docID+"&standID=6",
-                    type:"get",
-                    typeData:"text",
-                    beforeSend:function () {
-                        return confirm("确定不通过");
-                    },
-                    success:function (info) {
-                        layer.msg(info);
-                        if(info=='修改成功'){
-                            obj.del();
-                        }
-                    },
+            } else if(obj.event === 'onLine'){
+                //重新发布岗位
+                layer.confirm('是否重新上线岗位',{
+                    btn:['确定','取消'],
+                    time:20000,
+                },function (index) {
+                    $.ajax({
+                        url:path+"/rec/onLinePosition",
+                        data:"position="+JSON.stringify(data),
+                        type:"post",
+                        typeData:"text",
+                        success:function (info) {
+                            if(info=='1'){
+                                layer.msg("重新上线成功");
+                                obj.del();
+                            }else{
+                                layer.msg("网络繁忙，上线失败");
+                            }
+                        },
+                    })
                 })
             }else if(obj.event==='down'){
                 var docPath = obj.data.path;
@@ -277,11 +295,9 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        userName: $('#userName').val(),
+                        postName: $('#postName').val(),
                         beginTime:$('#beginTime').val(),
                         endTime:$('#endTime').val(),
-                        topic:$('#topic').val(),
-                        type:$('#type').val(),
                     }
                 }, 'data');
             }

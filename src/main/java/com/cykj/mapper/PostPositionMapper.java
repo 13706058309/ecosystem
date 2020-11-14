@@ -15,9 +15,9 @@ import java.util.Map;
 public interface PostPositionMapper {
     int addPostPosition(PostPosition postPosition);
 
-    List<PostPosition> findOnlinePosition(Map<String,Object> map);
+    List<PostPosition> findPosition(Map<String,Object> map);
 
-    int findOnlinePositionNum(Map<String,Object> map);
+    int findPositionNum(Map<String,Object> map);
 
     int changePostPositionStand(Map<String,Object> map);
 }

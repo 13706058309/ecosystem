@@ -8,8 +8,8 @@
         (#{companyId},#{postName},#{workNature},#{postId},#{department},#{maxSalary},#{minSalary},#{workCity},#{workYear},#{education},#{jobBenefits},#{jobDescription},6,#{recruitsNum},#{province},#{detailAddress},#{contact},#{contactEmail})
     </insert>
 
-    <select id="findOnlinePosition" parameterType="java.util.Map" resultType="com.cykj.entity.PostPosition">
-        select * from postPosition where companyId = #{compID} and postStandId = 6
+    <select id="findPosition" parameterType="java.util.Map" resultType="com.cykj.entity.PostPosition">
+        select * from postPosition where companyId = #{compID} and postStandId = #{standID}
 
         <if test="beginTime!=null">
             and releaseTime >= #{beginTime}
@@ -26,8 +26,8 @@
         order by releaseTime desc limit #{offset}, #{limit}
     </select>
 
-    <select id="findOnlinePositionNum" parameterType="java.util.Map" resultType="int">
-        select count(*) from postPosition where companyId = #{compID} and postStandId = 6
+    <select id="findPositionNum" parameterType="java.util.Map" resultType="int">
+        select count(*) from postPosition where companyId = #{compID} and postStandId = #{standID}
 
         <if test="beginTime!=null">
             and releaseTime >= #{beginTime}
@@ -37,8 +37,8 @@
             and releaseTime &lt;= #{endTime}
         </if>
 
-        <if test="postName!=null">
-            and postName like #{postName}
+        <if test="educationId!=null">
+            and educationId like #{educationId}
         </if>
 
     </select>

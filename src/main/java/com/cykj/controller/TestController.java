@@ -82,7 +82,6 @@ public class TestController {
 
     @RequestMapping("/unviTalent")
     public String unviTalent(){
-
         return "comp/BackUniversityTalent";
     }
 }
