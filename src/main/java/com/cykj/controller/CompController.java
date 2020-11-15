@@ -385,4 +385,21 @@ public class CompController {
 
         return new Gson().toJson(tableInfo);
     }
+    //查找岗位名字
+    @RequestMapping("/findPostName")
+    public @ResponseBody String findPostName(int postID){
+        return backCompService.findPostName(postID);
+    }
+    //修改发布的岗位
+    @RequestMapping("/changePostPosition")
+    public @ResponseBody String changePostPosition(PostPosition postPosition){
+        return backCompService.updatePostPosition(postPosition);
+    }
+
+    @RequestMapping("/changePostID")
+    public @ResponseBody String changePostID(PostPosition postPosition){
+        String msg = backCompService.updatePostPosition(postPosition);
+        String postName = backCompService.findPostName((int) postPosition.getPostId());
+        return msg.equals("1")? postName:"2";
+    }
 }

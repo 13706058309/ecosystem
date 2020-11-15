@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface PositionMapper {
     List<Position> findPositionByID(int departID);
+
+    Position findPostName(int postID);
 }

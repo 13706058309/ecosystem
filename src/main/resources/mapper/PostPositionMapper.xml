@@ -47,5 +47,75 @@
         update postPosition set postStandID = #{standID} where companyID = #{compID} and pPostID = #{pPostID}
     </update>
 
+    <update id="updatePostPosition" parameterType="java.util.Map">
+        update postPosition
+        <set>
+            <if test="postName!=null">
+                postName = #{postName},
+            </if>
+
+            <if test="workNature!=null">
+                workNature = #{workNature},
+            </if>
+
+            <if test="postId!=null">
+                postId = #{postId},
+            </if>
+
+            <if test="department!=null">
+                department = #{department},
+            </if>
+
+            <if test="maxSalary!=null">
+                maxSalary = #{maxSalary},
+            </if>
+
+            <if test="minSalary!=null">
+                minSalary = #{minSalary},
+            </if>
+
+            <if test="workCity!=null">
+                workCity = #{workCity},
+            </if>
+
+            <if test="workYear!=null">
+                workYear = #{workYear},
+            </if>
+
+            <if test="education!=null">
+                education = #{education},
+            </if>
+
+            <if test="jobBenefits!=null">
+                jobBenefits = #{jobBenefits},
+            </if>
+
+            <if test="jobDescription!=null">
+                jobDescription = #{jobDescription},
+            </if>
+
+            <if test="recruitsNum!=null">
+                recruitsNum = #{recruitsNum},
+            </if>
+
+            <if test="province!=null">
+                province = #{province},
+            </if>
+
+            <if test="detailAddress!=null">
+                detailAddress = #{detailAddress},
+            </if>
+
+            <if test="contact!=null">
+                contact = #{contact},
+            </if>
+
+            <if test="contactEmail!=null">
+                contactEmail = #{contactEmail},
+            </if>
+        </set>
+        where pPostId = #{pPostID}
+    </update>
+
 
 </mapper>

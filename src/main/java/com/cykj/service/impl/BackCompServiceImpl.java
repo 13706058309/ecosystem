@@ -181,4 +181,73 @@ public class BackCompServiceImpl implements BackCompService {
         int i = deliveryMapper.delResume(map);
         return i>0?1:2;
     }
+
+    @Override
+    public String findPostName(int postID) {
+        return positionMapper.findPostName(postID).getPostName();
+    }
+
+    @Override
+    public String updatePostPosition(PostPosition postPosition) {
+        Map<String,Object> map = new HashMap<>();
+        if(postPosition.getPPostId()!=0){
+            map.put("pPostID",postPosition.getPPostId());
+        }
+        if(postPosition.getPostName()!=null){
+            map.put("postName",postPosition.getPostName());
+        }
+        if(postPosition.getWorkNature()!=null){
+            map.put("workNature",postPosition.getWorkNature());
+        }
+        if(postPosition.getDepartment()!=null){
+            map.put("department",postPosition.getDepartment());
+        }
+        if(postPosition.getPostId()!=0){
+            map.put("postId",postPosition.getPostId());
+        }
+        if(postPosition.getMaxSalary()!=0){
+            map.put("maxSalary",postPosition.getMaxSalary());
+        }
+        if(postPosition.getMinSalary()!=0){
+            map.put("minSalary",postPosition.getMinSalary());
+        }
+
+        if(postPosition.getWorkCity()!=null){
+            map.put("workCity",postPosition.getWorkNature());
+        }
+        if(postPosition.getWorkYear()!=null){
+            map.put("workYear",postPosition.getWorkYear());
+        }
+        if(postPosition.getEducation()!=null){
+            map.put("education",postPosition.getEducation());
+        }
+        if(postPosition.getJobBenefits()!=null){
+            map.put("jobBenefits",postPosition.getJobBenefits());
+        }
+
+        if(postPosition.getJobDescription()!=null){
+            map.put("jobDescription",postPosition.getJobDescription());
+        }
+        if(postPosition.getRecruitsNum()!=null){
+            map.put("recruitsNum",postPosition.getRecruitsNum());
+        }
+
+        if(postPosition.getProvince()!=null){
+            int pID = Integer.parseInt(postPosition.getProvince());
+            Province province = provinceMapper.findByID(pID);
+            map.put("province",province.getProvinceName());
+        }
+        if(postPosition.getDetailAddress()!=null){
+            map.put("detailAddress",postPosition.getDetailAddress());
+        }
+
+        if(postPosition.getContact()!=null){
+            map.put("contact",postPosition.getContact());
+        }
+        if(postPosition.getContactEmail()!=null){
+            map.put("contactEmail",postPosition.getContactEmail());
+        }
+        int n = postPositionMapper.updatePostPosition(map);
+        return n>0 ? "1":"2";
+    }
 }

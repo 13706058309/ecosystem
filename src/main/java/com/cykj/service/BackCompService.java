@@ -41,5 +41,8 @@ public interface BackCompService {
     int delResume(List<Resume> list,int standID);
     //企业通知应聘者面试
     int passResume(int deliID,int standID,String msg);
-
+    //通过ID查找岗位名字
+    String findPostName(int postID);
+    //修改企业发布岗位信息
+    String updatePostPosition(PostPosition postPosition);
 }

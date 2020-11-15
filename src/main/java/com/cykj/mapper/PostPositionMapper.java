@@ -20,4 +20,6 @@ public interface PostPositionMapper {
     int findPositionNum(Map<String,Object> map);
 
     int changePostPositionStand(Map<String,Object> map);
+
+    int updatePostPosition(Map<String,Object> map);
 }

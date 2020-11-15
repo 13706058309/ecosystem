@@ -11,6 +11,7 @@
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackOnlinePosition.css">
+<script src="${pageContext.request.contextPath}/js/comp/BackOnlinePosition.js"></script>
 <html>
 <head>
     <title>Title</title>
@@ -19,7 +20,7 @@
 <body>
 
 <script id="btns" type="text/html">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看详情</a>
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="offLine">下线</a>
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
@@ -56,115 +57,67 @@
         </div>
     </div>
 </div>
-
     <table id="onLineTable" lay-filter="test"></table>
+
+<div id="postPositionDetailDiv" style="display: none;padding: 3%">
+    <table class="layui-table">
+        <tr>
+            <td  colspan="6"><h2>招聘信息查看</h2></td>
+        </tr>
+        <tr>
+            <td class="ziti" width="16%">岗位名称</td>
+            <td id="dPostName" ondblclick="changePostName()"></td>
+            <td class="ziti">岗位类型</td>
+            <td id="dPostType" ondblclick="changePostType()"></td>
+            <td class="ziti">所属部门</td>
+            <td id="dDepart" ondblclick="changePostName()"></td>
+        </tr>
+
+        <tr>
+            <td class="ziti">月薪范围</td>
+            <td id="salary" ondblclick="changeSalary()">dsfs</td>
+            <td class="ziti" >工作城市</td>
+            <td id="dWorkCity" ondblclick="changeCity()"></td>
+            <td class="ziti">招收人数</td>
+            <td id="num" ondblclick="changeNum()"></td>
+        </tr>
+
+        <tr>
+            <td class="ziti">工作经验</td>
+            <td id="dWorkExp" ondblclick="changeWorkYear()"></td>
+            <td class="ziti">学历</td>
+            <td id="dEducation" ondblclick="changeEdu()"></td>
+            <td class="ziti">工作性质</td>
+            <td id="workType" ondblclick="changeWorkType()"></td>
+        </tr>
+
+        <tr>
+            <td rowspan="1" class="ziti">投递邮箱</td>
+            <td colspan="5" id="dEmail" ondblclick="changeEmail()"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1" class="ziti">联系方式</td>
+            <td colspan="5" id="dContact" ondblclick="changeContact()"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1" class="ziti">具体地址</td>
+            <td colspan="5" id="dAddress" ondblclick="changeAddre()"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1" class="ziti">福利描述</td>
+            <td colspan="5" id="fuli" ondblclick="changeJobBenf()"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1" class="ziti">工作描述</td>
+            <td colspan="5" id="workDes" ondblclick="changeJobDes()"> </td>
+        </tr>
+
+    </table>
+</div>
 </body>
-<script>
-    var layer;
-    var path = $("#path").val();
-    var objs;
-    var index;
-    var form;
-    layui.use(['laydate','layer','form'],function () {
-        form = layui.form;
-        form.render();
-        var laydate = layui.laydate;
-        layer = layui.layer;
-    })
 
-    layui.use('table',function () {
-        var table = layui.table;
-        table.render({
-            elem:'#onLineTable',
-            height:332,
-            limits:[5],
-            limit:5,
-            url:"${pageContext.request.contextPath}/rec/findOnlinePosition",
-            page:true,
-            id: 'testReload',
-            cols:[[
-                {field:'postName',title:'岗位名称',sort:true},
-                {field:'department',title:'部门'},
-                {field:'education',title:'学历'},
-                {field:'workNature',title:'工作性质'},
-                {field:'workYear',title:'工作时间'},
-                {field:'releaseTime',title:'发布时间'},
-                {title:'操作',toolbar:'#btns',width:250}
-            ]]
-        });
-
-        table.on('tool(test)', function(obj){
-            var data = obj.data;
-            var pPostId = data.pPostId;
-
-            if(obj.event === 'del'){
-                layer.confirm('是否删除',{
-                    btn:['删除','取消'],
-                    time:20000,
-                },function (index) {
-                    $.ajax({
-                        url:path+"/rec/delPositionStand",
-                        data:"pPostId="+pPostId,
-                        type:"post",
-                        typeData:"text",
-                        success:function (info) {
-                            layer.msg(info);
-                            if(info=='删除成功'){
-                                obj.del();
-                            }
-                        },
-                    })
-                })
-            } else if(obj.event === 'offLine'){
-                layer.confirm('是否下线岗位',{
-                    btn:['下线','取消'],
-                    time:20000,
-                },function (index) {
-                    $.ajax({
-                        url:path+"/rec/offLinePosition",
-                        data:"pPostId="+pPostId,
-                        type:"post",
-                        typeData:"text",
-                        success:function (info) {
-                            if(info=='1'){
-                                layer.msg("下线成功");
-                                obj.del();
-                            }else{
-                                layer.msg("网络繁忙，下线失败");
-                            }
-                        },
-                    })
-                })
-            }else if(obj.event==='down'){
-                var docPath = obj.data.path;
-                location.href = path+"/doc/downFile?docID="+docID;
-            }
-        });
-
-        var $ = layui.$, active = {
-            reload: function(){
-                //执行重载
-                table.reload('testReload', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    },
-                    where: {
-                        postName: $('#postName').val(),
-                        beginTime:$('#beginTime').val(),
-                        endTime:$('#endTime').val(),
-                    }
-                }, 'data');
-            }
-        };
-
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-    })
-    function closeLayer() {
-        layer.close(index);
-    }
-
-</script>
 </html>
