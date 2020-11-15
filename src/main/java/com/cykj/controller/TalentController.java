@@ -41,7 +41,7 @@ public class TalentController {
     private TalentService talentService;
 
     @RequestMapping("/upload")
-    public  String upload(@RequestParam("file")MultipartFile[] imgFiles,HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public  String upload(@RequestParam("file")MultipartFile imgFile,HttpServletRequest request,HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = response.getWriter();
 
@@ -51,12 +51,12 @@ public class TalentController {
             if (!file.exists()) {
                 file.mkdirs();
             }
-            for(MultipartFile  multipartFile:imgFiles) {
-                String fileName = multipartFile.getOriginalFilename();
+
+                String fileName = imgFile.getOriginalFilename();
 
                 if (fileName.trim() != null && !fileName.equals("")) {
                     fileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
-                    multipartFile.transferTo(new File(file, fileName));
+                    imgFile.transferTo(new File(file, fileName));
                     String content = readWord(path + "\\" + date + "\\" + fileName);
                     String talentName = content.substring(content.indexOf("名") + 1, content.indexOf("院")).trim();
                     String school = content.substring(content.indexOf("校") + 1, content.indexOf("出")).trim();
@@ -77,7 +77,7 @@ public class TalentController {
                         writer.write("导入失败");
                     }
 
-                }
+
             }
 
 return "talentList";
