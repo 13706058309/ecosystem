@@ -1,4 +1,6 @@
-
+.layui-table{
+    text-align: center;
+}
 #postPositionDiv{
     border: 2px solid #2cffda;
     margin:5% auto 5% auto;
@@ -6,4 +8,10 @@
     position: relative;
     z-index: 1;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.ziti{
+    font-family: "Microsoft Yahei";
+    color: #50ffa1;
+    font-weight: bolder;
 }

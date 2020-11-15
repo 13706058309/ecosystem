@@ -8,23 +8,24 @@ import java.util.List;
 public class Resume {
 
   private long resumeId;
-  private long userId;
-  private String realName;
-  private String clan;
-  private String photo;
-  private String politicalStatus;
-  private String birthday;
-  private String contactInfo;
-  private String school;
-  private long educationId;
-  private String profession;
-  private String wrokYear;
-  private String qualiCer;
-  private String selfEva;
-  private long isShow;
-  private String address;
-  private java.sql.Date updateTime;
-  private long isGraduate;
+  private long userId;//用户ID
+  private String realName;//名字
+  private String clan;//民族
+  private String photo;//头像
+  private String politicalStatus;//政治面貌
+  private String birthday;//出生年月日
+  private String contactInfo;//联系方式
+  private String school;//学校
+  private long educationId;//学历ID
+  private String profession;//专业
+  private String wrokYear;//工作时间
+  private String qualiCer;//资格证书
+  private String selfEva;//自我评价
+  private long isShow;//是否展示
+  private String address;//地址
+  private String updateTime;//更新时间
+  private long isGraduate;//是否应届生
+
   private long jobStandId; //就业状态
   private String industry; //意向行业
   private String sex;
@@ -193,11 +194,11 @@ public class Resume {
   }
 
 
-  public java.sql.Date getUpdateTime() {
+  public String getUpdateTime() {
     return updateTime;
   }
 
-  public void setUpdateTime(java.sql.Date updateTime) {
+  public void setUpdateTime(String updateTime) {
     this.updateTime = updateTime;
   }
 

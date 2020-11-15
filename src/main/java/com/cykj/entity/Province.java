@@ -7,9 +7,9 @@ import java.util.List;
  */
 public class Province {
 
-  private long provinceId;
+  private long provinceId;//主键ID
   private List<City> cityList;
-  private String provinceName;
+  private String provinceName;//省份名字
 
   public Province() {
   }

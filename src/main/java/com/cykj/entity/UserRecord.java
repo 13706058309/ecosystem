@@ -1,5 +1,9 @@
 package com.cykj.entity;
 
+import com.cykj.utils.MyUtil;
+
+import java.util.Date;
+
 /**
  * 用户聊天记录
  */
@@ -54,7 +58,7 @@ public class UserRecord {
     return recoredTime;
   }
 
-  public void setRecoredTime(String recoredTime) {
-    this.recoredTime = recoredTime;
+  public void setRecoredTime(Date recoredTime) {
+    this.recoredTime = MyUtil.getDetailFoatTime(recoredTime);
   }
 }

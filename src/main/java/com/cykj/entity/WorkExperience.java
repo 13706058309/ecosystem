@@ -52,7 +52,6 @@ public class WorkExperience {
     this.companyPost = companyPost;
   }
 
-
   public String getBeginTime() {
     return beginTime;
   }
