@@ -4,11 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.JianliMapper">
     <select id="resume" parameterType="java.lang.Long" resultMap="findResume">
-        select r.*,we.*,pe.*,eb.*,e.education   from resume r,education e,educationalBackground eb,workExperience we,
-         projectExperience pe,resumeEduu re,resumeWork rw,resumePro rp
-           where r.educationid=e.educationid and r.resumeid=re.resumeid and r.resumeid=rw.resumeid and r.resumeid=rp.resumeid
-           and re.ebid=eb.ebid and rp.peid=pe.peid and rw.weid=we.weid
-           and r.userid=#{userid}
+        select r.*,we.*,pe.*,eb.*,e.education   from
+            resume r left join education e on r.educationid=e.educationid
+                        left join resumeEduu re on r.resumeID=re.resumeID left join educationalBackground eb on re.ebID=eb.ebID
+                            left join resumePro rp on r.resumeID=rp.resumeID left join projectExperience pe on rp.peID=pe.peID
+                                left join resumeWork rw on r.resumeID=rw.resumeID left join workExperience we on rw.weID=we.weID
+                                    where r.userid=#{userid}
+
     </select>
     <resultMap id="findResume" type="com.cykj.entity.Resume">
         <id property="resumeId" column="resumeId"></id>

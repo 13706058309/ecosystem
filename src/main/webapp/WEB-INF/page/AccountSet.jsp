@@ -71,7 +71,18 @@
             </div>
             <div class="layui-tab-item">内容2</div>
             <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item"  style="margin-top: 20%;margin-left: 20%">
+                <form class="layui-form">
+                    <label class="layui-form-label" style="width: 100px;margin-left: 15%">简历隐藏</label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" id="isShow" name="isShow" lay-skin="switch">
+                    </div>
+                    <div class="layui-input-block" style="margin-top: 10%">
+                        <input type="button" value="保存" onclick="" class="layui-btn">
+                        <input type="button" value="取消" onclick="" class="layui-btn">
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>
@@ -80,8 +91,9 @@
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    layui.use('element', function(){
+    layui.use(['form', 'element'], function(){
         var $ = layui.jquery
+            ,form=layui.form
             ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
         //触发事件

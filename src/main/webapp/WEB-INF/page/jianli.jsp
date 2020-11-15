@@ -23,6 +23,7 @@
 </head>
 
 <body>
+<input type="text" style="display: none" id="kong">
 <div id="wrap" class="">
     <div id="main" class="inner">
         <div id="container" class="resume-container">
@@ -33,42 +34,38 @@
                     <div class="update-time"><a href="javascript:;" ka="user_resume_preview"
                                                 class="link-preview">预览简历</a> 最后更新 <label id="updateTime9">${resume.updateTime}</label> </div>
                     <div class="resume-box">
-<%--                        <c:if test="${not empty resume}">--%>
-<%--                            <c:set value="${resume}" var="resume">--%>
-
-
                             <div id="userinfo" class="resume-item resume-userinfo">
                                 <div id="userinfo-show" class="item-primary">
                                     <!---->
                                     <div class="info-flex">
                                         <div class="info-flex-item">
-                                            <h2 class="name"><label id="realName9"></label>${resume.realName} <svg class="icon-svg">
+                                            <h2 class="name"><label id="realName9">${resume.realName}</label> <svg class="icon-svg">
                                                 <use xlink:href="#icon_man"></use>
                                             </svg></h2>
                                             <div class="info-labels">
                                                 <p><span class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i ><label id="clan9"></label>${resume.clan}族</span><span
+                                                        class="fz-resume fz-experience"></i >民族：<label id="clan9">${resume.clan}</label></span><span
                                                         class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i><label id="politicalStatus9"></label>政治面貌：${resume.politicalStatus}</span><span
+                                                        class="fz-resume fz-experience"></i>政治面貌：<label id="politicalStatus9">${resume.politicalStatus}</label></span><span
                                                         class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i><label id="wrokYear9"></label>工作年限：${resume.wrokYear}年</span><span
+                                                        class="fz-resume fz-experience"></i><label id="wrokYear9">工作年限：${resume.wrokYear}年</label></span><span
                                                         class="prev-line"><i
-                                                        class="fz-resume fz-degree"></i><label id="education9"></label>学历：${resume.education.education}</span></p>
+                                                        class="fz-resume fz-degree"></i>学历：<label id="education9">${resume.education.education}</label></span></p>
                                                 <p><span class="prev-line"><i
-                                                        class="fz-resume fz-status"></i><label id="profession9">专业：${resume.profession}</label></span><span class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i><label id="school9">毕业学校：${resume.school}</label></span><span
+                                                        class="fz-resume fz-status"></i>专业：<label id="profession9">${resume.profession}</label></span><span class="prev-line"><i
+                                                        class="fz-resume fz-experience"></i>毕业学校：<label id="school9">${resume.school}</label></span><span
                                                         class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i><label id="birthday9">出生年月：${resume.birthday}</label></span>
+                                                        class="fz-resume fz-experience"></i>出生年月：<label id="birthday9">${resume.birthday}</label></span>
                                                     <!---->
                                                     <!---->
                                                 </p>
                                                 <p><span class="prev-line"><i
-                                                        class="fz-resume fz-tel"></i><label id="contactInfo9">联系方式：${resume.contactInfo}</label></span>
+                                                        class="fz-resume fz-tel"></i>联系方式：<label id="contactInfo9">${resume.contactInfo}</label></span>
                                                     <!---->
                                                     <!---->
                                                 </p>
                                                 <p><span class="prev-line"><i
-                                                        class="fz-resume fz-place"></i><label id="address9">现居住地：${resume.address}</label></span>
+                                                        class="fz-resume fz-place"></i>现居住地：<label id="address9">${resume.address}</label></span>
                                                     <!---->
                                                     <!---->
                                                 </p>
@@ -87,7 +84,7 @@
                                     <div class="op"><a data-url="/geek/user/info.json" href="javascript:;"
                                                        ka="user-resume-edit-userinfo" class="link-edit"><svg class="icon-svg">
                                         <use xlink:href="#icon-svg-edit"></use>
-                                    </svg><span onclick="userInfoUpdate()">编辑</span></a></div>
+                                    </svg><span onclick="userInfoUpdate(${resume.educationId})">编辑</span></a></div>
                                     <div class="resume-cropper-upload"><input type="file" accept=""
                                                                               class="upload-input">
                                         <div class="custom-box">
@@ -133,68 +130,77 @@
 
                             <div id="userinfo-update" class="item-form display-hide">
                                 <h3 class="title">编辑个人信息</h3>
-                                <form class="layui-form">
+                                <form class="layui-form" id="userInfoUpdate">
+                                    <input type="hidden" value="${resume.resumeId}" id="resumeIdUpdate" name="resumeId">
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label" style="width: 100px">姓名</label>
+                                        <label class="layui-form-label" style="width: 100px" >姓名</label>
                                         <div class="layui-input-inline" >
-                                            <input type="text" id="realName" name="realName" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                                            <input type="text" id="realName" name="realName" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input" value="${resume.realName}">
                                         </div>
                                         <label class="layui-form-label" style="width: 100px">民族</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="chan" name="chan" required  lay-verify="required" placeholder="请输入民族" autocomplete="off" class="layui-input">
+                                            <input type="text" id="clan" name="clan" required  lay-verify="required" placeholder="请输入民族" autocomplete="off" class="layui-input" value="${resume.clan}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 100px">政治面貌</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="politicalStatus" name="politicalStatus" required  lay-verify="required" placeholder="请输入政治面貌" autocomplete="off" class="layui-input">
+                                            <input type="text" id="politicalStatus" name="politicalStatus" required  lay-verify="required" placeholder="请输入政治面貌" autocomplete="off" class="layui-input" value="${resume.politicalStatus}">
                                         </div>
                                         <label class="layui-form-label" style="width: 100px">联系方式</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="contactInfo" name="contactInfo" required  lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input">
+                                            <input type="text" id="contactInfo" name="contactInfo" required  lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input" value="${resume.contactInfo}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <div class="layui-inline">
                                             <label class="layui-form-label" style="width: 100px">出生日期</label>
                                             <div class="layui-input-inline">
-                                                <input type="text" class="layui-input" name="birthday" id="birthday" placeholder="yyyy-MM-dd">
+                                                <input type="text" class="layui-input" name="birthday" id="birthday" placeholder="yyyy-MM-dd" value="${resume.birthday}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">学历</label>
+                                        <label class="layui-form-label" style="width: 12%">学历</label>
                                         <div class="layui-input-block" style="width: 12%">
-                                            <select id="education1" name="education" lay-filter="aihao">
-                                                <option value=""></option>
-                                                <option value="0">高中</option>
-                                                <option value="1" selected="">大专</option>
-                                                <option value="2">本科</option>
-                                                <option value="3">硕士</option>
-                                                <option value="4">博士</option>
+                                            <select class="educationId" id="educationId" name="educationId" lay-filter="aihao" >
+
+                                                <option value="0" <c:if test="${resume.educationId==0}">selected </c:if>
+                                                >学历选择</option>
+                                                <option value="1"
+                                                        <c:if test="${resume.educationId==1}"> selected</c:if>
+                                                >高中</option>
+                                                <option value="2" <c:if test="${resume.educationId==2}">selected</c:if>
+                                                >大专</option>
+                                                <option value="3" <c:if test="${resume.educationId==3}"> selected</c:if>
+                                                >本科</option>
+                                                <option value="4" <c:if test="${resume.educationId==4}">selected </c:if>
+                                                >硕士</option>
+                                                <option value="5" <c:if test="${resume.educationId==5}">selected </c:if>
+                                                >博士</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 12%">专业</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="profession" name="profession" required  lay-verify="required" placeholder="请输入专业" autocomplete="off" class="layui-input">
+                                            <input type="text" id="profession" name="profession" required  lay-verify="required" placeholder="请输入专业" autocomplete="off" class="layui-input" value="${resume.profession}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 100px">毕业学校</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="school" name="school" required  lay-verify="required" placeholder="请输入毕业学校" autocomplete="off" class="layui-input">
+                                            <input type="text" id="school" name="school" required  lay-verify="required" placeholder="请输入毕业学校" autocomplete="off" class="layui-input" value="${resume.school}">
                                         </div>
-                                        <label class="layui-form-label" style="width: 100px">简历隐藏</label>
-                                        <div class="layui-input-inline">
-                                            <input type="checkbox" id="isShow" name="isShow" lay-skin="switch">
-                                        </div>
+<%--                                        <label class="layui-form-label" style="width: 100px">简历隐藏</label>--%>
+<%--                                        <div class="layui-input-inline">--%>
+<%--                                            <input type="checkbox" id="isShow" name="isShow" lay-skin="switch">--%>
+<%--                                        </div>--%>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 12%">居住地址</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" id="address" name="address" required  lay-verify="required" placeholder="请输入现居住地址" autocomplete="off" class="layui-input">
+                                        <div class="layui-input-block">
+                                            <input type="text"  id="address" name="address" required  lay-verify="required" placeholder="请输入现居住地址" autocomplete="off" class="layui-input" value="${resume.address}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -204,236 +210,17 @@
                                         </div>
                                     </div>
                                 </form>
-
-
-<%--                                <form autocomplete="off" class="ui-form ui-form-label-top">--%>
-<%--                                    <div class="form-item form-item-required">--%>
-<%--                                        <div class="item-label">姓名</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div class="input-wrap input-wrap-text input-group input-group-with-append input-hide-icon"--%>
-<%--                                                 ka="resume_form_edit_name">--%>
-<%--                                                <!---->--%>
-<%--                                                <!----><input autocomplete="on" spellcheck="false" type="text"--%>
-<%--                                                              placeholder="请输入您的姓名" maxlength="24" class="input">--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <div class="input-group-append" style="">--%>
-<%--                                                    <div class="append-tip" style="display: none;">--%>
-<%--                                                        <p class="gray">已实名认证，真实姓名不可修改，可显示对展示名</p>--%>
-<%--                                                        <!---->--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="form-item" ka="resume_form_edit_applyStatus">--%>
-<%--                                        <div class="item-label">当前求职状态</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div class="ui-select ui-select-single" autocomplete="off">--%>
-<%--                                                <div tabindex="0" class="ui-select-selection"><input type="hidden"--%>
-<%--                                                                                                     value="2">--%>
-<%--                                                    <div class="ui-select-inner"><span--%>
-<%--                                                            class="ui-select-selected-value">在职-考虑机会</span>--%>
-<%--                                                        <!---->--%>
-<%--                                                        <!----><i class="ui-icon-arrow-down"></i></div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="ui-select-dropdown" style="display: none;">--%>
-<%--                                                    <ul class="ui-dropdown-not-found" style="display: none;">--%>
-<%--                                                        <li>无匹配数据</li>--%>
-<%--                                                    </ul>--%>
-<%--                                                    <ul class="ui-dropdown-list">--%>
-<%--                                                        <li class="ui-select-item">离职-随时到岗</li>--%>
-<%--                                                        <li class="ui-select-item">在职-暂不考虑</li>--%>
-<%--                                                        <li class="ui-select-item ui-select-item-selected">在职-考虑机会--%>
-<%--                                                        </li>--%>
-<%--                                                        <li class="ui-select-item">在职-月内到岗</li>--%>
-<%--                                                    </ul>--%>
-<%--                                                    <ul class="ui-dropdown-loading" style="display: none;">加载中</ul>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="form-item">--%>
-<%--                                        <div class="item-label">性别</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div name="radioGroup_1605008124544_1"--%>
-<%--                                                 class="radio-group radio-group-rectangle" autocomplete="off"><label--%>
-<%--                                                    class="radio radio-item radio-checked"><span--%>
-<%--                                                    class="radio-inner"><input type="radio" class="radio-input"--%>
-<%--                                                                               name="radioGroup_1605008124544_1"><i--%>
-<%--                                                    class="radio-edging"></i></span>男</label><label--%>
-<%--                                                    class="radio radio-item"><span class="radio-inner"><input--%>
-<%--                                                    type="radio" class="radio-input"--%>
-<%--                                                    name="radioGroup_1605008124544_1"><i--%>
-<%--                                                    class="radio-edging"></i></span>女</label>--%>
-<%--                                                <!---->--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="form-item" ka="resume_form_edit_freshGraduate">--%>
-<%--                                        <div class="item-label">我的牛人身份</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div class="ui-select ui-select-disabled ui-select-single"--%>
-<%--                                                 autocomplete="off">--%>
-<%--                                                <div tabindex="-1" class="ui-select-selection"><input type="hidden"--%>
-<%--                                                                                                      value="0">--%>
-<%--                                                    <div class="ui-select-inner"><span--%>
-<%--                                                            class="ui-select-selected-value">职场人</span>--%>
-<%--                                                        <!---->--%>
-<%--                                                        <!----><i class="ui-icon-arrow-down"></i></div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="ui-select-dropdown" style="display: none;">--%>
-<%--                                                    <ul class="ui-dropdown-not-found" style="display: none;">--%>
-<%--                                                        <li>无匹配数据</li>--%>
-<%--                                                    </ul>--%>
-<%--                                                    <ul class="ui-dropdown-list">--%>
-<%--                                                        <li class="ui-select-item ui-select-item-selected">职场人</li>--%>
-<%--                                                        <li class="ui-select-item">学生</li>--%>
-<%--                                                    </ul>--%>
-<%--                                                    <ul class="ui-dropdown-loading" style="display: none;">加载中</ul>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="append-tip">--%>
-<%--                                                    <p class="gray">牛人身份需要到BOSS直聘APP中修改</p>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="form-item">--%>
-<%--                                        <div class="item-label">生日</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div class="datepicker-wrap" ka="resume_form_edit_birthday"--%>
-<%--                                                 autocomplete="off">--%>
-<%--                                                <div class="input-wrap">--%>
-<%--                                                    <!----><input placeholder="请选择生日" readonly="readonly"--%>
-<%--                                                                  autocomplete="off" class="input">--%>
-<%--                                                    <!---->--%>
-<%--                                                    <!---->--%>
-<%--                                                </div>--%>
-<%--                                                <!---->--%>
-<%--                                                <div class="datepicker-pannel datepicker-month"--%>
-<%--                                                     style="display: none;">--%>
-<%--                                                    <div class="picker-header"><span class="prev"></span><span--%>
-<%--                                                            class="month-year-btn up">1991年</span><span--%>
-<%--                                                            class="next"></span></div>--%>
-<%--                                                    <div class="picker-content"><span--%>
-<%--                                                            class="cell month">一月</span><span--%>
-<%--                                                            class="cell month">二月</span><span--%>
-<%--                                                            class="cell month">三月</span><span--%>
-<%--                                                            class="cell month">四月</span><span--%>
-<%--                                                            class="cell month">五月</span><span--%>
-<%--                                                            class="cell month">六月</span><span--%>
-<%--                                                            class="cell month">七月</span><span--%>
-<%--                                                            class="cell month">八月</span><span--%>
-<%--                                                            class="cell month">九月</span><span--%>
-<%--                                                            class="cell month selected">十月</span><span--%>
-<%--                                                            class="cell month">十一月</span><span--%>
-<%--                                                            class="cell month">十二月</span>--%>
-<%--                                                        <!---->--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="datepicker-pannel datepicker-year"--%>
-<%--                                                     style="display: none;">--%>
-<%--                                                    <div class="picker-header"><span class="prev"></span><span>1990--%>
-<%--                                                                - 1999年</span><span class="next"></span></div>--%>
-<%--                                                    <div class="picker-content"><span--%>
-<%--                                                            class="cell year">1990</span><span--%>
-<%--                                                            class="cell year selected">1991</span><span--%>
-<%--                                                            class="cell year">1992</span><span--%>
-<%--                                                            class="cell year">1993</span><span--%>
-<%--                                                            class="cell year">1994</span><span--%>
-<%--                                                            class="cell year">1995</span><span--%>
-<%--                                                            class="cell year">1996</span><span--%>
-<%--                                                            class="cell year">1997</span><span--%>
-<%--                                                            class="cell year">1998</span><span--%>
-<%--                                                            class="cell year">1999</span>--%>
-<%--                                                        <!---->--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="form-item">--%>
-<%--                                        <div class="item-label">微信号 (选填)</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div class="input-wrap input-wrap-text" ka="resume_form_edit_weixin">--%>
-<%--                                                <!---->--%>
-<%--                                                <!----><input autocomplete="off" spellcheck="false" type="text"--%>
-<%--                                                              placeholder="请输入您的微信号" maxlength="100" class="input">--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="form-item">--%>
-<%--                                        <div class="item-label">电话</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div class="input-wrap input-wrap-text input-group input-group-with-append input-hide-icon"--%>
-<%--                                                 ka="resume_form_edit_phone">--%>
-<%--                                                <!---->--%>
-<%--                                                <!----><input autocomplete="off" spellcheck="false" type="text"--%>
-<%--                                                              placeholder="请输入您的手机号" disabled="disabled"--%>
-<%--                                                              class="input input-disabled">--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <div class="input-group-append" style="">--%>
-<%--                                                    <div class="append-tip">--%>
-<%--                                                        <p class="gray"> 电话即为登录账号，如需修改可直接在 <a--%>
-<%--                                                                href="/web/geek/account?type=mobile">账号设置</a> 中修改--%>
-<%--                                                        </p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="form-item">--%>
-<%--                                        <div class="item-label">邮箱 (选填)</div>--%>
-<%--                                        <div class="item-content">--%>
-<%--                                            <div class="input-wrap input-wrap-text" ka="resume_form_edit_email">--%>
-<%--                                                <!---->--%>
-<%--                                                <!----><input autocomplete="off" spellcheck="false" type="text"--%>
-<%--                                                              placeholder="请输入您的邮箱" maxlength="80" class="input">--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                                <!---->--%>
-<%--                                            </div>--%>
-<%--                                            <!---->--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <!---->--%>
-<%--                                    <div class="form-btns form-btn-normal"><button type="button"--%>
-<%--                                                                                   ka="resume_form_baseinfo_cancel"--%>
-<%--                                                                                   class="btn btn-outline"--%>
-<%--                                                                                   onclick="userInfoUpdateCancel()">取消</button><button type="submit"--%>
-<%--                                                                                                                                       ka="resume_form_baseinfo_ok" class="btn btn-primary"--%>
-<%--                                                                                                                                       onclick="userInfoUpdateComfirm()">--%>
-<%--                                        <!---->完成 </button></div>--%>
-<%--                                </form>--%>
                             </div>
                         </div>
                         <div id="summary" class="resume-item resume-summary">
                             <div class="item-primary advantage-show">
                                 <h3 class="title"> 个人优势
-                                    <!---->
                                 </h3>
                                 <ul>
                                     <li ka="user-resume-edit-advantage" class="">
                                         <div class="primary-info">
                                             <div class="info-text advantage-text" style="white-space: normal;">
-                                                <p>${resume.selfEva}</p>
+                                                <p><label id="selfEva9">${resume.selfEva}</label></p>
                                             </div>
                                         </div>
                                         <div class="op op-show">
@@ -458,7 +245,7 @@
 <%--                                            <!----><input autocomplete="on" spellcheck="false" type="text"--%>
 <%--                                                          placeholder="输入内容" maxlength="44" class="input">--%>
                                             <textarea autocomplete="on" spellcheck="false" class="input" style="height: 5%"
-                                                      placeholder="输入内容" maxlength="50" id="selfEva" name="selfEva" ></textarea>
+                                                      placeholder="输入内容" maxlength="50" id="selfEva" name="selfEva" >${resume.selfEva}</textarea>
                                         </div>
                                         <!---->
                                         <!---->
@@ -481,27 +268,21 @@
 
                         <div id="purpose" class="resume-item resume-purpose">
                             <div class="item-primary">
-                                <h3 class="title"> 期望职位 <a href="javascript:;" ka="user-resume-add-expectation"
-                                                           class="link-add"><svg class="icon-svg">
-                                    <use xlink:href="#icon-svg-add"></use>
-                                </svg><span onclick="workUpdate()">编辑</span></a></h3>
+                                <h3 class="title"> 期望职位
+                                </h3>
                                 <ul>
                                     <li ka="user-resume-edit-expectation0" class="">
                                         <div class="primary-info">
                                             <div class="info-labels"><span class="prev-line"><span
-                                                    class="label-text"><i class="fz-resume fz-job"></i> ${resume.expectWork}
-                                                        </span></span>
-<%--                                                <span class="prev-line"><i--%>
-<%--                                                    class="fz-resume fz-salary"></i> 面议 </span><span--%>
-<%--                                                    class="prev-line"><i class="fz-resume fz-industry"></i>--%>
-<%--                                                        移动互联网·互联网·电子商务 </span><span class="prev-line"><i--%>
-<%--                                                    class="fz-resume fz-place"></i> 厦门 </span></div>--%>
+                                                    class="label-text"><i class="fz-resume fz-job"></i>
+                                                <label id="expectWork9">${resume.expectWork}</label>
+                                            </span></span></div>
                                         </div>
-<%--                                        <div class="op op-show">--%>
-<%--                                            <!----><a href="javascript:;" ka="user-resume-edit-expectation0"--%>
-<%--                                                      class="link-edit"><svg class="icon-svg">--%>
-<%--                                            <use xlink:href="#icon-svg-edit"></use>--%>
-<%--                                        </svg><span>编辑</span></a></div>--%>
+                                        <div class="op op-show">
+                                            <!----><a href="javascript:;" ka="user-resume-edit-expectation0"
+                                                      class="link-edit"><svg class="icon-svg">
+                                            <use xlink:href="#icon-svg-edit"></use>
+                                        </svg><span onclick="workUpdate()">编辑</span></a></div>
                                     </li>
                                 </ul>
                             </div>
@@ -517,12 +298,9 @@
                                     <div class="item-content">
                                         <div class="input-wrap input-wrap-text input-group input-group-with-append input-hide-icon"
                                                ka="resume_form_edit_name">
-                                            <!---->
-<%--                                            <!----><input autocomplete="on" spellcheck="false" type="text"--%>
-<%--                                                          placeholder="输入内容" maxlength="44" class="input">--%>
                                             <textarea autocomplete="on" spellcheck="false" class="input" style="height: 5%"
                                                       placeholder="输入内容" maxlength="50"
-                                                      id="expectWork" name="expectWork"></textarea>
+                                                      id="expectWork" name="expectWork" >${resume.expectWork}</textarea>
                                         </div>
                                         <!---->
                                         <!---->
@@ -546,36 +324,39 @@
                                 <h3 class="title"> 工作经历 <a href="javascript:;" ka="user-resume-add-workexp"
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
-                                </svg><span onclick="historyUpdate()">添加</span></a></h3>
+                                </svg><span onclick="historyInsert()">添加</span></a></h3>
                                 <c:if test="${not empty resume.workExperiences}">
                                     <c:forEach var="works" items="${resume.workExperiences}">
+                                        <div id="works${works.weId}">
+
                                         <ul>
                                             <li ka="user-resume-edit-workexp3" class="">
                                                 <div class="primary-info">
                                                     <!---->
                                                     <div class="info-text">
-                                                        <h4 class="name">公司：${works.companyName}</h4><span
-                                                            class="gray period">项目时间：${works.beginTime}-${works.endTime}</span>
+                                                        <h4 class="name">公司：<label id="companyName9">${works.companyName}</label></h4><span
+                                                            class="gray period">项目时间：<label id="beginTime9">${works.beginTime}</label>--<label id="endTime9"> ${works.endTime}</label></span>
                                                     </div>
-                                                    <h4><span class="prev-line">行业：${works.companyTrade}</span><span
-                                                            class="prev-line">担任角色：${works.companyPost}</span></h4>
+                                                    <h4><span class="prev-line">行业：<label id="companyTrade9">${works.companyTrade}</label></span><span
+                                                            class="prev-line">担任角色：<label id="companyPost9"> ${works.companyPost}</label></span></h4>
                                                     <div class="info-text" style="white-space: normal"><span
                                                             class="text-type">内容：</span>
-                                                        ${works.duties}</div>
-                                                    <div class="info-text"><span class="text-type">业绩：</span>${works.performance}</div>
+                                                        <label id="duties9"> ${works.duties}</label></div>
+                                                    <div class="info-text"><span class="text-type">业绩：</span><label id="performance9">${works.performance}</label> </div>
 <%--                                                    <div class="keywords"><span>java--%>
 <%--                                                        web</span><span>Java</span><span>jsp</span></div>--%>
                                                 </div>
                                                 <div class="op"><a href="javascript:;" ka="user-resume-del-workexp3"
                                                                    class="link-delete"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-delete"></use>
-                                                </svg><span>删除</span></a><a href="javascript:;"
+                                                </svg><span onclick="historyDelete(${works.weId})">删除</span></a><a href="javascript:;"
                                                                             ka="user-resume-edit-workexp3" class="link-edit"><svg
                                                         class="icon-svg">
                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                </svg><span>编辑</span></a></div>
+                                                </svg><span onclick="historyUpdate(${works.weId})">编辑</span></a></div>
                                             </li>
                                         </ul>
+                                        </div>
                                     </c:forEach>
                                 </c:if>
 
@@ -585,7 +366,8 @@
 
                         <div id="history-update" class="item-form display-hide">
                             <h3 class="title">编辑工作经历</h3>
-                            <form class="layui-form">
+                            <form class="layui-form" id="workInsert">
+                                <input type="hidden" id="weId" name="weId" >
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="width: 12%">公司</label>
                                     <div class="layui-input-inline">
@@ -631,10 +413,11 @@
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <div class="layui-input-block">
-                                        <input type="button" value="保存" onclick="historySave()" class="layui-btn">
+<%--                                    <div class="layui-input-inline">--%>
+                                        <input type="button" value="保存" id="historySave" onclick="historySave2()" class="layui-btn">
+                                        <input type="button" value="提交" id="historyCommit" onclick="historyCommit()" class="layui-btn">
                                         <input type="button" value="取消" onclick="historyQuit()" class="layui-btn">
-                                    </div>
+<%--                                    </div>--%>
                                 </div>
                             </form>
                         </div>
@@ -646,37 +429,39 @@
                                 <h3 class="title"> 项目经历 <a href="javascript:;" ka="user-resume-add-project"
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
-                                </svg><span onclick="projectUpdate()">添加</span></a></h3>
+                                </svg><span onclick="projectInsert()">添加</span></a></h3>
                                 <c:if test="${not empty resume.projectExperiences}">
                                     <c:forEach var="projects" items="${resume.projectExperiences}">
+                                        <form id="projects${projects.peId}">
                                         <ul>
                                             <li ka="user-resume-edit-project2" class="">
                                                 <div class="primary-info">
                                                     <!---->
                                                     <div class="info-text">
-                                                        <h4 class="name">项目名称：${projects.proName}</h4><span
-                                                            class="gray period">${projects.proBeginTime}-${projects.proEndTime}</span>
+                                                        <h4 class="name">项目名称：<label id="proName9">${projects.proName}</label> </h4><span
+                                                            class="gray period">项目时间：<label id="proBeginTime9">${projects.proBeginTime}</label> --<label id="proEndTime9">${projects.proEndTime}</label> </span>
                                                     </div>
                                                     <div class="info-text">
-                                                        <h4><span class="prev-line">担任职位：${projects.proPost}</span></h4>
+                                                        <h4><span class="prev-line">担任职位：<label id="proPost9">${projects.proPost}</label> </span></h4>
                                                     </div>
                                                     <div class="info-text"><span
-                                                            class="text-type">内容：</span>${projects.proDescription}
+                                                            class="text-type">内容：</span><label id="proDescription9">${projects.proDescription}</label>
                                                     </div>
                                                     <div class="info-text"><span
-                                                            class="text-type">业绩：</span>${projects.proPerformance}</div>
+                                                            class="text-type">业绩：</span><label id="proPerformance9">${projects.proPerformance}</label> </div>
                                                     <!---->
                                                 </div>
                                                 <div class="op"><a href="javascript:;" ka="user-resume-del-project2"
                                                                    class="link-delete"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-delete"></use>
-                                                </svg><span>删除</span></a><a href="javascript:;"
+                                                </svg><span onclick="projectDelete(${projects.peId})">删除</span></a><a href="javascript:;"
                                                                             ka="user-resume-edit-project2" class="link-edit"><svg
                                                         class="icon-svg">
                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                </svg><span >编辑</span></a></div>
+                                                </svg><span onclick="projectUpdate(${projects.peId})" >编辑</span></a></div>
                                             </li>
                                         </ul>
+                                        </form>
                                     </c:forEach>
                                 </c:if>
 
@@ -686,7 +471,8 @@
 
                         <div id="project-update" class="item-form display-hide">
                             <h3 class="title">编辑项目经历</h3>
-                            <form class="layui-form">
+                            <form class="layui-form" id="projectInsert">
+                                <input type="hidden" id="peId" name="peId" >
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="width: 12%">项目名称</label>
                                     <div class="layui-input-inline">
@@ -727,7 +513,8 @@
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <input type="button" value="保存" onclick="projectSave()" class="layui-btn">
+                                        <input type="button" value="保存" id="projectSave" onclick="projectSave()" class="layui-btn">
+                                        <input type="button" value="提交" id="projectCommit" onclick="projectCommit()" class="layui-btn">
                                         <input type="button" value="取消" onclick="projectQuit()" class="layui-btn">
                                     </div>
                                 </div>
@@ -741,31 +528,41 @@
                                 <h3 class="title"> 教育经历 <a href="javascript:;" ka="user-resume-add-eduexp"
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
-                                </svg><span onclick="educationtUpdate()">添加</span></a></h3>
+                                </svg><span onclick="educationtInsert()">添加</span></a></h3>
                                 <c:if test="${not empty resume.educationalBackgrounds}">
                                     <c:forEach var="educationalBackgrounds" items="${resume.educationalBackgrounds}">
+                                        <form id="educationalBackgrounds${educationalBackgrounds.ebId}">
                                         <ul>
                                             <li ka="user-resume-edit-eduexp0" class="">
                                                 <div class="primary-info">
                                                     <!---->
                                                     <div class="info-text">
-                                                        <h4 class="name">${educationalBackgrounds.ebSchool}</h4>
-                                                        <!----><span class="gray period">${educationalBackgrounds.schBeginTime}--${educationalBackgrounds.schEndTime}</span>
+                                                        <h4 class="name">学校：<label id="ebSchool9">${educationalBackgrounds.ebSchool}</label> </h4>
+                                                        <!----><span class="gray period">
+                                                            <label id="schBeginTime9">${educationalBackgrounds.schBeginTime}</label>
+                                                        --<label id="schEndTime9"> ${educationalBackgrounds.schEndTime}</label></span>
                                                     </div>
                                                     <div class="info-text">
-                                                        <h4><span class="prev-line">专业：${educationalBackgrounds.major}</span><span
-                                                                class="prev-line">学历：${educationalBackgrounds.ebEducation}
+                                                        <h4><span class="prev-line">专业：<label id="major9">${educationalBackgrounds.major}</label> </span><span
+                                                                class="prev-line">学历：<label id="ebEducation9">${educationalBackgrounds.ebEducation}</label>
                                                             <!----></span></h4>
+                                                    </div>
+                                                    <div class="info-text">
+                                                        <h4><span class="prev-line">在校经历：<label id="schExperience9">${educationalBackgrounds.schExperience}</label> </span></h4>
                                                     </div>
                                                     <!---->
                                                 </div>
-                                                <div class="op">
+                                                <div class="op"><a href="javascript:;" ka="user-resume-del-project2"
+                                                                   class="link-delete"><svg class="icon-svg">
+                                                    <use xlink:href="#icon-svg-delete"></use>
+                                                </svg><span onclick="educationtDelete(${educationalBackgrounds.ebId})">删除</span></a>
                                                     <!----><a href="javascript:;" ka="user-resume-edit-eduexp0"
                                                               class="link-edit"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                </svg><span>编辑</span></a></div>
+                                                </svg><span onclick="educationtUpdate(${educationalBackgrounds.ebId})">编辑</span></a></div>
                                             </li>
                                         </ul>
+                                        </form>
                                     </c:forEach>
                                 </c:if>
 
@@ -775,17 +572,18 @@
 
                         <div id="education-update" class="item-form display-hide">
                             <h3 class="title">编辑教育背景</h3>
-                            <form class="layui-form">
+                            <form class="layui-form" id="educationInsert">
+                                <input type="hidden" id="ebId" name="ebId" >
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"  style="width: 12%">学校</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="school2"  name="school" required  lay-verify="required" placeholder="请输入学校名称" autocomplete="off" class="layui-input">
+                                        <input type="text" id="ebSchool"  name="ebSchool" required  lay-verify="required" placeholder="请输入学校名称" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"  style="width: 12%">学历</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="education2" name="education" required  lay-verify="required" placeholder="请输入学历" autocomplete="off" class="layui-input">
+                                        <input type="text" id="ebEducation" name="ebEducation" required  lay-verify="required" placeholder="请输入学历" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -817,7 +615,8 @@
 
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <input type="button" value="保存" onclick="educationSave()" class="layui-btn">
+                                        <input type="button" value="保存" id="educationSave" onclick="educationSave()" class="layui-btn">
+                                        <input type="button" value="提交" id="educationCommit" onclick="educationCommit()" class="layui-btn">
                                         <input type="button" value="取消" onclick="educationQuit()" class="layui-btn">
                                     </div>
                                 </div>
@@ -1020,6 +819,46 @@
 
 
 <script>
+    //基本信息
+    var name;
+    var statu;
+    var clan;
+    var info;
+    var day;
+    var id;
+    var sion;
+    var school;
+    var address;
+    // 个人优势
+    var selfEva;
+    // 期望工作
+    var expectWork;
+    // 工作经历
+    var companyName;
+    var companyTrade;
+    var companyPost;
+    var beginTime;
+    var endTime;
+    var duties;
+    var performance;
+    // 项目经历
+    var proName;
+    var proPost;
+    var proBeginTime;
+    var proEndTime;
+    var proDescription;
+    var proPerformance;
+
+    // 教育背景
+    var ebSchool;
+    var major;
+    var ebEducation;
+    var schBeginTime;
+    var schEndTime;
+    var schExperience;
+
+    var kong=$('#kong').val()
+
     function selectFile() {
         let files = event.target.files;
         if (files.length === 0) return false;
@@ -1030,26 +869,119 @@
         }
     }
     // 基础信息
-    function userInfoUpdate() {
+    function userInfoUpdate(educationid) {
+        name=$('#realName').val()
+        clan=$('#clan').val()
+        statu=$('#politicalStatus').val()
+        info=$('#contactInfo').val()
+        day=$('#birthday').val()
+        id=$('#educationId').val()
+        sion=$('#profession').val()
+        school=$('#school').val()
+        address=$('#address').val()
+        $("#educationId").find("option[text='5']").attr("selected",true);
+
+
         $("#userinfo-show").hide()
         $("#userinfo-update").show()
+
+        // console.log(educationid)
+        // $('#education1').val(educationid);
+
     }
-    function userInfoSave() {
+    function userInfoSave(resumeId) {
         event.preventDefault()
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        // var resumeId=resumeId;
+        $.ajax({
+            url: 'userInfoUpdate',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: information,
+            processData:false,
+            contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('修改成功')
+
+
+                    $('#realName9').text($('#realName').val())
+                    $('#clan9').text($('#clan').val())
+                    $('#politicalStatus9').text($('#politicalStatus').val())
+                    $('#contactInfo9').text($('#contactInfo').val())
+                    $('#birthday9').text($('#birthday').val())
+                    $('#education9').text($("#educationId").find("option:selected").text())
+                    $('#profession9').text($('#profession').val())
+                    $('#school9').text($('#school').val())
+                    $('#address9').text($('#address').val())
+                    // location.href = path+"/jsp/user.jsp";
+                } else if (data == "lose") {
+                    layer.msg("修改失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
         $("#userinfo-show").show()
         $("#userinfo-update").hide()
+
+
     }
     function userInfoQuit() {
         event.preventDefault()
         $("#userinfo-show").show()
+        console.log(clan+"???"+name)
+
+        $('#realName').val(name)
+        $('#clan').val(clan)
+        $('#politicalStatus').val(statu)
+        $('#contactInfo').val(info)
+        $('#birthday').val(day)
+        $('#educationId').val(4)
+        $('#profession').val(sion)
+        $('#school').val(school)
+        $('#address').val(address)
+        layui.form.render('select')
+        console.log($('#educationId').val())
         $("#userinfo-update").hide()
     }
     // 期望工作
     function workUpdate() {
         $("#purpose").hide()
         $("#purpose-update").show()
+        expectWork=$('#expectWork9').text();
     }
     function workSave() {
+        expectWork=$('#expectWork').val();
+        // $('#expectWork').text(expectWork)
+        $.ajax({
+            url: 'workSave',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "expectWork="+expectWork,
+            processData:false,
+            contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('修改成功')
+                    $('#expectWork').text(expectWork)
+
+                } else if (data == "lose") {
+                    layer.msg("修改失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
         event.preventDefault()
         $("#purpose").show()
         $("#purpose-update").hide()
@@ -1058,13 +990,41 @@
         event.preventDefault()
         $("#purpose").show()
         $("#purpose-update").hide()
+        $('#expectWork').val(expectWork)
     }
-    // 自我评价
+    // 个人优势
     function summaryUpdate() {
         $("#summary").hide()
         $("#summary-update").show()
+        selfEva=$('#selfEva9').text();
     }
     function summarySave() {
+        selfEva=$('#selfEva').val();
+        $.ajax({
+            url: 'workSave',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "selfEva="+selfEva,
+            processData:false,
+            contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('修改成功')
+                    $('#selfEva').text(selfEva)
+
+                } else if (data == "lose") {
+                    layer.msg("修改失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
+
         event.preventDefault()
         $("#summary").show()
         $("#summary-update").hide()
@@ -1073,23 +1033,125 @@
         event.preventDefault()
         $("#summary").show()
         $("#summary-update").hide()
+        $('#selfEva').val(selfEva)
     }
     // 工作经历
-    function historyUpdate() {
+    function historyInsert() {
+        document.getElementById('historySave').hidden=true;
+        document.getElementById('historyCommit').hidden=false;
+        $("#history").hide()
+        $("#history-update").show()
+        $('#companyName').val(null);
+        $('#companyTrade').val(null);
+        $('#companyPost').val(null);
+        $('#beginTime').val(null);
+        $('#endTime').val(null);
+        $('#duties').val(null);
+        $('#performance').val(null);
+
+    }
+
+    function historyUpdate(weid) {
+        document.getElementById('historySave').hidden=false;
+        document.getElementById('historyCommit').hidden=true;
+        var worksid="works"+weid;
+        companyName=$('#'+worksid).find('#companyName9').text();
+        companyTrade=$('#'+worksid).find('#companyTrade9').text();
+        companyPost=$('#'+worksid).find('#companyPost9').text();
+        beginTime=$('#'+worksid).find('#beginTime9').text();
+        endTime=$('#'+worksid).find('#endTime9').text();
+        duties=$('#'+worksid).find('#duties9').text();
+        performance=$('#'+worksid).find('#performance9').text();
+
+
+        $('#weId').val(weid);
+        $('#companyName').val(companyName);
+        $('#companyTrade').val(companyTrade);
+        $('#companyPost').val(companyPost);
+        $('#beginTime').val(beginTime);
+        $('#endTime').val(endTime);
+        $('#duties').val(duties);
+        $('#performance').val(performance);
+
         $("#history").hide()
         $("#history-update").show()
     }
-    function historySave() {
+    function historyDelete(weid) {
+
+    }
+    function historyCommit() {
+        var  workInsert=new FormData(document.getElementById("workInsert"));
+        console.log(workInsert)
+        $.ajax({
+            url: 'historyCommit',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: workInsert,
+            processData:false,
+            contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('添加成功')
+                    location.reload()
+                } else if (data == "lose") {
+                    layer.msg("添加失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+    }
+    function historySave2() {
+
+        var  workInsert=new FormData(document.getElementById("workInsert"));
+        console.log(workInsert)
+        $.ajax({
+            url: 'historySave',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: workInsert,
+            processData:false,
+            contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('添加成功')
+                    location.reload()
+                } else if (data == "lose") {
+                    layer.msg("添加失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
+
         event.preventDefault()
         $("#history").show()
         $("#history-update").hide()
+
     }
     function historyQuit() {
         event.preventDefault()
         $("#history").show()
         $("#history-update").hide()
+
     }
     // 项目经历
+    function projectInsert(peid) {
+        $("#project").hide()
+        $("#project-update").show()
+    }
+    function projectDelete(peid) {
+
+    }
     function projectUpdate() {
         $("#project").hide()
         $("#project-update").show()
@@ -1105,7 +1167,14 @@
         $("#project-update").hide()
     }
     // 教育背景
-    function educationtUpdate() {
+    function educationtInsert() {
+        $("#education").hide()
+        $("#education-update").show()
+    }
+    function educationtDelete(weid) {
+
+    }
+    function educationtUpdate(weid) {
         $("#education").hide()
         $("#education-update").show()
     }

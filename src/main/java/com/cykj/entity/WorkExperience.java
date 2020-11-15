@@ -9,8 +9,8 @@ public class WorkExperience {
   private String companyName;
   private String companyTrade;
   private String companyPost;
-  private java.sql.Date beginTime;
-  private java.sql.Date endTime;
+  private String beginTime;
+  private String endTime;
   private String duties;
   private String performance;
 
@@ -53,23 +53,21 @@ public class WorkExperience {
   }
 
 
-  public java.sql.Date getBeginTime() {
+  public String getBeginTime() {
     return beginTime;
   }
 
-  public void setBeginTime(java.sql.Date beginTime) {
+  public void setBeginTime(String beginTime) {
     this.beginTime = beginTime;
   }
 
-
-  public java.sql.Date getEndTime() {
+  public String getEndTime() {
     return endTime;
   }
 
-  public void setEndTime(java.sql.Date endTime) {
+  public void setEndTime(String endTime) {
     this.endTime = endTime;
   }
-
 
   public String getDuties() {
     return duties;

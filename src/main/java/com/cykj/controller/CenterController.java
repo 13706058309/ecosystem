@@ -2,6 +2,7 @@ package com.cykj.controller;
 
 
 import com.cykj.entity.Resume;
+import com.cykj.entity.WorkExperience;
 import com.cykj.service.ResumeService;
 import com.cykj.service.impl.ResumeServiceImp;
 import com.google.gson.Gson;
@@ -35,5 +36,21 @@ public class CenterController {
     @RequestMapping("/accountSet")
     public String accountSet(){
         return "AccountSet";
+    }
+
+    @RequestMapping("/userInfoUpdate")
+    public @ResponseBody String userInfoUpdate(Resume resume,String education){
+        System.out.println(new Gson().toJson(resume));
+        return "succes";
+    }
+    @RequestMapping("/historyCommit")
+    public @ResponseBody String historyCommit(WorkExperience workExperience){
+        System.out.println(new Gson().toJson(workExperience));
+        return "succes";
+    }
+    @RequestMapping("/historySave")
+    public @ResponseBody String historySave(WorkExperience workExperience){
+        System.out.println(new Gson().toJson(workExperience));
+        return "succes";
     }
 }
