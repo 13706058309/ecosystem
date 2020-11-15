@@ -63,4 +63,25 @@
         </if>
     </select>
 
+    <select id="findTalent" parameterType="java.util.HashMap"  resultType="com.cykj.entity.Talent">
+        select * from talent where 1=1
+        <if test="school!=null">and school like concat('%',#{school},'%')</if>
+        <if test="profession!=null">and profession like concat('%',#{profession},'%')</if>
+        <if test="beginTime!=null">and entryTime >= #{beginTime} </if>
+        <if test="endTime!=null">and entryTime &lt;=  #{endTime} </if>
+        limit #{limit} offset #{offset}
+    </select>
+    <select id="findRecords" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from talent where 1=1
+        <if test="school!=null">and school like concat('%',#{school},'%')</if>
+        <if test="profession!=null">and profession like concat('%',#{profession},'%')</if>
+        <if test="beginTime!=null">and entryTime >= #{beginTime} </if>
+        <if test="endTime!=null">and entryTime &lt;=  #{endTime} </if>
+    </select>
+    <insert id="addTalent" parameterType="com.cykj.entity.Talent" >
+          insert into talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva)
+          values (#{talentName},#{school},#{birthday},#{profession},#{politicalStatus},
+          #{education},#{contactInfo},#{address},#{workExp},#{certificate},#{selfEva})
+        </insert>
+
 </mapper>

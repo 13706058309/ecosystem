@@ -16,4 +16,9 @@ public interface TalentMapper {
 
     List<Talent>  findUnviTalentOnPage(Map<String,Object> map);
     int findUnviTalentOnPageNum(Map<String,Object> map);
+
+    List<Talent> findTalent(Map<String,Object> map);
+    int findRecords(Map<String, Object> map);
+    int addTalent(Talent talent);
 }
+
