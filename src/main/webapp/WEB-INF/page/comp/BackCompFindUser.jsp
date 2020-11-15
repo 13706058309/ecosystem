@@ -58,8 +58,6 @@
 <script>
     var layer;
     var path = $("#path").val();
-    var docID;
-    var objs;
     var index;
     var form;
     layui.use(['laydate','layer','form'],function () {
@@ -67,25 +65,6 @@
         form.render();
         var laydate = layui.laydate;
         layer = layui.layer;
-    })
-
-    $(function () {
-        $.ajax({
-            url:path+"/docConfig/findAll",
-            type:"post",
-            typeData:"text",
-            success:function (data) {
-                var arr = JSON.parse(data);
-                $("#type").empty();
-                var $sel = $("<option>"+'请选择'+"</option>");
-                $("#type").append($sel)
-                for(var i=0;i<arr.length;i++){
-                    var $option = $("<option>"+arr[i].doc_Type+"</option>");
-                    $("#type").append($option);
-                }
-                form.render();
-            },
-        });
     })
 
     layui.use('table',function () {

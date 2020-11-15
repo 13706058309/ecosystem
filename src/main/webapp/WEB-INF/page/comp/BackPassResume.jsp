@@ -75,10 +75,8 @@
 </div>
 
 <table id="userTable" lay-filter="test"></table>
-<div class="layui-input-inline" style="margin-left: 50%">
-    <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" >返回</button>
-</div>
-<div id="changeDiv" style="display: none;padding: 3%">
+
+<div id="detailDiv" style="display: none;padding: 3%">
     <table class="layui-table">
         <tr><td colspan="6">简历详情</td></tr>
         <tr >
@@ -290,7 +288,7 @@
                     type:1,
                     area:['80%','90%'],
                     offset: ['5%', '10%'],
-                    content:$("#changeDiv"),
+                    content:$("#detailDiv"),
                 })
             }
         });

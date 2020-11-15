@@ -115,8 +115,6 @@
                         },
                     })
                 })
-
-
             } else if(obj.event === 'offLine'){
                 layer.confirm('是否下线岗位',{
                     btn:['下线','取消'],

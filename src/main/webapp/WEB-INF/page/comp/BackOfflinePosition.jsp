@@ -57,7 +57,7 @@
         </div>
     <table id="userTable" lay-filter="test"></table>
 
-<%--<button onclick="oper()">dfds</button>--%>
+<button onclick="oper()">dfds</button>
 <div id="changeDiv" style="display: none;margin-top: 3%">
     <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
         <div class="layui-form-item" >
@@ -197,7 +197,7 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">修改</button>
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">退出</button>
+                <button type="" class="layui-btn" lay-submit="" lay-filter="demo1">退出</button>
             </div>
         </div>
     </form>
@@ -215,6 +215,13 @@
         form.render();
         var laydate = layui.laydate;
         layer = layui.layer;
+        laydate.render({
+            elem:'#beginTime'
+        });
+
+        laydate.render({
+            elem:'#endTime'
+        });
     })
 
     layui.use('table',function () {

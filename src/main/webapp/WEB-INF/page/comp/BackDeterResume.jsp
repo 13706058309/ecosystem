@@ -62,65 +62,59 @@
     </div>
 </div>
 <table id="userTable" lay-filter="test"></table>
-
-<div id="resumesDetailDiv" style="display: none">
+<div id="detailDiv" style="display: none;padding: 3%">
     <table class="layui-table">
+        <tr><td colspan="6">简历详情</td></tr>
         <tr >
             <td width="19%">姓名</td>
-            <td width="19%">2</td>
+            <td width="19%" id="dName">2</td>
             <td width="19%">民族</td>
-            <td width="19%">4</td>
-            <td rowspan="4" colspan="2"></td>
+            <td width="19%" id="dClen">4</td>
+            <td rowspan="5" colspan="2"></td>
         </tr>
         <tr >
             <td>政治面貌</td>
-            <td>2</td>
+            <td id="dPolistatu">2</td>
             <td>出生年月日</td>
-            <td>4</td>
+            <td id="dBir">4</td>
+        </tr>
+        <tr >
+            <td>性别</td>
+            <td id="dSex">2</td>
+            <td>工作年限</td>
+            <td id="dWorkYear">4</td>
+        </tr>
+        <tr >
+            <td>学历</td>
+            <td id="dEdu">2</td>
+            <td>专业</td>
+            <td id="dProf">4</td>
         </tr>
         <tr >
             <td>毕业学校</td>
-            <td>2</td>
-            <td>工作年限</td>
-            <td>4</td>
+            <td id="DSchool">2</td>
+            <td>就业状态</td>
+            <td id="jobStand"></td>
         </tr>
         <tr >
-            <td>学历</td>
-            <td>2</td>
-            <td>专业</td>
-            <td>4</td>
-        </tr>
-        <tr >
-            <td>学历</td>
-            <td>2</td>
-            <td>专业</td>
-            <td>4</td>
+            <td>期望工作</td>
+            <td colspan="2" id="DHwork">2</td>
+            <td>意向行业</td>
+            <td colspan="2" id="DHIndustry">4</td>
         </tr>
         <tr >
             <td>地址</td>
-            <td colspan="2">2</td>
+            <td colspan="2" id="DAddress">2</td>
             <td>联系方式</td>
-            <td colspan="2">4</td>
+            <td colspan="2" id="DRealInfo">4</td>
         </tr>
-        <tr>
-            <td rowspan="1">教育背景</td>
-            <td colspan="5"> </td>
-        </tr>
-
-        <tr>
-            <td rowspan="1">工作经验</td>
-            <td colspan="5"> </td>
-        </tr>
-
-        <tr>
-            <td rowspan="1">项目经验</td>
-            <td colspan="5"> </td>
-        </tr>
-
         <tr>
             <td rowspan="1">自我评价</td>
-            <td colspan="5"> </td>
+            <td colspan="5" id="DselfEva" > </td>
         </tr>
+        <tbody id="tbody">
+
+        </tbody>
 
     </table>
 </div>
@@ -231,6 +225,8 @@
                         layer.close(index);
                     }
                 })
+            }else if(obj.event === 'detail'){
+                showDetail(data);
             }
         });
 
