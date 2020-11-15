@@ -75,6 +75,11 @@ public class TestController {
         return "comp/BackUnPassResume";
     }
 
+    @RequestMapping("/pass")
+    public String pass(){
+        return "comp/BackPassResume";
+    }
+
     @RequestMapping("/deterResume")
     public String deterResume(){
         return "comp/BackDeterResume";

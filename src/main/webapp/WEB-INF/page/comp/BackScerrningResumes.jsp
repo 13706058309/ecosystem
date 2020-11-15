@@ -155,8 +155,6 @@
 <script>
     var layer;
     var path = $("#path").val();
-    var docID;
-    var objs;
     var index;
     var form;
     layui.use(['laydate','layer','form'],function () {
@@ -187,7 +185,7 @@
             id: 'testReload',
             cols:[[
                 {type: 'checkbox', fixed: 'left'},
-                {field:'realName',title:'姓名'},
+                {field:'realName',title:'姓名', fixed: 'left'},
                 {field:'isGraduate',title:'是否应届生',templet:function (d) {
                         if(d.isGraduate==1){
                             res = "是";

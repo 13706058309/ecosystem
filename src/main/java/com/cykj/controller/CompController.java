@@ -270,12 +270,28 @@ public class CompController {
         return n+"";
     }
 
+    //删除已通知面试的单个简历
+    @RequestMapping("/delPassResumeOne")
+    public @ResponseBody String delPassResumeOne(int deliID){
+        int n = backCompService.changeDeliStand(deliID,21);
+        return n+"";
+    }
+
     //批量删除简历
     @RequestMapping("/delResume")
     public @ResponseBody String delResume(String msg){
 
         List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
         int successNum = backCompService.delResume(list,9);
+        return successNum+"";
+    }
+
+    //批量删除通知面试简历
+    @RequestMapping("/delPassResume")
+    public @ResponseBody String delPassResume(String msg){
+
+        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        int successNum = backCompService.changeDeliStand(list,21);
         return successNum+"";
     }
 
@@ -308,5 +324,65 @@ public class CompController {
     public @ResponseBody String passResume(int deliID,String msg){
         int n = backCompService.passResume(deliID,12,msg);
         return n+"";
+    }
+
+    //企业查询收到的简历简历
+    @RequestMapping("/findWaitResumes")
+    public @ResponseBody String findWaitResumes(PageBean pageBean, String postName,String evdu){
+        Map<String,Object> map = new HashMap<>();
+//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
+        if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
+            map.put("beginTime",pageBean.getBeginTime());
+        }
+        if(pageBean.getEndTime()!=null&&!pageBean.getEndTime().equals("")){
+            map.put("endTime",pageBean.getEndTime());
+        }
+        if(postName!=null&&!postName.equals("")){
+            map.put("postName","%"+postName+"%");
+        }
+
+        if(evdu!=null&&!evdu.equals("")&&!evdu.equals("0")){
+            map.put("evdu",evdu);
+        }
+
+        map.put("limit",pageBean.getLimit());
+        map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
+        int compID = 3;
+        map.put("compID",compID);
+        map.put("standID",20);
+        TableInfo tableInfo = backCompService.findAllResume(map);
+
+        return new Gson().toJson(tableInfo);
+    }
+
+    //企业查询通知面试简历
+    @RequestMapping("/findPassResumes")
+    public @ResponseBody String findPassResumes(PageBean pageBean, String postName,String userName){
+        Map<String,Object> map = new HashMap<>();
+//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
+        if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
+            map.put("beginTime",pageBean.getBeginTime());
+        }
+        if(pageBean.getEndTime()!=null&&!pageBean.getEndTime().equals("")){
+            map.put("endTime",pageBean.getEndTime());
+        }
+        if(postName!=null&&!postName.equals("")){
+            map.put("postName","%"+postName+"%");
+        }
+
+        if(userName!=null&&!userName.equals("")){
+            map.put("userName","%"+userName+"%");
+        }
+
+        map.put("limit",pageBean.getLimit());
+        map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
+        int compID = 3;
+        map.put("compID",compID);
+        map.put("standID",12);
+        TableInfo tableInfo = backCompService.findAllResume(map);
+
+        return new Gson().toJson(tableInfo);
     }
 }

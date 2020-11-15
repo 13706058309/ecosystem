@@ -33,6 +33,9 @@
         <if test="userName!=null">
             and r.realName >= #{userName}
         </if>
+        <if test="evdu!=null">
+            and e.educationID = #{evdu}
+        </if>
 
         order by deliTime desc limit #{offset}, #{limit}
     </select>
@@ -49,6 +52,7 @@
     <result property="educationId" column="educationId"></result>
     <result property="profession" column="profession"></result>
     <result property="wrokYear" column="wrokYear"></result>
+        <result property="qualiCer" column="qualiCer"></result>
     <result property="selfEva" column="selfEva"></result>
     <result property="isShow" column="isShow"></result>
     <result property="address" column="address"></result>
@@ -131,6 +135,10 @@
 
         <if test="userName!=null">
             and r.realName like #{userName}
+        </if>
+
+        <if test="evdu!=null">
+            and e.educationID = #{evdu}
         </if>
 
     </select>
