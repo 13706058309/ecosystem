@@ -1,6 +1,7 @@
 package com.cykj.controller;
 
 
+import com.cykj.entity.BackUserNum;
 import com.cykj.entity.TableInfo;
 import com.cykj.entity.Talent;
 import com.cykj.service.TalentService;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.*;
@@ -83,8 +85,6 @@ public class TalentController {
 return "talentList";
     }
 
-
-
     public String readWord(String path) {
         String buffer = "";
         try {
@@ -108,11 +108,6 @@ return "talentList";
 
         return buffer;
     }
-
-
-
-
-
 
     @RequestMapping("/talentList")
     public String userList(HttpServletRequest request) throws UnsupportedEncodingException {
@@ -172,5 +167,59 @@ return "talentList";
 
     }
 
+    @RequestMapping("/backUserNumMonth")
+    public String  backUserNumMonth(HttpServletRequest request, HttpServletResponse response)  {
+        List<BackUserNum> list=talentService.backUserNumMonth();
+        request.setAttribute("list",list);
+        String s="本月新增企业：";
+        request.setAttribute("s",s);
+
+        return "backUserNum";
+    }
+    @RequestMapping("/backUserNumWeek")
+    public String  backUserNumWeek(HttpServletRequest request, HttpServletResponse response)  {
+        List<BackUserNum> list=talentService.backUserNumWeek();
+        request.setAttribute("list",list);
+        String s="本周新增企业：";
+        request.setAttribute("s",s);
+
+        return "backUserNum";
+    }
+    @RequestMapping("/backUserNumHalfYear")
+    public String  backUserNumHalfYear(HttpServletRequest request, HttpServletResponse response)  {
+        List<BackUserNum> list=talentService.backUserNumHalfYear();
+        request.setAttribute("list",list);
+        String s="近半年新增企业：";
+        request.setAttribute("s",s);
+
+        return "backUserNum";
+    }
+    @RequestMapping("/userNumMonth")
+    public String  userNumMonth(HttpServletRequest request, HttpServletResponse response)  {
+        List<BackUserNum> list=talentService.userNumMonth();
+        request.setAttribute("list",list);
+        String s="本月新增用户：";
+        request.setAttribute("s",s);
+
+        return "UserNum";
+    }
+    @RequestMapping("/userNumWeek")
+    public String  userNumWeek(HttpServletRequest request, HttpServletResponse response)  {
+        List<BackUserNum> list=talentService.userNumWeek();
+        request.setAttribute("list",list);
+        String s="本周新增用户：";
+        request.setAttribute("s",s);
+
+        return "UserNum";
+    }
+    @RequestMapping("/userNumHalfYear")
+    public String  userNumHalfYear(HttpServletRequest request, HttpServletResponse response)  {
+        List<BackUserNum> list=talentService.userNumHalfYear();
+        request.setAttribute("list",list);
+        String s="近半年新增用户：";
+        request.setAttribute("s",s);
+
+        return "UserNum";
+    }
 
 }

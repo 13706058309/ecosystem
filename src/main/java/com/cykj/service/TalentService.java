@@ -2,6 +2,7 @@ package com.cykj.service;
 
 
 
+import com.cykj.entity.BackUserNum;
 import com.cykj.entity.Talent;
 
 import java.util.List;
@@ -14,4 +15,18 @@ public interface TalentService {
 
 
     int addTalent(Talent talent);
+
+
+    List<BackUserNum> backUserNumMonth();
+
+    List<BackUserNum> backUserNumWeek();
+
+
+    List<BackUserNum> backUserNumHalfYear();
+    List<BackUserNum> userNumMonth();
+
+    List<BackUserNum> userNumWeek();
+
+
+    List<BackUserNum> userNumHalfYear();
 }
