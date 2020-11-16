@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import java.util.List;
+
 /**
  * 后台用户
  */
@@ -26,7 +28,9 @@ public class BackUser {
   private String stateId;//状态
   private Parameter states;//状态实体类 （iD 状态名称  类型）
   private String bRegTime;//注册时间
-
+  private String coreValue;//企业核心价值
+  private String compName;
+  private List<Industry> industrys;
   public BackUser() {
   }
 
@@ -227,5 +231,29 @@ public class BackUser {
 
   public void setbRegTime(String bRegTime) {
     this.bRegTime = bRegTime;
+  }
+
+  public String getCoreValue() {
+    return coreValue;
+  }
+
+  public void setCoreValue(String coreValue) {
+    this.coreValue = coreValue;
+  }
+
+  public List<Industry> getIndustrys() {
+    return industrys;
+  }
+
+  public void setIndustrys(List<Industry> industrys) {
+    this.industrys = industrys;
+  }
+
+  public String getCompName() {
+    return compName;
+  }
+
+  public void setCompName(String compName) {
+    this.compName = compName;
   }
 }

@@ -11,6 +11,7 @@
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackUnPassResume.css">
+<script src="${pageContext.request.contextPath}/js/comp/Common.js"></script>
 
 <html>
 <head>
@@ -194,6 +195,7 @@
         table.on('tool(test)', function(obj){
             var data = obj.data;
             var deliID = data.delivery.deliveryId;
+            var resumeID = data.resumeId;
 
             if(obj.event === 'refuse'){
                 layer.confirm('是否拒绝选中的简历',{
@@ -279,6 +281,7 @@
                 })
             }else if(obj.event === 'detail'){
                 showDetail(data);
+                findDetailResume(resumeID)
             }
         });
 

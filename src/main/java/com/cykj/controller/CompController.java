@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -395,11 +398,90 @@ public class CompController {
     public @ResponseBody String changePostPosition(PostPosition postPosition){
         return backCompService.updatePostPosition(postPosition);
     }
-
+    //企业修改发布岗位的岗位类型
     @RequestMapping("/changePostID")
     public @ResponseBody String changePostID(PostPosition postPosition){
         String msg = backCompService.updatePostPosition(postPosition);
         String postName = backCompService.findPostName((int) postPosition.getPostId());
         return msg.equals("1")? postName:"2";
     }
+
+    @RequestMapping("/compFindResume")
+    public @ResponseBody String compFindResume(PageBean pageBean,Resume resume){
+        Map<String,Object> map = new HashMap<>();
+//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
+
+        if(resume.getEducationId()!=0){
+            map.put("educationId",resume.getEducationId());
+        }
+        if(resume.getWrokYear()!=0){
+            map.put("wrokYear",resume.getWrokYear());
+        }
+        if(resume.getIsGraduate()!=0){
+            map.put("isGraduate",resume.getIsGraduate());
+        }
+        if(resume.getProfession()!=null&&!resume.getProfession().equals("")){
+            map.put("profession","%"+resume.getProfession()+"%");
+        }
+        if(resume.getSex()!=null&&!resume.getSex().equals("不限")){
+            map.put("sex",resume.getSex());
+        }
+        map.put("limit",pageBean.getLimit());
+        map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
+
+        TableInfo tableInfo = backCompService.findUserResume(map);
+
+        return new Gson().toJson(tableInfo);
+    }
+    //查找简历详细信息
+    @RequestMapping("/findResumeDetail")
+    public @ResponseBody String findResumeDetail(int resumeID){
+        return new Gson().toJson(backCompService.findResumeDetail(resumeID));
+    }
+    //进入企业信息页面
+    @RequestMapping("/testComps")
+    public String test(HttpServletRequest request, HttpServletResponse response){
+        BackUser backUser = backCompService.findCompByID(3);
+        request.setAttribute("comp",backUser);
+        return "comp/BackCompInfo";
+    }
+
+    @RequestMapping("/changeCompInfo")
+    public @ResponseBody String changeCompInfo(BackUser backUser, HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
+//        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = bUser.getbUserId();
+        map.put("compID",3);
+        if(backUser.getInfoIntr()!=null){
+            map.put("infoIntr",backUser.getInfoIntr());
+        }
+
+        if(backUser.getAddress()!=null){
+            map.put("address",backUser.getAddress());
+        }
+
+        if(backUser.getCoreValue()!=null){
+            map.put("coreValue",backUser.getCoreValue());
+        }
+
+        if(backUser.getScale()!=null){
+            map.put("scale",backUser.getScale());
+        }
+
+        if(backUser.getHomePage()!=null){
+            map.put("homePage",backUser.getHomePage());
+        }
+
+        if(backUser.getFinanStage()!=null){
+            map.put("finanStage",backUser.getFinanStage());
+        }
+
+        if(backUser.getProduct()!=null){
+            map.put("product",backUser.getProduct());
+        }
+
+        return backCompService.changeCompInfo(map);
+    }
+
 }

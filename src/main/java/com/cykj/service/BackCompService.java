@@ -45,4 +45,12 @@ public interface BackCompService {
     String findPostName(int postID);
     //修改企业发布岗位信息
     String updatePostPosition(PostPosition postPosition);
+    //企业查询用户简历
+    TableInfo findUserResume(Map<String,Object> map);
+    //查找简历具体信息
+    Resume findResumeDetail(int resumeID);
+    //查找公司完整信息
+    BackUser findCompByID(int compID);
+    //修改公司信息
+    String changeCompInfo(Map<String,Object> map);
 }

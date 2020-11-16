@@ -3,5 +3,70 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.BackUserMapper">
+    <select id="findCompByID" parameterType="int" resultMap="findBackUser">
+        select b.*,i.industryname from backUser b, industry i, comp_industry ci
+        where b.buserid = ci.compid and i.industryid = ci.industryid and b.buserid = #{compID}
+    </select>
+
+    <resultMap id="findBackUser" type="com.cykj.entity.BackUser">
+        <id property="bUserId" column="bUserId"></id>
+        <result property="bUserName" column="bUserName"></result>
+        <result property="account" column="account"></result>
+        <result property="pwd" column="pwd"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="infoIntr" column="infoIntr"></result>
+        <result property="busiLice" column="busiLice"></result>
+        <result property="email" column="email"></result>
+        <result property="address" column="address"></result>
+        <result property="scale" column="scale"></result>
+        <result property="city" column="city"></result>
+        <result property="province" column="province"></result>
+        <result property="homePage" column="homePage"></result>
+        <result property="finanStage" column="finanStage"></result>
+        <result property="product" column="product"></result>
+        <result property="logp" column="logp"></result>
+        <result property="roleId" column="roleId"></result>
+        <result property="bRegTime" column="bRegTime"></result>
+        <result property="coreValue" column="coreValue"></result>
+        <result property="compName" column="compName"></result>
+
+        <collection property="industrys" ofType="com.cykj.entity.Industry">
+            <id property="industryId" column="industryId"></id>
+            <result property="industryName" column="industryName"></result>
+        </collection>
+    </resultMap>
+
+    <update id="changeCompInfo" parameterType="java.util.Map">
+        update backUser
+        <set>
+            <if test="infoIntr!=null">
+                infoIntr = #{infoIntr},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+
+            <if test="coreValue!=null">
+                coreValue = #{coreValue},
+            </if>
+
+            <if test="scale!=null">
+                scale = #{scale},
+            </if>
+
+            <if test="homePage!=null">
+                homePage = #{homePage},
+            </if>
+
+            <if test="finanStage!=null">
+                finanStage = #{finanStage},
+            </if>
+
+            <if test="product!=null">
+                product = #{product},
+            </if>
+        </set>
+        where bUserId = #{compID}
+    </update>
 
 </mapper>

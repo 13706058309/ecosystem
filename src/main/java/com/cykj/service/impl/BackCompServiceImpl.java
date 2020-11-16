@@ -42,6 +42,10 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Resource
     private DeliveryMapper deliveryMapper;
+
+    @Resource
+    private BackUserMapper backUserMapper;
+
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
         List<Talent> unviTalentOnPage = talentMapper.findUnviTalentOnPage(map);
@@ -249,5 +253,30 @@ public class BackCompServiceImpl implements BackCompService {
         }
         int n = postPositionMapper.updatePostPosition(map);
         return n>0 ? "1":"2";
+    }
+
+    @Override
+    public TableInfo findUserResume(Map<String, Object> map) {
+        List<Resume> resumes = resumeMapper.compFindResume(map);
+        int num = resumeMapper.compFindResumeNum(map);
+        TableInfo tableInfo = new TableInfo(0,"企业查找简历",num,resumes );
+        return tableInfo;
+    }
+
+    @Override
+    public Resume findResumeDetail(int resumeID) {
+        return resumeMapper.findResumeDetail(resumeID);
+    }
+    //获取公司的详细信息
+    @Override
+    public BackUser findCompByID(int compID) {
+        BackUser compByID = backUserMapper.findCompByID(compID);
+        return compByID;
+    }
+
+    @Override
+    public String changeCompInfo(Map<String, Object> map) {
+        int n = backUserMapper.changeCompInfo(map);
+        return n>0? "1":"2";
     }
 }

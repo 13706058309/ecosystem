@@ -158,6 +158,7 @@
         table.on('tool(test)', function(obj){
             var data = obj.data;
             var deliID = data.delivery.deliveryId;
+            var resumeID = data.resumeId;
             if(obj.event === 'del'){
                 layer.confirm('是否删除选中的简历',{
                     btn:['删除','取消'],
@@ -201,6 +202,7 @@
                 })
             }else if(obj.event === 'detail'){
                 showDetail(data);
+                findDetailResume(resumeID);
             }
         });
 
