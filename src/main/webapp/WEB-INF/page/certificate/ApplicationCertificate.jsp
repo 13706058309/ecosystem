@@ -128,7 +128,7 @@
             layer.msg('请同意协议', {icon: 5});
         }else if (username!=""||usernumber!=""||phone!=""||chenkxieyi.checked==true){
             $.ajax({
-                url:  "",//请求服务端地址值
+                url:  "upupzhengshu",//请求服务端地址值
                 async: true,
                 type: "post",//请求方式
                 data: "username=" + username+"&usernumber="+usernumber+"&phone="+phone+"&fileid="+fileid,
@@ -144,7 +144,7 @@
                         layer.msg('当前处于开发阶段，请勿重复申请', {icon: 5});
                     }else if (msg=='success'){
                        //跳转支付界面
-
+                        alert("2342453242");
                     }
                 }
             });

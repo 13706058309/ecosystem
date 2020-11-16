@@ -121,13 +121,15 @@ public class CertificateController {
 
 
     //跳转申请证书后判断
-    @RequestMapping("/zhengshupanduaan")
-    public @ResponseBody String querenzhengshu(HttpServletRequest request,String username,String usernumber,int phone,long fileid) throws ParseException {
+    @RequestMapping("/upupzhengshu")
+    public @ResponseBody String querenzhengshu(HttpServletRequest request,String username,String usernumber,String phone,String fileid) throws ParseException {
         String msg = "";
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
         userInfo.setUserId(1);
+        int phone1 = Integer.parseInt(phone);
+        long fileid1 = Long.parseLong(fileid);
         String dangqiantime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        CerRecord cerRecord = cerRecordService.findcerRecordid(userInfo.getUserId(),fileid);
+        CerRecord cerRecord = cerRecordService.findcerRecordid(userInfo.getUserId(),fileid1);
         if (cerRecord!=null){
             if (cerRecord.getStateId()==22){
                 msg="22";
@@ -148,14 +150,15 @@ public class CertificateController {
                     //创建一条数据
                     CerRecord cerRecord1 = new CerRecord();
                     cerRecord1.setStateId(userInfo.getUserId());
-                    cerRecord1.setFileId(fileid);
+                    cerRecord1.setFileId(fileid1);
                     cerRecord1.setStateId(23);
                     cerRecord1.setTrueName(username);
                     cerRecord1.setIdNumber(usernumber);
                     cerRecord1.setBeginTime(dangqiantime);
-                    cerRecord1.setCerPhone(phone);
+                    cerRecord1.setCerPhone(phone1);
                     int n = cerRecordService.insertCerRecord(cerRecord1);
                     if (n>0){
+                        System.out.println("加入申请记录成功");
                         msg="success";
                     }
                 }
@@ -166,14 +169,15 @@ public class CertificateController {
             //创建一条数据
             CerRecord cerRecord2 = new CerRecord();
             cerRecord2.setStateId(userInfo.getUserId());
-            cerRecord2.setFileId(fileid);
+            cerRecord2.setFileId(fileid1);
             cerRecord2.setStateId(23);
             cerRecord2.setTrueName(username);
             cerRecord2.setIdNumber(usernumber);
             cerRecord2.setBeginTime(dangqiantime);
-            cerRecord2.setCerPhone(phone);
+            cerRecord2.setCerPhone(phone1);
             int n = cerRecordService.insertCerRecord(cerRecord2);
             if (n>0){
+                System.out.println("加入申请记录成功");
                 msg="success";
             }
         }
