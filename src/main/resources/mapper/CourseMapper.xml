@@ -3,7 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CourseMapper">
-    <select id="findCourse"  resultType="com.cykj.entity.Course">
-        select courseId,fieldId,courseName,uploadTime  from course ;
+    <select id="findCourseOnPage" parameterType="java.util.HashMap" resultMap="results">
+        select * from course where courseName like concat('%',#{courseName},'%')
+        limit #{offset},#{limit}
     </select>
+    <resultMap id="results" type="com.cykj.entity.Course">
+        <id property="courseId" column="courseId"></id>
+        <result property="fieldId" column="fieldId"></result>
+        <result property="courseName" column="courseName"></result>
+        <result property="uploadTime" column="uploadTime"></result>
+    </resultMap>
+    
+    <select id="findNumOnPage" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from course where 1=1 and courseName like concat('%',#{courseName},'%')
+    </select>
+<!--    <select id="findCourse"  resultType="com.cykj.entity.Course">-->
+<!--        select courseId,fieldId,courseName,uploadTime  from course ;-->
+<!--    </select>-->
+<!--    <select id="search" parameterType="java.lang.String" resultType="com.cykj.entity.Course">-->
+<!--        select courseId,fieldId,courseName,uploadTime  from course where courseName like concat('%',#{courseName},'%')-->
+<!--    </select>-->
 </mapper>

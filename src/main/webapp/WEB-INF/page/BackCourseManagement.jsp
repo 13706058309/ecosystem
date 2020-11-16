@@ -15,9 +15,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 </head>
 <style>
-    #input_search{/*这是搜索栏样式*/
-        float: left;
-    }
+    /*#input_search{!*这是搜索栏样式*!*/
+    /*    float: left;*/
+    /*}*/
+
+        #courseName{/*这是搜索栏样式*/
+            float: left;
+        }
     #button_search{/*这是搜索按钮样式*/
         float: left;
     }
@@ -174,15 +178,41 @@
             });
                 return false;
             });
+
+            form.on('submit(search)', function(data){
+
+                console.log(data);
+                var input_search = $("#input_search").val();
+                console.log(input_search);
+
+                $.ajax({
+                    type:"POST",
+                    dataType: "json",//预期服务器返回的数据类型
+                    url: "${pageContext.request.contextPath}/txjtext/findCourse" ,//url
+                    data: "courseName="+input_search,
+                    // error:function () {
+                    //     alert("异常")
+                    // },
+                    // success:function () {
+                    //     alert("成功")
+                    //
+                    // },
+
+
+
+                })
+
+            });
         });
     })
 </script>
 
 <script type="text/html" id="toolbarDemo">
+    <div class="demoTable" style="margin-left: 20%">
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <input id="input_search" class="layui-input " type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入课程名"  style="width: 200px">
-            <input id="button_search" class="layui-btn layui-btn-warm" type="button" lay-submit=""  value="搜索">
+            <input id="courseName" class="layui-input " type="text" name="courseName" lay-verify="title" autocomplete="off" placeholder="请输入课程名"  style="width: 200px">
+            <input id="button_search" class="layui-btn layui-btn-warm" type="button" lay-submit lay-filter="search"  data-type="reload" value="搜索">
             <div id="dropDownMenu" class="layui-input-block" style="width: 200px">
                 <select name="city" ><%--lay-verify="required"--%>
                     <option value=""></option>
@@ -209,6 +239,7 @@
             </button>
         </div>
     </div>
+    </div>
 </script>
 
 <script>
@@ -218,42 +249,59 @@
         //第一个实例
         table.render({
             elem: '#demo'
-            ,height: 312
+            ,height: 500
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: []//取消头部工具栏右侧的按钮
             ,url: '../txjtext/findCourse' //数据接口
             ,page: true //开启分页
+            , limits: [2,8]
+            , limit: 4
+            ,id:'testReload'
             ,cols: [[ //表头
                 {field: 'courseId', title: '序号', width:80, sort: true, fixed: 'left'}
-                ,{field: 'fieldId', title: '课程所在领域', width:130}
+                ,{field: 'fieldId   ', title: '课程所在领域', width:130}
                 ,{field: 'courseName', title: '课程名称', width:130}
                 ,{field: 'uploadTime', title: '上传时间', width:130,sort: true}
                 ,{field: '', title: '操作', width: 177,toolbar:'#barDemo'}
             ]]
 
         });
+        var $ = layui.$, active = {
+            reload: function(){
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    },
+                    where: {
+                        courseName: $('#courseName').val(),
+                    }
+                }, 'data');
+            }
+        };
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
 
         //监听行工具事件
-        table.on('tool(test)', function(obj){
-            var data = obj.data;
-            //console.log(obj)
-            if(obj.event === 'del'){
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'detail'){
+                layer.msg('查看操作');
+            } else if(layEvent === 'del'){
                 layer.confirm('真的删除行么', function(index){
-                    obj.del();
+                    obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
+                    //向服务端发送删除指令
                 });
-            } else if(obj.event === 'edit'){
-                layer.prompt({
-                    formType: 2
-                    ,value: data.email
-                }, function(value, index){
-                    obj.update({
-                        email: value
-                    });
-                    layer.close(index);
-                });
+            } else if(layEvent === 'edit'){
+                layer.msg('编辑操作');
             }
         });
+
+
 
     });
 </script>
