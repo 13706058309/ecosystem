@@ -4,4 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.PositionMapper">
 
+    <select id="findPost" resultType="com.cykj.entity.Position">
+        select postName,postId from position where departId = #{departId}
+    </select>
 </mapper>

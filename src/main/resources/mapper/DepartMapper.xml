@@ -3,5 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.DepartMapper">
-
+    <select id="findDepart" resultType="com.cykj.entity.Depart">
+        select departName,departId from depart where industryID = #{industryId};
+    </select>
 </mapper>

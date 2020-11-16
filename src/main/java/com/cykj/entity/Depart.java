@@ -9,6 +9,14 @@ public class Depart {
   private long industryId;
   private String departName;
 
+  @Override
+  public String toString() {
+    return "Depart{" +
+            "departId=" + departId +
+            ", industryId=" + industryId +
+            ", departName='" + departName + '\'' +
+            '}';
+  }
 
   public long getDepartId() {
     return departId;
