@@ -49,6 +49,21 @@ public class ProjectExperience {
     this.proDescription = proDescription;
   }
 
+  public String getProBeginTime() {
+    return proBeginTime;
+  }
+
+  public void setProBeginTime(String proBeginTime) {
+    this.proBeginTime = proBeginTime;
+  }
+
+  public String getProEndTime() {
+    return proEndTime;
+  }
+
+  public void setProEndTime(String proEndTime) {
+    this.proEndTime = proEndTime;
+  }
 
   public String getProPerformance() {
     return proPerformance;

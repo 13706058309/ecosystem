@@ -5,9 +5,9 @@ package com.cykj.entity;
  */
 public class Depart {
 
-  private long departId;
-  private long industryId;
-  private String departName;
+  private long departId;//部门ID
+  private long industryId;//行业ID
+  private String departName;//部门名称
 
 
   public long getDepartId() {

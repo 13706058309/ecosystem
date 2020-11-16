@@ -9,6 +9,7 @@ public class City {
 
   private long cityId; //城市Id
   private String cityName; //城市名称
+  private long provinceId;
   private List<Province> provinces;  //下属省份集合
 
   public City() {
@@ -38,4 +39,11 @@ public class City {
     this.cityName = cityName;
   }
 
+  public long getProvinceId() {
+    return provinceId;
+  }
+
+  public void setProvinceId(long provinceId) {
+    this.provinceId = provinceId;
+  }
 }

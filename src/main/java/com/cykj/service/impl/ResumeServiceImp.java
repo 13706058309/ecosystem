@@ -10,6 +10,12 @@ import javax.annotation.Resource;
 public class ResumeServiceImp implements ResumeService {
     @Resource
     private JianliMapper jianliMapper;
+
+
+    /**
+     * @param userid 用户id
+     * @return
+     */
     @Override
     public Resume resume(long userid) {
         return jianliMapper.resume(userid);
