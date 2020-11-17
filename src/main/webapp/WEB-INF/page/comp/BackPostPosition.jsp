@@ -13,7 +13,7 @@
         <title>Title</title>
 <%--        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />--%>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+        <script src="${pageContext.request.contextPath}/jquery-3.5.1.js"></script>
         <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/comp/BackPostPosition.js"></script>

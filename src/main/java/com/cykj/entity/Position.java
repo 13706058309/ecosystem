@@ -12,6 +12,15 @@ public class Position {
   public Position() {
   }
 
+  @Override
+  public String toString() {
+    return "Position{" +
+            "postId=" + postId +
+            ", departId=" + departId +
+            ", postName='" + postName + '\'' +
+            '}';
+  }
+
   public long getPostId() {
     return postId;
   }
