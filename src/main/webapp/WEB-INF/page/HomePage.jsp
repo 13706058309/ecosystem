@@ -12,7 +12,6 @@
     <script id="allmobilize" charset="utf-8" src="../style/js/allmo8bilize.min.js"></script>
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=g7rHhDj9qFSGZF3qr9ZDOc7xLix7MLDo"></script>
-    <script src="../js/homePage.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="alternate" media="handheld"/>
     <!-- end 云适配 -->
@@ -38,8 +37,11 @@
     <![endif]-->
     <script type="text/javascript"></script>
     <script type="text/javascript" src="../style/js/conv.js"></script>
+    <script src="../js/homePage.js"></script>
+
 </head>
 <body>
+<input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <%--切换城市弹窗--%>
 <div id="choiceCity" style="display: none">
     <div style="padding: 20px 20px">
@@ -125,10 +127,11 @@
     <%--------------------------------------------------------------------------------   左侧三级菜单--%>
     <div id="container">
         <div id="sidebar" style="top: 240px">
+
             <div class="mainNavs">
                 <c:forEach items="${industry}" var="industry">
-                    <div class="menu_box" onblur="menu_box(${industry.industryId})">
-                        <div class="menu_main">
+                    <div class="menu_box" >
+                        <div class="menu_main" onmouseout="menu_box(${industry.industryId})">
                             <h2>${industry.industryName}<span></span></h2>
                             <a href="h/jobs/list_Java?labelWords=label">Java</a>
                             <a href="h/jobs/list_PHP?labelWords=label">PHP</a>
@@ -136,10 +139,11 @@
                         </div>
                         <div class="menu_sub dn">
                             <dl class="reset">
-                                <dt>
+                                <dt id="dt">
                                     <a>
                                         dfghj
                                     </a>
+
                                 </dt>
                                 <dd>
                                     <a href="h/jobs/list_Java?labelWords=label" class="curr">

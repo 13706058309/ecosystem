@@ -1,13 +1,27 @@
 package com.cykj.entity;
 
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 /**
  * 部门
  */
+@Component
 public class Depart {
 
   private long departId;
   private long industryId;
   private String departName;
+
+  public Depart() {
+  }
+
+  public Depart(long departId, long industryId, String departName) {
+    this.departId = departId;
+    this.industryId = industryId;
+    this.departName = departName;
+  }
 
   @Override
   public String toString() {
@@ -26,7 +40,6 @@ public class Depart {
     this.departId = departId;
   }
 
-
   public long getIndustryId() {
     return industryId;
   }
@@ -34,7 +47,6 @@ public class Depart {
   public void setIndustryId(long industryId) {
     this.industryId = industryId;
   }
-
 
   public String getDepartName() {
     return departName;

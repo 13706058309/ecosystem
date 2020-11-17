@@ -1,6 +1,31 @@
-function menu_box(industryId) {
+var path;
+$(function () {
+    path = $("#path").val();
+});
 
+function menu_box(industryId) {
+    console.log("111111")
+    console.log("industryId:"+industryId)
+    $.ajax({
+        url:path+"/homePage/findDepart",
+        async: true,
+        type: "post",
+        data: "industryId=" + industryId,
+        dataType: "text",
+        success: function (data) {
+            var depart = JSON.parse(data);
+            console.log("departs:"+depart['后端开发'][0].postName);
+            var dt = $("dt a");
+            var dd = $("dd a");
+            console.log("ssssssss"+ dt);
+                $("#dt").append("<a> 吱吱吱吱 </a>");
+                dd.last().append("<a> 啊啊啊啊啊啊啊啊啊啊啊 </a>");
+
+
+        }
+    });
 }
+
 
 //定位当前城市
 var position = new BMap.Geolocation();
