@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CourseMapper">
     <select id="findCourseOnPage" parameterType="java.util.HashMap" resultMap="results">
-        select * from course where courseName like concat('%',#{courseName},'%')
+        select * from course where courseName like concat('%',#{courseName},'%') and courseId != 0
         limit #{offset},#{limit}
     </select>
     <resultMap id="results" type="com.cykj.entity.Course">
@@ -15,7 +15,7 @@
     </resultMap>
     
     <select id="findNumOnPage" parameterType="java.util.HashMap" resultType="int">
-        select count(*) from course where 1=1 and courseName like concat('%',#{courseName},'%')
+        select count(*) from course where 1=1 and courseName like concat('%',#{courseName},'%') and courseId != 0
     </select>
 <!--    <select id="findCourse"  resultType="com.cykj.entity.Course">-->
 <!--        select courseId,fieldId,courseName,uploadTime  from course ;-->

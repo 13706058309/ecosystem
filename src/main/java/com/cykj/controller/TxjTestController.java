@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/txjtext")
 public class TxjTestController {
     @Resource
-private CourseServiceImpl courseServiceimpl;
+private CourseServiceImpl courseServiceImpl;
 
 
     @RequestMapping("goBCM")
@@ -34,14 +34,18 @@ private CourseServiceImpl courseServiceimpl;
     @RequestMapping(value = "/findCourse",produces = "text/html;charset=UTF-8")
     public @ResponseBody
     String getTableInfo(Integer page,Integer limit,String courseName){
+
         System.out.println("我获取到了courseName,值为："+courseName);
         Map<String,Object> map = new HashMap<>();
-        if (courseName != null && courseName.length() !=0){
+        if (courseName != null && courseName.length() != 0){
             map.put("courseName",courseName);
-        }else {
-            map.put("courseName","");
+            System.out.println("map有值，值为："+map);
         }
-        TableInfo tableInfo = courseServiceimpl.findCourse(map,page,limit);
+        else {
+            map.put("courseName","");
+            System.out.println("map无值，但是执行到了这里！！！！！！！！！！！！！");
+        }
+        TableInfo tableInfo = courseServiceImpl.findCourse(map,page,limit);
         return new Gson().toJson(tableInfo);
     }
 

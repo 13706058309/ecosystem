@@ -15,14 +15,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 </head>
 <style>
-    /*#input_search{!*这是搜索栏样式*!*/
-    /*    float: left;*/
-    /*}*/
+    #input_search{/*这是搜索栏样式*/
+        float: left;
+    }
 
         #courseName{/*这是搜索栏样式*/
             float: left;
         }
-    #button_search{/*这是搜索按钮样式*/
+    #layui-btn{/*这是搜索按钮样式*/
         float: left;
     }
     #dropDownMenu{/*这是下拉菜单样式*/
@@ -46,7 +46,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-<script type="text/javascript">
+<%--<script type="text/javascript">
     $(function  () {
         layui.use('form', function(){
         var form = layui.form;
@@ -179,40 +179,43 @@
                 return false;
             });
 
+
             form.on('submit(search)', function(data){
 
                 console.log(data);
-                var input_search = $("#input_search").val();
-                console.log(input_search);
+                var courseName = $("#input_search").val();
+                console.log("courseName的值为："+courseName+",接下来将响应搜索按钮监听");
 
-                $.ajax({
-                    type:"POST",
+                /*$.ajax({
+                    type:"GET",
                     dataType: "json",//预期服务器返回的数据类型
-                    url: "${pageContext.request.contextPath}/txjtext/findCourse" ,//url
-                    data: "courseName="+input_search,
-                    // error:function () {
-                    //     alert("异常")
-                    // },
-                    // success:function () {
-                    //     alert("成功")
-                    //
-                    // },
+                    url: "../txjtext/findCourse" ,//url
+                    data: "courseName="+courseName,
+                    async:true,
+                    success:function () {
+                        alert("成功")
+
+                    },
+                    error:function () {
+                        alert("异常")
+                    },
 
 
 
-                })
+
+                })*/
 
             });
         });
     })
-</script>
+</script>--%>
 
 <script type="text/html" id="toolbarDemo">
     <div class="demoTable" style="margin-left: 20%">
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <input id="courseName" class="layui-input " type="text" name="courseName" lay-verify="title" autocomplete="off" placeholder="请输入课程名"  style="width: 200px">
-            <input id="button_search" class="layui-btn layui-btn-warm" type="button" lay-submit lay-filter="search"  data-type="reload" value="搜索">
+            <input id="input_search" class="layui-input " type="text" name="input_search" lay-verify="title" autocomplete="off" placeholder="请输入课程名"  style="width: 200px">
+            <input id="layui-btn" class="layui-btn layui-btn-warm" type="button" lay-submit lay-filter="search"  data-type="reload" value="搜索">
             <div id="dropDownMenu" class="layui-input-block" style="width: 200px">
                 <select name="city" ><%--lay-verify="required"--%>
                     <option value=""></option>
@@ -243,25 +246,25 @@
 </script>
 
 <script>
-    layui.use('table', function(){
+    layui.use(['table','form'], function(){
         var table = layui.table;
-
+        var form = layui.form;
         //第一个实例
         table.render({
             elem: '#demo'
-            ,height: 500
+            ,height: 540
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: []//取消头部工具栏右侧的按钮
             ,url: '../txjtext/findCourse' //数据接口
             ,page: true //开启分页
-            , limits: [2,8]
-            , limit: 4
+            , limits: [5,8,10]
+            , limit: 10
             ,id:'testReload'
             ,cols: [[ //表头
                 {field: 'courseId', title: '序号', width:80, sort: true, fixed: 'left'}
                 ,{field: 'fieldId   ', title: '课程所在领域', width:130}
-                ,{field: 'courseName', title: '课程名称', width:130}
-                ,{field: 'uploadTime', title: '上传时间', width:130,sort: true}
+                ,{field: 'courseName', title: '课程名称', width:150}
+                ,{field: 'uploadTime', title: '上传时间', width:220,sort: true}
                 ,{field: '', title: '操作', width: 177,toolbar:'#barDemo'}
             ]]
 
@@ -274,14 +277,49 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        courseName: $('#courseName').val(),
+                        courseName: $('#input_search').val(),
                     }
                 }, 'data');
             }
         };
         $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+            // debugger;
+            // var type = $(this).data('type');
+            // active[type] ? active[type].call(this) : '';
+        });
+
+        form.on('submit(search)', function(data){
+
+            console.log(data);
+            var courseName = $("#input_search").val();
+            console.log("courseName的值为："+courseName+",接下来将响应搜索按钮监听");
+            table.reload('testReload', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                },
+                where: {
+                    courseName: $('#input_search').val(),
+                }
+            }, 'data');
+            /*$.ajax({
+                type:"GET",
+                dataType: "json",//预期服务器返回的数据类型
+                url: "../txjtext/findCourse" ,//url
+                data: "courseName="+courseName,
+                async:true,
+                success:function () {
+                    alert("成功")
+
+                },
+                error:function () {
+                    alert("异常")
+                },
+
+
+
+
+            })*/
+
         });
 
         //监听行工具事件
@@ -298,6 +336,43 @@
                 });
             } else if(layEvent === 'edit'){
                 layer.msg('编辑操作');
+                console.log(data);
+                //alert("修改完毕")
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+
+                    layer.open({
+                        title: '增加'
+                        ,area: ['500px', '300px']//设定弹窗的宽、高
+                        ,btn:[ '确认提交', '取消']//设定按钮组
+                        ,shade: [0.7, '#393D49']
+                        ,closeBtn:2
+                        ,yes: function(index, layero){
+                            //按钮【按钮一】的回调
+                            var courseName = document.getElementById("courseName").value;
+                            var courseImgURL = document.getElementById("courseImgURL").value;
+                            var courseIntroduce = document.getElementById("courseIntroduce").value;
+                            alert("获取到输入框的值为："+courseName);
+                            alert("增加成功！")
+                            layer.close(index); //如果设定了yes回调，需进行手工关闭
+                        }
+                        ,btn2: function(index, layero){
+                            //按钮【按钮二】的回调
+                            alert("取消提交按钮被触发")
+
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        }
+                        ,type:1
+                        ,content:'<style>' +
+                            'input{ border-radius: 10px;padding: 8px 0px;}</style>'+
+                            '<input id="courseName" placeholder="请输入修改后的课程名"  style="width: 200px;margin:5px 135px ">' +
+                            '<input id="courseImgURL" placeholder="请输入课程图片路径"  style="width: 200px;margin:5px 135px">' +
+                            '<input type="file" id="upload_file" style="display: none;" accept="image/jpeg, image/gif" />' +
+                            '<input id="courseIntroduce" placeholder="请输入课程介绍"  style="width: 200px;margin:5px 135px">'
+
+                    });
+                });
+                return false;
             }
         });
 

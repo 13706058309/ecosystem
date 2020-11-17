@@ -18,6 +18,7 @@ public class CourseServiceImpl implements CourseService {
     public TableInfo findCourse(Map<String, Object> map, Integer page, Integer limit) {
         map.put("limit",limit);
         map.put("offset",(page - 1) * limit);
+        System.out.println("CourseServiceImpl里map的值为："+map);
         List<Course> allOnPage = courseMapper.findCourseOnPage(map);
         int numOnPage = courseMapper.findNumOnPage(map);
         TableInfo tableInfo = new TableInfo(0,"后台用户信息数据",numOnPage,allOnPage);
