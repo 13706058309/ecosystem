@@ -29,4 +29,7 @@ public interface TalentService {
 
 
     List<BackUserNum> userNumHalfYear();
+
+
+    boolean findTalent(String talentName);
 }

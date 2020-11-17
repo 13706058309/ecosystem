@@ -20,5 +20,8 @@ public interface TalentMapper {
     List<Talent> findTalent(Map<String,Object> map);
     int findRecords(Map<String, Object> map);
     int addTalent(Talent talent);
+
+    Talent selectTalent(String talentName);
+
 }
 

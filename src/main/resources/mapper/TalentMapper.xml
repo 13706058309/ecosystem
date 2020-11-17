@@ -83,5 +83,7 @@
           values (#{talentName},#{school},#{birthday},#{profession},#{politicalStatus},
           #{education},#{contactInfo},#{address},#{workExp},#{certificate},#{selfEva})
         </insert>
-
+    <select id="selectTalent" parameterType="java.lang.String" resultType="com.cykj.entity.Talent">
+            select * from talent where talentName = #{talentName}
+        </select>
 </mapper>

@@ -83,5 +83,10 @@ public class TalentServiceImpl implements TalentService {
         return userNumMapper.userNumHalfYear();
     }
 
+    @Override
+    public boolean findTalent(String talentName) {
+        return talentMapper.selectTalent(talentName)==null;
+    }
+
 
 }
