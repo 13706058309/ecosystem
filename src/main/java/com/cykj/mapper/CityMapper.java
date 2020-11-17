@@ -1,6 +1,5 @@
 package com.cykj.mapper;
 
-import com.cykj.entity.City;
 import com.cykj.entity.Province;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -16,4 +15,5 @@ public interface CityMapper {
 
     public List<City> cityList();
 
+    List<City> findCityByID(int provinceID);
 }

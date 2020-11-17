@@ -6,4 +6,7 @@
     <select id="findDepart" resultType="com.cykj.entity.Depart">
         select departName,departId from depart where industryID = #{industryId};
     </select>
+    <select id="findDepartByID" parameterType="int" resultType="com.cykj.entity.Depart">
+        select * from depart where industryID = #{industryID}
+    </select>
 </mapper>

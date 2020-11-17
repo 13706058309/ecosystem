@@ -4,5 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CerRecordMapper">
 
+    <select id="findcerRecordid"  resultType="com.cykj.entity.CerRecord">
+        select * FROM cerRecord where userId= #{userid} and fileId= #{fileid} ORDER BY beginTime DESC LIMIT 0,1
+    </select>
+
+    <insert id="insertCerRecord" parameterType="com.cykj.entity.CerRecord" keyProperty="cerRecordId" useGeneratedKeys="true">
+       insert into cerRecord(userId,fileId,stateId,trueName,IdNumber,beginTime,cerPhone) value (#{userId},#{fileId},#{stateId},#{trueName},#{idNumber},#{beginTime},#{cerPhone})
+    </insert>
 </mapper>
 

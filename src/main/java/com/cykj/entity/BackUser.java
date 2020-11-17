@@ -25,6 +25,7 @@ public class BackUser {
   private RoleInfo role; //角色实体类
   private String stateId;//状态
   private Parameter states;//状态实体类 （iD 状态名称  类型）
+  private String bRegTime;//注册时间
 
   public BackUser() {
   }
@@ -218,5 +219,13 @@ public class BackUser {
 
   public void setStates(Parameter states) {
     this.states = states;
+  }
+
+  public String getbRegTime() {
+    return bRegTime;
+  }
+
+  public void setbRegTime(String bRegTime) {
+    this.bRegTime = bRegTime;
   }
 }

@@ -7,4 +7,7 @@
     <select id="findPost" resultType="com.cykj.entity.Position">
         select postName,postId from position where departId = #{departId}
     </select>
+    <select id="findPositionByID" parameterType="int" resultType="com.cykj.entity.Position">
+        select * from position where departID = #{departID}
+    </select>
 </mapper>

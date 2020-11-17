@@ -14,4 +14,5 @@ import java.util.List;
 public interface IndustryMapper {
 
     public  List<Industry> findIndustry ();
+    List<Industry> findAll();
 }

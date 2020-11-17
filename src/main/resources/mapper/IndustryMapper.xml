@@ -8,4 +8,7 @@
         select industryName,industryId from industry;
     </select>
 
+    <select id="findAll" resultType="com.cykj.entity.Industry">
+        select * from industry;
+    </select>
 </mapper>

@@ -5,8 +5,8 @@ package com.cykj.entity;
  */
 public class Industry {
 
-  private long industryId;
-  private String industryName;
+  private long industryId;//行业ID
+  private String industryName;//行业名称
 
   public Industry() {
   }

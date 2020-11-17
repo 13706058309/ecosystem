@@ -8,4 +8,7 @@
         select cityID,cityName from city;
     </select>
 
+    <select id="findCityByID" parameterType="int" resultType="com.cykj.entity.City">
+        select * from city where provinceId = #{provinceID}
+    </select>
 </mapper>
