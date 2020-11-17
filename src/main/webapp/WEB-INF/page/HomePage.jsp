@@ -78,16 +78,13 @@
             </a>
             <ul class="reset" id="navheader">
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li><a href="">公司</a></li>
+                <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li><a href="" target="_blank">校招</a></li>
                 <li><a href="" target="_blank">课程</a></li>
                 <li><a href="${pageContext.request.contextPath}/center/jianli"  rel="nofollow">我的简历</a></li>
                 <li><a href="" rel="nofollow">发布职位</a></li>
-                <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="h/toForum.html" target="_blank">校招</a></li>
-                <li><a href="h/toForum.html" target="_blank">课程</a></li>
-                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
-                <li><a href="create.html" rel="nofollow">发布职位</a></li>
+
+
             </ul>
             <ul class="loginTop" style="font-size: 18px">
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
@@ -136,7 +133,7 @@
             <div class="mainNavs">
                 <c:forEach items="${industry}" var="industry">
                     <div class="menu_box" >
-                        <div class="menu_main" onmouseover="menu_box(${industry.industryId})">
+                        <div class="menu_main" onmouseover="menu_box(${industry.industryId},this)">
                             <h2>${industry.industryName}<span></span></h2 >
                             <a href="h/jobs/list_Java?labelWords=label">Java</a>
                             <a href="h/jobs/list_PHP?labelWords=label">PHP</a>

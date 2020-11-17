@@ -800,7 +800,7 @@ span.error {
 }
 
 #container {
-    width: 1024px;
+    width: 100%;
     margin: -65px auto 0;
     padding-bottom: 100px;
 }
@@ -2115,7 +2115,10 @@ ul.hot_pos i {
 }
 
 .hc_tag > dd {
-    background: #fafafa;
+    width: 100%;
+    height: 220px;
+    margin-top: 10px;
+    background: #fff;
     padding: 20px 15px 10px 15px;
     overflow: hidden;
 }

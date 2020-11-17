@@ -3,27 +3,35 @@ $(function () {
     path = $("#path").val();
 });
 
-function menu_box(industryId) {
-    console.log("111111")
-    console.log("industryId:"+industryId)
-    $.ajax({
-        url:path+"/homePage/findDepart",
-        async: true,
-        type: "post",
-        data: "industryId=" + industryId,
-        dataType: "text",
-        success: function (data) {
-            var depart = JSON.parse(data);
-            console.log("departs:"+depart['后端开发'][0].postName);
-            var dt = $("dt a");
-            var dd = $("dd a");
-            console.log("ssssssss"+ dt);
-                $("#dt").append("<a> 吱吱吱吱 </a>");
-                dd.last().append("<a> 啊啊啊啊啊啊啊啊啊啊啊 </a>");
+function menu_box(industryId,dos) {
 
+    if(industryId != num){
+        // alert($(dos).next().find("a").eq(0).text());
+        $(dos).next().find("dt").eq(0).empty();
+        $(dos).next().find("dd").eq(0).empty();
+        num = industryId;
+        $.ajax({
+            url:path+"/homePage/findDepart",
+            async: true,
+            type: "post",
+            data: "industryId=" + industryId,
+            dataType: "text",
+            success: function (data) {
+                var depart = JSON.parse(data);
+                $.each(depart,function(key,values) {
+                    var $a = $("<a style='display: inline-block' >" + key + "</a>");
+                    $(dos).next().find("dt").eq(0).append($a);
 
-        }
-    });
+                    $(values).each(function (i,domel) {
+                        var $a2 = $("<a>"+domel.postName+"</a>")
+                        $(dos).next().find("dd").eq(0).append($a2);
+                    });
+                });
+
+                num=0;
+            }
+        });
+    }
 }
 
 
