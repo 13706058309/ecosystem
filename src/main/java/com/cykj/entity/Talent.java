@@ -19,8 +19,8 @@ public class Talent {
   private String selfEva;//自我评价
   private String education;//学历
   private String entryTime;//上传时间
-  private String address;
-  private String certificate;
+  private String address;//地址
+  private String certificate;//技能证书
   private CompAndtalent compAndtalent;
 
   public Talent() {

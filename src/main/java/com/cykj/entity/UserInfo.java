@@ -14,10 +14,18 @@ public class UserInfo {
 
   private String address; //地址
   private long isOpen; // 是否公开
-
+  private String regTime;//注册时间
 
   public UserInfo() {
 
+  }
+
+  public String getRegTime() {
+    return regTime;
+  }
+
+  public void setRegTime(String regTime) {
+    this.regTime = regTime;
   }
 
   public long getUserId() {
