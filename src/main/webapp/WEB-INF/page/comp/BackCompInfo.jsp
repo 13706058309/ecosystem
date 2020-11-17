@@ -51,6 +51,9 @@
     <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script>
     <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">--%>
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">--%>
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vendor.css">--%>
 
 </head>
 <body>
@@ -65,11 +68,19 @@
                         <div class="info-flex-item header-upload">
                             <div class="header-box">
                                 <div class="header-mask"></div>
-                                    <img id="headImg"
-                                     src="${pageContext.request.contextPath}/style/images/logo_default.png"
-                                           class="header-img" style="width:100%;height: 100%">
-                                <input type="file" onchange="selectFile()" class="head-input"
+                            <c:choose>
+                                <c:when test="${not empty comp.logo}">
+                                    <img src="${pageContext.request.contextPath}/uploadLogo${comp.logo}" id="headImg" class="header-img" style="width:100%;height: 100%">
+                                </c:when>
+
+                                <c:otherwise>
+                                    <img src="${pageContext.request.contextPath}/style/images/logo_default.png" id="headImg" class="header-img" style="width:100%;height: 100%">
+                                </c:otherwise>
+                            </c:choose>
+                                <form id="imgsForm" enctype="multipart/form-data">
+                                <input type ="file"  class="head-input" id="uploadFiles" name="uploadFiles"
                                        accept="image/*" />
+                                </form>
                                 <span style="display: block">点击替换logo</span>
                             </div>
                         </div>
@@ -641,15 +652,64 @@
         })
     }
 
-    function selectFile() {
-        // alert("123");
-        let files = event.target.files;
-        if (files.length === 0) return false;
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-        reader.onloadend = () => {
-            $("#headImg").attr("src", reader.result)
-        }
-    }
+    // function selectFile() {
+    //
+    //     let files = event.target.files;
+    //     if (files.length === 0) return false;
+    //     let reader = new FileReader();
+    //     reader.readAsDataURL(files[0]);
+    //     reader.onloadend = () => {
+    //         $("#headImg").attr("src", reader.result)
+    //     }
+    // }
+    $('input[type=file]').each(function()
+    {
+        var max_size=1024*1024*5;
+        $(this).change(function(evt)
+        {
+            var finput = $(this);
+            var files = evt.target.files; // 获得文件对象
+            var output = [];
+            for (var i = 0, f; f = files[i]; i++)
+            {  //检查文件大小
+                if(f.size > max_size)
+                {
+                    layer.alert("上传的图片不能超过5M!");
+                    $(this).val('');
+                    return false;
+                }else{
+                    var fName = $("#uploadFiles").val();
+                    let files = event.target.files;
+
+                    var form = new FormData(document.getElementById("imgsForm"))
+                    $.ajax({
+                        url:path+"/rec/uploadLogo",
+                        data:form,
+                        processData:false,
+                        contentType:false,
+                        type:"post",
+                        beforeSend:function(){
+                            if (files.length === 0) return false;
+                            return true;
+
+                        },
+                        success:function (info) {
+                            if(info=='1'){
+                                layer.msg('上传成功')
+                                let reader = new FileReader();
+                                reader.readAsDataURL(files[0]);
+                                reader.onloadend = () => {
+                                    $("#headImg").attr("src", reader.result)
+                                }
+                            }else{
+                                layer.msg('系统繁忙，上传失败')
+                            }
+                        },
+                    })
+
+                }
+            }
+        });
+    });
 </script>
 </html>

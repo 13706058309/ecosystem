@@ -53,4 +53,6 @@ public interface BackCompService {
     BackUser findCompByID(int compID);
     //修改公司信息
     String changeCompInfo(Map<String,Object> map);
+    //修改密码
+    String changePwd(String newPwd, String pwd,int compID);
 }

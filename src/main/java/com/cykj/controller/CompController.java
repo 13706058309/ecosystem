@@ -5,17 +5,20 @@ import com.cykj.service.BackCompService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/rec")
@@ -482,6 +485,37 @@ public class CompController {
         }
 
         return backCompService.changeCompInfo(map);
+    }
+
+    @RequestMapping("/uploadLogo")
+    public @ResponseBody String uploadLogo(MultipartFile uploadFiles,HttpServletRequest request) throws IOException {
+        String msg = "";
+        String path = request.getSession().getServletContext().getRealPath("/uploadLogo/");
+
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        File file = new File(path,date);
+        if(!file.exists()) file.mkdirs();
+
+        String fileName = uploadFiles.getOriginalFilename();
+
+        String uuid = UUID.randomUUID().toString().replace("-","");
+        fileName = uuid+"_"+fileName;
+        String savePath = "/"+date+"/"+fileName;
+        uploadFiles.transferTo(new File(file,fileName));
+
+        Map<String,Object> map = new HashMap<>();
+//        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = bUser.getbUserId();
+        map.put("compID",3);
+        map.put("logo",savePath);
+
+        return backCompService.changeCompInfo(map);
+    }
+
+    @RequestMapping("/compChangePwd")
+    public @ResponseBody String compChangePwd(String newPwd,String pwd){
+
+        return backCompService.changePwd(newPwd,pwd,3);
     }
 
 }

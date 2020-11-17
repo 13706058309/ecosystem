@@ -279,4 +279,21 @@ public class BackCompServiceImpl implements BackCompService {
         int n = backUserMapper.changeCompInfo(map);
         return n>0? "1":"2";
     }
+
+    @Override
+    public String changePwd(String newPwd, String pwd, int compID) {
+        String findPwd = backUserMapper.findPwd(compID);
+        String msg = "";
+        if(!pwd.equals(findPwd)){
+            msg = "1";
+        }else{
+            int n = backUserMapper.changePwd(newPwd,compID);
+            if(n>0){
+                msg = "2";
+            }else {
+                msg = "3";
+            }
+        }
+        return msg;
+    }
 }

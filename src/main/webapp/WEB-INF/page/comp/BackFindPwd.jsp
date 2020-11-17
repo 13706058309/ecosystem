@@ -77,6 +77,7 @@
 
             </div>
             <input type="submit" id="submitLogin" value="找回密码" style="margin-left: 24%"/>
+            <input type="button" value="123" onmouseover="tip()">
         </form>
     </div>
 </div>
@@ -107,6 +108,11 @@
             }
         });
     });
+
+    function tip() {
+
+        console.log(123);
+    }
 </script>
 </body>
 </html>

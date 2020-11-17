@@ -67,7 +67,7 @@ public class TestController {
 
     @RequestMapping("/findPwd")
     public String findPwd(){
-        return "BackFindPwd";
+        return "comp/BackFindPwd";
     }
 
     @RequestMapping("/unPass")

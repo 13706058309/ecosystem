@@ -24,7 +24,7 @@
         <result property="homePage" column="homePage"></result>
         <result property="finanStage" column="finanStage"></result>
         <result property="product" column="product"></result>
-        <result property="logp" column="logp"></result>
+        <result property="logo" column="logo"></result>
         <result property="roleId" column="roleId"></result>
         <result property="bRegTime" column="bRegTime"></result>
         <result property="coreValue" column="coreValue"></result>
@@ -65,8 +65,18 @@
             <if test="product!=null">
                 product = #{product},
             </if>
+            <if test="logo!=null">
+                logo = #{logo},
+            </if>
         </set>
         where bUserId = #{compID}
     </update>
 
+    <update id="changePwd">
+        update backUser set pwd = #{pwd} where buserid = #{compID}
+    </update>
+
+    <select id="findPwd" resultType="String">
+        select pwd from backUser where buserid = #{compID}
+    </select>
 </mapper>
