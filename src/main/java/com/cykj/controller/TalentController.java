@@ -4,6 +4,7 @@ package com.cykj.controller;
 import com.cykj.entity.BackUserNum;
 import com.cykj.entity.TableInfo;
 import com.cykj.entity.Talent;
+import com.cykj.entity.UserInfo;
 import com.cykj.service.TalentService;
 import com.cykj.service.UserService;
 import com.google.gson.Gson;
@@ -22,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -43,24 +45,20 @@ public class TalentController {
     private TalentService talentService;
 
     @RequestMapping("/upload")
-    public  String upload(@RequestParam("file")MultipartFile imgFile,HttpServletRequest request,HttpServletResponse response) throws IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter writer = response.getWriter();
-
+    public @ResponseBody  String upload(MultipartFile upload, HttpServletRequest request, HttpServletResponse response) throws IOException {
             String path = request.getSession().getServletContext().getRealPath("/upload");
             String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             File file = new File(path, date);
             if (!file.exists()) {
                 file.mkdirs();
             }
-
-                String fileName = imgFile.getOriginalFilename();
-
+                String fileName = upload.getOriginalFilename();
                 if (fileName.trim() != null && !fileName.equals("")) {
                     fileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
-                    imgFile.transferTo(new File(file, fileName));
+                    upload.transferTo(new File(file, fileName));
                     String content = readWord(path + "\\" + date + "\\" + fileName);
                     String talentName = content.substring(content.indexOf("名") + 1, content.indexOf("院")).trim();
+                    if(talentService.findTalent(talentName)){
                     String school = content.substring(content.indexOf("校") + 1, content.indexOf("出")).trim();
                     String birthday = content.substring(content.indexOf("月") + 1, content.indexOf("专")).trim();
                     String profession = content.substring(content.indexOf("业") + 1, content.indexOf("政")).trim();
@@ -74,15 +72,15 @@ public class TalentController {
                     Talent talent = new Talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva);
                     int i = talentService.addTalent(talent);
                     if(i>0){
-                       writer.write("导入成功");
+                       return "导入成功";
                     }else{
-                        writer.write("导入失败");
+                        return"导入失败";
                     }
-
-
+                    }else{
+                        return"简历重复";
+                    }
             }
-
-return "talentList";
+             return "";
     }
 
     public String readWord(String path) {
