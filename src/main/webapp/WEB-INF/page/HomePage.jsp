@@ -136,8 +136,8 @@
             <div class="mainNavs">
                 <c:forEach items="${industry}" var="industry">
                     <div class="menu_box" >
-                        <div class="menu_main" onmouseout="menu_box(${industry.industryId})">
-                            <h2>${industry.industryName}<span></span></h2>
+                        <div class="menu_main" onmouseover="menu_box(${industry.industryId})">
+                            <h2>${industry.industryName}<span></span></h2 >
                             <a href="h/jobs/list_Java?labelWords=label">Java</a>
                             <a href="h/jobs/list_PHP?labelWords=label">PHP</a>
                             <a href="h/jobs/list_C?labelWords=label">C</a>
