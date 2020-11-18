@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import com.cykj.utils.MyUtil;
+
 import java.util.Date;
 
 /**
@@ -55,7 +57,7 @@ public class CompAndtalent {
     return recommendTime;
   }
 
-  public void setRecommendTime(String recommendTime) {
-    this.recommendTime = recommendTime;
+  public void setRecommendTime(Date recommendTime) {
+    this.recommendTime = MyUtil.getFoatTime(recommendTime);
   }
 }

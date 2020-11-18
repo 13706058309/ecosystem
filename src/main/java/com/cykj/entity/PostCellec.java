@@ -1,14 +1,18 @@
 package com.cykj.entity;
 
+import com.cykj.utils.MyUtil;
+
+import java.util.Date;
+
 /**
- *
+ *岗位收藏
  */
 public class PostCellec {
 
-  private long postCellecId;
-  private long userId;
-  private long pPostId;
-  private String collecTime;
+  private long postCellecId;//主键ID
+  private long userId;//用户ID
+  private long pPostId;//收藏岗位的ID
+  private String collecTime;//收藏时间
 
 
   public long getPostCellecId() {
@@ -49,7 +53,7 @@ public class PostCellec {
     return collecTime;
   }
 
-  public void setCollecTime(String collecTime) {
-    this.collecTime = collecTime;
+  public void setCollecTime(Date collecTime) {
+    this.collecTime = MyUtil.getFoatTime(collecTime);
   }
 }

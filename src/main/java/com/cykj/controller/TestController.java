@@ -1,11 +1,16 @@
 package com.cykj.controller;
 
+import com.cykj.service.BackCompService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
+    @Resource
+    private BackCompService backCompServiceImpl;
 
     @RequestMapping("/testComp")
     public String test(){
@@ -72,6 +77,7 @@ public class TestController {
 
     @RequestMapping("/unviTalent")
     public String unviTalent(){
+
         return "comp/BackUniversityTalent";
     }
 

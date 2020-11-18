@@ -2,6 +2,10 @@ package com.cykj.entity;
 
 import org.springframework.stereotype.Component;
 
+import com.cykj.utils.MyUtil;
+
+import java.util.Date;
+
 /**
  * 后台用户日志
  */
@@ -63,8 +67,8 @@ public class BackLog {
     this.backUser = backUser;
   }
 
-  public void setOperaTime(String operaTime) {
-    this.operaTime = operaTime;
+  public void setOperaTime(Date operaTime) {
+    this.operaTime = MyUtil.getDetailFoatTime(operaTime);
   }
 
 

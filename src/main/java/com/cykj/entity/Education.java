@@ -5,8 +5,8 @@ package com.cykj.entity;
  */
 public class Education {
 
-  private long educationId;
-  private String education;
+  private long educationId;//学历ID
+  private String education;//学历名称
 
   public Education() {
   }

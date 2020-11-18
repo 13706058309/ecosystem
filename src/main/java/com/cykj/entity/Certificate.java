@@ -8,10 +8,27 @@ public class Certificate {
   private long cerId; //id
   private long fieldId;//领域Id
   private Field field; //领域实体类
+
   private String imgUrl; // 图片地址
+
+  private String cerSketch;//证书简述
+  private String cerTrait;//证书特点
+  private String cerHeadPortrait;//证书头像
+  private int cershowState;//展示状态
+  private String cerChangeTime;//变更时间
+  private int certificationFee;//证书费用
+
 
 
   public Certificate() {
+  }
+
+  public int getCertificationFee() {
+    return certificationFee;
+  }
+
+  public void setCertificationFee(int certificationFee) {
+    this.certificationFee = certificationFee;
   }
 
   public long getCerId() {
@@ -46,4 +63,43 @@ public class Certificate {
     this.imgUrl = imgUrl;
   }
 
+  public String getCerSketch() {
+    return cerSketch;
+  }
+
+  public void setCerSketch(String cerSketch) {
+    this.cerSketch = cerSketch;
+  }
+
+  public String getCerTrait() {
+    return cerTrait;
+  }
+
+  public void setCerTrait(String cerTrait) {
+    this.cerTrait = cerTrait;
+  }
+
+  public String getCerHeadPortrait() {
+    return cerHeadPortrait;
+  }
+
+  public void setCerHeadPortrait(String cerHeadPortrait) {
+    this.cerHeadPortrait = cerHeadPortrait;
+  }
+
+  public int getCershowState() {
+    return cershowState;
+  }
+
+  public void setCershowState(int cershowState) {
+    this.cershowState = cershowState;
+  }
+
+  public String getCerChangeTime() {
+    return cerChangeTime;
+  }
+
+  public void setCerChangeTime(String cerChangeTime) {
+    this.cerChangeTime = cerChangeTime;
+  }
 }

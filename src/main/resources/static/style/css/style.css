@@ -1,4 +1,19 @@
 ﻿@charset "utf-8";
+/*********************************************
+* Start Time 2013-06-14
+* Author : Vee
+* Contect : vee@3wcoffee.com
+**********************************************
+* background:#44D0C7;             绿 背景色
+* background:#44D0C7;             绿 按钮
+* background:#00694e;             绿 按钮 current
+* color:#44D0C7;                  绿字体
+* background:#fafafa;             灰 背景色
+* border:1px dashed #cfd0d2；     灰 边框
+* height:30px;                    list page btn
+* height:46px;                    login and register btn
+* height:60px;                    detail page btn .btn_big
+**********************************************/
 * {
     outline: none;
 }
@@ -529,14 +544,14 @@ span.error {
 
 #header {
     min-width: 1024px;
-    height: 140px;
+    height: 95px;
     background: #44D0C7;
     border-top: 3px solid #44D0C7;
 }
 
 #header .wrapper {
-    width: 1024px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0 0px;
     position: relative;
     z-index: 90;
 }
@@ -544,7 +559,7 @@ span.error {
 .logo {
     border: 0;
     float: left;
-    margin: 10px 0 0 0;
+    margin: 10px 70px 0 60px;
 }
 
 #navheader {
@@ -562,7 +577,7 @@ span.error {
     position: relative;
     z-index: 3;
     margin: 0;
-    padding-top: 80px;
+    padding-top: 30px;
     padding-left: 20px;
 }
 
@@ -619,18 +634,18 @@ span.error {
     margin: 0;
     padding: 0;
     list-style: none;
-    position: absolute;
+    /*position: absolute;*/
     right: 0;
     top: 0;
     overflow: hidden;
 }
 
 #header ul.loginTop li {
-    float: left;
+    float: right;
     color: #fff;
-    height: 22px;
+    height: 30px;
     background: #44D0C7;
-    padding: 4px 0;
+    padding: 10px 0;
 }
 
 #header ul.loginTop a {
@@ -786,7 +801,7 @@ span.error {
 
 #container {
     width: 1024px;
-    margin: 35px auto 0;
+    margin: -65px auto 0;
     padding-bottom: 100px;
 }
 
@@ -1053,7 +1068,8 @@ span.error {
 /*index content*/
 .content {
     width: 744px;
-    float: right;
+    float: left;
+    margin-left: 32%;
 }
 
 .da-thumbs {
@@ -1090,8 +1106,8 @@ span.error {
     position: absolute;
     background: #333;
     background: rgba(1, 152, 117, 0.9);
-    *background: #0d9572;
-    background: #0d9572 \0;
+    *background: #44D0C7;
+    background: #44D0C7 \0;
     filter: alpha(Opacity=90);
     width: 100%;
     height: 100%;
@@ -1327,7 +1343,7 @@ ul.hot_pos i {
 }
 
 .hot_pos a:hover {
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .hot_pos a.btn:hover {
@@ -1353,7 +1369,7 @@ ul.hot_pos i {
 }
 
 .hot_pos_l a span {
-    color: #0d9572;
+    color: #44D0C7;
     margin: 0;
 }
 
@@ -1377,7 +1393,7 @@ ul.hot_pos i {
 }
 
 .hot_pos_r a span {
-    color: #0d9572;
+    color: #44D0C7;
     margin: 0;
 }
 
@@ -1428,7 +1444,7 @@ ul.hot_pos i {
 .btn {
     font-size: 16px;
     color: #fff;
-    background: #0d9572 url(img/arrow.png) 88px center no-repeat;
+    background: #44D0C7 url(img/arrow.png) 88px center no-repeat;
     padding: 5px 40px 5px 15px;
     margin: 10px 0 0 0;
 }
@@ -1496,7 +1512,7 @@ ul.hot_pos i {
 
 .footer_qr i {
     display: none;
-    border: 3px solid #0D9572;
+    border: 3px solid #44D0C7;
     background: url(img/qrcode.jpg) no-repeat;
     width: 242px;
     height: 242px;
@@ -1543,7 +1559,7 @@ ul.hot_pos i {
 }
 
 #selected li {
-    background: #0d9572;
+    background: #44D0C7;
     white-space: nowrap;
     color: #fff;
     margin-bottom: 13px;
@@ -1643,12 +1659,12 @@ ul.hot_pos i {
 }
 
 .workplace a:hover {
-    background: #0d9572;
+    background: #44D0C7;
     color: #fff;
 }
 
 .workplace a.current {
-    background: #0d9572;
+    background: #44D0C7;
     color: #fff;
 }
 
@@ -2057,7 +2073,7 @@ ul.hot_pos i {
     font-size: 18px;
     text-align: center;
     color: #fff;
-    background: #0d9572;
+    background: #44D0C7;
     padding: 10px 0;
     margin: 0 30px 20px 2px;
 }
@@ -2076,7 +2092,7 @@ ul.hot_pos i {
 /*company_list.html*/
 .content_l {
     float: left;
-    width: 680px;
+    width: 100%;
 }
 
 .content_l h1 {
@@ -2127,12 +2143,12 @@ ul.hot_pos i {
 }
 
 .hc_tag dl a:hover {
-    background: #0d9572;
+    background: #44D0C7;
     color: #fff;
 }
 
 .hc_tag dl a.current {
-    background: #0d9572;
+    background: #44D0C7;
     color: #fff;
 }
 
@@ -2169,7 +2185,7 @@ ul.hot_pos i {
 }
 
 .hc_list a:hover h3 {
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
 }
 
@@ -2217,8 +2233,8 @@ ul.hot_pos i {
 }
 
 .hc_list ul.ctags li.current {
-    border: 1px solid #0d9572;
-    color: #0d9572;
+    border: 1px solid #44D0C7;
+    color: #44D0C7;
 }
 
 .content_r {
@@ -2252,7 +2268,7 @@ ul.hot_pos i {
 }
 
 .subscribe_side em {
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .subscribe_side div.why {
@@ -2312,7 +2328,7 @@ ul.hot_pos i {
 .upload_file {
     display: block;
     margin-top: 10px;
-    background: #0d9572 url(img/upload_file.png) 220px center no-repeat;
+    background: #44D0C7 url(img/upload_file.png) 220px center no-repeat;
     color: #fff;
     font-size: 24px;
     height: 60px;
@@ -3033,7 +3049,7 @@ ul.hot_pos i {
     border: none;
     height: 60px;
     line-height: 60px;
-    background: #0d9572;
+    background: #44D0C7;
     float: left;
     margin: 15px 0 5px;
     overflow: hidden;
@@ -3565,7 +3581,7 @@ ul.hot_pos i {
 }
 
 .c_box a.applyC {
-    background: #0d9572;
+    background: #44D0C7;
     color: #fff;
     padding: 2px 6px;
     margin: 0 0 0 15px;
@@ -3674,7 +3690,7 @@ ul.hot_pos i {
 
 .jobsTotal i, .jobsTotalB i {
     font-style: normal;
-    color: #0d9572;
+    color: #44D0C7;
     font-size: 18px;
 }
 
@@ -3950,7 +3966,7 @@ ul.hot_pos i {
     line-height: 40px;
     font-size: 18px;
     padding: 0 30px;
-    background: #0d9572;
+    background: #44D0C7;
     float: left;
     margin: 15px 0 5px;
     transition: background 0.2s ease-in 0s;
@@ -4259,13 +4275,13 @@ ul.c_jobs {
     padding: 5px 0;
     margin: 0;
     font-size: 18px;
-    color: #0d9572;
+    color: #44D0C7;
     font-weight: normal;
 }
 
 .c_jobs h3 span.pos {
     font-size: 18px;
-    color: #0d9572;
+    color: #44D0C7;
     font-weight: normal;
 }
 
@@ -4311,13 +4327,13 @@ ul.c_jobs {
 }
 
 .c_tags td a {
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
 }
 
 /*add by nancy*/
 .solveWrap td a {
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
     overflow: hidden;
     white-space: nowrap;
@@ -4562,7 +4578,7 @@ ul.c_jobs {
 
 .addnew a {
     font-size: 16px;
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
     float: left;
     margin: 10px 0 0 0;
@@ -4579,7 +4595,7 @@ ul.c_jobs {
 
 .addnew_right a {
     font-size: 16px;
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
     float: left;
     margin: 10px 0 0 100px;
@@ -4620,7 +4636,7 @@ ul.my_jobs {
 
 .my_jobs h3 a {
     font-size: 18px;
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .my_jobs h3 span {
@@ -4633,7 +4649,7 @@ ul.my_jobs {
 
 .my_jobs span.receivedResumeNo a {
     font-size: 16px;
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .my_jobs span {
@@ -4659,13 +4675,13 @@ ul.my_jobs {
 }
 
 .links a {
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
     margin-left: 8px;
 }
 
 .links a:hover {
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
 }
 
@@ -4714,7 +4730,7 @@ ul.my_jobs {
 
 .c_section_mid dt span {
     font-size: 18px;
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .c_section_mid h3 {
@@ -5683,7 +5699,7 @@ a.greylink {
 
 .aboutus div {
     margin-left: 196px;
-    background: #0d9572;
+    background: #44D0C7;
     padding: 20px 30px;
     height: 145px;
 }
@@ -6053,7 +6069,7 @@ a.greylink {
     color: #fff;
     font-size: 18px;
     line-height: 40px;
-    background: #0d9572;
+    background: #44D0C7;
 }
 
 .bbs_bg .btn_create:hover {
@@ -6602,7 +6618,7 @@ a.greylink {
 }
 
 #container #weibolist .ptunder a.ptgaosu {
-    background: #0d9572;
+    background: #44D0C7;
     margin-right: 20px;
     font-family: "微软雅黑";
     line-height: 24px;
@@ -7124,7 +7140,7 @@ ul.my_delivery {
 
 .my_delivery h2 em {
     font-size: 18px;
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .my_delivery h2 span {
@@ -7625,7 +7641,7 @@ ul.my_delivery {
     line-height: 40px;
     font-size: 20px;
     padding: 0 20px;
-    background: #0d9572;
+    background: #44D0C7;
     float: right;
     margin: 15px 0 5px;
     transition: background 0.2s ease-in 0s;
@@ -8509,7 +8525,7 @@ ul.my_delivery {
 .profile_box .pAdd span {
     display: block;
     font-size: 16px;
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
     margin-top: 5px;
 }
@@ -9086,7 +9102,7 @@ ul.my_delivery {
 }
 
 .position_del a {
-    background-color: #0d9572;
+    background-color: #44D0C7;
     color: #fff;
     padding: 0 5px;
     margin-left: 10px;
@@ -9209,7 +9225,7 @@ ul.bbsTabs li {
 }
 
 ul.bbsTabs li.current {
-    border-bottom: 3px solid #0D9572;
+    border-bottom: 3px solid #44D0C7;
     color: #333;
 }
 
@@ -9361,7 +9377,7 @@ ul.bbsTabs li a {
 }
 
 .work_place a {
-    color: #0d9572;
+    color: #44D0C7;
     margin-left: 20px;
 }
 
@@ -9507,12 +9523,12 @@ i.speed1 {
 
 .optionsDiv dd.opts a.curr {
     color: #fff;
-    background: #0d9572;
+    background: #44D0C7;
 }
 
 .optionsDiv dd.opts a:hover {
     color: #fff;
-    background: #0d9572;
+    background: #44D0C7;
 }
 
 .optionsDiv dl.file dt {
@@ -11415,7 +11431,7 @@ ul.resumeLists li.job_item .checkbox {
 
 .jobListShow h3 a {
     font-size: 18px;
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .jobListShow h3 span {
@@ -11433,12 +11449,12 @@ ul.resumeLists li.job_item .checkbox {
 }
 
 .jobListShow .links a {
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: none;
 }
 
 .jobListShow .links a:hover {
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .check_popbox {
@@ -11737,12 +11753,12 @@ ul.resumeLists li.job_item .checkbox {
 }
 
 .links_middle a {
-    color: #0d9572;
+    color: #44D0C7;
     margin-left: 8px;
 }
 
 .links_middle a:hover {
-    color: #0d9572;
+    color: #44D0C7;
     text-decoration: underline;
 }
 
@@ -11894,13 +11910,13 @@ ul.my_collections li .co_item {
 
 ul.my_collections h2 {
     font-size: 18px;
-    color: #0d9572;
+    color: #44D0C7;
     margin: 0 0 3px;
     float: left;
 }
 
 ul.my_collections h2 a {
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 ul.my_collections h2 a span {
@@ -12325,7 +12341,7 @@ ul.my_collections li i {
 }
 
 .user_noReceiveEmail li a, .noreceive li a, .user_verEmailTxt li a {
-    color: #0d9572;
+    color: #44D0C7;
 }
 
 .user_verEmailTxt li {

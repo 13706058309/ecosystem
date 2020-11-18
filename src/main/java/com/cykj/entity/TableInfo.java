@@ -19,6 +19,16 @@ public class TableInfo {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "TableInfo{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", count=" + count +
+                ", data=" + data +
+                '}';
+    }
+
     public int getCode() {
         return code;
     }

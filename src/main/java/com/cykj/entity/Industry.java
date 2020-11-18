@@ -5,9 +5,24 @@ package com.cykj.entity;
  */
 public class Industry {
 
-  private long industryId;
-  private String industryName;
+  private long industryId;//行业ID
+  private String industryName;//行业名称
 
+  public Industry() {
+  }
+
+  public Industry(long industryId, String industryName) {
+    this.industryId = industryId;
+    this.industryName = industryName;
+  }
+
+  @Override
+  public String toString() {
+    return "Industry{" +
+            "industryId=" + industryId +
+            ", industryName='" + industryName + '\'' +
+            '}';
+  }
 
   public long getIndustryId() {
     return industryId;

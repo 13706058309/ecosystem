@@ -5,13 +5,14 @@ package com.cykj.entity;
  */
 public class Delivery {
 
-  private long deliveryId;
-  private long userId;
-  private long pPostId;
-  private long deliStandId;
-  private String feedBackInfo;
-  private java.sql.Date feedBackTime;
-  private long isRead;
+  private long deliveryId;//主键ID
+  private long userId;//用户ID
+  private long pPostId;//招聘岗位ID
+  private long deliStandId;//投递简历的状态
+  private String feedBackInfo;//反馈的消息
+  private String feedBackTime;//反馈时间
+  private long isRead;//是否读过
+  private String deliTime;//投递时间
 
 
   public long getDeliveryId() {
@@ -59,14 +60,13 @@ public class Delivery {
   }
 
 
-  public java.sql.Date getFeedBackTime() {
+  public String getFeedBackTime() {
     return feedBackTime;
   }
 
-  public void setFeedBackTime(java.sql.Date feedBackTime) {
+  public void setFeedBackTime(String feedBackTime) {
     this.feedBackTime = feedBackTime;
   }
-
 
   public long getIsRead() {
     return isRead;
@@ -76,4 +76,11 @@ public class Delivery {
     this.isRead = isRead;
   }
 
+  public String getDeliTime() {
+    return deliTime;
+  }
+
+  public void setDeliTime(String deliTime) {
+    this.deliTime = deliTime;
+  }
 }

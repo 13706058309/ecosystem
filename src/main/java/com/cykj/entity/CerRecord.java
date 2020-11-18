@@ -17,8 +17,17 @@ public class CerRecord {
   private String trueName; //真实姓名
   private String idNumber; //身份证号码
   private String beginTime; //申请时间
+  private int cerPhone;//联系号码
 
   public CerRecord() {
+  }
+
+  public int getCerPhone() {
+    return cerPhone;
+  }
+
+  public void setCerPhone(int cerPhone) {
+    this.cerPhone = cerPhone;
   }
 
   public long getCerRecordId() {
