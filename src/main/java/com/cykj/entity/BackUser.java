@@ -26,6 +26,8 @@ public class BackUser {
   private String stateId;//状态
   private Parameter states;//状态实体类 （iD 状态名称  类型）
   private String bRegTime;//注册时间
+  private String compName;
+  private String coreValue;
 
   public BackUser() {
   }
@@ -115,6 +117,21 @@ public class BackUser {
     this.infoIntr = infoIntr;
   }
 
+  public String getCompName() {
+    return compName;
+  }
+
+  public void setCompName(String compName) {
+    this.compName = compName;
+  }
+
+  public String getCoreValue() {
+    return coreValue;
+  }
+
+  public void setCoreValue(String coreValue) {
+    this.coreValue = coreValue;
+  }
 
   public String getBusiLice() {
     return busiLice;
