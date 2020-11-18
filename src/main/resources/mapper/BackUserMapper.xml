@@ -4,4 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.BackUserMapper">
 
+    <select id="isRepeat" parameterType="java.lang.String" resultType="com.cykj.entity.BackUser">
+        select * from backUser where account = #{account} and compName = #{compName}
+    </select>
+    <insert id="register" parameterType="com.cykj.entity.BackUser" keyProperty="bUserId" useGeneratedKeys="true">
+        insert into backUser(bUserName,compName,contactInfo,account,pwd,roleId)
+        values (#{bUserName},#{compName},#{contactInfo},#{account},#{pwd},1)
+    </insert>
+
 </mapper>

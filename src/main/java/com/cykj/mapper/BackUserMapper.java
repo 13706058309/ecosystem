@@ -1,5 +1,6 @@
 package com.cykj.mapper;
 
+import com.cykj.entity.BackUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BackUserMapper {
 
+    int register(BackUser backUser);
+    BackUser isRepeat(String account);
 }

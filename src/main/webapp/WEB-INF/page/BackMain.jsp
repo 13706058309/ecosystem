@@ -14,7 +14,6 @@
     <script src="${pageContext.request.contextPath}/layui/layui.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <script>
-        alert(${pageContext.request.contextPath});
         //JavaScript代码区域
         $(function () {
             layui.use(['element','layer'], function(){
@@ -59,35 +58,6 @@
                         </li>
                     </c:forEach>
                 </c:if>
-
-<%--                <li class="layui-nav-item layui-nav-itemed">--%>
-<%--                    <a class="" href="javascript:;">用户管理</a>--%>
-<%--                    <dl class="layui-nav-child">--%>
-<%--                        <dd><a href="${pageContext.request.contextPath}/jsp/admin/userSearch.jsp" target="mainFrame">用户查询</a></dd>--%>
-<%--                        <dd><a href="javascript:;">用户管控</a></dd>--%>
-<%--                    </dl>--%>
-<%--                </li>--%>
-<%--                <li class="layui-nav-item">--%>
-<%--                    <a href="javascript:;">文档管理</a>--%>
-<%--                    <dl class="layui-nav-child">--%>
-<%--                        <dd><a href="${pageContext.request.contextPath}/jsp/admin/docManager.jsp" target="mainFrame">文档审核</a></dd>--%>
-<%--                        <dd><a href="javascript:;">文档配置</a></dd>--%>
-<%--                    </dl>--%>
-<%--                </li>--%>
-<%--                <li class="layui-nav-item">--%>
-<%--                    <a href="javascript:;">日志管理</a>--%>
-<%--                    <dl class="layui-nav-child">--%>
-<%--                        <dd><a href="javascript:;">日志列表</a></dd>--%>
-<%--                    </dl>--%>
-<%--                </li>--%>
-<%--                <li class="layui-nav-item">--%>
-<%--                    <a href="javascript:;">系统配置</a>--%>
-<%--                    <dl class="layui-nav-child">--%>
-<%--                        <dd><a href="javascript:;">系统奖励配置</a></dd>--%>
-<%--                        <dd><a href="javascript:;">注册奖励配置</a></dd>--%>
-<%--                        <dd><a href="${pageContext.request.contextPath}/jsp/admin/powerManager.jsp" target="mainFrame">权限配置</a></dd>--%>
-<%--                    </dl>--%>
-<%--                </li>--%>
             </ul>
         </div>
     </div>

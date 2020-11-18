@@ -12,7 +12,7 @@ public class BackUser {
   private String bUserName; //用户名
   private String account; //账号
   private String pwd; //密码
-  private String contactInfo; //练习方式
+  private String contactInfo; //联系方式
   private String infoIntr; //信息简介
   private String busiLice; //营业执照
   private String email; //邮箱
@@ -23,11 +23,12 @@ public class BackUser {
   private String homePage; //主页
   private String finanStage; //融资阶段
   private String product; //公司产品
-  private String logp; //logo
+  private String logo; //logo
   private long roleId; //角色ID
   private RoleInfo role; //角色实体类
   private String stateId;//状态
   private Parameter states;//状态实体类 （iD 状态名称  类型）
+  private String compName; //公司名称
 
   public BackUser() {
   }
@@ -199,12 +200,12 @@ public class BackUser {
   }
 
 
-  public String getLogp() {
-    return logp;
+  public String getLogo() {
+    return logo;
   }
 
-  public void setLogp(String logp) {
-    this.logp = logp;
+  public void setLogo(String logo) {
+    this.logo = logo;
   }
 
   public String getStateId() {
@@ -221,5 +222,40 @@ public class BackUser {
 
   public void setStates(Parameter states) {
     this.states = states;
+  }
+
+  public String getCompName() {
+    return compName;
+  }
+
+  public void setCompName(String compName) {
+    this.compName = compName;
+  }
+
+  @Override
+  public String toString() {
+    return "BackUser{" +
+            "bUserId=" + bUserId +
+            ", bUserName='" + bUserName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", infoIntr='" + infoIntr + '\'' +
+            ", busiLice='" + busiLice + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            ", scale='" + scale + '\'' +
+            ", city='" + city + '\'' +
+            ", province='" + province + '\'' +
+            ", homePage='" + homePage + '\'' +
+            ", finanStage='" + finanStage + '\'' +
+            ", product='" + product + '\'' +
+            ", logo='" + logo + '\'' +
+            ", roleId=" + roleId +
+            ", role=" + role +
+            ", stateId='" + stateId + '\'' +
+            ", states=" + states +
+            ", compName='" + compName + '\'' +
+            '}';
   }
 }

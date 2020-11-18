@@ -74,4 +74,20 @@ public class TestController {
     public String unviTalent(){
         return "comp/BackUniversityTalent";
     }
+
+    @RequestMapping("/st")
+    public String st(){
+        return "Login";
+    }
+
+    @RequestMapping("/ss")
+    public String ss(){
+        return "Register";
+    }
+
+    @RequestMapping("/sb")
+    public String sb(){
+        return "adminLog";
+    }
+
 }
