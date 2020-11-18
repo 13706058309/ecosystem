@@ -13,5 +13,8 @@ import java.util.List;
  * 城市
  */
 public interface CityMapper {
+
+    public List<City> cityList();
+
     List<City> findCityByID(int provinceID);
 }

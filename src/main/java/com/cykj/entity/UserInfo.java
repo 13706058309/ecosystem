@@ -1,7 +1,5 @@
 package com.cykj.entity;
 
-import java.util.List;
-
 /**
  * 前台用户
  */
@@ -16,11 +14,19 @@ public class UserInfo {
 
   private String address; //地址
   private long isOpen; // 是否公开
-  private List<PostPosition> postPositions;
 
+  private String regTime;//注册时间
 
   public UserInfo() {
 
+  }
+
+  public String getRegTime() {
+    return regTime;
+  }
+
+  public void setRegTime(String regTime) {
+    this.regTime = regTime;
   }
 
   public long getUserId() {

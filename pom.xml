@@ -127,6 +127,13 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.1</version>
         </dependency>
+
+        <!-- 百度人工智能 -->
+        <dependency>
+            <groupId>com.baidu.aip</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>4.4.1</version>
+        </dependency>
     </dependencies>
 
     <build>
