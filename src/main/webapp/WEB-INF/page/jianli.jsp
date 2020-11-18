@@ -24,6 +24,7 @@
 
 <body>
 <input type="text" style="display: none" id="kong">
+<input type="hidden" id="resumeId" value="${resume.resumeId}">
 <div id="wrap" class="">
     <div id="main" class="inner">
         <div id="container" class="resume-container">
@@ -415,7 +416,7 @@
                                 <div class="layui-form-item">
 <%--                                    <div class="layui-input-inline">--%>
                                         <input type="button" value="保存" id="historySave" onclick="historySave2()" class="layui-btn">
-                                        <input type="button" value="提交" id="historyCommit" onclick="historyCommit()" class="layui-btn">
+                                        <input type="button" value="提交" id="historyCommit" onclick="historyCommit2()" class="layui-btn">
                                         <input type="button" value="取消" onclick="historyQuit()" class="layui-btn">
 <%--                                    </div>--%>
                                 </div>
@@ -513,8 +514,8 @@
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <input type="button" value="保存" id="projectSave" onclick="projectSave()" class="layui-btn">
-                                        <input type="button" value="提交" id="projectCommit" onclick="projectCommit()" class="layui-btn">
+                                        <input type="button" value="保存" id="projectSave" onclick="projectSave2()" class="layui-btn">
+                                        <input type="button" value="提交" id="projectCommit" onclick="projectCommit2()" class="layui-btn">
                                         <input type="button" value="取消" onclick="projectQuit()" class="layui-btn">
                                     </div>
                                 </div>
@@ -536,12 +537,12 @@
                                             <li ka="user-resume-edit-eduexp0" class="">
                                                 <div class="primary-info">
                                                     <!---->
+
                                                     <div class="info-text">
-                                                        <h4 class="name">学校：<label id="ebSchool9">${educationalBackgrounds.ebSchool}</label> </h4>
-                                                        <!----><span class="gray period">
-                                                            <label id="schBeginTime9">${educationalBackgrounds.schBeginTime}</label>
-                                                        --<label id="schEndTime9"> ${educationalBackgrounds.schEndTime}</label></span>
+                                                        <h4 class="name">学校：<label id="ebSchool9">${educationalBackgrounds.ebSchool}</label></h4><span
+                                                            class="gray period">在校时间：<label id="schBeginTime9">${educationalBackgrounds.schBeginTime}</label>--<label id="schEndTime9"> ${educationalBackgrounds.schEndTime}</label></span>
                                                     </div>
+
                                                     <div class="info-text">
                                                         <h4><span class="prev-line">专业：<label id="major9">${educationalBackgrounds.major}</label> </span><span
                                                                 class="prev-line">学历：<label id="ebEducation9">${educationalBackgrounds.ebEducation}</label>
@@ -555,7 +556,7 @@
                                                 <div class="op"><a href="javascript:;" ka="user-resume-del-project2"
                                                                    class="link-delete"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-delete"></use>
-                                                </svg><span onclick="educationtDelete(${educationalBackgrounds.ebId})">删除</span></a>
+                                                </svg><span onclick="educationDelete(${educationalBackgrounds.ebId})">删除</span></a>
                                                     <!----><a href="javascript:;" ka="user-resume-edit-eduexp0"
                                                               class="link-edit"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-edit"></use>
@@ -615,47 +616,13 @@
 
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <input type="button" value="保存" id="educationSave" onclick="educationSave()" class="layui-btn">
-                                        <input type="button" value="提交" id="educationCommit" onclick="educationCommit()" class="layui-btn">
+                                        <input type="button" value="保存" id="educationSave" onclick="educationSave2()" class="layui-btn">
+                                        <input type="button" value="提交" id="educationCommit" onclick="educationCommit2()" class="layui-btn">
                                         <input type="button" value="取消" onclick="educationQuit()" class="layui-btn">
                                     </div>
                                 </div>
                             </form>
                         </div>
-
-
-
-
-<%--                        <div id="certification" class="resume-item resume-certification">--%>
-<%--                            <div class="item-primary">--%>
-<%--                                <h3 class="title"> 资格证书 <a href="javascript:;" ka="add-certificate-click"--%>
-<%--                                                           class="link-add"><svg class="icon-svg">--%>
-<%--                                    <use xlink:href="#icon-svg-add"></use>--%>
-<%--                                </svg><span>添加</span></a></h3>--%>
-<%--                                <ul></ul>--%>
-<%--                            </div>--%>
-<%--                            <!---->--%>
-<%--                        </div>--%>
-<%--                        <div id="social" class="resume-item resume-social">--%>
-<%--                            <div class="item-primary">--%>
-<%--                                <h3 class="title"> 社交主页 <a href="javascript:;" ka="user-resume-add-website"--%>
-<%--                                                           class="link-add"><svg class="icon-svg">--%>
-<%--                                    <use xlink:href="#icon-svg-add"></use>--%>
-<%--                                </svg><span>添加</span></a></h3>--%>
-<%--                                <ul></ul>--%>
-<%--                            </div>--%>
-<%--                            <!---->--%>
-<%--                        </div>--%>
-<%--                        <div id="volunteer" class="resume-item resume-volunteer">--%>
-<%--                            <div class="item-primary">--%>
-<%--                                <h3 class="title"> 志愿服务经历 <a href="javascript:;" ka="user-resume-add-volunteer"--%>
-<%--                                                             class="link-add"><svg class="icon-svg">--%>
-<%--                                    <use xlink:href="#icon-svg-add"></use>--%>
-<%--                                </svg><span>添加</span></a></h3>--%>
-<%--                                <ul></ul>--%>
-<%--                            </div>--%>
-<%--                            <!---->--%>
-<%--                        </div>--%>
                         <div id="work-display1" class="resume-item resume-work-display">
                             <!---->
                             <!---->
@@ -820,6 +787,7 @@
 
 <script>
     //基本信息
+    var resumeId=$('#resumeId').val();
     var name;
     var statu;
     var clan;
@@ -834,6 +802,7 @@
     // 期望工作
     var expectWork;
     // 工作经历
+    var worksid;
     var companyName;
     var companyTrade;
     var companyPost;
@@ -842,6 +811,7 @@
     var duties;
     var performance;
     // 项目经历
+    var projects;
     var proName;
     var proPost;
     var proBeginTime;
@@ -850,6 +820,7 @@
     var proPerformance;
 
     // 教育背景
+    var educationsid;
     var ebSchool;
     var major;
     var ebEducation;
@@ -870,6 +841,8 @@
     }
     // 基础信息
     function userInfoUpdate(educationid) {
+        document.getElementById('ooo').style.textOverflow
+        $('#ooo').remo
         name=$('#realName').val()
         clan=$('#clan').val()
         statu=$('#politicalStatus').val()
@@ -960,19 +933,19 @@
         expectWork=$('#expectWork').val();
         // $('#expectWork').text(expectWork)
         $.ajax({
-            url: 'workSave',
+            url: 'expectWorkUpdate',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "expectWork="+expectWork,
-            processData:false,
-            contentType:false,
+            data: "expectWork="+expectWork+"&resumeId="+resumeId,
+            // processData:false,
+            // contentType:false,
             dataType: "text",
             success: function (data) {
                 if (data == "succes") {
                     //向服务端发送删除指令
                     layer.msg('修改成功')
-                    $('#expectWork').text(expectWork)
+                    $('#expectWork9').text(expectWork)
 
                 } else if (data == "lose") {
                     layer.msg("修改失败")
@@ -1000,20 +973,21 @@
     }
     function summarySave() {
         selfEva=$('#selfEva').val();
+        console.log(resumeId+"??????????")
         $.ajax({
-            url: 'workSave',
+            url: 'selfEvaUpdate',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "selfEva="+selfEva,
-            processData:false,
-            contentType:false,
+            data: "selfEva="+selfEva+"&resumeId="+resumeId,
+            // processData:false,
+            // contentType:false,
             dataType: "text",
             success: function (data) {
                 if (data == "succes") {
                     //向服务端发送删除指令
                     layer.msg('修改成功')
-                    $('#selfEva').text(selfEva)
+                    $('#selfEva9').text(selfEva)
 
                 } else if (data == "lose") {
                     layer.msg("修改失败")
@@ -1054,7 +1028,7 @@
     function historyUpdate(weid) {
         document.getElementById('historySave').hidden=false;
         document.getElementById('historyCommit').hidden=true;
-        var worksid="works"+weid;
+        worksid="works"+weid;
         companyName=$('#'+worksid).find('#companyName9').text();
         companyTrade=$('#'+worksid).find('#companyTrade9').text();
         companyPost=$('#'+worksid).find('#companyPost9').text();
@@ -1077,9 +1051,32 @@
         $("#history-update").show()
     }
     function historyDelete(weid) {
-
+        console.log(weid+"???????????")
+        $.ajax({
+            url: 'historyDelete',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "weId="+weid,
+            // processData:false,
+            // contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('删除成功')
+                    // location.reload()
+                } else if (data == "lose") {
+                    layer.msg("删除失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
     }
-    function historyCommit() {
+    function historyCommit2() {
+        $('#weId').val(0);
         var  workInsert=new FormData(document.getElementById("workInsert"));
         console.log(workInsert)
         $.ajax({
@@ -1122,7 +1119,14 @@
                 if (data == "succes") {
                     //向服务端发送删除指令
                     layer.msg('添加成功')
-                    location.reload()
+                    $('#'+worksid).find('#companyName9').text($('#companyName').val());
+                    $('#'+worksid).find('#companyTrade9').text($('#companyTrade').val());
+                    $('#'+worksid).find('#companyPost9').text($('#companyPost').val());
+                    $('#'+worksid).find('#beginTime9').text($('#beginTime').val());
+                    $('#'+worksid).find('#endTime9').text($('#endTime').val());
+                    $('#'+worksid).find('#duties9').text($('#duties').val());
+                    $('#'+worksid).find('#performance9').text($('#performance').val());
+                    // location.reload()
                 } else if (data == "lose") {
                     layer.msg("添加失败")
                 }
@@ -1145,18 +1149,133 @@
 
     }
     // 项目经历
-    function projectInsert(peid) {
+    function projectInsert() {
+        document.getElementById('projectSave').hidden=true;
+        document.getElementById('projectCommit').hidden=false;
+
+        $('#proName').val(null);
+        $('#proPost').val(null);
+        $('#proBeginTime').val(null);
+        $('#proEndTime').val(null);
+        $('#proDescription').val(null);
+        $('#proPerformance').val(null);
         $("#project").hide()
         $("#project-update").show()
     }
     function projectDelete(peid) {
-
+        var peId=peid;
+        console.log(peId+"?????????")
+        $.ajax({
+            url: 'projectDelete',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "peId="+peId,
+            // processData:false,
+            // contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('删除成功')
+                    location.reload()
+                } else if (data == "lose") {
+                    layer.msg("删除失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
     }
-    function projectUpdate() {
+    function projectUpdate(peid) {
+        document.getElementById('projectSave').hidden=false;
+        document.getElementById('projectCommit').hidden=true;
+        projects="projects"+peid;
+        proName=$('#'+projects).find('#proName9').text();
+        proPost=$('#'+projects).find('#proPost9').text();
+        proBeginTime=$('#'+projects).find('#proBeginTime9').text();
+        proEndTime=$('#'+projects).find('#proEndTime9').text();
+        proDescription=$('#'+projects).find('#proDescription9').text();
+        proPerformance=$('#'+projects).find('#proPerformance9').text();
+
+
+        $('#peId').val(peid);
+        $('#proName').val(proName);
+        $('#proPost').val(proPost);
+        $('#proBeginTime').val(proBeginTime);
+        $('#proEndTime').val(proEndTime);
+        $('#proDescription').val(proDescription);
+        $('#proPerformance').val(proPerformance);
+
+
         $("#project").hide()
         $("#project-update").show()
     }
-    function projectSave() {
+    function projectSave2() {
+        var  projectInsert=new FormData(document.getElementById("projectInsert"));
+        console.log(workInsert)
+        $.ajax({
+            url: 'projectSave',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: projectInsert,
+            dataType: "text",
+            processData:false,
+            contentType:false,
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('修改成功')
+                    $('#'+projects).find('#proName9').text($('#proName').val());
+                    $('#'+projects).find('#proPost9').text($('#proPost').val());
+                    $('#'+projects).find('#proBeginTime9').text($('#proBeginTime').val());
+                    $('#'+projects).find('#proEndTime9').text($('#proEndTime').val());
+                    $('#'+projects).find('#proDescription9').text($('#pproDescription').val());
+                    $('#'+projects).find('#proPerformance9').text($('#proPerformance').val());
+                } else if (data == "lose") {
+                    layer.msg("添加失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
+
+        event.preventDefault()
+        $("#project").show()
+        $("#project-update").hide()
+    }
+    function projectCommit2() {
+        $('#peId').val(0);
+        var  projectInsert=new FormData(document.getElementById("projectInsert"));
+        console.log(workInsert)
+        $.ajax({
+            url: 'projectCommit',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: projectInsert,
+            dataType: "text",
+            processData:false,
+            contentType:false,
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('添加成功')
+                    location.reload()
+                } else if (data == "lose") {
+                    layer.msg("添加失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
+
         event.preventDefault()
         $("#project").show()
         $("#project-update").hide()
@@ -1168,17 +1287,132 @@
     }
     // 教育背景
     function educationtInsert() {
-        $("#education").hide()
-        $("#education-update").show()
-    }
-    function educationtDelete(weid) {
+        document.getElementById('educationSave').hidden=true;
+        document.getElementById('educationCommit').hidden=false;
 
-    }
-    function educationtUpdate(weid) {
+        $('#ebSchool').val(null);
+        $('#major').val(null);
+        $('#ebEducation').val(null);
+        $('#schBeginTime').val(null);
+        $('#schEndTime').val(null);
+        $('#schExperience').val(null);
+
+
         $("#education").hide()
         $("#education-update").show()
     }
-    function educationSave() {
+    function educationDelete(ebid) {
+        console.log(ebid+"?????????")
+        $.ajax({
+            url: 'educationDelete',
+            charset:"UTF-8",
+            async: "true",
+            contentType:'application/x-www-form-urlencoded',
+            type: "post",
+            data: "ebId="+ebid,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('删除成功')
+                    // location.reload()
+                } else if (data == "lose") {
+                    layer.msg("删除失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+    }
+    function educationtUpdate(ebid) {
+        document.getElementById('educationSave').hidden=false;
+        document.getElementById('educationCommit').hidden=true;
+        educationsid="educationalBackgrounds"+ebid;
+        ebSchool=$('#'+educationsid).find('#ebSchool9').text();
+        major=$('#'+educationsid).find('#major9').text();
+        ebEducation=$('#'+educationsid).find('#ebEducation9').text();
+        schBeginTime=$('#'+educationsid).find('#schBeginTime9').text();
+        schEndTime=$('#'+educationsid).find('#schEndTime9').text();
+        schExperience=$('#'+educationsid).find('#schExperience9').text();
+
+
+        $('#ebId').val(ebid);
+        $('#ebSchool').val(ebSchool);
+        $('#major').val(major);
+        $('#ebEducation').val(ebEducation);
+        $('#schBeginTime').val(schBeginTime);
+        $('#schEndTime').val(schEndTime);
+        $('#schExperience').val(schExperience);
+
+
+        $("#education").hide()
+        $("#education-update").show()
+    }
+    function educationSave2() {
+        var  educationInsert=new FormData(document.getElementById("educationInsert"));
+        $.ajax({
+            url: 'educationSave',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: educationInsert,
+            processData:false,
+            contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('修改成功')
+                    $('#'+educationsid).find('#ebSchool9').text($('#ebSchool').val());
+                    $('#'+educationsid).find('#major9').text($('#major').val());
+                    $('#'+educationsid).find('#ebEducation9').text($('#ebEducation').val());
+                    $('#'+educationsid).find('#schBeginTime9').text($('#schBeginTime').val());
+                    $('#'+educationsid).find('#schEndTime9').text($('#schEndTime').val());
+                    $('#'+educationsid).find('#schExperience9').text($('#schExperience').val());
+                } else if (data == "lose") {
+                    layer.msg("添加失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
+
+
+        event.preventDefault()
+        $("#education").show()
+        $("#education-update").hide()
+    }
+    function educationCommit2() {
+        $('#ebId').val(0);
+        console.log($('#ebId'))
+        var  educationInsert=new FormData(document.getElementById("educationInsert"));
+        $.ajax({
+            url: 'educationCommit',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: educationInsert,
+            processData:false,
+            contentType:false,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('添加成功')
+                    location.reload()
+                } else if (data == "lose") {
+                    layer.msg("添加失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
+
         event.preventDefault()
         $("#education").show()
         $("#education-update").hide()

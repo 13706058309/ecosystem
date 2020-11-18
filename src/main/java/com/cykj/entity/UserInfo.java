@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import java.util.List;
+
 /**
  * 前台用户
  */
@@ -14,6 +16,7 @@ public class UserInfo {
 
   private String address; //地址
   private long isOpen; // 是否公开
+  private List<PostPosition> postPositions;
 
 
   public UserInfo() {

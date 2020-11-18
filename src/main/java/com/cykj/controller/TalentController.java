@@ -4,11 +4,8 @@ package com.cykj.controller;
 import com.cykj.entity.TableInfo;
 import com.cykj.entity.Talent;
 import com.cykj.service.TalentService;
-import com.cykj.service.UserService;
 import com.google.gson.Gson;
-
 import org.apache.commons.io.FileUtils;
-
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.hwpf.extractor.WordExtractor;
@@ -24,14 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.*;
 
 @Controller

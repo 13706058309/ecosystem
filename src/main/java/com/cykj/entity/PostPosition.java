@@ -29,6 +29,7 @@ public class PostPosition {
   private String detailAddress;//详细地址
   private String contact;//联系方式
   private String contactEmail;//联系邮箱
+  private BackUser backUser;
 
 
   @Override
@@ -58,6 +59,14 @@ public class PostPosition {
   }
 
   public PostPosition() {
+  }
+
+  public long getpPostId() {
+    return pPostId;
+  }
+
+  public void setpPostId(long pPostId) {
+    this.pPostId = pPostId;
   }
 
   public long getPPostId() {
@@ -233,5 +242,17 @@ public class PostPosition {
 
   public void setContactEmail(String contactEmail) {
     this.contactEmail = contactEmail;
+  }
+
+  public void setReleaseTime(String releaseTime) {
+    this.releaseTime = releaseTime;
+  }
+
+  public BackUser getBackUser() {
+    return backUser;
+  }
+
+  public void setBackUser(BackUser backUser) {
+    this.backUser = backUser;
   }
 }
