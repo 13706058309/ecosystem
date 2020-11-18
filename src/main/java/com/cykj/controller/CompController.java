@@ -2,8 +2,15 @@ package com.cykj.controller;
 
 import com.cykj.entity.*;
 import com.cykj.service.BackCompService;
+import com.cykj.utils.MyUtil;
+import com.cykj.utils.WordUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -516,6 +523,54 @@ public class CompController {
     public @ResponseBody String compChangePwd(String newPwd,String pwd){
 
         return backCompService.changePwd(newPwd,pwd,3);
+    }
+
+    @RequestMapping("/outTalentResum")
+    public ResponseEntity<byte[]> outTalentResum(int talentID) throws IOException {
+        Talent talent = backCompService.findTalentByID(talentID);
+        System.out.println(talent);
+        Map<String,Object> map = new HashMap<>();
+        map.put("talentName",talent.getTalentName());
+        map.put("school",talent.getSchool());
+        map.put("birthday",talent.getBirthday());
+        map.put("contactInfo",talent.getContactInfo());
+        map.put("profession",talent.getProfession());
+        map.put("politicalStatus",talent.getPoliticalStatus());
+        map.put("workExp",talent.getWorkExp());
+        map.put("jobPlan",talent.getJobPlan());
+        map.put("selfEva",talent.getSelfEva());
+        map.put("education",talent.getEducation());
+        map.put("address",talent.getAddress());
+        map.put("certificate",talent.getCertificate());
+        WordUtil wordUtil = new WordUtil();
+        String path = wordUtil.createWord(map, MyUtil.TALENTRESUME);
+
+        //把下载文件构成一个文件处理
+        File file = new File(path);
+        //设置头信息
+        HttpHeaders httpHeaders = new HttpHeaders();
+        String downloadFileName = new String((path.substring(path.lastIndexOf("\\")+1)).getBytes("UTF-8"), "iso-8859-1");
+        //设置响应的文件名
+        httpHeaders.setContentDispositionFormData("attachment",downloadFileName);
+        //MediaType:互联网媒介类型，contextType 具体请求中的媒体类型信息
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
+    }
+
+    @RequestMapping("/outResume")
+    public ResponseEntity<byte[]> outResume(int resumeID) throws IOException {
+
+        String path = backCompService.outResume(resumeID);
+        //把下载文件构成一个文件处理
+        File file = new File(path);
+        //设置头信息
+        HttpHeaders httpHeaders = new HttpHeaders();
+        String downloadFileName = new String((path.substring(path.lastIndexOf("\\")+1)).getBytes("UTF-8"), "iso-8859-1");
+        //设置响应的文件名
+        httpHeaders.setContentDispositionFormData("attachment",downloadFileName);
+        //MediaType:互联网媒介类型，contextType 具体请求中的媒体类型信息
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
     }
 
 }

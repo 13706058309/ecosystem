@@ -136,7 +136,7 @@
             <div class="mainNavs">
                 <c:forEach items="${industry}" var="industry">
                     <div class="menu_box" >
-                        <div class="menu_main" onmouseover="menu_box(${industry.industryId})">
+                        <div class="menu_main" onmouseenter="menu_box(${industry.industryId},this)" onmouseleave="out()">
                             <h2>${industry.industryName}<span></span></h2 >
                             <a href="h/jobs/list_Java?labelWords=label">Java</a>
                             <a href="h/jobs/list_PHP?labelWords=label">PHP</a>
@@ -144,16 +144,15 @@
                         </div>
                         <div class="menu_sub dn">
                             <dl class="reset">
-                                <dt id="dt">
-                                    <a>
-                                        dfghj
-                                    </a>
-
+                                <dt>
+<%--                                    <a>--%>
+<%--                                        dfghj--%>
+<%--                                    </a>--%>
                                 </dt>
                                 <dd>
-                                    <a href="h/jobs/list_Java?labelWords=label" class="curr">
-                                        esrtyt6y7ui
-                                    </a>
+<%--                                    <a href="h/jobs/list_Java?labelWords=label" class="curr">--%>
+<%--                                        esrtyt6y7ui--%>
+<%--                                    </a>--%>
                                 </dd>
                             </dl>
                         </div>
@@ -464,6 +463,8 @@
 
 <script type="text/javascript" src="../style/js/core.min.js"></script>
 <script type="text/javascript" src="../style/js/popup.min.js"></script>
+<script>
 
+</script>
 </body>
 </html>

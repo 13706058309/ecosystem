@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="${pageContext.request.contextPath}/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackUnPassResume.css">
@@ -26,7 +26,16 @@
     <a class="layui-btn layui-btn-xs" lay-event="deter">待定</a>
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="refuse">拒绝</a>
 </script>
+<style type="text/css">
+    .layui-table-cell {
+        height: auto !important;
+        white-space: normal;
 
+    }
+    .layui-table img{
+        max-width: 200px;
+    }
+</style>
 <h1 style="text-align: center">待处理简历</h1>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
 <div class="demoTable layui-form" style="margin-left: 27%">
@@ -47,12 +56,13 @@
     </div>
     <div class="layui-form-item">
 
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width:100px">发布岗位名称:</label>
+
+            <label class="layui-form-label">发布岗位:</label>
             <div class="layui-input-inline">
                 <input type="tel" id="postName" class="layui-input">
             </div>
-        </div>
+
+
 
         <label class="layui-form-label">学历</label>
         <div class="layui-input-inline">
@@ -66,11 +76,12 @@
             </select>
         </div>
 
-        <div class="layui-inline">
+
+
             <div class="layui-input-inline" style="margin-left: 8%">
                 <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
             </div>
-        </div>
+
     </div>
 </div>
 
@@ -95,7 +106,7 @@
             <td width="19%" id="dName">2</td>
             <td width="19%">民族</td>
             <td width="19%" id="dClen">4</td>
-            <td rowspan="5" colspan="2"></td>
+            <td rowspan="5" colspan="2" id="imgs" ></td>
         </tr>
         <tr >
             <td>政治面貌</td>
@@ -142,6 +153,9 @@
         </tbody>
 
     </table>
+    <div class="layui-input-inline" style="margin-left: 50%">
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResume()" >简历导出</button>
+    </div>
 </div>
 </body>
 <script>

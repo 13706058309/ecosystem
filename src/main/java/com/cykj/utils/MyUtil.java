@@ -8,6 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MyUtil {
+
+    public static final String RESUME = "resume.ftl";
+    public static final String TALENTRESUME = "talentResume.ftl";
+
     public static String getFoatTime(Date date){
         SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
         return f.format(date);

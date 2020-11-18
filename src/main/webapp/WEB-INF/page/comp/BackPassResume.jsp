@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="${pageContext.request.contextPath}/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackUnPassResume.css">
@@ -85,7 +85,7 @@
             <td width="19%" id="dName">2</td>
             <td width="19%">民族</td>
             <td width="19%" id="dClen">4</td>
-            <td rowspan="5" colspan="2"></td>
+            <td rowspan="5" colspan="2"><img src="" id="imgs" width="100%" height="100%"></td>
         </tr>
         <tr >
             <td>政治面貌</td>
@@ -125,7 +125,7 @@
         </tr>
         <tr>
             <td rowspan="1">自我评价</td>
-            <td colspan="5" id="DselfEva" > </td>
+            <td colspan="5" id="DselfEva" id="imgs" > </td>
         </tr>
         <tbody id="tbody">
 

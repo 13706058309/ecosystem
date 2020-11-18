@@ -55,4 +55,8 @@ public interface BackCompService {
     String changeCompInfo(Map<String,Object> map);
     //修改密码
     String changePwd(String newPwd, String pwd,int compID);
+    //查找高校人才信息
+    Talent findTalentByID(int talentID);
+    //简历导出
+    String outResume(int resumeID);
 }

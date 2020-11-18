@@ -1,3 +1,6 @@
+//简历主键ID
+var reID;
+
 function showDetail2(data) {
     $("#dName").text(data.realName);
     $("#dClen").text(data.clan);
@@ -72,7 +75,7 @@ function showDetail2(data) {
 }
 
 function showDetails(data) {
-    if(datat.isShow==1){
+    if(data.isShow==1){
         $("#dName").text(data.realName);
         $("#dBir").text(data.contactInfo);
         $("#DAddress").text(data.address);
@@ -106,7 +109,7 @@ function showDetails(data) {
 }
 
 function showDetail(data) {
-
+    var paths = $("#path").val();
     $("#dName").text(data.realName);
     $("#dBir").text(data.contactInfo);
     $("#DAddress").text(data.address);
@@ -129,11 +132,18 @@ function showDetail(data) {
     }else{
         $("#jobStand").text("在职月内到岗")
     }
+    // $("#imgs").attr("scr",paths+data.photo);
+    $("#imgs").empty();
+    // var img=new Image();
+    // img.src=paths+data.photo;
+    var $img = $("<img width='160px' height='200px' src='"+paths+data.photo+"'>")
 
+    $("#imgs").append($img);
     $("#tbody").empty();
 }
 
 function findDetailResume(resumeID) {
+    reID = resumeID;
     $.ajax({
         url:path+"/rec/findResumeDetail",
         data:"resumeID="+resumeID,
@@ -193,4 +203,8 @@ function findDetailResume(resumeID) {
         },
     })
 
+}
+
+function outResume() {
+    location.href = path+"/rec/outResume?resumeID="+reID;
 }

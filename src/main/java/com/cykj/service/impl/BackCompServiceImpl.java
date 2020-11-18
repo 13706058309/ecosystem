@@ -3,6 +3,8 @@ package com.cykj.service.impl;
 import com.cykj.entity.*;
 import com.cykj.mapper.*;
 import com.cykj.service.BackCompService;
+import com.cykj.utils.MyUtil;
+import com.cykj.utils.WordUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -295,5 +297,109 @@ public class BackCompServiceImpl implements BackCompService {
             }
         }
         return msg;
+    }
+
+    @Override
+    public Talent findTalentByID(int talentID) {
+        return talentMapper.findTalentByID(talentID);
+    }
+
+    @Override
+    public String outResume(int resumeID) {
+        Resume resume = resumeMapper.findResumeDetail(resumeID);
+        Map<String,Object> map = new HashMap<>();
+        map.put("realName",resume.getRealName());
+        map.put("clan",resume.getClan());
+        map.put("politicalStatus",resume.getPoliticalStatus());
+        map.put("birthday",resume.getBirthday());
+        map.put("sex",resume.getSex());
+        map.put("workYear",resume.getWrokYear());
+        map.put("education",resume.getEducation().getEducation());
+        map.put("profession",resume.getProfession());
+        map.put("school",resume.getSchool());
+        int standID = (int) resume.getJobStandId();
+        if(standID==4){
+            map.put("jobStand","已就业");
+        }else if(standID==5){
+            map.put("jobStand","为就业");
+        }else{
+            map.put("jobStand","在职月内到岗");
+        }
+
+        map.put("expectWork",resume.getExpectWork());
+        map.put("industry",resume.getIndustry());
+        map.put("address",resume.getAddress());
+        map.put("contactInfo",resume.getContactInfo());
+        map.put("selfEva",resume.getSelfEva());
+
+        map.put("school1",resume.getEducationalBackgrounds().get(0).getEbSchool());
+        map.put("schBegin1",resume.getEducationalBackgrounds().get(0).getSchBeginTime());
+        map.put("edu1",resume.getEducationalBackgrounds().get(0).getEbEducation());
+        map.put("schEnd1",resume.getEducationalBackgrounds().get(0).getSchEndTime());
+        map.put("schoolExp1",resume.getEducationalBackgrounds().get(0).getSchExperience());
+        if(resume.getEducationalBackgrounds().size()==2){
+            map.put("school2",resume.getEducationalBackgrounds().get(1).getEbSchool());
+            map.put("schBegin2",resume.getEducationalBackgrounds().get(1).getSchBeginTime());
+            map.put("edu2",resume.getEducationalBackgrounds().get(1).getEbEducation());
+            map.put("schEnd2",resume.getEducationalBackgrounds().get(1).getSchEndTime());
+            map.put("schoolExp2",resume.getEducationalBackgrounds().get(1).getSchExperience());
+        }else{
+            map.put("school2","");
+            map.put("schBegin2","");
+            map.put("edu2","");
+            map.put("schEnd2","");
+            map.put("schoolExp2","");
+        }
+
+        map.put("compName1",resume.getWorkExperiences().get(0).getCompanyName());
+        map.put("begin1",resume.getWorkExperiences().get(0).getBeginTime());
+        map.put("post1",resume.getWorkExperiences().get(0).getCompanyPost());
+        map.put("end1",resume.getWorkExperiences().get(0).getEndTime());
+        map.put("trade1",resume.getWorkExperiences().get(0).getDuties());
+        map.put("performace1",resume.getWorkExperiences().get(0).getPerformance());
+        if(resume.getWorkExperiences().size()==2){
+            map.put("compName2",resume.getWorkExperiences().get(1).getCompanyName());
+            map.put("begin2",resume.getWorkExperiences().get(1).getBeginTime());
+            map.put("post2",resume.getWorkExperiences().get(1).getCompanyPost());
+            map.put("end2",resume.getWorkExperiences().get(1).getEndTime());
+            map.put("trade2",resume.getWorkExperiences().get(1).getDuties());
+            map.put("performace2",resume.getWorkExperiences().get(1).getPerformance());
+        }else{
+            map.put("compName2","");
+            map.put("begin2","");
+            map.put("post2","");
+            map.put("end2","");
+            map.put("trade2","");
+            map.put("performace2","");
+        }
+
+
+        map.put("projectName1",resume.getProjectExperiences().get(0).getProName());
+        map.put("proBegin1",resume.getProjectExperiences().get(0).getProBeginTime());
+        map.put("proPost1",resume.getProjectExperiences().get(0).getProPost());
+        map.put("proEnd1",resume.getProjectExperiences().get(0).getProEndTime());
+        map.put("proDes1",resume.getProjectExperiences().get(0).getProDescription());
+        map.put("proWork1",resume.getProjectExperiences().get(0).getProPerformance());
+
+        if(resume.getProjectExperiences().size()==2){
+            map.put("projectName2",resume.getProjectExperiences().get(1).getProName());
+            map.put("proBegin2",resume.getProjectExperiences().get(1).getProBeginTime());
+            map.put("proPost2",resume.getProjectExperiences().get(1).getProPost());
+            map.put("proEnd2",resume.getProjectExperiences().get(1).getProEndTime());
+            map.put("proDes2",resume.getProjectExperiences().get(1).getProDescription());
+            map.put("proWork2",resume.getProjectExperiences().get(1).getProPerformance());
+        }else{
+            map.put("projectName2","");
+            map.put("proBegin2","");
+            map.put("proPost2","");
+            map.put("proEnd2","");
+            map.put("proDes2","");
+            map.put("proWork2","");
+        }
+        WordUtil wordUtil = new WordUtil();
+        String imageBase = wordUtil.getImageBase("static"+resume.getPhoto());
+        map.put("image",imageBase);
+        String path = wordUtil.createWord(map, MyUtil.RESUME);
+        return path;
     }
 }
