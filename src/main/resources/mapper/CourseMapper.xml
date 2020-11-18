@@ -5,18 +5,48 @@
 <mapper namespace="com.cykj.mapper.CourseMapper">
     <select id="findCourseOnPage" parameterType="java.util.HashMap" resultMap="results">
         select * from course where courseName like concat('%',#{courseName},'%') and courseId != 0
+        <if test="fieldId!=null">
+            and fieldId = #{fieldId}
+        </if>
         limit #{offset},#{limit}
     </select>
     <resultMap id="results" type="com.cykj.entity.Course">
         <id property="courseId" column="courseId"></id>
-        <result property="fieldId" column="fieldId"></result>
+<!--        <id property="fieldId" column="fieldId"></id>-->
         <result property="courseName" column="courseName"></result>
+        <result property="courseImgURL" column="courseImgURL"></result>
+        <result property="speakerName" column="speakerName"></result>
+        <result property="courseIntroduce" column="courseIntroduce"></result>
         <result property="uploadTime" column="uploadTime"></result>
+        <result property="collectionNumber" column="collectionNumber"></result>
+        <result property="fieldId" column="fieldId"></result>
+        <result property="speakerHeadImgUrl" column="speakerHeadImgUrl"></result>
+        <result property="totalPlayTimes" column="totalPlayTimes"></result>
     </resultMap>
-    
+<!--    <resultMap id="results" type="com.cykj.entity.Course">-->
+<!--        <id property="courseId" column="courseId"></id>-->
+<!--        <id property="fieldId" column="fieldId"></id>-->
+<!--        <result property="courseName" column="courseName"></result>-->
+<!--        <result property="uploadTime" column="uploadTime"></result>-->
+<!--    </resultMap>-->
+
+
+
+<!--    &lt;!&ndash;查询订单表信息&ndash;&gt;-->
+<!--    <select id="getOrderList" parameterType="java.lang.String" resultMap="results">-->
+<!--       select courseId,fieldId,courseName,uploadTime from course where fieldId =(select f.fieldId from field f where f.fieldName = '#{selectvalue}')-->
+<!--    </select>-->
+
+
     <select id="findNumOnPage" parameterType="java.util.HashMap" resultType="int">
         select count(*) from course where 1=1 and courseName like concat('%',#{courseName},'%') and courseId != 0
     </select>
+
+    <delete id="deleteCourse" parameterType="java.lang.Integer" >
+        delete from course where courseId = #{courseId}
+    </delete>
+
+
 <!--    <select id="findCourse"  resultType="com.cykj.entity.Course">-->
 <!--        select courseId,fieldId,courseName,uploadTime  from course ;-->
 <!--    </select>-->

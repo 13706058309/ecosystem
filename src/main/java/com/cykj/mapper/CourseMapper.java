@@ -20,6 +20,8 @@ public interface CourseMapper {
 
     int findNumOnPage(Map<String, Object> map);
 
+    int deleteCourse(Integer courseId);
+
 
 //public List<Course> findCourse();
 //public List<Course> search(String courseName);

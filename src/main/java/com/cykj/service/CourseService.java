@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface CourseService {
     public TableInfo findCourse(Map<String,Object> map,Integer page,Integer limit);
+    public int deleteCourse(Integer courseId);
 //    public List<Course> findCourse();
 //    public List<Course> search(String courseName);
 }

@@ -25,6 +25,12 @@ public class CourseServiceImpl implements CourseService {
         return tableInfo;
     }
 
+    @Override
+    public int deleteCourse(Integer courseId) {
+        int course = courseMapper.deleteCourse(courseId);
+        return  course;
+    }
+
 //    @Resource
 //    private CourseMapper courseMapper;
 //    @Override

@@ -33,21 +33,45 @@ private CourseServiceImpl courseServiceImpl;
 
     @RequestMapping(value = "/findCourse",produces = "text/html;charset=UTF-8")
     public @ResponseBody
-    String getTableInfo(Integer page,Integer limit,String courseName){
+    String getTableInfo(Integer page,Integer limit,String courseName,String fieldId){
 
         System.out.println("我获取到了courseName,值为："+courseName);
+        System.out.println("我获取到了selectvalue,值为："+fieldId);
         Map<String,Object> map = new HashMap<>();
         if (courseName != null && courseName.length() != 0){
             map.put("courseName",courseName);
+            //map.put("selectvalue",selectvalue);
             System.out.println("map有值，值为："+map);
         }
         else {
             map.put("courseName","");
-            System.out.println("map无值，但是执行到了这里！！！！！！！！！！！！！");
+            //map.put("selectvalue",selectvalue);
+            System.out.println("搜索框為空，但是下拉框可能有值，值為："+map);
+        }
+        if (fieldId != null && fieldId.length() != 0){
+            map.put("fieldId",fieldId);
+            System.out.println("map有值，值为："+map);
         }
         TableInfo tableInfo = courseServiceImpl.findCourse(map,page,limit);
         return new Gson().toJson(tableInfo);
     }
+
+    @RequestMapping("deleteCourse")
+    public void deleteCourse(HttpServletRequest req,HttpServletResponse resp,Integer courseId){
+        System.out.println(courseId);
+        System.out.println("走入删除 控制类");
+
+//        Map<String,Object> map = new HashMap<>();
+        if (courseId != 0){
+//            map.put("courseId",courseId);
+            int course = courseServiceImpl.deleteCourse(courseId);
+        }
+
+
+
+    }
+
+
 
 //    @RequestMapping("findCourse")
 //    public void  findCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
