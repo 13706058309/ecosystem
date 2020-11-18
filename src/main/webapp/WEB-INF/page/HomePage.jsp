@@ -40,7 +40,7 @@
     <script src="../js/homePage.js"></script>
 
 </head>
-<body>
+<body style="background-color: #f6f6f8">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <%--切换城市弹窗--%>
 <div id="choiceCity" style="display: none">
@@ -62,9 +62,9 @@
         <hr>
         <c:forEach items="${cityList}" var="city">
             <button type="button" class="layui-btn layui-btn-primary" style="margin: 13px 8px;"
-                    onmouseover="this.style.backgroundColor='#44D0C7',this.style.color='#fafafa'";
-                    onmouseout="this.style.backgroundColor='#fafafa',this.style.color='#0e1726'";
-                    onclick="City(this)" >
+                    onmouseover="this.style.backgroundColor='#44D0C7',this.style.color='#fafafa'" ;
+                    onmouseout="this.style.backgroundColor='#fafafa',this.style.color='#0e1726'" ;
+                    onclick="City(this)">
                     ${city.cityName}
             </button>
         </c:forEach>
@@ -81,10 +81,8 @@
                 <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li><a href="" target="_blank">校招</a></li>
                 <li><a href="" target="_blank">课程</a></li>
-                <li><a href="${pageContext.request.contextPath}/center/jianli"  rel="nofollow">我的简历</a></li>
+                <li><a href="${pageContext.request.contextPath}/center/jianli" rel="nofollow">我的简历</a></li>
                 <li><a href="" rel="nofollow">发布职位</a></li>
-
-
             </ul>
             <ul class="loginTop" style="font-size: 18px">
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
@@ -94,7 +92,7 @@
         </div>
         <div style="float: right" onclick="cutCity()">
             <a id="city" class="layui-icon layui-icon-location" style="font-size: 15px; color: #0C0C0C;"></a>
-            <a style="font-size: 15px" >[切换城市]</a>
+            <a style="font-size: 15px">[切换城市]</a>
         </div>
     </div><!-- end #header -->
 
@@ -129,34 +127,27 @@
     <%--------------------------------------------------------------------------------   左侧三级菜单--%>
     <div id="container">
         <div id="sidebar" style="top: 240px">
-
-            <div class="mainNavs">
+            <div class="mainNavs" id="hidden">
                 <c:forEach items="${industry}" var="industry">
-                    <div class="menu_box" >
+                    <div class="menu_box">
                         <div class="menu_main" onmouseover="menu_box(${industry.industryId},this)">
-                            <h2>${industry.industryName}<span></span></h2 >
-                            <a href="h/jobs/list_Java?labelWords=label">Java</a>
-                            <a href="h/jobs/list_PHP?labelWords=label">PHP</a>
-                            <a href="h/jobs/list_C?labelWords=label">C</a>
+                            <h2><b>${industry.industryName}<span></span></b></h2>
                         </div>
                         <div class="menu_sub dn">
                             <dl class="reset">
-                                <dt id="dt">
-                                    <a>
-                                        dfghj
-                                    </a>
-
-                                </dt>
-                                <dd>
-                                    <a href="h/jobs/list_Java?labelWords=label" class="curr">
-                                        esrtyt6y7ui
-                                    </a>
-                                </dd>
+                                <dt id="dt"></dt>
+                                <dd></dd>
                             </dl>
                         </div>
                     </div>
                 </c:forEach>
             </div>
+            <div class="menu_box" id="aShow" STYLE="background-color: #FFFFFF;">
+                <div class="menu_main">
+                    <a onmouseover="show()" style="color: #44D0C7;margin: 8px 0px;font-size: 15px;">显示全部职位</a>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -308,37 +299,7 @@
 <%----------------------------------------------------------------------------热门职业、最新职业--%>
 <div id="hotList" align="center">
     <ul class="hot_pos reset">
-        <div style="font-size: 25px;color:#44D0C7">——热门企业——</div>
-        <li class="clearfix">
-            <div class="hot_pos_l">
-                <div class="mb10">
-                    <a href="h/jobs/147822.html" target="_blank">运营总监</a>
-                    &nbsp;
-                    <span class="c9">[北京]</span>
-                </div>
-                <span><em class="c7">月薪： </em>15k-20k</span>
-                <span><em class="c7">经验：</em> 3-5年</span>
-                <span><em class="c7">最低学历： </em>本科</span>
-                <br/>
-                <span><em class="c7">职位诱惑：</em>发展前景</span>
-                <br/>
-                <span>1天前发布</span>
-                <!-- <a  class="wb">分享到微博</a> -->
-            </div>
-            <div class="hot_pos_r">
-                <div class="mb10 recompany"><a href="h/c/399.html" target="_blank">节操精选</a></div>
-                <span><em class="c7">领域：</em> 移动互联网</span>
-                <span><em class="c7">创始人：</em>陈桦</span>
-                <br/>
-                <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
-                <span><em class="c7">规模：</em>少于15人</span>
-                <ul class="companyTags reset">
-                    <li>移动互联网</li>
-                    <li>五险一金</li>
-                    <li>扁平管理</li>
-                </ul>
-            </div>
-        </li>
+        <div style="font-size: 25px;color:#44D0C7">——&nbsp;&nbsp;热招职位&nbsp;&nbsp;——</div>
         <li class="odd clearfix">
             <div class="hot_pos_l">
                 <div class="mb10">
@@ -354,18 +315,6 @@
                 <br/>
                 <span>1天前发布</span>
                 <!-- <a  class="wb">分享到微博</a> -->
-            </div>
-            <div class="hot_pos_r">
-                <div class="mb10 recompany"><a href="h/c/4474.html" target="_blank">酒咔嚓</a></div>
-                <span><em class="c7">领域：</em> 移动互联网,生活服务</span>
-                <br/>
-                <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
-                <span><em class="c7">规模：</em>15-50人</span>
-                <ul class="companyTags reset">
-                    <li>五险一金</li>
-                    <li>股票期权</li>
-                    <li>带薪年假</li>
-                </ul>
             </div>
         </li>
         <li class="clearfix">
@@ -398,7 +347,7 @@
                 </ul>
             </div>
         </li>
-        <a href="list.html?city=%E5%85%A8%E5%9B%BD" class="btn fr" target="_blank">查看更多</a>
+<%--        <a href="list.html?city=%E5%85%A8%E5%9B%BD" class="btn fr" target="_blank">查看更多</a>--%>
     </ul>
 </div>
 <div class="clear"></div>

@@ -4,6 +4,7 @@ import com.cykj.entity.City;
 import com.cykj.entity.Depart;
 import com.cykj.entity.Industry;
 import com.cykj.entity.Position;
+import com.cykj.service.CityService;
 import com.cykj.service.HomePageService;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ import java.util.Map;
 public class HomePageController {
     @Resource
     private HomePageService homePageService;
+
+    @Resource
+    private CityService cityService;
 
     @Resource
     private Depart depart;
@@ -52,7 +56,6 @@ public class HomePageController {
                 map.put(dep.getDepartName(),post);
             }
             departJson = new Gson().toJson(map);
-            System.out.println("departJson:"+departJson);
         }
         return departJson;
     }
@@ -64,7 +67,10 @@ public class HomePageController {
     }
 
     @RequestMapping("/companylist")
-    public String company(){
+    public String company(HttpServletRequest request){
+        //城市集合
+        List<City> cityList = cityService.cityList();
+        request.setAttribute("cityList",cityList);
         return "Companylist";
     }
 

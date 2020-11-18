@@ -46,6 +46,7 @@ body {
 
 .clearfix {
     display: inline-block;
+    width: 100%;
 }
 
 /* for IE/Mac */
@@ -847,8 +848,8 @@ span.error {
 }
 
 #search_input {
-    width: 476px;
-    height: 33px;
+    width: 494px;
+    height: 37px;
     line-height: 30px;
     float: left;
     font-size: 18px;
@@ -932,6 +933,7 @@ span.error {
 }
 
 #sidebar {
+    margin-left: 10%;
     width: 230px;
     position: absolute;
     z-index: 101;
@@ -945,14 +947,24 @@ span.error {
 /*}*/
 
 #sidebar .mainNavs {
-    background: #fafafa;
+
+    background: #ffffff;
+    overflow: hidden;
+    height: 440px;
+
 }
+
+#sidebar .mainNavs1 {
+    background: #fafafa;
+    height: 440px;
+}
+
 
 #sidebar .menu_main {
     width: 206px;
     padding: 6px 12px;
     *padding-bottom: 10px;
-    border: 2px solid #fafafa;
+    border: 2px solid #ffffff;
     border-right: none;
     overflow: hidden;
     position: relative;
@@ -994,7 +1006,7 @@ span.error {
 }
 
 #sidebar .menu_sub {
-    width: 540px;
+    width: 580px;
     padding: 15px 30px 5px 30px;
     position: absolute;
     top: 0;
@@ -1005,48 +1017,47 @@ span.error {
 }
 
 #sidebar .menu_sub dl {
-    margin: 0 0 20px;
-    *position: relative;
+    margin: 18px 35px 30px 5px;
+    *position: absolute;
 }
 
 #sidebar .menu_sub dt {
-    width: 70px;
+    width: 110px;
     font-size: 14px;
     margin: 0;
-    text-align: right;
+    text-align: center;
     position: absolute;
     *left: 0;
 }
 
 #sidebar .menu_sub dt a {
     padding: 0;
-    color: #333;
+    color: #777;
     line-height: 28px;
-    text-decoration: underline;
+
 }
 
-#sidebar .menu_sub dt a:hover {
-    color: #44D0C7;
-    text-decoration: underline;
-}
+/*#sidebar .menu_sub dt a:hover {*/
+/*    color: #44D0C7;*/
+/*}*/
 
 #sidebar .menu_sub dd {
-    margin-left: 100px;
+    margin-left: 125px;
     overflow: hidden;
 }
 
 #sidebar .menu_sub dd a {
     white-space: nowrap;
+    margin: 15px 10px;
     padding: 0 10px;
-    background: url(img/arr.png) -29px center no-repeat;
-    color: #777;
+    color: #0C0C0C;
+    font-family: "微软雅黑", "黑体";
     line-height: 28px;
     margin-left: -1px;
 }
 
 #sidebar .menu_sub dd a:hover {
     color: #44D0C7;
-    text-decoration: underline;
 }
 
 #sidebar .menu_sub dd a.curr {
@@ -1330,7 +1341,7 @@ ul.hot_pos i {
 }
 
 .hot_pos .odd {
-    background: #fafafa;
+    background: #FFFFFF;
 }
 
 .hot_pos a {
@@ -2103,6 +2114,7 @@ ul.hot_pos i {
 
 .hc_tag {
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .hc_tag > dt {
@@ -2117,7 +2129,7 @@ ul.hot_pos i {
 .hc_tag > dd {
     width: 100%;
     height: 220px;
-    margin-top: 10px;
+    margin-top: 5px;
     background: #fff;
     padding: 20px 15px 10px 15px;
     overflow: hidden;
@@ -2163,15 +2175,15 @@ ul.hot_pos i {
 .hc_list > li {
     width: 190px;
     float: left;
-    background: #fafafa url(img/hc_list_bg.gif) left bottom repeat-x;
+    background: #FFFFFF url(img/hc_list_bg.gif) left bottom repeat-x;
     padding: 15px 13px;
-    border: 2px solid #fff;
+    border: 2px solid #FFFFFF;
     border-bottom: none;
     margin: 0 10px 20px 0;
 }
 
 .hc_list > li:hover {
-    background: #fafafa url(img/hc_list_bg_curr.gif) left bottom repeat-x;
+    background: #FFFFFF url(img/hc_list_bg_curr.gif) left bottom repeat-x;
     border: 2px solid #e6e7e8;
     border-bottom: none;
 }
