@@ -3,6 +3,8 @@ package com.cykj.service;
 
 
 import com.cykj.entity.BackUserNum;
+import com.cykj.entity.CompAndtalent;
+import com.cykj.entity.Positions;
 import com.cykj.entity.Talent;
 
 import java.util.List;
@@ -12,6 +14,10 @@ public interface TalentService {
 
     List<Talent> findTalent(Map<String, Object> map, int limit, int page);
     int findRecords(Map<String, Object> map);
+
+    List<Positions> findPosition(Map<String, Object> map, int limit, int page);
+    int findPositionRecords(Map<String, Object> map);
+
 
 
     int addTalent(Talent talent);
@@ -32,4 +38,10 @@ public interface TalentService {
 
 
     boolean findTalent(String talentName);
+
+
+    boolean findCompAndtalent(int companyID, char c);
+
+
+    int addCompAndtalent(int companyID, char c);
 }

@@ -2,7 +2,6 @@ package com.cykj.mapper;
 
 import com.cykj.entity.Talent;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,8 +22,6 @@ public interface TalentMapper {
     int addTalent(Talent talent);
 
     Talent selectTalent(String talentName);
-
-    Talent findTalentByID(@Param("talentID") int talentID);
 
 }
 

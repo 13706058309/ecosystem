@@ -2,6 +2,8 @@ package com.cykj.service.impl;
 
 
 import com.cykj.entity.BackUserNum;
+import com.cykj.entity.CompAndtalent;
+import com.cykj.entity.Positions;
 import com.cykj.entity.Talent;
 import com.cykj.mapper.TalentMapper;
 import com.cykj.mapper.UserNumMapper;
@@ -41,7 +43,17 @@ public class TalentServiceImpl implements TalentService {
         int records = talentMapper.findRecords(map);
         return records;
     }
-
+    @Override
+    public List<Positions> findPosition(Map<String, Object> map, int limit, int page) {
+        map.put("limit",limit);
+        map.put("offset",(page-1)*limit);
+        return talentMapper.findPosition(map);
+    }
+    @Override
+    public int findPositionRecords(Map<String, Object> map) {
+        int records = talentMapper.findPositionRecords(map);
+        return records;
+    }
     @Override
     public int addTalent(Talent talent) {
 
@@ -86,6 +98,19 @@ public class TalentServiceImpl implements TalentService {
     @Override
     public boolean findTalent(String talentName) {
         return talentMapper.selectTalent(talentName)==null;
+    }
+
+    @Override
+    public boolean findCompAndtalent(int companyID, char c) {
+        return talentMapper.selectCompAndtalent(companyID,c)==null;
+    }
+
+    @Override
+    public int addCompAndtalent(int companyID, char c) {
+
+        int n = talentMapper.addCompAndtalent(companyID,c);
+
+        return n;
     }
 
 
