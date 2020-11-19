@@ -33,6 +33,7 @@
     <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
 </script>
 <div id="leadDiv" style="display: none;width: 360px;height: 250px;" >
+
     <br><br>
     <h1 style="text-align: center">人才导入</h1><br>
     <div class="layui-inline">
@@ -41,15 +42,26 @@
         </div>
     </div><br><br>
 
-    <form action="upload"  method="post" enctype="multipart/form-data"  accept-charset="UTF-8" >
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        <input type="file" name="file" id="file" class="layui-btn layui-btn-normal"><br><br><br>
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        <input  type="submit" value="导入"class="layui-bg-orange layui-btn" >
+<%--    <form action="upload"  method="post" enctype="multipart/form-data"  accept-charset="UTF-8" >--%>
+<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
+<%--        <input type="file" name="file" id="file" class="layui-btn layui-btn-normal"><br><br><br>--%>
+<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
+<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
+<%--        <input  type="submit" value="导入"class="layui-bg-orange layui-btn" >--%>
+<%--    </form>--%>
+    <form class="layui-form layui-form-pane"  enctype="multipart/form-data" id="forms" accept-charset="UTF-8">
+        <div class="layui-form-item">
+            <div class="layui-upload">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="file" class="layui-btn layui-btn-normal" id="upload" name="upload"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline" style="margin-left: 40%">
+                <button type="button" class="layui-bg-orange layui-btn"  onclick="uploads()">导入</button>
+            </div>
+        </div>
     </form>
-
-
 
 
 </div>
@@ -125,8 +137,9 @@
     </div>
 
 
-    <input type="hidden" value="${pageContext.request.contextPath}" id="path">
+
 <br><br>
+<input type="hidden" value="${pageContext.request.contextPath}" id="path">
 <div class="demoTable" style="margin-left: 20%">
     <div class="layui-form-item">
 
@@ -179,6 +192,7 @@
 </script>
 
 <script>
+    var $;
     var layer;
     var path = $("#path").val();
     var uIDs;
@@ -255,7 +269,7 @@
                 })
             }
         });
-        var $ = layui.$, active = {
+        $ = layui.$, active = {
             reload: function(){
                 //执行重载
                 table.reload('testReload', {
@@ -321,7 +335,40 @@
         window.open("${pageContext.request.contextPath}/talent/download?fileName=简历.doc");
 
     }
+    function uploads() {
+        var form = new FormData(document.getElementById("forms"))
+        var file= $('#upload').val()
+        $.ajax({
+            url:path+"/talent/upload",
+            data:form,
+            processData:false,
+            contentType:false,
+            type:"post",
+            beforeSend:function(){
+                if(file.length==0){
+                    layer.msg("请先选择简历")
+                    return false;
+                }
+                if(file!="C:\\fakepath\\简历.doc"){
+                    layer.msg("不是简历文件")
+                    return false;
+                }
+                return true;
 
+            },
+            success:function (info) {
+                layer.msg(info,{
+                    time:1000,
+                    end:function () {
+                        if (info=="导入成功"){
+                            location.href=path+"/talent/talentList";
+                        }
+                    }
+                })
+
+            },
+        })
+    }
 
 
 </script>

@@ -58,11 +58,26 @@ public class TestController {
         return "comp/BackOfflinePosition";
     }
 
+    @RequestMapping("/backOnline")
+    public String backOnline(){
+        return "comp/BackOnlinePosition";
+    }
+
 
 
     @RequestMapping("/findPwd")
     public String findPwd(){
-        return "BackFindPwd";
+        return "comp/BackFindPwd";
+    }
+
+    @RequestMapping("/unPass")
+    public String unPass(){
+        return "comp/BackUnPassResume";
+    }
+
+    @RequestMapping("/pass")
+    public String pass(){
+        return "comp/BackPassResume";
     }
 
     @RequestMapping("/deterResume")
@@ -77,7 +92,27 @@ public class TestController {
 
     @RequestMapping("/unviTalent")
     public String unviTalent(){
-
         return "comp/BackUniversityTalent";
     }
+
+    @RequestMapping("/findUser")
+    public String findUser(){
+        return "comp/BackCompFindUser";
+    }
+
+    @RequestMapping("/st")
+    public String st(){
+        return "Login";
+    }
+
+    @RequestMapping("/ss")
+    public String ss(){
+        return "Register";
+    }
+
+    @RequestMapping("/sb")
+    public String sb(){
+        return "adminLog";
+    }
+
 }

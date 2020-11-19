@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.IndustryMapper">
+
+    <select id="findIndustry" resultType="com.cykj.entity.Industry">
+        select industryName,industryId from industry;
+    </select>
+
     <select id="findAll" resultType="com.cykj.entity.Industry">
         select * from industry;
     </select>

@@ -102,8 +102,18 @@
         </tr>
 
         <tr>
+            <td rowspan="1">具体地址</td>
+            <td colspan="5" id="tAdd"> </td>
+        </tr>
+
+        <tr>
             <td rowspan="1">工作经验</td>
             <td colspan="5" id="tWorkExp"> </td>
+        </tr>
+
+        <tr>
+            <td rowspan="1">技能证书</td>
+            <td colspan="5" id="tCert"> </td>
         </tr>
 
         <tr>
@@ -118,10 +128,10 @@
 
     </table>
     <div class="layui-input-inline" style="margin-left: 50%">
-        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" >简历导出</button>
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResume()" >简历导出</button>
     </div>
 </div>
-<table id="userTable" lay-filter="test"></table>
+    <table id="userTable" lay-filter="test"></table>
 </body>
 <script>
     var layer;
@@ -130,6 +140,7 @@
     var data;
     var index;
     var form;
+    var talentID;
     layui.use(['laydate','layer','form'],function () {
         form = layui.form;
         form.render();
@@ -194,6 +205,7 @@
                     })
                 })
             } else if(obj.event === 'detail'){
+                talentID = data.talentId;
                 addResume();
                 layer.open({
                     type:1,
@@ -261,6 +273,12 @@
         $("#tWorkExp").text(data.workExp);
         $("#tWorkPlan").text(data.jobPlan);
         $("#tSelfEva").text(data.selfEva);
+        $("#tCert").text(data.certificate);
+        $("#tAdd").text(data.address);
+    }
+
+    function outResume() {
+        location.href = path+"/rec/outTalentResum?talentID="+talentID;
     }
 
 </script>

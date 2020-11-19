@@ -11,6 +11,7 @@
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/BackCompFindUser.css">
+<script src="${pageContext.request.contextPath}/js/comp/Common.js"></script>
 <html>
 <head>
     <title>Title</title>
@@ -19,136 +20,187 @@
 
 <body>
 <script id="btns" type="text/html">
-    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="go">查看详情</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
 </script>
 
 <h1 style="text-align: center">招聘查找</h1>
 <br>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<div class="demoTable layui-form" style="margin-left: 25%">
+<div class="demoTable layui-form" style="margin-left: 12%">
     <div class="layui-form-item">
 
         <div class="layui-inline">
-            <label class="layui-form-label">姓名:</label>
+            <label class="layui-form-label">学历</label>
             <div class="layui-input-inline">
-                <input type="tel" id="userName" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                <select class="layui-input" id="evdu">
+                    <option value="0">不限</option>
+                    <option value="1">高中</option>
+                    <option value="2">大专</option>
+                    <option value="3">本科</option>
+                    <option value="4">硕士</option>
+                    <option value="5">博士</option>
+                </select>
             </div>
         </div>
 
         <div class="layui-inline">
-            <label class="layui-form-label">学历:</label>
+            <label class="layui-form-label">专业:</label>
             <div class="layui-input-inline">
-                <input type="tel" id="education" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                <input type="tel" id="profession"  class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">性别:</label>
+            <div class="layui-input-inline">
+                <select class="layui-input" id="sex">
+                    <option value="不限">不限</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
             </div>
         </div>
     </div>
+
     <div class="layui-form-item">
-        <label class="layui-form-label">行业:</label>
-        <div class="layui-input-inline">
-            <input type="tel" id="industry" lay-verify="required|phone" autocomplete="off" class="layui-input">
+        <div class="layui-inline">
+            <label class="layui-form-label">是否应届</label>
+            <div class="layui-input-inline">
+                <select class="layui-input" id="isGraduate">
+                    <option value="0">不限</option>
+                    <option value="1">应届生</option>
+                    <option value="2">非应届生</option>
+                </select>
+            </div>
         </div>
-        <div class="layui-input-inline" style="margin-left: 12%" >
-            <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">工作经验</label>
+            <div class="layui-input-inline">
+                <select class="layui-input" id="wrokYear">
+                    <option value="0">不限</option>
+                    <option value="1">1年以下</option>
+                    <option value="3">3年以下</option>
+                    <option value="5">5年以下</option>
+                    <option value="10">10年以下</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="margin-left: 55%" >
+                <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+            </div>
         </div>
     </div>
 </div>
+<div id="detailDiv" style="display: none;padding: 3%">
+    <table class="layui-table">
+        <tr><td colspan="6">简历详情</td></tr>
+        <tr >
+            <td width="19%">姓名</td>
+            <td width="19%" id="dName">2</td>
+            <td width="19%">民族</td>
+            <td width="19%" id="dClen">4</td>
+            <td rowspan="5" colspan="2"></td>
+        </tr>
+        <tr >
+            <td>政治面貌</td>
+            <td id="dPolistatu">2</td>
+            <td>出生年月日</td>
+            <td id="dBir">4</td>
+        </tr>
+        <tr >
+            <td>性别</td>
+            <td id="dSex">2</td>
+            <td>工作年限</td>
+            <td id="dWorkYear">4</td>
+        </tr>
+        <tr >
+            <td>学历</td>
+            <td id="dEdu">2</td>
+            <td>专业</td>
+            <td id="dProf">4</td>
+        </tr>
+        <tr >
+            <td>毕业学校</td>
+            <td id="DSchool">2</td>
+            <td>就业状态</td>
+            <td id="jobStand"></td>
+        </tr>
+        <tr >
+            <td>期望工作</td>
+            <td colspan="2" id="DHwork">2</td>
+            <td>意向行业</td>
+            <td colspan="2" id="DHIndustry">4</td>
+        </tr>
+        <tr >
+            <td>地址</td>
+            <td colspan="2" id="DAddress">2</td>
+            <td>联系方式</td>
+            <td colspan="2" id="DRealInfo">4</td>
+        </tr>
+        <tr>
+            <td rowspan="1">自我评价</td>
+            <td colspan="5" id="DselfEva" > </td>
+        </tr>
+        <tbody id="tbody">
 
+        </tbody>
+
+    </table>
+    <div class="layui-input-inline" style="margin-left: 50%">
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResume()" >简历导出</button>
+    </div>
+</div>
 <table id="userTable" lay-filter="test"></table>
 </body>
 <script>
     var layer;
     var path = $("#path").val();
-    var docID;
-    var objs;
     var index;
     var form;
     layui.use(['laydate','layer','form'],function () {
         form = layui.form;
         form.render();
-        var laydate = layui.laydate;
         layer = layui.layer;
-    })
-
-    $(function () {
-        $.ajax({
-            url:path+"/docConfig/findAll",
-            type:"post",
-            typeData:"text",
-            success:function (data) {
-                var arr = JSON.parse(data);
-                $("#type").empty();
-                var $sel = $("<option>"+'请选择'+"</option>");
-                $("#type").append($sel)
-                for(var i=0;i<arr.length;i++){
-                    var $option = $("<option>"+arr[i].doc_Type+"</option>");
-                    $("#type").append($option);
-                }
-                form.render();
-            },
-        });
     })
 
     layui.use('table',function () {
         var table = layui.table;
+
         table.render({
             elem:'#userTable',
-            height:312,
-            limits:[3,6],
-            limit:3,
-            url:"${pageContext.request.contextPath}/doc/checkDoc",
+            height:310,
+            limits:[5],
+            limit:5,
+            url:"${pageContext.request.contextPath}/rec/compFindResume",
             page:true,
             id: 'testReload',
             cols:[[
-                {field:'doc_Name',title:'文档标题',sort:true},
-                {field:'user_Name',title:'上传人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
-                {field:'up_Time',title:'上传时间',sort:true},
-                {field:'dow_Score',title:'下载积分',sort:true},
-                {field:'doc_type',title:'文档类型',templet:'<div>{{d.docConfig.doc_Type}}</div>'},
+                {field:'realName',title:'姓名', fixed: 'left'},
+                {field:'sex',title:'性别'},
+                {field:'profession',title:'专业'},
+                {field:'isGraduate',title:'是否应届生',templet:function (d) {
+                        if(d.isGraduate==1){
+                            res = "是";
+                        }else{
+                            res = "否";
+                        }
+                        return res;
+                    }},
+                {field:'wrokYear',title:'工作时间',sort:true},
+                {field:'education',title:'学历',templet:'<div>{{d.education.education}}</div>'},
                 {title:'操作',toolbar:'#btns',width:250}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            docID = data.doc_ID;
-            var u_ID = data.u_ID;
-            var doc_Type_ID = data.doc_Type_ID;
-            if(obj.event === 'go'){
-                $.ajax({
-                    url:path+"/doc/changeDocStand",
-                    data:"doc_ID="+docID+"&standID=5&u_ID="+u_ID+"&doc_Type_ID="+doc_Type_ID,
-                    type:"get",
-                    typeData:"text",
-                    beforeSend:function () {
-                        return confirm("确定通过");
-                    },
-                    success:function (info) {
-                        layer.msg(info);
-                        if(info=='修改成功'){
-                            obj.del();
-                        }
-                    },
-                })
-
-            } else if(obj.event === 'pass'){
-                $.ajax({
-                    url:path+"/doc/changeDocStand",
-                    data:"doc_ID="+docID+"&standID=6",
-                    type:"get",
-                    typeData:"text",
-                    beforeSend:function () {
-                        return confirm("确定不通过");
-                    },
-                    success:function (info) {
-                        layer.msg(info);
-                        if(info=='修改成功'){
-                            obj.del();
-                        }
-                    },
-                })
-            }else if(obj.event==='down'){
-                var docPath = obj.data.path;
-                location.href = path+"/doc/downFile?docID="+docID;
+            var resumeID = data.resumeId;
+            if(obj.event === 'detail'){
+                showDetails(data);
+                findDetailResume(resumeID)
             }
         });
 
@@ -160,11 +212,11 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        userName: $('#userName').val(),
-                        beginTime:$('#beginTime').val(),
-                        endTime:$('#endTime').val(),
-                        topic:$('#topic').val(),
-                        type:$('#type').val(),
+                        educationId:$('#evdu').val(),
+                        wrokYear:$('#wrokYear').val(),
+                        isGraduate:$('#isGraduate').val(),
+                        profession:$('#profession').val(),
+                        sex:$('#sex').val(),
                     }
                 }, 'data');
             }
@@ -178,6 +230,7 @@
     function closeLayer() {
         layer.close(index);
     }
+
 
 </script>
 </html>

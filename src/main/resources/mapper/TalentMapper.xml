@@ -36,6 +36,8 @@
         <result property="selfEva" column="selfEva"></result>
         <result property="education" column="education"></result>
         <result property="entryTime" column="entryTime"></result>
+        <result property="address" column="address"></result>
+        <result property="certificate" column="certificate"></result>
 
         <association property="compAndtalent" column="talent" javaType="com.cykj.entity.CompAndtalent">
             <id property="compAndTalId" column="compAndTalId"></id>
@@ -83,5 +85,11 @@
           values (#{talentName},#{school},#{birthday},#{profession},#{politicalStatus},
           #{education},#{contactInfo},#{address},#{workExp},#{certificate},#{selfEva})
         </insert>
+    <select id="selectTalent" parameterType="java.lang.String" resultType="com.cykj.entity.Talent">
+            select * from talent where talentName = #{talentName}
+        </select>
 
+    <select id="findTalentByID" resultType="com.cykj.entity.Talent">
+        select * from talent where talentID = #{talentID}
+    </select>
 </mapper>

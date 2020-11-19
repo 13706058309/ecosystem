@@ -12,5 +12,7 @@ import java.util.List;
  * 行业
  */
 public interface IndustryMapper {
+
+    public  List<Industry> findIndustry ();
     List<Industry> findAll();
 }
