@@ -93,7 +93,7 @@
                                 <td colspan="2">
                                     <div style="align-content: center">
                                         <input  type="submit" onclick="javascript:history.back(-1)" value="返回" id="jobPreview" class="btn_32">
-                                        <input type="button" value="确认并支付" id="yeszhengshu" class="btn_32">
+                                        <input type="button" value="确认并支付" onclick="upzhengshu()" id="yeszhengshu" class="btn_32">
                                     </div>
                                 </td>
                             </tr>
@@ -128,7 +128,7 @@
             layer.msg('请同意协议', {icon: 5});
         }else if (username!=""||usernumber!=""||phone!=""||chenkxieyi.checked==true){
             $.ajax({
-                url:  "upupzhengshu",//请求服务端地址值
+                url:  "${pageContext.request.contextPath}/zhengshu/upupzhengshu",//请求服务端地址值
                 async: true,
                 type: "post",//请求方式
                 data: "username=" + username+"&usernumber="+usernumber+"&phone="+phone+"&fileid="+fileid,
@@ -142,9 +142,19 @@
                         layer.msg('7天内不可再申请', {icon: 5});
                     }else if (msg=='500'){
                         layer.msg('当前处于开发阶段，请勿重复申请', {icon: 5});
-                    }else if (msg=='success'){
+                    }else {
                        //跳转支付界面
-                        alert("2342453242");
+                        var xinxi = "证书申请";
+                        var vNow = new Date();
+                        var sNow = "";
+                        sNow += String(vNow.getFullYear());
+                        sNow += String(vNow.getMonth() + 1);
+                        sNow += String(vNow.getDate());
+                        sNow += String(vNow.getHours());
+                        sNow += String(vNow.getMinutes());
+                        sNow += String(vNow.getSeconds());
+                        sNow += String(vNow.getMilliseconds());
+                        location.href='${pageContext.request.contextPath}/zhifubao/alipayTradePagePay?WIDout_trade_no='+sNow+'&WIDtotal_amount='+filemoney+'&WIDsubject='+xinxi+'&cerRecordlastid='+msg;
                     }
                 }
             });
@@ -187,7 +197,7 @@
         formData.append("file",$("#file_idcard")[0].files[0]);
         // var file = new FormData(document.getElementById("idCardform"));
         $.ajax({
-            url:"shenfenupload",//=servlet里要调用的方法名
+            url:"${pageContext.request.contextPath}/zhengshu/shenfenupload",//=servlet里要调用的方法名
             async: true,//true异步请求，false同步请求，不写默认true，ajax嵌套时需要同步请求
             type: "post",//请求方式
             data: formData,//要提交的数据
