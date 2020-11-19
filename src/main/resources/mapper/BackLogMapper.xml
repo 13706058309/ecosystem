@@ -4,4 +4,20 @@
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.BackLogMapper">
 
+        <select id="findLogOnPage" parameterType="java.util.Map" resultMap="adLogRes">
+
+        </select>
+
+
+        <resultMap id="adLogRes" type="com.cykj.entity.BackLog">
+                <id property="bLogId" column="bLogId"></id>
+                <result property="bUserID" column="bUserID"></result>
+                <result property="operaTime" column="operaTime"></result>
+                <result property="matter" column="matter"></result>
+                <association property="backUser" column="" javaType="com.cykj.entity.BackLog">
+                <id property="bUserID" column="bUserID"></id>
+                <result property="bUserName" column="bUserName"></result>
+                </association>
+        </resultMap>
+
 </mapper>

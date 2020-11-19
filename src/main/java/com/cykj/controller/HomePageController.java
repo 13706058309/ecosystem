@@ -26,6 +26,14 @@ public class HomePageController {
     private Depart depart;
 
 
+
+    //跳转访问
+
+    @RequestMapping("/home")
+    public String home(){
+        return "HomePage";
+    }
+
     @RequestMapping("/home")
     public String home(HttpServletRequest request ){
 //城市集合
