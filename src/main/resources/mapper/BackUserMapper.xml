@@ -4,4 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.BackUserMapper">
 
+    <select id="findCompany" resultType="com.cykj.entity.BackUser">
+        select compName,city,finanStage,scale,product,homePage,logo from backUser;
+    </select>
 </mapper>

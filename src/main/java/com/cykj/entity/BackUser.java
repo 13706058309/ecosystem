@@ -20,7 +20,7 @@ public class BackUser {
   private String homePage; //主页
   private String finanStage; //融资阶段
   private String product; //公司产品
-  private String logp; //logo
+  private String logo; //logo
   private long roleId; //角色ID
   private RoleInfo role; //角色实体类
   private String stateId;//状态
@@ -197,12 +197,12 @@ public class BackUser {
   }
 
 
-  public String getLogp() {
-    return logp;
+  public String getLogo() {
+    return logo;
   }
 
-  public void setLogp(String logp) {
-    this.logp = logp;
+  public void setLogo(String logo) {
+    this.logo = logo;
   }
 
   public String getStateId() {

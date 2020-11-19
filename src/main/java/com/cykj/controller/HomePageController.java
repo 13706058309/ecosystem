@@ -1,10 +1,8 @@
 package com.cykj.controller;
 
-import com.cykj.entity.City;
-import com.cykj.entity.Depart;
-import com.cykj.entity.Industry;
-import com.cykj.entity.Position;
+import com.cykj.entity.*;
 import com.cykj.service.CityService;
+import com.cykj.service.CompanyService;
 import com.cykj.service.HomePageService;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -27,8 +25,7 @@ public class HomePageController {
     private CityService cityService;
 
     @Resource
-    private Depart depart;
-
+    private CompanyService companyService;
 
     @RequestMapping("/home")
     public String home(HttpServletRequest request ){
@@ -71,6 +68,10 @@ public class HomePageController {
         //城市集合
         List<City> cityList = cityService.cityList();
         request.setAttribute("cityList",cityList);
+//        公司首页集合
+        List<BackUser> backUserList = companyService.findCompany();
+        request.setAttribute("backUserList",backUserList);
+
         return "Companylist";
     }
 
