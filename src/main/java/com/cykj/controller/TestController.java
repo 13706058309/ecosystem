@@ -1,10 +1,13 @@
 package com.cykj.controller;
 
 import com.cykj.service.BackCompService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/test")
@@ -63,7 +66,10 @@ public class TestController {
         return "comp/BackOnlinePosition";
     }
 
-
+    @RequestMapping("/reg")
+    public String reg(){
+        return "comp/BackReg";
+    }
 
     @RequestMapping("/findPwd")
     public String findPwd(){

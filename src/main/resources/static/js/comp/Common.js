@@ -1,5 +1,6 @@
 //简历主键ID
 var reID;
+var isShow;
 
 function showDetail2(data) {
     $("#dName").text(data.realName);
@@ -75,16 +76,17 @@ function showDetail2(data) {
 }
 
 function showDetails(data) {
-    if(data.isShow==1){
-        $("#dName").text(data.realName);
-        $("#dBir").text(data.contactInfo);
-        $("#DAddress").text(data.address);
-    }else{
-        $("#dName").text("*********");
-        $("#dBir").text("*********");
-        $("#DAddress").text("*********");
-    }
+    var paths = $("#path").val();
 
+    if(data.isShow==1){
+        $("#DAddress").text(data.address);
+        $("#DRealInfo").text(data.contactInfo);
+    }else{
+        $("#DAddress").text("*********");
+        $("#DRealInfo").text("*********");
+    }
+    $("#dBir").text(data.birthday);
+    $("#dName").text(data.realName);
     $("#dClen").text(data.clan);
     $("#dPolistatu").text(data.politicalStatus);
     $("#dSex").text(data.sex);
@@ -94,7 +96,7 @@ function showDetails(data) {
     $("#dEdu").text(data.education.education);
     $("#DHIndustry").text(data.industry);
     $("#DHwork").text(data.expectWork);
-    $("#DRealInfo").text(data.contactInfo);
+
     $("#DselfEva").text(data.selfEva);
     var num = data.jobStandId;
     if(num==4){
@@ -105,13 +107,20 @@ function showDetails(data) {
         $("#jobStand").text("在职月内到岗")
     }
 
+    $("#imgs").empty();
+    // var img=new Image();
+    // img.src=paths+data.photo;
+    var $img = $("<img width='200px' height='200px' src='"+paths+data.photo+"'>")
+
+    $("#imgs").append($img);
+
     $("#tbody").empty();
 }
 
 function showDetail(data) {
     var paths = $("#path").val();
     $("#dName").text(data.realName);
-    $("#dBir").text(data.contactInfo);
+    $("#dBir").text(data.birthday);
     $("#DAddress").text(data.address);
     $("#dClen").text(data.clan);
     $("#dPolistatu").text(data.politicalStatus);
@@ -136,14 +145,15 @@ function showDetail(data) {
     $("#imgs").empty();
     // var img=new Image();
     // img.src=paths+data.photo;
-    var $img = $("<img width='160px' height='200px' src='"+paths+data.photo+"'>")
+    var $img = $("<img width='200px' height='200px' src='"+paths+data.photo+"'>")
 
     $("#imgs").append($img);
     $("#tbody").empty();
 }
 
-function findDetailResume(resumeID) {
+function findDetailResume(resumeID,isshow) {
     reID = resumeID;
+    isShow = isshow;
     $.ajax({
         url:path+"/rec/findResumeDetail",
         data:"resumeID="+resumeID,
@@ -207,4 +217,31 @@ function findDetailResume(resumeID) {
 
 function outResume() {
     location.href = path+"/rec/outResume?resumeID="+reID;
+}
+
+function RandomRange() {
+    var returnStr = "";
+    var arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    for(var i=0; i<12 ; i++){
+        var index = Math.round(Math.random() * (arr.length-1));
+        returnStr += arr[index];
+    }
+    return returnStr;
+}
+
+function outResumes(){
+    if(isShow==1){
+        location.href = path+"/rec/outResume?resumeID="+reID;
+    }else{
+        $("#WIDout_trade_no").val(RandomRange);
+        $("#WIDsubject").val("下载费用"+reID);
+        $("#WIDtotal_amount").val("20");
+        $("#WIDbody").val("人才简历下载查看");
+        layer.open({
+            type:1,
+            area:['30%','30%'],
+            offset: ['35%', '25%'],
+            content:$("#payForm"),
+        })
+    }
 }
