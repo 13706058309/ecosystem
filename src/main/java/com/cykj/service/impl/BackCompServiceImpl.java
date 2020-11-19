@@ -305,7 +305,7 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public String outResume(int resumeID) {
+    public String outResume(int resumeID,String savePath) {
         Resume resume = resumeMapper.findResumeDetail(resumeID);
         Map<String,Object> map = new HashMap<>();
         map.put("realName",resume.getRealName());
@@ -399,7 +399,17 @@ public class BackCompServiceImpl implements BackCompService {
         WordUtil wordUtil = new WordUtil();
         String imageBase = wordUtil.getImageBase("static"+resume.getPhoto());
         map.put("image",imageBase);
-        String path = wordUtil.createWord(map, MyUtil.RESUME);
+        String path = wordUtil.createWord(map, MyUtil.RESUME,savePath);
         return path;
+    }
+
+    @Override
+    public BackUser findByPhone(String phone) {
+        return backUserMapper.findByPhone(phone);
+    }
+
+    @Override
+    public int changePwdByPhone(String pwd, String phone) {
+        return backUserMapper.changePwdByPhone(pwd,phone);
     }
 }

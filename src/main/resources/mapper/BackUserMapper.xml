@@ -79,4 +79,12 @@
     <select id="findPwd" resultType="String">
         select pwd from backUser where buserid = #{compID}
     </select>
+
+    <select id="findByPhone" resultType="com.cykj.entity.BackUser">
+        select * from backUser where contactInfo = #{phone}
+    </select>
+
+    <update id="changePwdByPhone">
+        update backUser set pwd = #{pwd} where contactInfo = #{phone}
+    </update>
 </mapper>

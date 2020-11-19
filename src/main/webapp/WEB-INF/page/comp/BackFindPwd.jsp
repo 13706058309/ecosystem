@@ -46,73 +46,154 @@
         <div id="cloud_s"><img src="${pageContext.request.contextPath}/style/images/cloud_s.png" width="81" height="52" alt="cloud" /></div>
         <div id="cloud_m"><img src="${pageContext.request.contextPath}/style/images/cloud_m.png" width="136" height="95"  alt="cloud" /></div>
     </div>
-
+    <input type="hidden" value="${pageContext.request.contextPath}" id="path">
     <input type="hidden" id="resubmitToken" value="" />
     <div class="find_psw">
         <form id="pswForm" action="http://www.lagou.com/rs.html" method="post">
             <div class="layui-form-item" style="margin-left:-11%;">
                 <label class="layui-form-label" >手机号码:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="account" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" style="height: 37px">
+                    <input type="text" id="phone" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" style="height: 6%">
                 </div>
             </div>
             <div class="layui-form-item" style="margin-left:-11%;">
                 <label class="layui-form-label">重置密码:</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="pwd" id="pwd" lay-verify="required|phone" autocomplete="off" class="layui-input" style="height: 37px">
+                    <input type="password" name="pwd" id="pwd"  autocomplete="off" class="layui-input" style="height: 6%">
                 </div>
             </div>
             <div class="layui-form-item " style="margin-left:-11%;">
                 <label class="layui-form-label">确认密码:</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="pwd" id="againPwd" lay-verify="required|phone" autocomplete="off" class="layui-input" style="height: 37px">
+                    <input type="password" name="pwd" id="againPwd" autocomplete="off" class="layui-input" style="height: 6%">
                 </div>
             </div>
             <div class="layui-form-item" style="margin-left:-11%;">
                 <label class="layui-form-label">验证码:</label>
                 <div class="layui-input-inline" >
-                    <input type="password" name="pwd" id="vCode" lay-verify="required|phone" autocomplete="off" class="layui-input" style="height: 37px;width: 150px">
+                    <input type="text" name="vCode" id="vCode"  autocomplete="off" class="layui-input" style="height: 6%;width: 80%">
                 </div>
-                <input type="button" value="获取验证码" class="layui-btn layui-btn-normal " style="background-color: #0D9572">
+                <input type="button" value="获取验证码" class="layui-btn layui-btn-normal " style="background-color: #0D9572" onclick="sendCode()" id="codeBtn">
 
             </div>
-            <input type="submit" id="submitLogin" value="找回密码" style="margin-left: 24%"/>
-            <input type="button" value="123" onmouseover="tip()">
+            <input type="button" id="submitLogin" value="找回密码" style="margin-left: 24%" onclick="findPwd()">
+
         </form>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#pswForm input[type="text"]').focus(function(){
-            $(this).siblings('.error').hide();
-        });
-        //验证表单
+    var layer;
+    var InterValObj;
+    var path = $("#path").val();
+    var curCount=120;
+    layui.use('layer',function () {
+        layer = layui.layer;
+    })
+    function sendCode() {
+        var phone = $("#phone").val();
+        var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+        if(!pattern.test(phone)){
+            layer.alert("请输入正确手机号");
+        }else{
+            $.ajax({
+                url:path+"/rec/sendCode",
+                type:'post',
+                data:"phone=" + phone,
+                dataType:'text',
+                success:function(data){
+                    if(data=='1'){
+                        layer.msg("发送成功");
+                        $("#codeBtn").attr("disabled", "true");
+                        $("#codeBtn").css("background-color", "grey");
+                        $("#codeBtn").val( curCount + "秒");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }else if(data=='2'){
+                        layer.msg("手机号错误，该手机未注册过");
+                    }else{
+                        layer.msg("发送失败，请稍后再发");
+                    }
+                },
+                error:function(){
+                    layer.alert('请求超时或系统出错!');
+                }
+            });
 
-        $("#pswForm").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
+        }
+    }
+
+    function SetRemainTime() {
+        if (curCount == 0) {
+            curCount=120;
+            window.clearInterval(InterValObj);//停止计时器
+            $("#codeBtn").removeAttr("disabled");//启用按钮
+            $("#codeBtn").css("background-color", "#0D9572");
+            $("#codeBtn").val("重新发送");
+        }
+        else {
+            curCount--;
+            $("#codeBtn").val(curCount +"秒");
+        }
+    }
+
+    function findPwd() {
+        var value = $("#codeBtn").val();
+        if(value=='获取验证码'){
+            layer.alert("验证码未发送");
+            return false;
+        }
+        var phone = $("#phone").val();
+        var vCode = $("#vCode").val();
+        var pwd = $("#pwd").val();
+        var againPwd = $("#againPwd").val();
+
+        $.ajax({
+            url:path+"/rec/findPwd",
+            type:'post',
+            data:"phone=" + phone+"&pwd="+pwd+"&vCode="+vCode,
+            dataType:'text',
+            beforeSend:function(){
+                if(pwd!==againPwd){
+                    layer.alert("两次密码不一致");
+                    return false;
+                }
+                if(vCode.trim().length!=4){
+                    layer.alert("验证码输入错误");
+                    return false;
+                }
+                var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+                if(!pattern.test(phone)){
+                    layer.alert("请输入正确手机号");
+                    return false;
                 }
             },
-            messages: {
-                email: {
-                    required: "请输入注册时使用的邮箱地址",
-                    email: "请输入有效的邮箱地址，如：vivi@lagou.com"
+            success:function(data){
+                if(data==1){
+                    layer.msg("修改成功");
+                    curCount=120;
+                    window.clearInterval(InterValObj);//停止计时器
+                    $("#codeBtn").removeAttr("disabled");//启用按钮
+                    $("#codeBtn").css("background-color", "#0D9572");
+                    $("#codeBtn").val("发送验证码");
+                    var phone = $("#phone").val("");
+                    var vCode = $("#vCode").val("");
+                    var pwd = $("#pwd").val("");
+                    var againPwd = $("#againPwd").val("");
+                }else if(data=='2'){
+                    layer.alert("手机号输入错误");
+                }else if(data=='3'){
+                    layer.alert("验证码输入错误");
+                }else{
+                    layer.alert("系统繁忙，找回失败");
                 }
             },
-            submitHandler:function(form){
-                $(form).find(":submit").attr("disabled", true);
-                form.submit();
+            error:function(){
+                layer.alert('请求超时或系统出错!');
             }
         });
-    });
 
-    function tip() {
-
-        console.log(123);
     }
+
 </script>
 </body>
 </html>

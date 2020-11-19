@@ -25,7 +25,7 @@ public class WordUtil {
     /***
      * word生成的输出目录
      */
-    private static final String  outputDir = "C:/";
+//    private static final String  outputDir = "C:/";
 
     public WordUtil(){
         configuration = new Configuration();
@@ -56,7 +56,7 @@ public class WordUtil {
      * @version v1.0
      * @since
      */
-    public String createWord(Map<String,Object> dataMap,String path){
+    public String createWord(Map<String,Object> dataMap,String path,String outputDir){
 //        Map<String,Object> dataMap=new HashMap<String,Object>();
         //构造参数
 //        getData(dataMap);
@@ -69,7 +69,7 @@ public class WordUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        File outFile = new File(outputDir+Math.random()*10000+".doc"); //导出文件
+        File outFile = new File(outputDir,Math.random()*10000+".doc"); //导出文件
         System.out.println("123"+outFile.toString());
         Writer out = null;
         try {

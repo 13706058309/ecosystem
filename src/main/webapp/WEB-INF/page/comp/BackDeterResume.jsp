@@ -118,6 +118,9 @@
         </tbody>
 
     </table>
+    <div class="layui-input-inline" style="margin-left: 50%">
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResume()" >简历导出</button>
+    </div>
 </div>
 </body>
 <script>

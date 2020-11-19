@@ -3,6 +3,7 @@ package com.cykj.controller;
 import com.cykj.entity.*;
 import com.cykj.service.BackCompService;
 import com.cykj.utils.MyUtil;
+import com.cykj.utils.PhoneCodeUtil;
 import com.cykj.utils.WordUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -526,7 +527,8 @@ public class CompController {
     }
 
     @RequestMapping("/outTalentResum")
-    public ResponseEntity<byte[]> outTalentResum(int talentID) throws IOException {
+    public ResponseEntity<byte[]> outTalentResum(int talentID,HttpServletRequest request) throws IOException {
+        String savePath = request.getSession().getServletContext().getRealPath("/outResume/");
         Talent talent = backCompService.findTalentByID(talentID);
         System.out.println(talent);
         Map<String,Object> map = new HashMap<>();
@@ -543,7 +545,7 @@ public class CompController {
         map.put("address",talent.getAddress());
         map.put("certificate",talent.getCertificate());
         WordUtil wordUtil = new WordUtil();
-        String path = wordUtil.createWord(map, MyUtil.TALENTRESUME);
+        String path = wordUtil.createWord(map, MyUtil.TALENTRESUME,savePath);
 
         //把下载文件构成一个文件处理
         File file = new File(path);
@@ -558,9 +560,9 @@ public class CompController {
     }
 
     @RequestMapping("/outResume")
-    public ResponseEntity<byte[]> outResume(int resumeID) throws IOException {
-
-        String path = backCompService.outResume(resumeID);
+    public ResponseEntity<byte[]> outResume(int resumeID,HttpServletRequest request) throws IOException {
+        String savePath = request.getSession().getServletContext().getRealPath("/outResume/");
+        String path = backCompService.outResume(resumeID,savePath);
         //把下载文件构成一个文件处理
         File file = new File(path);
         //设置头信息
@@ -571,6 +573,39 @@ public class CompController {
         //MediaType:互联网媒介类型，contextType 具体请求中的媒体类型信息
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
+    }
+
+    @RequestMapping("/sendCode")
+    public @ResponseBody String sendCode(String phone,HttpServletRequest request){
+        BackUser backUser = backCompService.findByPhone(phone);
+        if(backUser==null) return "2";
+
+        String code = "";
+        for(int i=0;i<4;i++){
+            int num = (int)(1+Math.random()*10);
+            code += num;
+        }
+        System.out.println("code="+code);
+        request.getSession().setAttribute("phone",phone);
+        request.getSession().setAttribute("code",code);
+        String s = PhoneCodeUtil.sendCode(phone, code);
+        System.out.println(s);
+        return "1";
+    }
+
+    @RequestMapping("/findPwd")
+    public @ResponseBody String findPwd(String phone,String vCode,String pwd,HttpServletRequest request){
+        String savePhone = (String) request.getSession().getAttribute("phone");
+        String saveCode = (String)request.getSession().getAttribute("code");
+        if(!phone.equals(savePhone)){
+            return "2";
+        }
+        if(!vCode.equals(saveCode)){
+            return "3";
+        }
+        int n = backCompService.changePwdByPhone(pwd,phone);
+
+        return n>0?"1":"4";
     }
 
 }

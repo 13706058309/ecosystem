@@ -58,5 +58,9 @@ public interface BackCompService {
     //查找高校人才信息
     Talent findTalentByID(int talentID);
     //简历导出
-    String outResume(int resumeID);
+    String outResume(int resumeID,String savePath);
+    //通过手机号找用户
+    BackUser findByPhone(String phone);
+    //修改密码
+    int changePwdByPhone( String pwd,String phone);
 }
