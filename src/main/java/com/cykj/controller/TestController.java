@@ -12,10 +12,10 @@ public class TestController {
     @Resource
     private BackCompService backCompServiceImpl;
 
-//    @RequestMapping("/testComp")
-//    public String test(){
-//        return "comp/BackCompInfo";
-//    }
+    @RequestMapping("/testComp")
+    public String test(){
+        return "comp/BackCompInfo";
+    }
 
 
     @RequestMapping("/userManage")
@@ -99,4 +99,20 @@ public class TestController {
     public String findUser(){
         return "comp/BackCompFindUser";
     }
+
+    @RequestMapping("/st")
+    public String st(){
+        return "Login";
+    }
+
+    @RequestMapping("/ss")
+    public String ss(){
+        return "Register";
+    }
+
+    @RequestMapping("/sb")
+    public String sb(){
+        return "adminLog";
+    }
+
 }

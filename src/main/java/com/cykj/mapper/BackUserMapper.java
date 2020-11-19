@@ -24,4 +24,6 @@ public interface BackUserMapper {
     BackUser findByPhone(@Param("phone") String phone);
     //通过手机修改密码
     int changePwdByPhone(@Param("pwd") String pwd,@Param("phone") String phone);
+    int register(BackUser backUser);
+    BackUser isRepeat(String account);
 }

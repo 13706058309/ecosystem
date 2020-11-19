@@ -1,8 +1,11 @@
 package com.cykj.entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 前台用户
  */
+@Component
 public class UserInfo {
 
   private long userId; //用户Id
@@ -11,6 +14,8 @@ public class UserInfo {
   private String pwd; //密码
   private String telephone; //手机号码
   private long accStandId; // 账号状态
+  private Parameter states; //用户状态
+  private long jobStandId; //就业状态
 
   private String address; //地址
   private long isOpen; // 是否公开
@@ -82,6 +87,9 @@ public class UserInfo {
   }
 
 
+  public long getJobStandId() {
+    return jobStandId;
+  }
 
 
 
@@ -105,4 +113,28 @@ public class UserInfo {
 
 
 
+  public Parameter getStates() {
+    return states;
+  }
+
+  public void setStates(Parameter states) {
+    this.states = states;
+  }
+
+  @Override
+  public String toString() {
+    return "UserInfo{" +
+            "userId=" + userId +
+            ", userName='" + userName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", telephone='" + telephone + '\'' +
+            ", accStandId=" + accStandId +
+            ", states=" + states.toString() +
+            ", jobStandId=" + jobStandId +
+            ", address='" + address + '\'' +
+            ", isOpen=" + isOpen +
+            ", industry='" + industry + '\'' +
+            '}';
+  }
 }

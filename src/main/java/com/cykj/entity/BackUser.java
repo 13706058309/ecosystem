@@ -2,9 +2,12 @@ package com.cykj.entity;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 后台用户
  */
+@Component
 public class BackUser {
 
   private long bUserId; //后台用户ID
@@ -254,5 +257,33 @@ public class BackUser {
 
   public void setCompName(String compName) {
     this.compName = compName;
+  }
+
+
+  @Override
+  public String toString() {
+    return "BackUser{" +
+            "bUserId=" + bUserId +
+            ", bUserName='" + bUserName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", infoIntr='" + infoIntr + '\'' +
+            ", busiLice='" + busiLice + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            ", scale='" + scale + '\'' +
+            ", city='" + city + '\'' +
+            ", province='" + province + '\'' +
+            ", homePage='" + homePage + '\'' +
+            ", finanStage='" + finanStage + '\'' +
+            ", product='" + product + '\'' +
+            ", logo='" + logo + '\'' +
+            ", roleId=" + roleId +
+            ", role=" + role +
+            ", stateId='" + stateId + '\'' +
+            ", states=" + states +
+            ", compName='" + compName + '\'' +
+            '}';
   }
 }

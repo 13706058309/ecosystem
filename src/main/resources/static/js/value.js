@@ -51,7 +51,7 @@ function deleteBackUser(node, userId) {
     var trNode = $(node).parent().parent(); //拿到值
     var Stand_Id = trNode.children().eq(4);
     var user_Id = userId;
-
+    
     // alert("点击后端删除状态：" + Stand_Id.text());
     // alert("点击后端删除切换" + user_Id);
 

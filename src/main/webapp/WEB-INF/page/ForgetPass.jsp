@@ -10,6 +10,7 @@
 <head>
     <script id="allmobilize" charset="utf-8" src="../style/js/allmobilize.min.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link rel="alternate" media="handheld"  />
     <!-- end 云适配 -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
