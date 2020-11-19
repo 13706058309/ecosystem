@@ -133,8 +133,7 @@ public class UserInfo {
             ", states=" + states.toString() +
             ", jobStandId=" + jobStandId +
             ", address='" + address + '\'' +
-            ", isOpen=" + isOpen +
-            ", industry='" + industry + '\'' +
+            ", isOpen=" + isOpen + '\'' +
             '}';
   }
 }
