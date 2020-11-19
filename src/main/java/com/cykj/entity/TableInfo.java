@@ -3,15 +3,13 @@ package com.cykj.entity;
 import java.util.List;
 
 public class TableInfo {
-
-    private int code;  //用户
+    private int code;
     private String msg;
     private int count;
-    private List<?> data;  //集合
-
-    public TableInfo(){
+    private List<?> data;
 
 
+    public TableInfo() {
     }
 
     public TableInfo(int code, String msg, int count, List<?> data) {
@@ -19,6 +17,16 @@ public class TableInfo {
         this.msg = msg;
         this.count = count;
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "TableInfo{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", count=" + count +
+                ", data=" + data +
+                '}';
     }
 
     public int getCode() {

@@ -14,6 +14,8 @@ public class PowerServiceImpl implements PowerService {
 
     @Resource
     PowerMapper powerMapper;
+
+
     @Override
     public List<Menu> findExistMenu(long roleId) {
         List<Menu> existList =powerMapper.findExistMenu(roleId,0);

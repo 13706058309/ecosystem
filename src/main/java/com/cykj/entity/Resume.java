@@ -8,30 +8,45 @@ import java.util.List;
 public class Resume {
 
   private long resumeId;
-  private long userId;
-  private String realName;
-  private String clan;
-  private String photo;
-  private String politicalStatus;
-  private String birthday;
-  private String contactInfo;
-  private String school;
-  private long educationId;
-  private String profession;
-  private String wrokYear;
-  private String qualiCer;
-  private String selfEva;
-  private long isShow;
-  private String address;
-  private java.sql.Date updateTime;
-  private long isGraduate;
+  private long userId;//用户ID
+  private String realName;//名字
+  private String clan;//民族
+  private String photo;//头像
+  private String politicalStatus;//政治面貌
+  private String birthday;//出生年月日
+  private String contactInfo;//联系方式
+  private String school;//学校
+  private long educationId;//学历ID
+  private String profession;//专业
+  private int wrokYear;//工作时间
+  private String qualiCer;//资格证书
+  private String selfEva;//自我评价
+  private long isShow;//是否展示
+  private String address;//地址
+  private String updateTime;//更新时间
+  private long isGraduate;//是否应届生
 
+  private long jobStandId; //就业状态
+  private String industry; //意向行业
+  private String sex;
+  private String expectWork;
+
+  private Delivery delivery;
   private Education education;
+  private PostPosition postPosition;
   private List<EducationalBackground> educationalBackgrounds;
   private List<WorkExperience> workExperiences;
   private List<ProjectExperience> projectExperiences;
 
   public Resume() {
+  }
+
+  public String getExpectWork() {
+    return expectWork;
+  }
+
+  public void setExpectWork(String expectWork) {
+    this.expectWork = expectWork;
   }
 
   public long getResumeId() {
@@ -51,6 +66,13 @@ public class Resume {
     this.userId = userId;
   }
 
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
 
   public String getRealName() {
     return realName;
@@ -129,14 +151,13 @@ public class Resume {
     this.profession = profession;
   }
 
-  public String getWrokYear() {
+  public int getWrokYear() {
     return wrokYear;
   }
 
-  public void setWrokYear(String wrokYear) {
+  public void setWrokYear(int wrokYear) {
     this.wrokYear = wrokYear;
   }
-
 
   public String getQualiCer() {
     return qualiCer;
@@ -174,11 +195,11 @@ public class Resume {
   }
 
 
-  public java.sql.Date getUpdateTime() {
+  public String getUpdateTime() {
     return updateTime;
   }
 
-  public void setUpdateTime(java.sql.Date updateTime) {
+  public void setUpdateTime(String updateTime) {
     this.updateTime = updateTime;
   }
 
@@ -189,6 +210,22 @@ public class Resume {
 
   public void setIsGraduate(long isGraduate) {
     this.isGraduate = isGraduate;
+  }
+
+  public long getJobStandId() {
+    return jobStandId;
+  }
+
+  public void setJobStandId(long jobStandId) {
+    this.jobStandId = jobStandId;
+  }
+
+  public String getIndustry() {
+    return industry;
+  }
+
+  public void setIndustry(String industry) {
+    this.industry = industry;
   }
 
   public Education getEducation() {
@@ -221,5 +258,56 @@ public class Resume {
 
   public void setProjectExperiences(List<ProjectExperience> projectExperiences) {
     this.projectExperiences = projectExperiences;
+  }
+
+  public Delivery getDelivery() {
+    return delivery;
+  }
+
+  public void setDelivery(Delivery delivery) {
+    this.delivery = delivery;
+  }
+
+  public PostPosition getPostPosition() {
+    return postPosition;
+  }
+
+  public void setPostPosition(PostPosition postPosition) {
+    this.postPosition = postPosition;
+  }
+
+
+  @Override
+  public String toString() {
+    return "Resume{" +
+            "resumeId=" + resumeId +
+            ", userId=" + userId +
+            ", realName='" + realName + '\'' +
+            ", clan='" + clan + '\'' +
+            ", photo='" + photo + '\'' +
+            ", politicalStatus='" + politicalStatus + '\'' +
+            ", birthday='" + birthday + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", school='" + school + '\'' +
+            ", educationId=" + educationId +
+            ", profession='" + profession + '\'' +
+            ", wrokYear='" + wrokYear + '\'' +
+            ", qualiCer='" + qualiCer + '\'' +
+            ", selfEva='" + selfEva + '\'' +
+            ", isShow=" + isShow +
+            ", address='" + address + '\'' +
+            ", updateTime='" + updateTime + '\'' +
+            ", isGraduate=" + isGraduate +
+            ", jobStandId=" + jobStandId +
+            ", industry='" + industry + '\'' +
+            ", sex='" + sex + '\'' +
+            ", expectWork='" + expectWork + '\'' +
+            ", delivery=" + delivery +
+            ", education=" + education +
+            ", postPosition=" + postPosition +
+            ", educationalBackgrounds=" + educationalBackgrounds +
+            ", workExperiences=" + workExperiences +
+            ", projectExperiences=" + projectExperiences +
+            '}';
   }
 }
