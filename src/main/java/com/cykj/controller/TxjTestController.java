@@ -2,6 +2,7 @@ package com.cykj.controller;
 
 import com.cykj.entity.Course;
 import com.cykj.entity.TableInfo;
+import com.cykj.interceptor.Loger;
 import com.cykj.service.impl.CourseServiceImpl;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ private CourseServiceImpl courseServiceImpl;
 
 
     @RequestMapping("goBCM")
+    @Loger(operationType = "走入管理表格",operationName = "走入管理表格数据")
+
     public String goBackCourseManagement(){
         System.out.println("走入汤某人的测试控制类，即将访问 后台课程管理的JSP！！");
 
@@ -32,6 +35,7 @@ private CourseServiceImpl courseServiceImpl;
     }
 
     @RequestMapping(value = "/findCourse",produces = "text/html;charset=UTF-8")
+    @Loger(operationType = "录入表格数据",operationName = "录入表格数据")
     public @ResponseBody
     String getTableInfo(Integer page,Integer limit,String courseName,String fieldId){
 
@@ -57,6 +61,7 @@ private CourseServiceImpl courseServiceImpl;
     }
 
     @RequestMapping("deleteCourse")
+    @Loger(operationType = "表格执行删除",operationName = "表格执行删除")
     public void deleteCourse(HttpServletRequest req,HttpServletResponse resp,Integer courseId){
         System.out.println(courseId);
         System.out.println("走入删除 控制类");
@@ -67,7 +72,20 @@ private CourseServiceImpl courseServiceImpl;
             int course = courseServiceImpl.deleteCourse(courseId);
         }
 
+    }
 
+
+    @RequestMapping("deleteCourse")
+    @Loger(operationType = "表格执行删除",operationName = "表格执行删除")
+    public void updateCourse(HttpServletRequest req,HttpServletResponse resp,Integer courseId){
+        System.out.println(courseId);
+        System.out.println("走入删除 控制类");
+
+//        Map<String,Object> map = new HashMap<>();
+        if (courseId != 0){
+//            map.put("courseId",courseId);
+            int course = courseServiceImpl.deleteCourse(courseId);
+        }
 
     }
 
