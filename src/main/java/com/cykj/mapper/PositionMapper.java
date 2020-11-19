@@ -17,4 +17,6 @@ public interface PositionMapper {
 
     public List<Position> findPost (long departId);
     List<Position> findPositionByID(int departID);
+
+    Position findPostName(int postID);
 }

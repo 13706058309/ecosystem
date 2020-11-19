@@ -154,15 +154,17 @@ function sumb() {
                 alert("岗位名称不能超过10");
                 return false;
             }
-            var minSalary = $("#minSalary").val();
-            var maxSalary = $("#maxSalary").val();
+            var minSalary = 0;
+            var maxSalary = 0;
+            minSalary = $("#minSalary").val();
+            maxSalary = $("#maxSalary").val();
             var pattern = /^\+?[1-9][0-9]*$/;
             if(!pattern.test(minSalary)||!pattern.test(maxSalary)){
                 alert("工资只能是整数");
                 return false;
             }
 
-            if(minSalary>=maxSalary){
+            if(parseInt($("#minSalary").val())>= parseInt($("#maxSalary").val())){
                 alert("最低工资不能大于最大工资");
                 return false;
             }
@@ -236,7 +238,9 @@ function sumb() {
             }
         },
         success:function (info) {
-
+            if(info=='1'){
+                layer.alert("发布成功")
+            }
         },
     })
 }
@@ -266,6 +270,8 @@ function showDetail() {
         content:$("#postPositionDetailDiv"),
     })
 }
+
+
 
 
 

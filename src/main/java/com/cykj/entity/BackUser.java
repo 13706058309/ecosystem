@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +14,7 @@ public class BackUser {
   private String bUserName; //用户名
   private String account; //账号
   private String pwd; //密码
-  private String contactInfo; //联系方式
+  private String contactInfo; //练习方式
   private String infoIntr; //信息简介
   private String busiLice; //营业执照
   private String email; //邮箱
@@ -28,9 +30,10 @@ public class BackUser {
   private RoleInfo role; //角色实体类
   private String stateId;//状态
   private Parameter states;//状态实体类 （iD 状态名称  类型）
-  private String compName; //公司名称
   private String bRegTime;//注册时间
-
+  private String coreValue;//企业核心价值
+  private String compName;
+  private List<Industry> industrys;
   public BackUser() {
   }
 
@@ -200,7 +203,6 @@ public class BackUser {
     this.product = product;
   }
 
-
   public String getLogo() {
     return logo;
   }
@@ -233,6 +235,22 @@ public class BackUser {
     this.bRegTime = bRegTime;
   }
 
+  public String getCoreValue() {
+    return coreValue;
+  }
+
+  public void setCoreValue(String coreValue) {
+    this.coreValue = coreValue;
+  }
+
+  public List<Industry> getIndustrys() {
+    return industrys;
+  }
+
+  public void setIndustrys(List<Industry> industrys) {
+    this.industrys = industrys;
+  }
+
   public String getCompName() {
     return compName;
   }
@@ -240,6 +258,7 @@ public class BackUser {
   public void setCompName(String compName) {
     this.compName = compName;
   }
+
 
   @Override
   public String toString() {

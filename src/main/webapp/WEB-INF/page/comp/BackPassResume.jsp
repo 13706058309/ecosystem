@@ -7,40 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="${pageContext.request.contextPath}/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/comp/BackUnPassResume.css">
+<script src="${pageContext.request.contextPath}/js/comp/Common.js"></script>
 <html>
 <head>
     <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-<style>
-    .layui-table th{
-        text-align: center;
-    }
-    .layui-table{
-        text-align: center;
-    }
-    .layui-form-select dl {
-        max-height:200px;
-    }
-    #lay{
-        font-size: 18px;
-    }
 
-    .layui-form-select dl {
-        max-height:200px;
-    }
-
-    .layui-table-page {
-        text-align: center;
-    }
-
-</style>
 <body>
 <script id="btns" type="text/html">
-    <a class="layui-btn layui-btn-xs" lay-event="down">下载</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">查看详情</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="delCheck">删除选中的简历</button>
+    </div>
 </script>
 
 <h1 style="text-align: center">通知面试简历</h1>
@@ -48,18 +36,34 @@
 <div class="demoTable layui-form" style="margin-left: 27%">
 
     <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">投递时间</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="beginTime"  placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">至</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
 
         <div class="layui-inline">
-            <label class="layui-form-label" style="width:100px">发布岗位名称:</label>
+            <label class="layui-form-label" >岗位名称:</label>
             <div class="layui-input-inline">
-                <input type="tel" id="topic" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                <input type="tel" id="postName"  class="layui-input">
             </div>
         </div>
 
         <div class="layui-inline">
-            <label class="layui-form-label" style="width:100px">名字:</label>
+            <label class="layui-form-label" >名字:</label>
             <div class="layui-input-inline">
-                <input type="tel" id="userName" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                <input type="tel" id="userName"  class="layui-input">
             </div>
         </div>
 
@@ -72,76 +76,71 @@
 </div>
 
 <table id="userTable" lay-filter="test"></table>
-<div class="layui-input-inline" style="margin-left: 50%">
-    <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="oper()" >返回</button>
-</div>
-<div id="changeDiv" style="display: none">
+
+<div id="detailDiv" style="display: none;padding: 3%">
     <table class="layui-table">
+        <tr><td colspan="6">简历详情</td></tr>
         <tr >
             <td width="19%">姓名</td>
-            <td width="19%">2</td>
+            <td width="19%" id="dName">2</td>
             <td width="19%">民族</td>
-            <td width="19%">4</td>
-            <td rowspan="4" colspan="2"></td>
+            <td width="19%" id="dClen">4</td>
+            <td rowspan="5" colspan="2"><img src="" id="imgs" width="100%" height="100%"></td>
         </tr>
         <tr >
             <td>政治面貌</td>
-            <td>2</td>
+            <td id="dPolistatu">2</td>
             <td>出生年月日</td>
-            <td>4</td>
+            <td id="dBir">4</td>
+        </tr>
+        <tr >
+            <td>性别</td>
+            <td id="dSex">2</td>
+            <td>工作年限</td>
+            <td id="dWorkYear">4</td>
+        </tr>
+        <tr >
+            <td>学历</td>
+            <td id="dEdu">2</td>
+            <td>专业</td>
+            <td id="dProf">4</td>
         </tr>
         <tr >
             <td>毕业学校</td>
-            <td>2</td>
-            <td>工作年限</td>
-            <td>4</td>
+            <td id="DSchool">2</td>
+            <td>就业状态</td>
+            <td id="jobStand"></td>
         </tr>
         <tr >
-            <td>学历</td>
-            <td>2</td>
-            <td>专业</td>
-            <td>4</td>
-        </tr>
-        <tr >
-            <td>学历</td>
-            <td>2</td>
-            <td>专业</td>
-            <td>4</td>
+            <td>期望工作</td>
+            <td colspan="2" id="DHwork">2</td>
+            <td>意向行业</td>
+            <td colspan="2" id="DHIndustry">4</td>
         </tr>
         <tr >
             <td>地址</td>
-            <td colspan="2">2</td>
+            <td colspan="2" id="DAddress">2</td>
             <td>联系方式</td>
-            <td colspan="2">4</td>
+            <td colspan="2" id="DRealInfo">4</td>
         </tr>
-        <tr>
-            <td rowspan="1">教育背景</td>
-            <td colspan="5"> </td>
-        </tr>
-
-        <tr>
-            <td rowspan="1">工作经验</td>
-            <td colspan="5"> </td>
-        </tr>
-
-        <tr>
-            <td rowspan="1">项目经验</td>
-            <td colspan="5"> </td>
-        </tr>
-
         <tr>
             <td rowspan="1">自我评价</td>
-            <td colspan="5"> </td>
+            <td colspan="5" id="DselfEva"  > </td>
         </tr>
+        <tbody id="tbody">
+
+        </tbody>
 
     </table>
+    <div class="layui-input-inline" style="margin-left: 50%">
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResume()" >简历导出</button>
+    </div>
 </div>
 </body>
 <script>
     var layer;
     var path = $("#path").val();
-    var docID;
-    var objs;
+
     var index;
     var form;
     layui.use(['laydate','layer','form'],function () {
@@ -158,63 +157,115 @@
         });
     })
 
-    $(function () {
-        $.ajax({
-            url:path+"/fDoc/findAll",
-            type:"post",
-            typeData:"text",
-            success:function (data) {
-                var arr = JSON.parse(data);
-                $("#type").empty();
-                var $sel = $("<option>"+'请选择'+"</option>");
-                $("#type").append($sel)
-                for(var i=0;i<arr.length;i++){
-                    var $option = $("<option>"+arr[i].doc_Type+"</option>");
-                    $("#type").append($option);
-                }
-                form.render();
-            },
-        });
-    })
-
     layui.use('table',function () {
         var table = layui.table;
         table.render({
             elem:'#userTable',
-            height:312,
-            limits:[3,6],
-            limit:3,
-            url:"${pageContext.request.contextPath}/fDoc/findDoc",
+            toolbar: '#toolbarDemo',
+            height:340,
+            limits:[5],
+            limit:5,
+            url:"${pageContext.request.contextPath}/rec/findPassResumes",
             page:true,
             id: 'testReload',
             cols:[[
-                {field:'doc_Name',title:'文档标题',sort:true},
-                {field:'user_Name',title:'上传人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
-                {field:'up_Time',title:'上传时间',sort:true},
-                {field:'dow_Score',title:'下载积分',sort:true},
-                {field:'doc_type',title:'文档类型',templet:'<div>{{d.docConfig.doc_Type}}</div>'},
-                {field:'dow_Num',title:'下载次数',sort:true},
-                {title:'操作',toolbar:'#btns',width:250}
+                {type: 'checkbox', fixed: 'left',width: 50},
+                {field:'realName',title:'姓名',fixed: 'left',width:"10%"},
+                {field:'clan',title:'民族',hide:'true'},
+                {field:'politicalStatus',title:'政治面貌',hide:'true'},
+                {field:'birthday',title:'出生日期',hide:'true'},
+                {field:'contactInfo',title:'联系方式',hide:'true'},
+                {field:'school',title:'毕业院校',hide:'true'},
+                {field:'profession',title:'专业',hide:'true'},
+                {field:'isGraduate',title:'是否应届生',width:"10%",templet:function (d) {
+                        if(d.isGraduate==1){
+                            res = "是";
+                        }else{
+                            res = "否";
+                        }
+                        return res;
+                    }},
+                {field:'profession',title:'应聘岗位',templet:'<div>{{d.postPosition.postName}}</div>',width:"15%"},
+                {field:'wrokYear',title:'工作时间',sort:true,width:"15%"},
+                {field:'education',title:'学历',templet:'<div>{{d.education.education}}</div>',width:"15%"},
+                {field:'qualiCer',title:'资格证书',hide:'true'},
+                {field:'selfEva',title:'自我评价',hide:'true'},
+                {field:'address',title:'地址',hide:'true'},
+                {field:'deliTime',title:'投递时间',sort:true,templet:'<div>{{d.delivery.deliTime}}</div>',width:"15%"},
+                {field:'educationalBackgrounds',title:'教育背景',sort:true,templet:'<div>{{d.educationalBackgrounds}}</div>' ,hide:'true'},
+                {field:'workExperiences',title:'工作经验',sort:true,templet:'<div>{{d.workExperiences}}</div>' ,hide:'true'},
+                {field:'projectExperiences',title:'项目经验',sort:true,templet:'<div>{{d.projectExperiences}}</div>' ,hide:'true'},
+                {title:'操作',toolbar:'#btns',width:"20%"}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            docID = data.doc_ID;
-            var u_ID = data.u_ID;
-            // var doc_Type_ID = data.doc_Type_ID;
-            var score = data.dow_Score;
-            var paths = data.path;
-            if(obj.event === 'down'){
-                if(userScore<score){
-                    layer.msg("积分不足无法下载")
-                    return false;
-                }
-                alert(docID);
-                if(confirm("确定下载")){
-                    location.href = path+"/fDoc/download?doc_ID="+docID;
-                }
+            var deliID = data.delivery.deliveryId;
+            var resumeID = data.resumeId;
+            if(obj.event === 'del'){
+                layer.confirm('是否删除选中的简历',{
+                    btn:['删除','取消'],
+                    time:20000,
+                },function (index) {
+                    $.ajax({
+                        url:path+"/rec/delPassResumeOne",
+                        data:"deliID="+deliID,
+                        type:"post",
+                        typeData:"text",
+                        success:function (info) {
+
+                            if(info==1){
+                                layer.alert("成功删除");
+                                obj.del();
+                            }else{
+                                layer.alert("网络繁忙，删除失败")
+                            }
+                        },
+                    })
+                })
+            }else if(obj.event === 'detail'){
+                showDetail(data);
+                findDetailResume(resumeID)
             }
+        });
+
+
+        //工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'delCheck':
+                    var data = checkStatus.data;
+                    var length = data.length;
+                    if(length==0){
+                        layer.alert("请选择删除的简历");
+                        return false;
+                    }
+                    layer.confirm('是否删除选中的简历',{
+                        btn:['删除','取消'],
+                        time:20000,
+                    },function (index) {
+                        $.ajax({
+                            url:path+"/rec/delPassResume",
+                            data:"msg="+JSON.stringify(data),
+                            type:"post",
+                            typeData:"text",
+                            success:function (info) {
+                                table.reload('testReload', {
+                                    page: {
+                                        curr: 1,
+                                    },
+                                    where: {
+                                        postName: $('#postName').val(),
+                                    }
+                                }, 'data');
+                                layer.alert("成功删除"+info+"个");
+                            },
+                        })
+                    })
+                    break;
+            };
         });
 
         var $ = layui.$, active = {
@@ -228,8 +279,7 @@
                         userName: $('#userName').val(),
                         beginTime:$('#beginTime').val(),
                         endTime:$('#endTime').val(),
-                        topic:$('#topic').val(),
-                        type:$('#type').val(),
+                        postName:$('#postName').val(),
                     }
                 }, 'data');
             }
@@ -246,15 +296,6 @@
 
     function returnMain() {
         location.href = path+"/front/main";
-    }
-
-    function oper() {
-        layer.open({
-            type:1,
-            area:['80%','70%'],
-            offset: ['5%', '10%'],
-            content:$("#changeDiv"),
-        })
     }
 
 </script>
