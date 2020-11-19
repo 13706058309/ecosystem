@@ -8,7 +8,7 @@ import com.cykj.entity.Talent;
 import com.cykj.mapper.TalentMapper;
 import com.cykj.mapper.UserNumMapper;
 import com.cykj.service.TalentService;
-import com.cykj.service.UserService;
+
 
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Component;
