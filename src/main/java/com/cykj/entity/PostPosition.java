@@ -234,4 +234,6 @@ public class PostPosition {
   public void setContactEmail(String contactEmail) {
     this.contactEmail = contactEmail;
   }
+
+
 }

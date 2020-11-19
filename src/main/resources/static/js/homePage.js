@@ -1,5 +1,4 @@
 var path;
-var num = 0;
 $(function () {
     path = $("#path").val();
 });

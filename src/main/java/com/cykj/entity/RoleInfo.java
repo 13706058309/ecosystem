@@ -6,7 +6,6 @@ package com.cykj.entity;
 public class RoleInfo {
 
   private long roleId;
-  private long bUserId;
   private String roleName;
 
   public RoleInfo() {
@@ -19,16 +18,6 @@ public class RoleInfo {
   public void setRoleId(long roleId) {
     this.roleId = roleId;
   }
-
-
-  public long getBUserId() {
-    return bUserId;
-  }
-
-  public void setBUserId(long bUserId) {
-    this.bUserId = bUserId;
-  }
-
 
   public String getRoleName() {
     return roleName;

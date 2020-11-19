@@ -1,0 +1,26 @@
+.layui-table th{
+    text-align: center;
+}
+.layui-table{
+    text-align: center;
+}
+.layui-form-select dl {
+    max-height:200px;
+}
+#lay{
+    font-size: 18px;
+}
+
+.layui-form-select dl {
+    max-height:200px;
+}
+
+.layui-table-page {
+    text-align: center;
+}
+
+.ziti{
+    font-family: "Microsoft Yahei";
+    color: #50ffa1;
+    font-weight: bolder;
+}

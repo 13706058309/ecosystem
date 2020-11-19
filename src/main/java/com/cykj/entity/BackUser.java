@@ -1,8 +1,13 @@
 package com.cykj.entity;
 
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 /**
  * 后台用户
  */
+@Component
 public class BackUser {
 
   private long bUserId; //后台用户ID
@@ -26,7 +31,9 @@ public class BackUser {
   private String stateId;//状态
   private Parameter states;//状态实体类 （iD 状态名称  类型）
   private String bRegTime;//注册时间
-
+  private String coreValue;//企业核心价值
+  private String compName;
+  private List<Industry> industrys;
   public BackUser() {
   }
 
@@ -196,6 +203,8 @@ public class BackUser {
     this.product = product;
   }
 
+  public String getLogo() {
+    return logo;
 
   public String getLogo() {
     return logo;
@@ -227,5 +236,57 @@ public class BackUser {
 
   public void setbRegTime(String bRegTime) {
     this.bRegTime = bRegTime;
+  }
+
+  public String getCoreValue() {
+    return coreValue;
+  }
+
+  public void setCoreValue(String coreValue) {
+    this.coreValue = coreValue;
+  }
+
+  public List<Industry> getIndustrys() {
+    return industrys;
+  }
+
+  public void setIndustrys(List<Industry> industrys) {
+    this.industrys = industrys;
+  }
+
+  public String getCompName() {
+    return compName;
+  }
+
+  public void setCompName(String compName) {
+    this.compName = compName;
+  }
+
+
+  @Override
+  public String toString() {
+    return "BackUser{" +
+            "bUserId=" + bUserId +
+            ", bUserName='" + bUserName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", infoIntr='" + infoIntr + '\'' +
+            ", busiLice='" + busiLice + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            ", scale='" + scale + '\'' +
+            ", city='" + city + '\'' +
+            ", province='" + province + '\'' +
+            ", homePage='" + homePage + '\'' +
+            ", finanStage='" + finanStage + '\'' +
+            ", product='" + product + '\'' +
+            ", logo='" + logo + '\'' +
+            ", roleId=" + roleId +
+            ", role=" + role +
+            ", stateId='" + stateId + '\'' +
+            ", states=" + states +
+            ", compName='" + compName + '\'' +
+            '}';
   }
 }

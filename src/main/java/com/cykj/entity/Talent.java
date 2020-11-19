@@ -26,28 +26,21 @@ public class Talent {
   public Talent() {
   }
 
-
-
-  public Talent(String talentName, String school, String birthday, String profession, String politicalStatus, String education, String contactInfo, String address, String workExp, String certificate, String selfEva) {
-
+  public Talent(String talentName, String school, String birthday, String profession,
+                String politicalStatus, String education, String contactInfo, String address, String workExp,
+                String certificate, String selfEva) {
     this.talentName = talentName;
     this.school = school;
     this.birthday = birthday;
-    this.contactInfo = contactInfo;
     this.profession = profession;
     this.politicalStatus = politicalStatus;
-    this.workExp = workExp;
-
-    this.selfEva = selfEva;
     this.education = education;
-
+    this.contactInfo = contactInfo;
     this.address = address;
+    this.workExp = workExp;
     this.certificate = certificate;
-
-
+    this.selfEva = selfEva;
   }
-
-
 
   public long getTalentId() {
     return talentId;

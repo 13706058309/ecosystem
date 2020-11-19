@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import org.springframework.stereotype.Component;
+
 import com.cykj.utils.MyUtil;
 
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.Date;
 /**
  * 后台用户日志
  */
+@Component
 public class BackLog {
 
   private long bLogId;   //ID
@@ -77,4 +80,15 @@ public class BackLog {
     this.matter = matter;
   }
 
+
+  @Override
+  public String toString() {
+    return "BackLog{" +
+            "bLogId=" + bLogId +
+            ", bUserID=" + bUserID +
+            ", backUser=" + backUser +
+            ", operaTime='" + operaTime + '\'' +
+            ", matter='" + matter + '\'' +
+            '}';
+  }
 }
