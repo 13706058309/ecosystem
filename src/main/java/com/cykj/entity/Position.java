@@ -8,7 +8,6 @@ public class Position {
   private long postId;//岗位ID
   private long departId;//部门ID
   private String postName;//岗位名称
-
   public Position() {
   }
 
@@ -20,7 +19,6 @@ public class Position {
             ", postName='" + postName + '\'' +
             '}';
   }
-
   public long getPostId() {
     return postId;
   }
