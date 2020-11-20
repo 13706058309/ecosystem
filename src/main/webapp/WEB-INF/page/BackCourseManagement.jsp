@@ -421,6 +421,27 @@
         });
 
 
+        //监听提交【日志管理  按钮的监听】
+        form.on('submit(OperationRecord)', function(data){
+            console.log(data);
+            layer.open({
+                title: '操作日志'
+                ,area: ['500px', '300px']//设定弹窗的宽、高
+                ,btn:[ '查看完毕']//设定按钮组
+                ,shade: [0.7, '#393D49']
+                ,closeBtn:2
+                ,yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                }
+                ,type:1
+                ,content:'看到这个是的猪！看到这个是的猪！看到这个是的猪！看到这个是的猪！看到这个是的猪！看到这个是的猪！看到这个是的猪！看到这个是的猪！看到这个是的猪！看到这个是的猪！'
+
+            });
+            return false;
+        });
+
+
 
 
         //监听行工具事件
@@ -430,6 +451,7 @@
             if(layEvent === 'detail'){
                 layer.msg('查看操作');
             }
+            //这是工具栏里“删除课程”的监听
             else if(layEvent === 'del'){
                 var courseId=data.courseId;
                 alert(courseId);
@@ -491,11 +513,13 @@
                 //     layer.close(index);
                 //     //向服务端发送删除指令
                 // });
-            } else if(layEvent === 'edit'){
+            }
+            //这是工具栏里“修改课程”的监听
+            else if(layEvent === 'edit'){
                 layer.msg('编辑操作');
                 console.log(data);
                 //alert("修改完毕")
-                var courseId = data.courseId;
+                var courseId_table = data.courseId;
                 var courseName_table = data.courseName;
                 var courseImgURL_table = data.courseImgURL;
                 var courseIntroduce_table = data.courseIntroduce;
@@ -516,39 +540,41 @@
                             var courseImgURL = document.getElementById('courseImgURL').value;//修改后的文件路径
                             var speakerHeadImgUrl = document.getElementById('speakerHeadImgUrl').value;//修改后的文件图片路径
                             console.log("修改后的课程名："+courseName+";修改后的课程介绍:"+courseIntroduce+";修改后的文件路径="+courseImgURL+";修改后的文件图片路径="+speakerHeadImgUrl);
-                            console.log("表格中的id："+courseId+";表格中的课程名："+courseName_table+";表格中的课程介绍:"+courseIntroduce_table+";表格中的文件路径="+courseImgURL_table+";表格中的文件图片路径="+speakerHeadImgUrl_table)
+                            console.log("表格中的id："+courseId_table+";表格中的课程名："+courseName_table+";表格中的课程介绍:"+courseIntroduce_table+";表格中的文件路径="+courseImgURL_table+";表格中的文件图片路径="+speakerHeadImgUrl_table)
 
                             $.ajax({
                                 type:"GET",
                                 dataType: "json",//预期服务器返回的数据类型
-                                url: "../txjtext/deleteCourse" ,//url
-                                data: "courseId="+courseId,
+                                url: "../txjtext/updateCourse" ,//url
+                                data: 'courseId_table='+courseId_table+'&courseName_table='+courseName_table+'&courseImgURL_table='+courseImgURL_table
+                                    +'&courseIntroduce_table='+courseIntroduce_table+'&speakerHeadImgUrl_table='+speakerHeadImgUrl_table+'&courseName='+courseName
+                                    +'&courseIntroduce='+courseIntroduce+'&courseImgURL='+courseImgURL+'&speakerHeadImgUrl='+speakerHeadImgUrl,
                                 async:true,
-                                success:function () {
-                                    // alert("成功")
-                                    table.reload('testReload', {
-                                        page: {
-                                            curr: 1 //重新从第 1 页开始
-                                        },
-                                        where: {
-                                            courseName: $('#input_search').val(),
-                                            fieldId: $('#fieldId').val(),
-                                        }
-                                    }, 'data');
-
-                                },
-                                error:function () {
-                                    // alert("异常")
-                                    table.reload('testReload', {
-                                        page: {
-                                            curr: 1 //重新从第 1 页开始
-                                        },
-                                        where: {
-                                            courseName: $('#input_search').val(),
-                                            fieldId: $('#fieldId').val(),
-                                        }
-                                    }, 'data');
-                                },
+                                // success:function () {
+                                //     // alert("成功")
+                                //     table.reload('testReload', {
+                                //         page: {
+                                //             curr: 1 //重新从第 1 页开始
+                                //         },
+                                //         where: {
+                                //             courseName: $('#input_search').val(),
+                                //             fieldId: $('#fieldId').val(),
+                                //         }
+                                //     }, 'data');
+                                //
+                                // },
+                                // error:function () {
+                                //     // alert("异常")
+                                //     table.reload('testReload', {
+                                //         page: {
+                                //             curr: 1 //重新从第 1 页开始
+                                //         },
+                                //         where: {
+                                //             courseName: $('#input_search').val(),
+                                //             fieldId: $('#fieldId').val(),
+                                //         }
+                                //     }, 'data');
+                                // },
 
                             });
 

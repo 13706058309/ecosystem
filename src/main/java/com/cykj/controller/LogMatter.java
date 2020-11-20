@@ -3,6 +3,7 @@ package com.cykj.controller;
 import com.cykj.entity.BackLog;
 import com.cykj.entity.BackUser;
 import com.cykj.interceptor.Loger;
+import com.cykj.service.BackLogService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,10 +22,11 @@ import java.lang.reflect.Method;
 @Component
 public class LogMatter {
 
-//    @Resource   //资源
-//    LogService logService;//获取日志service对象
+    @Resource   //资源
+    BackLogService backLogService;//获取日志service对象
 
-    @Pointcut("execution(* com.cykj.controller.*.*(..))")//修改
+//    @Pointcut("execution(* com.cykj.controller.*.*(..))")//修改
+@Pointcut("execution(* com.cykj.controller.TxjTestController.*(..))")//修改
     public void logpoint() {
 
     }
@@ -53,25 +55,30 @@ public class LogMatter {
             }
         }
         //获取到request对象
-        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-        HttpServletRequest request = sra.getRequest();
-        //获取session中的对象     ------------------      以下为参考   -------------
-      //  BackUser backUser = new BackUser(7);
-        BackUser backUser = (BackUser) request.getSession().getAttribute("hUser");
-        BackLog backLog = new BackLog();
-        if (backUser == null) {//如果不存在对象，则是管理员在操作
-//            backLog.setbUserId(15);
-            backLog.setbUserID(15);
-        } else {
-//            backLog.setbUserId(backUser.getbUserId());
-            backLog.setbUserID(backUser.getbUserId());
-        }
-
-        backLog.setMatter(operaName);
+//        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+//        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+//        HttpServletRequest request = sra.getRequest();
+//        //获取session中的对象     ------------------      以下为参考   -------------
+//      //  BackUser backUser = new BackUser(7);
+//        BackUser backUser = (BackUser) request.getSession().getAttribute("hUser");
+//        System.out.println("backUser:"+backUser.getbUserName()+backUser.getBUserName());
+//        BackLog backLog = new BackLog();
+//        if (backUser == null) {//如果不存在对象，则是管理员在操作
+////            backLog.setbUserId(15);
+//            backLog.setbUserID(15);
+//        } else {
+////            backLog.setbUserId(backUser.getbUserId());
+//            backLog.setbUserID(backUser.getbUserId());
+//        }
+//
+//        backLog.setMatter(operaName);
 //        logService.addLog(backLog);//数据库添加一个日志
 
+
+        backLogService.insertLog(1,operaName);
     }
+
+
 
     @Before("logpoint()")
     public void before() {

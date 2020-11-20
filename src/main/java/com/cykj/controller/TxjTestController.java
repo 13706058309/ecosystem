@@ -75,16 +75,19 @@ private CourseServiceImpl courseServiceImpl;
     }
 
 
-    @RequestMapping("deleteCourse")
-    @Loger(operationType = "表格执行删除",operationName = "表格执行删除")
-    public void updateCourse(HttpServletRequest req,HttpServletResponse resp,Integer courseId){
-        System.out.println(courseId);
-        System.out.println("走入删除 控制类");
+    @RequestMapping("updateCourse")
+    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
+    public void updateCourse(Integer courseId_table,String courseName_table){
+        System.out.println("走入更改控制类");
+        System.out.println(courseId_table+courseName_table);
+
+
+
 
 //        Map<String,Object> map = new HashMap<>();
-        if (courseId != 0){
+        if (courseId_table != 0){
 //            map.put("courseId",courseId);
-            int course = courseServiceImpl.deleteCourse(courseId);
+//            int course = courseServiceImpl.deleteCourse(courseId);
         }
 
     }

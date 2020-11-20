@@ -2,6 +2,7 @@ package com.cykj.mapper;
 
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BackLogMapper {
 
+    void insertLog(@Param("buserid") int buserid,@Param("matter") String  matter);
 }
