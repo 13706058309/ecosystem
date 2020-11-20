@@ -134,7 +134,7 @@ public class UserInfo {
             ", jobStandId=" + jobStandId +
             ", address='" + address + '\'' +
             ", isOpen=" + isOpen +
-            ", industry='" + industry + '\'' +
+
             '}';
   }
 }

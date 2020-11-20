@@ -12,12 +12,14 @@ public class CerUserServiceImpl implements CerUserService {
 
     @Resource
     CerUserMapper cerUserMapper;
+
     /**
      * @param userid
      * @return查询用户已获得的证书集合
      */
     @Override
     public List<CerUser> findceruserlist(long userid) {
+
         return cerUserMapper.findceruserlist(userid);
     }
 }

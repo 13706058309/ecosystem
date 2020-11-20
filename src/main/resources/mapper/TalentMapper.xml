@@ -80,7 +80,27 @@
         <if test="beginTime!=null">and entryTime >= #{beginTime} </if>
         <if test="endTime!=null">and entryTime &lt;=  #{endTime} </if>
     </select>
-    <insert id="addTalent" parameterType="com.cykj.entity.Talent" >
+    <select id="findPosition" parameterType="java.util.HashMap"  resultMap="result">
+        select  p.companyID,p.releaseTime, b.compName,p2.postName,i.industryName from postPosition p ,backUser b, position p2,industry i,depart d
+        where p.companyID=b.bUserID and p.postID=p2.postID and d.departID=p2.departID and i.industryID=d.industryID and p.postStandID=6
+        <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
+        <if test="postName!=null">and p2.postName like concat('%',#{postName},'%')</if>
+        limit #{limit} offset #{offset}
+    </select>
+    <resultMap id="result" type="com.cykj.entity.Positions">
+        <result property="companyID" column="companyID"></result>
+        <result property="releaseTime" column="releaseTime"></result>
+        <result property="compName" column="compName"></result>
+        <result property="postName" column="postName"></result>
+        <result property="industryName" column="industryName"></result>
+    </resultMap>
+    <select id="findPositionRecords" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from  postPosition p ,backUser b, position p2,industry i,depart d
+        where p.companyID=b.bUserID and p.postID=p2.postID and d.departID=p2.departID and i.industryID=d.industryID and p.postStandID=6
+        <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
+        <if test="postName!=null">and p2.postName like concat('%',#{postName},'%')</if>
+    </select>
+    <insert id="addTalent" parameterType="com.cykj.entity.Talent" keyProperty="talentId" useGeneratedKeys="true">
           insert into talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva)
           values (#{talentName},#{school},#{birthday},#{profession},#{politicalStatus},
           #{education},#{contactInfo},#{address},#{workExp},#{certificate},#{selfEva})
@@ -89,7 +109,16 @@
             select * from talent where talentName = #{talentName}
         </select>
 
+
     <select id="findTalentByID" resultType="com.cykj.entity.Talent">
         select * from talent where talentID = #{talentID}
     </select>
+
+    <insert id="addCompAndtalent" parameterType="com.cykj.entity.CompAndtalent" >
+          insert into compAndtalent(talent,compID,stand) values (#{c},#{companyID},16)
+        </insert>
+    <select id="selectCompAndtalent" parameterType="java.util.HashMap" resultType="com.cykj.entity.CompAndtalent">
+            select * from compAndtalent where talent = #{c} and compID = #{companyID}
+        </select>
+
 </mapper>
