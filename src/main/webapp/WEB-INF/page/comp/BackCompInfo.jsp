@@ -21,7 +21,7 @@
         }
         </style>
 <%--    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>--%>
-    <script src="${pageContext.request.contextPath}/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
+    <script src="${pageContext.request.contextPath}/comp/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
     <style type="text/css"></style>
     <meta content="no-siteapp" http-equiv="Cache-Control">
     <link  media="handheld" rel="alternate">
@@ -34,21 +34,21 @@
         console.log(1);
     </script>
     <link href="http://www.lagou.com/images/favicon.ico" rel="Shortcut Icon">
-    <link href="${pageContext.request.contextPath}/style/css/style.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/style/css/external.min.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/style/css/popup.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/jquery.1.10.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/style/js/jquery.lib.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/ajaxfileupload.js"></script>
-    <script src="${pageContext.request.contextPath}/style/js/additional-methods.js" type="text/javascript"></script>
+    <link href="${pageContext.request.contextPath}/comp/style/css/style.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/comp/style/css/external.min.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/comp/style/css/popup.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/comp/style/js/jquery.1.10.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/comp/style/js/jquery.lib.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/comp/style/js/ajaxfileupload.js"></script>
+    <script src="${pageContext.request.contextPath}/comp/style/js/additional-methods.js" type="text/javascript"></script>
     <!--[if lte IE 8]>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/excanvas.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/comp/style/js/excanvas.js"></script>
     <![endif]-->
     <script type="text/javascript">
         var youdao_conv_id = 271546;
     </script>
-    <script src="${pageContext.request.contextPath}/style/js/conv.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/comp/style/js/conv.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/comp/style/js/ajaxCross.json" charset="UTF-8"></script>
     <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">--%>
@@ -74,7 +74,7 @@
                                 </c:when>
 
                                 <c:otherwise>
-                                    <img src="${pageContext.request.contextPath}/style/images/logo_default.png" id="headImg" class="header-img" style="width:100%;height: 100%">
+                                    <img src="${pageContext.request.contextPath}/comp/style/images/logo_default.png" id="headImg" class="header-img" style="width:100%;height: 100%">
                                 </c:otherwise>
                             </c:choose>
                                 <form id="imgsForm" enctype="multipart/form-data">
@@ -107,9 +107,9 @@
                         </form>
 
                         <div class="clear oneword" style="display: block;" id="addressDiv">
-                            <img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_l.png">&nbsp;
+                            <img width="17" height="15" src="${pageContext.request.contextPath}/comp/style/images/quote_l.png">&nbsp;
                             <h1 class="fullname" id="address" style="display: inline-block;text-align: center">${comp.address}</h1>&nbsp;
-                            <img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_r.png">
+                            <img width="17" height="15" src="${pageContext.request.contextPath}/comp/style/images/quote_r.png">
                         </div>
 
                     </div>
@@ -360,7 +360,7 @@
 
         <!------------------------------------- end ----------------------------------------->
 
-        <script src="${pageContext.request.contextPath}/style/js/company.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/comp/style/js/company.min.js" type="text/javascript"></script>
         <script>
             var avatar = {};
             avatar.uploadComplate = function( data ){
@@ -377,8 +377,8 @@
     </div><!-- end #container -->
 </div><!-- end #body -->
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<script src="${pageContext.request.contextPath}/style/js/core.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/style/js/popup.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/comp/style/js/core.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/comp/style/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
 

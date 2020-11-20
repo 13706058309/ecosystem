@@ -2,6 +2,7 @@ package com.cykj.controller;
 
 import com.cykj.entity.*;
 import com.cykj.service.BackCompService;
+import com.cykj.utils.GaoDeMapUtil;
 import com.cykj.utils.MyUtil;
 import com.cykj.utils.PhoneCodeUtil;
 import com.cykj.utils.WordUtil;
@@ -574,7 +575,7 @@ public class CompController {
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
     }
-
+    //修改密码发送验证码
     @RequestMapping("/sendCode")
     public @ResponseBody String sendCode(String phone,HttpServletRequest request){
         BackUser backUser = backCompService.findByPhone(phone);
@@ -588,6 +589,24 @@ public class CompController {
         System.out.println("code="+code);
         request.getSession().setAttribute("phone",phone);
         request.getSession().setAttribute("code",code);
+        String s = PhoneCodeUtil.sendCode(phone, code);
+        System.out.println(s);
+        return "1";
+    }
+    //注册发送验证码
+    @RequestMapping("/regSendCode")
+    public @ResponseBody String regSendCode(String phone,HttpServletRequest request){
+        BackUser backUser = backCompService.findByPhone(phone);
+        if(backUser!=null) return "2";
+
+        String code = "";
+        for(int i=0;i<4;i++){
+            int num = (int)(1+Math.random()*9);
+            code += num;
+        }
+        System.out.println("code="+code);
+        request.getSession().setAttribute("regPhone",phone);
+        request.getSession().setAttribute("regCode",code);
         String s = PhoneCodeUtil.sendCode(phone, code);
         System.out.println(s);
         return "1";
@@ -606,6 +625,48 @@ public class CompController {
         int n = backCompService.changePwdByPhone(pwd,phone);
 
         return n>0?"1":"4";
+    }
+
+    @RequestMapping("/compReg")
+    public @ResponseBody String compReg(BackUser backUser,MultipartFile photo, int industry,String code,HttpServletRequest request) throws IOException {
+        System.out.println(backUser);
+        String savePhone = (String) request.getSession().getAttribute("regPhone");
+        String saveCode = (String)request.getSession().getAttribute("regCode");
+        if(saveCode!=null&&!saveCode.equals(code)){
+            return "1";//验证码错误
+        }
+
+        if(savePhone!=null&&!savePhone.equals(backUser.getContactInfo())){
+            return "2";//手机号与验证码接收手机号不同
+        }
+
+        BackUser user = backCompService.findCompByAcc(backUser.getAccount());
+        if(user!=null){
+            return "3";//账号重复请重新填写
+        }
+
+        String msg = "";
+        String path = request.getSession().getServletContext().getRealPath("/uploadBusiLice/");
+
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        File file = new File(path,date);
+        if(!file.exists()) file.mkdirs();
+
+        String fileName = photo.getOriginalFilename();
+
+        String uuid = UUID.randomUUID().toString().replace("-","");
+        fileName = uuid+"_"+fileName;
+        String savePath = "/"+date+"/"+fileName;
+        photo.transferTo(new File(file,fileName));
+        backUser.setBusiLice(savePath);
+        backUser.setRoleId(1);
+        backUser.setStateId("17");
+        String location = GaoDeMapUtil.getLocation(backUser.getAddress());
+        backUser.setLng(location.split("%")[0]);
+        backUser.setLat(location.split("%")[1]);
+
+        int n = backCompService.RegComp(backUser,industry);
+        return n+"";
     }
 
 }

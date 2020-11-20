@@ -121,4 +121,13 @@ public class TestController {
         return "adminLog";
     }
 
+    @RequestMapping("/testMap")
+    public String testMap(){
+        return "comp/TestMap";
+    }
+
+    @RequestMapping("/Buju")
+    public String Buju(){
+        return "comp/Buju";
+    }
 }

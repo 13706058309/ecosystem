@@ -29,6 +29,8 @@
         <result property="bRegTime" column="bRegTime"></result>
         <result property="coreValue" column="coreValue"></result>
         <result property="compName" column="compName"></result>
+        <result property="lat" column="lat"></result>
+        <result property="lng" column="lng"></result>
 
         <collection property="industrys" ofType="com.cykj.entity.Industry">
             <id property="industryId" column="industryId"></id>
@@ -91,9 +93,25 @@
     <select id="isRepeat" parameterType="java.lang.String" resultType="com.cykj.entity.BackUser">
         select * from backUser where account = #{account} and compName = #{compName}
     </select>
+
     <insert id="register" parameterType="com.cykj.entity.BackUser" keyProperty="bUserId" useGeneratedKeys="true">
         insert into backUser(bUserName,compName,contactInfo,account,pwd,roleId)
         values (#{bUserName},#{compName},#{contactInfo},#{account},#{pwd},1)
     </insert>
+
+    <insert id="addComp" parameterType="com.cykj.entity.BackUser">
+        insert into backUser (bUserName, account, pwd, contactInfo, busiLice, email,
+         city, province,  roleId, stateId, compName,address,lat,lng)
+        VALUES ( #{bUserName},#{account},#{pwd},#{contactInfo},#{busiLice},#{email},#{city},#{province}
+        ,#{roleId},#{stateId},#{compName},#{address},#{lat},#{lng});
+    </insert>
+
+    <select id="findByAccount" resultType="com.cykj.entity.BackUser">
+        select * from backUser where account = #{account};
+    </select>
+
+    <select id="findID" resultType="int">
+        select last_insert_id() ;
+    </select>
 
 </mapper>

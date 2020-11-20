@@ -132,114 +132,118 @@ function sumb() {
         beforeSend:function(){
             var post = $("#postId").val();
             if(post==null||post=='请选择'||post.length==0){
-                alert("请选择岗位");
+                layer.alert('请选择岗位!',{icon: 0,offset: '20%'});
                 return false;
             }
+
             var department = $("#department").val();
             if(department.trim().length==0){
-                alert("请填写部门");
+                layer.alert('请填写部门!',{icon: 0,offset: '20%'});
                 return false;
             }
+
             if(department.trim().length>10){
-                alert("部门长度不能超过10");
+                layer.alert('部门长度不能超过10!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var postName = $("#postName").val();
             if(postName.trim().length==0){
-                alert("请填写岗位名称");
+                layer.alert('请填写岗位名称!',{icon: 0,offset: '20%'});
                 return false;
             }
             if(postName.trim().length>10){
-                alert("岗位名称不能超过10");
+                layer.alert('岗位名称不能超过10!',{icon: 0,offset: '20%'});
                 return false;
             }
+
             var minSalary = 0;
             var maxSalary = 0;
             minSalary = $("#minSalary").val();
             maxSalary = $("#maxSalary").val();
             var pattern = /^\+?[1-9][0-9]*$/;
             if(!pattern.test(minSalary)||!pattern.test(maxSalary)){
-                alert("工资只能是整数");
+                layer.alert('工资只能是整数!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             if(parseInt($("#minSalary").val())>= parseInt($("#maxSalary").val())){
-                alert("最低工资不能大于最大工资");
+                layer.alert('最低工资不能大于最大工资!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var workCity = $("#workCity").val();
             if(workCity==null||workCity=='请选择'||workCity.length==0){
-                alert("工作城市不能为空");
+                layer.alert('工作城市不能为空!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var detailAddress = $("#detailAddress").val();
             if(detailAddress.trim().length==0){
-                alert("请填写详细地址");
+                layer.alert('请填写详细地址!',{icon: 0,offset: '20%'});
                 return false;
             }
             if(detailAddress.trim().length>20){
-                alert("地址长度不能超过20");
+                layer.alert('地址长度不能超过20!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var recruitsNum = $("#recruitsNum").val();
             if(recruitsNum.trim().length==0){
-                alert("招收人数未填写");
+                layer.alert('招收人数未填写!',{icon: 0,offset: '20%'});
                 return false;
             }
             if(recruitsNum.trim().length>6){
-                alert("招收人数长度不能超过6");
+                layer.alert('招收人数长度不能超过6!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var jobBenefits = $("#jobBenefits").val();
             if(jobBenefits.trim().length==0){
-                alert("福利描述未填写");
+                layer.alert('福利描述未填写!',{icon: 0,offset: '20%'});
                 return false;
             }
             if(jobBenefits.trim().length>20){
-                alert("福利描述长度不能超过20");
+                layer.alert('福利描述长度不能超过20!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var contactEmail = $("#contactEmail").val();
             var patterns = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
             if(!patterns.test(contactEmail)){
-                alert("请输入正确邮箱格式");
+                layer.alert('请输入正确邮箱格式!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var contact = $("#contact").val();
             if(contact.trim().length==0){
-                alert("联系方式未填写");
+                layer.alert('联系方式未填写!',{icon: 0,offset: '20%'});
+
                 return false;
             }
             if(contact.trim().length>30){
-                alert("联系方式长度不能超过30");
+                layer.alert('联系方式长度不能超过30!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             var jobDescription = $("#jobDescription").val();
             if(jobDescription.trim().length==0){
-                alert("工作描述未填写");
+                layer.alert('工作描述未填写!',{icon: 0,offset: '20%'});
                 return false;
             }
             if(jobDescription.trim().length<=10){
-                alert("工作描述过于简单，长度起码10以上");
+                layer.alert('工作描述过于简单，长度起码10以上!',{icon: 0,offset: '20%'});
                 return false;
             }
 
             if(jobDescription.trim().length>100){
-                alert("工作描述长度不能超过100");
+                layer.alert('工作描述长度不能超过100!',{icon: 0,offset: '20%'});
                 return false;
             }
         },
         success:function (info) {
             if(info=='1'){
-                layer.alert("发布成功")
+                layer.alert('发布成功!',{icon: 0,offset: '20%'});
             }
         },
     })
