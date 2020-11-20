@@ -3,6 +3,7 @@ package com.cykj.controller;
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Menu;
 import com.cykj.entity.UserInfo;
+import com.cykj.log.Loger;
 import com.cykj.service.LoginService;
 import com.cykj.service.PowerService;
 import com.cykj.util.MD5Utils;
@@ -71,6 +72,7 @@ public class LoginController {
 
     //前端登录的动作
     @RequestMapping(value = {"/log"})
+    @Loger(operationName = "执行前端用户登录")
     public @ResponseBody
     String log(String account, String pwd, String sVCode, HttpServletRequest request) {
         System.out.println("执行前端用户登录!");
@@ -113,6 +115,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/getCode")
+    @Loger(operationName = "获取验证码")
     public String getCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //声明验证码
         System.out.println("123");
@@ -174,6 +177,7 @@ public class LoginController {
     }
 
     //注册的动作
+    @Loger(operationName = "执行前端注册")
     @RequestMapping(value = {"/regiest"})
     public @ResponseBody
     String regiest(UserInfo userInfo) {
@@ -202,11 +206,13 @@ public class LoginController {
         }
 
     @RequestMapping("/admin")
+    @Loger(operationType = "跳转登录页面")
     public String admin(){
         return "adminLog";
     }
 
         @RequestMapping("/adLog")
+        @Loger(operationName = "执行后端登录动作",operationType="执行后端登录动作")
         public @ResponseBody String adlog (String account, String password, String vCode, HttpServletRequest
         request, HttpServletResponse response) throws IOException {
             System.out.println("执行后端登录动作");
@@ -246,6 +252,7 @@ public class LoginController {
         }
 
         @RequestMapping("/adminMain")
+        @Loger(operationName = "登录后跳转菜单",operationType = "登录后跳转菜单")
         public String adminMain (HttpServletRequest request, HttpServletResponse response){
             BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
             if (backUser != null) {

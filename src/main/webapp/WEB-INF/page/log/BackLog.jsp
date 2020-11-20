@@ -57,7 +57,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">操作人:</label>
         <div class="layui-input-inline">
-            <input type="tel" id="userName" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            <input type="tel" id="bUserName" lay-verify="required|phone" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline" style="margin-left: 8%">
             <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
@@ -90,13 +90,14 @@
             height:312,
             limits:[3,6],
             limit:3,
-            url:"${pageContext.request.contextPath}/log/findLog",
+            url:"${pageContext.request.contextPath}/backLog/findLog",
             page:true,
             id: 'testReload',
             cols:[[
-                {field:'build_Time',title:'操作时间',sort:true},
-                {field:'user_Name',title:'操作人',templet:'<div>{{d.userInfo.user_Name}}</div>'},
-                {field:'opera_Matter',title:'操作事项'},
+                {field:'bLogId',title:'ID',width: 120, sort: true, fixed: 'left'},
+                {field:'operaTime',title:'操作时间',sort:true},
+                {field:'bUserName',title:'操作人',templet:'<div>{{d.backUser.bUserName}}</div>'},
+                {field:'matter',title:'操作事项'},
             ]]
         });
 
@@ -108,7 +109,7 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        userName: $('#userName').val(),
+                        bUserName: $('#bUserName').val(),
                         beginTime:$('#beginTime').val(),
                         endTime:$('#endTime').val(),
                     }

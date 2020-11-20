@@ -18,10 +18,11 @@ public class BackLogServiceImpl implements BackLogService {
     @Override
     public List<BackLog> findLogOnPage(Map<String, Object> map, int curPage, int limit) {
         map.put("limit",limit);
-        map.put("offset",(curPage=1)*limit);
+        map.put("offset",(curPage-1)*limit);
         List<BackLog> allOnPage = backLogMapper.findLogOnPage(map);
         return allOnPage;
     }
+
 
     @Override
     public int findLogNum(Map<String, Object> map) {

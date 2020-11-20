@@ -27,7 +27,7 @@
         </resultMap>
 
 
-        <select id="findLogNum" parameterType="java.util.Map" resultMap="int">
+        <select id="findLogNum" resultType="java.lang.Integer">
                 select count(*) from backLog l,backUser u where l.bUserID = u.bUserID and bUserName like concat('%',#{bUserName},'%')
                 <if test="beginTime != null">
                         and operaTime >= #{beginTime}

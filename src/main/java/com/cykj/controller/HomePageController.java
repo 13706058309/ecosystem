@@ -29,10 +29,10 @@ public class HomePageController {
 
     //跳转访问
 
-    @RequestMapping("/home")
-    public String home(){
-        return "HomePage";
-    }
+//    @RequestMapping("/home")
+//    public String home(){
+//        return "HomePage";
+//    }
 
     @RequestMapping("/home")
     public String home(HttpServletRequest request ){

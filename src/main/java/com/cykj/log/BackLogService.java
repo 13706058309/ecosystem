@@ -8,7 +8,7 @@ import java.util.Map;
 public interface BackLogService {
 
 
-    List<BackLog> findLogOnPage(Map<String, Object> map, int curPage, int limit);
+    List<BackLog> findLogOnPage(Map<String, Object> map, int page, int limit);
     int findLogNum(Map<String, Object> map);
     int addBackLog(BackLog backLog);
 
