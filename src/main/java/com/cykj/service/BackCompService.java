@@ -63,4 +63,8 @@ public interface BackCompService {
     BackUser findByPhone(String phone);
     //修改密码
     int changePwdByPhone( String pwd,String phone);
+    //通过账号找公司
+    BackUser findCompByAcc(String account);
+    //公司注册
+    int RegComp(BackUser backUser,int industryID);
 }

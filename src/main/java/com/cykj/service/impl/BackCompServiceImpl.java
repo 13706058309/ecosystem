@@ -48,6 +48,9 @@ public class BackCompServiceImpl implements BackCompService {
     @Resource
     private BackUserMapper backUserMapper;
 
+    @Resource
+    private CompIndustryMapper compIndustryMapper;
+
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
         List<Talent> unviTalentOnPage = talentMapper.findUnviTalentOnPage(map);
@@ -411,5 +414,27 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public int changePwdByPhone(String pwd, String phone) {
         return backUserMapper.changePwdByPhone(pwd,phone);
+    }
+
+    @Override
+    public BackUser findCompByAcc(String account) {
+        return backUserMapper.findByAccount(account);
+    }
+
+    @Override
+    public int RegComp(BackUser backUser, int industryID) {
+
+        int provinceID = Integer.parseInt(backUser.getProvince());
+        Province province = provinceMapper.findByID(provinceID);
+        backUser.setProvince(province.getProvinceName());
+
+        int n = backUserMapper.addComp(backUser);
+        if(n<0){
+            return 4;
+        }
+
+        int compID = backUserMapper.findID();
+        int result = compIndustryMapper.addCompAndInd(compID, industryID);
+        return 5;
     }
 }
