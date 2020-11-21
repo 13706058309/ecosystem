@@ -14,6 +14,7 @@ public class Depart {
   private long industryId;//行业ID
   private String departName;//部门名称
 
+
   public Depart() {
   }
 

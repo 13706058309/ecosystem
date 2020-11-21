@@ -28,6 +28,7 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     public Certificate findCerFee(String fieldid) {
 
-        return certificateMapper.findCerFee(Integer.parseInt(fieldid));
+        int fid = Integer.parseInt(fieldid);
+        return certificateMapper.findCerFee(fid);
     }
 }

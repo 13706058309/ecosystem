@@ -17,5 +17,5 @@ import java.util.List;
 public interface CerUserMapper {
 
     //根据用户ID查询已获得证书
-    public List<CerUser> findceruserlist(@Param("userId") long userid);
+    public List<CerUser> findceruserlist(@Param("userId")long userId);
 }

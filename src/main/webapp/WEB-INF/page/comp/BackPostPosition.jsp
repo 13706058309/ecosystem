@@ -13,7 +13,7 @@
         <title>Title</title>
 <%--        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />--%>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <script src="${pageContext.request.contextPath}/jquery-3.5.1.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
         <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/comp/BackPostPosition.js"></script>
@@ -103,7 +103,6 @@
 
                     </select>
                 </div>
-
             </div>
 
             <div class="layui-form-item">
@@ -198,7 +197,7 @@
                 <td  colspan="6"><h2>招聘岗位预览</h2></td>
             </tr>
             <tr>
-                <td class="ziti">岗位名称</td>
+                <td class="ziti" width="16%">岗位名称</td>
                 <td id="dPostName"></td>
                 <td class="ziti">所属部门</td>
                 <td id="dDepart"></td>

@@ -17,10 +17,18 @@ public class Certificate {
   private int cershowState;//展示状态
   private String cerChangeTime;//变更时间
   private int certificationFee;//证书费用
-
+  private String cerRequirement;//证书需求路径
 
 
   public Certificate() {
+  }
+
+  public String getCerRequirement() {
+    return cerRequirement;
+  }
+
+  public void setCerRequirement(String cerRequirement) {
+    this.cerRequirement = cerRequirement;
   }
 
   public int getCertificationFee() {

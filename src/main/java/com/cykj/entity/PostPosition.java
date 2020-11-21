@@ -79,6 +79,7 @@ public class PostPosition {
     this.pPostId = pPostId;
   }
 
+
   public long getPPostId() {
     return pPostId;
   }
@@ -265,6 +266,8 @@ public class PostPosition {
   public void setBackUser(BackUser backUser) {
     this.backUser = backUser;
   }
+
+
 
 
 

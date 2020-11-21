@@ -21,8 +21,10 @@
         </association>
     </resultMap>
 
-    <select id="findCerFee" parameterType="java.lang.String" resultType="com.cykj.entity.Certificate">
+    <select id="findCerFee"  resultType="com.cykj.entity.Certificate">
     select * from certificate where fieldId = #{fieldid}
     </select>
+
+
 
 </mapper>

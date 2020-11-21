@@ -6,4 +6,8 @@
     <select id="findAllProvince" resultType="com.cykj.entity.Province">
         select * from province;
     </select>
+
+    <select id="findByID" resultType="com.cykj.entity.Province">
+        select * from province where provinceID = #{provinceID}
+    </select>
 </mapper>

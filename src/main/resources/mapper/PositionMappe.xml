@@ -10,4 +10,8 @@
     <select id="findPositionByID" parameterType="int" resultType="com.cykj.entity.Position">
         select * from position where departID = #{departID}
     </select>
+
+    <select id="findPostName" parameterType="int" resultType="com.cykj.entity.Position">
+        select * from position where postID = #{postID}
+    </select>
 </mapper>

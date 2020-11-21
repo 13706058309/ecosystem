@@ -5,6 +5,7 @@ package com.cykj.entity;
  */
 public class CompIndustry {
 
+  private long compAndIndId;
   private long compId;
   private long industryId;
 
@@ -28,4 +29,11 @@ public class CompIndustry {
     this.industryId = industryId;
   }
 
+  public long getCompAndIndId() {
+    return compAndIndId;
+  }
+
+  public void setCompAndIndId(long compAndIndId) {
+    this.compAndIndId = compAndIndId;
+  }
 }

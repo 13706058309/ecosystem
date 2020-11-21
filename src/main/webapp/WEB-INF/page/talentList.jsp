@@ -42,13 +42,6 @@
         </div>
     </div><br><br>
 
-<%--    <form action="upload"  method="post" enctype="multipart/form-data"  accept-charset="UTF-8" >--%>
-<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
-<%--        <input type="file" name="file" id="file" class="layui-btn layui-btn-normal"><br><br><br>--%>
-<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
-<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
-<%--        <input  type="submit" value="导入"class="layui-bg-orange layui-btn" >--%>
-<%--    </form>--%>
     <form class="layui-form layui-form-pane"  enctype="multipart/form-data" id="forms" accept-charset="UTF-8">
         <div class="layui-form-item">
             <div class="layui-upload">
