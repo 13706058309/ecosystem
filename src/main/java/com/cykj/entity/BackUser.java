@@ -21,6 +21,7 @@ public class BackUser {
   private String finanStage; //融资阶段
   private String product; //公司产品
   private String logp; //logo
+  private String compName;
   private long roleId; //角色ID
   private RoleInfo role; //角色实体类
   private String stateId;//状态
@@ -28,6 +29,32 @@ public class BackUser {
 
   public BackUser() {
 
+  }
+
+  @Override
+  public String toString() {
+    return "BackUser{" +
+            "bUserId=" + bUserId +
+            ", bUserName='" + bUserName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", infoIntr='" + infoIntr + '\'' +
+            ", busiLice='" + busiLice + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            ", scale='" + scale + '\'' +
+            ", city='" + city + '\'' +
+            ", province='" + province + '\'' +
+            ", homePage='" + homePage + '\'' +
+            ", finanStage='" + finanStage + '\'' +
+            ", product='" + product + '\'' +
+            ", logp='" + logp + '\'' +
+            ", roleId=" + roleId +
+            ", role=" + role +
+            ", stateId='" + stateId + '\'' +
+            ", states=" + states +
+            '}';
   }
 
   public long getbUserId() {
@@ -79,6 +106,13 @@ public class BackUser {
     this.bUserName = bUserName;
   }
 
+  public String getCompName() {
+    return compName;
+  }
+
+  public void setCompName(String compName) {
+    this.compName = compName;
+  }
 
   public String getAccount() {
     return account;

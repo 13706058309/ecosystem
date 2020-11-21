@@ -1,0 +1,85 @@
+var path;
+$(function () {
+    path=$("#path").val();
+    layui.use(['table','laypage','layer','element'], function(){
+        var table = layui.table;
+        var layer = layui.layer;
+        var laypage= layui.laypage;
+        var element = layui.element;
+        $(".params").on("click",function () {
+            console.log($(this).children().val());
+            table.reload("demo",{
+                url:path+'/project/findProjectAll'
+                ,where:{
+                    "stateId":$(this).children().val()
+                },page: {curr:1}
+            });
+        });
+        laypage.render({
+            elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 50 //数据总数，从服务端得到
+        });
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,url: path+'/project/findProjectAll' //数据接口
+            ,page: "page" //开启分页
+            // ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,limit:5
+            ,limits:[5,10,15,20]
+            ,cols: [[ //表头
+                {field: 'projectName', title: '项目名称',  fixed: 'left'}
+                ,{field: 'projectSynopsis', title: '项目描述',  fixed: 'left',templet:function (data) {
+                        var str=data.projectSynopsis.replaceAll("<br>"," ");
+                        return str;
+                    }}
+                ,{field: 'publishTime', title: '发布时间', fixed: 'center',width:200}
+                ,{field: 'money', title: '预算费用（元）',fixed: 'center',width:140}
+                ,{field: 'states', title: '状态', fixed: 'center',width:100,
+                    templet:function (data) {
+                        return data.states.paramName;
+                    }
+                }
+                ,{field:'caozuo',title: '操作',width:300,align:'left', templet:"#barDemo"}
+            ]]
+        });
+        //监听行工具事件
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            console.log(layEvent);
+            if(layEvent === 'detail'){
+                // layer.msg('查看操作');
+                location.href=path+"/project/projectDetail"
+            }
+        });
+    });
+})
+
+function initUserInfo() {
+    document.getElementById("userInfoForm").reset();
+}
+
+// function changeUserState(obj,code) {
+//     var obj=obj;
+//     var code=code;
+//     $.ajax({
+//         url:path+"/userManager/changeUserState",
+//         type:'post',
+//         data:{"user":JSON.stringify(obj.data),"code":code},
+//         dataType:'json',
+//         success:function (res) {
+//             console.log(res);
+//             if (res.code=='success'){
+//                 obj.data=res.userInfo;
+//                 console.log(res.userInfo);
+//                 obj.update(obj.data);
+//                 layer.alert("修改成功！")
+//             }else{
+//                 layer.alert("修改失败！")
+//             }
+//         }
+//     })
+// }
+
+

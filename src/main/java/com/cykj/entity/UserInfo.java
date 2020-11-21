@@ -20,6 +20,22 @@ public class UserInfo {
 
   }
 
+  @Override
+  public String toString() {
+    return "UserInfo{" +
+            "userId=" + userId +
+            ", userName='" + userName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", telephone='" + telephone + '\'' +
+            ", accStandId=" + accStandId +
+            ", jobStandId=" + jobStandId +
+            ", address='" + address + '\'' +
+            ", isOpen=" + isOpen +
+            ", industry='" + industry + '\'' +
+            '}';
+  }
+
   public long getUserId() {
     return userId;
   }

@@ -10,6 +10,18 @@ public class Parameter {
   private String paramType; //参数类型
   private String paramValues; // 值
 
+  public Parameter() {
+  }
+
+  @Override
+  public String toString() {
+    return "Parameter{" +
+            "paramId=" + paramId +
+            ", paramName='" + paramName + '\'' +
+            ", paramType='" + paramType + '\'' +
+            ", paramValues='" + paramValues + '\'' +
+            '}';
+  }
 
   public long getParamId() {
     return paramId;

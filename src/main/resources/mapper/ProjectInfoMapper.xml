@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.ProjectInfoMapper">
+
+    <select id="findProjectAll" resultMap="projectMap">
+        select bU.*,uI.*,pI.*,pM.*,pF.paramId as fileId,pF.paramName as fieldName,pF.paramType as paramType from projectInfo pI
+            left join backUser bU on pI.bUserID = bU.bUserID
+            left join userInfo uI on pI.userId =uI.userId
+            left join parameter pM on pM.paramId=pI.states
+            left join parameter pF on pF.paramId=pI.fieldId
+            where 1=1
+            <if test="null != condition.stateName">
+                and pM.paramName=#{condition.stateName}
+            </if>
+
+            <if test="null !=condition.stateId">
+                and pM.paramId=#{condition.stateId}
+            </if>
+            <if test="null != condition.bUserId">
+                and pI.bUserID=#{condition.bUserId}
+            </if>
+            <if test="null != condition.fieldId">
+                and pI.fieldId = #{condition.fieldId}
+            </if>
+            <if test="null != condition.projectName">
+                and pI.projectName like concat('%',#{condition.projectName},'%')
+            </if>
+            <if test="null!=condition.moneyHigher">
+                and pI.money &lt; #{condition.moneyHigher}
+            </if>
+            <if test="null!=condition.moneyLower">
+                and pI.money &gt;= #{condition.moneyLower}
+            </if>
+            order by publishTime desc
+            limit #{page},#{limit}
+    </select>
+    <select id="findRecords" resultType="Integer">
+        select count(*)from projectInfo pI
+        left join backUser bU on pI.bUserID = bU.bUserID
+        left join userInfo uI on pI.userId =uI.userId
+        left join parameter pM on pM.paramId=pI.states
+        left join parameter pF on pF.paramId=pI.fieldId
+        where 1=1
+        <if test="null != condition.stateName">
+            and pM.paramName=#{condition.stateName}
+        </if>
+        <if test="null !=condition.stateId">
+            and pM.paramId=#{condition.stateId}
+        </if>
+        <if test="null != condition.bUserId">
+            and pI.bUserID=#{condition.bUserId}
+        </if>
+        <if test="null != condition.fieldId">
+            and pI.fieldId = #{condition.fieldId}
+        </if>
+        <if test="null != condition.projectName">
+            and pI.projectName like concat('%',#{condition.projectName},'%')
+        </if>
+        <if test="null!=condition.moneyHigher">
+            and pI.money &lt;#{condition.moneyHigher}
+        </if>
+        <if test="null!=condition.moneyLower">
+            and pI.money &gt;= #{condition.moneyLower}
+        </if>
+    </select>
+
+    <select id="findProject" parameterType="com.cykj.entity.ProjectInfo" resultMap="projectMap">
+        select bU.*,uI.*,pI.*,pM.*,pF.paramId as fileId,pF.paramName as fieldName,pF.paramType as paramType from projectInfo pI
+        left join backUser bU on pI.bUserID = bU.bUserID
+        left join userInfo uI on pI.userId =uI.userId
+        left join parameter pM on pM.paramId=pI.states
+        left join parameter pF on pF.paramId=pI.fieldId
+        where 1=1
+        <if test="null != projectId">
+            and projectId = #{projectId}
+        </if>
+        limit 1
+    </select>
+    <resultMap id="projectMap" type="com.cykj.entity.ProjectInfo">
+        <id property="projectId" column="projectId"></id>
+        <result property="bUserId" column="bUserID"></result>
+        <result property="projectName" column="projectName"></result>
+        <result property="projectSynopsis" column="projectSynopsis"></result>
+        <result property="userId" column="userId"></result>
+        <result property="money" column="money"></result>
+        <result property="docUrl" column="docUrl"></result>
+        <result property="publishTime" column="publishTime"></result>
+        <association property="userInfo" javaType="com.cykj.entity.UserInfo">
+            <id property="userId" column="userId"></id>
+            <result property="userName" column="userName"></result>
+        </association>
+
+        <association property="states" javaType="com.cykj.entity.Parameter">
+            <id property="paramId" column="paramId"></id>
+            <result property="paramName" column="paramName"></result>
+            <result property="paramType" column="paramType"></result>
+        </association>
+        <association property="backUser" javaType="com.cykj.entity.BackUser">
+            <id property="bUserId" column="bUserId"></id>
+            <result property="bUserName" column="bUserName"></result>
+            <result property="compName" column="compName"></result>
+        </association>
+        <association property="field" javaType="com.cykj.entity.Parameter">
+            <id property="paramId" column="fieldId"></id>
+            <result property="paramName" column="fieldName"></result>
+            <result property="paramType" column="fieldType"></result>
+        </association>
+    </resultMap>
+
+</mapper>
