@@ -1,12 +1,9 @@
 package com.cykj.controller;
 
 
-import com.cykj.entity.BackUserNum;
-import com.cykj.entity.TableInfo;
-import com.cykj.entity.Talent;
-import com.cykj.entity.UserInfo;
+import com.cykj.entity.*;
 import com.cykj.service.TalentService;
-//import com.cykj.service.UserService;
+
 import com.google.gson.Gson;
 
 import org.apache.commons.io.FileUtils;
@@ -69,6 +66,10 @@ public class TalentController {
                     String workExp = content.substring(content.indexOf("验") + 1, content.indexOf("技")).trim();
                     String certificate = content.substring(content.indexOf("书") + 1, content.indexOf("自")).trim();
                     String selfEva = content.substring(content.indexOf("价") + 1).trim();
+                    if (talentName.equals("")||school.equals("")||birthday.equals("")||profession.equals("")||politicalStatus.equals("")||education.equals("")
+                            ||contactInfo.equals("")||address.equals("")||workExp.equals("")||certificate.equals("")||selfEva.equals("")){
+                        return "简历填写不完整";
+                    }
                     Talent talent = new Talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva);
                     int i = talentService.addTalent(talent);
                     if(i>0){
@@ -106,11 +107,39 @@ public class TalentController {
 
         return buffer;
     }
-
     @RequestMapping("/talentList")
     public String userList(HttpServletRequest request) throws UnsupportedEncodingException {
 
         return "talentList";
+    }
+    @RequestMapping("/schoolInfo")
+    public String schoolInfo(HttpServletRequest request) throws UnsupportedEncodingException {
+
+        return "schoolInfo";
+    }
+    @RequestMapping("/showSchoolInfo")
+    public void showSchoolInfo(HttpServletResponse response,HttpServletRequest request) throws IOException {
+        List<BackUser> list=new ArrayList<>();
+//       BackUser backUser=new BackUser("大概","收到");
+//       list.add(backUser);
+//        TableInfo tableInfo=new TableInfo();
+//        tableInfo.setCode(0);
+//        tableInfo.setCount(1);
+//        tableInfo.setMsg("列表数据信息");
+//        tableInfo.setData(list);
+//        String message=new Gson().toJson(tableInfo);
+//        response.setContentType("text/html;charset=UTF-8");
+//        PrintWriter out=response.getWriter();
+//        out.write(message);
+//        out.flush();
+//        out.close();
+
+    }
+
+    @RequestMapping("/positionList")
+    public String positionList(HttpServletRequest request) throws UnsupportedEncodingException {
+
+        return "positionList";
     }
 
     @RequestMapping( "/download")
@@ -163,6 +192,73 @@ public class TalentController {
         out.flush();
         out.close();
 
+    }
+
+    @RequestMapping("/findPosition")
+    public void findPosition(HttpServletResponse response,HttpServletRequest request) throws IOException {
+
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        String postName = request.getParameter("postName");
+        String industryName = request.getParameter("industryName");
+        Map<String,Object> map = new HashMap<>();
+        if(postName!=null&&postName.length()!=0){
+            map.put("postName",postName);
+        }
+        if(industryName!=null&&industryName.length()!=0){
+            map.put("industryName",industryName);
+        }
+
+        List<Positions> talents=talentService.findPosition(map,limit,page);
+
+        TableInfo tableInfo=new TableInfo();
+        int records = talentService.findPositionRecords(map);
+        tableInfo.setCode(0);
+        tableInfo.setCount(records);
+        tableInfo.setMsg("列表数据信息");
+        tableInfo.setData(talents);
+        String message=new Gson().toJson(tableInfo);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out=response.getWriter();
+        out.write(message);
+        out.flush();
+        out.close();
+
+    }
+    @RequestMapping("/recommendSure")
+    public @ResponseBody  String recommendSure(HttpServletRequest request) throws IOException {
+        int companyID = Integer.parseInt(request.getParameter("companyID"));
+        String talentIds = request.getParameter("talentIds");
+        char[] talentIdsChar=talentIds.toCharArray();
+        if (talentIdsChar.length==1){
+            if(talentService.findCompAndtalent(companyID,talentIdsChar[0])){
+                int a= talentService.addCompAndtalent(companyID,talentIdsChar[0]);
+                if(a>0){
+                    return  "推荐成功";
+                }else{
+                    return  "推荐失败";
+                }
+            }else{
+                return  "该人才已推荐过了";
+            }
+        }else {
+            for (int i = 0; i < talentIdsChar.length; i += 2) {
+                if (talentService.findCompAndtalent(companyID, talentIdsChar[i])) {
+                    int a = talentService.addCompAndtalent(companyID, talentIdsChar[i]);
+                    if (a > 0) {
+                        if(i==talentIdsChar.length-1){
+                            return "成功推荐"+(i+2)/2+"名人才";
+                        }
+
+                    } else {
+                        return "推荐失败";
+                    }
+                } else {
+                    return "存在已推荐过的人才，请重新选择";
+                }
+            }
+        }
+    return "";
     }
 
     @RequestMapping("/backUserNumMonth")
