@@ -17,6 +17,8 @@ public class ProjectInfo {
   private String docUrl;
   private long fieldId;
   private Parameter field;
+  private String orderNum;
+  private long trueMoney;
 
   public ProjectInfo() {
   }
@@ -146,5 +148,21 @@ public class ProjectInfo {
 
   public void setField(Parameter field) {
     this.field = field;
+  }
+
+  public String getOrderNum() {
+    return orderNum;
+  }
+
+  public void setOrderNum(String orderNum) {
+    this.orderNum = orderNum;
+  }
+
+  public long getTrueMoney() {
+    return trueMoney;
+  }
+
+  public void setTrueMoney(long trueMoney) {
+    this.trueMoney = trueMoney;
   }
 }
