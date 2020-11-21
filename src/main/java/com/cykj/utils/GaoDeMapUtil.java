@@ -25,10 +25,10 @@ public class GaoDeMapUtil {
         String latitude = positionObj.getString("latitude");
         System.out.println("经度：" + longitude);
         System.out.println("纬度：" + latitude);
-        String location = getLocation("北京市  海淀区  牡丹 科  技楼A座");
+        String location = getLocation("12");
 
-        System.out.println(location.split("%")[0]);
-        System.out.println(location.split("%")[1]);
+        System.out.println(location+"123");
+
     }
 
     public static String getLocation(String address){

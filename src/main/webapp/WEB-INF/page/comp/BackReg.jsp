@@ -230,8 +230,8 @@
                     for(var i=0;i<arr.length;i++){
                         var $option = $("<option value='"+arr[i].cityName+"' >"+arr[i].cityName+"</option>");
                         $("#city").append($option);
-                        form.render();
                     }
+                    form.render();
                 },
             })
         })
@@ -287,8 +287,8 @@
                 for(var i=0;i<arr.length;i++){
                     var $option = $("<option value='"+arr[i].industryId+"' onclick='findDepart(1)'>"+arr[i].industryName+"</option>");
                     $("#industry").append($option);
-                    form.render();
                 }
+                form.render();
             },
         })
     })
@@ -307,8 +307,8 @@
                 for(var i=0;i<arr.length;i++){
                     var $option = $("<option value='"+arr[i].provinceId+"'>"+arr[i].provinceName+"</option>");
                     $("#province").append($option);
-                    form.render();
                 }
+                form.render();
             },
         })
     })
@@ -349,10 +349,10 @@
     function regs() {
         var value = $("#codeBtn").val();
 
-        if(value=='发送验证码'){
-            layer.alert("验证码未发送",{icon: 0,offset: '20%'});
-            return false;
-        }
+        // if(value=='发送验证码'){
+        //     layer.alert("验证码未发送",{icon: 0,offset: '20%'});
+        //     return false;
+        // }
 
         if(value=='重新发送'){
             layer.alert("验证码已超时,请重新发送",{icon: 0,offset: '20%'});
@@ -364,6 +364,7 @@
             url:path+"/rec/compReg",
             type:'post',
             data:form,
+            async: false,
             processData: false,
             contentType: false,
             dataType:'text',
@@ -409,8 +410,13 @@
 
                 var address = $("#address").val();
                 var i = postLocation();
+
                 if(i==2){
                     layer.alert("地址有误，定位不存在",{icon: 0,offset: '20%'});
+                    return false;
+                }
+                if(address.length==0){
+                    layer.alert("地址不能为空",{icon: 0,offset: '20%'});
                     return false;
                 }
                 if(address.length>=20){
@@ -473,6 +479,8 @@
                     layer.alert('验证码输入错误!',{icon: 0,offset: '20%'});
                 }else if(data=='3'){
                     layer.alert('账号重复请重新填写!',{icon: 0,offset: '20%'});
+                }else if(data=='8'){
+                    layer.alert("地址有误，定位不存在",{icon: 0,offset: '20%'});
                 }else{
                     layer.alert('系统繁忙，注册失败!',{icon: 0,offset: '20%'});
                 }

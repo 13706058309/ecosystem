@@ -456,7 +456,7 @@ public class CompController {
     public String test(HttpServletRequest request, HttpServletResponse response){
         BackUser backUser = backCompService.findCompByID(3);
         request.setAttribute("comp",backUser);
-        return "comp/BackCompInfo";
+        return "comp/Buju";
     }
 
     @RequestMapping("/changeCompInfo")
@@ -465,11 +465,17 @@ public class CompController {
 //        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
 //        int compID = bUser.getbUserId();
         map.put("compID",3);
+        if(backUser.getAddress()!=null&&GaoDeMapUtil.getLocation(backUser.getAddress()).equals("null%null")){
+            return "5";
+        }
         if(backUser.getInfoIntr()!=null){
             map.put("infoIntr",backUser.getInfoIntr());
         }
 
         if(backUser.getAddress()!=null){
+            String location = GaoDeMapUtil.getLocation(backUser.getAddress());
+            backUser.setLat(location.split("%")[1]);
+            backUser.setLng(location.split("%")[0]);
             map.put("address",backUser.getAddress());
         }
 
@@ -493,24 +499,33 @@ public class CompController {
             map.put("product",backUser.getProduct());
         }
 
+        if(backUser.getLat()!=null){
+            map.put("lat",backUser.getLat());
+        }
+
+        if(backUser.getLng()!=null){
+            map.put("lng",backUser.getLng());
+        }
+
         return backCompService.changeCompInfo(map);
     }
 
     @RequestMapping("/uploadLogo")
-    public @ResponseBody String uploadLogo(MultipartFile uploadFiles,HttpServletRequest request) throws IOException {
+    public @ResponseBody String uploadLogo(MultipartFile photo,HttpServletRequest request) throws IOException {
         String msg = "";
+        System.out.println("tupin"+photo);
         String path = request.getSession().getServletContext().getRealPath("/uploadLogo/");
 
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         File file = new File(path,date);
         if(!file.exists()) file.mkdirs();
 
-        String fileName = uploadFiles.getOriginalFilename();
+        String fileName = photo.getOriginalFilename();
 
         String uuid = UUID.randomUUID().toString().replace("-","");
         fileName = uuid+"_"+fileName;
         String savePath = "/"+date+"/"+fileName;
-        uploadFiles.transferTo(new File(file,fileName));
+        photo.transferTo(new File(file,fileName));
 
         Map<String,Object> map = new HashMap<>();
 //        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
@@ -638,6 +653,10 @@ public class CompController {
 
         if(savePhone!=null&&!savePhone.equals(backUser.getContactInfo())){
             return "2";//手机号与验证码接收手机号不同
+        }
+        //判断地址是否存在
+        if(GaoDeMapUtil.getLocation(backUser.getAddress()).equals("null%null")){
+            return "8";
         }
 
         BackUser user = backCompService.findCompByAcc(backUser.getAccount());

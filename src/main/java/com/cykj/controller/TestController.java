@@ -15,10 +15,6 @@ public class TestController {
     @Resource
     private BackCompService backCompServiceImpl;
 
-    @RequestMapping("/testComp")
-    public String test(){
-        return "comp/BackCompInfo";
-    }
 
 
     @RequestMapping("/userManage")

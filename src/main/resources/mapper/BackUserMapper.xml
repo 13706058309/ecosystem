@@ -70,6 +70,12 @@
             <if test="logo!=null">
                 logo = #{logo},
             </if>
+            <if test="lng!=null">
+                lng = #{lng},
+            </if>
+            <if test="lat!=null">
+                lat = #{lat},
+            </if>
         </set>
         where bUserId = #{compID}
     </update>
