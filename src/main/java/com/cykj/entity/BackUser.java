@@ -1,8 +1,13 @@
 package com.cykj.entity;
 
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 /**
  * 后台用户
  */
+@Component
 public class BackUser {
 
   private long bUserId; //后台用户ID
@@ -20,41 +25,17 @@ public class BackUser {
   private String homePage; //主页
   private String finanStage; //融资阶段
   private String product; //公司产品
+  private String logo; //logo
   private String logp; //logo
-  private String compName;
   private long roleId; //角色ID
   private RoleInfo role; //角色实体类
   private String stateId;//状态
   private Parameter states;//状态实体类 （iD 状态名称  类型）
-
+  private String bRegTime;//注册时间
+  private String coreValue;//企业核心价值
+  private String compName;
+  private List<Industry> industrys;
   public BackUser() {
-
-  }
-
-  @Override
-  public String toString() {
-    return "BackUser{" +
-            "bUserId=" + bUserId +
-            ", bUserName='" + bUserName + '\'' +
-            ", account='" + account + '\'' +
-            ", pwd='" + pwd + '\'' +
-            ", contactInfo='" + contactInfo + '\'' +
-            ", infoIntr='" + infoIntr + '\'' +
-            ", busiLice='" + busiLice + '\'' +
-            ", email='" + email + '\'' +
-            ", address='" + address + '\'' +
-            ", scale='" + scale + '\'' +
-            ", city='" + city + '\'' +
-            ", province='" + province + '\'' +
-            ", homePage='" + homePage + '\'' +
-            ", finanStage='" + finanStage + '\'' +
-            ", product='" + product + '\'' +
-            ", logp='" + logp + '\'' +
-            ", roleId=" + roleId +
-            ", role=" + role +
-            ", stateId='" + stateId + '\'' +
-            ", states=" + states +
-            '}';
   }
 
   public long getbUserId() {
@@ -106,13 +87,6 @@ public class BackUser {
     this.bUserName = bUserName;
   }
 
-  public String getCompName() {
-    return compName;
-  }
-
-  public void setCompName(String compName) {
-    this.compName = compName;
-  }
 
   public String getAccount() {
     return account;
@@ -230,13 +204,12 @@ public class BackUser {
     this.product = product;
   }
 
-
-  public String getLogp() {
-    return logp;
+  public String getLogo() {
+    return logo;
   }
 
-  public void setLogp(String logp) {
-    this.logp = logp;
+  public void setLogo(String logo) {
+    this.logo = logo;
   }
 
   public String getStateId() {
@@ -253,5 +226,65 @@ public class BackUser {
 
   public void setStates(Parameter states) {
     this.states = states;
+  }
+
+  public String getbRegTime() {
+    return bRegTime;
+  }
+
+  public void setbRegTime(String bRegTime) {
+    this.bRegTime = bRegTime;
+  }
+
+  public String getCoreValue() {
+    return coreValue;
+  }
+
+  public void setCoreValue(String coreValue) {
+    this.coreValue = coreValue;
+  }
+
+  public List<Industry> getIndustrys() {
+    return industrys;
+  }
+
+  public void setIndustrys(List<Industry> industrys) {
+    this.industrys = industrys;
+  }
+
+  public String getCompName() {
+    return compName;
+  }
+
+  public void setCompName(String compName) {
+    this.compName = compName;
+  }
+
+
+  @Override
+  public String toString() {
+    return "BackUser{" +
+            "bUserId=" + bUserId +
+            ", bUserName='" + bUserName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", infoIntr='" + infoIntr + '\'' +
+            ", busiLice='" + busiLice + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            ", scale='" + scale + '\'' +
+            ", city='" + city + '\'' +
+            ", province='" + province + '\'' +
+            ", homePage='" + homePage + '\'' +
+            ", finanStage='" + finanStage + '\'' +
+            ", product='" + product + '\'' +
+            ", logo='" + logo + '\'' +
+            ", roleId=" + roleId +
+            ", role=" + role +
+            ", stateId='" + stateId + '\'' +
+            ", states=" + states +
+            ", compName='" + compName + '\'' +
+            '}';
   }
 }

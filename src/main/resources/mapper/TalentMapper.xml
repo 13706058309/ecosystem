@@ -3,5 +3,122 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.TalentMapper">
+    <select id="findUnviTalentOnPage" parameterType="java.util.Map" resultMap="results">
+        select t.*,s.recommendTime,s.compAndTalId from talent t, compAndtalent s where t.talentID = s.talent and s.stand=16 and s.compID = #{compID}
+        <if test="beginTime!=null">
+            and recommendTime >= #{beginTime}
+        </if>
+        <if test="endTime!=null">
+            and recommendTime &lt;= #{endTime}
+        </if>
+        <if test="talentName!=null">
+            and talentName like #{talentName}
+        </if>
+        <if test="school!=null">
+            and school like #{school}
+        </if>
+        <if test="profession!=null">
+            and profession like #{profession}
+        </if>
+        order by recommendTime desc limit #{offset}, #{limit}
+    </select>
+
+    <resultMap id="results" type="com.cykj.entity.Talent">
+        <id property="talentId" column="talentId"></id>
+        <result property="talentName" column="talentName"></result>
+        <result property="school" column="school"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="profession" column="profession"></result>
+        <result property="politicalStatus" column="politicalStatus"></result>
+        <result property="workExp" column="workExp"></result>
+        <result property="jobPlan" column="jobPlan"></result>
+        <result property="selfEva" column="selfEva"></result>
+        <result property="education" column="education"></result>
+        <result property="entryTime" column="entryTime"></result>
+        <result property="address" column="address"></result>
+        <result property="certificate" column="certificate"></result>
+
+        <association property="compAndtalent" column="talent" javaType="com.cykj.entity.CompAndtalent">
+            <id property="compAndTalId" column="compAndTalId"></id>
+            <result property="recommendTime" column="recommendTime"></result>
+            <result property="compAndTalId" column="compAndTalId"></result>
+        </association>
+    </resultMap>
+
+    <select id="findUnviTalentOnPageNum" parameterType="java.util.Map" resultType="int">
+        select count(*) from talent t, compAndtalent s where t.talentID = s.talent and s.stand=16 and s.compID = #{compID}
+        <if test="beginTime!=null">
+            and recommendTime >= #{beginTime}
+        </if>
+        <if test="endTime!=null">
+            and recommendTime &lt;= #{endTime}
+        </if>
+        <if test="talentName!=null">
+            and talentName like #{talentName}
+        </if>
+        <if test="school!=null">
+            and school like #{school}
+        </if>
+        <if test="profession!=null">
+            and profession like #{profession}
+        </if>
+    </select>
+
+    <select id="findTalent" parameterType="java.util.HashMap"  resultType="com.cykj.entity.Talent">
+        select * from talent where 1=1
+        <if test="school!=null">and school like concat('%',#{school},'%')</if>
+        <if test="profession!=null">and profession like concat('%',#{profession},'%')</if>
+        <if test="beginTime!=null">and entryTime >= #{beginTime} </if>
+        <if test="endTime!=null">and entryTime &lt;=  #{endTime} </if>
+        limit #{limit} offset #{offset}
+    </select>
+    <select id="findRecords" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from talent where 1=1
+        <if test="school!=null">and school like concat('%',#{school},'%')</if>
+        <if test="profession!=null">and profession like concat('%',#{profession},'%')</if>
+        <if test="beginTime!=null">and entryTime >= #{beginTime} </if>
+        <if test="endTime!=null">and entryTime &lt;=  #{endTime} </if>
+    </select>
+    <select id="findPosition" parameterType="java.util.HashMap"  resultMap="result">
+        select  p.companyID,p.releaseTime, b.compName,p2.postName,i.industryName from postPosition p ,backUser b, position p2,industry i,depart d
+        where p.companyID=b.bUserID and p.postID=p2.postID and d.departID=p2.departID and i.industryID=d.industryID and p.postStandID=6
+        <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
+        <if test="postName!=null">and p2.postName like concat('%',#{postName},'%')</if>
+        limit #{limit} offset #{offset}
+    </select>
+    <resultMap id="result" type="com.cykj.entity.Positions">
+        <result property="companyID" column="companyID"></result>
+        <result property="releaseTime" column="releaseTime"></result>
+        <result property="compName" column="compName"></result>
+        <result property="postName" column="postName"></result>
+        <result property="industryName" column="industryName"></result>
+    </resultMap>
+    <select id="findPositionRecords" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from  postPosition p ,backUser b, position p2,industry i,depart d
+        where p.companyID=b.bUserID and p.postID=p2.postID and d.departID=p2.departID and i.industryID=d.industryID and p.postStandID=6
+        <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
+        <if test="postName!=null">and p2.postName like concat('%',#{postName},'%')</if>
+    </select>
+    <insert id="addTalent" parameterType="com.cykj.entity.Talent" keyProperty="talentId" useGeneratedKeys="true">
+          insert into talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva)
+          values (#{talentName},#{school},#{birthday},#{profession},#{politicalStatus},
+          #{education},#{contactInfo},#{address},#{workExp},#{certificate},#{selfEva})
+        </insert>
+    <select id="selectTalent" parameterType="java.lang.String" resultType="com.cykj.entity.Talent">
+            select * from talent where talentName = #{talentName}
+        </select>
+
+
+    <select id="findTalentByID" resultType="com.cykj.entity.Talent">
+        select * from talent where talentID = #{talentID}
+    </select>
+
+    <insert id="addCompAndtalent" parameterType="com.cykj.entity.CompAndtalent" >
+          insert into compAndtalent(talent,compID,stand) values (#{c},#{companyID},16)
+        </insert>
+    <select id="selectCompAndtalent" parameterType="java.util.HashMap" resultType="com.cykj.entity.CompAndtalent">
+            select * from compAndtalent where talent = #{c} and compID = #{companyID}
+        </select>
 
 </mapper>

@@ -37,15 +37,15 @@
     <div id="header">
         <div class="wrapper">
             <a class="logo">
-                <img src="../style/images/logo.png" width="350" height="130" alt="钱程无忧-关注你的钱程"/>
+                <img src="../style/images/logo.png" width="310" height="110" alt="钱程无忧-关注你的钱程"/>
             </a>
             <ul class="reset" id="navheader">
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li><a href="">公司</a></li>
-                <li><a href="" target="_blank">校招</a></li>
-                <li><a href="" target="_blank">课程</a></li>
-                <li><a href="" rel="nofollow">我的简历</a></li>
-                <li><a href="" rel="nofollow">发布职位</a></li>
+                <li><a href="companylist.html">公司</a></li>
+                <li><a href="h/toForum.html" target="_blank">校招</a></li>
+                <li><a href="h/toForum.html" target="_blank">课程</a></li>
+                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
+                <li><a href="create.html" rel="nofollow">发布职位</a></li>
             </ul>
             <ul class="loginTop">
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>

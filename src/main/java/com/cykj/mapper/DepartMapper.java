@@ -1,7 +1,12 @@
 package com.cykj.mapper;
 
+import com.cykj.entity.Depart;
+import com.cykj.entity.Industry;
+import com.cykj.entity.Depart;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -10,4 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 public interface DepartMapper {
 
+    public List<Depart> findDepart (long industryId);
+    List<Depart> findDepartByID(int industryID);
 }

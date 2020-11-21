@@ -3,5 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CertificateMapper">
+    
+    <select id="findcertificatelist" resultMap="recmap">
+    select * from certificate c join field f on c.fieldId=f.fieldId
+    </select>
+    <resultMap id="recmap" type="com.cykj.entity.Certificate">
+        <id property="cerId" column="cerId"></id>
+        <result property="imgUrl" column="imgUrl"></result>
+        <result property="cerSketch" column="cerSketch"></result>
+        <result property="cerTrait" column="cerTrait"></result>
+        <result property="cerHeadPortrait" column="cerHeadPortrait"></result>
+        <result property="cershowState" column="cershowState"></result>
+        <result property="cerChangeTime" column="cerChangeTime"></result>
+        <association property="field" column="fieldId" javaType="com.cykj.entity.Field">
+            <id property="fieldId" column="fieldId"></id>
+            <result property="fieldName" column="fieldName"></result>
+        </association>
+    </resultMap>
+
+    <select id="findCerFee"  resultType="com.cykj.entity.Certificate">
+    select * from certificate where fieldId = #{fieldid}
+    </select>
+
+
 
 </mapper>

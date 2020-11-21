@@ -1,23 +1,45 @@
 package com.cykj.entity;
 
+import java.util.Date;
+
 /**
  *人才表
  */
 public class Talent {
 
-  private long talentId;
-  private String talentName;
-  private String school;
-  private String birthday;
-  private String contactInfo;
-  private String profession;
-  private String politicalStatus;
-  private String workExp;
-  private String jobPlan;
-  private String selfEva;
-  private java.sql.Date entryTime;
+  private long talentId;//人才ID
+  private String talentName;//名字
+  private String school;//学校
+  private String birthday;//出生年月日
+  private String contactInfo;//联系方式
+  private String profession;//专业
+  private String politicalStatus;//政治面貌
+  private String workExp;//工作经验
+  private String jobPlan;//职业规划
+  private String selfEva;//自我评价
+  private String education;//学历
+  private String entryTime;//上传时间
+  private String address;//地址
+  private String certificate;//技能证书
+  private CompAndtalent compAndtalent;
 
   public Talent() {
+  }
+
+  public Talent(String talentName, String school, String birthday, String profession,
+                String politicalStatus, String education, String contactInfo, String address, String workExp,
+                String certificate, String selfEva) {
+    this.talentName = talentName;
+    this.school = school;
+    this.birthday = birthday;
+    this.profession = profession;
+    this.politicalStatus = politicalStatus;
+    this.education = education;
+    this.contactInfo = contactInfo;
+    this.address = address;
+    this.workExp = workExp;
+    this.certificate = certificate;
+    this.selfEva = selfEva;
   }
 
   public long getTalentId() {
@@ -109,13 +131,62 @@ public class Talent {
     this.selfEva = selfEva;
   }
 
-
-  public java.sql.Date getEntryTime() {
+  public String getEntryTime() {
     return entryTime;
   }
 
-  public void setEntryTime(java.sql.Date entryTime) {
+  public void setEntryTime(String entryTime) {
     this.entryTime = entryTime;
   }
 
+  public String getEducation() {
+    return education;
+  }
+
+  public void setEducation(String education) {
+    this.education = education;
+  }
+
+  public CompAndtalent getCompAndtalent() {
+    return compAndtalent;
+  }
+
+  public void setCompAndtalent(CompAndtalent compAndtalent) {
+    this.compAndtalent = compAndtalent;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getCertificate() {
+    return certificate;
+  }
+
+  public void setCertificate(String certificate) {
+    this.certificate = certificate;
+  }
+
+  @Override
+  public String toString() {
+    return "Talent{" +
+            "talentId=" + talentId +
+            ", talentName='" + talentName + '\'' +
+            ", school='" + school + '\'' +
+            ", birthday='" + birthday + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", profession='" + profession + '\'' +
+            ", politicalStatus='" + politicalStatus + '\'' +
+            ", workExp='" + workExp + '\'' +
+            ", jobPlan='" + jobPlan + '\'' +
+            ", selfEva='" + selfEva + '\'' +
+            ", education='" + education + '\'' +
+            ", entryTime=" + entryTime +
+            ", compAndtalent=" + compAndtalent +
+            '}';
+  }
 }

@@ -21,26 +21,26 @@
 
     </head>
 <body>
-
+    <input type="hidden" value="${pageContext.request.contextPath}" id="path">
     <div class="layui-container layui-fluid" id="postPositionDiv">
         <br>
         <h1 style="text-align: center">岗位发布</h1>
         <br>
-        <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
+        <form class="layui-form" action="#" style="margin-left: 15%;margin-right: 15%" id="postPosition">
         <div class="layui-form-item" >
             <label class="layui-form-label">职位类别</label>
             <div class="layui-input-inline">
-                <select name="quiz1">
+                <select name="industry" id="industry" lay-filter="industry">
+
+                </select>
+            </div>
+            <div class="layui-input-inline" >
+                <select name="depart" id="depart" lay-filter="depart">
 
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select name="quiz2">
-
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="quiz3">
+                <select name="postId" id="postId" lay-filter="position">
 
                 </select>
             </div>
@@ -49,8 +49,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="account" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
-                    <label class="layui-form-label" style="color: red;display: none">skfsadsads</label>
+                    <input type="text" id="postName" name="postName"  autocomplete="off" class="layui-input" >
+<%--                    <label class="layui-form-label" style="color: red;display: none">skfsadsads</label>--%>
                 </div>
 
             </div>
@@ -58,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属部门:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="department" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="department" name="department"  autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
@@ -67,9 +67,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">工作性质</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="sex" value="全职" title="全职" checked="">
-                    <input type="radio" name="sex" value="兼职" title="兼职">
-                    <input type="radio" name="sex" value="实习" title="实习" >
+                    <input type="radio" name="workNature" value="全职" title="全职" checked="">
+                    <input type="radio" name="workNature" value="兼职" title="兼职">
+                    <input type="radio" name="workNature" value="实习" title="实习" >
                 </div>
             </div>
 
@@ -77,25 +77,29 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">月薪范围</label>
                     <div class="layui-input-inline" style="width: 200px;">
-                        <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input">
+                        <input type="text" name="minSalary" placeholder="￥" autocomplete="off" class="layui-input" id="minSalary">
                     </div>
                     <div class="layui-form-mid">-</div>
                     <div class="layui-input-inline" style="width: 200px;">
-                        <input type="text" name="price_max" placeholder="￥" autocomplete="off" class="layui-input">
+                        <input type="text" name="maxSalary" placeholder="￥" autocomplete="off" class="layui-input" id="maxSalary">
                     </div>
                     <div class="layui-form-mid">k</div>
                 </div>
             </div>
 
+
+
             <div class="layui-form-item" >
                 <label class="layui-form-label">工作城市</label>
+
                 <div class="layui-input-inline">
-                    <select name="quiz1">
+                    <select name="province" id="province" lay-filter="province">
 
                     </select>
                 </div>
+
                 <div class="layui-input-inline">
-                    <select name="quiz2">
+                    <select name="workCity" id="workCity" lay-filter="workCity">
 
                     </select>
                 </div>
@@ -105,29 +109,38 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">具体地址:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="address" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="detailAddress" name="detailAddress" lay-verify="required|phone" autocomplete="off" class="layui-input" >
                 </div>
+<%--                <label class="layui-form-label">具体地址:</label>--%>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">招收人数:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="num" name="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="recruitsNum" name="recruitsNum" lay-verify="required|phone" autocomplete="off" class="layui-input" >
                 </div>
             </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">福利描述</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea" style="width: 60%; height: 15%" id="jobBenefits" name="jobBenefits"></textarea>
+                </div>
+            </div>
+
             <hr class="layui-bg-green">
 
             <div class="layui-form-item" >
                 <label class="layui-form-label">工作经验</label>
                 <div class="layui-input-inline">
-                    <select name="quiz1">
-                        <option>不限</option>
-                        <option>应届毕业生</option>
-                        <option>1年以下</option>
-                        <option>1-3年</option>
-                        <option>3-5年</option>
-                        <option>5-10年</option>
-                        <option>10年以上</option>
+                    <select name="workYear" id="workYear">
+                        <option value="不限">不限</option>
+                        <option value="应届毕业生">应届毕业生</option>
+                        <option value="1年以下">1年以下</option>
+                        <option value="1-3年">1-3年</option>
+                        <option value="3-5年">3-5年</option>
+                        <option value="5-10年">5-10年</option>
+                        <option value="10年以上">10年以上</option>
                     </select>
                 </div>
             </div>
@@ -135,12 +148,13 @@
             <div class="layui-form-item" >
                 <label class="layui-form-label">学历</label>
                 <div class="layui-input-inline">
-                    <select name="quiz1">
-                        <option>不限</option>
-                        <option>大专</option>
-                        <option>本科</option>
-                        <option>硕士</option>
-                        <option>博士</option>
+                    <select name="education" id="education">
+                        <option value="不限">不限</option>
+                        <option value="高中">高中</option>
+                        <option value="大专">大专</option>
+                        <option value="本科">本科</option>
+                        <option value="硕士">硕士</option>
+                        <option value="博士">博士</option>
                     </select>
                 </div>
             </div>
@@ -148,14 +162,21 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">投递邮箱</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="email" name="email" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="contactEmail" name="contactEmail" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系方式</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="contact" name="contact" lay-verify="required|phone" autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">工作描述</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" style="width: 60%; height: 35%"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" style="width: 60%; height: 35%" id="jobDescription" name="jobDescription"></textarea>
                 </div>
             </div>
 
@@ -163,13 +184,66 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">招聘预览</button>
+                    <input  type="button" class="layui-btn" onclick="sumb()" value="立即提交">  </input>
+                    <input  type="button" class="layui-btn" value="招聘预览" onclick="showDetail()"></input>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </form>
     </div>
 
+    <div id="postPositionDetailDiv" style="display: none;padding: 3%">
+        <table class="layui-table">
+            <tr>
+                <td  colspan="6"><h2>招聘岗位预览</h2></td>
+            </tr>
+            <tr>
+                <td class="ziti" width="16%">岗位名称</td>
+                <td id="dPostName"></td>
+                <td class="ziti">所属部门</td>
+                <td id="dDepart"></td>
+                <td class="ziti">工作性质</td>
+                <td id="workType"></td>
+            </tr>
+
+            <tr>
+                <td class="ziti">月薪范围</td>
+                <td id="salary"></td>
+                <td class="ziti">工作城市</td>
+                <td id="dWorkCity"></td>
+                <td class="ziti">招收人数</td>
+                <td id="num"></td>
+            </tr>
+
+            <tr>
+                <td class="ziti">工作经验</td>
+                <td id="dWorkExp"></td>
+                <td class="ziti">学历</td>
+                <td id="dEducation"></td>
+                <td class="ziti">投递邮箱</td>
+                <td id="dEmail"></td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">联系方式</td>
+                <td colspan="5" id="dContact"> </td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">具体地址</td>
+                <td colspan="5" id="dAddress"> </td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">福利描述</td>
+                <td colspan="5" id="fuli"> </td>
+            </tr>
+
+            <tr>
+                <td rowspan="1" class="ziti">工作描述</td>
+                <td colspan="5" id="workDes"> </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

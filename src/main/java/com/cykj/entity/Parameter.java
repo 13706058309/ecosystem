@@ -13,16 +13,6 @@ public class Parameter {
   public Parameter() {
   }
 
-  @Override
-  public String toString() {
-    return "Parameter{" +
-            "paramId=" + paramId +
-            ", paramName='" + paramName + '\'' +
-            ", paramType='" + paramType + '\'' +
-            ", paramValues='" + paramValues + '\'' +
-            '}';
-  }
-
   public long getParamId() {
     return paramId;
   }
@@ -58,4 +48,13 @@ public class Parameter {
     this.paramValues = paramValues;
   }
 
+  @Override
+  public String toString() {
+    return "Parameter{" +
+            "paramId=" + paramId +
+            ", paramName='" + paramName + '\'' +
+            ", paramType='" + paramType + '\'' +
+            ", paramValues='" + paramValues + '\'' +
+            '}';
+  }
 }

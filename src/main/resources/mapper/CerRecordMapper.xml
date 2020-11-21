@@ -4,5 +4,100 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CerRecordMapper">
 
+    <select id="findcerRecordid"  resultType="com.cykj.entity.CerRecord">
+        select * FROM cerRecord where userId= #{userid} and fileId= #{fileid} ORDER BY beginTime DESC LIMIT 0,1
+    </select>
+
+    <select id="findcersqlistsize" parameterType="java.util.HashMap" resultType="integer">
+        select count(*) from cerRecord c join userInfo u on c.userId=u.userId join field f on c.fileId=f.fieldId join parameter p on c.stateId=p.paramId
+        where 1=1 and c.userId= #{userid} and p.paramType='申请证书状态'  or p.paramType='开发证书状态'
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+        <if test="top != null and down == null ">
+            and c.beginTime >= #{top}
+        </if>
+        <if test="top == null and down != null ">
+            and c.beginTime &lt;= #{down}
+        </if>
+        <if test="top != null and down != null ">
+            and c.beginTime >= #{top} and c.beginTime &lt;= #{down}
+        </if>
+
+    </select>
+
+
+    <select id="findcersqlist" parameterType="java.util.HashMap" resultMap="cermap">
+        select * from cerRecord c join userInfo u on c.userId=u.userId join field f on c.fileId=f.fieldId join parameter p on c.stateId=p.paramId
+        where 1=1 and c.userId= #{userid} and p.paramType='申请证书状态' or p.paramType='开发证书状态'
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+        <if test="top != null and down == null ">
+            and c.beginTime >= #{top}
+        </if>
+        <if test="top == null and down != null ">
+            and c.beginTime &lt;= #{down}
+        </if>
+        <if test="top != null and down != null ">
+            and c.beginTime >= #{top} and c.beginTime &lt;= #{down}
+        </if>
+
+        order by c.beginTime desc  limit #{page},#{limit}
+
+    </select>
+
+    <resultMap id="cermap" type="com.cykj.entity.CerRecord">
+        <id property="cerRecordId" column="cerRecordId"></id>
+        <result property="trueName" column="trueName"></result>
+        <result property="idNumber" column="idNumber"></result>
+        <result property="stateId" column="stateId"></result>
+        <result property="beginTime" column="beginTime"></result>
+        <result property="turnoverTime" column="turnoverTime"></result>
+        <result property="cerTestScore" column="cerTestScore"></result>
+        <result property="cerJudgeScore" column="cerJudgeScore"></result>
+        <result property="cerFinalScore" column="cerFinalScore"></result>
+        <result property="cerPhone" column="cerPhone"></result>
+        <association property="user" column="userId" javaType="com.cykj.entity.UserInfo">
+            <id property="userId" column="userId"></id>
+            <result property="userName" column="userName"></result>
+        </association>
+        <association property="field" column="fieldId" javaType="com.cykj.entity.Field">
+            <id property="fieldId" column="fieldId"></id>
+            <result property="fieldName" column="fieldName"></result>
+        </association>
+        <association property="state" column="stateId" javaType="com.cykj.entity.Parameter">
+            <id property="paramId" column="paramId"></id>
+            <result property="paramName" column="paramName"></result>
+            <result property="paramType" column="paramType"></result>
+        </association>
+    </resultMap>
+
+
+    <select id="findcerKFList"  resultMap="cermap">
+        select * from cerRecord c join userInfo u on c.userId=u.userId join field f on c.fileId=f.fieldId join parameter p on c.stateId=p.paramId
+        where 1=1 and c.userId= #{userid} and p.paramType='开发证书状态' order by c.turnoverTime desc
+    </select>
+
+
+    <select id="findcerRecordup"  resultType="com.cykj.entity.CerRecord">
+        select  * from cerRecord where cerRecordId = #{cerRecordId}
+    </select>
+
+    <insert id="insertCerRecord" parameterType="com.cykj.entity.CerRecord" keyProperty="cerRecordId" useGeneratedKeys="true">
+       insert into cerRecord(userId,fileId,stateId,trueName,IdNumber,beginTime,cerPhone) value (#{userId},#{fileId},#{stateId},#{trueName},#{idNumber},#{beginTime},#{cerPhone})
+    </insert>
+    <select id="findzssqlastid" resultType="integer">
+          select last_insert_id()
+    </select>
+    <update id="upcerdocurl" >
+       update cerRecord set docUrl = #{docUrl},stateId = #{stateId}  where cerRecordId = #{cerRecordId}
+    </update>
+
+    <update id="upcersqstandid" >
+       update cerRecord set stateId = #{stateId}  where cerRecordId= #{cerRecordId}
+    </update>
 </mapper>
 

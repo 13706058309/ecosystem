@@ -10,8 +10,8 @@
 
 <html xmlns:wb="http://open.weibo.com/wb"><head>
 
-    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/static/style/js/conversion.js"></script>
-    <script src="${pageContext.request.contextPath}/static/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
+    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>
+    <script src="${pageContext.request.contextPath}/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
     <style type="text/css"></style>
     <meta content="no-siteapp" http-equiv="Cache-Control">
     <link  media="handheld" rel="alternate">
@@ -24,14 +24,14 @@
         console.log(1);
     </script>
 <%--    <link href="h/images/favicon.ico" rel="Shortcut Icon">--%>
-    <link href="${pageContext.request.contextPath}/static/style/css/style.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/static/css/BackChangePwd.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/static/style/css/external.min.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/static/style/css/popup.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/style/js/jquery.1.10.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/style/js/jquery.lib.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/style/js/ajaxfileupload.js"></script>
-    <script src="${pageContext.request.contextPath}/static/style/js/additional-methods.js" type="text/javascript"></script>
+    <link href="${pageContext.request.contextPath}/style/css/style.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/BackChangePwd.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/css/external.min.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/css/popup.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/jquery.1.10.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/style/js/jquery.lib.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/ajaxfileupload.js"></script>
+    <script src="${pageContext.request.contextPath}/style/js/additional-methods.js" type="text/javascript"></script>
     <!--[if lte IE 8]>
     <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/excanvas.js"></script>
     <![endif]-->
@@ -39,9 +39,14 @@
         var youdao_conv_id = 271546;
     </script>
     <script src="${pageContext.request.contextPath}/style/js/conv.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script></head>
+    <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script>
+
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+</head>
 <body>
 <div id="body">
+    <input type="hidden" value="${pageContext.request.contextPath}" id="path">
     <div id="container">
         <input type="hidden" id="hasSidebar" value="1">
         <div id="changePwdDiv">
@@ -74,7 +79,7 @@
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><input type="submit" value="保 存"></td>
+                            <td><input type="button" class="layui-btn" onclick="changePwd()" value="保 存"></td>
                         </tr>
                         </tbody></table>
                 </form>
@@ -95,21 +100,51 @@
         <a rel="nofollow" title="回到顶部" id="backtop"></a>
     </div><!-- end #container -->
 </div><!-- end #body -->
-<div id="footer">
-    <div class="wrapper">
-        <a rel="nofollow" target="_blank" href="h/about.html">联系我们</a>
-        <a target="_blank" href="h/af/zhaopin.html">互联网公司导航</a>
-        <a rel="nofollow" target="_blank" href="http://e.weibo.com/lagou720">拉勾微博</a>
-        <a rel="nofollow" href="javascript:void(0)" class="footer_qr">拉勾微信<i></i></a>
-        <div class="copyright">&copy;2013-2014 Lagou <a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" target="_blank">京ICP备14023790号-2</a></div>
-    </div>
-</div>
+
 
 <script src="${pageContext.request.contextPath}/style/js/core.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/style/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
-
-
 </body>
+<script>
+    var path = $("#path").val();
+    var layer;
+    layui.use('layer',function () {
+        layer = layui.layer;
+    })
+    function changePwd() {
+        var pwd = $("#oldpassword").val()
+        var newPwd = $("#newpassword").val();
+        var againPwd = $("#comfirmpassword").val();
+
+        $.ajax({
+            url:path+"/rec/compChangePwd",
+            data:"pwd="+pwd+"&newPwd="+newPwd,
+            type:"post",
+            typeData:"text",
+            beforeSend:function(){
+                var pattern = /\w{6,16}$/;
+                if(!pattern.test(newPwd)){
+                    layer.msg("密码只能由字母数字_组成,且至少6位，最多16位");
+                    return false;
+                }
+
+                if(newPwd!=againPwd){
+                    return false;
+                }
+
+            },
+            success:function (data) {
+                if(data=='1'){
+                    layer.alert("旧密码错误");
+                }else if(data=='2'){
+                    layer.alert("修改成功，请重新登录");
+                }else{
+                    layer.alert("业务繁忙，修改失败");
+                }
+            }
+        })
+    }
+</script>
 </html>

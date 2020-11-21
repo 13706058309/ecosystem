@@ -8,7 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns:wb="http://open.weibo.com/wb"><head>
-    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>
+    <style>
+        .head-input{
+            width: 70px;
+            height: 70px;
+            position: relative;
+            top: -70px;
+            opacity: 0;
+        }
+        .display-hide{
+            display: none;
+        }
+        </style>
+<%--    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>--%>
     <script src="${pageContext.request.contextPath}/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
     <style type="text/css"></style>
     <meta content="no-siteapp" http-equiv="Cache-Control">
@@ -36,62 +48,72 @@
         var youdao_conv_id = 271546;
     </script>
     <script src="${pageContext.request.contextPath}/style/js/conv.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script></head>
+    <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">--%>
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">--%>
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vendor.css">--%>
+
+</head>
 <body>
 <div id="body">
 
     <div id="container">
-        <!-- <script src="style/js/swfobject_modified.js" type="text/javascript"></script> -->
         <div class="clearfix">
-
             <div class="content_l">
                 <div class="c_detail">
                     <div style="background-color:#fff;" class="c_logo">
-                        <a title="上传公司LOGO" id="logoShow" class="inline cboxElement" href="#logoUploader">
-                            <img width="190" height="190" alt="公司logo" src="${pageContext.request.contextPath}/style/images/logo_default.png">
 
-                            <span>更换公司图片<br>190px*190px 小于5M</span>
-                        </a>
+                        <div class="info-flex-item header-upload">
+                            <div class="header-box">
+                                <div class="header-mask"></div>
+                            <c:choose>
+                                <c:when test="${not empty comp.logo}">
+                                    <img src="${pageContext.request.contextPath}/uploadLogo${comp.logo}" id="headImg" class="header-img" style="width:100%;height: 100%">
+                                </c:when>
+
+                                <c:otherwise>
+                                    <img src="${pageContext.request.contextPath}/style/images/logo_default.png" id="headImg" class="header-img" style="width:100%;height: 100%">
+                                </c:otherwise>
+                            </c:choose>
+                                <form id="imgsForm" enctype="multipart/form-data">
+                                <input type ="file"  class="head-input" id="uploadFiles" name="uploadFiles"
+                                       accept="image/*" />
+                                </form>
+                                <span style="display: block">点击替换logo</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="c_box companyName">
-                        <h2 title="公司名称">公司名称</h2>
+<%--                        <h3 title="公司名称" style="margin-left: 20%">公司名称</h3>--%>
 
-                        <em class="unvalid"></em>
-                        <span class="valid dn" style="display: none;">拉勾未认证企业</span>
-                        <a class="applyC" href="#">认证通过</a>
+<%--                        <em class="unvalid"></em>--%>
+<%--                        <span class="valid dn" style="display: none;">拉勾未认证企业</span>--%>
+<%--                        <a class="applyC" href="#">认证通过</a>--%>
                         <div class="clear"></div>
+                        <h1 title="" style="text-align: center">公司名称</h1>
 
-                        <h1 title="福建平潭协创进出口贸易有限公司" class="fullname">福建平潭协创进出口贸易有限公司</h1>
+                        <h1 title="" class="fullname" style="text-align: center">${comp.compName}</h1>
+
+                        <h1 title=""  style="text-align: center">具体地址</h1>
 
                         <form class="clear editDetail dn" id="editDetailForm" style="display: none;">
-                            <input type="text" placeholder="写明公司详细地址，限25字" maxlength="50" value="" name="companyFeatures" id="companyFeatures" class="valid"><span for="companyFeatures" generated="true" class="error" style="display: none;">请输入5-50字的一句话介绍</span>
-                            <input type="hidden" value="25927" id="companyId" name="companyId">
-                            <input type="submit" value="保存" id="saveDetail" class="btn_small">
+                            <input type="text" placeholder="写明公司详细地址，限25字" maxlength="25" value="${comp.address}"  id="compAddress" class="valid">
+
+                            <input type="button" value="保存" id="saveDetail" class="btn_small" onclick="changeAddress()">
                             <a id="cancelDetail" class="btn_cancel_s" >取消</a>
                         </form>
 
-                        <div class="clear oneword" style="display: block;"><img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_l.png">&nbsp; <span>请输入公司地址</span> &nbsp;<img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_r.png"></div>
-                        <h3 class="dn">已选择标签</h3>
-                        <ul style="overflow:auto" id="hasLabels" class="reset clearfix">
-                            <li><span>年终分红</span></li>
-                            <li><span>五险一金</span></li>
-                            <li><span>弹性工作</span></li>
-                            <li><span>岗位晋升</span></li>
-                            <li class="link">编辑</li>
-                        </ul>
-                        <div class="dn" id="addLabels">
-                            <a id="changeLabels" class="change" href="javascript:void(0)">换一换</a>
-                            <input type="hidden" value="1" id="labelPageNo">
-                            <input type="submit" value="贴上" class="fr" id="add_label">
-                            <input type="text" placeholder="添加自定义标签" name="label" id="label" class="label_form fr">
-                            <div class="clear"></div>
-                            <ul class="reset clearfix"> </ul>
-                            <a id="saveLabels" class="btn_small" href="javascript:void(0)">保存</a>
-                            <a id="cancelLabels" class="btn_cancel_s" href="javascript:void(0)">取消</a>
+                        <div class="clear oneword" style="display: block;" id="addressDiv">
+                            <img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_l.png">&nbsp;
+                            <h1 class="fullname" id="address" style="display: inline-block;text-align: center">${comp.address}</h1>&nbsp;
+                            <img width="17" height="15" src="${pageContext.request.contextPath}/style/images/quote_r.png">
                         </div>
+
                     </div>
-                    <a title="编辑基本信息" class="c_edit" id="editCompanyDetail" href="javascript:void(0);" style="display: block;"></a>
+                    <a title="编辑基本信息" class="c_edit" id="editCompanyDetail" href="javascript:void(0);" style="display: block" ></a>
                     <div class="clear"></div>
                 </div>
 
@@ -106,25 +128,28 @@
                             </dt>
                             <dd>
                                 <form id="companyValueForm">
-                                    <textarea placeholder="请分段详细描述公司简介、企业文化等" name="companyProfile" id="newValue" class="valid" style="height: 15%">法嘎嘎法嘎嘎</textarea>
-                                    <div class="word_count fr">你还可以输入 <span>955</span> 字</div>
+                                    <textarea placeholder="请详细描述公司核心价值"  id="newCoreValue"  style="height: 15%">${comp.coreValue}</textarea>
+                                    <div class="word_count fr">你可以输入 <span>50</span> 字</div>
                                     <div class="clear"></div>
-                                    <input type="submit" value="保存" id="submitValue" class="btn_small">
+                                    <a id="delValues" class="btn_small" onclick="changeScor()">确定</a>
                                     <a id="delValue" class="btn_cancel_s" onclick="hiddenValue()">取消</a>
                                 </form>
                             </dd>
+
+
                         </dl>
 
                         <!--有介绍-->
-                        <dl class="c_section" style="display: block;" id="realValue">
+                        <dl class="c_section" style="display: block" id="realValue">
                             <dt>
                                 <h2><em></em>公司核心价值</h2>
                             </dt>
                             <dd>
-                                <div class="c_intro">afdsafs</div>
+                                <div class="c_intro" id="coreValues">${comp.coreValue}</div>
                                 <a title="编辑公司介绍" id="editValue" class="c_edit" href="#" onclick="showValue()"></a>
                             </dd>
                         </dl>
+
                     </div>
 
                 </div><!-- end #Profile -->
@@ -134,7 +159,7 @@
                 <div id="Profile">
                     <div class="profile_wrap">
                         <!--无介绍 -->
-                        <dl class="c_section dn" style="display: none;">
+                        <dl class="c_section dn" style="display: none;" id="c1">
                             <dt>
                                 <h2><em></em>公司介绍</h2>
                             </dt>
@@ -146,28 +171,28 @@
                             </dd>
                         </dl>
                         <!--编辑介绍-->
-                        <dl class="c_section newIntro dn" style="display: none;">
+                        <dl class="c_section newIntro dn" style="display: none;" id="c2">
                             <dt>
                                 <h2><em></em>公司介绍</h2>
                             </dt>
                             <dd>
                                 <form id="companyDesForm">
-                                    <textarea placeholder="请分段详细描述公司简介、企业文化等" name="companyProfile" id="companyProfile" class="valid">该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎</textarea>
+                                    <textarea placeholder="请分段详细描述公司简介、企业文化等" id="newInfoIntr" class="valid"></textarea>
                                     <div class="word_count fr">你还可以输入 <span>955</span> 字</div>
                                     <div class="clear"></div>
-                                    <input type="submit" value="保存" id="submitProfile" class="btn_small">
+                                    <input type="button" value="保存" id="submitProfile" class="btn_small" onclick="changeInfo()">
                                     <a id="delProfile" class="btn_cancel_s" href="javascript:void(0)">取消</a>
                                 </form>
                             </dd>
                         </dl>
 
                         <!--有介绍-->
-                        <dl class="c_section" style="display: block;">
+                        <dl class="c_section" style="display: block;" id="c3">
                             <dt>
                                 <h2><em></em>公司介绍</h2>
                             </dt>
                             <dd>
-                                <div class="c_intro">afdsafs</div>
+                                <div class="c_intro" id="infoIntr">${comp.infoIntr}</div>
                                 <a title="编辑公司介绍" id="editIntro" class="c_edit" href="javascript:void(0)"></a>
                             </dd>
                         </dl>
@@ -181,7 +206,7 @@
                 <input type="hidden" value="" name="pageNo" id="pageNo">
                 <input type="hidden" value="" name="pageSize" id="pageSize">
                 <div id="flag"></div>
-            </div>	<!-- end .content_l -->
+            </div>
 
             <div class="content_r">
                 <div id="Tags">
@@ -190,68 +215,70 @@
                             <tbody>
                             <tr>
                                 <td>地点</td>
-                                <td>上海</td>
+                                <td>${comp.city}</td>
                             </tr>
                             <tr>
                                 <td>领域</td>
-                                <td>移动互联网</td>
+                                <td>${comp.industrys[0].industryName}   ${comp.industrys[1].industryName}</td>
                             </tr>
                             <tr>
                                 <td>邮箱</td>
-                                <td>移动互联网</td>
+                                <td>${comp.email}</td>
                             </tr>
                             <tr>
                                 <td>规模</td>
-                                <td>150-500人</td>
+                                <td id="scale">${comp.scale}</td>
                             </tr>
                             <tr>
                                 <td>主页</td>
-                                <td><a target="_blank" href="http://www.zmtpost.com">http://www.zmtpost.com</a></td>
+                                <td id="homePage"><a target="_blank" href="${comp.homePage}">${comp.homePage}</a></td>
                             </tr>
                             </tbody>
                         </table>
-                        <a id="editTags" class="c_edit" href="javascript:void(0)"></a>
+<%--                        <a id="editTags" class="c_edit" href="javascript:void(0)"></a>--%>
+                        <a id="editTags" class="c_edit" onclick="showChange1()"></a>
                     </div>
                     <div id="c_tags_edit" class="c_tags editTags dn" style="display: none;">
                         <form id="tagForms">
                             <table>
-                                <tbody><tr>
+                                <tbody>
+                                <tr>
                                     <td>地点</td>
                                     <td>
-                                        <input type="text" placeholder="请输入地点" value="上海" name="city" id="city" class="valid">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>领域</td><!-- 支持多选 -->
-                                    <td>
-                                        <input type="hidden" value="移动互联网" id="industryField" name="industryField" class="valid">
-                                        <input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="移动互联网" id="select_ind" class="select_tags">
-
+                                        <input type="hidden" value="${comp.city}"  class="valid">
+                                        <input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="${comp.city}"  class="select_tags">
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td>邮箱</td><!-- 支持多选 -->
+                                    <td>领域</td>
                                     <td>
-                                        <input type="hidden" value="邮箱" id="email" name="eamil" class="valid">
-                                        <input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="移动互联网" id="select_ind" class="select_tags">
+                                        <input type="hidden" value="${comp.industrys[0].industryName}   ${comp.industrys[1].industryName}" class="valid">
+                                        <input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="${comp.industrys[0].industryName}   ${comp.industrys[1].industryName}" class="select_tags">
+                                    </td>
+                                </tr>
 
+                                <tr>
+                                    <td>邮箱</td>
+                                    <td>
+                                        <input type="hidden" value="${comp.email}" class="valid">
+                                        <input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="${comp.email}" class="select_tags">
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>规模</td>
                                     <td>
-                                        <input type="hidden" value="150-500人" id="companySize" name="companySize" class="valid">
-                                        <input type="button" value="150-500人" id="select_sca" class="select_tags">
+                                        <input type="hidden" value="${comp.scale}" id="companySize" name="companySize" class="valid">
+                                        <input type="button" value="${comp.scale}" id="select_sca" class="select_tags">
                                         <div class="selectBox dn" id="box_sca" style="display: none;">
                                             <ul class="reset">
-                                                <li>少于15人</li>
-                                                <li>15-50人</li>
-                                                <li>50-150人</li>
-                                                <li class="current">150-500人</li>
-                                                <li>500-2000人</li>
-                                                <li>2000人以上</li>
+                                                <li <c:if test="${comp.scale}=='少于15人'"> class="current" </c:if>>少于15人</li>
+                                                <li <c:if test="${comp.scale}=='15-50人'"> class="current" </c:if>>15-50人</li>
+                                                <li <c:if test="${comp.scale}=='50-150人'"> class="current" </c:if>>50-150人</li>
+                                                <li <c:if test="${comp.scale}=='150-500人'"> class="current" </c:if>>150-500人</li>
+                                                <li <c:if test="${comp.scale}=='500-999人'"> class="current" </c:if>>500-999人</li>
+                                                <li <c:if test="${comp.scale}=='1000人以上'"> class="current" </c:if>>1000人以上</li>
                                             </ul>
                                         </div>
                                     </td>
@@ -263,12 +290,12 @@
                                     </td>
                                 </tr>
                                 </tbody></table>
-                            <input type="hidden" id="comCity" value="上海">
-                            <input type="hidden" id="comInd" value="移动互联网">
-                            <input type="hidden" id="comSize" value="150-500人">
-                            <input type="hidden" id="comUrl" value="http://www.zmtpost.com">
-                            <input type="submit" value="保存" id="submitFeatures" class="btn_small">
-                            <a id="cancelFeatures" class="btn_cancel_s" href="javascript:void(0)">取消</a>
+                            <input type="hidden" id="comCity" value="${comp.city}">
+                            <input type="hidden" id="comInd" value="${comp.industrys[0].industryName}   ${comp.industrys[1].industryName}">
+                            <input type="hidden" id="comSize" value="${comp.scale}">
+                            <input type="hidden" id="comUrl" value="${comp.homePage}">
+                            <input type="button" value="保存" id="submitFeatures" class="btn_small" onclick="sureChange1()">
+                            <a id="cancelFeatures" class="btn_cancel_s" onclick="hiddenChange1()" >取消</a>
                             <div class="clear"></div>
                         </form>
                     </div>
@@ -277,32 +304,32 @@
                 <dl class="c_section c_stages">
                     <dt>
                         <h2><em></em>融资阶段</h2>
-                        <a title="编辑融资阶段" class="c_edit" href="javascript:void(0)"></a>
+                        <a title="编辑融资阶段" class="c_edit" id="btn3" onclick="show2()"></a>
                     </dt>
                     <dd>
-                        <ul class="reset stageshow">
-                            <li>目前阶段：<span class="c5">天使轮</span></li>
+                        <ul class="reset stageshow" id="s1">
+                            <li>目前阶段：<span class="c5" id="finanStage">${comp.finanStage}</span></li>
                         </ul>
-                        <form class="dn" id="stageform">
-                            <div class="stageSelect">
+                        <form class="dn" id="stageform" >
+                            <div class="stageSelect" id="s2">
                                 <label>目前阶段</label>
-                                <input type="hidden" value="天使轮" id="financeStage" name="financeStage">
-                                <input type="button" value="天使轮" id="select_fin" class="select_tags_short fl">
+                                <input type="hidden" value="${comp.finanStage}" id="financeStage" name="financeStage" class="valid">
+                                <input type="button" value="${comp.finanStage}" id="select_fin" class="select_tags_short fl">
                                 <div class="selectBoxShort dn" id="box_fin" style="display: none;">
                                     <ul class="reset">
-                                        <li>未融资</li>
-                                        <li class="current">天使轮</li>
-                                        <li>A轮</li>
-                                        <li>B轮</li>
-                                        <li>C轮</li>
-                                        <li>D轮及以上</li>
-                                        <li>上市公司</li>
+                                        <li <c:if test="${comp.finanStage}=='未融资'"> class="current" </c:if>>未融资</li>
+                                        <li <c:if test="${comp.finanStage}=='天使轮'"> class="current" </c:if>>天使轮</li>
+                                        <li <c:if test="${comp.finanStage}=='A轮'"> class="current" </c:if>>A轮</li>
+                                        <li <c:if test="${comp.finanStage}=='B轮'"> class="current" </c:if>>B轮</li>
+                                        <li <c:if test="${comp.finanStage}=='C轮'"> class="current" </c:if>>C轮</li>
+                                        <li <c:if test="${comp.finanStage}=='D轮及以上'"> class="current" </c:if>>D轮及以上</li>
+                                        <li <c:if test="${comp.finanStage}=='上市公司'"> class="current" </c:if>>上市公司</li>
                                     </ul>
                                 </div>
                             </div>
 
-                            <input type="submit" value="保存" class="btn_small">
-                            <a id="cancelStages" class="btn_cancel_s" href="javascript:void(0)">取消</a>
+                            <input type="submit" value="保存" class="btn_small" id="btn1" onclick="changeFin()">
+                            <a class="btn_cancel_s" onclick="hidden2()" id="btn2">取消</a>
                             <div class="clear"></div>
 
                         </form>
@@ -316,13 +343,14 @@
                         <a title="产品介绍编辑" class="c_edit" href="#" onclick="showProduct()"></a>
                     </dt>
                     <dd>
-                        <ul class="reset stageshow">
-                            <textarea placeholder="请简短描述该产品定位、产品特色、用户群体等" maxlength="500" value="" class="s_textarea valid" name="productProfile" style="width: 100%"></textarea>
+                        <ul class="reset stageshow" id="u1">
+                            <div class="c_intro" id="product">${comp.product}</div>
                         </ul>
                         <form id="products" style="display:none;">
-
-                            <input type="submit" value="保存" class="btn_small">
-                            <a id="cancelProducts" class="btn_cancel_s" >取消</a>
+                            <textarea placeholder="请简短描述该产品定位、产品特色、用户群体等" maxlength="500" class="s_textarea valid"
+                                      name="productProfile" style="width: 100%" id="productProfile">${comp.product}</textarea>
+                            <input type="button" value="保存" class="btn_small" onclick="changeProduct()">
+                            <a id="cancelProducts" class="btn_cancel_s" onclick="hiddenProduct()">取消</a>
                             <div class="clear"></div>
 
                         </form>
@@ -330,35 +358,6 @@
                 </dl>
         </div>
 
-        <!-------------------------------------弹窗lightbox  ----------------------------------------->
-        <div style="display:none;">
-            <div style="width:650px;height:470px;" class="popup" id="logoUploader">
-                <object width="650" height="470" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="FlashID">
-                    <param value="../../flash/avatar.swf?url=http://www.lagou.com/cd/saveProfileLogo.json" name="movie">
-                    <param value="high" name="quality">
-                    <param value="opaque" name="wmode">
-                    <param value="111.0.0.0" name="swfversion">
-                    <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-                    <param value="../../Scripts/expressInstall.swf" name="expressinstall">
-                    <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-                    <!--[if !IE]>-->
-                    <object width="650" height="470" data="../../flash/avatar.swf?url=http://www.lagou.com/cd/saveProfileLogo.json" type="application/x-shockwave-flash">
-                        <!--<![endif]-->
-                        <param value="high" name="quality">
-                        <param value="opaque" name="wmode">
-                        <param value="111.0.0.0" name="swfversion">
-                        <param value="../../Scripts/expressInstall.swf" name="expressinstall">
-                        <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-                        <div>
-                            <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-                            <p><a href="http://www.adobe.com/go/getflashplayer"><img width="112" height="33" src="style/images/get_flash_player.gif" alt="获取 Adobe Flash Player"></a></p>
-                        </div>
-                        <!--[if !IE]>-->
-                    </object>
-                    <!--<![endif]-->
-                </object>
-            </div><!-- #logoUploader -->
-        </div>
         <!------------------------------------- end ----------------------------------------->
 
         <script src="${pageContext.request.contextPath}/style/js/company.min.js" type="text/javascript"></script>
@@ -377,7 +376,7 @@
         <a rel="nofollow" title="回到顶部" id="backtop" style="display: none;"></a>
     </div><!-- end #container -->
 </div><!-- end #body -->
-
+<input type="hidden" value="${pageContext.request.contextPath}" id="path">
 <script src="${pageContext.request.contextPath}/style/js/core.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/style/js/popup.min.js" type="text/javascript"></script>
 
@@ -415,8 +414,21 @@
 </body>
 
 <script>
+    var path = $("#path").val();
+    var layer;
+    layui.use('layer',function () {
+        layer = layui.layer;
+    })
     function showProduct() {
         $("#products").css("display","block");
+        $("#u1").css("display","none");
+        $("#productProfile").attr("readonly",false);
+    }
+
+    function hiddenProduct() {
+        $("#products").css("display","none");
+        $("#u1").css("display","block");
+        $("#productProfile").attr("readonly",true);
     }
 
     function showValue() {
@@ -428,5 +440,276 @@
         $("#valuesComp").css("display","none");
         $("#realValue").css("display","block");
     }
+
+    function showChange1() {
+        $("#c_tags_show").css("display","none");
+        $("#c_tags_edit").css("display","block");
+    }
+
+    function hiddenChange1() {
+        $("#c_tags_show").css("display","block");
+        $("#c_tags_edit").css("display","none");
+    }
+
+    function hidden2() {
+        $("#s1").css("display","block");
+        $("#s2").css("display","none");
+        $("#btn1").css("display","none");
+        $("#btn2").css("display","none");
+        $("#btn3").css("display","block");
+    }
+
+    function show2() {
+        $("#stageform").css("display","block");
+        $("#s1").css("display","none");
+        $("#s2").css("display","block");
+        $("#btn1").css("display","block");
+        $("#btn2").css("display","block");
+    }
+
+    function sureChange1() {
+        var homePage = $("#companyUrl").val();
+        var scale = $("#companySize").val();
+        $.ajax({
+            url:path+"/rec/changeCompInfo",
+            data:"homePage="+homePage+"&scale="+scale,
+            type:"post",
+            typeData:"text",
+            beforeSend:function () {
+                if(homePage.length==0){
+                    layer.msg("主页地址未填写");
+                    return false;
+                }
+                if(homePage.length>=40){
+                    layer.msg("主页地址不能超过40字符");
+                    return false;
+                }
+            },
+            success:function (data) {
+                hiddenChange1()
+                if(data=='1'){
+                    layer.alert("修改成功");
+                    $("#scale").text(scale);
+                    $("#homePage").text(homePage);
+
+                    $("#companySize").val(scale);
+                    $("#companyUrl").val(homePage);
+
+                    $("#select_sca").val(scale);
+                    $("#comSize").val(scale);
+
+                    $("#comUrl").val(homePage);
+
+
+                }else{
+                    layer.alert("网络繁忙，修改失败");
+                }
+            }
+        })
+    }
+
+    function changeScor() {
+        var coreValue = $("#newCoreValue").val();
+        $.ajax({
+            url:path+"/rec/changeCompInfo",
+            data:"coreValue="+coreValue,
+            type:"post",
+            typeData:"text",
+            beforeSend:function () {
+                if(homePage.length==0){
+                    layer.msg("核心价值未填写");
+                    return false;
+                }
+                if(homePage.length>=40){
+                    layer.msg("核心价值不能超过50字符");
+                    return false;
+                }
+            },
+            success:function (data) {
+                hiddenValue();
+                if(data=='1'){
+                    layer.alert("修改成功");
+                    $("#newCoreValue").text(coreValue);
+
+                }else{
+                    layer.alert("网络繁忙，修改失败");
+                }
+            }
+        })
+    }
+    //修改公司信息
+    function changeInfo() {
+        var infoIntr = $("#newInfoIntr").val();
+        $.ajax({
+            url:path+"/rec/changeCompInfo",
+            data:"infoIntr="+infoIntr,
+            type:"post",
+            typeData:"text",
+            beforeSend:function () {
+                if(infoIntr.length==0){
+                    layer.msg("公司简介未填写");
+                    return false;
+                }
+                if(homePage.length>=200){
+                    layer.msg("公司简介不能超过200字符");
+                    return false;
+                }
+            },
+            success:function (data) {
+                if(data=='1'){
+                    layer.alert("修改成功");
+                    $("#infoIntr").text(infoIntr);
+                }else{
+                    layer.alert("网络繁忙，修改失败");
+                }
+
+                $("#c2").css("display","none");
+                $("#c3").css("display","block");
+            }
+        })
+    }
+    //修改公司地址
+    function changeAddress() {
+
+        var address = $("#compAddress").val();
+        $.ajax({
+            url:path+"/rec/changeCompInfo",
+            data:"address="+address,
+            type:"post",
+            typeData:"text",
+            beforeSend:function () {
+                if(address.length==0){
+                    layer.msg("公司地址未填写");
+                    return false;
+                }
+                if(address.length>=25){
+                    layer.msg("公司地址不能超过25字符");
+                    return false;
+                }
+            },
+            success:function (data) {
+                if(data=='1'){
+                    layer.alert("修改成功");
+                    $("#address").text(address);
+                }else{
+                    layer.alert("网络繁忙，修改失败");
+                }
+                $("#addressDiv").css("display","block");
+                $("#editDetailForm").css("display","none");
+                $("#editCompanyDetail").css("display","block");
+            }
+        })
+    }
+
+    function changeFin() {
+        var finanStage = $("#financeStage").val();
+        alert(finanStage)
+        $.ajax({
+            url:path+"/rec/changeCompInfo",
+            data:"finanStage="+finanStage,
+            type:"post",
+            typeData:"text",
+            success:function (data) {
+                if(data=='1'){
+                    layer.alert("修改成功");
+                    $("#finanStage").text(finanStage);
+                }else{
+                    layer.alert("网络繁忙，修改失败");
+                }
+                hidden2();
+            }
+        })
+    }
+
+    function changeProduct() {
+        var product = $("#productProfile").val();
+        $.ajax({
+            url:path+"/rec/changeCompInfo",
+            data:"product="+product,
+            type:"post",
+            typeData:"text",
+            beforeSend:function () {
+                if(infoIntr.length==0){
+                    layer.msg("产品讲述未填写");
+                    return false;
+                }
+                if(homePage.length>=100){
+                    layer.msg("产品讲述不能超过100字符");
+                    return false;
+                }
+            },
+            success:function (data) {
+                if(data=='1'){
+                    layer.alert("修改成功");
+                    $("#infoIntr").text(infoIntr);
+                }else{
+                    layer.alert("网络繁忙，修改失败");
+                }
+
+                hiddenProduct();
+                $("#industry").text(product);
+            }
+        })
+    }
+
+    // function selectFile() {
+    //
+    //     let files = event.target.files;
+    //     if (files.length === 0) return false;
+    //     let reader = new FileReader();
+    //     reader.readAsDataURL(files[0]);
+    //     reader.onloadend = () => {
+    //         $("#headImg").attr("src", reader.result)
+    //     }
+    // }
+    $('input[type=file]').each(function()
+    {
+        var max_size=1024*1024*5;
+        $(this).change(function(evt)
+        {
+            var finput = $(this);
+            var files = evt.target.files; // 获得文件对象
+            var output = [];
+            for (var i = 0, f; f = files[i]; i++)
+            {  //检查文件大小
+                if(f.size > max_size)
+                {
+                    layer.alert("上传的图片不能超过5M!");
+                    $(this).val('');
+                    return false;
+                }else{
+                    var fName = $("#uploadFiles").val();
+                    let files = event.target.files;
+
+                    var form = new FormData(document.getElementById("imgsForm"))
+                    $.ajax({
+                        url:path+"/rec/uploadLogo",
+                        data:form,
+                        processData:false,
+                        contentType:false,
+                        type:"post",
+                        beforeSend:function(){
+                            if (files.length === 0) return false;
+                            return true;
+
+                        },
+                        success:function (info) {
+                            if(info=='1'){
+                                layer.msg('上传成功')
+                                let reader = new FileReader();
+                                reader.readAsDataURL(files[0]);
+                                reader.onloadend = () => {
+                                    $("#headImg").attr("src", reader.result)
+                                }
+                            }else{
+                                layer.msg('系统繁忙，上传失败')
+                            }
+                        },
+                    })
+
+                }
+            }
+        });
+    });
 </script>
 </html>
