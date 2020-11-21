@@ -4,6 +4,7 @@ import com.cykj.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ResumeService {
     /**
@@ -173,4 +174,72 @@ public interface ResumeService {
      * @return
      */
     public int positionDel(int userId,int pPostId);
+
+
+
+    /**
+     * 查找投递岗位
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    public List<PostPosition> deliveryPosts(int userId,int page,int size);
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    public List<PostPosition> deliveryPostsCount(int userId);
+
+    /**
+     * 岗位列表
+     * @param map
+     * @return
+     */
+    public List<PostPosition> jobs(Map map);
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    public List<PostPosition> jobsCount(Map map);
+
+    /**
+     * 查找岗位详情
+     * @param pPostID
+     * @return
+     */
+    public PostPosition findPost(int pPostID);
+
+    /**
+     * 利用id和密码查找是否有该用户
+     * @param map
+     * @return
+     */
+    public UserInfo findpwd(Map map);
+
+    /**
+     * 修改密码
+     * @param map
+     * @return
+     */
+    public int savepwd(Map map);
+
+    /**
+     * 修改用户简历状态
+     * @param map
+     * @return
+     */
+    public int saveShow(Map map);
+
+    /**
+     * 获取前台用户
+     * @param userId
+     * @return
+     */
+    public UserInfo findUser(int userId);
+
 }

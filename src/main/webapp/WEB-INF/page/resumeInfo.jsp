@@ -70,7 +70,7 @@
                                             <c:if test="${not empty posts}">
                                                 <c:forEach var="post" items="${posts}">
                                                     <div class="item-primary">
-                                                        <h3 class="title"> ${posts.backUesr.bUserName} <a href="javascript:;" ka="user-resume-add-expectation"
+                                                        <h3 class="title"> ${post.backUser.bUserName} <a href="javascript:;" ka="user-resume-add-expectation"
                                                                                   class="link-add"><svg class="icon-svg">
                                                             <use xlink:href="#icon-svg-add"></use>
                                                         </svg><span onclick="postDel(${post.pPostId})">取消感兴趣</span></a>
@@ -81,7 +81,7 @@
                                                                     <div class="info-labels"><span class="prev-line"><span
                                                                             class="label-text"><i class="fz-resume fz-job"></i><a onclick="">${post.postName}</a>
                                                         </span></span><span class="prev-line"><i
-                                                                            class="fz-resume fz-salary"></i> 面议 </span>
+                                                                            class="fz-resume fz-salary"></i>${post.minSalary}--${post.maxSalary}k </span>
                                                                         <span class="prev-line"><i
                                                                                 class="fz-resume fz-place"></i> ${post.jobDescription} </span></div>
                                                                 </div>
@@ -89,7 +89,7 @@
                                                                     <!----><a href="javascript:;" ka="user-resume-edit-expectation0"
                                                                               class="link-edit"><svg class="icon-svg">
                                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                                </svg><span>公司名字</span></a><a href="javascript:;" ka="user-resume-edit-expectation0"
+                                                                </svg><span>${post.backUser.compName}</span></a><a href="javascript:;" ka="user-resume-edit-expectation0"
                                                                                               class="link-edit"><svg class="icon-svg">
                                                                     <use xlink:href="#icon-svg-edit"></use>
                                                                 </svg><span>继续沟通</span></a></div>
@@ -97,11 +97,11 @@
                                                             <li ka="user-resume-edit-expectation0" class="">
                                                                 <div class="primary-info">
                                                                     <div class="info-labels"><span class="prev-line"><span
-                                                                            class="label-text"><i class="fz-resume fz-job"></i> 工作年限
+                                                                            class="label-text"><i class="fz-resume fz-job"></i> ${post.workYear}
                                                         </span></span><span class="prev-line"><i
-                                                                            class="fz-resume fz-salary"></i> 学历 </span><span
+                                                                            class="fz-resume fz-salary"></i> ${post.education} </span><span
                                                                             class="prev-line"><i class="fz-resume fz-salary"></i>
-                                                        福利包吃包住的巨额嘿嘿 </span></div>
+                                                        ${post.jobBenefits} </span></div>
                                                                 </div>
 
                                                             </li>
@@ -149,10 +149,11 @@
                                                 <c:if test="${not empty postss}">
                                                     <c:forEach var="post" items="${postss}">
                                                         <div class="item-primary">
-                                                            <h3 class="title"> 发布人 <a href="javascript:;" ka="user-resume-add-expectation"
-                                                                                      class="link-add"><svg class="icon-svg">
-                                                                <use xlink:href="#icon-svg-add"></use>
-                                                            </svg><span onclick="postDel(${post.pPostId})">取消感兴趣</span></a>
+                                                            <h3 class="title"> ${post.backUser.bUserName}
+<%--                                                                <a href="javascript:;" ka="user-resume-add-expectation"--%>
+<%--                                                                                      class="link-add"><svg class="icon-svg">--%>
+<%--                                                                <use xlink:href="#icon-svg-add"></use>--%>
+<%--                                                            </svg><span onclick="postDel(${post.pPostId})">取消感兴趣</span></a>--%>
                                                             </h3>
                                                             <ul>
                                                                 <li ka="user-resume-edit-expectation0" class="">
@@ -160,7 +161,7 @@
                                                                         <div class="info-labels"><span class="prev-line"><span
                                                                                 class="label-text"><i class="fz-resume fz-job"></i><a onclick="">${post.postName}</a>
                                                         </span></span><span class="prev-line"><i
-                                                                                class="fz-resume fz-salary"></i> 面议 </span>
+                                                                                class="fz-resume fz-salary"></i> ${post.minSalary}--${post.maxSalary}k </span>
                                                                             <span class="prev-line"><i
                                                                                     class="fz-resume fz-place"></i> ${post.jobDescription} </span></div>
                                                                     </div>
@@ -168,7 +169,7 @@
                                                                         <!----><a href="javascript:;" ka="user-resume-edit-expectation0"
                                                                                   class="link-edit"><svg class="icon-svg">
                                                                         <use xlink:href="#icon-svg-edit"></use>
-                                                                    </svg><span>公司名字</span></a><a href="javascript:;" ka="user-resume-edit-expectation0"
+                                                                    </svg><span>${post.backUser.compName}</span></a><a href="javascript:;" ka="user-resume-edit-expectation0"
                                                                                                   class="link-edit"><svg class="icon-svg">
                                                                         <use xlink:href="#icon-svg-edit"></use>
                                                                     </svg><span>继续沟通</span></a></div>
@@ -176,11 +177,11 @@
                                                                 <li ka="user-resume-edit-expectation0" class="">
                                                                     <div class="primary-info">
                                                                         <div class="info-labels"><span class="prev-line"><span
-                                                                                class="label-text"><i class="fz-resume fz-job"></i> 工作年限
+                                                                                class="label-text"><i class="fz-resume fz-job"></i> ${post.workYear}
                                                         </span></span><span class="prev-line"><i
-                                                                                class="fz-resume fz-salary"></i> 学历 </span><span
+                                                                                class="fz-resume fz-salary"></i> ${post.education} </span><span
                                                                                 class="prev-line"><i class="fz-resume fz-salary"></i>
-                                                        福利包吃包住的巨额嘿嘿 </span></div>
+                                                        ${post.jobBenefits} </span></div>
                                                                     </div>
 
                                                                 </li>
@@ -344,7 +345,7 @@
                 console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
                 console.log(obj.limit); //得到每页显示的条数
                 if(!first){
-                    location.href="resumePage?curr="+obj.curr+"&limit="+obj.limit;
+                    location.href="resumeCommitPage?curr="+obj.curr+"&limit="+obj.limit;
                 }
             }
         });

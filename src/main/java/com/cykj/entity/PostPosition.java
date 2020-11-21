@@ -3,6 +3,7 @@ package com.cykj.entity;
 import com.cykj.utils.MyUtil;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 发布岗位表
@@ -30,6 +31,7 @@ public class PostPosition {
   private String contact;//联系方式
   private String contactEmail;//联系邮箱
   private BackUser backUser;
+  private List<Industry> industryList;
 
 
   @Override
@@ -59,6 +61,14 @@ public class PostPosition {
   }
 
   public PostPosition() {
+  }
+
+  public List<Industry> getIndustryList() {
+    return industryList;
+  }
+
+  public void setIndustryList(List<Industry> industryList) {
+    this.industryList = industryList;
   }
 
   public long getpPostId() {
@@ -255,4 +265,7 @@ public class PostPosition {
   public void setBackUser(BackUser backUser) {
     this.backUser = backUser;
   }
+
+
+
 }

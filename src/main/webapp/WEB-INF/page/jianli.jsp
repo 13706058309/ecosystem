@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -325,9 +326,16 @@
                                 <h3 class="title"> 工作经历 <a href="javascript:;" ka="user-resume-add-workexp"
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
-                                </svg><span onclick="historyInsert()">添加</span></a></h3>
+                                </svg>
+                                    <c:if test="${fn:length(resume.workExperiences)<2}">
+                                        <span onclick="historyInsert()">添加</span>
+                                    </c:if>
+                                    </a>
+                                    </h3>
+
                                 <c:if test="${not empty resume.workExperiences}">
                                     <c:forEach var="works" items="${resume.workExperiences}">
+
                                         <div id="works${works.weId}">
 
                                         <ul>
@@ -430,7 +438,10 @@
                                 <h3 class="title"> 项目经历 <a href="javascript:;" ka="user-resume-add-project"
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
-                                </svg><span onclick="projectInsert()">添加</span></a></h3>
+                                </svg>
+                                    <c:if test="${fn:length(resume.projectExperiences)<2}">
+                                    <span onclick="projectInsert()">添加</span>
+                                    </c:if></a></h3>
                                 <c:if test="${not empty resume.projectExperiences}">
                                     <c:forEach var="projects" items="${resume.projectExperiences}">
                                         <form id="projects${projects.peId}">
@@ -529,7 +540,10 @@
                                 <h3 class="title"> 教育经历 <a href="javascript:;" ka="user-resume-add-eduexp"
                                                            class="link-add"><svg class="icon-svg">
                                     <use xlink:href="#icon-svg-add"></use>
-                                </svg><span onclick="educationtInsert()">添加</span></a></h3>
+                                </svg>
+                                    <c:if test="${fn:length(resume.educationalBackgrounds)<2}">
+                                    <span onclick="educationtInsert()">添加</span>
+                                    </c:if></a></h3>
                                 <c:if test="${not empty resume.educationalBackgrounds}">
                                     <c:forEach var="educationalBackgrounds" items="${resume.educationalBackgrounds}">
                                         <form id="educationalBackgrounds${educationalBackgrounds.ebId}">
@@ -831,13 +845,39 @@
     var kong=$('#kong').val()
 
     function selectFile() {
-        let files = event.target.files;
-        if (files.length === 0) return false;
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-        reader.onloadend = () => {
-            $("#headImg").attr("src", reader.result)
-        }
+
+        $.ajax({
+            url: 'photoUpdate',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "",
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+
+                    let files = event.target.files;
+                    if (files.length === 0) return false;
+                    let reader = new FileReader();
+                    reader.readAsDataURL(files[0]);
+                    reader.onloadend = () => {
+                        $("#headImg").attr("src", reader.result)
+                    }
+
+                } else if (data == "lose") {
+                    layer.msg("修改失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+
+
+
+        console.log("!!!!!!!!")
+        console.log(files[0].name)
+        console.log("??????????")
     }
     // 基础信息
     function userInfoUpdate(educationid) {

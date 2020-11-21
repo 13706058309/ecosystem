@@ -155,6 +155,53 @@
             left join backUser b on pp.companyId=b.bUserId
             where u.userId=#{userId} limit #{page},#{size};
     </select>
+
+    <!--    查找岗位-->
+    <select id="findPost" parameterType="java.lang.Integer" resultMap="findPosition">
+        select pp.*,b.*  from  postPosition pp,backUser b where pp.companyID=b.bUserID and pPostID=#{pPostID};
+
+    </select>
+<!--    <resultMap id="findPosition" type="com.cykj.entity.PostPosition">-->
+<!--        <id property="pPostId" column="pPostId"></id>-->
+<!--        <result property="companyId" column="companyId"></result>-->
+<!--        <result property="postName" column="postName"></result>-->
+<!--        <result property="workNature" column="workNature"></result>-->
+<!--        <result property="postId" column="postId"></result>-->
+<!--        <result property="dapartment" column="dapartment"></result>-->
+<!--        <result property="workCity" column="workCity"></result>-->
+<!--        <result property="workYear" column="workYear"></result>-->
+<!--        <result property="education" column="education"></result>-->
+<!--        <result property="jobBenefits" column="jobBenefits"></result>-->
+<!--        <result property="jobDescription" column="jobDescription"></result>-->
+<!--        <result property="detailAddress" column="detailAddress"></result>-->
+<!--        <result property="releaseTime" column="detailAddress"></result>-->
+<!--        <result property="maxSalary" column="maxSalary"></result>-->
+<!--        <result property="minSalary" column="minSalary"></result>-->
+<!--        <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">-->
+<!--            <id property="bUserId" column="bUserId"></id>-->
+<!--            <result property="bUserName" column="bUserName"></result>-->
+<!--            <result property="compName" column="compName"></result>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+    <select id="findPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select pp.*,b.*  from userInfo u left join postCellec p on u.userId=p.userID
+            left join postPosition pp on p.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId} ;
+    </select>
+<!--    删除感兴趣岗位-->
+    <delete id="pcDel" parameterType="java.lang.Integer">
+        delete from postCellec where userId=#{userId} and pPostId=#{pPostId}
+    </delete>
+<!--    <delete id="postPositionDel" parameterType="java.lang.Integer">-->
+<!--        delete from postPosition where  pPostId=#{pPostId}-->
+<!--    </delete>-->
+<!--    投递简历-->
+    <select id="deliveryPosts" parameterType="java.lang.Integer" resultMap="findPosition">
+        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join postPosition pp on d.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId
+            where u.userId=#{userId} limit #{page},#{size};
+    </select>
     <resultMap id="findPosition" type="com.cykj.entity.PostPosition">
         <id property="pPostId" column="pPostId"></id>
         <result property="companyId" column="companyId"></result>
@@ -169,23 +216,157 @@
         <result property="jobDescription" column="jobDescription"></result>
         <result property="detailAddress" column="detailAddress"></result>
         <result property="releaseTime" column="detailAddress"></result>
+        <result property="maxSalary" column="maxSalary"></result>
+        <result property="minSalary" column="minSalary"></result>
         <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">
             <id property="bUserId" column="bUserId"></id>
             <result property="bUserName" column="bUserName"></result>
             <result property="compName" column="compName"></result>
+            <result property="city" column="city"></result>
+            <result property="address" column="address"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="logo" column="logo"></result>
+            <result property="scale" column="scale"></result>
+            <result property="homePage" column="homePage"></result>
+            <result property="infoIntr" column="infoIntr"></result>
         </association>
     </resultMap>
-    <select id="findPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
-        select pp.*,b.*  from userInfo u left join postCellec p on u.userId=p.userID
-            left join postPosition pp on p.pPostID=pp.pPostID
+    <select id="deliveryPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join postPosition pp on d.pPostID=pp.pPostID
             left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId} ;
     </select>
-<!--    删除感兴趣岗位-->
-    <delete id="pcDel" parameterType="java.lang.Integer">
-        delete from postCellec where userId=#{userId} and pPostId=#{pPostId}
-    </delete>
-    <delete id="postPositionDel" parameterType="java.lang.Integer">
-        delete from postPosition where  pPostId=#{pPostId}
-    </delete>
+
+    <select id="jobsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select  pp.*,b.*,i.*  from  postPosition pp left join postCellec pc on pp.pPostID=pc.pPostID
+        left join backUser b on pp.companyID=b.bUserID
+        left join comp_industry  ci on b.bUserId=ci.compId
+        left join industry i on ci.industryID=i.industryID
+        <where>
+        <if test="workCity!=null" >
+            pp.workCity=#{workCity}
+        </if>
+
+        <if test="workName!=null" >
+            and workName= #{workName}
+        </if>
+        <if test="education!=null" >
+            and education= #{education}
+        </if>
+        <if test="finanStage!=null" >
+            and finanStage= #{finanStage}
+        </if>
+        <if test="workYear!=null" >
+            and workYear= #{workYear}
+        </if>
+
+        <if test="scale!=null" >
+            and scale= #{scale}
+        </if>
+        <if test="releaseTime!=null" >
+            and DATE_SUB(CURDATE(),INTERVAL #{releaseTime} DAY) &lt;= DATE(releaseTime)
+        </if>
+        <if test="releaseTime2!=null" >
+            and DATE_SUB(CURDATE(),INTERVAL #{releaseTime2} Month) &lt;= DATE(releaseTime)
+        </if>
+        <if test="min!=null" >
+            and (maxSalary between #{min} and #{max} or minSalary between #{min} and #{max})
+        </if>
+        <if test="min2!=null" >
+            and  maxSalary  &gt;= #{min2}
+        </if>
+        <if test="search!=null" >
+            and  (postName  like #{search} or compName like #{search} )
+        </if>
+        </where>
+    </select>
+    <select id="jobs" parameterType="java.util.HashMap" resultMap="findiobs">
+
+            select  pp.*,b.*,i.*  from  postPosition pp
+            left join backUser b on pp.companyID=b.bUserID
+            left join comp_industry  ci on pp.companyId=ci.compId
+            left join industry i on ci.industryID=i.industryID
+            <where>
+            <if test="workCity!=null" >
+                pp.workCity=#{workCity}
+            </if>
+            <if test="workName!=null" >
+                and workName= #{workName}
+            </if>
+            <if test="education!=null" >
+            and education= #{education}
+            </if>
+            <if test="finanStage!=null" >
+                and finanStage= #{finanStage}
+            </if>
+            <if test="workYear!=null" >
+                and workYear= #{workYear}
+            </if>
+
+            <if test="scale!=null" >
+                and scale= #{scale}
+            </if>
+            <if test="releaseTime!=null" >
+                and DATE_SUB(CURDATE(),INTERVAL #{releaseTime} DAY) &lt;= DATE(releaseTime)
+            </if>
+            <if test="releaseTime2!=null" >
+                and DATE_SUB(CURDATE(),INTERVAL #{releaseTime2} Month) &lt;= DATE(releaseTime)
+            </if>
+            <if test="min!=null" >
+                and (maxSalary between #{min} and #{max} or minSalary between #{min} and #{max})
+            </if>
+            <if test="min2!=null" >
+                and  maxSalary  &gt;= #{min2}
+            </if>
+            <if test="search!=null" >
+                and  (postName  like #{search} or compName like #{search} )
+            </if>
+            </where>
+              limit #{page},#{limit}
+    </select>
+    <resultMap id="findiobs" type="com.cykj.entity.PostPosition">
+        <id property="pPostId" column="pPostId"></id>
+        <result property="companyId" column="companyId"></result>
+        <result property="postName" column="postName"></result>
+        <result property="workNature" column="workNature"></result>
+        <result property="postId" column="postId"></result>
+        <result property="dapartment" column="dapartment"></result>
+        <result property="workCity" column="workCity"></result>
+        <result property="workYear" column="workYear"></result>
+        <result property="education" column="education"></result>
+        <result property="jobBenefits" column="jobBenefits"></result>
+        <result property="jobDescription" column="jobDescription"></result>
+        <result property="detailAddress" column="detailAddress"></result>
+        <result property="releaseTime" column="detailAddress"></result>
+        <result property="maxSalary" column="maxSalary"></result>
+        <result property="minSalary" column="minSalary"></result>
+        <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">
+            <id property="bUserId" column="bUserId"></id>
+            <result property="bUserName" column="bUserName"></result>
+            <result property="compName" column="compName"></result>
+            <result property="city" column="city"></result>
+            <result property="address" column="address"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="logo" column="logo"></result>
+            <result property="scale" column="scale"></result>
+        </association>
+        <collection property="industryList"   ofType="com.cykj.entity.Industry">
+            <id property="industryId" column="industryId"></id>
+            <result property="industryName" column="industryName"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findpwd" parameterType="java.util.HashMap" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where userId=#{userId} and pwd=#{oldpwd}
+    </select>
+    <select id="findUser" parameterType="java.lang.Integer" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where userId=#{userId}
+    </select>
+    <update id="savepwd" parameterType="java.util.HashMap">
+        update userInfo set pwd=#{newpwd} where userId=#{userId}
+    </update>
+    <update id="saveShow" parameterType="java.util.HashMap">
+        update userInfo set isOpen=#{isOpen} where userId=#{userId}
+    </update>
 
 </mapper>

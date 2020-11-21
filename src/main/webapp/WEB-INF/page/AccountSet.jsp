@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: WUWX
@@ -13,7 +14,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>账号设置</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}//layui/css/layui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <script src="${pageContext.request.contextPath}//layui/layui.js"></script>
     <style>
         .layui-tab-title li{
@@ -47,40 +48,70 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 15%">旧密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="title" required  lay-verify="required" placeholder="请输入旧密码" autocomplete="off" class="layui-input">
+                        <input type="password" id="oldpwd" required  lay-verify="required" placeholder="请输入旧密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 15%">新密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="title" required  lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                        <input type="password" id="newpwd" required  lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 15%">确认密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="title" required  lay-verify="required" placeholder="再次输入密码" autocomplete="off" class="layui-input">
+                        <input type="password" id="newpwd2" required  lay-verify="required" placeholder="再次输入密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <input type="button" value="保存" onclick="" class="layui-btn">
-                        <input type="button" value="取消" onclick="" class="layui-btn">
-                    </div>
+                <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+<%--                    <div class="layui-input-block">--%>
+                        <input id="savePwd" type="button" value="保存"  data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">
+<%--                    </div>--%>
                 </div>
             </div>
-            <div class="layui-tab-item">内容2</div>
+            <div class="layui-tab-item" style="margin-top: 20%;margin-left: 20%">
+                <form class="layui-form" action="">
+                    <div>
+                        <label class="layui-form-label" style="width: 25%">当前手机号：</label>
+                        <label class="layui-form-label">${user.telephone}</label>
+                        <button id="hidePhone" class="layui-btn layui-btn-sm layui-btn-danger" onclick="showPhone()" lay-filter="formDemo">绑定新手机号</button>
+                    </div>
+                    <div id="showPhone" style="display: none">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"  style="width: 25%">新手机号码：</label>
+                            <div class="layui-input-block">
+                                <input style="width: 65%" type="text" name="title" required  lay-verify="required" placeholder="请输入新手机号码" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="width: 25%">验证码:</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" name="password" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                                </div>
+                                <button class="layui-btn layui-btn-xs" lay-submit lay-filter="formDemo">获取验证码</button>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary" onclick="quitPhone()">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="layui-tab-item">内容3</div>
             <div class="layui-tab-item"  style="margin-top: 20%;margin-left: 20%">
                 <form class="layui-form">
                     <label class="layui-form-label" style="width: 100px;margin-left: 15%">简历隐藏</label>
                     <div class="layui-input-inline">
-                        <input type="checkbox" id="isShow" name="isShow" lay-skin="switch">
+                        <input type="checkbox" id="isShow" name="isShow" lay-text="ON|OFF"   lay-skin="switch" lay-filter="switchTest"   <c:if test="${user.isOpen==2}">checked</c:if>  >
                     </div>
-                    <div class="layui-input-block" style="margin-top: 10%">
-                        <input type="button" value="保存" onclick="" class="layui-btn">
-                        <input type="button" value="取消" onclick="" class="layui-btn">
-                    </div>
+<%--                    <div class="layui-input-block" style="margin-top: 10%">--%>
+<%--                        <input type="button" value="保存" onclick="" class="layui-btn">--%>
+<%--                        <input type="button" value="取消" onclick="" class="layui-btn">--%>
+<%--                    </div>--%>
                 </form>
             </div>
 
@@ -91,9 +122,11 @@
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    layui.use(['form', 'element'], function(){
+    layui.use(['form', 'element','layer'], function(){
         var $ = layui.jquery
             ,form=layui.form
+            , layer = layui.layer
+            ,$ = layui.jquery
             ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
         //触发事件
@@ -132,9 +165,103 @@
             location.hash = 'test='+ $(this).attr('lay-id');
         });
 
-    });
-</script>
+        $('#savePwd').on('click',function () {
+            var oldpwd=$('#oldpwd').val();
+            var newpwd=$('#newpwd').val();
+            var newpwd2=$('#newpwd2').val();
+            console.log("22222222222222")
+            if (newpwd==newpwd2){
+                $.ajax({
+                    url: 'savePwd',
+                    charset:"UTF-8",
+                    async: "true",
+                    type: "post",
+                    data: "oldpwd="+oldpwd+"&newpwd="+newpwd,
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "succes") {
+                            //向服务端发送删除指令
+                            layer.msg('修改成功')
+                            location.reload()
+                        } else if (data == "lose") {
+                            layer.msg("旧密码错误")
+                        }
+                    },
+                    error: function () {
+                        layer.msg('网络繁忙')
+                    }
+                })
+            }else {
 
+                layer.open({
+                    title: '信息'
+                    ,content: '两次密码不一致'
+
+                })
+            }
+        })
+
+        //监听指定开关
+        form.on('switch(switchTest)', function(data){
+            var start=data.othis.text();
+            if (data.othis.text()=='OFF'){
+                var isOpen=1;
+                // layer.msg('您的简历已恢复展示状态');
+            }else {
+                var isOpen=2;
+                // layer.msg('您的简历已设置成隐藏状态');
+            }
+            $.ajax({
+                url: 'saveShow',
+                charset:"UTF-8",
+                async: "true",
+                type: "post",
+                data: "isOpen="+isOpen,
+                dataType: "text",
+                success: function (data) {
+                    if (data == "succes") {
+                        //向服务端发送删除指令
+
+                        if (start=='OFF'){
+                            console.log("!!!!!!!!!!")
+                            layer.msg('您的简历已恢复展示状态');
+                        }else {
+                            console.log("!!!!!？？？？？？？？？？？!!!!!")
+                            layer.msg('您的简历已设置成隐藏状态');
+                        }
+                    } else if (data == "lose") {
+                        layer.msg("修改失败")
+                    }
+                },
+                error: function () {
+                    layer.msg('网络繁忙')
+                }
+            })
+
+
+            // layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            // if(){
+            //
+            // }
+        });
+
+
+
+
+
+    });
+    function showPhone() {
+        document.getElementById("showPhone").style.display='block';
+        document.getElementById("hidePhone").style.display='none';
+    }
+    function quitPhone() {
+        document.getElementById("hidePhone").style.display='block';
+        document.getElementById("showPhone").style.display='none';
+    }
+</script>
+<script>
+
+</script>
 </body>
 
 </html>

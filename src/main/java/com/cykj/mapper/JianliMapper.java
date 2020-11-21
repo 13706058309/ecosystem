@@ -6,12 +6,14 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Mapper
 public interface JianliMapper {
     public int insertid();
     public Resume resume(@Param("userid")long userid);
+    public UserInfo findUser(@Param("userId")int userId);
     public int workInsert(WorkExperience workExperience);
     public int projectInsert(ProjectExperience projectExperience);
     public int educationInsert(EducationalBackground educationalBackground);
@@ -41,6 +43,20 @@ public interface JianliMapper {
     public List<PostPosition> findPosts(@Param("userId")int userId,@Param("page")int page,@Param("size")int size);
     public List<PostPosition> findPostsCount(@Param("userId")int userId);
 //    删除感兴趣岗位
-    public int postPositionDel(@Param("pPostId")int pPostId);
+//    public int postPositionDel(@Param("pPostId")int pPostId);
     public int pcDel(@Param("userId")int userId,@Param("pPostId")int pPostId);
+
+    //    查找投递岗位
+    public List<PostPosition> deliveryPosts(@Param("userId")int userId,@Param("page")int page,@Param("size")int size);
+    public List<PostPosition> deliveryPostsCount(@Param("userId")int userId);
+    public List<PostPosition> jobsCount(Map map);
+
+    public List<PostPosition> jobs(Map map);
+
+//    查找岗位详情
+    public PostPosition findPost(@Param("pPostID")int pPostID);
+
+    public UserInfo findpwd(Map map);
+    public int savepwd(Map map);
+    public int saveShow(Map map);
 }

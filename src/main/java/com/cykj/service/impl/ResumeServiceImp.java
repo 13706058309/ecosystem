@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ResumeServiceImp implements ResumeService {
@@ -273,8 +274,105 @@ public class ResumeServiceImp implements ResumeService {
     @Override
     public int positionDel(int userId, int pPostId) {
         int n=jianliMapper.pcDel(userId,pPostId);
-        n=jianliMapper.postPositionDel(pPostId);
+//        n=jianliMapper.postPositionDel(pPostId);
         return n;
+    }
+
+    /**
+     * 查找投递岗位
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public List<PostPosition> deliveryPosts(int userId, int page, int size) {
+        return jianliMapper.deliveryPosts(userId,page,size);
+    }
+
+    /**
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<PostPosition> deliveryPostsCount(int userId) {
+        return jianliMapper.deliveryPostsCount(userId);
+    }
+
+    /**
+     * 岗位列表
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public List<PostPosition> jobs(Map map) {
+        return jianliMapper.jobs(map);
+    }
+
+    /**
+     * @param map
+     * @return
+     */
+    @Override
+    public List<PostPosition> jobsCount(Map map) {
+        return jianliMapper.jobsCount(map);
+    }
+
+    /**
+     * 查找岗位详情
+     *
+     * @param pPostID
+     * @return
+     */
+    @Override
+    public PostPosition findPost(int pPostID) {
+        return jianliMapper.findPost(pPostID);
+    }
+
+    /**
+     * 利用id和密码查找是否有该用户
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public UserInfo findpwd(Map map) {
+        return jianliMapper.findpwd(map);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public int savepwd(Map map) {
+        return jianliMapper.savepwd(map);
+    }
+
+    /**
+     * 修改用户简历状态
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public int saveShow(Map map) {
+        return jianliMapper.saveShow(map);
+    }
+
+    /**
+     * 获取前台用户
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserInfo findUser(int userId) {
+        return jianliMapper.findUser(userId);
     }
 
 
