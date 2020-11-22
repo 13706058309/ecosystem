@@ -454,4 +454,35 @@ public class BackCompServiceImpl implements BackCompService {
         }
         return msg;
     }
+
+    @Override
+    public String changeFeeStand(int standID) {
+        int n = parameterMapper.changeFeeStand(standID);
+        return n>0? "1":"2";
+    }
+
+    @Override
+    public String openFee(int standID) {
+        int n = parameterMapper.changeFeeStand(standID);
+        if(n>0){
+          String msg = parameterMapper.findDownFee(56).getParamValues();
+          return msg;
+        }else{
+          return "failed";
+        }
+
+    }
+
+    @Override
+    public String judgeResumeShowOrHidden() {
+        Parameter  parameter = parameterMapper.findDownFee(57);
+        return parameter.getParamValues();
+    }
+
+    @Override
+    public String findDownFee() {
+        return parameterMapper.findDownFee(56).getParamValues();
+    }
+
+
 }

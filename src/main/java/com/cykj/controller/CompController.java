@@ -696,9 +696,30 @@ public class CompController {
         int n = backCompService.RegComp(backUser,industry);
         return n+"";
     }
-
+    //判断是否下载简历开启收费
     @RequestMapping("/judgeDownFee")
     public @ResponseBody String judgeDownFee(){
         return  backCompService.judegCharse();
+    }
+    //关闭下载简历收费
+    @RequestMapping("/closeFee")
+    public  @ResponseBody String closeFee(){
+        return backCompService.changeFeeStand(1);
+    }
+    //打开下载简历i收费
+    @RequestMapping("/openFee")
+    public  @ResponseBody String openFee(){
+
+        return backCompService.openFee(2);
+    }
+    //判断是否下载收费
+    @RequestMapping("/judgeResumeShowOrHidden")
+    public @ResponseBody String judgeResumeShowOrHidden(){
+        return backCompService.judgeResumeShowOrHidden();
+    }
+    //查找下载简历需要的费用
+    @RequestMapping("/findDownFee")
+    public @ResponseBody String findDownFee(){
+        return backCompService.findDownFee();
     }
 }

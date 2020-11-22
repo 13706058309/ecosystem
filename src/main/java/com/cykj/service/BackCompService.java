@@ -69,4 +69,12 @@ public interface BackCompService {
     int RegComp(BackUser backUser,int industryID);
     //判断是否开启收费
     String judegCharse();
+    //关闭简历下载是否收费状态
+    String changeFeeStand(int standID);
+    //开启简历下载收费
+    String openFee(int standID);
+    //是否隐藏简历联系信息
+    String judgeResumeShowOrHidden();
+    //查找下载简历需要的费用
+    String findDownFee();
 }

@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface ParameterMapper {
 
     Parameter findDownFee(@Param("paramID") int paramID);
+
+    int changeFeeStand(@Param("standID") int standID);
 }

@@ -6,4 +6,8 @@
     <select id="findDownFee" resultType="com.cykj.entity.Parameter">
         select * from parameter where paramID = #{paramID};
     </select>
+
+    <update id="changeFeeStand">
+        update parameter set paramValues = #{standID} where paramID = 57;
+    </update>
 </mapper>

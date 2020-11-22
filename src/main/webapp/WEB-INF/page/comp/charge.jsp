@@ -25,10 +25,10 @@
     <input type="hidden" value="${pageContext.request.contextPath}" id="path">
     <div class="main-agileinfo">
         <div class="agileits-top">
-            <form action="#" method="post">
+<%--            <form method="post">--%>
 
-                <input type="submit" value="登录" id="command" onclick="change()">
-            </form>
+                <input type="submit" value="" id="command" onclick="change()">
+<%--            </form>--%>
             <p id="detail">暂未开启收费</p>
         </div>
     </div>
@@ -67,10 +67,10 @@
             success:function (data) {
                 if(data=="no"){
                     $("#command").val("开启收费");
-                    $("#detail").text("暂未开启收费");
+                    $("#detail").text("暂未开启简历下载收费");
                 }else{
                     $("#command").val("关闭收费");
-                    $("#detail").text("收费已开启，费用为"+data+"元");
+                    $("#detail").text("简历下载收费已开启，费用为"+data+"元");
                 }
             }
         })
@@ -79,7 +79,45 @@
     function change() {
         var command =  $("#command").val();
        if(command=='关闭收费'){
-
+           layer.confirm('是否关闭收费',{
+               btn:['确定','取消'],
+               time:20000,
+           },function (index) {
+               $.ajax({
+                   url:path+"/rec/closeFee",
+                   type:"post",
+                   typeData:"text",
+                   success:function (info) {
+                       if(info=='1'){
+                           layer.msg('关闭成功');
+                           $("#command").val("开启收费");
+                           $("#detail").text("暂未开启简历下载收费");
+                       }else{
+                           layer.msg("网络繁忙，关闭失败");
+                       }
+                   },
+               })
+           })
+       }else{
+           layer.confirm('是否开启收费',{
+               btn:['确定','取消'],
+               time:20000,
+           },function (index) {
+               $.ajax({
+                   url:path+"/rec/openFee",
+                   type:"post",
+                   typeData:"text",
+                   success:function (info) {
+                       if(info=='failed'){
+                           layer.msg("网络繁忙，关闭失败");
+                       }else{
+                           layer.msg('开启成功');
+                           $("#command").val("关闭收费");
+                           $("#detail").text("简历下载收费已开启，费用为"+info+"元");
+                       }
+                   },
+               })
+           })
        }
     }
 </script>
