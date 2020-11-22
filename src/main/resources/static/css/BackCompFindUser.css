@@ -18,3 +18,7 @@
 .layui-table-page {
     text-align: center;
 }
+
+.layui-table img{
+    max-width: 200px;
+}

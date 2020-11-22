@@ -42,13 +42,6 @@
         </div>
     </div><br><br>
 
-<%--    <form action="upload"  method="post" enctype="multipart/form-data"  accept-charset="UTF-8" >--%>
-<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
-<%--        <input type="file" name="file" id="file" class="layui-btn layui-btn-normal"><br><br><br>--%>
-<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
-<%--        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp--%>
-<%--        <input  type="submit" value="导入"class="layui-bg-orange layui-btn" >--%>
-<%--    </form>--%>
     <form class="layui-form layui-form-pane"  enctype="multipart/form-data" id="forms" accept-charset="UTF-8">
         <div class="layui-form-item">
             <div class="layui-upload">
@@ -105,25 +98,25 @@
             </td>
             <td width="120" align="right" style="padding-top: 14px;padding-right: 20px">
                 <!--个人照片-->
-                <table border="0" cellpadding="2" cellspacing="1" bgcolor="#dddddd" id="Table10">
-                    <tr>
-                        <td align="center" bgcolor="#FFFFFF">
-                            <img id="Image1" src="../imgs/1.jpg" style="height:140px;width:110px;border-width:0px;" />
-                        </td>
-                    </tr>
-                </table>
+<%--                <table border="0" cellpadding="2" cellspacing="1" bgcolor="#dddddd" id="Table10">--%>
+<%--                    <tr>--%>
+<%--                        <td align="center" bgcolor="#FFFFFF">--%>
+<%--                            <img id="Image1" src="../imgs/1.jpg" style="height:140px;width:110px;border-width:0px;" />--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
+<%--                </table>--%>
 
             </td>
         </tr>
         </table>
 
         <h1 style="text-align: center">社会经历</h1>
-        <textarea  id="workExp" style="resize: none"onfocus=this.blur() class="layui-textarea"></textarea>
+        <textarea  id="workExp" style="resize: none;text-align: center"onfocus=this.blur() class="layui-textarea"></textarea>
 
         <h1 style="text-align: center">技能证书</h1>
-        <textarea   id="certificate" style="resize: none"onfocus=this.blur() class="layui-textarea"></textarea>
+        <textarea   id="certificate" style="resize: none;text-align: center"onfocus=this.blur() class="layui-textarea"></textarea>
         <h1 style="text-align: center">自我评价</h1>
-        <textarea   id="selfEva" style="resize: none"onfocus=this.blur() class="layui-textarea"></textarea>
+        <textarea   id="selfEva" style="resize: none;text-align: center"onfocus=this.blur() class="layui-textarea"></textarea>
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

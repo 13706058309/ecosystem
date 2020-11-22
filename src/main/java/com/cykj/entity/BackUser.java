@@ -33,8 +33,21 @@ public class BackUser {
   private String bRegTime;//注册时间
   private String coreValue;//企业核心价值
   private String compName;
+  private String lng;
+  private String lat;
   private List<Industry> industrys;
   public BackUser() {
+  }
+
+
+  public BackUser( String bUserName,  String contactInfo, String infoIntr,  String email, String address, String compName, String coreValue) {
+    this.bUserName = bUserName;
+    this.contactInfo = contactInfo;
+    this.infoIntr = infoIntr;
+    this.email = email;
+    this.address = address;
+    this.coreValue = coreValue;
+    this.compName = compName;
   }
 
   public long getbUserId() {
@@ -259,6 +272,21 @@ public class BackUser {
     this.compName = compName;
   }
 
+  public String getLng() {
+    return lng;
+  }
+
+  public void setLng(String lng) {
+    this.lng = lng;
+  }
+
+  public String getLat() {
+    return lat;
+  }
+
+  public void setLat(String lat) {
+    this.lat = lat;
+  }
 
   @Override
   public String toString() {
@@ -283,7 +311,12 @@ public class BackUser {
             ", role=" + role +
             ", stateId='" + stateId + '\'' +
             ", states=" + states +
+            ", bRegTime='" + bRegTime + '\'' +
+            ", coreValue='" + coreValue + '\'' +
             ", compName='" + compName + '\'' +
+            ", lng='" + lng + '\'' +
+            ", lat='" + lat + '\'' +
+            ", industrys=" + industrys +
             '}';
   }
 }

@@ -69,7 +69,7 @@
             <td class="ziti">岗位类型</td>
             <td id="dPostType" ondblclick="changePostType()"></td>
             <td class="ziti">所属部门</td>
-            <td id="dDepart" ondblclick="changePostName()"></td>
+            <td id="dDepart" ondblclick="changeDepartName()"></td>
         </tr>
 
         <tr>
@@ -131,7 +131,7 @@
 <div style="display: none" id="changeDepartMent">
     <br>
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">岗位名称:</label>
+        <label class="layui-form-label">部门名称:</label>
         <div class="layui-input-inline">
             <input type="text" id="newDepart" name="newDepart"  class="layui-input" >
         </div>

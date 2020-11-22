@@ -305,7 +305,7 @@ function changePostName() {
     })
 }
 
-function changePostName() {
+function changeDepartName() {
     $("#newDepart").val("");
     var postIDs = $("#pID").val();
     layer.open({
@@ -544,7 +544,7 @@ function changeWorkYear() {
     var postIDs = $("#pID").val();
     layer.open({
         type:1,
-        title:"修改工作城市",
+        title:"修改工作时间",
         area:['40%','60%'],
         offset: ['30%', '20%'],
         content:$("#changeWorkYear"),

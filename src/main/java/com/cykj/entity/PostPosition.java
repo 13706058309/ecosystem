@@ -59,7 +59,9 @@ public class PostPosition {
 
   public PostPosition() {
   }
-
+  public void setReleaseTime(String releaseTime) {
+    this.releaseTime = releaseTime;
+  }
   public long getPPostId() {
     return pPostId;
   }
