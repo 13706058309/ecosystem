@@ -88,6 +88,10 @@
         height: 600px;
     }
 
+     #container {
+         margin:35px auto 0;
+     }
+
 </style>
 <script>
  function kongzhiimg(id){
@@ -115,7 +119,7 @@
                     <li style="margin-top: 40px;width: 215px">
                         <h3 style="text-align: center;font-family:Microsoft YaHei,微软雅黑,MicrosoftJhengHei,华文琥珀,STHupo,MingLiu;color: #009688" title="${list.name}">${list.name}</h3>
                         <div class="comLogo">
-                            <img src="${list.url}" onclick="kongzhiimg('${list.cuid}')"  width="190" height="190" alt="${list.name}"/>
+                            <img src="${pageContext.request.contextPath}${list.url}" onclick="kongzhiimg('${list.cuid}')"  width="190" height="190" alt="${list.name}"/>
                         </div>
                         </a>
                         <label  target="_blank" style="text-align: center">姓名:${list.cerRecord.trueName}</label><br>
@@ -132,7 +136,7 @@
                     <span class="close" onclick="guanbi('${list.cuid}')">&times;</span>
                     <h2 style="text-align: center">${list.name}证书</h2>
                 </div>
-                <div class="modal-body" style="background: url('${list.url}') no-repeat;background-size:100% 100%;">
+                <div class="modal-body" style="background: url('${pageContext.request.contextPath}${list.url}') no-repeat;background-size:100% 100%;">
                     <label style="position: relative;top: 340px;left: 120px;font-size: 23px">${list.cerRecord.trueName}</label>
                     <label style="position: relative;top: 480px;left: 400px">${list.gainTime}</label>
                     <label style="position: relative;top: 455px;left: 250px;">${list.backUser.bUserName}/人才生态系统计算机语言认证中心</label>

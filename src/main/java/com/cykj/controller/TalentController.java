@@ -6,7 +6,6 @@ import com.cykj.entity.TableInfo;
 import com.cykj.entity.Talent;
 import com.cykj.entity.UserInfo;
 import com.cykj.service.TalentService;
-import com.cykj.service.UserService;
 import com.google.gson.Gson;
 
 import org.apache.commons.io.FileUtils;

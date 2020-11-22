@@ -23,6 +23,12 @@
             background-color:transparent;
             border-style:none
         }
+        #container {
+            margin:35px auto 0;
+        }
+        .content_l{
+            float:left;
+            width:680px;}
     </style>
 </head>
 <body>
@@ -43,7 +49,7 @@
                                 <c:if test="${not empty certificateList}">
                                     <c:forEach items="${certificateList}" var="map">
                                         <li data-id="133340">
-                                            <img alt="携程旅行网" src="${map.cerHeadPortrait}">
+                                            <img alt="携程旅行网" src="${pageContext.request.contextPath}${map.cerHeadPortrait}">
                                             <div class="co_item">
                                                 <h2 title="${map.field.fieldName}">
 

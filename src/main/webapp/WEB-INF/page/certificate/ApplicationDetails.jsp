@@ -16,6 +16,11 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/external.min.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/popup.css"/>
+    <style>
+        #container {
+            margin:35px auto 0;
+        }
+    </style>
 </head>
 <body>
 <div id="body">

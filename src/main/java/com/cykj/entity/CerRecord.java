@@ -24,7 +24,15 @@ public class CerRecord {
   private int cerTestScore;//评测成绩
   private int cerFinalScore;//最终成绩
   private int cerJudgeScore;//评审成绩
+  private String cerReviewVideo;//评审视频
 
+  public String getCerReviewVideo() {
+    return cerReviewVideo;
+  }
+
+  public void setCerReviewVideo(String cerReviewVideo) {
+    this.cerReviewVideo = cerReviewVideo;
+  }
 
   public CerRecord() {
   }
