@@ -166,11 +166,11 @@ public class PayService {
             String resumeID =subject.substring(4);
             request.getSession().setAttribute("resumeID",resumeID);
             request.getSession().removeAttribute("subject");
-            return "comp/BackCompFindUser";
+            return "BackMain";
         } else {
             String result = "验签失败";
             request.getSession().setAttribute("session", result);
-            return "comp/BackCompFindUser";
+            return "BackMain";
         }
         //——请在这里编写您的程序（以上代码仅作参考）——
         }

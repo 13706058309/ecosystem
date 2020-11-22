@@ -126,4 +126,9 @@ public class TestController {
     public String Buju(){
         return "comp/Buju";
     }
+
+    @RequestMapping("/charge")
+    public String charge(){
+        return "comp/charge";
+    }
 }

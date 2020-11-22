@@ -67,4 +67,6 @@ public interface BackCompService {
     BackUser findCompByAcc(String account);
     //公司注册
     int RegComp(BackUser backUser,int industryID);
+    //判断是否开启收费
+    String judegCharse();
 }
