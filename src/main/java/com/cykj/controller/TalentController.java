@@ -114,25 +114,51 @@ public class TalentController {
     }
     @RequestMapping("/schoolInfo")
     public String schoolInfo(HttpServletRequest request) throws UnsupportedEncodingException {
+        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
+        if (bUser!=null){
+            int compID = (int) bUser.getbUserId();
+            BackUser shool= talentService.findShoolByID(compID);
+            request.setAttribute("shool",shool);
+        }
 
         return "schoolInfo";
     }
-    @RequestMapping("/showSchoolInfo")
-    public void showSchoolInfo(HttpServletResponse response,HttpServletRequest request) throws IOException {
-        List<BackUser> list=new ArrayList<>();
-//       BackUser backUser=new BackUser("大概","收到");
-//       list.add(backUser);
-//        TableInfo tableInfo=new TableInfo();
-//        tableInfo.setCode(0);
-//        tableInfo.setCount(1);
-//        tableInfo.setMsg("列表数据信息");
-//        tableInfo.setData(list);
-//        String message=new Gson().toJson(tableInfo);
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out=response.getWriter();
-//        out.write(message);
-//        out.flush();
-//        out.close();
+    @RequestMapping("/changeSchoolInfo")
+    public @ResponseBody String changeSchoolInfo(BackUser backUser,HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
+        String compName=request.getParameter("newCompName");
+        String bUserName=request.getParameter("bUserName");
+        String infoIntr=request.getParameter("infoIntr");
+        String email=request.getParameter("email");
+        String address=request.getParameter("address");
+        String coreValue=request.getParameter("coreValue");
+        String contactInfo=request.getParameter("contactInfo");
+        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
+        long compID = bUser.getbUserId();
+        map.put("schoolID",compID);
+        if(compName!=null){
+            map.put("compName",compName);
+        }
+        if(bUserName!=null){
+            map.put("bUserName",bUserName);
+        }
+        if(infoIntr!=null){
+            map.put("infoIntr",infoIntr);
+        }
+        if(email!=null){
+            map.put("email",email);
+        }
+        if(address!=null){
+            map.put("address",address);
+        }
+        if(coreValue!=null){
+            map.put("coreValue",coreValue);
+        }
+        if(contactInfo!=null){
+            map.put("contactInfo",contactInfo);
+        }
+
+        return talentService.changeSchoolInfo(map);
 
     }
 

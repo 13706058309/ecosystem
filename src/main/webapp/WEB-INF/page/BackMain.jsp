@@ -62,11 +62,9 @@
         </div>
     </div>
 
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">
-        <iframe style="width: 100%;height: 100%;border: 0px" name="mainFrame"> </iframe>
-        </div>
+    <div class="layui-body" style="bottom: 0px">
+        <iframe style="width: 100%; height: 100%" name="mainFrame"  frameborder="0">
+        </iframe>
     </div>
 
 <%--    <div class="layui-footer">--%>

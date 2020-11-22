@@ -37,6 +37,17 @@ public class BackUser {
   public BackUser() {
   }
 
+
+  public BackUser( String bUserName,  String contactInfo, String infoIntr,  String email, String address, String compName, String coreValue) {
+    this.bUserName = bUserName;
+    this.contactInfo = contactInfo;
+    this.infoIntr = infoIntr;
+    this.email = email;
+    this.address = address;
+    this.coreValue = coreValue;
+    this.compName = compName;
+  }
+
   public long getbUserId() {
     return bUserId;
   }
