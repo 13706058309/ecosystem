@@ -83,11 +83,6 @@
                 <li><a href="" target="_blank">课程</a></li>
                 <li><a href="${pageContext.request.contextPath}/center/jianli" rel="nofollow">我的简历</a></li>
                 <li><a href="" rel="nofollow">发布职位</a></li>
-                <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="h/toForum.html" target="_blank">校招</a></li>
-                <li><a href="h/toForum.html" target="_blank">课程</a></li>
-                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
-                <li><a href="create.html" rel="nofollow">发布职位</a></li>
             </ul>
             <ul class="loginTop" style="font-size: 18px">
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
@@ -303,59 +298,62 @@
 
 <%----------------------------------------------------------------------------热门职业、最新职业--%>
 <div id="hotList" align="center">
-    <ul class="hot_pos reset">
-        <div style="font-size: 25px;color:#44D0C7">——&nbsp;&nbsp;热招职位&nbsp;&nbsp;——</div>
-        <li class="odd clearfix">
-            <div class="hot_pos_l">
-                <div class="mb10">
-                    <a href="h/jobs/148429.html" target="_blank">葡萄酒内容运营专员</a>
-                    &nbsp;
-                    <span class="c9">[广州]</span>
-                </div>
-                <span><em class="c7">月薪： </em>5k-8k</span>
-                <span><em class="c7">经验：</em> 1-3年</span>
-                <span><em class="c7">最低学历： </em>本科</span>
-                <br/>
-                <span><em class="c7">职位诱惑：</em>喝着世界美酒快乐地工作！</span>
-                <br/>
-                <span>1天前发布</span>
-                <!-- <a  class="wb">分享到微博</a> -->
+    <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
+        <div style="font-size: 30px;color:#44D0C7;margin: 20px;font-family: 楷体">
+            ——&nbsp;&nbsp;<b>最新职位</b>&nbsp;&nbsp;——
+        </div>
+        <%--        <c:forEach items="${backUserList}" var="company">--%>
+        <li style="margin: 3px 5px;width: 264px;height: 120px">
+            <div class="comLogo" style="float: left">
+                <img src="" width="60"
+                     height="60" alt="CCIC"/>
             </div>
+            <div style="float: right">
+                <h3 title="CCIC" style="margin: 2px 5px;width: 183px;text-overflow:ellipsis;" align="center"><b>风格和</b>
+                </h3>
+                <a href="h/jobs/148928.html" target="_blank"
+                   style="font-size: 13px;color: darkgrey">
+                    斯蒂芬规划局&nbsp;|&nbsp;受到广泛化工后面
+                </a>
+            </div>
+            <ul class="reset ctags" style="margin-top: 73px;">
+                <li>一句话</li>
+                <li>的风格</li>
+            </ul>
         </li>
-        <li class="clearfix">
-            <div class="hot_pos_l">
-                <div class="mb10">
-                    <a href="h/jobs/1221.html" target="_blank">百度移动游戏UI designer</a>
-                    &nbsp;
-                    <span class="c9">[北京]</span>
-                </div>
-                <span><em class="c7">月薪： </em>7k-14k</span>
-                <span><em class="c7">经验：</em> 1-3年</span>
-                <span><em class="c7">最低学历： </em>本科</span>
-                <br/>
-                <span><em class="c7">职位诱惑：</em>喜欢游戏，喜欢生活，游戏生活~</span>
-                <br/>
-                <span>1天前发布</span>
-                <!-- <a  class="wb">分享到微博</a> -->
-            </div>
-            <div class="hot_pos_r">
-                <div class="mb10 recompany"><a href="h/c/323.html" target="_blank">百度移动游戏</a></div>
-                <span><em class="c7">领域：</em> 移动互联网</span>
-                <span><em class="c7">创始人：</em>李彦宏</span>
-                <br/>
-                <span><em class="c7">阶段：</em> 上市公司</span>
-                <span><em class="c7">规模：</em>2000人以上</span>
-                <ul class="companyTags reset">
-                    <li>年终分红</li>
-                    <li>绩效奖金</li>
-                    <li>股票期权</li>
-                </ul>
-            </div>
-        </li>
-<%--        <a href="list.html?city=%E5%85%A8%E5%9B%BD" class="btn fr" target="_blank">查看更多</a>--%>
+        <%--        </c:forEach>--%>
     </ul>
 </div>
-<div class="clear"></div>
+
+<%------------------------------------------------------------------------------------热门企业--------------%>
+<div id="hotList" align="center">
+    <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
+        <div style="font-size: 30px;color:#44D0C7;margin: 20px;font-family: 楷体">
+            ——&nbsp;&nbsp;<b>热门企业</b>&nbsp;&nbsp;——
+        </div>
+        <c:forEach items="${homeCompany}" var="hc">
+            <li style="margin: 3px 5px;width: 264px;height: 120px">
+                <div class="comLogo" style="float: left">
+                    <img src="${pageContext.request.contextPath}/uploadLogo${hc.logo}" width="60"
+                         height="60" alt="CCIC"/>
+                </div>
+                <div style="float: right">
+                    <h3 title="CCIC" style="margin: 2px 5px;width: 183px;text-overflow:ellipsis;" align="center">
+                        <b>${hc.compName}</b>
+                    </h3>
+                    <a href="h/jobs/148928.html" target="_blank"
+                       style="font-size: 13px;color: darkgrey">
+                            ${hc.finanStage}&nbsp;|&nbsp;${hc.city}
+                    </a>
+                </div>
+                <ul class="reset ctags" style="margin-top: 73px;">
+                    <li>${hc.scale}</li>
+                    <li>${hc.product}</li>
+                </ul>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
 
 <%------------------------------------------------------------------------------------友情连接--%>

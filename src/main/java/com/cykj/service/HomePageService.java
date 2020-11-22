@@ -1,9 +1,6 @@
 package com.cykj.service;
 
-import com.cykj.entity.City;
-import com.cykj.entity.Depart;
-import com.cykj.entity.Industry;
-import com.cykj.entity.Position;
+import com.cykj.entity.*;
 
 import java.util.List;
 
@@ -19,4 +16,6 @@ public interface HomePageService {
     List<Position> findPost(long departId);
 
     List<City> cityList();
+
+    List<BackUser> CompanyCity(String city);
 }

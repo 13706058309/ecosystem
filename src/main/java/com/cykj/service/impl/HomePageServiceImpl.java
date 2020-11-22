@@ -1,13 +1,7 @@
 package com.cykj.service.impl;
 
-import com.cykj.entity.City;
-import com.cykj.entity.Depart;
-import com.cykj.entity.Industry;
-import com.cykj.entity.Position;
-import com.cykj.mapper.CityMapper;
-import com.cykj.mapper.DepartMapper;
-import com.cykj.mapper.IndustryMapper;
-import com.cykj.mapper.PositionMapper;
+import com.cykj.entity.*;
+import com.cykj.mapper.*;
 import com.cykj.service.HomePageService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -27,6 +21,9 @@ public class HomePageServiceImpl implements HomePageService {
 
     @Resource
     private CityMapper cityMapper;
+
+    @Resource
+    private BackUserMapper backUserMapper;
 
     /**
      * 主页行业遍历显示
@@ -68,4 +65,12 @@ public class HomePageServiceImpl implements HomePageService {
         List<City> cityList = cityMapper.cityList();
         return cityList;
     }
+
+    @Override
+    public List<BackUser> CompanyCity(String city) {
+        List<BackUser> backUserList = backUserMapper.CompanyCity(city);
+        return backUserList;
+    }
+
+
 }

@@ -1,5 +1,4 @@
 package com.cykj.controller;
-
 import com.cykj.entity.*;
 import com.cykj.service.CityService;
 import com.cykj.service.CompanyService;
@@ -8,7 +7,6 @@ import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -28,13 +26,18 @@ public class HomePageController {
     private CompanyService companyService;
 
     @RequestMapping("/home")
-    public String home(HttpServletRequest request ){
+    public String home(HttpServletRequest request,String city){
 //城市集合
         List<City> cityList = homePageService.cityList();
         request.setAttribute("cityList",cityList);
 //        三级菜单 第一层 的集合
         List<Industry> industry = homePageService.findIndustry();
         request.setAttribute("industry",industry);
+//        热门企业
+        System.err.println("?????????????????????????????????????"+city);
+        List<BackUser> homeCompany = homePageService.CompanyCity(city);
+        request.setAttribute("homeCompany",homeCompany);
+
 
         return "HomePage";
     }
@@ -58,24 +61,49 @@ public class HomePageController {
     }
 
 
-    @RequestMapping("/A")
-    public String aEnd(){
-        return "AEndToEnd";
-    }
+//    公司主页控制层
 
     @RequestMapping("/companylist")
-    public String company(HttpServletRequest request){
+    public String company(HttpServletRequest request,String chooseCity,String chooseType ,String chooseFinan,String chooseScale,String curr,String limit){
         //城市集合
         List<City> cityList = cityService.cityList();
         request.setAttribute("cityList",cityList);
 //        公司首页集合
-        List<BackUser> backUserList = companyService.findCompany();
-        request.setAttribute("backUserList",backUserList);
+        Map conditionMap = new HashMap<>();
+        if (chooseCity!=null && !chooseCity.equals("全国") && !chooseCity.equals("".trim())){
+            conditionMap.put("chooseCity",chooseCity);
+        }
+        if (chooseType!=null && !chooseType.equals("不限") && !chooseType.equals("".trim())){
+            conditionMap.put("chooseType",chooseType);
+        }
+        if (chooseFinan!=null && !chooseFinan.equals("不限") && !chooseFinan.equals("".trim())){
+            conditionMap.put("chooseFinan",chooseFinan);
+        }
+        if (chooseScale!=null && !chooseScale.equals("不限") && !chooseScale.equals("".trim())){
+            conditionMap.put("chooseScale",chooseScale);
+        }
+        int n=0;
+        int li=4;
+        if (curr==null ){
+            n=1;
 
+        }else {
+            n=Integer.parseInt(curr);
+        }
+        conditionMap.put("curr",(n-1)*li);
+        conditionMap.put("limit",li);
+//        根据条件查找企业信息
+        List<BackUser> backUserList = companyService.findCompany(conditionMap);
+        List<BackUser> backUsers = companyService.findCount(conditionMap);
+        int companys = backUsers.size();  //查询公司总数
+        request.setAttribute("companyList",companys);
+        request.setAttribute("backUserList",backUserList);
+        request.setAttribute("chooseType",chooseType);
+        request.setAttribute("chooseCity",chooseCity);
+        request.setAttribute("chooseFinan",chooseFinan);
+        request.setAttribute("chooseScale",chooseScale);
+        request.setAttribute("curr",(n-1)*li);
         return "Companylist";
     }
-
-
-
 
 }

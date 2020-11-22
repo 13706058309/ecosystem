@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -16,8 +17,14 @@ public class CompanyServiceImpl implements CompanyService {
     private BackUserMapper backUserMapper;
 
     @Override
-    public List<BackUser> findCompany() {
-        List<BackUser> backUserList = backUserMapper.findCompany();
+    public List<BackUser> findCompany(Map map) {
+        List<BackUser> backUserList = backUserMapper.findCompany(map);
         return backUserList;
     }
+
+    @Override
+    public List<BackUser> findCount(Map map) {
+        return backUserMapper.findCount(map);
+    }
+
 }

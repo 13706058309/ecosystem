@@ -130,11 +130,11 @@ public class UserInfo {
             ", pwd='" + pwd + '\'' +
             ", telephone='" + telephone + '\'' +
             ", accStandId=" + accStandId +
-            ", states=" + states.toString() +
+            ", states=" + states +
             ", jobStandId=" + jobStandId +
             ", address='" + address + '\'' +
             ", isOpen=" + isOpen +
-            ", industry='" + industry + '\'' +
+            ", regTime='" + regTime + '\'' +
             '}';
   }
 }

@@ -34,8 +34,69 @@ public class BackUser {
   private String coreValue;//企业核心价值
   private String compName;
   private List<Industry> industrys;
+
+
+
   public BackUser() {
   }
+
+  public BackUser(long bUserId, String bUserName, String account, String pwd, String contactInfo, String infoIntr, String busiLice, String email, String address, String scale, String city, String province, String homePage, String finanStage, String product, String logo, long roleId, RoleInfo role, String stateId, Parameter states, String bRegTime, String coreValue, String compName, List<Industry> industrys) {
+    this.bUserId = bUserId;
+    this.bUserName = bUserName;
+    this.account = account;
+    this.pwd = pwd;
+    this.contactInfo = contactInfo;
+    this.infoIntr = infoIntr;
+    this.busiLice = busiLice;
+    this.email = email;
+    this.address = address;
+    this.scale = scale;
+    this.city = city;
+    this.province = province;
+    this.homePage = homePage;
+    this.finanStage = finanStage;
+    this.product = product;
+    this.logo = logo;
+    this.roleId = roleId;
+    this.role = role;
+    this.stateId = stateId;
+    this.states = states;
+    this.bRegTime = bRegTime;
+    this.coreValue = coreValue;
+    this.compName = compName;
+    this.industrys = industrys;
+  }
+
+  @Override
+  public String toString() {
+    return "BackUser{" +
+            "bUserId=" + bUserId +
+            ", bUserName='" + bUserName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", infoIntr='" + infoIntr + '\'' +
+            ", busiLice='" + busiLice + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            ", scale='" + scale + '\'' +
+            ", city='" + city + '\'' +
+            ", province='" + province + '\'' +
+            ", homePage='" + homePage + '\'' +
+            ", finanStage='" + finanStage + '\'' +
+            ", product='" + product + '\'' +
+            ", logo='" + logo + '\'' +
+            ", roleId=" + roleId +
+            ", role=" + role +
+            ", stateId='" + stateId + '\'' +
+            ", states=" + states +
+            ", bRegTime='" + bRegTime + '\'' +
+            ", coreValue='" + coreValue + '\'' +
+            ", compName='" + compName + '\'' +
+            ", industrys=" + industrys +
+            '}';
+  }
+
 
   public long getbUserId() {
     return bUserId;
@@ -113,7 +174,6 @@ public class BackUser {
     this.contactInfo = contactInfo;
   }
 
-
   public String getInfoIntr() {
     return infoIntr;
   }
@@ -121,7 +181,6 @@ public class BackUser {
   public void setInfoIntr(String infoIntr) {
     this.infoIntr = infoIntr;
   }
-
 
   public String getBusiLice() {
     return busiLice;
@@ -131,7 +190,6 @@ public class BackUser {
     this.busiLice = busiLice;
   }
 
-
   public String getEmail() {
     return email;
   }
@@ -139,7 +197,6 @@ public class BackUser {
   public void setEmail(String email) {
     this.email = email;
   }
-
 
   public String getAddress() {
     return address;
@@ -149,7 +206,6 @@ public class BackUser {
     this.address = address;
   }
 
-
   public String getScale() {
     return scale;
   }
@@ -157,7 +213,6 @@ public class BackUser {
   public void setScale(String scale) {
     this.scale = scale;
   }
-
 
   public String getCity() {
     return city;
@@ -167,7 +222,6 @@ public class BackUser {
     this.city = city;
   }
 
-
   public String getProvince() {
     return province;
   }
@@ -175,7 +229,6 @@ public class BackUser {
   public void setProvince(String province) {
     this.province = province;
   }
-
 
   public String getHomePage() {
     return homePage;
@@ -185,7 +238,6 @@ public class BackUser {
     this.homePage = homePage;
   }
 
-
   public String getFinanStage() {
     return finanStage;
   }
@@ -194,7 +246,6 @@ public class BackUser {
     this.finanStage = finanStage;
   }
 
-
   public String getProduct() {
     return product;
   }
@@ -202,9 +253,6 @@ public class BackUser {
   public void setProduct(String product) {
     this.product = product;
   }
-
-  public String getLogo() {
-    return logo;
 
   public String getLogo() {
     return logo;
@@ -246,14 +294,6 @@ public class BackUser {
     this.coreValue = coreValue;
   }
 
-  public List<Industry> getIndustrys() {
-    return industrys;
-  }
-
-  public void setIndustrys(List<Industry> industrys) {
-    this.industrys = industrys;
-  }
-
   public String getCompName() {
     return compName;
   }
@@ -262,31 +302,11 @@ public class BackUser {
     this.compName = compName;
   }
 
+  public List<Industry> getIndustrys() {
+    return industrys;
+  }
 
-  @Override
-  public String toString() {
-    return "BackUser{" +
-            "bUserId=" + bUserId +
-            ", bUserName='" + bUserName + '\'' +
-            ", account='" + account + '\'' +
-            ", pwd='" + pwd + '\'' +
-            ", contactInfo='" + contactInfo + '\'' +
-            ", infoIntr='" + infoIntr + '\'' +
-            ", busiLice='" + busiLice + '\'' +
-            ", email='" + email + '\'' +
-            ", address='" + address + '\'' +
-            ", scale='" + scale + '\'' +
-            ", city='" + city + '\'' +
-            ", province='" + province + '\'' +
-            ", homePage='" + homePage + '\'' +
-            ", finanStage='" + finanStage + '\'' +
-            ", product='" + product + '\'' +
-            ", logo='" + logo + '\'' +
-            ", roleId=" + roleId +
-            ", role=" + role +
-            ", stateId='" + stateId + '\'' +
-            ", states=" + states +
-            ", compName='" + compName + '\'' +
-            '}';
+  public void setIndustrys(List<Industry> industrys) {
+    this.industrys = industrys;
   }
 }

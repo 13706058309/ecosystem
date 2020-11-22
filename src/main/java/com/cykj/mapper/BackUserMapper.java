@@ -19,7 +19,13 @@ public interface BackUserMapper {
 
     int changeCompInfo(Map<String,Object> map);
 
-    public List<BackUser> findCompany();
+//    根据条件查找公司信息
+    public List<BackUser> findCompany(Map map);
+//    查找公司数量
+    public List<BackUser> findCount(Map map);
+//    根据城市查找公司
+    public List<BackUser> CompanyCity(@Param("city") String city);
+
 
     int changePwd(@Param("pwd") String pwd,@Param("compID") int compID);
 
@@ -30,4 +36,6 @@ public interface BackUserMapper {
     int changePwdByPhone(@Param("pwd") String pwd,@Param("phone") String phone);
     int register(BackUser backUser);
     BackUser isRepeat(String account);
+
+
 }

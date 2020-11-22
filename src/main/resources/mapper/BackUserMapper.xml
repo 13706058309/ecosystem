@@ -96,7 +96,72 @@
         values (#{bUserName},#{compName},#{contactInfo},#{account},#{pwd},1)
     </insert>
 
-    <select id="findCompany" resultType="com.cykj.entity.BackUser">
-        select compName,city,finanStage,scale,product,homePage,logo from backUser;
+<!--    根据条件展示企业-->
+    <select id="findCompany" parameterType="java.util.HashMap" resultMap="CompanyMap">
+        select i.industryName,b.bUserId,b.compName,b.city,b.finanStage,b.scale,b.product,b.homePage,b.logo
+        from backUser b,comp_industry ci,industry i
+        where b.roleId=1 and b.stateId=1 and i.industryID = ci.industryID and ci.compID = b.bUserID
+        <if test="chooseCity!=null">
+            and b.city = #{chooseCity}
+        </if>
+        <if test="chooseType!=null">
+            and i.industryName = #{chooseType}
+        </if>
+        <if test="chooseFinan!=null">
+            and b.finanStage = #{chooseFinan}
+        </if>
+        <if test="chooseScale!=null">
+            and b.scale = #{chooseScale}
+        </if>
+         limit #{curr} , #{limit}
     </select>
+    <select id="findCount" parameterType="java.util.HashMap" resultMap="CompanyMap">
+        select i.industryName,b.bUserId,b.compName,b.city,b.finanStage,b.scale,b.product,b.homePage,b.logo
+        from backUser b,comp_industry ci,industry i
+        where b.roleId=1 and b.stateId=1 and i.industryID = ci.industryID and ci.compID = b.bUserID
+        <if test="chooseCity!=null">
+            and b.city = #{chooseCity}
+        </if>
+        <if test="chooseType!=null">
+            and i.industryName = #{chooseType}
+        </if>
+        <if test="chooseFinan!=null">
+            and b.finanStage = #{chooseFinan}
+        </if>
+        <if test="chooseScale!=null">
+            and b.scale = #{chooseScale}
+        </if>
+
+    </select>
+
+    <resultMap id="CompanyMap" type="com.cykj.entity.CompIndustry">
+        <id property="compAndIndID" column="compAndIndID"></id>
+        <result property="compID" column="compID"></result>
+        <result property="industryID" column="industryID"></result>
+        <association property="industry" column="industryID" javaType="com.cykj.entity.Industry">
+            <id property="industryID" column="industryID"></id>
+            <result property="industryName" column="industryName"></result>
+        </association>
+        <association property="backUser" column="compID" javaType="com.cykj.entity.BackUser">
+            <id property="bUserID" column="compID"></id>
+            <result property="compName" column="compName"></result>
+            <result property="city" column="city"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="scale" column="scale"></result>
+            <result property="product" column="product"></result>
+            <result property="homePage" column="homePage"></result>
+            <result property="logo" column="logo"></result>
+        </association>
+    </resultMap>
+
+<!--    根据城市查找企业信息-->
+    <select id="CompanyCity" resultType="com.cykj.entity.BackUser">
+        select * from backUser b where b.roleId=1 and b.stateId=1
+        <if test="city!=null">
+            and b.city = #{city}
+        </if>
+        limit 9
+    </select>
+
+
 </mapper>

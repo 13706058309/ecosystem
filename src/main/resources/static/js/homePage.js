@@ -3,6 +3,7 @@ $(function () {
     path = $("#path").val();
 });
 
+var num = 0;
 function menu_box(industryId, dos) {
     if (industryId != num) {
         // alert($(dos).next().find("a").eq(0).text());
@@ -77,10 +78,16 @@ function cutCity() {
 }
 
 //切换当前城市
+var currCity = $("#city").text();
+function curr() {
+    currCity = $("#city").text();
+}
 function City(node) {
     var currentCity = $(node);
     console.log(currentCity.text());
     $("#city").text(currentCity.text());
     $("#bCity").text(currentCity.text());
     layer.closeAll();
+    location.href="home?city="+currCity;
+
 }

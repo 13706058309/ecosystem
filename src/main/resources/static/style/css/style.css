@@ -147,7 +147,6 @@ em {
 }
 
 ul.reset {
-    margin: 0;
     padding: 0;
     list-style: none;
 }
@@ -799,6 +798,7 @@ span.error {
     -o-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
 }
+
 
 #container {
     width: 100%;
@@ -2150,6 +2150,7 @@ ul.hot_pos i {
     margin-left: 75px;
 }
 
+
 .hc_tag dl a {
     float: left;
     margin: 0 10px 10px 0;
@@ -2162,10 +2163,10 @@ ul.hot_pos i {
     color: #fff;
 }
 
-.hc_tag dl a.current {
-    background: #44D0C7;
-    color: #fff;
-}
+/*.hc_tag dl a.current {*/
+/*    background: #44D0C7;*/
+/*    color: #fff;*/
+/*}*/
 
 .hc_list {
     width: 700px;
