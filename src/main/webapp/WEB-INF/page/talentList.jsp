@@ -342,10 +342,10 @@
                     layer.msg("请先选择简历")
                     return false;
                 }
-                if(file!="C:\\fakepath\\简历.doc"){
-                    layer.msg("不是简历文件")
-                    return false;
-                }
+                // if(file!="C:\\fakepath\\简历.doc"){
+                //     layer.msg("不是简历文件")
+                //     return false;
+                // }
                 return true;
 
             },
