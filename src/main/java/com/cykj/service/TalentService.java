@@ -2,10 +2,7 @@ package com.cykj.service;
 
 
 
-import com.cykj.entity.BackUserNum;
-import com.cykj.entity.CompAndtalent;
-import com.cykj.entity.Positions;
-import com.cykj.entity.Talent;
+import com.cykj.entity.*;
 
 import java.util.List;
 import java.util.Map;
@@ -44,4 +41,10 @@ public interface TalentService {
 
 
     int addCompAndtalent(int companyID, char c);
+
+
+    String changeSchoolInfo(Map<String, Object> map);
+
+
+    BackUser findShoolByID(int i);
 }

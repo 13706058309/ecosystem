@@ -3,10 +3,13 @@ package com.cykj.controller;
 //import com.cykj.log.Loger;
 import com.cykj.service.BackCompService;
 import jdk.nashorn.internal.runtime.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/test")
@@ -14,10 +17,6 @@ public class TestController {
     @Resource
     private BackCompService backCompServiceImpl;
 
-    @RequestMapping("/testComp")
-    public String test(){
-        return "comp/BackCompInfo";
-    }
 
 
     @RequestMapping("/userManage")
@@ -65,7 +64,10 @@ public class TestController {
         return "comp/BackOnlinePosition";
     }
 
-
+    @RequestMapping("/reg")
+    public String reg(){
+        return "comp/BackReg";
+    }
 
     @RequestMapping("/findPwd")
     public String findPwd(){
@@ -117,6 +119,15 @@ public class TestController {
         return "adminLog";
     }
 
+    @RequestMapping("/testMap")
+    public String testMap(){
+        return "comp/TestMap";
+    }
+
+    @RequestMapping("/Buju")
+    public String Buju(){
+        return "comp/Buju";
+    }
     @RequestMapping("/tete")
     public String tete(){
         return "tst";

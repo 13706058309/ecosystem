@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=7c1d325554fabccbfb414e1ec058cf40"></script>-->
+
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=7c1d325554fabccbfb414e1ec058cf40"></script>
+<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <body>
+        <div class="control-group">
+        <label class="control-label">按关键字搜索：</label>
+        <div id="myPageTop">
+            <div class="controls">
+                <input type="text" class="input-xlarge" placeholder="请输入关键字进行搜索" id="tipinput">
+                <button id="bt2" type="button" onclick="geoCode()">搜索</button>
+            </div>
+        </div>
+        <div id="container" style="margin-top: 0.2cm;width:100%;height: 300px;"></div>
+    </div>
+<!--    <div id="container"></div>-->
+</body>
+<script>
+    function geoCode() {
+        AMap.plugin('AMap.Geocoder', function() {
+            var geocoder = new AMap.Geocoder({
+                // city 指定进行编码查询的城市，支持传入城市名、adcode 和 citycode
+            })
+            var address  = document.getElementById('tipinput').value;
+            geocoder.getLocation(address, function(status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    var lnglat = result.geocodes[0].location.toString();
+                    var lnglatArray = lnglat.split(",");
+                    // $("#lonNum").val(lnglatArray[0]);
+                    // $("#latNum").val(lnglatArray[1]);
+                    var map = new AMap.Map("container", {
+                    });
+                    var marker = new AMap.Marker({
+                        icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png",
+                        // position: new AMap.LngLat(lnglatArray[0],lnglatArray[1]),
+                        position: new AMap.LngLat(116.39, 39.9),// 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+                        offset: new AMap.Pixel(-13, -30)
+                    });
+                    map.setZoom(15);
+                    map.setCenter(result.geocodes[0].location);
+                    map.add(marker);
+                }
+            })
+
+        })
+    }
+    // var map = new AMap.Map('container',{
+    //     zoom: 10,
+    //     center: [116.39,39.9]//new AMap.LngLat(116.39,39.9)
+    // });
+</script>
+</html>

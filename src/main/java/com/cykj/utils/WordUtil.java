@@ -44,6 +44,8 @@ public class WordUtil {
 //        map.put("image",imgs);
 //        test.createWord(map);
 //        test.createWord();
+        String s = "12345";
+        System.out.println(s.substring(3));
     }
 
     /*****

@@ -24,8 +24,15 @@ public class CerRecord {
   private int cerTestScore;//评测成绩
   private int cerFinalScore;//最终成绩
   private int cerJudgeScore;//评审成绩
-  private String cerReviewVideo; //cerReviewVideo
+  private String cerReviewVideo;//评审视频
 
+  public String getCerReviewVideo() {
+    return cerReviewVideo;
+  }
+
+  public void setCerReviewVideo(String cerReviewVideo) {
+    this.cerReviewVideo = cerReviewVideo;
+  }
 
   public CerRecord() {
   }
@@ -177,39 +184,6 @@ public class CerRecord {
 
   public void setIdNumber(String idNumber) {
     this.idNumber = idNumber;
-  }
-
-  public String getCerReviewVideo() {
-    return cerReviewVideo;
-  }
-
-  public void setCerReviewVideo(String cerReviewVideo) {
-    this.cerReviewVideo = cerReviewVideo;
-  }
-
-  @Override
-  public String toString() {
-    return "CerRecord{" +
-            "cerRecordId=" + cerRecordId +
-            ", userId=" + userId +
-            ", user=" + user +
-            ", fileId=" + fileId +
-            ", field=" + field +
-            ", stateId=" + stateId +
-            ", state=" + state +
-            ", docUrl='" + docUrl + '\'' +
-            ", trueName='" + trueName + '\'' +
-            ", idNumber='" + idNumber + '\'' +
-            ", beginTime='" + beginTime + '\'' +
-            ", cerPhone='" + cerPhone + '\'' +
-            ", turnoverTime='" + turnoverTime + '\'' +
-            ", cerTestReport='" + cerTestReport + '\'' +
-            ", cerFinalReport='" + cerFinalReport + '\'' +
-            ", cerTestScore=" + cerTestScore +
-            ", cerFinalScore=" + cerFinalScore +
-            ", cerJudgeScore=" + cerJudgeScore +
-            ", cerReviewVideo='" + cerReviewVideo + '\'' +
-            '}';
   }
 }
 
