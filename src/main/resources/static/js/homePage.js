@@ -78,7 +78,7 @@ function cutCity() {
 }
 
 //切换当前城市
-var currCity = $("#city").text();
+var currCity = $("#city").innerText();
 function curr() {
     currCity = $("#city").text();
 }
@@ -88,6 +88,8 @@ function City(node) {
     $("#city").text(currentCity.text());
     $("#bCity").text(currentCity.text());
     layer.closeAll();
-    location.href="home?city="+currCity;
-
+    location.href="home?" +
+        "="+currCity;
+    console.log("!!!!!!!!!!!!!!!!!!!!!"+currentCity);
 }
+
