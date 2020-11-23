@@ -268,7 +268,7 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+        String realpath   = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         Certificate certificate= certificateService.findCerFee(fileid);
@@ -337,6 +337,7 @@ public class CertificateController {
             if (betweenDate>=0&&betweenDate<=10) {
                 //获取上传目录
                 String path = request.getSession().getServletContext().getRealPath("/wtqupload");
+
                 //获取当天日期为后面创建日期
                 String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 //创建以日期来区分的文件夹目录
@@ -381,7 +382,7 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+        String realpath   = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);
@@ -406,7 +407,8 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+//        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+        String realpath = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);

@@ -78,13 +78,6 @@ function showDetail2(data) {
 function showDetails(data) {
     var paths = $("#path").val();
 
-    if(data.isShow==1){
-        $("#DAddress").text(data.address);
-        $("#DRealInfo").text(data.contactInfo);
-    }else{
-        $("#DAddress").text("*********");
-        $("#DRealInfo").text("*********");
-    }
     $("#dBir").text(data.birthday);
     $("#dName").text(data.realName);
     $("#dClen").text(data.clan);
@@ -115,6 +108,29 @@ function showDetails(data) {
     $("#imgs").append($img);
 
     $("#tbody").empty();
+
+    $.ajax({
+        url:paths+"/rec/judgeResumeShowOrHidden",
+        type:"post",
+        typeData:"text",
+        success:function (info) {
+            if(info=='1'){
+                $("#DAddress").text(data.address);
+                $("#DRealInfo").text(data.contactInfo);
+            }else{
+                $("#DAddress").text("*********");
+                $("#DRealInfo").text("*********");
+            }
+        },
+    })
+
+    // if(data.isShow==1){
+    //     $("#DAddress").text(data.address);
+    //     $("#DRealInfo").text(data.contactInfo);
+    // }else{
+    //     $("#DAddress").text("*********");
+    //     $("#DRealInfo").text("*********");
+    // }
 }
 
 function showDetail(data) {
@@ -230,18 +246,29 @@ function RandomRange() {
 }
 
 function outResumes(){
-    if(isShow==1){
+    var paths = $("#path").val();
+    if($("#DAddress").text()!="*********"){
         location.href = path+"/rec/outResume?resumeID="+reID;
     }else{
-        $("#WIDout_trade_no").val(RandomRange);
-        $("#WIDsubject").val("下载费用"+reID);
-        $("#WIDtotal_amount").val("20");
-        $("#WIDbody").val("人才简历下载查看");
-        layer.open({
-            type:1,
-            area:['30%','30%'],
-            offset: ['35%', '25%'],
-            content:$("#payForm"),
+        $.ajax({
+            url:paths+"/rec/findDownFee",
+            type:"post",
+            async:false,
+            typeData:"text",
+            success:function (info) {
+                $("#WIDout_trade_no").val(RandomRange);
+                $("#WIDsubject").val("下载费用"+reID);
+                $("#WIDtotal_amount").val(info);
+                $("#WIDbody").val("人才简历下载查看");
+                $("#money").text("支付"+info+"元下载？")
+                layer.open({
+                    type:1,
+                    area:['30%','30%'],
+                    offset: ['35%', '25%'],
+                    content:$("#payForm"),
+                })
+            },
         })
+
     }
 }
