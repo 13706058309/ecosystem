@@ -16,6 +16,8 @@ public interface HomePageService {
     List<Position> findPost(long departId);
 
     List<City> cityList();
-
+//热门企业
     List<BackUser> CompanyCity(String city);
+//最新岗位
+    List<PostPosition> postList(String workCity);
 }

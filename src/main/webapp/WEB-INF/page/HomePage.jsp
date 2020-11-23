@@ -97,32 +97,22 @@
     </div><!-- end #header -->
 
     <%-----------------------------------------------------------------------------------------搜索框--%>
-    <div id="search_box">
-        <form id="searchForm" name="searchForm" action="list.html" method="get">
-            <ul id="searchType">
-                <li data-searchtype="1" class="type_selected">职位</li>
-                <li data-searchtype="4">公司</li>
-            </ul>
-            <div class="searchtype_arrow"></div>
-            <input type="text" id="search_input" name="kd" tabindex="1" value="" placeholder="请输入职位名称，如：产品经理"/>
-            <input type="submit" id="search_button" value="搜索"/>
-        </form>
+
+
+    <div class="content" style="margin-bottom: 20px;margin-left: 23%">
+        <div id="search_box">
+            <form id="searchForm" name="searchForm" action="list.html" method="get">
+                <ul id="searchType">
+                    <li data-searchtype="1" class="type_selected">职位</li>
+                </ul>
+                <input type="text" id="search_input" name="kd" tabindex="1" value="" placeholder="请输入职位名称，如：产品经理"/>
+                <input type="button" id="search_button" value="搜索"/>
+
+            </form>
+        </div>
     </div>
 
-    <script type="text/javascript" src="../style/js/search.min.js"></script>
-    <dl class="hotSearch">
-        <dt>热门搜索：</dt>
-        <dd><a href="list.htmlJava?labelWords=label&city=">Java</a></dd>
-        <dd><a href="list.htmlPHP?labelWords=label&city=">PHP</a></dd>
-        <dd><a href="list.htmlAndroid?labelWords=label&city=">Android</a></dd>
-        <dd><a href="list.htmliOS?labelWords=label&city=">iOS</a></dd>
-        <dd><a href="list.html前端?labelWords=label&city=">前端</a></dd>
-        <dd><a href="list.html产品经理?labelWords=label&city=">产品经理</a></dd>
-        <dd><a href="list.htmlUI?labelWords=label&city=">UI</a></dd>
-        <dd><a href="list.html运营?labelWords=label&city=">运营</a></dd>
-        <dd><a href="list.htmlBD?labelWords=label&city=">BD</a></dd>
-        <dd><a href="list.html?gx=实习&city=">实习</a></dd>
-    </dl>
+
 
     <%--------------------------------------------------------------------------------   左侧三级菜单--%>
     <div id="container">
@@ -296,36 +286,43 @@
     </div>
 </div>
 
-<%----------------------------------------------------------------------------热门职业、最新职业--%>
+<%------------------------------------------------------------------热门职业、最新职业-------------%>
 <div id="hotList" align="center">
     <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
         <div style="font-size: 30px;color:#44D0C7;margin: 20px;font-family: 楷体">
             ——&nbsp;&nbsp;<b>最新职位</b>&nbsp;&nbsp;——
         </div>
-        <%--        <c:forEach items="${backUserList}" var="company">--%>
-        <li style="margin: 3px 5px;width: 264px;height: 120px">
-            <div class="comLogo" style="float: left">
-                <img src="" width="60"
-                     height="60" alt="CCIC"/>
-            </div>
-            <div style="float: right">
-                <h3 title="CCIC" style="margin: 2px 5px;width: 183px;text-overflow:ellipsis;" align="center"><b>风格和</b>
-                </h3>
-                <a href="h/jobs/148928.html" target="_blank"
-                   style="font-size: 13px;color: darkgrey">
-                    斯蒂芬规划局&nbsp;|&nbsp;受到广泛化工后面
-                </a>
-            </div>
-            <ul class="reset ctags" style="margin-top: 73px;">
-                <li>一句话</li>
-                <li>的风格</li>
-            </ul>
-        </li>
-        <%--        </c:forEach>--%>
+        <c:forEach items="${postList}" var="post">
+            <li style="margin: 3px 5px;width: 264px;height: 120px">
+                <div style="float: left">
+                    <div class="comLogo" style="font-size: 18px">
+                           ${post.postName}
+                    </div>
+                    <div>
+                        <a target="_blank"
+                           style="font-size: 13px;color: darkgrey">
+                                ${post.workCity}&nbsp;|&nbsp;${post.workYear}|&nbsp;${post.education}
+                        </a>
+                    </div>
+                </div>
+                <div style="float: right;color: #d9534f;font-size: 16px" align="center">
+                    <b>${post.minSalary}K&nbsp;-&nbsp; ${post.maxSalary}K</b>
+                </div>
+                <ul class="reset ctags" style="margin-top: 73px;">
+                    <div style="float: left">q
+                        <img src="${pageContext.request.contextPath}/uploadLogo${post.backUser.logo}" width="40"
+                             height="39" alt="CCIC"/>
+                    </div>
+                    <div style="float: right"align="center">
+                            ${post.backUser.finanStage}&nbsp;|&nbsp;${post.backUser.scale}
+                    </div>
+                </ul>
+            </li>
+        </c:forEach>
     </ul>
 </div>
 
-<%------------------------------------------------------------------------------------热门企业--------------%>
+<%-----------------------------------------------------------------------------热门企业--------------%>
 <div id="hotList" align="center">
     <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
         <div style="font-size: 30px;color:#44D0C7;margin: 20px;font-family: 楷体">
@@ -358,10 +355,9 @@
 
 <%------------------------------------------------------------------------------------友情连接--%>
 <div id="linkbox">
-    <dl>
+    <dl style="margin-left: 25%">
         <dt>友情链接</dt>
         <dd>
-            <a href="http://www.zhuqu.com/" target="_blank">住趣家居网</a> <span>|</span>
             <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
             <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
             <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>

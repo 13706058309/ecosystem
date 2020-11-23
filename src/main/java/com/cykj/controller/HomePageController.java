@@ -34,11 +34,15 @@ public class HomePageController {
         List<Industry> industry = homePageService.findIndustry();
         request.setAttribute("industry",industry);
 //        热门企业
-        System.err.println("?????????????????????????????????????"+city);
-        List<BackUser> homeCompany = homePageService.CompanyCity(city);
-        request.setAttribute("homeCompany",homeCompany);
-
-
+        System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + city);
+        if (city!=null) {
+            city = city.trim();
+            List<BackUser> homeCompany = homePageService.CompanyCity(city);
+            request.setAttribute("homeCompany", homeCompany);
+//        最新岗位
+            List<PostPosition> postList = homePageService.postList(city);
+            request.setAttribute("postList", postList);
+        }
         return "HomePage";
     }
 
@@ -46,7 +50,6 @@ public class HomePageController {
     @ResponseBody
     public String findDepart(HttpServletRequest request,String industryId ){
         //        三级菜单 第二层 的集合
-        System.out.println("第二层"+industryId);
         String departJson = null;
         if (industryId!=null){
             Map<String,List<Position>> map = new HashMap<>();
@@ -62,7 +65,6 @@ public class HomePageController {
 
 
 //    公司主页控制层
-
     @RequestMapping("/companylist")
     public String company(HttpServletRequest request,String chooseCity,String chooseType ,String chooseFinan,String chooseScale,String curr,String limit){
         //城市集合

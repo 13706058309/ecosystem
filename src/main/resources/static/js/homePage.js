@@ -25,7 +25,7 @@ function menu_box(industryId, dos) {
                     $(dos).next().find("dl").eq(0).append($dt);
                     var $dt = $("<dd></dd>");
                     $(values).each(function (i, domel) {
-                        var $a2 = $("<a>" + domel.postName + "</a>");
+                        var $a2 = $("<a onclick='postName(this)'>" + domel.postName + "</a>");
                         $dt.append($a2);
                     });
                     $(dos).next().find("dl").eq(0).append($dt);
@@ -36,6 +36,12 @@ function menu_box(industryId, dos) {
     }
 }
 
+//第三岗位的值，跳转界面
+function postName(node) {
+    console.log("?????????????????????"+$(node).text());
+    location.href="center/job?city="+$("#city").text();
+}
+
 //显示隐藏三级菜单
 function show() {
     var hidden = document.getElementById("hidden");
@@ -44,12 +50,11 @@ function show() {
     $("#packUp").css('display','block');
 }
 
-// function packUp() {
-//     // var hidden  =document.getElementById("hidden");
-//     // hidden.setAttribute("class","mainNavs");
-// }
 
-
+var currCity = $("#city").text();
+$(function () {
+    currCity = $("#city").text();
+});
 //定位当前城市
 var position = new BMap.Geolocation();
 position.getCurrentPosition(function (r) {
@@ -62,7 +67,7 @@ position.getCurrentPosition(function (r) {
         $("#city").text(city);
         $("#bCity").text(city);
     }
-})
+});
 
 //切换城市弹窗
 function cutCity() {
@@ -78,18 +83,13 @@ function cutCity() {
 }
 
 //切换当前城市
-var currCity = $("#city").innerText();
-function curr() {
-    currCity = $("#city").text();
-}
 function City(node) {
     var currentCity = $(node);
     console.log(currentCity.text());
     $("#city").text(currentCity.text());
     $("#bCity").text(currentCity.text());
     layer.closeAll();
-    location.href="home?" +
-        "="+currCity;
-    console.log("!!!!!!!!!!!!!!!!!!!!!"+currentCity);
+    location.href="home?city="+$("#city").text();
+    console.log("!!!!!!!!!!!!!!!!!!!!!"+$("#city").text());
 }
 

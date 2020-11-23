@@ -25,6 +25,9 @@ public class HomePageServiceImpl implements HomePageService {
     @Resource
     private BackUserMapper backUserMapper;
 
+    @Resource
+    private PostPositionMapper postPositionMapper;
+
     /**
      * 主页行业遍历显示
      * @return
@@ -32,19 +35,6 @@ public class HomePageServiceImpl implements HomePageService {
     @Override
     public List<Industry> findIndustry() {
         List<Industry> industries = industryMapper.findIndustry();
-//        Map<Industry,List<Depart>> oneMap = new HashMap<>();
-//        Map<Depart,List<Position>> twoMap = new HashMap<>();
-//
-//        for (Industry industrys:parent) {
-//            List<Depart> sonList =  departMapper.findDepart(industrys.getIndustryId());
-//            oneMap.put(industrys,sonList);
-//
-//            for (Depart depart:sonList) {
-//                List<Position> post = positionMapper.findPost(depart.getDepartId());
-//                twoMap.put(depart,post);
-//            }
-//        }
-//        Object[] obj = {oneMap, twoMap};
         return industries;
     }
 
@@ -72,5 +62,9 @@ public class HomePageServiceImpl implements HomePageService {
         return backUserList;
     }
 
-
+    @Override
+    public List<PostPosition> postList(String workCity) {
+        List<PostPosition> postList = postPositionMapper.postList(workCity);
+        return postList;
+    }
 }

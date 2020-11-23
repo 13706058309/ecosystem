@@ -117,5 +117,29 @@
         where pPostId = #{pPostID}
     </update>
 
+<!--    主页最新岗位9条信息查询-->
+    <select id="postList" resultType="com.cykj.entity.PostPosition" resultMap="postMap">
+        select p.postName,p.workCity,p.workYear,p.education,p.maxSalary,p.minSalary,
+        b.logo,b.finanStage,b.scale
+            from postPosition p,backUser b
+            where p.companyID = b.bUserID and workCity = #{workCity} order by releaseTime desc limit 9
+    </select>
+    <resultMap id="postMap" type="com.cykj.entity.PostPosition">
+        <id property="pPostID" column="pPostID"></id>
+        <result property="postName" column="postName"></result>
+        <result property="workCity" column="workCity"></result>
+        <result property="workYear" column="workYear"></result>
+        <result property="education" column="education"></result>
+        <result property="maxSalary" column="maxSalary"></result>
+        <result property="minSalary" column="minSalary"></result>
+        <result property="companyID" column="companyID"></result>
+        <association property="backUser" column="compID" javaType="com.cykj.entity.BackUser">
+            <id property="bUserID" column="compID"></id>
+            <result property="logo" column="logo"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="scale" column="scale"></result>
+        </association>
+    </resultMap>
+
 
 </mapper>
