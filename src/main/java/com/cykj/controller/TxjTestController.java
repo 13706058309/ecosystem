@@ -74,23 +74,79 @@ private CourseServiceImpl courseServiceImpl;
 
     }
 
-
-    @RequestMapping("updateCourse")
+    @RequestMapping("updateCourseName")//更改课程名称
     @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
-    public void updateCourse(Integer courseId_table,String courseName_table){
+    public void updateCourseName(String courseName,Integer courseId) {
         System.out.println("走入更改控制类");
-        System.out.println(courseId_table+courseName_table);
-
-
-
-
-//        Map<String,Object> map = new HashMap<>();
-        if (courseId_table != 0){
-//            map.put("courseId",courseId);
-//            int course = courseServiceImpl.deleteCourse(courseId);
+        System.out.println("courseName="+courseName+";courseId="+courseId);
+        if ( courseName != null){
+            int updatecourseName = courseServiceImpl.updateCourseName(courseName,courseId);
         }
-
     }
+
+    //更改课程路径
+    @RequestMapping("updatecourseImgURL")
+    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
+    public void updatecourseImgURL(String courseImgURL,Integer courseId) {
+        System.out.println("走入更改控制类");
+        System.out.println("courseImgURL="+courseImgURL+";courseId="+courseId);
+        if ( courseImgURL != null){
+            int updatecourseImgURL = courseServiceImpl.updatecourseImgURL(courseImgURL,courseId);
+        }
+    }
+
+    @RequestMapping("updatecourseIntroduce")//更改课程介绍
+    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
+    public void updatecourseIntroduce(String courseIntroduce,Integer courseId) {
+        System.out.println("走入更改控制类");
+        System.out.println("courseIntroduce="+courseIntroduce+";courseId="+courseId);
+        if ( courseIntroduce != null){
+            int updateCourseIntroduce = courseServiceImpl.updatecourseIntroduce(courseIntroduce,courseId);
+        }
+    }
+
+    @RequestMapping("updatespeakerHeadImgUrl")//更改头像路径
+    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
+    public void updatespeakerHeadImgUrl(String speakerHeadImgUrl,Integer courseId) {
+        System.out.println("走入更改控制类");
+        System.out.println("speakerHeadImgUrl="+speakerHeadImgUrl+";courseId="+courseId);
+        if ( speakerHeadImgUrl != null){
+            int updateSpeakerHeadImgUrl = courseServiceImpl.updatespeakerHeadImgUrl(speakerHeadImgUrl,courseId);
+        }
+    }
+//    @RequestMapping("updateCourse")
+//    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
+//    public void updateCourse(Integer courseId_table,String courseName_table,String courseImgURL_table,String courseIntroduce_table,String speakerHeadImgUrl_table
+//    ,String courseName,String courseIntroduce,String courseImgURL,String speakerHeadImgUrl){
+//        System.out.println("走入更改控制类");
+//        System.out.println("面板上的获取值："+courseId_table+courseName_table+courseImgURL_table+courseIntroduce_table+speakerHeadImgUrl_table);
+//        System.out.println("输入框的获取值："+courseName+courseIntroduce+courseImgURL+speakerHeadImgUrl);
+//
+//        Map<String,Object> map = new HashMap<>();
+//
+//        map.put("courseId_table",courseId_table);
+//        map.put("courseName_table",courseName_table);
+//        map.put("courseImgURL_table",courseImgURL_table);
+//        map.put("courseIntroduce_table",courseIntroduce_table);
+//        map.put("speakerHeadImgUrl_table",speakerHeadImgUrl_table);
+//        map.put("courseName",courseName);
+//        map.put("courseIntroduce",courseIntroduce);
+//        map.put("courseImgURL",courseImgURL);
+//        map.put("speakerHeadImgUrl",speakerHeadImgUrl);
+//
+//        int course = courseServiceImpl.updateCourse(map);
+//
+//
+////        Map<String,Object> map = new HashMap<>();
+//        if (courseId_table != 0){
+////            map.put("courseId",courseId);
+////            int course = courseServiceImpl.deleteCourse(courseId);
+//        }//
+
+
+
+
+
 
 
 

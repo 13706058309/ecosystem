@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,14 @@ public interface CourseMapper {
     int findNumOnPage(Map<String, Object> map);
 
     int deleteCourse(Integer courseId);
+
+    int updateCourseName(String courseName,Integer courseId);//更改课程名字
+
+    int updatecourseImgURL(String courseImgURL,Integer courseId);//更改路径
+
+    int updatecourseIntroduce(String courseIntroduce,Integer courseId);//更改课程介绍
+
+    int updatespeakerHeadImgUrl(String speakerHeadImgUrl,Integer courseId);//更改头像路径
 
 
 //public List<Course> findCourse();

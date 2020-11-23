@@ -46,6 +46,22 @@
         delete from course where courseId = #{courseId}
     </delete>
 
+<!--更改课程名字-->
+    <update id="updateCourseName" >
+        update course set courseName = #{courseName} where courseId = #{courseId}
+    </update>
+<!--    更改路径-->
+    <update id="updatecourseImgURL" >
+        update course set courseImgURL = #{courseImgURL} where courseId = #{courseId}
+    </update>
+<!--更改课程介绍-->
+    <update id="updatecourseIntroduce" >
+        update course set courseIntroduce = #{courseIntroduce} where courseId = #{courseId}
+    </update>
+<!--更改头像路径-->
+    <update id="updatespeakerHeadImgUrl" >
+        update course set speakerHeadImgUrl = #{speakerHeadImgUrl} where courseId = #{courseId}
+    </update>
 
 <!--    <select id="findCourse"  resultType="com.cykj.entity.Course">-->
 <!--        select courseId,fieldId,courseName,uploadTime  from course ;-->

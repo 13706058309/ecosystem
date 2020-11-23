@@ -31,6 +31,34 @@ public class CourseServiceImpl implements CourseService {
         return  course;
     }
 
+    @Override//更改课程名字
+    public int updateCourseName(String courseName,Integer courseId) {
+        System.out.println("CourseServiceImpl里map的值为："+courseName+courseId);
+        int updateCourseName = courseMapper.updateCourseName(courseName,courseId);
+        return updateCourseName;
+    }
+
+    @Override//更改路径
+    public int updatecourseImgURL(String courseImgURL, Integer courseId) {
+        System.out.println("CourseServiceImpl里map的值为："+courseImgURL+courseId);
+        int updatecourseImgURL = courseMapper.updatecourseImgURL(courseImgURL,courseId);
+        return updatecourseImgURL;
+    }
+
+    @Override//更改课程介绍
+    public int updatecourseIntroduce(String courseIntroduce, Integer courseId) {
+        System.out.println("CourseServiceImpl里map的值为："+courseIntroduce+courseId);
+        int updateCourseIntroduce = courseMapper.updatecourseIntroduce(courseIntroduce,courseId);
+        return updateCourseIntroduce;
+    }
+
+    @Override//更改头像路径
+    public int updatespeakerHeadImgUrl(String speakerHeadImgUrl, Integer courseId) {
+        System.out.println("CourseServiceImpl里map的值为："+speakerHeadImgUrl+courseId);
+        int updateSpeakerHeadImgUrl = courseMapper.updatespeakerHeadImgUrl(speakerHeadImgUrl,courseId);
+        return updateSpeakerHeadImgUrl;
+    }
+
 //    @Resource
 //    private CourseMapper courseMapper;
 //    @Override

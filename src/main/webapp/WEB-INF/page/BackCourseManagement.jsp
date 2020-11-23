@@ -42,7 +42,7 @@
 
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">修改课程</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改提示</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除课程</a>
 </script>
 
@@ -283,10 +283,10 @@
             // ]]
             ,cols: [[ //表头
                 {field: 'courseId', title: '序号', width:80, sort: true, fixed: 'left'}
-                ,{field: 'courseName', title: '课程名称', width:150}
-                ,{field: 'courseImgURL', title: '路径', width:330}
+                ,{field: 'courseName', title: '课程名称', width:150,event:'courseName'}
+                ,{field: 'courseImgURL', title: '路径', width:330,event:'courseImgURL'}
                 ,{field: 'speakerName', title: '讲师', width:130}
-                ,{field: 'courseIntroduce', title: '个人签名', width:150}
+                ,{field: 'courseIntroduce', title: '课程介绍', width:150,event:'courseIntroduce'}
                 ,{field: 'uploadTime', title: '上传时间', width:220,sort: true}
                 ,{field: 'collectionNumber', title: '观看人数', width:120,sort: true}
                 ,{field: 'fieldId', title: '课程所在领域', width:130,templet:function (d) {
@@ -302,7 +302,7 @@
                             return '嵌入式';
                         }
                     }}
-                ,{field: 'speakerHeadImgUrl', title: '头像路径', width:250}
+                ,{field: 'speakerHeadImgUrl', title: '头像路径', width:250,event:'speakerHeadImgUrl'}
                 ,{field: 'totalPlayTimes', title: '总播放时间', width:150,sort: true}
                 ,{field: '', title: '操作', width: 177,toolbar:'#barDemo'}
             ]]
@@ -387,6 +387,20 @@
                     ,closeBtn:2
                     ,yes: function(index, layero){
                         //按钮【按钮一】的回调
+                        var courseName = document.getElementById("courseName").value;    //【增加界面第一行】文本框输入的课程名
+                        var fieldId_add = document.getElementById("fieldId_add");
+                        var index = fieldId_add.selectedIndex;// selectedIndex是所选中的项的index
+                        var fileId = fieldId_add.options[index].value;                    //【增加界面第二行】下拉框选择的领域
+                        var courseImgURL = document.getElementById('courseImgURL').value;//【增加界面第三行】选择后的文件路径
+                        var speakerName = document.getElementById("speakerName").value;  //【增加界面第四行】文本框输入的讲师名
+                        var courseIntroduce = document.getElementById("courseIntroduce").value;//【增加界面第五行】文本框输入的课程介绍
+                        var uploadTime = document.getElementById("uploadTime").value;//【增加界面第六行】文本框输入的上传时间
+                        var collectionNumber = document.getElementById("collectionNumber").value;//【增加界面第七行】文本框输入的观看人数
+                        var speakerHeadImgUrl = document.getElementById('speakerHeadImgUrl').value;//【增加界面第八行】文本框输入的头像路径
+                        var totalPlayTimes = document.getElementById("totalPlayTimes").value;//【增加界面第九行】文本框输入的播放时间
+                        console.log("courseName:"+courseName+"；fileId:"+fileId+"；courseImgURL:"+courseImgURL
+                        +"；speakerName:"+speakerName+"；courseIntroduce:"+courseIntroduce+"；uploadTime:"+uploadTime
+                            +"；collectionNumber:"+collectionNumber+"；speakerHeadImgUrl:"+speakerHeadImgUrl+"；totalPlayTimes:"+totalPlayTimes);
                         alert("增加成功！")
                         layer.close(index); //如果设定了yes回调，需进行手工关闭
                     }
@@ -397,24 +411,29 @@
                         //return false 开启该代码可禁止点击该按钮关闭
                     }
                     ,type:1
-                    ,content:'<style>input,select{ border-radius: 10px;padding: 6px 0px;}</style>'+
-                        '<input placeholder="课程名"  style="width: 250px;margin:5px 110px">' +
-                        '<select name="city" style="width: 250px;margin:5px 110px" >\n' +
+                    ,content:'<style>input,select{ border-radius: 10px;padding: 6px 0px;}' +
+                        '.file {position: relative;display: inline-block;background: #D0EEFF;border: 1px solid #99D3F5; border-radius: 20px; padding: 4px 12px; overflow: hidden; color: #1E88C7; text-decoration: none;text-indent: 0; line-height: 20px;}' +
+                        '.file input { position: absolute; font-size: 100px;  right: 0;  top: 0;  opacity: 0; }'  +
+                        '.file:hover { background: #AADFFD;  border-color: #78C3F3;  color: #004974; text-decoration: none;}</style>'+
+
+                        '<input id="courseName" placeholder="课程名"  style="width: 250px;margin:5px 110px">' +
+                        '<select id="fieldId_add"  style="width: 250px;margin:5px 110px" >\n' +
                         '                    <option value="">--请选择领域--</option>\n' +
-                        '                    <option value="0">JAVA</option>\n' +
-                        '                    <option value="1">HTML</option>\n' +
-                        '                    <option value="2">PYTHON</option>\n' +
-                        '                    <option value="3">C</option>\n' +
+                        '                    <option value="1" >C++</option>\n' +
+                        '                    <option value="2">HTML</option>\n' +
+                        '                    <option value="3">Java</option>\n' +
                         '                    <option value="4">PHP</option>\n' +
+                        '                    <option value="5">嵌入式</option>\n' +
                         '                </select>' +
-                        '<input placeholder="请输入课程图片路径"  style="width: 250px;margin:5px 110px">' +
-                        '<input placeholder="请输入讲师名"  style="width: 250px;margin:5px 110px">' +
-                        '<input placeholder="课程介绍"  style="width: 250px;margin:5px 110px">' +
-                        '<input placeholder="上传时间"  style="width: 250px;margin:5px 110px">' +
-                        '<input placeholder="观看人数"  style="width: 250px;margin:5px 110px">' +
-                        '<input placeholder="课程所在领域"  style="width: 250px;margin:5px 110px">' +
-                        '<input placeholder="头像路径"  style="width: 250px;margin:5px 110px">' +
-                        '<input placeholder="总播放时间"  style="width: 250px;margin:5px 110px">'
+                        // '<input placeholder="请输入课程图片路径"  style="width: 250px;margin:5px 110px">' +
+                        '<a href="javascript:;" class="file" style="width: 230px;margin:5px 110px">选择修改后的图片路径<input type="file" name="file" id="courseImgURL"></a>' +
+                        '<input id="speakerName" placeholder="请输入讲师名"  style="width: 250px;margin:5px 110px">' +
+                        '<input id="courseIntroduce" placeholder="课程介绍"  style="width: 250px;margin:5px 110px">' +
+                        '<input id="uploadTime" placeholder="上传时间"  style="width: 250px;margin:5px 110px">' +
+                        '<input id="collectionNumber" placeholder="观看人数"  style="width: 250px;margin:5px 110px">' +
+                        // '<input placeholder="头像路径"  style="width: 250px;margin:5px 110px">' +
+                        '<a href="javascript:;" class="file" style="width: 230px;margin:5px 110px">头像路径<input type="file" name="file" id="speakerHeadImgUrl"></a>' +
+                        '<input id="totalPlayTimes" placeholder="总播放时间"  style="width: 250px;margin:5px 110px">'
                 });
             });
             return false;
@@ -448,11 +467,9 @@
         table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
             var data = obj.data //获得当前行数据
                 ,layEvent = obj.event; //获得 lay-event 对应的值
-            if(layEvent === 'detail'){
-                layer.msg('查看操作');
-            }
+
             //这是工具栏里“删除课程”的监听
-            else if(layEvent === 'del'){
+            if(layEvent === 'del'){
                 var courseId=data.courseId;
                 alert(courseId);
                 layui.use('layer', function(){
@@ -515,97 +532,180 @@
                 // });
             }
             //这是工具栏里“修改课程”的监听
-            else if(layEvent === 'edit'){
-                layer.msg('编辑操作');
-                console.log(data);
-                //alert("修改完毕")
-                var courseId_table = data.courseId;
-                var courseName_table = data.courseName;
-                var courseImgURL_table = data.courseImgURL;
-                var courseIntroduce_table = data.courseIntroduce;
-                var speakerHeadImgUrl_table = data.speakerHeadImgUrl;
-                layui.use('layer', function(){
-                    var layer = layui.layer;
+                else if(layEvent == 'edit'){
+                    alert("这里是温馨提示！只允许修改课程名称、路径、课程介绍、头像路径。直接点击修改部分即可修改！");
+            }
 
-                    layer.open({
-                        title: '修改窗口'
-                        ,area: ['500px', '300px']//设定弹窗的宽、高
-                        ,btn:[ '确认提交', '取消']//设定按钮组
-                        ,shade: [0.7, '#393D49']
-                        ,closeBtn:2
-                        ,yes: function(index, layero){
-                            //按钮【按钮一】的回调
-                            var courseName = document.getElementById("courseName").value;//修改后的课程名
-                            var courseIntroduce = document.getElementById("courseIntroduce").value;//修改后的课程介绍
-                            var courseImgURL = document.getElementById('courseImgURL').value;//修改后的文件路径
-                            var speakerHeadImgUrl = document.getElementById('speakerHeadImgUrl').value;//修改后的文件图片路径
-                            console.log("修改后的课程名："+courseName+";修改后的课程介绍:"+courseIntroduce+";修改后的文件路径="+courseImgURL+";修改后的文件图片路径="+speakerHeadImgUrl);
-                            console.log("表格中的id："+courseId_table+";表格中的课程名："+courseName_table+";表格中的课程介绍:"+courseIntroduce_table+";表格中的文件路径="+courseImgURL_table+";表格中的文件图片路径="+speakerHeadImgUrl_table)
+            // else if(layEvent === 'edit'){
+            //     layer.msg('编辑操作');
+            //     console.log(data);
+            //     //alert("修改完毕")
+            //     var courseId_table = data.courseId;
+            //     var courseName_table = data.courseName;
+            //     var courseImgURL_table = data.courseImgURL;
+            //     var courseIntroduce_table = data.courseIntroduce;
+            //     var speakerHeadImgUrl_table = data.speakerHeadImgUrl;
+            //     layui.use('layer', function(){
+            //         var layer = layui.layer;
+            //         layer.open({
+            //             title: '修改窗口'
+            //             ,area: ['500px', '300px']//设定弹窗的宽、高
+            //             ,btn:[ '确认提交', '取消']//设定按钮组
+            //             ,shade: [0.7, '#393D49']
+            //             ,closeBtn:2
+            //             ,yes: function(index, layero){
+            //                 //按钮【按钮一】的回调
+            //                 var courseName = document.getElementById("courseName").value;//修改后的课程名
+            //                 var courseIntroduce = document.getElementById("courseIntroduce").value;//修改后的课程介绍
+            //                 var courseImgURL = document.getElementById('courseImgURL').value;//修改后的文件路径
+            //                 var speakerHeadImgUrl = document.getElementById('speakerHeadImgUrl').value;//修改后的文件图片路径
+            //                 console.log("修改后的课程名："+courseName+";修改后的课程介绍:"+courseIntroduce+";修改后的文件路径="+courseImgURL+";修改后的文件图片路径="+speakerHeadImgUrl);
+            //                 console.log("表格中的id："+courseId_table+";表格中的课程名："+courseName_table+";表格中的课程介绍:"+courseIntroduce_table+";表格中的文件路径="+courseImgURL_table+";表格中的文件图片路径="+speakerHeadImgUrl_table)
+            //
+            //
+            //                 $.ajax({
+            //                     type:"POST",
+            //                     dataType: "json",//预期服务器返回的数据类型
+            //                     url: "../txjtext/updateCourse" ,//url
+            //                     data: 'courseId_table='+courseId_table+'&courseName_table='+courseName_table+'&courseImgURL_table='+courseImgURL_table
+            //                         +'&courseIntroduce_table='+courseIntroduce_table+'&speakerHeadImgUrl_table='+speakerHeadImgUrl_table+'&courseName='+courseName
+            //                         +'&courseIntroduce='+courseIntroduce+'&courseImgURL='+courseImgURL+'&speakerHeadImgUrl='+speakerHeadImgUrl,
+            //                     async:true,
+            //
+            //                 });
+            //
+            //                 alert("修改成功！")
+            //                 layer.close(index); //如果设定了yes回调，需进行手工关闭
+            //             }
+            //             ,btn2: function(index, layero){
+            //                 //按钮【按钮二】的回调
+            //                 alert("取消提交按钮被触发")
+            //
+            //                 //return false 开启该代码可禁止点击该按钮关闭
+            //             }
+            //             ,type:1
+            //             ,content:
+            //                 '<style>' +
+            //                 'input{ border-radius: 10px;padding: 8px 0px;}' +
+            //                 '.file {position: relative;display: inline-block;background: #D0EEFF;border: 1px solid #99D3F5; border-radius: 20px; padding: 4px 12px; overflow: hidden; color: #1E88C7; text-decoration: none;text-indent: 0; line-height: 20px;}\n' +
+            //                 '.file input { position: absolute; font-size: 100px;  right: 0;  top: 0;  opacity: 0; }\n' +
+            //                 '.file:hover { background: #AADFFD;  border-color: #78C3F3;  color: #004974; text-decoration: none;}' +
+            //                 '$("#courseName").val(courseName_table);'+
+            //                 '</style>'+
+            //
+            //
+            //                 '<input id="courseName" placeholder="请输入修改后的课程名"  style="width: 200px;margin:5px 135px ;" :value="courseName_table">' +
+            //                 '<input id="courseIntroduce" placeholder="请输入课程介绍"  style="width: 200px;margin:5px 135px">'+
+            //                 '<a href="javascript:;" class="file" style="width: 120px;margin:5px 135px">选择修改后的路径<input type="file" name="file" id="courseImgURL"></a>' +
+            //                 '<a href="javascript:;" class="file" style="width: 150px;margin:5px 135px">选择修改后的图片路径<input type="file" name="file" id="speakerHeadImgUrl"></a>'
+            //                 // '<input type="file" id="upload_file" style="display: none;" accept="image/jpeg, image/gif" />'
+            //         });
+            //     });
+            //     return false;
+            // }
 
-                            $.ajax({
-                                type:"GET",
-                                dataType: "json",//预期服务器返回的数据类型
-                                url: "../txjtext/updateCourse" ,//url
-                                data: 'courseId_table='+courseId_table+'&courseName_table='+courseName_table+'&courseImgURL_table='+courseImgURL_table
-                                    +'&courseIntroduce_table='+courseIntroduce_table+'&speakerHeadImgUrl_table='+speakerHeadImgUrl_table+'&courseName='+courseName
-                                    +'&courseIntroduce='+courseIntroduce+'&courseImgURL='+courseImgURL+'&speakerHeadImgUrl='+speakerHeadImgUrl,
-                                async:true,
-                                // success:function () {
-                                //     // alert("成功")
-                                //     table.reload('testReload', {
-                                //         page: {
-                                //             curr: 1 //重新从第 1 页开始
-                                //         },
-                                //         where: {
-                                //             courseName: $('#input_search').val(),
-                                //             fieldId: $('#fieldId').val(),
-                                //         }
-                                //     }, 'data');
-                                //
-                                // },
-                                // error:function () {
-                                //     // alert("异常")
-                                //     table.reload('testReload', {
-                                //         page: {
-                                //             curr: 1 //重新从第 1 页开始
-                                //         },
-                                //         where: {
-                                //             courseName: $('#input_search').val(),
-                                //             fieldId: $('#fieldId').val(),
-                                //         }
-                                //     }, 'data');
-                                // },
+            //修改课程名称监听
+            else if (obj.event === 'courseName'){
+                layer.prompt({
+                    formType: 2
+                    ,title: '修改 ID 为 ['+ data.courseId +'] 的课程名称'
+                    ,value: data.courseName
+                }, function(value, index){
+                    layer.close(index);
+                    var courseId = data.courseId;
+                    console.log("courseId的值为："+courseId);
+                    //这里一般是发送修改的Ajax请求
+                    $.ajax({
+                         type:"POST",
+                          dataType: "json",//预期服务器返回的数据类型
+                          url: "../txjtext/updateCourseName" ,//url
+                          data: 'courseName='+value+'&courseId='+courseId,
+                          async:true,
 
-                            });
-
-                            alert("修改成功！")
-                            layer.close(index); //如果设定了yes回调，需进行手工关闭
-                        }
-                        ,btn2: function(index, layero){
-                            //按钮【按钮二】的回调
-                            alert("取消提交按钮被触发")
-
-                            //return false 开启该代码可禁止点击该按钮关闭
-                        }
-                        ,type:1
-                        ,content:
-                            '<style>' +
-                            'input{ border-radius: 10px;padding: 8px 0px;}' +
-                            '.file {position: relative;display: inline-block;background: #D0EEFF;border: 1px solid #99D3F5; border-radius: 20px; padding: 4px 12px; overflow: hidden; color: #1E88C7; text-decoration: none;text-indent: 0; line-height: 20px;}\n' +
-                            '.file input { position: absolute; font-size: 100px;  right: 0;  top: 0;  opacity: 0; }\n' +
-                            '.file:hover { background: #AADFFD;  border-color: #78C3F3;  color: #004974; text-decoration: none;}' +
-                            '</style>'+
-
-
-                            '<input id="courseName" placeholder="请输入修改后的课程名"  style="width: 200px;margin:5px 135px ">' +
-                            '<input id="courseIntroduce" placeholder="请输入课程介绍"  style="width: 200px;margin:5px 135px">'+
-                            '<a href="javascript:;" class="file" style="width: 120px;margin:5px 135px">选择修改后的路径<input type="file" name="file" id="courseImgURL"></a>' +
-                            '<a href="javascript:;" class="file" style="width: 150px;margin:5px 135px">选择修改后的图片路径<input type="file" name="file" id="speakerHeadImgUrl"></a>'
-                            // '<input type="file" id="upload_file" style="display: none;" accept="image/jpeg, image/gif" />'
+                          });
+                    //同步更新表格和缓存对应的值
+                    obj.update({
+                        courseName: value
                     });
                 });
-                return false;
             }
+            //修改课程路径监听
+            else if (obj.event === 'courseImgURL'){
+                layer.prompt({
+                    formType: 2
+                    ,title: '修改 ID 为 ['+ data.courseId +'] 的课程路径'
+                    ,value: data.courseImgURL
+                }, function(value, index){
+                    layer.close(index);
+                    var courseId = data.courseId;
+                    console.log("courseId的值为："+courseId);
+                    //这里一般是发送修改的Ajax请求
+                    $.ajax({
+                        type:"POST",
+                        dataType: "json",//预期服务器返回的数据类型
+                        url: "../txjtext/updatecourseImgURL" ,//url
+                        data: 'courseImgURL='+value+'&courseId='+courseId,
+                        async:true,
+
+                    });
+                    //同步更新表格和缓存对应的值
+                    obj.update({
+                        courseImgURL: value
+                    });
+                });
+            }
+            //修改课程介绍监听
+            else if (obj.event === 'courseIntroduce'){
+                layer.prompt({
+                    formType: 2
+                    ,title: '修改 ID 为 ['+ data.courseId +'] 的课程介绍'
+                    ,value: data.courseIntroduce
+                }, function(value, index){
+                    layer.close(index);
+                    var courseId = data.courseId;
+                    console.log("courseId的值为："+courseId);
+                    //这里一般是发送修改的Ajax请求
+                    $.ajax({
+                        type:"POST",
+                        dataType: "json",//预期服务器返回的数据类型
+                        url: "../txjtext/updatecourseIntroduce" ,//url
+                        data: 'courseIntroduce='+value+'&courseId='+courseId,
+                        async:true,
+
+                    });
+                    //同步更新表格和缓存对应的值
+                    obj.update({
+                        courseIntroduce: value
+                    });
+                });
+            }
+            //修改课程介绍监听
+            else if (obj.event === 'speakerHeadImgUrl'){
+                layer.prompt({
+                    formType: 2
+                    ,title: '修改 ID 为 ['+ data.courseId +'] 的课程介绍'
+                    ,value: data.speakerHeadImgUrl
+                }, function(value, index){
+                    layer.close(index);
+                    var courseId = data.courseId;
+                    console.log("courseId的值为："+courseId);
+                    //这里一般是发送修改的Ajax请求
+                    $.ajax({
+                        type:"POST",
+                        dataType: "json",//预期服务器返回的数据类型
+                        url: "../txjtext/updatespeakerHeadImgUrl" ,//url
+                        data: 'speakerHeadImgUrl='+value+'&courseId='+courseId,
+                        async:true,
+
+                    });
+                    //同步更新表格和缓存对应的值
+                    obj.update({
+                        speakerHeadImgUrl: value
+                    });
+                });
+            }
+
+
         });
 
 
