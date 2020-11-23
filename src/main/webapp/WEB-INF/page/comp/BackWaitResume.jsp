@@ -38,31 +38,27 @@
 </style>
 <h1 style="text-align: center">待处理简历</h1>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<div class="demoTable layui-form" style="margin-left: 27%">
-    <div class="layui-form-item">
-        <div class="layui-inline">
+<div class="demoTable layui-form" style="margin-left: 25%">
+    <div class="layui-form-item" style="margin-left: -10%">
+
             <label class="layui-form-label">投递时间</label>
             <div class="layui-input-inline">
                 <input type="text" class="layui-input" id="beginTime"  placeholder="yyyy-MM-dd">
             </div>
-        </div>
-        <div class="layui-inline">
+
             <label class="layui-form-label">至</label>
             <div class="layui-input-inline">
                 <input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd">
             </div>
-        </div>
+
 
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="margin-left: -10%">
 
-
-            <label class="layui-form-label">发布岗位:</label>
-            <div class="layui-input-inline">
-                <input type="tel" id="postName" class="layui-input">
-            </div>
-
-
+        <label class="layui-form-label">发布岗位:</label>
+        <div class="layui-input-inline">
+            <input type="tel" id="postName" class="layui-input">
+        </div>
 
         <label class="layui-form-label">学历</label>
         <div class="layui-input-inline">
@@ -79,7 +75,7 @@
 
 
             <div class="layui-input-inline" style="margin-left: 8%">
-                <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+                <button type="button" class="layui-btn  layui-btn-fluid" data-type="reload" style="width: 60%">查询</button>
             </div>
 
     </div>

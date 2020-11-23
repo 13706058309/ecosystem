@@ -1,10 +1,7 @@
 package com.cykj.service.impl;
 
 
-import com.cykj.entity.BackUserNum;
-import com.cykj.entity.CompAndtalent;
-import com.cykj.entity.Positions;
-import com.cykj.entity.Talent;
+import com.cykj.entity.*;
 import com.cykj.mapper.TalentMapper;
 import com.cykj.mapper.UserNumMapper;
 import com.cykj.service.TalentService;
@@ -111,6 +108,17 @@ public class TalentServiceImpl implements TalentService {
         int n = talentMapper.addCompAndtalent(companyID,c);
 
         return n;
+    }
+
+    @Override
+    public String changeSchoolInfo(Map<String, Object> map) {
+        int n = talentMapper.changeSchoolInfo(map);
+        return n>0? "1":"2";
+    }
+
+    @Override
+    public BackUser findShoolByID(int i) {
+      return talentMapper.findShoolByID(i);
     }
 
 

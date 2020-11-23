@@ -1,5 +1,9 @@
 package com.cykj.entity;
 
+import com.cykj.utils.MyUtil;
+
+import java.util.Date;
+
 /**
  * 投递简历
  */
@@ -81,7 +85,7 @@ public class Delivery {
     return deliTime;
   }
 
-  public void setDeliTime(String deliTime) {
-    this.deliTime = deliTime;
+  public void setDeliTime(Date deliTime) {
+    this.deliTime = MyUtil.getFoatTime(deliTime);
   }
 }

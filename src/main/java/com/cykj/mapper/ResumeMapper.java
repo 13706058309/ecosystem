@@ -20,4 +20,6 @@ public interface ResumeMapper {
     int compFindResumeNum(Map<String,Object> map);
 
     Resume findResumeDetail(int resumeID);
+
+    Resume findOne();
 }

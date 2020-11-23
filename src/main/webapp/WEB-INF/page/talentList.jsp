@@ -38,7 +38,7 @@
     <h1 style="text-align: center">人才导入</h1><br>
     <div class="layui-inline">
         <div class="layui-input-inline" style="margin-left: 100px">
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="button" class="layui-btn layui-bg-blue layui-btn-fluid" onclick="downLoad()">下载模板</button>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="button" class="layui-btn layui-bg-blue layui-btn-fluid" onclick="downLoad()">下载表格</button>
         </div>
     </div><br><br>
 
@@ -98,25 +98,25 @@
             </td>
             <td width="120" align="right" style="padding-top: 14px;padding-right: 20px">
                 <!--个人照片-->
-                <table border="0" cellpadding="2" cellspacing="1" bgcolor="#dddddd" id="Table10">
-                    <tr>
-                        <td align="center" bgcolor="#FFFFFF">
-                            <img id="Image1" src="../imgs/1.jpg" style="height:140px;width:110px;border-width:0px;" />
-                        </td>
-                    </tr>
-                </table>
+<%--                <table border="0" cellpadding="2" cellspacing="1" bgcolor="#dddddd" id="Table10">--%>
+<%--                    <tr>--%>
+<%--                        <td align="center" bgcolor="#FFFFFF">--%>
+<%--                            <img id="Image1" src="../imgs/1.jpg" style="height:140px;width:110px;border-width:0px;" />--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
+<%--                </table>--%>
 
             </td>
         </tr>
         </table>
 
         <h1 style="text-align: center">社会经历</h1>
-        <textarea  id="workExp" style="resize: none"onfocus=this.blur() class="layui-textarea"></textarea>
+        <textarea  id="workExp" style="resize: none;text-align: center"onfocus=this.blur() class="layui-textarea"></textarea>
 
         <h1 style="text-align: center">技能证书</h1>
-        <textarea   id="certificate" style="resize: none"onfocus=this.blur() class="layui-textarea"></textarea>
+        <textarea   id="certificate" style="resize: none;text-align: center"onfocus=this.blur() class="layui-textarea"></textarea>
         <h1 style="text-align: center">自我评价</h1>
-        <textarea   id="selfEva" style="resize: none"onfocus=this.blur() class="layui-textarea"></textarea>
+        <textarea   id="selfEva" style="resize: none;text-align: center"onfocus=this.blur() class="layui-textarea"></textarea>
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -325,12 +325,13 @@
 
     //下载模板
     function downLoad() {
-        window.open("${pageContext.request.contextPath}/talent/download?fileName=简历.doc");
+        window.open("${pageContext.request.contextPath}/talent/download?fileName=简历.xls");
 
     }
     function uploads() {
         var form = new FormData(document.getElementById("forms"))
         var file= $('#upload').val()
+
         $.ajax({
             url:path+"/talent/upload",
             data:form,
@@ -342,8 +343,9 @@
                     layer.msg("请先选择简历")
                     return false;
                 }
-                if(file!="C:\\fakepath\\简历.doc"){
-                    layer.msg("不是简历文件")
+                if(!file.endsWith(".xls")){
+                // if(file.end!="C:\\fakepath\\简历.xls"){
+                    layer.msg("不是简历表格，请先下载模板")
                     return false;
                 }
                 return true;

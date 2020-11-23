@@ -74,6 +74,23 @@ public class UserInfo {
     return telephone;
   }
 
+  @Override
+  public String toString() {
+    return "UserInfo{" +
+            "userId=" + userId +
+            ", userName='" + userName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", telephone='" + telephone + '\'' +
+            ", accStandId=" + accStandId +
+            ", states=" + states +
+            ", jobStandId=" + jobStandId +
+            ", address='" + address + '\'' +
+            ", isOpen=" + isOpen +
+            ", regTime='" + regTime + '\'' +
+            '}';
+  }
+
   public void setTelephone(String telephone) {
     this.telephone = telephone;
   }
@@ -122,20 +139,5 @@ public class UserInfo {
     this.states = states;
   }
 
-  @Override
-  public String toString() {
-    return "UserInfo{" +
-            "userId=" + userId +
-            ", userName='" + userName + '\'' +
-            ", account='" + account + '\'' +
-            ", pwd='" + pwd + '\'' +
-            ", telephone='" + telephone + '\'' +
-            ", accStandId=" + accStandId +
-            ", states=" + states.toString() +
-            ", jobStandId=" + jobStandId +
-            ", address='" + address + '\'' +
-            ", isOpen=" + isOpen +
 
-            '}';
-  }
 }

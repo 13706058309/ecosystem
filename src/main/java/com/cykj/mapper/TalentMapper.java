@@ -1,5 +1,6 @@
 package com.cykj.mapper;
 
+import com.cykj.entity.BackUser;
 import com.cykj.entity.CompAndtalent;
 import com.cykj.entity.Positions;
 import com.cykj.entity.Talent;
@@ -30,5 +31,11 @@ public interface TalentMapper {
     CompAndtalent selectCompAndtalent(@Param("companyID") int companyID, @Param("c") char c);
 
     int addCompAndtalent(@Param("companyID") int companyID,@Param("c") char c);
+
+
+    int changeSchoolInfo(Map<String, Object> map);
+
+    BackUser findShoolByID(int i);
+
 }
 

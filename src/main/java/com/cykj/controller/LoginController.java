@@ -18,20 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Random;
 
 @Controller
 @RequestMapping("/golog")
 public class LoginController {
-
-
-
     @Resource
     private LoginService loginServiceImpl;
     @Resource
     private PowerService powerServiceImpl;
-
 
     //跳转登录界面
     @RequestMapping(value = {"/login"})
@@ -267,4 +264,5 @@ public class LoginController {
             request.getSession().setAttribute("menuList", menuList);
             return "BackMain";
         }
+
     }
