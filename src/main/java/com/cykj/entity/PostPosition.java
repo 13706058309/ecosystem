@@ -32,6 +32,8 @@ public class PostPosition {
   private String contactEmail;//联系邮箱
   private BackUser backUser;
   private List<Industry> industryList;
+  private Delivery delivery;
+  private Parameter parameter;
 
 
   @Override
@@ -267,8 +269,20 @@ public class PostPosition {
     this.backUser = backUser;
   }
 
+  public Delivery getDelivery() {
+    return delivery;
+  }
 
+  public void setDelivery(Delivery delivery) {
+    this.delivery = delivery;
+  }
 
+  public Parameter getParameter() {
+    return parameter;
+  }
 
+  public void setParameter(Parameter parameter) {
+    this.parameter = parameter;
+  }
 
 }

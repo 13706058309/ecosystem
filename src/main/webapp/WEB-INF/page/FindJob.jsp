@@ -21,6 +21,11 @@
     <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
     <script src="${pageContext.request.contextPath}/js/findJob.js" charset="utf-8"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+
+
+
+
+
 </head>
 <body>
 <input type="hidden" id="count" value="${count}">
@@ -28,8 +33,8 @@
 <input type="hidden" id="curr" value="${curr}">
 
 
-<div id="header">
-    <div class="inner home-inner">
+<div id="header" style="background-color: #0d98ff">
+    <div class="inner home-inner" >
         <div class="logo">
             <a href="https://www.zhipin.com/" ka="header-home-logo" title="BOSS直聘"><span>BOSS直聘</span></a>
         </div>
@@ -37,21 +42,21 @@
             <ul>
                 <li class=""><a ka="header-home" href="https://www.zhipin.com/">首页</a></li>
                 <li class="cur"><a ka="header-job" href="https://www.zhipin.com/job_detail/">职位</a></li>
-                <li class=""><a class="nav-school-new" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">EGH</a></li>
-                <li class=""><a ka="tab_overseas_click" href="https://www.zhipin.com/returnee_jobs/">海归</a></li>
-                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">公司</a></li>
-                <li class=""><a ka="header-app" href="https://app.zhipin.com/">APP</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
+                <li class=""><a ka="tab_overseas_click" href="https://www.zhipin.com/returnee_jobs/">简历</a></li>
+                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
+                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
                 <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
             </ul>
         </div>
         <div class="nav-search search-box">
             <form action="https://www.zhipin.com/job_detail/" method="get" target="_blank">
-                <div class="search-form-con">
-                    <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" maxlength="50" placeholder="搜索职位、公司"/></p>
-                </div>
+<%--                <div class="search-form-con">--%>
+<%--                    <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" maxlength="50" placeholder="搜索职位、公司"/></p>--%>
+<%--                </div>--%>
                 <input type="hidden" name="city" class="city-code" value="101230200"/>
                 <input type="hidden" name="source" value="8">
-                <button type="submit" ka="search-job-top" class="btn btn-search">搜索</button>
+<%--                <button type="submit" ka="search-job-top" class="btn btn-search">搜索</button>--%>
                 <div class="suggest-result">
                     <ul></ul>
                 </div>
@@ -60,9 +65,9 @@
         <div class="user-nav">
             <ul>
                 <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
-                <li class=""><a ka="header-resume" href="https://www.zhipin.com/web/geek/resume">简历</a></li>
-                <li class="nav-dot">·</li>
-                <li class="nav-up-file"><a class="header-resume-upload" ka="header-resume-upload-2" href="javascript:;">上传</a></li>
+<%--                <li class=""><a ka="header-resume" href="https://www.zhipin.com/web/geek/resume">简历</a></li>--%>
+<%--                <li class="nav-dot">·</li>--%>
+<%--                <li class="nav-up-file"><a class="header-resume-upload" ka="header-resume-upload-2" href="javascript:;">上传</a></li>--%>
                 <li class="nav-figure">
                     <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
                         <span class="label-text">吴世泽</span><img src="https://img.bosszhipin.com/beijin/upload/avatar/20191127/983522633b91a32d3c06c43f75dcc8e5d28c90069eead34e1450918b517a0c3b_s.png" alt=""/>
@@ -96,7 +101,7 @@
                             </div>
                             <div class="industry-sel" ka="search_bos_sel_industry">
                                 <i class="line"></i>
-                                <span class="label-text" onclick="industryBoxToggle()"><b>公司行业</b><i class="icon-arrow-down"></i></span>
+                                <span class="label-text" id="position9" onclick="industryBoxToggle()"><b>${position}</b><i class="icon-arrow-down"></i></span>
                             </div>
                             <p class="ipt-wrap"><input type="text" id="search" name="query" ka="search-keyword" value="${search}"
                                                        autocomplete="off" class="ipt-search" maxlength="50" placeholder="搜索职位、公司"></p>
@@ -111,38 +116,34 @@
                             <div class="dorpdown-city">
                             </div>
                         </div>
-                        <div class="industry-box">
+                        <div class="industry-box" id="positionsShow">
                             <ul>
                                 <li data-val=""><a href="javascript:;">不限</a></li>
-                                <li data-val="100001" ka="sel-industry-1"><a href="javascript:;">电子商务</a></li>
-                                <li data-val="100002" ka="sel-industry-2"><a href="javascript:;">游戏</a></li>
-                                <li data-val="100003" ka="sel-industry-3"><a href="javascript:;">媒体</a></li>
-                                <li data-val="100004" ka="sel-industry-4"><a href="javascript:;">广告营销</a></li>
-                                <li data-val="100005" ka="sel-industry-5"><a href="javascript:;">数据服务</a></li>
-                                <li data-val="100006" ka="sel-industry-6"><a href="javascript:;">医疗健康</a></li>
-                                <li data-val="100007" ka="sel-industry-7"><a href="javascript:;">生活服务</a></li>
-                                <li data-val="100008" ka="sel-industry-8"><a href="javascript:;">O2O</a></li>
-                                <li data-val="100009" ka="sel-industry-9"><a href="javascript:;">旅游</a></li>
-                                <li data-val="100010" ka="sel-industry-10"><a href="javascript:;">分类信息</a></li>
-                                <li data-val="100011" ka="sel-industry-11"><a href="javascript:;">音乐/视频/阅读</a></li>
-                                <li data-val="100012" ka="sel-industry-12"><a href="javascript:;">在线教育</a></li>
-                                <li data-val="100013" ka="sel-industry-13"><a href="javascript:;">社交网络</a></li>
-                                <li data-val="100014" ka="sel-industry-14"><a href="javascript:;">人力资源服务</a></li>
-                                <li data-val="100015" ka="sel-industry-15"><a href="javascript:;">企业服务</a></li>
-                                <li data-val="100016" ka="sel-industry-16"><a href="javascript:;">信息安全</a></li>
-                                <li data-val="100018" ka="sel-industry-17"><a href="javascript:;">智能硬件</a></li>
-                                <li data-val="100019" ka="sel-industry-18"><a href="javascript:;">移动互联网</a></li>
-                                <li data-val="100020" ka="sel-industry-19"><a href="javascript:;">互联网</a></li>
-                                <li data-val="100021" ka="sel-industry-20"><a href="javascript:;">计算机软件</a></li>
-                                <li data-val="100024" ka="sel-industry-21"><a href="javascript:;">通信/网络设备</a></li>
-                                <li data-val="100101" ka="sel-industry-22"><a href="javascript:;">广告/公关/会展</a></li>
-                                <li data-val="100206" ka="sel-industry-23"><a href="javascript:;">互联网金融</a></li>
-                                <li data-val="100502" ka="sel-industry-24"><a href="javascript:;">物流/仓储</a></li>
-                                <li data-val="100504" ka="sel-industry-25"><a href="javascript:;">贸易/进出口</a></li>
-                                <li data-val="100601" ka="sel-industry-26"><a href="javascript:;">咨询</a></li>
-                                <li data-val="100702" ka="sel-industry-27"><a href="javascript:;">工程施工</a></li>
-                                <li data-val="100801" ka="sel-industry-28"><a href="javascript:;">汽车生产</a></li>
-                                <li data-val="101304" ka="sel-industry-29"><a href="javascript:;">其他行业</a></li>
+                                <c:if test="${not empty positions}">
+                                    <c:forEach var="position" items="${positions}">
+                                        <li data-val="100001" ka="sel-industry-1"><a href="javascript:;">${position.postName}</a></li>
+                                    </c:forEach>
+                                </c:if>
+
+<%--                                <li data-val="100002" ka="sel-industry-2"><a href="javascript:;">游戏</a></li>--%>
+
+
+
+                            </ul>
+                        </div>
+                        <div class="industry-box" id="citysShow">
+                            <ul>
+                                <li data-val=""><a href="javascript:;">不限</a></li>
+                                <c:if test="${not empty citys}">
+                                    <c:forEach var="city" items="${citys}">
+                                        <li data-val="100001" ka="sel-industry-1"><a href="javascript:;">${city.cityName}</a></li>
+                                    </c:forEach>
+                                </c:if>
+
+                                <%--                                <li data-val="100002" ka="sel-industry-2"><a href="javascript:;">游戏</a></li>--%>
+
+
+
                             </ul>
                         </div>
                     </form>
@@ -178,7 +179,7 @@
                         <a onclick="findCity(this)">厦门市</a>
                         <a onclick="findCity(this)">成都市</a>
                         <a onclick="findCity(this)">重庆市</a>
-                        <a href="javascript:;" class="btn-allcity" onclick="showCityDialog()">全部城市</a>
+                        <a href="javascript:;" class="btn-allcity" onclick="updateCityDialog()">全部城市</a>
                     </dd>
                 </dl>
 <%--                <dl class="condition-district  show-condition-district ">--%>
@@ -373,12 +374,15 @@
                                                         data-index="0">${job.postName}</a></span>
                                                     <span class="job-area-wrapper">
                                                     <span class="job-area">${job.detailAddress}</span>
+
                                                 </span>
                                                     <span class="job-pub-time">发布于:${job.releaseTime}</span>
+
                                                 </div>
                                                 <div class="job-limit clearfix">
                                                     <span class="red">${job.minSalary}-${job.maxSalary}k</span>
                                                     <p>${job.workYear}<em class="vline"></em>${job.education}</p>
+<%--                                                    <span class="job-area"><a>投递简历</a></span>--%>
                                                     <div class="info-publis">
                                                         <h3 class="name"><img class="icon-chat"
                                                                               src="https://z.zhipin.com/web/geek/resource/icon-chat-v2.png">${job.backUser.bUserName}
@@ -393,7 +397,9 @@
                                                              alt="">
                                                         <span>立即沟通</span>
                                                     </button>
+
                                                 </div>
+
                                                 <div class="info-detail" style="top: 0px;"></div>
                                             </div>
                                         </div>
@@ -423,11 +429,7 @@
                                     </div>
                                     <div class="info-append clearfix">
                                         <div class="tags">
-                                            <span class="tag-item">Vue</span>
-                                            <span class="tag-item">Angular</span>
-                                            <span class="tag-item">Node.js</span>
-                                            <span class="tag-item">Webpack</span>
-                                            <span class="tag-item">小程序</span>
+                                            <span class="tag-item"><a onclick="sendResume(${job.pPostId})">投递简历</a></span>
                                         </div>
                                         <div class="info-desc">${job.jobBenefits}</div>
                                     </div>
@@ -541,12 +543,15 @@
 
     // 全部城市弹出框
     function showCityDialog() {
-        $("#city-dialog").show()
+        // $("#city-dialog").show()
+        $("#citysShow").toggle()
     }
+
+
 
     // 公司行业切换 隐藏/显示
     function industryBoxToggle() {
-        $(".industry-box").toggle()
+        $("#positionsShow").toggle()
     }
 </script>
 <script>
@@ -594,6 +599,31 @@
     }
     function findsearch() {
         location.href="searchJob?findSearch="+$('#search').val()+"&findWorkCity="+findWorkCity
+    }
+    function updateCityDialog() {
+        // $("#city-dialog").show()
+        $("#citysShow").toggle()
+    }
+    function sendResume(pPostId) {
+        $.ajax({
+            url: 'sendResume',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "pPostId="+pPostId,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('投递成功')
+                } else if (data == "lose") {
+                    layer.msg("简历不完善，无法投递。请先完善再重新投递简历")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
     }
 
     var count=$('#count').val();

@@ -24,15 +24,6 @@ public class ResumeServiceImp implements ResumeService {
         return jianliMapper.resume(userid);
     }
 
-    /**
-     * @param workExperience
-     * @return
-     */
-    @Override
-    public int workInsert(WorkExperience workExperience) {
-        int n=jianliMapper.workInsert(workExperience);
-        return n;
-    }
 
     /**
      * 获取最新添加数据的id
@@ -45,16 +36,25 @@ public class ResumeServiceImp implements ResumeService {
         return n;
     }
 
-    /**
-     * @param weId
-     * @param resumeId
-     * @return
-     */
-    @Override
-    public int rwInsert(int weId, int resumeId) {
-        int n=jianliMapper.rwInsert(weId,resumeId);
-        return n;
-    }
+//    /**
+//     * @param workExperience
+//     * @return
+//     */
+//    @Override
+//    public int workInsert(WorkExperience workExperience) {
+//        int n=jianliMapper.workInsert(workExperience);
+//        return n;
+//    }
+//    /**
+//     * @param weId
+//     * @param resumeId
+//     * @return
+//     */
+//    @Override
+//    public int rwInsert(int weId, int resumeId) {
+//        int n=jianliMapper.rwInsert(weId,resumeId);
+//        return n;
+//    }
 
     /**
      * @param workExperience
@@ -62,77 +62,80 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public boolean workInsert(WorkExperience workExperience, int resumeId) {
-        int n=workInsert(workExperience);
+    public boolean workInsert(WorkExperience workExperience, int resumeId,Resume resume) {
+        int n=jianliMapper.workInsert(workExperience);
         int k=insertid();
-        int j=rwInsert(k,resumeId);
+
+        int j=jianliMapper.rwInsert(k,resumeId);
+        k=jianliMapper.updateResumeTime(resume);
         if (j>0){
             return true;
         }
         return false;
     }
 
+//    /**
+//     * @param projectExperience
+//     * @return
+//     */
+//    @Override
+//    public int projectInsert(ProjectExperience projectExperience) {
+//        int n=jianliMapper.projectInsert(projectExperience);
+//        return n;
+//    }
+//
+//    /**
+//     * @param peId
+//     * @param resumeId
+//     * @return
+//     */
+//    @Override
+//    public int rpInsert(int peId, int resumeId) {
+//        int n=jianliMapper.rpInsert(peId,resumeId);
+//        return n;
+//    }
+
     /**
      * @param projectExperience
+     * @param resumeId
      * @return
      */
     @Override
-    public int projectInsert(ProjectExperience projectExperience) {
+    public boolean projectInsert(ProjectExperience projectExperience, int resumeId,Resume resume) {
         int n=jianliMapper.projectInsert(projectExperience);
-        return n;
-    }
-
-    /**
-     * @param peId
-     * @param resumeId
-     * @return
-     */
-    @Override
-    public int rpInsert(int peId, int resumeId) {
-        int n=jianliMapper.rpInsert(peId,resumeId);
-        return n;
-    }
-
-    /**
-     * @param projectExperience
-     * @param resumeId
-     * @return
-     */
-    @Override
-    public boolean projectInsert(ProjectExperience projectExperience, int resumeId) {
-        int n=projectInsert(projectExperience);
         int k=insertid();
-        int j=rpInsert(k,resumeId);
-        if (j>0){
+        int i=jianliMapper.rpInsert(k,resumeId);
+        i=jianliMapper.updateResumeTime(resume);
+        if (i>0){
             return true;
         }
         return false;
     }
 
-    /**
-     * 背景表数据添加
-     *
-     * @param educationalBackground
-     * @return
-     */
-    @Override
-    public int educationInsert(EducationalBackground educationalBackground) {
-        int n=jianliMapper.educationInsert(educationalBackground);
-        return n;
-    }
-
-    /**
-     * 背景关系表数据添加
-     *
-     * @param ebId
-     * @param resumeId
-     * @return
-     */
-    @Override
-    public int reInsert(int ebId, int resumeId) {
-        int n=jianliMapper.reInsert(ebId,resumeId);
-        return n;
-    }
+//    /**
+//     * 背景表数据添加
+//     *
+//     * @param educationalBackground
+//     * @return
+//     */
+//    @Override
+//    public int educationInsert(EducationalBackground educationalBackground) {
+//        int n=jianliMapper.educationInsert(educationalBackground);
+//        return n;
+//    }
+//
+//    /**
+//     * 背景关系表数据添加
+//     *
+//     * @param ebId
+//     * @param resumeId
+//     * @return
+//     */
+//    @Override
+//    public int reInsert(int ebId, int resumeId) {
+//        int n=jianliMapper.reInsert(ebId,resumeId);
+//        return n;
+//    }
 
     /**
      * 背景事务整合
@@ -142,10 +145,12 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public boolean educationInsert(EducationalBackground educationalBackground, int resumeId) {
-        int n=educationInsert(educationalBackground);
+    public boolean educationInsert(EducationalBackground educationalBackground, int resumeId,Resume resume) {
+        int n=jianliMapper.educationInsert(educationalBackground);
         int k=insertid();
-        int j=reInsert(k,resumeId);
+
+        int j=jianliMapper.reInsert(k,resumeId);
+        k=jianliMapper.updateResumeTime(resume);
         if (j>0){
             return true;
         }
@@ -158,9 +163,10 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public int rwDel(int weId, int resumeId) {
+    public int rwDel(int weId, int resumeId,Resume resume) {
         int n=jianliMapper.rwDel(weId,resumeId);
         int k=jianliMapper.workDel(weId);
+        k=jianliMapper.updateResumeTime(resume);
         return k;
     }
 
@@ -170,9 +176,10 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public int rpDel(int peId, int resumeId) {
+    public int rpDel(int peId, int resumeId,Resume resume) {
         int n=jianliMapper.rpDel(peId,resumeId);
         int k=jianliMapper.projectDel(peId);
+        k=jianliMapper.updateResumeTime(resume);
         return k;
     }
 
@@ -182,9 +189,11 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public int reDel(int ebId, int resumeId) {
+    public int reDel(int ebId, int resumeId,Resume resume) {
+
         int n=jianliMapper.reDel(ebId,resumeId);
         int k=jianliMapper.educationDel(ebId);
+        k=jianliMapper.updateResumeTime(resume);
         return k;
     }
 
@@ -195,6 +204,7 @@ public class ResumeServiceImp implements ResumeService {
     @Override
     public int resumeUpdate(Resume resume) {
         int n=jianliMapper.resumeUpdate(resume);
+        n=jianliMapper.updateResumeTime(resume);
         return n;
     }
 
@@ -203,8 +213,9 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public int workUpdate(WorkExperience workExperience) {
+    public int workUpdate(WorkExperience workExperience,Resume resume) {
         int n=jianliMapper.workUpdate(workExperience);
+        n=jianliMapper.updateResumeTime(resume);
         return n;
     }
 
@@ -213,8 +224,9 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public int projectUpdate(ProjectExperience projectExperience) {
+    public int projectUpdate(ProjectExperience projectExperience,Resume resume) {
         int n=jianliMapper.projectUpdate(projectExperience);
+        n=jianliMapper.updateResumeTime(resume);
         return n;
     }
 
@@ -223,8 +235,9 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public int educationUpdate(EducationalBackground educationalBackground) {
+    public int educationUpdate(EducationalBackground educationalBackground,Resume resume) {
         int n=jianliMapper.educationUpdate(educationalBackground);
+        n=jianliMapper.updateResumeTime(resume);
         return n;
     }
 
@@ -235,6 +248,7 @@ public class ResumeServiceImp implements ResumeService {
     @Override
     public int expectWorkUpdate(Resume resume) {
         int n=jianliMapper.expectWorkUpdate(resume);
+        n=jianliMapper.updateResumeTime(resume);
         return n;
     }
 
@@ -245,8 +259,11 @@ public class ResumeServiceImp implements ResumeService {
     @Override
     public int selfEvaUpdate(Resume resume) {
         int n=jianliMapper.selfEvaUpdate(resume);
+        n=jianliMapper.updateResumeTime(resume);
         return n;
     }
+
+//    -------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * 查找刚兴趣岗位
@@ -373,6 +390,77 @@ public class ResumeServiceImp implements ResumeService {
     @Override
     public UserInfo findUser(int userId) {
         return jianliMapper.findUser(userId);
+    }
+
+    /**
+     * 简历投递
+     *
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    @Override
+    public int sendResume(int userId, int pPostId) {
+        return jianliMapper.sendResume(userId,pPostId);
+    }
+
+    /**
+     * 查找手机号是否存在
+     *
+     * @param telephone
+     * @return
+     */
+    @Override
+    public List<UserInfo> findTtelephone(String telephone) {
+        return jianliMapper.findTtelephone(telephone);
+    }
+
+    /**
+     * 查看反馈信息
+     *
+     * @param userId
+     * @param page
+     * @param limit
+     * @return
+     */
+    @Override
+    public List<PostPosition> deliveryInfo(int userId, int page, int limit) {
+        return jianliMapper.deliveryInfo(userId,page,limit);
+    }
+
+    @Override
+    public List<PostPosition> deliveryInfoCount(int userId) {
+        return jianliMapper.deliveryInfoCount(userId);
+    }
+
+    /**
+     * 查询所有职位类型
+     *
+     * @return
+     */
+    @Override
+    public List<Position> positions() {
+        return jianliMapper.positions();
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<City> citys() {
+        return jianliMapper.citys();
+    }
+
+
+    /**
+     * 修改简历联系方式
+     *
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public int updatePhone(UserInfo userInfo) {
+        return jianliMapper.updatePhone(userInfo);
     }
 
 

@@ -26,6 +26,26 @@
 <body>
 <input type="text" style="display: none" id="kong">
 <input type="hidden" id="resumeId" value="${resume.resumeId}">
+<div id="header" style="background-color: #0d98ff">
+<div class="inner home-inner" >
+    <div class="logo">
+<%--        <img src="" style="width: 120px,20px" >--%>
+<%--        <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo3.png) 3px 7px no-repeat;;background-size:217px 49px"><span>钱程无忧</span></a>--%>
+    </div>
+    <div class="nav">
+        <ul>
+            <li class=""><a ka="header-home" href="https://www.zhipin.com/">首页</a></li>
+            <li class=""><a ka="header-job" href="https://www.zhipin.com/job_detail/">职位</a></li>
+            <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
+            <li class="cur"><a ka="tab_overseas_click" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>
+            <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
+            <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
+            <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+        </ul>
+    </div>
+
+</div>
+</div>
 <div id="wrap" class="">
     <div id="main" class="inner">
         <div id="container" class="resume-container">
@@ -665,8 +685,8 @@
                     </div>
                     <div style="margin-top: 20px">
                         <h3 >我的信息</h3>
-                        <div><a href=""  >收藏岗位</a></div>
-                        <div><a href="" >账号设置</a></div>
+                        <div><a href="${pageContext.request.contextPath}/center/resumeInfo"  >收藏岗位</a></div>
+                        <div><a href="${pageContext.request.contextPath}/center/accountSet" >账号设置</a></div>
                     </div>
                 </div>
             </div>
@@ -682,6 +702,7 @@
     </div>
 </div>
 </div>
+
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate'], function(){
@@ -844,6 +865,31 @@
 
     var kong=$('#kong').val()
 
+    Date.prototype.format = function(fmt){
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "h+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+
+        if(/(y+)/.test(fmt)){
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+
+        for(var k in o){
+            if(new RegExp("("+ k +")").test(fmt)){
+                fmt = fmt.replace(
+                    RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            }
+        }
+
+        return fmt;
+    }
+
     function selectFile() {
 
         $.ajax({
@@ -881,8 +927,8 @@
     }
     // 基础信息
     function userInfoUpdate(educationid) {
-        document.getElementById('ooo').style.textOverflow
-        $('#ooo').remo
+        // document.getElementById('ooo').style.textOverflow
+        // $('#ooo').remo
         name=$('#realName').val()
         clan=$('#clan').val()
         statu=$('#politicalStatus').val()
@@ -905,9 +951,11 @@
     function userInfoSave(resumeId) {
         event.preventDefault()
         var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+        console.log(time)
         // var resumeId=resumeId;
         $.ajax({
-            url: 'userInfoUpdate',
+            url: 'userInfoUpdate?time='+time,
             charset:"UTF-8",
             async: "true",
             type: "post",
@@ -930,6 +978,7 @@
                     $('#profession9').text($('#profession').val())
                     $('#school9').text($('#school').val())
                     $('#address9').text($('#address').val())
+                    $('#updateTime9').text(time)
                     // location.href = path+"/jsp/user.jsp";
                 } else if (data == "lose") {
                     layer.msg("修改失败")
@@ -971,13 +1020,15 @@
     }
     function workSave() {
         expectWork=$('#expectWork').val();
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         // $('#expectWork').text(expectWork)
         $.ajax({
             url: 'expectWorkUpdate',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "expectWork="+expectWork+"&resumeId="+resumeId,
+            data: "expectWork="+expectWork+"&resumeId="+resumeId+'&time='+time,
             // processData:false,
             // contentType:false,
             dataType: "text",
@@ -986,6 +1037,7 @@
                     //向服务端发送删除指令
                     layer.msg('修改成功')
                     $('#expectWork9').text(expectWork)
+                    $('#updateTime9').text(time)
 
                 } else if (data == "lose") {
                     layer.msg("修改失败")
@@ -1014,12 +1066,14 @@
     function summarySave() {
         selfEva=$('#selfEva').val();
         console.log(resumeId+"??????????")
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         $.ajax({
             url: 'selfEvaUpdate',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "selfEva="+selfEva+"&resumeId="+resumeId,
+            data: "selfEva="+selfEva+"&resumeId="+resumeId+'&time='+time,
             // processData:false,
             // contentType:false,
             dataType: "text",
@@ -1028,6 +1082,7 @@
                     //向服务端发送删除指令
                     layer.msg('修改成功')
                     $('#selfEva9').text(selfEva)
+                    $('#updateTime9').text(time)
 
                 } else if (data == "lose") {
                     layer.msg("修改失败")
@@ -1091,13 +1146,15 @@
         $("#history-update").show()
     }
     function historyDelete(weid) {
-        console.log(weid+"???????????")
+        console.log(weid+"???????????");
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         $.ajax({
             url: 'historyDelete',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "weId="+weid,
+            data: "weId="+weid+'&time='+time,
             // processData:false,
             // contentType:false,
             dataType: "text",
@@ -1105,7 +1162,9 @@
                 if (data == "succes") {
                     //向服务端发送删除指令
                     layer.msg('删除成功')
-                    // location.reload()
+
+                    // $('#updateTime9').text(time)
+                    location.reload()
                 } else if (data == "lose") {
                     layer.msg("删除失败")
                 }
@@ -1118,9 +1177,11 @@
     function historyCommit2() {
         $('#weId').val(0);
         var  workInsert=new FormData(document.getElementById("workInsert"));
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         console.log(workInsert)
         $.ajax({
-            url: 'historyCommit',
+            url: 'historyCommit?time='+time,
             charset:"UTF-8",
             async: "true",
             type: "post",
@@ -1145,9 +1206,11 @@
     function historySave2() {
 
         var  workInsert=new FormData(document.getElementById("workInsert"));
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         console.log(workInsert)
         $.ajax({
-            url: 'historySave',
+            url: 'historySave?time='+time,
             charset:"UTF-8",
             async: "true",
             type: "post",
@@ -1166,6 +1229,7 @@
                     $('#'+worksid).find('#endTime9').text($('#endTime').val());
                     $('#'+worksid).find('#duties9').text($('#duties').val());
                     $('#'+worksid).find('#performance9').text($('#performance').val());
+                    $('#updateTime9').text(time)
                     // location.reload()
                 } else if (data == "lose") {
                     layer.msg("添加失败")
@@ -1205,12 +1269,14 @@
     function projectDelete(peid) {
         var peId=peid;
         console.log(peId+"?????????")
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         $.ajax({
             url: 'projectDelete',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "peId="+peId,
+            data: "peId="+peId+'&time='+time,
             // processData:false,
             // contentType:false,
             dataType: "text",
@@ -1254,9 +1320,11 @@
     }
     function projectSave2() {
         var  projectInsert=new FormData(document.getElementById("projectInsert"));
-        console.log(workInsert)
+        console.log(workInsert);
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         $.ajax({
-            url: 'projectSave',
+            url: 'projectSave?time='+time,
             charset:"UTF-8",
             async: "true",
             type: "post",
@@ -1274,6 +1342,7 @@
                     $('#'+projects).find('#proEndTime9').text($('#proEndTime').val());
                     $('#'+projects).find('#proDescription9').text($('#pproDescription').val());
                     $('#'+projects).find('#proPerformance9').text($('#proPerformance').val());
+                    $('#updateTime9').text(time)
                 } else if (data == "lose") {
                     layer.msg("添加失败")
                 }
@@ -1291,9 +1360,11 @@
     function projectCommit2() {
         $('#peId').val(0);
         var  projectInsert=new FormData(document.getElementById("projectInsert"));
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         console.log(workInsert)
         $.ajax({
-            url: 'projectCommit',
+            url: 'projectCommit?time='+time,
             charset:"UTF-8",
             async: "true",
             type: "post",
@@ -1343,18 +1414,21 @@
     }
     function educationDelete(ebid) {
         console.log(ebid+"?????????")
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         $.ajax({
             url: 'educationDelete',
             charset:"UTF-8",
             async: "true",
             contentType:'application/x-www-form-urlencoded',
             type: "post",
-            data: "ebId="+ebid,
+            data: "ebId="+ebid+'&time='+time,
             dataType: "text",
             success: function (data) {
                 if (data == "succes") {
                     //向服务端发送删除指令
                     layer.msg('删除成功')
+                    location.reload();
                     // location.reload()
                 } else if (data == "lose") {
                     layer.msg("删除失败")
@@ -1391,8 +1465,10 @@
     }
     function educationSave2() {
         var  educationInsert=new FormData(document.getElementById("educationInsert"));
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         $.ajax({
-            url: 'educationSave',
+            url: 'educationSave?time='+time,
             charset:"UTF-8",
             async: "true",
             type: "post",
@@ -1410,6 +1486,7 @@
                     $('#'+educationsid).find('#schBeginTime9').text($('#schBeginTime').val());
                     $('#'+educationsid).find('#schEndTime9').text($('#schEndTime').val());
                     $('#'+educationsid).find('#schExperience9').text($('#schExperience').val());
+                    $('#updateTime9').text(time)
                 } else if (data == "lose") {
                     layer.msg("添加失败")
                 }
@@ -1428,9 +1505,11 @@
     function educationCommit2() {
         $('#ebId').val(0);
         console.log($('#ebId'))
+        var information=new FormData(document.getElementById("userInfoUpdate"))
+        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
         var  educationInsert=new FormData(document.getElementById("educationInsert"));
         $.ajax({
-            url: 'educationCommit',
+            url: 'educationCommit?time='+time,
             charset:"UTF-8",
             async: "true",
             type: "post",

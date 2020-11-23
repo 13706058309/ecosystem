@@ -42,15 +42,34 @@
     </script>
 </head>
 <body>
+<div id="header" style="background-color: #0d98ff">
+    <div class="inner home-inner" >
+        <div class="logo">
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="BOSS直聘"><span>BOSS直聘</span></a>
+        </div>
+        <div class="nav">
+            <ul>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
+                <li class="cur"><a ka="tab_overseas_click" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>
+                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
+                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
+                <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
 <form class="layui-form">
-<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="width: 70%">
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="width: 70%;margin-left: 15%;margin-top: 2%">
     <input type="hidden" id="count" value="${count}">
     <input type="hidden" id="limit" value="${limit}">
     <input type="hidden" id="curr" value="${curr}">
     <ul class="layui-tab-title" >
         <li  <c:if test="${not empty posts}">class="layui-this"</c:if> lay-id="resumeInfo">感兴趣</li>
         <li  <c:if test="${not empty postss}">class="layui-this"</c:if> lay-id="resumeCommit">已投递</li>
-        <li lay-id="interview">面试</li>
+        <li lay-id="deliveryInfo" <c:if test="${not empty postsss}">class="layui-this"</c:if> >投递反馈</li>
         <li lay-id="communication">沟通过</li>
     </ul>
     <div class="layui-tab-content" style="height: 90%">
@@ -150,10 +169,6 @@
                                                     <c:forEach var="post" items="${postss}">
                                                         <div class="item-primary">
                                                             <h3 class="title"> ${post.backUser.bUserName}
-<%--                                                                <a href="javascript:;" ka="user-resume-add-expectation"--%>
-<%--                                                                                      class="link-add"><svg class="icon-svg">--%>
-<%--                                                                <use xlink:href="#icon-svg-add"></use>--%>
-<%--                                                            </svg><span onclick="postDel(${post.pPostId})">取消感兴趣</span></a>--%>
                                                             </h3>
                                                             <ul>
                                                                 <li ka="user-resume-edit-expectation0" class="">
@@ -216,7 +231,88 @@
 
 
         </div>
-        <div class="layui-tab-item">内容3</div>
+        <div class="layui-tab-item <c:if test="${not empty postsss}" >layui-show</c:if>">
+            <c:if test="${not empty postsss}">
+                <div id="wrap" class=""><c:if test="${not empty postsss}">
+                <div id="main" class="inner"><c:if test="${not empty postsss}">
+                <div id="container" class="resume-container">
+                    <div class="resume-content">
+                        <!---->
+                        <div class="resume-content-box">
+
+                            <div class="resume-box"><c:if test="${not empty postsss}">
+                                <div id="userinfo" class="resume-item resume-userinfo"><c:if test="${not empty postsss}">
+                                    <div id="purpose" class="resume-item resume-purpose">
+                                        <c:if test="${not empty postsss}">
+                                            <c:forEach var="post" items="${postsss}">
+                                                <div class="item-primary">
+                                                    <h3 class="title"> ${post.backUser.compName}--${post.postName}的反馈信息
+                                                    </h3>
+                                                    <ul>
+                                                        <li ka="user-resume-edit-expectation0" class="">
+                                                            <div class="primary-info">
+                                                                <div class="info-labels"><span class="prev-line"><span
+                                                                        class="label-text"><i class=" "></i>简历状态:${post.parameter.paramName}
+                                                                    &nbsp; &nbsp; <i>${post.delivery.feedBackTime}</i>
+                                                        </span>
+<%--                                                                </span><span class="prev-line"><i--%>
+<%--                                                                        class="fz-resume fz-salary"></i> ${post.minSalary}--${post.maxSalary}k </span>--%>
+<%--                                                                    <span class="prev-line"><i--%>
+<%--                                                                            class="fz-resume fz-place"></i> ${post.jobDescription} </span>--%>
+                                                                </div>
+                                                            </div>
+                                                            <div class="op op-show">
+<%--                                                                <!----><a href="javascript:;" ka="user-resume-edit-expectation0"--%>
+<%--                                                                          class="link-edit"><svg class="icon-svg">--%>
+<%--                                                                <use xlink:href="#icon-svg-edit"></use>--%>
+<%--                                                            </svg><span>${post.backUser.compName}</span></a>--%>
+                                                                <a href="javascript:;" ka="user-resume-edit-expectation0"
+                                                                                                               class="link-edit"><svg class="icon-svg">
+                                                                <use xlink:href="#icon-svg-edit"></use>
+                                                            </svg><span onclick="postInfo(${post.pPostId})">岗位详情</span></a></div>
+                                                        </li>
+                                                        <li ka="user-resume-edit-expectation0" class="">
+                                                            <div class="primary-info">
+                                                                <div class="info-labels"><span class="prev-line"><span
+                                                                        class="label-text"><i class="fz-resume fz-job"></i> 反馈信息：${post.delivery.feedBackInfo}
+                                                        </span></span>
+<%--                                                                    <span class="prev-line"><i--%>
+<%--                                                                        class="fz-resume fz-salary"></i> ${post.education} </span><span--%>
+<%--                                                                        class="prev-line"><i class="fz-resume fz-salary"></i>--%>
+<%--                                                        ${post.jobBenefits} </span>--%>
+                                                                </div>
+                                                            </div>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </c:forEach>
+                                        </c:if>
+
+                                    </div></c:if>
+                                </div></c:if>
+                            </div>
+                            <div id="fenye3" style="text-align: center"></div>
+                        </div>
+                    </div>
+                        <%--                        <div class="user-sider" style="height: 600px;background: #fff;">--%>
+                        <%--                            <div data-v-3b220faa="" class="sider-box sider-resume">--%>
+                        <%--                                <div data-v-3b220faa="" class="resume-attachment">--%>
+                        <%--                                    <h3 data-v-3b220faa="" class="sider-title">附件管理--%>
+                        <%--                                    </h3>--%>
+                        <%--                                    <div data-v-3b220faa="" class="btns"><button data-v-3b220faa="" type="button"--%>
+                        <%--                                                                                 class="btn btn-primary">上传简历</button>--%>
+                        <%--                                    </div>--%>
+                        <%--                                    <div data-v-3b220faa="" class="">--%>
+                        <%--                                    </div>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                        </div>--%>
+                </div>
+                </div></c:if>
+                </div></c:if>
+            </c:if>
+        </div>
         <div class="layui-tab-item">内容4</div>
     </div>
 
@@ -349,10 +445,27 @@
                 }
             }
         });
+        laypage.render({
+            elem: 'fenye3'
+            ,count: count
+            ,curr:curr
+            ,theme: '#1E9FFF'
+            ,limit:limit
+            ,jump:function (obj,first) {
+                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                console.log(obj.limit); //得到每页显示的条数
+                if(!first){
+                    location.href="deliveryInfoPage?curr="+obj.curr+"&limit="+obj.limit;
+                }
+            }
+        });
 
 
 
     });
+    function postInfo(id) {
+        location.href="postInfo?pPostId="+id;
+    }
 </script>
 </body>
 </html>

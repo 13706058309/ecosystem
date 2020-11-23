@@ -1,6 +1,7 @@
 package com.cykj.service;
 
 import com.cykj.entity.*;
+import com.sun.javafx.logging.PulseLogger;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface ResumeService {
      * @param workExperience
      * @return
      */
-    public int workInsert(WorkExperience workExperience);
+//    public int workInsert(WorkExperience workExperience);
 
     /**
      * 获取最新添加数据的id
@@ -33,7 +34,7 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public int rwInsert(int weId,int resumeId);
+//    public int rwInsert(int weId,int resumeId);
 
     /**
      *
@@ -41,14 +42,14 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public boolean workInsert(WorkExperience workExperience,int resumeId);
+    public boolean workInsert(WorkExperience workExperience,int resumeId,Resume resume);
 
     /**
      *
      * @param projectExperience
      * @return
      */
-    public int projectInsert(ProjectExperience projectExperience);
+//    public int projectInsert(ProjectExperience projectExperience);
 
     /**
      *
@@ -56,7 +57,7 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public int rpInsert(int peId,int resumeId);
+//    public int rpInsert(int peId,int resumeId);
 
     /**
      *
@@ -64,14 +65,14 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public boolean projectInsert(ProjectExperience projectExperience,int resumeId);
+    public boolean projectInsert(ProjectExperience projectExperience,int resumeId,Resume resume);
 
     /**
      * 背景表数据添加
      * @param educationalBackground
      * @return
      */
-    public int educationInsert(EducationalBackground educationalBackground);
+//    public int educationInsert(EducationalBackground educationalBackground);
 
     /**
      * 背景关系表数据添加
@@ -79,7 +80,7 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public int reInsert(int ebId,int resumeId);
+//    public int reInsert(int ebId,int resumeId);
 
     /**
      * 背景事务整合
@@ -87,7 +88,7 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public boolean educationInsert(EducationalBackground educationalBackground,int resumeId);
+    public boolean educationInsert(EducationalBackground educationalBackground,int resumeId,Resume resume);
 
     /**
      *
@@ -95,7 +96,7 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public int rwDel(int weId,int resumeId);
+    public int rwDel(int weId,int resumeId,Resume resume);
 
     /**
      *
@@ -103,7 +104,7 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public int rpDel(int peId,int resumeId);
+    public int rpDel(int peId,int resumeId,Resume resume);
 
     /**
      *
@@ -111,7 +112,7 @@ public interface ResumeService {
      * @param resumeId
      * @return
      */
-    public int reDel(int ebId,int resumeId);
+    public int reDel(int ebId,int resumeId,Resume resume);
 
     //简历修改
 
@@ -127,21 +128,21 @@ public interface ResumeService {
      * @param workExperience
      * @return
      */
-    public int workUpdate(WorkExperience workExperience);
+    public int workUpdate(WorkExperience workExperience,Resume resume);
 
     /**
      *
      * @param projectExperience
      * @return
      */
-    public int projectUpdate(ProjectExperience projectExperience);
+    public int projectUpdate(ProjectExperience projectExperience,Resume resume);
 
     /**
      *
      * @param educationalBackground
      * @return
      */
-    public int educationUpdate(EducationalBackground educationalBackground);
+    public int educationUpdate(EducationalBackground educationalBackground,Resume resume);
 
 //    期望工作和个人优势修改
 
@@ -241,5 +242,50 @@ public interface ResumeService {
      * @return
      */
     public UserInfo findUser(int userId);
+
+    /**
+     * 简历投递
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    public int sendResume(int userId,int pPostId);
+
+    /**
+     * 修改简历联系方式
+     * @param userInfo
+     * @return
+     */
+    public int updatePhone(UserInfo userInfo);
+
+    /**
+     * 查找手机号是否存在
+     * @param telephone
+     * @return
+     */
+    public List<UserInfo> findTtelephone(@Param("telephone")String telephone);
+
+    /**
+     * 查看反馈信息
+     * @param userId
+     * @param page
+     * @param limit
+     * @return
+     */
+    public  List<PostPosition> deliveryInfo(int userId,int page,int limit);
+    public  List<PostPosition> deliveryInfoCount(int userId);
+
+    /**
+     * 查询所有职位类型
+     * @return
+     */
+    public List<Position> positions();
+
+    /**
+     *
+     * @return
+     */
+    public List<City> citys();
+
 
 }

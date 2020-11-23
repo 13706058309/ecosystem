@@ -16,6 +16,12 @@
     <title>账号设置</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <script src="${pageContext.request.contextPath}//layui/layui.js"></script>
+
+    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/js/findJob.js" charset="utf-8"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+
     <style>
         .layui-tab-title li{
             display: block;
@@ -31,6 +37,25 @@
     </style>
 </head>
 <body>
+
+<div id="header" style="background-color: #0cccb5">
+    <div class="inner home-inner" >
+        <div class="logo">
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="BOSS直聘"><span>BOSS直聘</span></a>
+        </div>
+        <div class="nav">
+            <ul>
+                <li class=""><a ka="header-home" href="https://www.zhipin.com/">首页</a></li>
+                <li class="cur"><a ka="header-job" href="https://www.zhipin.com/job_detail/">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
+                <li class=""><a ka="tab_overseas_click" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>
+                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
+                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
+                <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+            </ul>
+        </div>
+
+    </div>
 <div style="width: 60%;height: 50%;margin-top: 5%;margin-left: 20%">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>账号设置</legend>
@@ -63,7 +88,7 @@
                         <input type="password" id="newpwd2" required  lay-verify="required" placeholder="再次输入密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+                <div class="site-demo-button" id="layerDemo" style="text-align: center" >
 <%--                    <div class="layui-input-block">--%>
                         <input id="savePwd" type="button" value="保存"  data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">
 <%--                    </div>--%>
@@ -72,29 +97,31 @@
             <div class="layui-tab-item" style="margin-top: 20%;margin-left: 20%">
                 <form class="layui-form" action="">
                     <div>
-                        <label class="layui-form-label" style="width: 25%">当前手机号：</label>
-                        <label class="layui-form-label">${user.telephone}</label>
+                        <label class="layui-form-label"  style="width: 25%">当前手机号：</label>
+                        <label class="layui-form-label" id="oldPhone">${user.telephone}</label>
                         <button id="hidePhone" class="layui-btn layui-btn-sm layui-btn-danger" onclick="showPhone()" lay-filter="formDemo">绑定新手机号</button>
                     </div>
                     <div id="showPhone" style="display: none">
                         <div class="layui-form-item">
                             <label class="layui-form-label"  style="width: 25%">新手机号码：</label>
                             <div class="layui-input-block">
-                                <input style="width: 65%" type="text" name="title" required  lay-verify="required" placeholder="请输入新手机号码" autocomplete="off" class="layui-input">
+                                <input style="width: 65%" type="text" id="newPhone" name="title" required  lay-verify="required" placeholder="请输入新手机号码" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-form-item">
-                                <label class="layui-form-label" style="width: 25%">验证码:</label>
+                                <label class="layui-form-label"  style="width: 25%">验证码:</label>
                                 <div class="layui-input-inline">
-                                    <input type="password" name="password" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                                    <input type="text" name="password" id="vCode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
                                 </div>
-                                <button class="layui-btn layui-btn-xs" lay-submit lay-filter="formDemo">获取验证码</button>
+                                <input class="layui-btn layui-btn-xs" id="vCodeMenu"  value="获取验证码" style="width: 17%">
+<%--                                <button class="layui-btn layui-btn-xs" onclick="vCode(this)" lay-filter="formDemo">获取验证码</button>--%>
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                                <input class="layui-btn" id="updatePhone" value="立即提交">
+<%--                                <button class="layui-btn" id="updatePhone"  >立即提交</button>--%>
                                 <button type="reset" class="layui-btn layui-btn-primary" onclick="quitPhone()">取消</button>
                             </div>
                         </div>
@@ -119,6 +146,7 @@
     </div>
 </div>
 
+</div>
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
@@ -245,7 +273,59 @@
             // }
         });
 
+        $('#updatePhone').on('click',function () {
+            var newPhone=$('#newPhone').val();
+            var vCode=$('#vCode').val();
+            console.log(newPhone);
+            console.log(vCode);
+            $.ajax({
+                url: 'updatePhone',
+                charset:"UTF-8",
+                async: "true",
+                type: "post",
+                data: "vCode="+vCode,
+                dataType: "text",
+                success: function (data) {
+                    if (data == "succes") {
+                        layer.msg("手机号修改成功")
+                        document.getElementById("hidePhone").style.display='block';
+                        document.getElementById("showPhone").style.display='none';
+                        $('#oldPhone').text(newPhone);
+                        $('#newPhone').val("");
+                        $('#vCode').val("");
 
+                    } else if (data == "lose") {
+                        layer.msg("验证码错误")
+                    }
+                },
+                error: function () {
+                    layer.msg('网络繁忙')
+                }
+            })
+
+        })
+        $('#vCodeMenu').on('click',function () {
+            $.ajax({
+                url: 'vCodeMenu',
+                charset:"UTF-8",
+                async: "true",
+                type: "post",
+                data: "newPhone="+$('#newPhone').val(),
+                dataType: "text",
+                success: function (data) {
+                    if (data == "succes") {
+                        layer.msg("已发送验证码，请注意查看");
+                        $('#vCodeMenu').val("已发送")
+
+                    } else if (data == "lose") {
+                        layer.msg("手机号已被绑定")
+                    }
+                },
+                error: function () {
+                    layer.msg('网络繁忙')
+                }
+            })
+        })
 
 
 
@@ -258,6 +338,8 @@
         document.getElementById("hidePhone").style.display='block';
         document.getElementById("showPhone").style.display='none';
     }
+
+
 </script>
 <script>
 

@@ -56,7 +56,26 @@ public interface JianliMapper {
 //    查找岗位详情
     public PostPosition findPost(@Param("pPostID")int pPostID);
 
+
     public UserInfo findpwd(Map map);
     public int savepwd(Map map);
     public int saveShow(Map map);
+//    简历投递
+    public int sendResume(@Param("userId")int userId,@Param("pPostId")int pPostId);
+
+//    查找手机号是否存在
+    public List<UserInfo> findTtelephone(@Param("telephone")String telephone);
+//    修改简历联系方式
+    public int updatePhone(UserInfo userInfo);
+    //查看反馈信息
+    public  List<PostPosition> deliveryInfoCount(@Param("userId")int userId);
+    public List<PostPosition> deliveryInfo(@Param("userId")int userId,@Param("page")int page,@Param("limit")int limit);
+
+//    修改简历时间
+    public int updateResumeTime(Resume resume);
+
+//    查看所有职位类型
+    public List<Position> positions();
+//    查看所有城市
+    public List<City> citys();
 }

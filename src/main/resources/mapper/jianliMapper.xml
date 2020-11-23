@@ -231,17 +231,34 @@
             <result property="infoIntr" column="infoIntr"></result>
         </association>
     </resultMap>
-    <select id="deliveryPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
-        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+
+    <select id="deliveryInfo" parameterType="java.lang.Integer" resultMap="findiobs">
+        select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join parameter p on d.deliStandId=p.paramId
+            left join postPosition pp on d.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId}  limit #{page},#{limit};
+    </select>
+    <select id="deliveryInfoCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join parameter p on d.deliStandId=p.paramId
             left join postPosition pp on d.pPostID=pp.pPostID
             left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId} ;
     </select>
+
+    <select id="deliveryPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join postPosition pp on d.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId};
+    </select>
+
+
 
     <select id="jobsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
         select  pp.*,b.*,i.*  from  postPosition pp left join postCellec pc on pp.pPostID=pc.pPostID
         left join backUser b on pp.companyID=b.bUserID
         left join comp_industry  ci on b.bUserId=ci.compId
         left join industry i on ci.industryID=i.industryID
+        left join position p on pp.postId=p.postId
         <where>
         <if test="workCity!=null" >
             pp.workCity=#{workCity}
@@ -276,8 +293,11 @@
             and  maxSalary  &gt;= #{min2}
         </if>
         <if test="search!=null" >
-            and  (postName  like #{search} or compName like #{search} )
+            and  (pp.postName  like #{search} or compName like #{search} )
         </if>
+            <if test="position!=null" >
+                and  p.postName=#{position}
+            </if>
         </where>
     </select>
     <select id="jobs" parameterType="java.util.HashMap" resultMap="findiobs">
@@ -286,6 +306,7 @@
             left join backUser b on pp.companyID=b.bUserID
             left join comp_industry  ci on pp.companyId=ci.compId
             left join industry i on ci.industryID=i.industryID
+            left join position p on pp.postId=p.postId
             <where>
             <if test="workCity!=null" >
                 pp.workCity=#{workCity}
@@ -319,8 +340,11 @@
                 and  maxSalary  &gt;= #{min2}
             </if>
             <if test="search!=null" >
-                and  (postName  like #{search} or compName like #{search} )
+                and  (pp.postName  like #{search} or compName like #{search} )
             </if>
+                <if test="position!=null" >
+                    and  p.postName=#{position}
+                </if>
             </where>
               limit #{page},#{limit}
     </select>
@@ -337,7 +361,7 @@
         <result property="jobBenefits" column="jobBenefits"></result>
         <result property="jobDescription" column="jobDescription"></result>
         <result property="detailAddress" column="detailAddress"></result>
-        <result property="releaseTime" column="detailAddress"></result>
+        <result property="releaseTime" column="releaseTime"></result>
         <result property="maxSalary" column="maxSalary"></result>
         <result property="minSalary" column="minSalary"></result>
         <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">
@@ -349,6 +373,18 @@
             <result property="finanStage" column="finanStage"></result>
             <result property="logo" column="logo"></result>
             <result property="scale" column="scale"></result>
+        </association>
+        <association property="delivery" column="delivery" javaType="com.cykj.entity.Delivery">
+            <id property="deliveryId" column="deliveryId"></id>
+            <result property="deliStandId" column="deliStandId"></result>
+            <result property="feedBackInfo" column="feedBackInfo"></result>
+            <result property="feedBackTime" column="feedBackTime"></result>
+        </association>
+        <association property="parameter" column="parameter" javaType="com.cykj.entity.Parameter">
+            <id property="paramId" column="paramId"></id>
+            <result property="paramName" column="paramName"></result>
+            <result property="paramType" column="paramType"></result>
+            <result property="paramValues" column="paramValues"></result>
         </association>
         <collection property="industryList"   ofType="com.cykj.entity.Industry">
             <id property="industryId" column="industryId"></id>
@@ -369,4 +405,34 @@
         update userInfo set isOpen=#{isOpen} where userId=#{userId}
     </update>
 
+    <update id="phone" parameterType="java.util.HashMap">
+        update userInfo set isOpen=#{isOpen} where userId=#{userId}
+    </update>
+
+<!--    简历投递-->
+    <insert id="sendResume" parameterType="java.lang.Integer">
+        insert into delivery (userId,pPostId) values (#{userId},#{pPostId})
+    </insert>
+<!--    查看手机号码是否存在-->
+    <select id="findTtelephone" parameterType="java.lang.String" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where telephone=#{telephone}
+    </select>
+<!--    修改yonghu手机号-->
+    <update id="updatePhone" parameterType="com.cykj.entity.UserInfo">
+        update userInfo set telephone=#{telephone} where userId=#{userId}
+    </update>
+
+<!--    简历更新时间-->
+    <update id="updateResumeTime" parameterType="com.cykj.entity.Resume">
+        update resume set updateTime=#{updateTime} where userId=#{userId}
+    </update>
+
+<!--    查看所有职位类型-->
+    <select id="positions" resultType="com.cykj.entity.Position">
+        select * from position ;
+    </select>
+<!--    查看所有城市-->
+    <select id="citys" resultType="com.cykj.entity.City">
+        select * from city ;
+    </select>
 </mapper>

@@ -4,6 +4,7 @@ package com.cykj.controller;
 import com.cykj.entity.*;
 import com.cykj.service.ResumeService;
 import com.cykj.service.impl.ResumeServiceImp;
+import com.cykj.utils.PhoneCodeUtil;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import java.util.*;
 @RequestMapping("/center")
 public class CenterController {
     private int resumeId;
-    private int userId;
+    private int userId=1;
     String workCity="厦门市";
     String workYear="工作经验";
     String education="学历要求";
@@ -29,6 +30,7 @@ public class CenterController {
     String scale="公司规模";
     String releaseTime="发布时间";
     String search="";
+    String position="职位类型";
     @Resource
     private ResumeService resumeService;
     @RequestMapping("/myCenter")
@@ -118,6 +120,40 @@ public class CenterController {
         System.out.println(new Gson().toJson(posts));
         return "resumeInfo";
     }
+
+    @RequestMapping("/deliveryInfo")
+    public String deliveryInfo(HttpServletRequest req){
+        userId=1;
+        int page=0;
+        int curr=1;
+        int limit=2;
+        List<PostPosition> posts=resumeService.deliveryInfo(userId,page,limit);
+        List<PostPosition> postsCount=resumeService.deliveryInfoCount(userId);
+        int count=postsCount.size();
+
+        req.setAttribute("postsss",posts);
+        req.setAttribute("count",count);
+        req.setAttribute("limit",limit);
+        req.setAttribute("curr",curr);
+        System.out.println(new Gson().toJson(posts));
+        return "resumeInfo";
+    }
+    @RequestMapping("/deliveryInfoPage")
+    public String deliveryInfoPage(HttpServletRequest req,int curr,int limit){
+        userId=1;
+        List<PostPosition> posts=resumeService.deliveryInfo(userId,(curr-1)*limit,limit);
+        List<PostPosition> postsCount=resumeService.deliveryInfoCount(userId);
+        int count=postsCount.size();
+
+        req.setAttribute("postsss",posts);
+        req.setAttribute("count",count);
+        req.setAttribute("limit",limit);
+        req.setAttribute("curr",curr);
+        System.out.println(new Gson().toJson(posts));
+        return "resumeInfo";
+    }
+
+
     @RequestMapping("/resumePage")
     public String resumePage(HttpServletRequest req,int curr,int limit){
         userId=1;
@@ -201,9 +237,15 @@ public class CenterController {
         return "AccountSet";
     }
 
+
+//    简历信息修改
     @RequestMapping("/userInfoUpdate")
-    public @ResponseBody String userInfoUpdate(Resume resume,String education){
+    public @ResponseBody String userInfoUpdate(HttpServletRequest req,Resume resume,String education,String time){
 //        System.out.println(new Gson().toJson(resume));
+//        String time=new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").format(updateTime);
+        req.setAttribute("updateTime",time);
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
         int n=resumeService.resumeUpdate(resume);
         String msg="lose";
         if (n>0){
@@ -214,9 +256,13 @@ public class CenterController {
 
 //    工作经历
     @RequestMapping("/historyCommit")
-    public @ResponseBody String historyCommit(WorkExperience workExperience){
+    public @ResponseBody String historyCommit(HttpServletRequest req,WorkExperience workExperience,String time){
+        Resume resume=new Resume();
         System.out.println(new Gson().toJson(workExperience));
-        boolean flag=resumeService.workInsert(workExperience,resumeId);
+        req.setAttribute("updateTime",time);
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
+        boolean flag=resumeService.workInsert(workExperience,resumeId,resume);
         String msg="lose";
         if (flag){
             msg="succes";
@@ -224,9 +270,13 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/historySave")
-    public @ResponseBody String historySave(WorkExperience workExperience){
+    public @ResponseBody String historySave(HttpServletRequest req,WorkExperience workExperience,String time){
+        Resume resume=new Resume();
+        req.setAttribute("updateTime",time);
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
         System.out.println(new Gson().toJson(workExperience));
-        int n=resumeService.workUpdate(workExperience);
+        int n=resumeService.workUpdate(workExperience,resume);
         String msg="lose";
         if (n>0){
             msg="succes";
@@ -234,9 +284,13 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/historyDelete")
-    public @ResponseBody String historyDelect(int weId){
+    public @ResponseBody String historyDelect(HttpServletRequest req,int weId,String time){
+        Resume resume=new Resume();
+        req.setAttribute("updateTime",time);
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
         System.out.println(weId+"?????????????????");
-        int n=resumeService.rwDel(weId,resumeId);
+        int n=resumeService.rwDel(weId,resumeId,resume);
         String msg="lose";
         if (n>0){
             msg="succes";
@@ -246,10 +300,14 @@ public class CenterController {
 
 //    项目经历
     @RequestMapping("/projectCommit")
-    public @ResponseBody String projectCommit(ProjectExperience projectExperience){
+    public @ResponseBody String projectCommit(HttpServletRequest req,ProjectExperience projectExperience,String time){
+        Resume resume=new Resume();
+        req.setAttribute("updateTime",time);
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
         System.out.println(new Gson().toJson(projectExperience));
         System.out.println("???????????????????????????");
-        boolean flag=resumeService.projectInsert(projectExperience,resumeId);
+        boolean flag=resumeService.projectInsert(projectExperience,resumeId,resume);
         String msg="lose";
         if (flag){
             msg="succes";
@@ -257,9 +315,13 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/projectSave")
-    public @ResponseBody String projectSave(ProjectExperience projectExperience){
+    public @ResponseBody String projectSave(HttpServletRequest req,ProjectExperience projectExperience,String time){
+        Resume resume=new Resume();
+        req.setAttribute("updateTime",time);
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
 //        System.out.println(new Gson().toJson(projectExperience));
-        int n=resumeService.projectUpdate(projectExperience);
+        int n=resumeService.projectUpdate(projectExperience,resume);
         String msg="lose";
         if (n>0){
             msg="succes";
@@ -267,9 +329,12 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/projectDelete")
-    public @ResponseBody String projectDelect(int peId){
+    public @ResponseBody String projectDelect(int peId,String time){
+        Resume resume=new Resume();
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
         System.out.println("peid="+peId);
-        int n=resumeService.rpDel(peId,resumeId);
+        int n=resumeService.rpDel(peId,resumeId,resume);
         String msg="lose";
         if (n>0){
             msg="succes";
@@ -280,9 +345,12 @@ public class CenterController {
 
 //    教育背景
     @RequestMapping("/educationCommit")
-    public @ResponseBody String educationCommit(EducationalBackground educationalBackground){
+    public @ResponseBody String educationCommit(EducationalBackground educationalBackground,String time){
 //        System.out.println(new Gson().toJson(educationalBackground));
-        boolean flag=resumeService.educationInsert(educationalBackground,resumeId);
+        Resume resume=new Resume();
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
+        boolean flag=resumeService.educationInsert(educationalBackground,resumeId,resume);
         String msg="lose";
         if (flag){
             msg="succes";
@@ -290,9 +358,12 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/educationSave")
-    public @ResponseBody String educationSave(EducationalBackground educationalBackground){
+    public @ResponseBody String educationSave(EducationalBackground educationalBackground,HttpServletRequest req,String time){
 //        System.out.println(new Gson().toJson(educationalBackground));
-        int n=resumeService.educationUpdate(educationalBackground);
+        Resume resume=new Resume();
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
+        int n=resumeService.educationUpdate(educationalBackground,resume);
         String msg="lose";
         if (n>0){
             msg="succes";
@@ -300,9 +371,13 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/educationDelete")
-    public @ResponseBody String educationDelect(int ebId){
+    public @ResponseBody String educationDelect(int ebId,String time){
         System.out.println("edid="+ebId);
-        int n=resumeService.reDel(ebId,resumeId);
+
+        Resume resume=new Resume();
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
+        int n=resumeService.reDel(ebId,resumeId,resume);
         String msg="lose";
         if (n>0){
             msg="succes";
@@ -310,7 +385,11 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/expectWorkUpdate")
-    public @ResponseBody String expectWorkUpdate(Resume resume){
+    public @ResponseBody String expectWorkUpdate(Resume resume,HttpServletRequest req,String time){
+//        Resume resume=new Resume();
+
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
         int n=resumeService.expectWorkUpdate(resume);
         String msg="lose";
         if (n>0){
@@ -320,7 +399,11 @@ public class CenterController {
     }
 
     @RequestMapping("/selfEvaUpdate")
-    public @ResponseBody String selfEvaUpdate(Resume resume){
+    public @ResponseBody String selfEvaUpdate(Resume resume,HttpServletRequest req,String time){
+//        Resume resume=new Resume();
+
+        resume.setUpdateTime(time);
+        resume.setUserId(userId);
         int n=resumeService.selfEvaUpdate(resume);
         String msg="lose";
         if (n>0){
@@ -329,17 +412,31 @@ public class CenterController {
         return msg;
     }
 
+
+
+
     @RequestMapping("/job")
-    public String job(HttpServletRequest req){
+    public String job(HttpServletRequest req,String findPosition){
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         Map map=new HashMap();
         map.put("workCity",workCity);
         map.put("page",page);
         map.put("limit",limit);
+        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+            position="职位类型";
+        }else if (findPosition.equals("不限")){
+            position=findPosition;
+        }else {
+            position=findPosition;
+            map.put("position",findPosition);
+        }
 
-
+        List<Position> positions=resumeService.positions();
+        req.setAttribute("positions",positions);
+        List<City>citys=resumeService.citys();
+        req.setAttribute("citys",citys);
 
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -358,6 +455,8 @@ public class CenterController {
         req.setAttribute("findReleaseTime",releaseTime);
         req.setAttribute("search",search);
         req.setAttribute("workCity",workCity);
+        req.setAttribute("position",position);
+
 
         return "FindJob";
     }
@@ -368,7 +467,7 @@ public class CenterController {
     public String clearjob(HttpServletRequest req){
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         Map map=new HashMap();
         map.put("workCity",workCity);
         map.put("page",page);
@@ -409,7 +508,7 @@ public class CenterController {
     public String serachJob(HttpServletRequest req,String findSearch,String findWorkCity){
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
 
         Map map=new HashMap();
         map.put("workCity",findWorkCity);
@@ -453,7 +552,7 @@ public class CenterController {
     public String findJob(HttpServletRequest req,String findSearch,String findworkYear,String findWorkCity,String findEducation,String findSalary,String findFinanStage,String findScale,String findReleaseTime){
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         workCity=findWorkCity;
         Map map=new HashMap();
         if (findWorkCity.equals("全国")){
@@ -753,6 +852,17 @@ public class CenterController {
         req.setAttribute("post",post);
         return "postInfo";
     }
+//    投递简历
+    @RequestMapping("/sendResume")
+    public @ResponseBody String sendResume(HttpServletRequest req,int pPostId){
+
+        int n=resumeService.sendResume(userId,pPostId);
+        String msg="lose";
+        if (n>0){
+            msg="succes";
+        }
+        return msg;
+    }
 
 
     @RequestMapping("/photoUpdate")
@@ -783,5 +893,42 @@ public class CenterController {
 
 
         return "succes";
+    }
+
+//    修改手机号码--获取验证码
+    @RequestMapping("/vCodeMenu")
+    public @ResponseBody String vCodeMenu(HttpServletRequest req,String newPhone){
+        String code = "";
+        for(int i=0;i<4;i++){
+            int num = (int)(1+Math.random()*9);
+            code += num;
+        }
+        if (resumeService.findTtelephone(newPhone).size()!=0){
+            return "lose";
+        }
+        req.getSession().setAttribute("vCodeMenu",code);
+        req.getSession().setAttribute("newPhone",newPhone);
+        System.out.println(code+"???????????????????"+newPhone);
+        return "succes";
+    }
+
+    @RequestMapping("/updatePhone")
+    public @ResponseBody String updatePhone(HttpServletRequest req,String vCode){
+        String newPhone= (String) req.getSession().getAttribute("newPhone");
+
+        System.out.println(vCode);
+        System.out.println(req.getSession().getAttribute("vCodeMenu"));
+        if (vCode.equals(req.getSession().getAttribute("vCodeMenu"))){
+            System.out.println("11111111111");
+            UserInfo userInfo=new UserInfo();
+            userInfo.setUserId(1);
+            userInfo.setTelephone(newPhone);
+            int n=resumeService.updatePhone(userInfo);
+            if (n>0){
+                System.out.println("22222222");
+                return "succes";
+            }
+        }
+        return "lose";
     }
 }
