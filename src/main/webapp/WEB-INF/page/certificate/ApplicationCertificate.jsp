@@ -24,6 +24,11 @@
             background-color:transparent;
             border-style:none
         }
+
+         #container {
+             margin:35px auto 0;
+         }
+
     </style>
 </head>
 <body>

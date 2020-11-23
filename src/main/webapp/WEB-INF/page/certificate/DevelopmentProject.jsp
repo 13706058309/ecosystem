@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" media="all">
     <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 
+    <style>
+        #container {
+            margin:35px auto 0;
+        }
+    </style>
 </head>
 <body>
 <div id="body">

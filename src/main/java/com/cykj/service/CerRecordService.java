@@ -69,4 +69,48 @@ public interface CerRecordService {
      * @return 增加项目文件上传地址
      */
     public  int upcerdocurl(String docUrl,String stateId,String cerRecordId);
+
+
+    /**
+     *
+     * @param map
+     * @return 后台测试阶段的集合
+     */
+    public List<CerRecord> findcerCSlist(Map<String, Object> map);
+
+    /**
+     *
+     * @param
+     * @return 后台测试阶段的集合长度
+     */
+    public int findcerCSlistsize();
+
+
+    /**
+     *@param cerRecordId
+     * @param cerTestReport
+     * @return 后台测试阶段的修改测试报告路径
+     */
+    public int upcertestreport(String cerTestReport,String cerRecordId);
+    /**
+     *@param cerRecordId
+     * @param cerTestScore
+     * @return 后台测试阶段的修改测试分数
+     */
+    public int upcertestrescore(String cerTestScore,String stateId,String cerRecordId);
+
+
+    /**
+     *
+     * @param map
+     * @return 后台评审证书项目集合带时间和证书类型条件
+     */
+    public List<CerRecord> findcerPSlist(Map<String, Object> map);
+
+    /**
+     *
+     * @param findmap
+     * @return 后台评审证书项目集合列表长度
+     */
+    public  int findcerPSlistsize(Map<String, Object> findmap);
 }
