@@ -120,13 +120,16 @@ public class TalentController {
 //
 //                        //取到每一行第十个个单元格的数据
 //                        int srole = (int)row.getCell(9).getNumericCellValue();
-
+                        if (talentName.equals("")||school.equals("")||birthday.equals("")||profession.equals("")||politicalStatus.equals("")||education.equals("")
+                            ||contactInfo.equals("")||address.equals("")||workExp.equals("")||certificate.equals("")||selfEva.equals("")){
+                        return "表格填写不完整";
+                    }
                         if(talentService.findTalent(talentName)){
                         Talent talent = new Talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva);
                          int a= talentService.addTalent(talent);
                             if(a>0){
                                 if(i==sum){
-                                    return "成功导入"+i+"份简历";
+                                    return "导入成功";
                                 }
 
                             }else{
