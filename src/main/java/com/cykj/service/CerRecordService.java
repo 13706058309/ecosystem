@@ -1,6 +1,7 @@
 package com.cykj.service;
 
 import com.cykj.entity.CerRecord;
+import com.cykj.entity.Certificate;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -69,4 +70,9 @@ public interface CerRecordService {
      * @return 增加项目文件上传地址
      */
     public  int upcerdocurl(String docUrl,String stateId,String cerRecordId);
+
+    /**
+     * 查询记录分页
+     */
+    public List<CerRecord> allPage(String page, String limit);
 }

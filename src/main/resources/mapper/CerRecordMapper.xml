@@ -51,15 +51,21 @@
 
     <resultMap id="cermap" type="com.cykj.entity.CerRecord">
         <id property="cerRecordId" column="cerRecordId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="fileId" column="fileId"></result>
+        <result property="stateId" column="stateId"></result>
+        <result property="docUrl" column="docUrl"></result>
         <result property="trueName" column="trueName"></result>
         <result property="idNumber" column="idNumber"></result>
-        <result property="stateId" column="stateId"></result>
-        <result property="beginTime" column="beginTime"></result>
         <result property="turnoverTime" column="turnoverTime"></result>
-        <result property="cerTestScore" column="cerTestScore"></result>
-        <result property="cerJudgeScore" column="cerJudgeScore"></result>
-        <result property="cerFinalScore" column="cerFinalScore"></result>
         <result property="cerPhone" column="cerPhone"></result>
+        <result property="beginTime" column="beginTime"></result>
+        <result property="cerTestReport" column="cerTestReport"></result>
+        <result property="cerFinalReport" column="cerFinalReport"></result>
+        <result property="cerTestScore" column="cerTestScore"></result>
+        <result property="cerFinalScore" column="cerFinalScore"></result>
+        <result property="cerJudgeScore" column="cerJudgeScore"></result>
+        <result property="cerReviewVideo" column="cerReviewVideo"></result>
         <association property="user" column="userId" javaType="com.cykj.entity.UserInfo">
             <id property="userId" column="userId"></id>
             <result property="userName" column="userName"></result>
@@ -96,8 +102,17 @@
        update cerRecord set docUrl = #{docUrl},stateId = #{stateId}  where cerRecordId = #{cerRecordId}
     </update>
 
-    <update id="upcersqstandid" >
+    <update id="upcersqstandid" parameterType="java.util.HashMap">
        update cerRecord set stateId = #{stateId}  where cerRecordId= #{cerRecordId}
     </update>
+
+    <select id="allPage" parameterType="java.util.HashMap" resultMap="cermap">
+        select f.fieldName,p.paramName,u.userName,r.* from cerRecord r
+        inner join field f on r.fileId = f.fieldId
+        inner join parameter p on r.stateId = p.paramId
+        inner join userInfo u on r.userId = u.userId
+    </select>
+
+    <update id=""></update>
 </mapper>
 

@@ -2,7 +2,7 @@ package com.cykj.service.impl;
 
 import com.cykj.entity.BackUser;
 import com.cykj.entity.UserInfo;
-import com.cykj.log.Loger;
+//import com.cykj.log.Loger;
 import com.cykj.mapper.UserInfoMapper;
 import com.cykj.service.LoginService;
 import org.springframework.stereotype.Service;

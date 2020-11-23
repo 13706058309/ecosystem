@@ -6,6 +6,7 @@ import com.cykj.service.CerRecordService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,5 +99,19 @@ public class CerRecordServiceImpl implements CerRecordService {
     @Override
     public int upcerdocurl(String docUrl, String stateId, String cerRecordId) {
         return cerRecordMapper.upcerdocurl(docUrl,stateId,cerRecordId);
+    }
+
+    /**
+     * 查询记录分页
+     *
+     * @param page
+     * @param limit
+     */
+    @Override
+    public List<CerRecord> allPage(String page, String limit) {
+        Map map = new HashMap<String,String>();
+        map.put("page",page);
+        map.put("limit",limit);
+        return cerRecordMapper.allPage(map);
     }
 }

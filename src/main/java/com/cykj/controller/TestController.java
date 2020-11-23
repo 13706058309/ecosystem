@@ -1,6 +1,8 @@
 package com.cykj.controller;
 
+//import com.cykj.log.Loger;
 import com.cykj.service.BackCompService;
+import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -114,5 +116,12 @@ public class TestController {
     public String sb(){
         return "adminLog";
     }
+
+    @RequestMapping("/tete")
+    public String tete(){
+        return "tst";
+    }
+
+
 
 }
