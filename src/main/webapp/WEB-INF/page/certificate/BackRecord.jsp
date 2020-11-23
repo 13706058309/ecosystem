@@ -44,7 +44,7 @@
 <div class="demoTbale" style="text-align: center">
     用户名:
     <div class="layui-inline" >
-        <input type="text" class="layui-input"  id="username"  placeholder="请输入姓名">
+        <input type="text" class="layui-input"  id="username"  placeholder="请输入用户名">
     </div>
 
     <button class="layui-btn" data-type="reload" id="serch" onclick="">查询</button>
@@ -54,9 +54,41 @@
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="show">查看</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="examine">审核</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="examine" id="examine">审核</a>
 </script>
-
+<div id="detailDiv" style="display: none;width: 350px;height: 300px" >
+    <table class="layui-table">
+        <tr>
+            <td>用户名:</td>
+            <td id="SuserName"></td>
+        </tr>
+        <tr>
+            <td>领域名:</td>
+            <td id="fileName"></td>
+        </tr>
+        <tr>
+            <td>真实姓名:</td>
+            <td id="trueName"></td>
+        </tr>
+        <tr>
+            <td>身份证:</td>
+            <td id="idNumber"></td>
+        </tr>
+        <tr>
+            <td>手机:</td>
+            <td id="cerPhone"></td>
+        </tr>
+        <tr>
+            <td>状态:</td>
+            <td id="state"></td>
+        </tr>
+    </table>
+    <div class="layui-inline">
+        <div class="layui-input-inline" style="margin-left: 100px">
+            <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="closeLayer()">返回</button>
+        </div>
+    </div>
+</div>
 
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js" charset="UTF-8"></script>
@@ -72,12 +104,6 @@
         table.render({
             elem: '#jlgl'
             ,url:path+'/zsgl/getJl'
-            // ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            // ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
-            //     title: '提示'
-            //     ,layEvent: 'LAYTABLE_TIPS'
-            //     ,icon: 'layui-icon-tips'
-            // }]
             ,title: '用户数据表'
             ,cols: [[
                 {type:'numbers', title:'编号', width:100, fixed: 'left', sort: true}
@@ -100,42 +126,56 @@
         });
 
 
-
-        //头工具栏事件
-        // table.on('toolbar(test)', function(obj){
-        //     var checkStatus = table.checkStatus(obj.config.id);
-        //     switch(obj.event){
-        //         case 'getCheckData':
-        //             var data = checkStatus.data;
-        //             layer.alert(JSON.stringify(data));
-        //             break;
-        //         case 'getCheckLength':
-        //             var data = checkStatus.data;
-        //             layer.msg('选中了：'+ data.length + ' 个');
-        //             break;
-        //         case 'isAll':
-        //             layer.msg(checkStatus.isAll ? '全选': '未全选');
-        //             break;
-        //
-        //         //自定义头工具栏右侧图标 - 提示
-        //         case 'LAYTABLE_TIPS':
-        //             layer.alert('这是工具栏右侧自定义的一个图标按钮');
-        //             break;
-        //     };
-        // });
-
         //监听行工具事件
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            var cerId = data.cerId;
+            var userId = data.userId;
             //console.log(obj)
             if(obj.event === 'examine'){
-
+                // layer.msg("3123123123213");
+                objs = obj;
+                layer.config('审核是否通过', {
+                    btn: ['通过', '不通过'],
+                    time: 20000,
+                },function (index) {
+                    upSta(userId,17)
+                },function (index) {
+                    upSta(userId,18)
+                });
             } else if(obj.event === 'show'){
-
+                index = layer.open({
+                    type:1,
+                    content:("#detailDiv"),
+                })
             }
         });
     });
+    function upSta(userId,stateId) {
+        $.ajax({
+            url:path+"/zsgl/change",
+            data:{"userId":userId,"stateId":stateId},
+            type:"get",
+            typeData:"text",
+            success:function (info) {
+                if (info=='changeSucc'){
+                    layer.msg("审核已通过!");
+                    // objs.update({
+                    //     stateId:stateId,
+                    //     params:stateId==17?'审核已通过':'审核未通过',
+                    // });
+                    $("#examine").remove();
+                }
+            }
+        })
+
+    }
+
+
+    function search() {
+        var serch = $("#serch").val();
+
+    }
+
 
 </script>
 </body>

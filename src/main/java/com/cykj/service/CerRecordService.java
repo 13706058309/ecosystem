@@ -118,4 +118,14 @@ public interface CerRecordService {
      * 查询记录分页
      */
     public List<CerRecord> allPage(String page, String limit);
+
+    /**
+     * 修改审核状态
+     */
+    int upSta(Map<String,Object> map);
+
+    /**
+     * 搜索
+     */
+    int search(Map<String,Object> map);
 }

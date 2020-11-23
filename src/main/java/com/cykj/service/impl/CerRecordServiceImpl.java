@@ -170,4 +170,26 @@ public class CerRecordServiceImpl implements CerRecordService {
         map.put("limit",limit);
         return cerRecordMapper.allPage(map);
     }
+
+    /**
+     * 修改审核状态
+     *
+     * @param map
+     */
+    @Override
+    public int upSta(Map<String, Object> map) {
+        int result = cerRecordMapper.upSta(map);
+        return result;
+    }
+
+    /**
+     * 搜索
+     *
+     * @param map
+     */
+    @Override
+    public int search(Map<String, Object> map) {
+        int n = cerRecordMapper.search(map);
+        return n;
+    }
 }

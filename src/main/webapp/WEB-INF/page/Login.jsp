@@ -198,11 +198,11 @@
                     alert("此账号已被禁用!请联系管理员!");
                 } else if (info == 'delete') {
                     alert("此账号已被删除!请重新注册!");
-                } else if (info == 'Audit failed') {
+                } else if (info == 'auditFailed') {
                     alert("此账号还未通过审核,请稍后重试!");
-                } else if (info == 'Vcode error') {
+                } else if (info == 'vCodeError') {
                     alert("验证码错误!");
-                } else if (info == 'no account') {
+                } else if (info == 'noAccount') {
                     alert("查无此账号,登录失败!");
                     var isA = confirm("是否注册?");
                     if (isA == true){

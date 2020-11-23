@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/zsgl")
@@ -66,6 +68,19 @@ public class ZSController {
             msg = "delSuccess";
         } else {
             msg = "delFiald";
+        }
+        return msg;
+    }
+
+    @RequestMapping("/change")
+    public @ResponseBody String change(int userId,int stateId){
+        String msg = "";
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("stateId",stateId);
+        int n = cerRecordServiceImpl.upSta(map);
+        if (n > 0){
+            msg="changeSucc";
         }
         return msg;
     }

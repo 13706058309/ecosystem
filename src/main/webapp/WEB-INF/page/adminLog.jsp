@@ -89,11 +89,11 @@
         var path = $("#path").val();
         var account = $("#username").val();
         var password = $("#password").val();
-        var vCode = $("#captcha").val();
+        var sVCode = $("#captcha").val();
 
         $.ajax({
             url:path+"/golog/adLog",
-            data:{"account":account,"password":password,"vCode":vCode},
+            data:{"account":account,"password":password,"sVCode":sVCode},
             type:"post",
             typeData:"text",
             beforeSend:function () {
@@ -106,7 +106,7 @@
                     layer.msg("密码不能为空!");
                     return false;
                 }
-                if(vCode.trim().length==0){
+                if(sVCode.trim().length==0){
                     layer.msg("验证码不能为空!");
                     return false;
                 }
@@ -115,19 +115,18 @@
             success:function (info) {
                 console.log(info);
 
-                // layer.msg(info);
+                 // layer.msg(info);
                 // changeImg();
                 if (info == 'success'){
                     layer.msg("登陆成功!");
                     location.href = path+"/golog/adminMain";
-                } else if (info = 'disable'){
-                    layer.msg("登录失败,此账号已被禁用!");
-                    // location.href = path+"/golog/admin";
                 } else if (info == 'delete'){
                     layer.msg("登录失败,此账号已被删除!");
                     // location.href = path+"/golog/admin";
-                } else if (info == 'Vcode error'){
+                } else if (info == 'vCodeError'){
                     layer.msg("登录失败,验证码错误，请重试!");
+                } else if (info = 'disable'){
+                    layer.msg("登录失败,此账号已被禁用!");
                 } else {
                     layer.msg("当前账号无权限,请联系管理员!");
                 }

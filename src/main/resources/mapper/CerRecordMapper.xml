@@ -185,7 +185,13 @@ where 1=1  and c.stateId in (29,30,31)
         inner join userInfo u on r.userId = u.userId
     </select>
 
-    <update id=""></update>
+    <update id="upSta" parameterType="com.cykj.entity.CerRecord">
+        update cerRecord set stateId = #{stateId} where userId = #{userId}
+    </update>
+
+    <select id="search" parameterType="java.util.HashMap" resultMap="cermap">
+        select u.userName,c.* from userInfo u inner join cerRecord c on c.userId = u.userId where userName like concat('%','userName','%')
+     </select>
 
 
 </mapper>
