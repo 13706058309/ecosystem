@@ -128,11 +128,9 @@ public class TestController {
     public String Buju(){
         return "comp/Buju";
     }
-    @RequestMapping("/tete")
-    public String tete(){
-        return "tst";
+
+    @RequestMapping("/charge")
+    public String charge(){
+        return "comp/charge";
     }
-
-
-
 }

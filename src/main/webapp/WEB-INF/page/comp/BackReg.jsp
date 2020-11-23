@@ -196,7 +196,7 @@
                 <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="regs()">注册</button>
             </div>
             <div class="layui-input-inline">
-                <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid"><a href="#">返回</a></button>
+                <a href="${pageContext.request.contextPath}/golog/admin"><button type="button" class="layui-btn layui-btn-lg layui-btn-fluid">返回</button></a>
             </div>
             <input type="reset" name="reset" style="display: none;" />
         </div>
@@ -349,10 +349,10 @@
     function regs() {
         var value = $("#codeBtn").val();
 
-        // if(value=='发送验证码'){
-        //     layer.alert("验证码未发送",{icon: 0,offset: '20%'});
-        //     return false;
-        // }
+        if(value=='发送验证码'){
+            layer.alert("验证码未发送",{icon: 0,offset: '20%'});
+            return false;
+        }
 
         if(value=='重新发送'){
             layer.alert("验证码已超时,请重新发送",{icon: 0,offset: '20%'});

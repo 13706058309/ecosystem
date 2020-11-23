@@ -24,6 +24,7 @@
     </script>
 </head>
 <body class="layui-layout-body">
+<input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">后台管理首页</div>
@@ -63,8 +64,10 @@
     </div>
 
     <div class="layui-body" style="bottom: 0px">
-        <iframe style="width: 100%; height: 100%" name="mainFrame"  frameborder="0">
-        </iframe>
+        <!-- 内容主体区域 -->
+<%--        <div style="padding: 15px;">--%>
+        <iframe style="width: 100%;height: 100%;border: 0px" name="mainFrame"> </iframe>
+<%--        </div>--%>
     </div>
 
 <%--    <div class="layui-footer">--%>
@@ -77,4 +80,22 @@
 
 
 </body>
+<script>
+    var resumeID = "";
+    var path = $("#path").val();
+    <%
+        String resumeID = (String) request.getSession().getAttribute("resumeID");
+        if(resumeID!=null){
+            out.write("resumeID="+resumeID);
+            request.getSession().removeAttribute("resumeID");
+        }
+
+    %>
+    $(function () {
+        if(resumeID.length!=0){
+            location.href = path+"/rec/outResume?resumeID="+resumeID;
+            resumeID == "";
+        }
+    })
+</script>
 </html>
