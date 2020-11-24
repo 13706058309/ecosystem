@@ -26,7 +26,7 @@
         <br>
         <h1 style="text-align: center">岗位发布</h1>
         <br>
-        <form class="layui-form" action="#" style="margin-left: 15%;margin-right: 15%" id="postPosition">
+        <form class="layui-form" action="#" style="margin-left: 10%;margin-right: 10%" id="postPosition">
         <div class="layui-form-item" >
             <label class="layui-form-label">职位类别</label>
             <div class="layui-input-inline">
@@ -49,7 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="postName" name="postName"  autocomplete="off" class="layui-input" >
+                    <input type="text" id="postName" name="postName" placeholder="填写岗位具体名称"  autocomplete="off" class="layui-input" >
 <%--                    <label class="layui-form-label" style="color: red;display: none">skfsadsads</label>--%>
                 </div>
 
@@ -58,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属部门:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="department" name="department"  autocomplete="off" class="layui-input" >
+                    <input type="text" id="department" name="department" placeholder="职位所属部门"  autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
@@ -103,13 +103,12 @@
 
                     </select>
                 </div>
-
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">具体地址:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="detailAddress" name="detailAddress" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="detailAddress" name="detailAddress" placeholder="工作的具体地址"  autocomplete="off" class="layui-input" >
                 </div>
 <%--                <label class="layui-form-label">具体地址:</label>--%>
             </div>
@@ -117,14 +116,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">招收人数:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="recruitsNum" name="recruitsNum" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="recruitsNum" name="recruitsNum" placeholder="打算招收的人数" autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">福利描述</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" style="width: 60%; height: 15%" id="jobBenefits" name="jobBenefits"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" placeholder="简单描述一下岗位的福利" style="width: 80%; height: 15%;resize: none" id="jobBenefits" name="jobBenefits"></textarea>
                 </div>
             </div>
 
@@ -162,21 +161,21 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">投递邮箱</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="contactEmail" name="contactEmail" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="contactEmail" name="contactEmail" placeholder="接收简历的邮箱" lay-verify="required|phone" autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">联系方式</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="contact" name="contact" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="contact" name="contact" placeholder="手机或固话" autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">工作描述</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" style="width: 60%; height: 35%" id="jobDescription" name="jobDescription"></textarea>
+                    <textarea placeholder="具体工作的描述" class="layui-textarea" style="width: 80%; height: 35%; resize: none" id="jobDescription" name="jobDescription"></textarea>
                 </div>
             </div>
 

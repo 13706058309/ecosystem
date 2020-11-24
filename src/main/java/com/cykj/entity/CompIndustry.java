@@ -4,7 +4,8 @@ package com.cykj.entity;
  * 公司 ----- 行业
  */
 public class CompIndustry {
-  private long compAndIndID;
+
+  private long compAndIndId;
   private long compId;
   private long industryId;
 
@@ -73,4 +74,11 @@ public class CompIndustry {
     this.industryId = industryId;
   }
 
+  public long getCompAndIndId() {
+    return compAndIndId;
+  }
+
+  public void setCompAndIndId(long compAndIndId) {
+    this.compAndIndId = compAndIndId;
+  }
 }

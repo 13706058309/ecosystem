@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 @Service
 public class BackCompServiceImpl implements BackCompService {
@@ -47,6 +48,12 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Resource
     private BackUserMapper backUserMapper;
+
+    @Resource
+    private CompIndustryMapper compIndustryMapper;
+
+    @Resource
+    private ParameterMapper parameterMapper;
 
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
@@ -412,4 +419,70 @@ public class BackCompServiceImpl implements BackCompService {
     public int changePwdByPhone(String pwd, String phone) {
         return backUserMapper.changePwdByPhone(pwd,phone);
     }
+
+    @Override
+    public BackUser findCompByAcc(String account) {
+        return backUserMapper.findByAccount(account);
+    }
+
+    @Override
+    public int RegComp(BackUser backUser, int industryID) {
+
+        int provinceID = Integer.parseInt(backUser.getProvince());
+        Province province = provinceMapper.findByID(provinceID);
+        backUser.setProvince(province.getProvinceName());
+
+        int n = backUserMapper.addComp(backUser);
+        if(n<0){
+            return 4;
+        }
+
+        int compID = backUserMapper.findID();
+        int result = compIndustryMapper.addCompAndInd(compID, industryID);
+        return 5;
+    }
+    //判断下载简历是否收费
+    @Override
+    public String judegCharse() {
+        Parameter  parameter = parameterMapper.findDownFee(57);
+        int flag = Integer.parseInt(parameter.getParamValues());
+        String msg = "";
+        if(flag==1){
+            msg = "no";
+        }else{
+           msg = parameterMapper.findDownFee(56).getParamValues();
+        }
+        return msg;
+    }
+
+    @Override
+    public String changeFeeStand(int standID) {
+        int n = parameterMapper.changeFeeStand(standID);
+        return n>0? "1":"2";
+    }
+
+    @Override
+    public String openFee(int standID) {
+        int n = parameterMapper.changeFeeStand(standID);
+        if(n>0){
+          String msg = parameterMapper.findDownFee(56).getParamValues();
+          return msg;
+        }else{
+          return "failed";
+        }
+
+    }
+
+    @Override
+    public String judgeResumeShowOrHidden() {
+        Parameter  parameter = parameterMapper.findDownFee(57);
+        return parameter.getParamValues();
+    }
+
+    @Override
+    public String findDownFee() {
+        return parameterMapper.findDownFee(56).getParamValues();
+    }
+
+
 }

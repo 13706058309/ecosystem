@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
-    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>
+<%--    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/style/js/conversion.js"></script>--%>
     <script src="${pageContext.request.contextPath}/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
     <style type="text/css"></style>
     <meta content="no-siteapp" http-equiv="Cache-Control">
@@ -24,26 +24,26 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/jquery.1.10.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/style/js/jquery.lib.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/ajaxfileupload.js"></script>
-    <script src="${pageContext.request.contextPath}/style/js/additional-methods.js" type="text/javascript"></script>
+<%--    <script src="${pageContext.request.contextPath}/style/js/additional-methods.js" type="text/javascript"></script>--%>
     <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <!--[if lte IE 8]>
     <script type="text/javascript" src="${pageContext.request.contextPath}/style/js/excanvas.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-        var youdao_conv_id = 271546;
-    </script>
-    <script src="${pageContext.request.contextPath}/style/js/conv.js" type="text/javascript"></script>
+
+<%--    <script src="${pageContext.request.contextPath}/style/js/conv.js" type="text/javascript"></script>--%>
     <script src="${pageContext.request.contextPath}/style/js/ajaxCross.json" charset="UTF-8"></script>
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vendor.css">
 
 </head>
 <body>
 <div id="body" style="background-color: #5dfffc">
     <div id="container" style="margin-top: 1%">
 
-        <div class="content_mid">
+        <form class="content_mid layui-form">
             <dl class="c_section c_section_mid">
                 <dt>
                     <h2><em></em>填写公司信息</h2>
@@ -52,16 +52,28 @@
                     <input type="hidden" id="path" value="${pageContext.request.contextPath}">
                     <form id="stepForm">
                         <h3>公司负责人</h3>
-                        <input type="text"  maxlength="4" placeholder="请输入公司负责人的姓名"  name="username" id="username" style="height: 40px;">
+                        <input type="text"  maxlength="4" placeholder="请输入公司负责人的姓名"  name="bUserName" id="bUserName" style="height: 8%;">
 
                         <h3>上传负责人身份证</h3>
-                            <span>上传身份证 大小:小于5M</span>
-                            <div class="layui-upload">
-                                <input type="file" class="layui-btn layui-btn-normal" id="IDFile" name="upload" />
+<%--                        <div id="logoNo">--%>
+<%--                            <span>上传营业执照 大小：小于5M</span>--%>
+<%--                            <div class="layui-upload">--%>
+<%--                                <input type="file" class="layui-btn layui-btn-normal" id="uploadFile" name="upload" ></input>--%>
+<%--                            </div>--%>
+                        <div class="info-flex-item header-upload">
+                            <div class="header-box">
+                                <div class="header-mask"></div><img id="headImg"
+                                                                    src="https://paimgcdn.baidu.com/2986AD9ACAF1B0B1?src=http%3A%2F%2Fms.bdimg.com%2Fdsp-image%2F3256454903.jpg&rz=urar_2_968_600&v=0"
+                                                                    class="header-img">
+                                <input type="file" onchange="selectFile()" class="head-input"
+                                       accept="image/*" />
                             </div>
+                        </div>
+<%--                        </div>--%>
 
                         <h3>公司名称</h3> <!--非必填-->
-                        <input type="text" placeholder="请输入公司简称，如:拉勾" value="" name="compName" id="compName" class="valid">
+                        <input type="text" placeholder="请输入公司简称，如:拉勾" value="" name="compName" id="compName" class="valid" style="height: 8%">
+
                         <h3>公司营业执照上传</h3>
                         <div id="logoNo">
                             <span>上传营业执照 大小：小于5M</span>
@@ -71,17 +83,20 @@
                         </div>
 
                         <h3>所在城市</h3>
-                        <div>
-                            <select id="province">
-                                <option value="" hidden>请选择省份</option>
-                            </select>
-                            <select id="city">
-                                <option value="" hidden>请选择城市</option>
-                            </select>
-                            <select id="district">
-                                <option value="" hidden>请选择区县</option>
-                            </select>
-<%--                            <button>提交</button>--%>
+
+                        <div class="layui-form-item" >
+
+                            <div class="layui-input-inline">
+                                <select name="province" id="province" lay-filter="province" style="width: 30%;">
+
+                                </select>
+                            </div>
+
+                            <div class="layui-input-inline">
+                                <select name="workCity" id="workCity" lay-filter="workCity" style="width: 30%;">
+
+                                </select>
+                            </div>
                         </div>
 
 
@@ -145,10 +160,16 @@
                     </form>
                 </dd>
             </dl>
-        </div>
-        <script src="${pageContext.request.contextPath}/style/js/step1.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/data.js"></script>
+        </form>
+<%--        <script src="${pageContext.request.contextPath}/style/js/step1.min.js" type="text/javascript"></script>--%>
+<%--        <script type="text/javascript" src="${pageContext.request.contextPath}/js/data.js"></script>--%>
         <script type="text/javascript">
+
+            var form;
+            layui.use('form',function () {
+                form = layui.form;
+                form.render();
+            })
 
             var avatar = {};
             avatar.uploadComplate = function( data ){
@@ -227,6 +248,16 @@
                 // alert("省:"+province+"市:"+city+"县城:"+district);
             }
 
+            function selectFile() {
+                let files = event.target.files;
+                if (files.length === 0) return false;
+                let reader = new FileReader();
+                reader.readAsDataURL(files[0]);
+                reader.onloadend = () => {
+                    $("#headImg").attr("src", reader.result)
+                }
+            }
+
         </script>
 
         <div class="clear"></div>
@@ -234,48 +265,40 @@
         <a rel="nofollow" title="回到顶部" id="backtop" style="display: none;"></a>
     </div><!-- end #container -->
 </div><!-- end #body -->
-<%--<div id="footer">--%>
-<%--    <div class="wrapper">--%>
-<%--        <a rel="nofollow" target="_blank" href="#">联系我们</a>--%>
-<%--        <a target="_blank" href="http://www.lagou.com/af/zhaopin.html">互联网公司导航</a>--%>
-<%--        <a rel="nofollow" target="_blank" href="http://e.weibo.com/lagou720">拉勾微博</a>--%>
-<%--        <a rel="nofollow" href="javascript:void(0)" class="footer_qr">拉勾微信<i></i></a>--%>
-<%--        <div class="copyright">&copy;2013-2014 Lagou <a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" target="_blank">京ICP备14023790号-2</a></div>--%>
-<%--    </div>--%>
-<%--</div>--%>
+
 
 <script src="${pageContext.request.contextPath}/style/js/core.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/style/js/popup.min.js" type="text/javascript"></script>
+<%--<script src="${pageContext.request.contextPath}/style/js/popup.min.js" type="text/javascript"></script>--%>
 
 <!--  -->
 
 
-<div id="cboxOverlay" style="display: none;"></div>
-<div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;">
-    <div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div>
-        <div id="cboxTopCenter" style="float: left;"></div>
-        <div id="cboxTopRight" style="float: left;"></div>
-    </div>
-        <div style="clear: left;">
-            <div id="cboxMiddleLeft" style="float: left;"></div>
-            <div id="cboxContent" style="float: left;">
-                <div id="cboxTitle" style="float: left;"></div>
-                <div id="cboxCurrent" style="float: left;"></div>
-                <button type="button" id="cboxPrevious"></button>
-                <button type="button" id="cboxNext"></button>
-                <button id="cboxSlideshow"></button>
-                <div id="cboxLoadingOverlay" style="float: left;"></div>
-                <div id="cboxLoadingGraphic" style="float: left;"></div>
-            </div>
-            <div id="cboxMiddleRight" style="float: left;"></div>
-        </div>
-        <div style="clear: left;">
-            <div id="cboxBottomLeft" style="float: left;"></div>
-            <div id="cboxBottomCenter" style="float: left;"></div>
-            <div id="cboxBottomRight" style="float: left;"></div>
-        </div>
-    </div>
-    <div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div>
-</div>
+<%--<div id="cboxOverlay" style="display: none;"></div>--%>
+<%--<div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;">--%>
+<%--    <div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div>--%>
+<%--        <div id="cboxTopCenter" style="float: left;"></div>--%>
+<%--        <div id="cboxTopRight" style="float: left;"></div>--%>
+<%--    </div>--%>
+<%--        <div style="clear: left;">--%>
+<%--            <div id="cboxMiddleLeft" style="float: left;"></div>--%>
+<%--            <div id="cboxContent" style="float: left;">--%>
+<%--                <div id="cboxTitle" style="float: left;"></div>--%>
+<%--                <div id="cboxCurrent" style="float: left;"></div>--%>
+<%--                <button type="button" id="cboxPrevious"></button>--%>
+<%--                <button type="button" id="cboxNext"></button>--%>
+<%--                <button id="cboxSlideshow"></button>--%>
+<%--                <div id="cboxLoadingOverlay" style="float: left;"></div>--%>
+<%--                <div id="cboxLoadingGraphic" style="float: left;"></div>--%>
+<%--            </div>--%>
+<%--            <div id="cboxMiddleRight" style="float: left;"></div>--%>
+<%--        </div>--%>
+<%--        <div style="clear: left;">--%>
+<%--            <div id="cboxBottomLeft" style="float: left;"></div>--%>
+<%--            <div id="cboxBottomCenter" style="float: left;"></div>--%>
+<%--            <div id="cboxBottomRight" style="float: left;"></div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div>--%>
+<%--</div>--%>
 </body>
 </html>

@@ -7,18 +7,31 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
-<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/BackCompFindUser.css">
-<script src="${pageContext.request.contextPath}/js/comp/Common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/BackCompFindUser.css">
+    <script src="${pageContext.request.contextPath}/js/comp/Common.js"></script>
+
+
 <html>
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
+<style>
+    * {
+        overflow: hidden;
+        padding:0;
+        margin:0;
+    }
 
+    canvas {
+        display: block;
+    }
+</style>
 <body>
+
 <script id="btns" type="text/html">
     <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
 </script>
@@ -88,8 +101,8 @@
         </div>
 
         <div class="layui-inline">
-            <div class="layui-input-inline" style="margin-left: 55%" >
-                <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+            <div class="layui-input-inline"  style="margin-left: 40%">
+                <button type="button" class="layui-btn  layui-btn-fluid" data-type="reload" style="width: 50%">查询</button>
             </div>
         </div>
     </div>
@@ -102,7 +115,7 @@
             <td width="19%" id="dName">2</td>
             <td width="19%">民族</td>
             <td width="19%" id="dClen">4</td>
-            <td rowspan="5" colspan="2"></td>
+            <td rowspan="5" colspan="2" id="imgs" ></td>
         </tr>
         <tr >
             <td>政治面貌</td>
@@ -150,16 +163,50 @@
 
     </table>
     <div class="layui-input-inline" style="margin-left: 50%">
-        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResume()" >简历导出</button>
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResumes()" >简历导出</button>
     </div>
 </div>
+<div id="payForm" style="display: none;padding: 5%">
+    <form action="${pageContext.request.contextPath}/alipayTradePagePay" method=post>
+        <input name="WIDout_trade_no" id="WIDout_trade_no" type="hidden">
+        <input name="WIDsubject" id="WIDsubject" type="hidden">
+        <input name="WIDtotal_amount" id="WIDtotal_amount" type="hidden">
+        <input name="WIDbody" id="WIDbody" type="hidden">
+
+        <table class="layui-table">
+            <tr>
+                <div class="layui-input-inline" style="margin-left: 27%">
+                <h1 id="money">支付20元下载？</h1>
+                </div>
+            </tr>
+            <tr style="margin-top: 3%">
+                <div class="layui-input-inline" style="margin-left: 34%">
+                <input type="submit" class="layui-btn layui-btn-lg layui-btn-fluid" value="支付宝支付" >
+                </div>
+            </tr>
+        </table>
+    </form>
+</div>
 <table id="userTable" lay-filter="test"></table>
+
+<script  src="${pageContext.request.contextPath}/static/bg/js/tween.js"></script>
+<script  src="${pageContext.request.contextPath}/static/bg/js/bgs.js"></script>
+<canvas id="c"></canvas>
 </body>
 <script>
+    var resumeID = "";
     var layer;
     var path = $("#path").val();
     var index;
     var form;
+    <%
+        String resumeID = (String) request.getSession().getAttribute("resumeID");
+        if(resumeID!=null){
+            out.write("resumeID="+resumeID);
+            request.getSession().removeAttribute("resumeID");
+        }
+
+    %>
     layui.use(['laydate','layer','form'],function () {
         form = layui.form;
         form.render();
@@ -200,7 +247,7 @@
             var resumeID = data.resumeId;
             if(obj.event === 'detail'){
                 showDetails(data);
-                findDetailResume(resumeID)
+                findDetailResume(resumeID,data.isShow);
             }
         });
 
@@ -231,6 +278,11 @@
         layer.close(index);
     }
 
-
+$(function () {
+   if(resumeID.length!=0){
+        location.href = path+"/rec/outResume?resumeID="+resumeID;
+        resumeID == "";
+   }
+})
 </script>
 </html>

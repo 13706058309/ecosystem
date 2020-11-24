@@ -33,6 +33,8 @@ public class BackUser {
   private String bRegTime;//注册时间
   private String coreValue;//企业核心价值
   private String compName;
+  private String lng;
+  private String lat;
   private List<Industry> industrys;
 
 
@@ -67,35 +69,7 @@ public class BackUser {
     this.industrys = industrys;
   }
 
-  @Override
-  public String toString() {
-    return "BackUser{" +
-            "bUserId=" + bUserId +
-            ", bUserName='" + bUserName + '\'' +
-            ", account='" + account + '\'' +
-            ", pwd='" + pwd + '\'' +
-            ", contactInfo='" + contactInfo + '\'' +
-            ", infoIntr='" + infoIntr + '\'' +
-            ", busiLice='" + busiLice + '\'' +
-            ", email='" + email + '\'' +
-            ", address='" + address + '\'' +
-            ", scale='" + scale + '\'' +
-            ", city='" + city + '\'' +
-            ", province='" + province + '\'' +
-            ", homePage='" + homePage + '\'' +
-            ", finanStage='" + finanStage + '\'' +
-            ", product='" + product + '\'' +
-            ", logo='" + logo + '\'' +
-            ", roleId=" + roleId +
-            ", role=" + role +
-            ", stateId='" + stateId + '\'' +
-            ", states=" + states +
-            ", bRegTime='" + bRegTime + '\'' +
-            ", coreValue='" + coreValue + '\'' +
-            ", compName='" + compName + '\'' +
-            ", industrys=" + industrys +
-            '}';
-  }
+
 
 
   public long getbUserId() {
@@ -294,6 +268,15 @@ public class BackUser {
     this.coreValue = coreValue;
   }
 
+
+  public List<Industry> getIndustrys() {
+    return industrys;
+  }
+
+  public void setIndustrys(List<Industry> industrys) {
+    this.industrys = industrys;
+  }
+
   public String getCompName() {
     return compName;
   }
@@ -302,11 +285,51 @@ public class BackUser {
     this.compName = compName;
   }
 
-  public List<Industry> getIndustrys() {
-    return industrys;
+  public String getLng() {
+    return lng;
   }
 
-  public void setIndustrys(List<Industry> industrys) {
-    this.industrys = industrys;
+  public void setLng(String lng) {
+    this.lng = lng;
+  }
+
+  public String getLat() {
+    return lat;
+  }
+
+  public void setLat(String lat) {
+    this.lat = lat;
+  }
+
+  @Override
+  public String toString() {
+    return "BackUser{" +
+            "bUserId=" + bUserId +
+            ", bUserName='" + bUserName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", contactInfo='" + contactInfo + '\'' +
+            ", infoIntr='" + infoIntr + '\'' +
+            ", busiLice='" + busiLice + '\'' +
+            ", email='" + email + '\'' +
+            ", address='" + address + '\'' +
+            ", scale='" + scale + '\'' +
+            ", city='" + city + '\'' +
+            ", province='" + province + '\'' +
+            ", homePage='" + homePage + '\'' +
+            ", finanStage='" + finanStage + '\'' +
+            ", product='" + product + '\'' +
+            ", logo='" + logo + '\'' +
+            ", roleId=" + roleId +
+            ", role=" + role +
+            ", stateId='" + stateId + '\'' +
+            ", states=" + states +
+            ", bRegTime='" + bRegTime + '\'' +
+            ", coreValue='" + coreValue + '\'' +
+            ", compName='" + compName + '\'' +
+            ", lng='" + lng + '\'' +
+            ", lat='" + lat + '\'' +
+            ", industrys=" + industrys +
+            '}';
   }
 }

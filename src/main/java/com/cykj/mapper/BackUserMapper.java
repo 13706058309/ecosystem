@@ -39,5 +39,12 @@ public interface BackUserMapper {
     int register(BackUser backUser);
     BackUser isRepeat(String account);
 
+    //添加公司用户
+    int addComp(BackUser backUser);
+    //通过账号找角色
+    BackUser findByAccount(@Param("account") String account);
+    //查找刚插入数据的ID
+    int findID();
+
 
 }

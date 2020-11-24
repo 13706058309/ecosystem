@@ -4,7 +4,98 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CerUserMapper">
 
-    <select id="findceruserlist" parameterType="java.lang.Long" resultType="com.cykj.entity.CerUser">
-         select * from cerUser where userId = #{userId}
+    <select id="findceruserlist" resultMap="cerusermap">
+          select *,f.fieldName name,ce.imgUrl url from cerUser u join cerRecord c on c.cerRecordId=u.cerId join backUser b on u.bUserID=b.bUserID
+         join field f on f.fieldId=c.fileId
+           join certificate ce on ce.fieldId=f.fieldId
+           where u.userId= #{userId}
     </select>
+    <select id="findceruserlistsize" parameterType="java.util.HashMap" resultType="integer">
+        select count(*) from cerUser u join cerRecord c on c.cerRecordId=u.cerId join backUser b on u.bUserID=b.bUserID
+        join field f on f.fieldId=c.fileId
+        join certificate ce on ce.fieldId=f.fieldId where 1=1
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+        <if test="trueName != null ">
+            and c.trueName like #{trueName}
+        </if>
+        <if test="bUserName != null ">
+            and b.bUserName like #{bUserName}
+        </if>
+
+        <if test="top != null and down == null ">
+            and u.gainTime >= #{top}
+        </if>
+        <if test="top == null and down != null ">
+            and u.gainTime &lt;= #{down}
+        </if>
+        <if test="top != null and down != null ">
+            and u.gainTime >= #{top} and u.gainTime &lt;= #{down}
+        </if>
+
+
+    </select>
+
+    <select id="backfindceruserlist" parameterType="java.util.HashMap" resultMap="cerusermap">
+          select *,f.fieldName name,ce.imgUrl url from cerUser u join cerRecord c on c.cerRecordId=u.cerId join backUser b on u.bUserID=b.bUserID
+         join field f on f.fieldId=c.fileId
+           join certificate ce on ce.fieldId=f.fieldId where 1=1
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+        <if test="trueName != null ">
+            and c.trueName like #{trueName}
+        </if>
+        <if test="bUserName != null ">
+            and b.bUserName like #{bUserName}
+        </if>
+
+        <if test="top != null and down == null ">
+            and u.gainTime >= #{top}
+        </if>
+        <if test="top == null and down != null ">
+            and u.gainTime &lt;= #{down}
+        </if>
+        <if test="top != null and down != null ">
+            and u.gainTime >= #{top} and u.gainTime &lt;= #{down}
+        </if>
+
+        order by u.gainTime desc  limit #{page},#{limit}
+    </select>
+
+    <resultMap id="cerusermap" type="com.cykj.entity.CerUser">
+        <id property="cuid" column="cuid"></id>
+        <result property="cerId" column="cerId"></result>
+        <result property="gainTime" column="gainTime"></result>
+        <result property="bUserId" column="bUserId"></result>
+        <result property="userId" column="userId"></result>
+        <result property="name" column="name"></result>
+        <result property="url" column="url"></result>
+        <association property="cerRecord" column="cerId" javaType="com.cykj.entity.CerRecord">
+            <id property="cerRecordId" column="cerRecordId"></id>
+            <result property="userName" column="userName"></result>
+            <result property="trueName" column="trueName"></result>
+            <result property="idNumber" column="idNumber"></result>
+            <result property="stateId" column="stateId"></result>
+            <result property="beginTime" column="beginTime"></result>
+            <result property="turnoverTime" column="turnoverTime"></result>
+            <result property="cerTestScore" column="cerTestScore"></result>
+            <result property="cerJudgeScore" column="cerJudgeScore"></result>
+            <result property="cerFinalScore" column="cerFinalScore"></result>
+            <result property="cerPhone" column="cerPhone"></result>
+        </association>
+        <association property="user" column="userId" javaType="com.cykj.entity.UserInfo">
+            <id property="userId" column="userId"></id>
+            <result property="userName" column="userName"></result>
+        </association>
+        <association property="backUser" column="bUserId" javaType="com.cykj.entity.BackUser">
+            <id property="bUserId" column="bUserId"></id>
+            <result property="bUserName" column="bUserName"></result>
+        </association>
+
+    </resultMap>
+
 </mapper>

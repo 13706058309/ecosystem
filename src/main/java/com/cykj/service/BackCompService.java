@@ -63,4 +63,18 @@ public interface BackCompService {
     BackUser findByPhone(String phone);
     //修改密码
     int changePwdByPhone( String pwd,String phone);
+    //通过账号找公司
+    BackUser findCompByAcc(String account);
+    //公司注册
+    int RegComp(BackUser backUser,int industryID);
+    //判断是否开启收费
+    String judegCharse();
+    //关闭简历下载是否收费状态
+    String changeFeeStand(int standID);
+    //开启简历下载收费
+    String openFee(int standID);
+    //是否隐藏简历联系信息
+    String judgeResumeShowOrHidden();
+    //查找下载简历需要的费用
+    String findDownFee();
 }

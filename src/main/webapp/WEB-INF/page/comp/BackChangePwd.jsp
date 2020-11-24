@@ -60,7 +60,7 @@
                         <tbody>
                         <tr>
                             <td>登录账号</td>
-                            <td class="c7">123</td>
+                            <td class="c7">${admin.account}</td>
                         </tr>
                         <tr>
                             <td class="label">当前密码</td>

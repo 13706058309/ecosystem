@@ -18,6 +18,12 @@ public class CompAndtalent {
   public CompAndtalent() {
   }
 
+  public CompAndtalent(long talent, long compId) {
+    this.talent = talent;
+    this.compId = compId;
+
+  }
+
   public long getCompAndTalId() {
     return compAndTalId;
   }
