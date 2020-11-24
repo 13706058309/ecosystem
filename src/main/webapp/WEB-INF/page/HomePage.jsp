@@ -38,7 +38,6 @@
     <script type="text/javascript"></script>
     <script type="text/javascript" src="../style/js/conv.js"></script>
     <script src="../js/homePage.js"></script>
-
 </head>
 <body style="background-color: #f6f6f8">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
@@ -101,12 +100,12 @@
 
     <div class="content" style="margin-bottom: 20px;margin-left: 23%">
         <div id="search_box">
-            <form id="searchForm" name="searchForm" action="list.html" method="get">
+            <form id="searchForm"  method="get">
                 <ul id="searchType">
                     <li data-searchtype="1" class="type_selected">职位</li>
                 </ul>
                 <input type="text" id="search_input" name="kd" tabindex="1" value="" placeholder="请输入职位名称，如：产品经理"/>
-                <input type="button" id="search_button" value="搜索"/>
+                <input type="button" id="search_button" value="搜索" onclick="searchBut()"/>
 
             </form>
         </div>

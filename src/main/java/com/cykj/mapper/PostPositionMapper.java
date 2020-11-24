@@ -26,4 +26,8 @@ public interface PostPositionMapper {
 
 //    最新岗位 9条信息
     public List<PostPosition> postList(@Param("workCity") String workCity);
+
+//    根据企业id查找岗位信息
+    public List<PostPosition> findPost(@Param("bUserId") int bUserId);
+
 }

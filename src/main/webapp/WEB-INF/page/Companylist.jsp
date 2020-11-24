@@ -128,7 +128,7 @@
                     </div>
                     <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
                         <c:forEach items="${backUserList}" var="company">
-                            <li style="margin: 3px 5px;width: 264px;height: 120px">
+                            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="companyProfile(${company.backUser.bUserId})">
                                 <div class="comLogo" style="float: left">
                                     <img src="${pageContext.request.contextPath}/uploadLogo${company.backUser.logo}" width="60"
                                          height="60" alt="CCIC"/>
@@ -136,8 +136,7 @@
                                 <div style="float: right">
                                     <h3 title="CCIC" style="margin: 2px 5px;width: 183px;text-overflow:ellipsis;" align="center"><b>${company.backUser.compName}</b>
                                     </h3>
-                                    <a href="h/jobs/148928.html" target="_blank"
-                                       style="font-size: 13px;color: darkgrey">
+                                    <a  target="_blank" style="font-size: 13px;color: darkgrey">
                                             ${company.backUser.finanStage}&nbsp;|&nbsp;${company.backUser.city}
                                     </a>
                                 </div>
@@ -171,7 +170,6 @@
 </div><%--  id=body  end  --%>
 
 <script type="text/javascript" src="../style/js/core.min.js"></script>
-<script type="text/javascript" src="../style/js/popup.min.js"></script>
 
 </body>
 </html>

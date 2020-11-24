@@ -25,6 +25,8 @@ public interface BackUserMapper {
     public List<BackUser> findCount(Map map);
 //    根据城市查找公司
     public List<BackUser> CompanyCity(@Param("city") String city);
+//    根据ID查公司简介
+    public BackUser findProfile(@Param("bUserId") int bUserId);
 
 
     int changePwd(@Param("pwd") String pwd,@Param("compID") int compID);

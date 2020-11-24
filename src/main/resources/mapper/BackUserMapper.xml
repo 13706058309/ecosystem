@@ -143,7 +143,7 @@
             <result property="industryName" column="industryName"></result>
         </association>
         <association property="backUser" column="compID" javaType="com.cykj.entity.BackUser">
-            <id property="bUserID" column="compID"></id>
+            <id property="bUserId" column="bUserId"></id>
             <result property="compName" column="compName"></result>
             <result property="city" column="city"></result>
             <result property="finanStage" column="finanStage"></result>
@@ -163,5 +163,9 @@
         limit 9
     </select>
 
+<!--    根据id查企业信息-->
+    <select id="findProfile" resultType="com.cykj.entity.BackUser">
+        select * from backUser b where bUserID = #{bUserId}
+    </select>
 
 </mapper>

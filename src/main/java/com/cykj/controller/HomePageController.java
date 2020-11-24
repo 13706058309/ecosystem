@@ -98,6 +98,7 @@ public class HomePageController {
         List<BackUser> backUserList = companyService.findCompany(conditionMap);
         List<BackUser> backUsers = companyService.findCount(conditionMap);
         int companys = backUsers.size();  //查询公司总数
+
         request.setAttribute("companyList",companys);
         request.setAttribute("backUserList",backUserList);
         request.setAttribute("chooseType",chooseType);
@@ -107,5 +108,19 @@ public class HomePageController {
         request.setAttribute("curr",(n-1)*li);
         return "Companylist";
     }
+
+//    公司简介
+    @RequestMapping("/compProfile")
+    public String profile(HttpServletRequest request,int bUserId){
+        BackUser backUser = companyService.findProfile(bUserId);
+        List<PostPosition> postPositions = companyService.findPost(bUserId);
+        int size = postPositions.size();  //该公司在招岗位数
+
+        request.setAttribute("backUser",backUser);
+        request.setAttribute("postPositions",postPositions);
+        request.setAttribute("size",size);
+        return "CompanyProfile";
+    }
+
 
 }

@@ -41,6 +41,13 @@ function postName(node) {
     console.log("?????????????????????"+$(node).text());
     location.href="center/job?city="+$("#city").text();
 }
+//搜索第三岗位，跳转界面
+function searchBut() {
+    var search = $("#search_input").val()
+    console.log("1111111111111111111111111"+search)
+    location.href="center/job?city="+$("#city").text();
+
+}
 
 //显示隐藏三级菜单
 function show() {

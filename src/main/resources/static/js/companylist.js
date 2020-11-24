@@ -59,7 +59,6 @@ function sel() {
 }
 
 //页面分页
-
 layui.use(['laypage', 'layer'], function(){
     var laypage = layui.laypage,
         layer = layui.layer;
@@ -84,3 +83,10 @@ layui.use(['laypage', 'layer'], function(){
         }
     });
 });
+
+function companyProfile(bUserID) {
+
+    console.log(bUserID);
+    location.href="compProfile?bUserId="+bUserID;
+
+}
