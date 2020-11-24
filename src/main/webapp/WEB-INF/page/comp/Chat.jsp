@@ -31,7 +31,7 @@
 
 <body>
 
-<div class="qqBox">
+<div class="qqBox" style="margin-top: 0%">
     <!-- xx -->
     <div class="BoxHead">
         <!-- <div class="headImg">
@@ -85,7 +85,7 @@
                                 <div class="tab-panel-item tab-active">
                                     <div class="tab-item">
                                         <a href="javascript:;" class="aui-list-item">
-                                            <ul id="number">
+                                            <ul id="number" style="margin-top: -6%">
                                                 <li>
                                                     <div class="liLeft"><img
                                                             src="${pageContext.request.contextPath}/chat/index_files/20170926103645_04.jpg"></div>
@@ -94,24 +94,7 @@
                                                         <span class="infor">厉害了</span>
                                                     </div>
                                                 </li>
-                                                <li class="bg">
-                                                    <div class="liLeft"><img
-                                                            src="${pageContext.request.contextPath}/chat/index_files/20170926103645_19.jpg"></div>
-                                                    <div class="liRight">
-                                                        <span class="intername">赵鹏</span>
-                                                        <span class="infor">[流泪]</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="liLeft"><img
-                                                            src="${pageContext.request.contextPath}/chat/index_files/20170926103645_27.jpg"></div>
-                                                    <div class="liRight">
-                                                        <span class="intername">web交流群</span>
-                                                        <span class="infor">666</span>
-                                                    </div>
-                                                </li>
                                             </ul>
-
                                         </a>
                                     </div>
                                 </div>
@@ -236,17 +219,25 @@
                             $('.internetName').text(arr[i].userInfo.userName);
                             $("#userID").val(arr[i].userId);
                             $("#curImg").val(arr[i].userInfo.headImgUrl);
+                            var $img = $("<div class='liLeft'><input type='hidden' class='headImg' value='"+arr[i].userInfo.headImgUrl+"'><input type='hidden' class='userID' value='"+arr[i].userId+"'><img src='"+ctx+"/"+arr[i].userInfo.headImgUrl+"' style='margin-top: 5px;width: 80%;height: 80%' ></div>");
+                            var $div = $("<div class='liRight'><span class='intername'>"+arr[i].userInfo.userName+"</span><span class='infor'>"+arr[i].recoredTime+"</span></div>");
                         }else{
                             var $li = $("<li id='a"+arr[i].userId+"' onclick='changeSelect(this)'></li>");//
+                            var $img = $("<div class='liLeft'><input type='hidden' class='headImg' value='"+arr[i].userInfo.headImgUrl+"'><input type='hidden' class='userID' value='"+arr[i].userId+"'><img src='"+ctx+"/"+arr[i].userInfo.headImgUrl+"' style='margin-top: 5px;width: 80%;height: 80%' ></div>");
+                            if(arr[i].isRead == 1 && arr[i].companyId==0){
+                                var $div = $("<div class='liRight'><span class='intername'>"+arr[i].userInfo.userName+"</span><span class='infor'>"+"未读消息"+"</span></div>");
+                            }else{
+                                var $div = $("<div class='liRight'><span class='intername'>"+arr[i].userInfo.userName+"</span><span class='infor'>"+arr[i].recoredTime+"</span></div>");
+                            }
                         }
-
-                        var $img = $("<div class='liLeft'><input type='hidden' class='headImg' value='"+arr[i].userInfo.headImgUrl+"'><input type='hidden' class='userID' value='"+arr[i].userId+"'><img src='"+ctx+"/"+arr[i].userInfo.headImgUrl+"' style='margin-top: 5px;width: 80%;height: 80%' ></div>")
-                        var $div = $("<div class='liRight'><span class='intername'>"+arr[i].userInfo.userName+"</span><span class='infor'>"+arr[i].recoredTime+"</span></div>");
                         $li.append($img);
                         $li.append($div);
                         $("#number").append($li);
                      }
                     findChat(arr[0].userId);
+                }else{
+                    alert("暂无用户来访");
+                    $("#dope").attr("readonly",true);
                 }
             }
         })
@@ -256,12 +247,28 @@
 
         $(node).addClass('bg').siblings().removeClass('bg');
         var intername=$(node).children('.liRight').children('.intername').text();
+        var tip = $(node).children('.liRight').children('.infor').text();
         var userID = $(node).children('.liLeft').children('.userID').val();
         $("#userID").val(userID);
         $("#curImg").val($(node).children('.liLeft').children('.headImg').val());
         $('.internetName').text(intername);
         $('.newsList').html('');
-        findChat(userID);
+        if(tip=='未读消息'){
+            $.ajax({
+                url:ctx+"/rec/readUserMsg",
+                type:"post",
+                data:"userID="+userID,
+                typeData:"text",
+                async:false,
+                success:function (data) {
+                    if(data=='1'){
+                        findChat(userID);
+                    }
+                }
+            })
+        }else{
+            findChat(userID);
+        }
     }
 
 

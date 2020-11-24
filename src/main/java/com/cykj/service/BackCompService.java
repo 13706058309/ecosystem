@@ -1,6 +1,7 @@
 package com.cykj.service;
 
 import com.cykj.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -87,4 +88,8 @@ public interface BackCompService {
     String findChatRecs(int compID,int userID);
     //添加聊天纪律
     int addCompRec(CompRecord compRecord);
+    //确认读过用户发了的消息
+    int readUserMsg( int compID, int userID);
+    //确认读过公司的消息
+    int readCompMsg( int compID, int userID);
 }

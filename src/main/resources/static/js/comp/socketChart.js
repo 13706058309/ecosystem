@@ -35,7 +35,6 @@ websocket.onmessage = function (event) {
 
     //目标用户
     var tarUser = messageJson.tarUser;
-    alert(tarUser);
     //消息
     var message = messageJson.message;
 
@@ -47,8 +46,18 @@ websocket.onmessage = function (event) {
             $li.append($div2),
             $('.newsList').append($li);
         $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
+        $.ajax({
+            url:ctx+"/rec/readUserMsg",
+            type:"post",
+            data:"userID="+curID,
+            typeData:"text",
+            async:false,
+            success:function (data) {
+
+            }
+        })
     }else{
-        $('#a'+tarUser).children('.liRight').children('.infor').text("新消息");
+        $('#a'+tarUser).children('.liRight').children('.infor').text("未读消息");
     }
 
 }
@@ -61,12 +70,13 @@ websocket.onclose = function () {
 
 $('.sendBtn').on('click',function(){
     var news=$('#dope').val();
+    if(news.length>100){
+        alert('字符长度不能超过100');
+    }
     if(news==''){
         alert('不能为空');
     }else{
         $('#dope').val('');
-        var a = 3;
-        alert($("#ip"+a+"").val());
         var str='';
         str+='<li>'+
             '<div class="nesHead"><img src="'+ctx+'/uploadLogo'+photo+'"/></div>'+
@@ -85,48 +95,6 @@ $('.sendBtn').on('click',function(){
     }
 
 })
-function send() {
-    //消息
-    var message = $("#hz-message-input").html();
-    //目标用户名
-    var tarUserName = $("#toUserName").text();
-    //登录用户名
-    var srcUserName = $("#talks").text();
-
-    // $("#hz-message-body").append(
-    //     "<div class=\"hz-message-list\">" +
-    //     "<div class=\"hz-message-list-text right\">" +
-    //     "<span>" + message + "</span>" +
-    //     "</div>" +
-    //     "</div>");
-    // $("#hz-message-input").html("");
-    // //取出对象
-    // if (msgObjArr.length > 0) {
-    //     var isExist = false;
-    //     for (var i = 0; i < msgObjArr.length; i++) {
-    //         var obj = msgObjArr[i];
-    //         if (obj.toUserName == tarUserName) {
-    //             //保存最新数据
-    //             obj.message.push({username: srcUserName, message: message, date: NowTime()});
-    //             isExist = true;
-    //             break;
-    //         }
-    //     }
-    //     if (!isExist) {
-    //         //追加聊天对象
-    //         msgObjArr.push({
-    //             toUserName: tarUserName,
-    //             message: [{username: srcUserName, message: message, date: NowTime()}]//封装数据[{username:huanzi,message:"你好，我是欢子！",date:2018-04-29 22:48:00}]
-    //         });
-    //     }
-    // } else {
-    //     //追加聊天对象
-    //     msgObjArr.push({
-    //         toUserName: tarUserName,
-    //         message: [{username: srcUserName, message: message, date: NowTime()}]//封装数据[{username:huanzi,message:"你好，我是欢子！",date:2018-04-29 22:48:00}]
-    //     });
-    // }
-}
 
 //监听点击用户
 $("body").on("click", ".hz-group-list", function () {

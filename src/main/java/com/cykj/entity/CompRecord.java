@@ -14,6 +14,7 @@ public class CompRecord {
   private BackUser backUser;
   private long tUserId;
   private long tCompId;
+  private long isRead;
 
   public CompRecord() {
   }
@@ -91,5 +92,13 @@ public class CompRecord {
 
   public void setBackUser(BackUser backUser) {
     this.backUser = backUser;
+  }
+
+  public long getIsRead() {
+    return isRead;
+  }
+
+  public void setIsRead(long isRead) {
+    this.isRead = isRead;
   }
 }

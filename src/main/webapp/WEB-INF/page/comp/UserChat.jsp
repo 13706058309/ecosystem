@@ -243,14 +243,34 @@
                 for(var i=0;i<length;i++){
                     if(arr[i].tCompId!=selNum){
                         var $li = $("<li onclick='changeSelect(this)'id='a"+arr[i].tCompId+"'></li>");
-                        var $img = $("<div class='liLeft'><input type='hidden' class='headImg' value='"+arr[i].backUser.logo+"'><input type='hidden' class='userID' value='"+arr[i].tCompId+"'><img src='"+ctx+"/uploadLogo"+arr[i].backUser.logo+"' style='width: 80%;height: 80%'></div>")
-                        var $div = $("<div class='liRight'><span class='intername'>"+arr[i].backUser.bUserName+"</span><span class='infor'>"+arr[i].recoredTime+"</span></div>");
+                        var $img = $("<div class='liLeft'><input type='hidden' class='headImg' value='"+arr[i].backUser.logo+"'><input type='hidden' class='userID' value='"+arr[i].tCompId+"'><img src='"+ctx+"/uploadLogo"+arr[i].backUser.logo+"' style='width: 80%;height: 80%'></div>");
+                        if(arr[i].isRead==1&&arr[i].tUserId==0){
+                            var $div = $("<div class='liRight'><span class='intername'>"+arr[i].backUser.bUserName+"</span><span class='infor'>"+"未读消息"+"</span></div>");
+                        }else{
+                            var $div = $("<div class='liRight'><span class='intername'>"+arr[i].backUser.bUserName+"</span><span class='infor'>"+arr[i].recoredTime+"</span></div>");
+                        }
                         $li.append($img);
                         $li.append($div);
                         $("#number").append($li);
                     }
                 }
-                findChat(selCompID);
+                if(selNum==0){
+                    findChat(selCompID);
+                }else{
+                    $.ajax({
+                        url:ctx+"/rec/readCompMsg",
+                        type:"post",
+                        data:"compID="+selNum,
+                        typeData:"text",
+                        async:false,
+                        success:function (data) {
+                            if(data=='1'){
+                                findChat(selCompID);
+                            }
+                        }
+                    })
+                }
+
             }
         })
     })
@@ -258,12 +278,29 @@
     function changeSelect(node) {
         $(node).addClass('bg').siblings().removeClass('bg');
         var intername=$(node).children('.liRight').children('.intername').text();
+        var tip = $(node).children('.liRight').children('.infor').text();
         var userID = $(node).children('.liLeft').children('.userID').val();
         $("#compID").val(userID);
         $("#curImg").val($(node).children('.liLeft').children('.headImg').val());
         $('.internetName').text(intername);
         $('.newsList').html('');
-        findChat(userID);
+
+        if(tip=='未读消息'){
+            $.ajax({
+                url:ctx+"/rec/readCompMsg",
+                type:"post",
+                data:"compID="+userID,
+                typeData:"text",
+                async:false,
+                success:function (data) {
+                    if(data=='1'){
+                        findChat(userID);
+                    }
+                }
+            })
+        }else{
+            findChat(userID);
+        }
     }
 
     function findChat(compID) {

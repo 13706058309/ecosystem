@@ -48,8 +48,18 @@ websocket.onmessage = function (event) {
             $li.append($div2),
             $('.newsList').append($li);
         $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
+        $.ajax({
+            url:ctx+"/rec/readCompMsg",
+            type:"post",
+            data:"compID="+curID,
+            typeData:"text",
+            async:false,
+            success:function (data) {
+
+            }
+        })
     }else{
-        $('#a'+tarUser).children('.liRight').children('.infor').text("新消息");
+        $('#a'+tarUser).children('.liRight').children('.infor').text("未读消息");
     }
     //最加聊天数据
     // setMessageInnerHTML(srcUser.username,srcUser.username, message);
@@ -127,6 +137,9 @@ function setMessageInnerHTML(srcUserName,msgUserName, message) {
 $('.sendBtn').on('click',function(){
     var news=$('#dope').val();
     var tarID = $("#compID").val();
+    if(news.length>100){
+        alert('字符长度不能超过100');
+    }
     if(news==''){
         alert('不能为空');
     }else{

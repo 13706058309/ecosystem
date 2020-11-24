@@ -23,4 +23,8 @@ public interface CompRecordMapper {
     List<CompRecord> findChatRecs(@Param("compID") int compID, @Param("userID") int userID);
     //添加聊天纪律
     int addCompRec(CompRecord compRecord);
+    //确认读过用户发了的消息
+    int readUserMsg(@Param("compID") int compID, @Param("userID") int userID);
+    //确认读过公司的消息
+    int readCompMsg(@Param("compID") int compID, @Param("userID") int userID);
 }

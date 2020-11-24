@@ -491,6 +491,11 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public String compfindChat(int compID) {
         List<CompRecord> list = compRecordMapper.findCompChatRec(compID);
+        if(list.size()!=0){
+            if(list.get(0).getIsRead()==1&&list.get(0).getCompanyId()==0){
+                compRecordMapper.readUserMsg(compID, (int) list.get(0).gettUserId());
+            }
+        }
         return new Gson().toJson(list);
     }
 
@@ -515,6 +520,16 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public int addCompRec(CompRecord compRecord) {
         return compRecordMapper.addCompRec(compRecord);
+    }
+
+    @Override
+    public int readUserMsg(int compID, int userID) {
+        return compRecordMapper.readUserMsg(compID,userID);
+    }
+
+    @Override
+    public int readCompMsg(int compID, int userID) {
+        return compRecordMapper.readCompMsg(compID,userID);
     }
 
 

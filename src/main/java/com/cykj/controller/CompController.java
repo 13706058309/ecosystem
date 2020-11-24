@@ -724,10 +724,9 @@ public class CompController {
     public @ResponseBody String findDownFee(){
         return backCompService.findDownFee();
     }
-
+    //跳转企业通讯页面
     @RequestMapping("/chat")
     public String chat(HttpServletRequest request){
-
         int compID = 3;
         BackUser backUser = backCompService.findCompByID(compID);
         request.setAttribute("admin",backUser);
@@ -736,14 +735,18 @@ public class CompController {
 
 
     @RequestMapping("/getChatUser")
-    public @ResponseBody String getChatUser(){
+    public @ResponseBody String getChatUser(HttpServletRequest request){
+//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
         int compID = 3;
         return backCompService.compfindChat(compID);
     }
 
     @RequestMapping("/findChatRec")
-    public @ResponseBody String findChatRec(String userID){
+    public @ResponseBody String findChatRec(String userID,HttpServletRequest request){
         System.out.println("收地点ID"+userID);
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
         int compID = 3;
         return backCompService.findChatRec(compID, Integer.parseInt(userID));
     }
@@ -761,15 +764,35 @@ public class CompController {
     }
     //查找用户聊过的公司
     @RequestMapping("/getChatComp")
-    public @ResponseBody String getChatComp(){
+    public @ResponseBody String getChatComp(HttpServletRequest request){
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+//        int userID = (int) userInfo.getUserId();
         int userID = 1;
         return backCompService.userFindChat(userID);
     }
     //用户查找具体和某个企业的聊天纪律
     @RequestMapping("/findChatRecs")
-    public @ResponseBody String findChatRecs(String compID){
-        System.out.println("收地点ID"+compID);
+    public @ResponseBody String findChatRecs(String compID,HttpServletRequest request){
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+//        int userID = (int) userInfo.getUserId();
         int userID = 1;
         return backCompService.findChatRecs(Integer.parseInt(compID),userID);
+    }
+    //把读过的用户消息设为已读
+    @RequestMapping("/readUserMsg")
+    public @ResponseBody String readUserMsg(String userID,HttpServletRequest request){
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
+        int compID = 3;
+        backCompService.readUserMsg(3,Integer.parseInt(userID));
+        return "1";
+    }
+
+    //把读过的用户消息设为已读
+    @RequestMapping("/readCompMsg")
+    public @ResponseBody String readCompMsg(String compID){
+        int userID = 1;
+        backCompService.readCompMsg(Integer.parseInt(compID),userID);
+        return "1";
     }
 }
