@@ -3,5 +3,65 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CompRecordMapper">
+    <select id="findCompChatRec" resultMap="getCompChat">
+        select max(recoredTime) as recoredTime,u.userName,u.headImgUrl,u.telephone,r.userID from compRecord r,userInfo u
+            where r.tCompID = #{compID} and r.userID = u.userId group by r.userID limit 10;
+    </select>
+
+    <resultMap id="getCompChat" type="com.cykj.entity.CompRecord">
+        <id property="compRecId" column="compRecId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="companyId" column="companyId"></result>
+        <result property="recored" column="recored"></result>
+        <result property="recoredTime" column="recoredTime"></result>
+        <result property="tUserId" column="tUserId"></result>
+        <result property="tCompId" column="tCompId"></result>
+
+
+        <association property="userInfo" column="userId" javaType="com.cykj.entity.UserInfo">
+            <id property="compAndTalId" column="compAndTalId"></id>
+            <result property="userName" column="userName"></result>
+            <result property="headImgUrl" column="headImgUrl"></result>
+            <result property="telephone" column="telephone"></result>
+        </association>
+    </resultMap>
+
+    <select id="findChatRec" resultMap="getCompChat">
+       select r.*,u.headImgUrl from compRecord r left join userInfo u on r.userID = u.userId where
+       (r.companyID = #{compID} and  r.userID = #{userID}) or (r.tCompID = #{compID} and r.tuserID = #{userID});
+    </select>
+
+
+    <select id="getChatComp" resultMap="findComp">
+        select max(recoredTime) as recoredTime ,u.bUserName,u.logo,r.tCompID from compRecord r,backUser u
+            where r.userID = #{userID} and r.tCompID = u.buserId group by r.tCompID limit 10;
+    </select>
+
+    <resultMap id="findComp" type="com.cykj.entity.CompRecord">
+        <id property="compRecId" column="compRecId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="companyId" column="companyId"></result>
+        <result property="recored" column="recored"></result>
+        <result property="recoredTime" column="recoredTime"></result>
+        <result property="tUserId" column="tUserId"></result>
+        <result property="tCompId" column="tCompId"></result>
+
+
+        <association property="backUser" column="tCompID" javaType="com.cykj.entity.BackUser">
+            <id property="bUserId" column="bUserId"></id>
+            <result property="bUserName" column="bUserName"></result>
+            <result property="logo" column="logo"></result>
+        </association>
+    </resultMap>
+
+    <select id="findChatRecs" resultMap="findComp">
+       select r.*,u.logo from compRecord r left join backUser u on r.tCompID = u.buserId where
+       (r.companyID = #{compID} and  r.userID = #{userID}) or (r.tCompID = #{compID} and r.tuserID = #{userID});
+    </select>
+
+    <insert id="addCompRec" parameterType="com.cykj.entity.CompRecord">
+        insert into compRecord (userID, companyID, recored, tUserID, tCompID)
+        VALUES (#{userId},#{companyId},#{recored},#{tUserId},#{tCompId})
+    </insert>
 
 </mapper>

@@ -20,6 +20,7 @@ public class UserInfo {
   private String address; //地址
   private long isOpen; // 是否公开
   private String regTime;//注册时间
+  private String headImgUrl;
 
   public UserInfo() {
 
@@ -138,5 +139,11 @@ public class UserInfo {
     this.states = states;
   }
 
+  public String getHeadImgUrl() {
+    return headImgUrl;
+  }
 
+  public void setHeadImgUrl(String headImgUrl) {
+    this.headImgUrl = headImgUrl;
+  }
 }

@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.zip.Inflater;
 
 @Controller
 @RequestMapping("/rec")
@@ -585,7 +586,8 @@ public class CompController {
     @RequestMapping("/outResume")
     public ResponseEntity<byte[]> outResume(int resumeID,HttpServletRequest request) throws IOException {
         String savePath = request.getSession().getServletContext().getRealPath("/outResume/");
-        String path = backCompService.outResume(resumeID,savePath);
+        String photoPath = request.getSession().getServletContext().getRealPath("");
+        String path = backCompService.outResume(resumeID,savePath,photoPath);
         //把下载文件构成一个文件处理
         File file = new File(path);
         //设置头信息
@@ -721,5 +723,53 @@ public class CompController {
     @RequestMapping("/findDownFee")
     public @ResponseBody String findDownFee(){
         return backCompService.findDownFee();
+    }
+
+    @RequestMapping("/chat")
+    public String chat(HttpServletRequest request){
+
+        int compID = 3;
+        BackUser backUser = backCompService.findCompByID(compID);
+        request.setAttribute("admin",backUser);
+        return "comp/Chat";
+    }
+
+
+    @RequestMapping("/getChatUser")
+    public @ResponseBody String getChatUser(){
+        int compID = 3;
+        return backCompService.compfindChat(compID);
+    }
+
+    @RequestMapping("/findChatRec")
+    public @ResponseBody String findChatRec(String userID){
+        System.out.println("收地点ID"+userID);
+        int compID = 3;
+        return backCompService.findChatRec(compID, Integer.parseInt(userID));
+    }
+
+    @RequestMapping("/userChat")
+    public String userChat(HttpServletRequest request){
+        BackUser backUser = backCompService.findCompByID(7);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(1);
+        userInfo.setUserName("慕莲");
+        userInfo.setHeadImgUrl("/headimg/images/headImg.png");
+        request.getSession().setAttribute("bUser",backUser);
+        request.getSession().setAttribute("qUser",userInfo);
+        return "comp/UserChat";
+    }
+    //查找用户聊过的公司
+    @RequestMapping("/getChatComp")
+    public @ResponseBody String getChatComp(){
+        int userID = 1;
+        return backCompService.userFindChat(userID);
+    }
+    //用户查找具体和某个企业的聊天纪律
+    @RequestMapping("/findChatRecs")
+    public @ResponseBody String findChatRecs(String compID){
+        System.out.println("收地点ID"+compID);
+        int userID = 1;
+        return backCompService.findChatRecs(Integer.parseInt(compID),userID);
     }
 }

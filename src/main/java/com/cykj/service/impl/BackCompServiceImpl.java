@@ -5,6 +5,7 @@ import com.cykj.mapper.*;
 import com.cykj.service.BackCompService;
 import com.cykj.utils.MyUtil;
 import com.cykj.utils.WordUtil;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,6 +55,9 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Resource
     private ParameterMapper parameterMapper;
+
+    @Resource
+    private CompRecordMapper compRecordMapper;
 
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
@@ -312,7 +316,7 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public String outResume(int resumeID,String savePath) {
+    public String outResume(int resumeID,String savePath,String photoPath) {
         Resume resume = resumeMapper.findResumeDetail(resumeID);
         Map<String,Object> map = new HashMap<>();
         map.put("realName",resume.getRealName());
@@ -404,7 +408,7 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("proWork2","");
         }
         WordUtil wordUtil = new WordUtil();
-        String imageBase = wordUtil.getImageBase("static"+resume.getPhoto());
+        String imageBase = wordUtil.getImageBase(photoPath+resume.getPhoto());
         map.put("image",imageBase);
         String path = wordUtil.createWord(map, MyUtil.RESUME,savePath);
         return path;
@@ -482,6 +486,35 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public String findDownFee() {
         return parameterMapper.findDownFee(56).getParamValues();
+    }
+
+    @Override
+    public String compfindChat(int compID) {
+        List<CompRecord> list = compRecordMapper.findCompChatRec(compID);
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public String findChatRec(int compID, int userID) {
+        List<CompRecord> list = compRecordMapper.findChatRec(compID,userID);
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public String userFindChat(int userID) {
+        List<CompRecord> list = compRecordMapper.getChatComp(userID);
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public String findChatRecs(int compID, int userID) {
+        List<CompRecord> list = compRecordMapper.findChatRecs(compID,userID);
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public int addCompRec(CompRecord compRecord) {
+        return compRecordMapper.addCompRec(compRecord);
     }
 
 
