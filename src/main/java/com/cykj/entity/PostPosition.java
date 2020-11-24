@@ -70,10 +70,6 @@ public class PostPosition {
     this.pPostId = pPostId;
   }
 
-  public void setReleaseTime(String releaseTime) {
-    this.releaseTime = releaseTime;
-  }
-
   public BackUser getBackUser() {
     return backUser;
   }
