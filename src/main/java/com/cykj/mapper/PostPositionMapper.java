@@ -2,6 +2,7 @@ package com.cykj.mapper;
 
 import com.cykj.entity.PostPosition;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface PostPositionMapper {
     int changePostPositionStand(Map<String,Object> map);
 
     int updatePostPosition(Map<String,Object> map);
+
+//    最新岗位 9条信息
+    public List<PostPosition> postList(@Param("workCity") String workCity);
+
+//    根据企业id查找岗位信息
+    public List<PostPosition> findPost(@Param("bUserId") int bUserId);
+
 }
