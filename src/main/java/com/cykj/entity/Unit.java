@@ -5,18 +5,13 @@ package com.cykj.entity;
  */
 public class Unit {
 
-  private long unitId; //Id
-  private String unitName; //章节名称
-  private String unitSpeaker; //
-  private String unitSynopsis;
-  private String videoUrl;
-  private long timeLength;
-  private long playTimes;
-  private long unitNum;
-  private long courseId;
+  private long unitId;//章节ID
+  private String unitName;//章节名
+  private String videoUrl;//播放链接
+  private String timeLength;//时长
+  private long preUnitId;//前一章节ID
+  private long courseId;//所属课程Id
 
-  public Unit() {
-  }
 
   public long getUnitId() {
     return unitId;
@@ -36,24 +31,6 @@ public class Unit {
   }
 
 
-  public String getUnitSpeaker() {
-    return unitSpeaker;
-  }
-
-  public void setUnitSpeaker(String unitSpeaker) {
-    this.unitSpeaker = unitSpeaker;
-  }
-
-
-  public String getUnitSynopsis() {
-    return unitSynopsis;
-  }
-
-  public void setUnitSynopsis(String unitSynopsis) {
-    this.unitSynopsis = unitSynopsis;
-  }
-
-
   public String getVideoUrl() {
     return videoUrl;
   }
@@ -63,30 +40,21 @@ public class Unit {
   }
 
 
-  public long getTimeLength() {
+  public String getTimeLength() {
     return timeLength;
   }
 
-  public void setTimeLength(long timeLength) {
+  public void setTimeLength(String timeLength) {
     this.timeLength = timeLength;
   }
 
 
-  public long getPlayTimes() {
-    return playTimes;
+  public long getPreUnitId() {
+    return preUnitId;
   }
 
-  public void setPlayTimes(long playTimes) {
-    this.playTimes = playTimes;
-  }
-
-
-  public long getUnitNum() {
-    return unitNum;
-  }
-
-  public void setUnitNum(long unitNum) {
-    this.unitNum = unitNum;
+  public void setPreUnitId(long preUnitId) {
+    this.preUnitId = preUnitId;
   }
 
 

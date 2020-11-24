@@ -59,6 +59,16 @@ public class CourseServiceImpl implements CourseService {
         return updateSpeakerHeadImgUrl;
     }
 
+    @Override//新增课程
+    public int insertCourse(String courseName, Integer fieldId, String courseImgURL, String speakerName, String courseIntroduce, String collectionNumber, String speakerHeadImgUrl, String totalPlayTimes) {
+        System.out.println("CourseServiceImpl里的值为："+"courseName:"+courseName+"；fileId:"+fieldId+"；courseImgURL:"+courseImgURL
+                +"；speakerName:"+speakerName+"；courseIntroduce:"+courseIntroduce +"；collectionNumber:"
+                +collectionNumber+"；speakerHeadImgUrl:"+speakerHeadImgUrl+"；totalPlayTimes:"+totalPlayTimes);
+        int insertCourse = courseMapper.insertCourse(courseName,fieldId,courseImgURL,speakerName,
+                courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes);
+        return insertCourse;
+    }
+
 //    @Resource
 //    private CourseMapper courseMapper;
 //    @Override

@@ -31,6 +31,9 @@ public interface CourseMapper {
 
     int updatespeakerHeadImgUrl(String speakerHeadImgUrl,Integer courseId);//更改头像路径
 
+    int insertCourse(String courseName,Integer fieldId,String courseImgURL,String speakerName
+            ,String courseIntroduce,String collectionNumber,String speakerHeadImgUrl,String totalPlayTimes);//新增课程
+
 
 //public List<Course> findCourse();
 //public List<Course> search(String courseName);

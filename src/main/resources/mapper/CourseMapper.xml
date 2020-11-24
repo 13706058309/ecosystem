@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CourseMapper">
+
     <select id="findCourseOnPage" parameterType="java.util.HashMap" resultMap="results">
         select * from course where courseName like concat('%',#{courseName},'%') and courseId != 0
         <if test="fieldId!=null">
@@ -62,6 +63,11 @@
     <update id="updatespeakerHeadImgUrl" >
         update course set speakerHeadImgUrl = #{speakerHeadImgUrl} where courseId = #{courseId}
     </update>
+
+    <insert id="insertCourse">
+        insert into course (courseName,fieldId,courseImgURL,speakerName,courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes,uploadTime) values
+        (#{courseName},#{fieldId},#{courseImgURL},#{speakerName},#{courseIntroduce},#{collectionNumber},#{speakerHeadImgUrl},#{totalPlayTimes},now())
+    </insert>
 
 <!--    <select id="findCourse"  resultType="com.cykj.entity.Course">-->
 <!--        select courseId,fieldId,courseName,uploadTime  from course ;-->

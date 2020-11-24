@@ -26,7 +26,7 @@ public class LogMatter {
     BackLogService backLogService;//获取日志service对象
 
 //    @Pointcut("execution(* com.cykj.controller.*.*(..))")//修改
-@Pointcut("execution(* com.cykj.controller.TxjTestController.*(..))")//修改
+@Pointcut("execution(* com.cykj.controller.CourseController.*(..))")//修改
     public void logpoint() {
 
     }

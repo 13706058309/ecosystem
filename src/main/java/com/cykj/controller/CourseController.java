@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/txjtext")
-public class TxjTestController {
+@RequestMapping("/course")
+public class CourseController {
     @Resource
 private CourseServiceImpl courseServiceImpl;
 
@@ -60,6 +60,7 @@ private CourseServiceImpl courseServiceImpl;
         return new Gson().toJson(tableInfo);
     }
 
+
     @RequestMapping("deleteCourse")
     @Loger(operationType = "表格执行删除",operationName = "表格执行删除")
     public void deleteCourse(HttpServletRequest req,HttpServletResponse resp,Integer courseId){
@@ -74,6 +75,7 @@ private CourseServiceImpl courseServiceImpl;
 
     }
 
+
     @RequestMapping("updateCourseName")//更改课程名称
     @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
     public void updateCourseName(String courseName,Integer courseId) {
@@ -83,6 +85,7 @@ private CourseServiceImpl courseServiceImpl;
             int updatecourseName = courseServiceImpl.updateCourseName(courseName,courseId);
         }
     }
+
 
     //更改课程路径
     @RequestMapping("updatecourseImgURL")
@@ -95,6 +98,7 @@ private CourseServiceImpl courseServiceImpl;
         }
     }
 
+
     @RequestMapping("updatecourseIntroduce")//更改课程介绍
     @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
     public void updatecourseIntroduce(String courseIntroduce,Integer courseId) {
@@ -105,6 +109,7 @@ private CourseServiceImpl courseServiceImpl;
         }
     }
 
+
     @RequestMapping("updatespeakerHeadImgUrl")//更改头像路径
     @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
     public void updatespeakerHeadImgUrl(String speakerHeadImgUrl,Integer courseId) {
@@ -114,7 +119,29 @@ private CourseServiceImpl courseServiceImpl;
             int updateSpeakerHeadImgUrl = courseServiceImpl.updatespeakerHeadImgUrl(speakerHeadImgUrl,courseId);
         }
     }
-//    @RequestMapping("updateCourse")
+
+
+    @RequestMapping("insertCourse")//更改头像路径
+    @Loger(operationType = "表格执行新增",operationName = "表格执行新增")
+    public void insertCourse(String courseName,Integer fieldId,String courseImgURL,String speakerName
+    ,String courseIntroduce,String collectionNumber,String speakerHeadImgUrl,String totalPlayTimes) {
+        System.out.println("走入更改控制类");
+        System.out.println("courseName:"+courseName+"；fieldId:"+fieldId+"；courseImgURL:"+courseImgURL
+                +"；speakerName:"+speakerName+"；courseIntroduce:"+courseIntroduce +"；collectionNumber:"
+                +collectionNumber+"；speakerHeadImgUrl:"+speakerHeadImgUrl+"；totalPlayTimes:"+totalPlayTimes);
+
+        if (courseName != null && fieldId !=null && courseImgURL !=null && speakerName != null &&
+                courseIntroduce != null && collectionNumber !=null && speakerHeadImgUrl !=null && totalPlayTimes !=null){
+            int insertCourse = courseServiceImpl.insertCourse(courseName,fieldId,courseImgURL,speakerName,
+                    courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes);
+        }
+
+
+    }
+
+
+
+    //    @RequestMapping("updateCourse")
 //    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
 //    public void updateCourse(Integer courseId_table,String courseName_table,String courseImgURL_table,String courseIntroduce_table,String speakerHeadImgUrl_table
 //    ,String courseName,String courseIntroduce,String courseImgURL,String speakerHeadImgUrl){

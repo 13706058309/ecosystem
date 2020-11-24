@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>后台课程管理</title>
+    <title>后台章节管理</title>
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
@@ -29,7 +29,7 @@
     #dropDownMenu{/*这是下拉菜单样式*/
         float: left;
     }
-    #AddCourses_button{/*这是增加课程样式*/
+    #AddUnit_button{/*这是增加课程样式*/
         margin-left: 30px;
     }
     #OperationRecord_button{/*这是操作记录样式*/
@@ -44,7 +44,7 @@
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改提示</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除课程</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除章节</a>
 </script>
 
 
@@ -55,7 +55,7 @@
         var form = layui.form;
 
             //监听提交【增加课程  按钮的监听】
-            form.on('submit(AddCourses)', function(data){
+            form.on('submit(AddUnit)', function(data){
             console.log(data);
             // alert("成功提交“增加操作”");
                 layui.use('layer', function(){
@@ -219,7 +219,7 @@
         <div class="layui-input-block">
             <div id="dropDownMenu" class="layui-input-block" style="width: 200px">
                 <select id="fieldId"   ><%--lay-verify="required"--%>
-                <option value="">请选择领域</option>
+                <option value="">请选择课程</option>
                 <option value="1">C++</option>
                 <option value="2">Html</option>
                 <option value="3">Java</option>
@@ -227,12 +227,12 @@
                 <option value="5">嵌入式</option>
             </select>
             </div>
-            <input id="input_search" class="layui-input " type="text"  lay-verify="title" autocomplete="off" placeholder="请输入课程名"  style="width: 200px">
+            <input id="input_search" class="layui-input " type="text"  lay-verify="title" autocomplete="off" placeholder="请输入章节名"  style="width: 200px">
             <input id="layui-btn" class="layui-btn layui-btn-warm" type="button" lay-submit lay-filter="search"  data-type="reload" value="搜索">
 
-            <button id="AddCourses_button" type="button" class="layui-btn " lay-submit lay-filter="AddCourses">
+            <button id="AddUnit_button" type="button" class="layui-btn " lay-submit lay-filter="AddUnit">
 <%--                <i class="layui-icon">&#xe654;</i>--%>
-                            增加课程
+                            增加章节
             </button>
 <%--            <button id="DeleteCourse_button" type="button" class="layui-btn "lay-submit lay-filter="DeleteCourse">--%>
 <%--&lt;%&ndash;                <i class="layui-icon">&#xe67e;</i>&ndash;%&gt;--%>
@@ -259,54 +259,33 @@
             ,height: 570
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: []//取消头部工具栏右侧的按钮
-            ,url: '../course/findCourse' //数据接口
-            ,data:['courseName']//,'selectvalue'
+            ,url: '../unit/findUnit' //数据接口
+            ,data:['unitName']
             ,page: true //开启分页
             , limits: [5,8,10]
             , limit: 10
             ,id:'testReload'
-            // ,cols: [[ //表头
-            //     {field: 'courseId', title: '序号', width:80, sort: true, fixed: 'left'}
-            //     ,{field: 'fieldId', title: '课程所在领域', width:130,templet:function (d) {
-            //         if (d.fieldId == 1){
-            //             return 'C++';
-            //         }else if(d.fieldId == 2){
-            //             return 'Html';
-            //         }else if(d.fieldId == 3){
-            //             return 'Java';
-            //         }else if (d.fieldId == 4){
-            //             return 'PHP';
-            //         }else if (d.fieldId == 5){
-            //             return '嵌入式';
-            //         }
-            //         }}
-            //     ,{field: 'courseName', title: '课程名称', width:150}
-            //     ,{field: 'uploadTime', title: '上传时间', width:220,sort: true}
-            //     ,{field: '', title: '操作', width: 177,toolbar:'#barDemo'}
-            // ]]
+
             ,cols: [[ //表头
-                {field: 'courseId', title: '序号', width:80, sort: true, fixed: 'left'}
-                ,{field: 'courseName', title: '课程名称', width:150,event:'courseName'}
-                ,{field: 'courseImgURL', title: '路径', width:330,event:'courseImgURL'}
-                ,{field: 'speakerName', title: '讲师', width:130}
-                ,{field: 'courseIntroduce', title: '课程介绍', width:150,event:'courseIntroduce'}
-                ,{field: 'uploadTime', title: '上传时间', width:220,sort: true}
-                ,{field: 'collectionNumber', title: '收藏人数', width:120,sort: true}
-                ,{field: 'fieldId', title: '课程所在领域', width:130,templet:function (d) {
-                        if (d.fieldId == 1){
-                            return 'C++';
-                        }else if(d.fieldId == 2){
-                            return 'Html';
-                        }else if(d.fieldId == 3){
-                            return 'Java';
-                        }else if (d.fieldId == 4){
-                            return 'PHP';
-                        }else if (d.fieldId == 5){
-                            return '嵌入式';
-                        }
-                    }}
-                ,{field: 'speakerHeadImgUrl', title: '头像路径', width:250,event:'speakerHeadImgUrl'}
-                ,{field: 'totalPlayTimes', title: '总播放次数', width:150,sort: true}
+                {field: 'unitId', title: '序号', width:80, sort: true, fixed: 'left'}
+                ,{field: 'unitName', title: '章节名称', width:150,event:'courseName'}
+                ,{field: 'videoUrl', title: '路径', width:330,event:'courseImgURL'}
+                ,{field: 'timeLength', title: '时长', width:130,sort: true}
+                ,{field: 'preUnitId', title: '上章Id', width:130,sort: true}
+                ,{field: 'courseId', title: '课程id', width:130,sort: true}
+                // ,{field: 'fieldId', title: '课程名', width:130,templet:function (d) {
+                //         if (d.fieldId == 1){
+                //             return 'C++';
+                //         }else if(d.fieldId == 2){
+                //             return 'Html';
+                //         }else if(d.fieldId == 3){
+                //             return 'Java';
+                //         }else if (d.fieldId == 4){
+                //             return 'PHP';
+                //         }else if (d.fieldId == 5){
+                //             return '嵌入式';
+                //         }
+                //     }}
                 ,{field: '', title: '操作', width: 177,toolbar:'#barDemo'}
             ]]
 
@@ -376,7 +355,7 @@
         });
 
         //监听提交【增加课程  按钮的监听】
-        form.on('submit(AddCourses)', function(data){
+        form.on('submit(AddUnit)', function(data){
             console.log(data);
             // alert("成功提交“增加操作”");
             layui.use('layer', function(){
