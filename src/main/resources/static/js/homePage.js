@@ -38,14 +38,12 @@ function menu_box(industryId, dos) {
 
 //第三岗位的值，跳转界面
 function postName(node) {
-    console.log("?????????????????????"+$(node).text());
-    location.href="center/job?city="+$("#city").text();
+    location.href="center/job?findWorkCity="+$("#city").text()+"&findPosition="+node.text();
 }
 //搜索第三岗位，跳转界面
 function searchBut() {
     var search = $("#search_input").val()
-    console.log("1111111111111111111111111"+search)
-    location.href="center/job?city="+$("#city").text();
+    location.href="center/job?city="+$("#city").text()+"&findSearch="+search;
 
 }
 

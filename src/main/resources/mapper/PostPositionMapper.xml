@@ -143,7 +143,7 @@
 
 <!--    根据企业id查找岗位信息-->
     <select id="findPost" resultType="com.cykj.entity.PostPosition">
-        select * from postPosition where companyId = #{companyId}
+        select * from postPosition where companyId = #{bUserId}
     </select>
 
 </mapper>
