@@ -59,6 +59,7 @@ public class PostPosition {
             ", detailAddress='" + detailAddress + '\'' +
             ", contact='" + contact + '\'' +
             ", contactEmail='" + contactEmail + '\'' +
+            ", backUser=" + backUser +
             '}';
   }
 
@@ -72,6 +73,9 @@ public class PostPosition {
   public void setIndustryList(List<Industry> industryList) {
     this.industryList = industryList;
   }
+
+
+
 
   public long getpPostId() {
     return pPostId;
