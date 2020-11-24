@@ -55,7 +55,6 @@ function show() {
     $("#packUp").css('display','block');
 }
 
-
 var currCity = $("#city").text();
 $(function () {
     currCity = $("#city").text();
