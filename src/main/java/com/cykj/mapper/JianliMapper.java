@@ -78,4 +78,10 @@ public interface JianliMapper {
     public List<Position> positions();
 //    查看所有城市
     public List<City> citys();
+//    修改简历头像
+    public int updatePhoto(Resume resume);
+    public int updateHeadImgUrl(UserInfo userInfo);
+
+//    查看是否有投递过该岗位的简历
+    public Delivery findDelivery(@Param("userId")int userId,@Param("pPostId")int pPostId);
 }

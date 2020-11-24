@@ -451,6 +451,40 @@ public class ResumeServiceImp implements ResumeService {
         return jianliMapper.citys();
     }
 
+    /**
+     * 修改简历头像
+     *
+     * @param resume
+     * @return
+     */
+    @Override
+    public int updatePhoto(Resume resume) {
+        return jianliMapper.updatePhoto(resume);
+    }
+
+    /**
+     * 用户头像
+     *
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public int updateHeadImgUrl(UserInfo userInfo) {
+        return jianliMapper.updateHeadImgUrl(userInfo);
+    }
+
+    /**
+     * 查看是否有投递过该岗位的简历
+     *
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    @Override
+    public Delivery findDelivery(int userId, int pPostId) {
+        return jianliMapper.findDelivery(userId,pPostId);
+    }
+
 
     /**
      * 修改简历联系方式

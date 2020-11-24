@@ -12,8 +12,10 @@
     <style>
 
     </style>
-
+<%--    <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">--%>
     <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
+
+<%--    <link href="${pageContext.request.contextPath}/css/vendor.css" rel="stylesheet">--%>
 
     <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"  media="all">
@@ -22,7 +24,8 @@
     <script src="${pageContext.request.contextPath}/js/findJob.js" charset="utf-8"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
 
-
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 
 
 
@@ -35,15 +38,16 @@
 
 <div id="header" style="background-color: #0d98ff">
     <div class="inner home-inner" >
-        <div class="logo">
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="BOSS直聘"><span>BOSS直聘</span></a>
+        <div class="logo" style="width: 150px">
+
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo20.png) 3px 7px no-repeat;background-size:150px 30px;width: 150px"><span>钱程无忧</span></a>
         </div>
         <div class="nav">
             <ul>
-                <li class=""><a ka="header-home" href="https://www.zhipin.com/">首页</a></li>
-                <li class="cur"><a ka="header-job" href="https://www.zhipin.com/job_detail/">职位</a></li>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                 <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
-                <li class=""><a ka="tab_overseas_click" href="https://www.zhipin.com/returnee_jobs/">简历</a></li>
+<%--                <li class=""><a ka="tab_overseas_click" href="https://www.zhipin.com/returnee_jobs/">简历</a></li>--%>
                 <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
                 <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
                 <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
@@ -62,27 +66,31 @@
                 </div>
             </form>
         </div>
+
         <div class="user-nav">
+            <c:if test="${empty realName}">
+            <div class="btns" style="margin-top: 10%">
+                <a href="https://signup.zhipin.com" ka="header-register" class="btn btn-outline">注册</a>
+                <a href="https://login.zhipin.com" ka="header-login" class="btn btn-outline">登录</a>
+            </div>
+            </c:if>
+            <c:if test="${not empty realName}">
             <ul>
+<%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
                 <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
-<%--                <li class=""><a ka="header-resume" href="https://www.zhipin.com/web/geek/resume">简历</a></li>--%>
-<%--                <li class="nav-dot">·</li>--%>
-<%--                <li class="nav-up-file"><a class="header-resume-upload" ka="header-resume-upload-2" href="javascript:;">上传</a></li>--%>
                 <li class="nav-figure">
                     <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
-                        <span class="label-text">吴世泽</span><img src="https://img.bosszhipin.com/beijin/upload/avatar/20191127/983522633b91a32d3c06c43f75dcc8e5d28c90069eead34e1450918b517a0c3b_s.png" alt=""/>
+                        <span class="label-text">${realName}</span><img src="${pageContext.request.contextPath}${photo}" alt=""/>
                     </a>
                     <div class="dropdown">
-                        <a href="https://www.zhipin.com/web/geek/recommend" ka="header-personal">个人中心<span>推荐职位、编辑在线简历</span></a>
-                        <a href="https://www.zhipin.com/web/geek/account?type=mobile" ka="account_manage">账号设置<span>修改密码、打招呼语和常用语</span></a>
-                        <a href="https://www.zhipin.com/web/geek/account?type=privacySet" ka="privacy_set">隐私设置</a>
-                        <a href="https://www.zhipin.com/web/geek/mall" class="link-mall" ka="recruit_assistant">求职助手</a>
-                        <a href="javascript:;" class="link-recruit" ka="header-recruit">切换为招聘者</a>
+                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                        <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置</span></a>
+<%--                        <a href="https://www.zhipin.com/web/geek/account?type=privacySet" ka="privacy_set">隐私设置</a>--%>
                         <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
                         <p class="recruit-tip"><img src="https://static.zhipin.com/v2/web/geek/images/recruit-tip.gif" alt=""><span>在 APP 端“我的 - 设置”中切换为Boss身份后，刷新本页面即可进行招聘</span></p>
                     </div>
                 </li>
-            </ul>
+            </ul></c:if>
         </div>
     </div>
 </div>
@@ -101,6 +109,7 @@
                             </div>
                             <div class="industry-sel" ka="search_bos_sel_industry">
                                 <i class="line"></i>
+                                <input type="hidden" id="findPosition" value="${position}">
                                 <span class="label-text" id="position9" onclick="industryBoxToggle()"><b>${position}</b><i class="icon-arrow-down"></i></span>
                             </div>
                             <p class="ipt-wrap"><input type="text" id="search" name="query" ka="search-keyword" value="${search}"
@@ -116,12 +125,12 @@
                             <div class="dorpdown-city">
                             </div>
                         </div>
-                        <div class="industry-box" id="positionsShow">
-                            <ul>
-                                <li data-val=""><a href="javascript:;">不限</a></li>
+                        <div class="industry-box" id="positionsShow"  >
+                            <ul >
+                                <li data-val=""><a onclick="findPosition(this)">不限</a></li>
                                 <c:if test="${not empty positions}">
                                     <c:forEach var="position" items="${positions}">
-                                        <li data-val="100001" ka="sel-industry-1"><a href="javascript:;">${position.postName}</a></li>
+                                        <li data-val="100001" ka="sel-industry-1"><a onclick="findPosition(this)">${position.postName}</a></li>
                                     </c:forEach>
                                 </c:if>
 
@@ -136,7 +145,7 @@
                                 <li data-val=""><a href="javascript:;">不限</a></li>
                                 <c:if test="${not empty citys}">
                                     <c:forEach var="city" items="${citys}">
-                                        <li data-val="100001" ka="sel-industry-1"><a href="javascript:;">${city.cityName}</a></li>
+                                        <li data-val="100001" ka="sel-industry-1"><a onclick="findCity(this)">${city.cityName}</a></li>
                                     </c:forEach>
                                 </c:if>
 
@@ -563,39 +572,50 @@
     var findScale=$('#findScale').val();
     var findReleaseTime=$('#findReleaseTime').val();
     var search=$('#search').val()
+    var findposition=$('#findPosition').val();
+    var count=$('#count').val();
+    var limit=$('#limit').val();
+    var curr=$('#curr').val();
     console.log(findWorkCity)
     console.log($('#findWorkCity').innerText)
     function workYear(condition) {
         findworkYear=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        //+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     }
     function workCity(condition) {
         findworkYear=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+
     }
     function education(condition) {
         findEducation=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+
     }
     function salary(condition) {
         findSalary=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     }
     function financing(condition) {
         findFinanStage=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     }
     function scale(condition) {
         findScale=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     }
     function releaseTime(condition) {
         findReleaseTime=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     }
     function findCity(condition) {
         findWorkCity=condition.innerText;
-        location.href="findJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+    }
+    function findPosition(condition) {
+        findposition=condition.innerText;
+        location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     }
     function findsearch() {
         location.href="searchJob?findSearch="+$('#search').val()+"&findWorkCity="+findWorkCity
@@ -618,6 +638,8 @@
                     layer.msg('投递成功')
                 } else if (data == "lose") {
                     layer.msg("简历不完善，无法投递。请先完善再重新投递简历")
+                }else if (data == "repetition") {
+                    layer.msg("已向该岗位投递过简历")
                 }
             },
             error: function () {
@@ -626,9 +648,7 @@
         })
     }
 
-    var count=$('#count').val();
-    var limit=$('#limit').val();
-    var curr=$('#curr').val();
+
     layui.use(['laypage', 'layer'], function(){
         var laypage = layui.laypage
             ,layer = layui.layer;
@@ -644,7 +664,7 @@
                 console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
                 console.log(obj.limit); //得到每页显示的条数
                 if(!first){
-                    location.href="pageJob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+obj.curr+"&limit="+obj.limit;
+                    location.href="pageJob?findworkYear="+findworkYear+"&findPosition="+findposition+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+obj.curr+"&limit="+obj.limit;
                 }
             }
         });

@@ -21,30 +21,92 @@
     <link href="${pageContext.request.contextPath}/css/jianli.css" rel="stylesheet">
     <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
+
+
 </head>
 
 <body>
 <input type="text" style="display: none" id="kong">
 <input type="hidden" id="resumeId" value="${resume.resumeId}">
-<div id="header" style="background-color: #0d98ff">
-<div class="inner home-inner" >
-    <div class="logo">
-<%--        <img src="" style="width: 120px,20px" >--%>
-<%--        <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo3.png) 3px 7px no-repeat;;background-size:217px 49px"><span>钱程无忧</span></a>--%>
-    </div>
-    <div class="nav">
-        <ul>
-            <li class=""><a ka="header-home" href="https://www.zhipin.com/">首页</a></li>
-            <li class=""><a ka="header-job" href="https://www.zhipin.com/job_detail/">职位</a></li>
-            <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
-            <li class="cur"><a ka="tab_overseas_click" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>
-            <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
-            <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
-            <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
-        </ul>
-    </div>
+<%--<div id="header" style="background-color: #0d98ff">--%>
+<%--<div class="inner home-inner" >--%>
+<%--    <div class="logo">--%>
+<%--&lt;%&ndash;        <img src="" style="width: 140px,30px" >&ndash;%&gt;--%>
+<%--        <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo20.png) 3px 7px no-repeat;;background-size:150px 30px"><span>钱程无忧</span></a>--%>
+<%--    </div>--%>
+<%--    <div class="nav">--%>
+<%--        <ul>--%>
+<%--            <li class=""><a ka="header-home" href="https://www.zhipin.com/" >首页</a></li>--%>
+<%--            <li class=""><a ka="header-job" href="https://www.zhipin.com/job_detail/">职位</a></li>--%>
+<%--            <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>--%>
+<%--            <li class="cur"><a ka="tab_overseas_click" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
+<%--            <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+<%--            <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>--%>
+<%--            <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>--%>
+<%--        </ul>--%>
+<%--    </div>--%>
 
-</div>
+<%--</div>--%>
+
+    <div id="header" style="background-color: #0d98ff">
+        <div class="inner home-inner" >
+            <div class="logo">
+
+                <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo20.png) 3px 7px no-repeat;;background-size:150px 30px;width: 150px"><span>钱程无忧</span></a>
+            </div>
+            <div class="nav">
+                <ul>
+                    <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                    <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                    <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
+                    <%--                <li class=""><a ka="tab_overseas_click" href="https://www.zhipin.com/returnee_jobs/">简历</a></li>--%>
+                    <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
+                    <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
+                    <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+                </ul>
+            </div>
+            <div class="nav-search search-box">
+                <form action="https://www.zhipin.com/job_detail/" method="get" target="_blank">
+                    <%--                <div class="search-form-con">--%>
+                    <%--                    <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" maxlength="50" placeholder="搜索职位、公司"/></p>--%>
+                    <%--                </div>--%>
+                    <input type="hidden" name="city" class="city-code" value="101230200"/>
+                    <input type="hidden" name="source" value="8">
+                    <%--                <button type="submit" ka="search-job-top" class="btn btn-search">搜索</button>--%>
+                    <div class="suggest-result">
+                        <ul></ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="user-nav">
+                <c:if test="${empty realName}">
+                    <div class="btns" style="margin-top: 10%">
+                        <a href="https://signup.zhipin.com" ka="header-register" class="btn btn-outline">注册</a>
+                        <a href="https://login.zhipin.com" ka="header-login" class="btn btn-outline">登录</a>
+                    </div>
+                </c:if>
+                <c:if test="${not empty realName}">
+                    <ul>
+                            <%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
+                        <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
+                        <li class="nav-figure">
+                            <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
+                                <span class="label-text">${realName}</span><img src="${pageContext.request.contextPath}${photo}" alt=""/>
+                            </a>
+                            <div class="dropdown">
+                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置</span></a>
+                                    <%--                        <a href="https://www.zhipin.com/web/geek/account?type=privacySet" ka="privacy_set">隐私设置</a>--%>
+                                <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
+                                <p class="recruit-tip"><img src="https://static.zhipin.com/v2/web/geek/images/recruit-tip.gif" alt=""><span>在 APP 端“我的 - 设置”中切换为Boss身份后，刷新本页面即可进行招聘</span></p>
+                            </div>
+                        </li>
+                    </ul></c:if>
+            </div>
+        </div>
+    </div>
 </div>
 <div id="wrap" class="">
     <div id="main" class="inner">
@@ -53,8 +115,10 @@
                 <!---->
 
                 <div class="resume-content-box">
-                    <div class="update-time"><a href="javascript:;" ka="user_resume_preview"
-                                                class="link-preview">预览简历</a> 最后更新 <label id="updateTime9">${resume.updateTime}</label> </div>
+                    <div class="update-time">
+<%--                        <a href="javascript:;" ka="user_resume_preview"--%>
+<%--                                                class="link-preview">预览简历</a>--%>
+                        最后更新 <label id="updateTime9">${resume.updateTime}</label> </div>
                     <div class="resume-box">
                             <div id="userinfo" class="resume-item resume-userinfo">
                                 <div id="userinfo-show" class="item-primary">
@@ -95,11 +159,16 @@
                                         </div>
                                         <div class="info-flex-item header-upload">
                                             <div class="header-box">
+                                                <form class="" id="form"
+                                                      method="post"
+                                                      enctype="multipart/form-data"
+                                                      accept-charset="UTF-8">
                                                 <div class="header-mask"></div><img id="headImg"
-                                                                                    src="https://paimgcdn.baidu.com/2986AD9ACAF1B0B1?src=http%3A%2F%2Fms.bdimg.com%2Fdsp-image%2F3256454903.jpg&rz=urar_2_968_600&v=0"
+                                                                                    src="${pageContext.request.contextPath}${resume.photo}"
                                                                                     class="header-img">
-                                                <input type="file" onchange="selectFile()" class="head-input"
+                                                <input type="file" onchange="selectFile()" name="imgFile" id="imgFile" class="head-input"
                                                        accept="image/*" />
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -674,19 +743,27 @@
             </div>
             <div class="user-sider" style="height: 600px;background: #fff;">
                 <div data-v-3b220faa="" class="sider-box sider-resume">
-                    <div data-v-3b220faa="" class="resume-attachment">
-                        <h3 data-v-3b220faa="" class="sider-title">附件管理
-                        </h3>
-                        <div data-v-3b220faa="" class="btns"><button data-v-3b220faa="" type="button"
-                                                                     class="btn btn-primary">上传简历</button>
-                        </div>
-                        <div data-v-3b220faa="" class="">
-                        </div>
-                    </div>
+<%--                    <div data-v-3b220faa="" class="resume-attachment">--%>
+<%--                        <h3 data-v-3b220faa="" class="sider-title">附件管理--%>
+<%--                        </h3>--%>
+<%--                        <div data-v-3b220faa="" class="btns"><button data-v-3b220faa="" type="button"--%>
+<%--                                                                     class="btn btn-primary">上传简历</button>--%>
+<%--                        </div>--%>
+<%--                        <div data-v-3b220faa="" class="">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div style="text-align: center">--%>
+<%--                        <div class="info-flex-item header-upload">--%>
+<%--                            <div class="header-box">--%>
+<%--                        <div class="header-mask" ></div><img style="height: 10%;width: 30%" id="headImg2"--%>
+<%--                                                                src="${pageContext.request.contextPath}${resume.photo}"--%>
+<%--                                                       class="header-img"></div></div>--%>
+<%--                        <div>${resume.realName}</div>--%>
+<%--                    </div>--%>
                     <div style="margin-top: 20px">
-                        <h3 >我的信息</h3>
-                        <div><a href="${pageContext.request.contextPath}/center/resumeInfo"  >收藏岗位</a></div>
-                        <div><a href="${pageContext.request.contextPath}/center/accountSet" >账号设置</a></div>
+                        <h2 style="color: #0cccb5">我的信息</h2>
+                        <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/center/resumeInfo"  >收藏岗位</a></div>
+                        <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/center/accountSet" >账号设置</a></div>
                     </div>
                 </div>
             </div>
@@ -892,23 +969,20 @@
 
     function selectFile() {
 
+        var fm=new FormData(document.getElementById("form"))
         $.ajax({
             url: 'photoUpdate',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "",
+            data: fm,
+            processData:false,
+            contentType:false,
             dataType: "text",
             success: function (data) {
                 if (data == "succes") {
-
-                    let files = event.target.files;
-                    if (files.length === 0) return false;
-                    let reader = new FileReader();
-                    reader.readAsDataURL(files[0]);
-                    reader.onloadend = () => {
-                        $("#headImg").attr("src", reader.result)
-                    }
+                    //向服务端发送删除指令
+                    // layer.msg('修改成功')
 
                 } else if (data == "lose") {
                     layer.msg("修改失败")
@@ -919,11 +993,14 @@
             }
         })
 
+        let files = event.target.files;
+        if (files.length === 0) return false;
+        let reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.onloadend = () => {
+            $("#headImg").attr("src", reader.result)
+        }
 
-
-        console.log("!!!!!!!!")
-        console.log(files[0].name)
-        console.log("??????????")
     }
     // 基础信息
     function userInfoUpdate(educationid) {

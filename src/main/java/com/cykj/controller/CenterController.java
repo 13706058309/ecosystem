@@ -415,7 +415,7 @@ public class CenterController {
 
 
 
-    @RequestMapping("/job")
+    @RequestMapping("/pageJob")
     public String job(HttpServletRequest req,String findPosition){
         int page=0;
         int curr=1;
@@ -654,7 +654,7 @@ public class CenterController {
         if (findReleaseTime.equals("发布时间")||findReleaseTime==null ){
 
         }else if (findReleaseTime.equals("不限")){
-            finanStage=findFinanStage;
+            releaseTime=findReleaseTime;
         }else {
             int time=0;
 
@@ -696,28 +696,57 @@ public class CenterController {
 
         return "FindJob";
     }
-    @RequestMapping("/pageJob")
-    public String pageJob(HttpServletRequest req,String findworkYear,String findSearch,String findWorkCity,String findEducation,String findSalary,String findFinanStage,String findScale,String findReleaseTime,int curr,int limit){
+    @RequestMapping("/job")
+    public String pageJob(HttpServletRequest req,String findworkYear,String findSearch,String findWorkCity,String findEducation,String findSalary,String findFinanStage,String findScale,String findReleaseTime,String curr,String limit,String findPosition){
+        req.getSession().setAttribute("realName","小白");
+        System.out.println("6666666666");
+        System.out.println(findworkYear+"1111"+findSearch+findWorkCity+findEducation+findSalary+findFinanStage+findScale+findReleaseTime+curr+limit+findPosition+"2222222222");
         int page=0;
+        if (limit==null){
+            limit="10";
+        }
+        if (curr==null){
+            curr="1";
+        }
+
+        List<Position> positions=resumeService.positions();
+        req.setAttribute("positions",positions);
+        List<City>citys=resumeService.citys();
+        req.setAttribute("citys",citys);
 //        int curr=1;
 //        int limit=2;
         Map map=new HashMap();
-        if (findWorkCity.equals("全国")){
-
+        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+            position="职位类型";
+        }else if (findPosition.equals("不限")){
+            position=findPosition;
         }else {
+            position=findPosition;
+            map.put("position",findPosition);
+        }
+
+        if (findWorkCity==null){
+            System.out.println("99999");
+        }else if (findWorkCity.equals("全国")){
+            System.out.println("88888");
+            workCity=findWorkCity;
+        }else {
+            System.out.println("77777");
+            workCity=findWorkCity;
             map.put("workCity",findWorkCity);
         }
+        System.out.println(workCity+"???????????????????");
         search=findSearch;
-        if (findSearch.equals("".trim())||findSearch==null){
+        if (findSearch==null||findSearch.equals("".trim())){
 
         }else {
             map.put("search","%"+findSearch+"%");
         }
         map.put("workCity",workCity);
-        map.put("page",(curr-1)*limit);
-        map.put("limit",limit);
+        map.put("page",(Integer.parseInt(curr)-1)*Integer.parseInt(limit));
+        map.put("limit",Integer.parseInt(limit));
         System.out.println(findEducation+"??????????");
-        if (findSalary.equals("薪资要求")||findSalary==null ){
+        if (findSalary==null ||findSalary.equals("薪资要求")){
             System.out.println("1111111111111111");
         }else if (findSalary.equals("不限")){
             salary=findSalary;
@@ -767,7 +796,7 @@ public class CenterController {
             salary=findSalary;
 
         }
-        if (findEducation.equals("学历要求")||findEducation==null ){
+        if (findEducation==null|| findEducation.equals("学历要求")){
 
         }else if (findEducation.equals("不限")){
             education=findEducation;
@@ -775,7 +804,7 @@ public class CenterController {
             education=findEducation;
             map.put("education",education);
         }
-        if (findworkYear.equals("工作经验")||findworkYear==null ){
+        if (findworkYear==null||findworkYear.equals("工作经验") ){
 
         }else if (findworkYear.equals("不限")){
             workYear=findworkYear;
@@ -783,7 +812,7 @@ public class CenterController {
             workYear=findworkYear;
             map.put("workYear",workYear);
         }
-        if (findScale.equals("公司规模")||findScale==null ){
+        if (findScale==null||findScale.equals("公司规模") ){
 
         }else if (findScale.equals("不限")){
             scale=findScale;
@@ -791,7 +820,7 @@ public class CenterController {
             scale=findScale;
             map.put("scale",scale);
         }
-        if (findFinanStage.equals("融资阶段")||findFinanStage==null ){
+        if (findFinanStage==null||findFinanStage.equals("融资阶段") ){
 
         }else if (findFinanStage.equals("不限")){
             finanStage=findFinanStage;
@@ -799,7 +828,7 @@ public class CenterController {
             finanStage=findFinanStage;
             map.put("finanStage",finanStage);
         }
-        if (findReleaseTime.equals("发布时间")||findReleaseTime==null ){
+        if (findReleaseTime==null||findReleaseTime.equals("发布时间") ){
 
         }else if (findReleaseTime.equals("不限")){
             finanStage=findFinanStage;
@@ -824,7 +853,7 @@ public class CenterController {
             releaseTime=findReleaseTime;
 
         }
-        workCity=findWorkCity;
+//        workCity=findWorkCity;
         System.out.println(workYear+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -841,7 +870,9 @@ public class CenterController {
         req.setAttribute("findScale",scale);
         req.setAttribute("findReleaseTime",releaseTime);
         req.setAttribute("search",findSearch);
-        req.setAttribute("workCity",findWorkCity);
+        System.out.println(workCity+"$$$$$$$$$$$$$$$$$$$$");
+        req.setAttribute("workCity",workCity);
+        req.setAttribute("position",position);
 
         return "FindJob";
     }
@@ -855,7 +886,14 @@ public class CenterController {
 //    投递简历
     @RequestMapping("/sendResume")
     public @ResponseBody String sendResume(HttpServletRequest req,int pPostId){
-
+        Resume r=resumeService.resume(userId);
+        Delivery delivery=resumeService.findDelivery(userId,pPostId);
+        if (null!=delivery){
+            return "repetition";
+        }
+        if (r.getClan().equals("".trim())||r.getBirthday().equals("".trim())||r.getSchool().equals("".trim())||r.getEducation().getEducation().equals("".trim())||r.getSelfEva().equals("".trim())||r.getAddress().equals("".trim())||r.getExpectWork().equals("".trim())||r.getProjectExperiences().size()==0||r.getWorkExperiences().size()==0||r.getEducationalBackgrounds().size()==0){
+            return "lose";
+        }
         int n=resumeService.sendResume(userId,pPostId);
         String msg="lose";
         if (n>0){
@@ -866,13 +904,14 @@ public class CenterController {
 
 
     @RequestMapping("/photoUpdate")
-    public @ResponseBody String photoUpdate(MultipartFile imgFile, String dscore, String dintro, HttpServletRequest req) throws Exception {
-        System.out.println(dscore+"???"+dintro);
+    public @ResponseBody String photoUpdate(MultipartFile imgFile, HttpServletRequest req) throws Exception {
 
 //        创建文件夹路径
 //        String path=this.getClass().getClassLoader().getResource("").getPath();
-        String path=CenterController.class.getClassLoader().getResource("static/user").getPath();
-        File fff=new File(path,"static/user");
+//        String path=CenterController.class.getClassLoader().getResource("static/user").getPath();
+//        File fff=new File(path,"static/user");
+        String path=req.getSession().getServletContext().getRealPath("/resumePhoto");
+
 //        子文件夹
         String date=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         File file=new File(path,date);
@@ -888,9 +927,15 @@ public class CenterController {
         System.out.println(imgFile.getOriginalFilename().substring(0,imgFile.getOriginalFilename().lastIndexOf(".")));
         System.out.println(imgFile.getOriginalFilename());
         imgFile.transferTo(new File(file,fileName));
-//        String uid=(String) req.getSession().getAttribute("uid");
-        String uid="1";
 
+        Resume resume=new Resume();
+        resume.setUserId(userId);
+        resume.setPhoto("/resumePhoto/"+date+"/"+fileName);
+        int n=resumeService.updatePhoto(resume);
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserId(userId);
+        userInfo.setHeadImgUrl("/resumePhoto/"+date+"/"+fileName);
+        n=resumeService.updateHeadImgUrl(userInfo);
 
         return "succes";
     }

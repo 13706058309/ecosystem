@@ -287,5 +287,25 @@ public interface ResumeService {
      */
     public List<City> citys();
 
+    /**
+     * 修改简历头像
+     * @param resume
+     * @return
+     */
+    public int updatePhoto(Resume resume);
 
+    /**
+     * 用户头像
+     * @param userInfo
+     * @return
+     */
+    public int updateHeadImgUrl(UserInfo userInfo);
+
+    /**
+     * 查看是否有投递过该岗位的简历
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    public Delivery findDelivery(int userId,int pPostId);
 }

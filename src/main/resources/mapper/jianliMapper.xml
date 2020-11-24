@@ -236,7 +236,7 @@
         select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
             left join parameter p on d.deliStandId=p.paramId
             left join postPosition pp on d.pPostID=pp.pPostID
-            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId}  limit #{page},#{limit};
+            left join backUser b on pp.companyId=b.bUserId where  u.userId=#{userId}  limit #{page},#{limit};
     </select>
     <select id="deliveryInfoCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
         select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
@@ -258,10 +258,10 @@
         left join backUser b on pp.companyID=b.bUserID
         left join comp_industry  ci on b.bUserId=ci.compId
         left join industry i on ci.industryID=i.industryID
-        left join position p on pp.postId=p.postId
-        <where>
+        left join position p on pp.postId=p.postId where postStandId=6
+
         <if test="workCity!=null" >
-            pp.workCity=#{workCity}
+            and pp.workCity=#{workCity}
         </if>
 
         <if test="workName!=null" >
@@ -298,7 +298,7 @@
             <if test="position!=null" >
                 and  p.postName=#{position}
             </if>
-        </where>
+
     </select>
     <select id="jobs" parameterType="java.util.HashMap" resultMap="findiobs">
 
@@ -307,9 +307,10 @@
             left join comp_industry  ci on pp.companyId=ci.compId
             left join industry i on ci.industryID=i.industryID
             left join position p on pp.postId=p.postId
-            <where>
+            where postStandId=6
+
             <if test="workCity!=null" >
-                pp.workCity=#{workCity}
+                and pp.workCity=#{workCity}
             </if>
             <if test="workName!=null" >
                 and workName= #{workName}
@@ -345,7 +346,7 @@
                 <if test="position!=null" >
                     and  p.postName=#{position}
                 </if>
-            </where>
+
               limit #{page},#{limit}
     </select>
     <resultMap id="findiobs" type="com.cykj.entity.PostPosition">
@@ -413,6 +414,9 @@
     <insert id="sendResume" parameterType="java.lang.Integer">
         insert into delivery (userId,pPostId) values (#{userId},#{pPostId})
     </insert>
+    <select id="findDelivery" parameterType="java.lang.Integer" resultType="com.cykj.entity.Delivery">
+        select * from delivery where userId=#{userId} and pPostId=#{pPostId}
+    </select>
 <!--    查看手机号码是否存在-->
     <select id="findTtelephone" parameterType="java.lang.String" resultType="com.cykj.entity.UserInfo">
         select * from userInfo where telephone=#{telephone}
@@ -435,4 +439,13 @@
     <select id="citys" resultType="com.cykj.entity.City">
         select * from city ;
     </select>
+
+<!--    头像修改-->
+    <update id="updatePhoto" parameterType="com.cykj.entity.Resume">
+        update resume set photo=#{photo} where userId=#{userId}
+    </update>
+
+    <update id="updateHeadImgUrl" parameterType="com.cykj.entity.UserInfo">
+        update userInfo set headImgUrl=#{headImgUrl} where userId=#{userId}
+    </update>
 </mapper>
