@@ -37,8 +37,41 @@ public class BackUser {
   private String lng;
   private String lat;
   private List<Industry> industrys;
+
+
+
   public BackUser() {
   }
+
+  public BackUser(long bUserId, String bUserName, String account, String pwd, String contactInfo, String infoIntr, String busiLice, String email, String address, String scale, String city, String province, String homePage, String finanStage, String product, String logo, long roleId, RoleInfo role, String stateId, Parameter states, String bRegTime, String coreValue, String compName, List<Industry> industrys) {
+    this.bUserId = bUserId;
+    this.bUserName = bUserName;
+    this.account = account;
+    this.pwd = pwd;
+    this.contactInfo = contactInfo;
+    this.infoIntr = infoIntr;
+    this.busiLice = busiLice;
+    this.email = email;
+    this.address = address;
+    this.scale = scale;
+    this.city = city;
+    this.province = province;
+    this.homePage = homePage;
+    this.finanStage = finanStage;
+    this.product = product;
+    this.logo = logo;
+    this.roleId = roleId;
+    this.role = role;
+    this.stateId = stateId;
+    this.states = states;
+    this.bRegTime = bRegTime;
+    this.coreValue = coreValue;
+    this.compName = compName;
+    this.industrys = industrys;
+  }
+
+
+
 
   public long getbUserId() {
     return bUserId;
@@ -116,7 +149,6 @@ public class BackUser {
     this.contactInfo = contactInfo;
   }
 
-
   public String getInfoIntr() {
     return infoIntr;
   }
@@ -124,7 +156,6 @@ public class BackUser {
   public void setInfoIntr(String infoIntr) {
     this.infoIntr = infoIntr;
   }
-
 
   public String getBusiLice() {
     return busiLice;
@@ -134,7 +165,6 @@ public class BackUser {
     this.busiLice = busiLice;
   }
 
-
   public String getEmail() {
     return email;
   }
@@ -142,7 +172,6 @@ public class BackUser {
   public void setEmail(String email) {
     this.email = email;
   }
-
 
   public String getAddress() {
     return address;
@@ -152,7 +181,6 @@ public class BackUser {
     this.address = address;
   }
 
-
   public String getScale() {
     return scale;
   }
@@ -160,7 +188,6 @@ public class BackUser {
   public void setScale(String scale) {
     this.scale = scale;
   }
-
 
   public String getCity() {
     return city;
@@ -170,7 +197,6 @@ public class BackUser {
     this.city = city;
   }
 
-
   public String getProvince() {
     return province;
   }
@@ -178,7 +204,6 @@ public class BackUser {
   public void setProvince(String province) {
     this.province = province;
   }
-
 
   public String getHomePage() {
     return homePage;
@@ -188,7 +213,6 @@ public class BackUser {
     this.homePage = homePage;
   }
 
-
   public String getFinanStage() {
     return finanStage;
   }
@@ -196,7 +220,6 @@ public class BackUser {
   public void setFinanStage(String finanStage) {
     this.finanStage = finanStage;
   }
-
 
   public String getProduct() {
     return product;
@@ -245,6 +268,7 @@ public class BackUser {
   public void setCoreValue(String coreValue) {
     this.coreValue = coreValue;
   }
+
 
   public List<Industry> getIndustrys() {
     return industrys;

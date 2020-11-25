@@ -20,6 +20,7 @@ public class UserInfo {
   private String address; //地址
   private long isOpen; // 是否公开
   private String regTime;//注册时间
+  private String headImgUrl;
 
   public UserInfo() {
 
@@ -73,6 +74,23 @@ public class UserInfo {
     return telephone;
   }
 
+  @Override
+  public String toString() {
+    return "UserInfo{" +
+            "userId=" + userId +
+            ", userName='" + userName + '\'' +
+            ", account='" + account + '\'' +
+            ", pwd='" + pwd + '\'' +
+            ", telephone='" + telephone + '\'' +
+            ", accStandId=" + accStandId +
+            ", states=" + states +
+            ", jobStandId=" + jobStandId +
+            ", address='" + address + '\'' +
+            ", isOpen=" + isOpen +
+            ", regTime='" + regTime + '\'' +
+            '}';
+  }
+
   public void setTelephone(String telephone) {
     this.telephone = telephone;
   }
@@ -124,20 +142,11 @@ public class UserInfo {
     this.states = states;
   }
 
-  @Override
-  public String toString() {
-    return "UserInfo{" +
-            "userId=" + userId +
-            ", userName='" + userName + '\'' +
-            ", account='" + account + '\'' +
-            ", pwd='" + pwd + '\'' +
-            ", telephone='" + telephone + '\'' +
-            ", accStandId=" + accStandId +
-            ", states=" + states.toString() +
-            ", jobStandId=" + jobStandId +
-            ", address='" + address + '\'' +
-            ", isOpen=" + isOpen +
+  public String getHeadImgUrl() {
+    return headImgUrl;
+  }
 
-            '}';
+  public void setHeadImgUrl(String headImgUrl) {
+    this.headImgUrl = headImgUrl;
   }
 }

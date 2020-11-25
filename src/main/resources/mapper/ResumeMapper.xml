@@ -257,4 +257,8 @@
             <result property="proPerformance" column="proPerformance"></result>
         </collection>
     </resultMap>
+
+    <select id="findOne" resultType="com.cykj.entity.Resume">
+        select * from resume where resumeID = 1;
+    </select>
 </mapper>

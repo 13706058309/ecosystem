@@ -5,49 +5,49 @@
 <mapper namespace="com.cykj.mapper.UserNumMapper">
     <select id="backUserNumMonth"   resultType="com.cykj.entity.BackUserNum">
         select * from (
-        select count(0) NUM,'第1周' as name from backUser t where t.bRegTime between
+        select count(0) NUM,'第1周' as name from backUser t where  t.roleId=1 and t.bRegTime between
         DATE_ADD(curdate(),interval -day(curdate())+1 day)and DATE_ADD(curdate(),interval -day(curdate())+7 day) union
-        select count(0) NUM,'第2周' as name from backUser t where t.bRegTime between
+        select count(0) NUM,'第2周' as name from backUser t where   t.roleId=1 and  t.bRegTime between
         DATE_ADD(curdate(),interval -day(curdate())+7 day) and DATE_ADD(curdate(),interval -day(curdate())+14 day) union
-        select count(0) NUM,'第3周' as name from backUser t where t.bRegTime between
+        select count(0) NUM,'第3周' as name from backUser t where   t.roleId=1 and t.bRegTime between
         DATE_ADD(curdate(),interval -day(curdate())+14 day) and DATE_ADD(curdate(),interval -day(curdate())+21 day) union
-        select count(0) NUM,'第4周' as name from backUser t where t.bRegTime between
+        select count(0) NUM,'第4周' as name from backUser t where   t.roleId=1 and t.bRegTime between
         DATE_ADD(curdate(),interval -day(curdate())+21 day) and DATE_ADD(curdate(),interval -day(curdate())+28 day) union
-        select count(0) NUM,'第5周' as name from backUser t where t.bRegTime between
+        select count(0) NUM,'第5周' as name from backUser t where   t.roleId=1 and t.bRegTime between
         DATE_ADD(curdate(),interval -day(curdate())+28 day) and last_day(curdate())
         ) as a order by name  asc
     </select>
     <select id="backUserNumWeek"   resultType="com.cykj.entity.BackUserNum">
        select * from (
-        select count(0) NUM,'星期一' as name from backUser t where
+        select count(0) NUM,'星期一' as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -0 DAY) union
-        select count(0) NUM,'星期二' as name from backUser t where
+        select count(0) NUM,'星期二' as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -1 DAY) union
-        select count(0) NUM,'星期三' as name from backUser t where
+        select count(0) NUM,'星期三' as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -2 DAY) union
-        select count(0) NUM,'星期四' as name from backUser t where
+        select count(0) NUM,'星期四' as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -3 DAY) union
-        select count(0) NUM,'星期五' as name from backUser t where
+        select count(0) NUM,'星期五' as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -4 DAY) union
-        select count(0) NUM,'星期六' as name from backUser t where
+        select count(0) NUM,'星期六' as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -5 DAY) union
-        select count(0) NUM,'星期日' as name from backUser t where
+        select count(0) NUM,'星期日' as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -6 DAY)
         ) as a
     </select>
     <select id="backUserNumHalfYear"   resultType="com.cykj.entity.BackUserNum">
       select * from (
-        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 5 month), '%Y-%m') as name from backUser t where
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 5 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 5 month), '%Y-%m') union
-        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 4 month), '%Y-%m') as name from backUser t where
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 4 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 4 month), '%Y-%m') union
-        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 3 month), '%Y-%m') as name from backUser t where
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 3 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
          DATE_FORMAT(t.bRegTime,'%Y-%m') = DATE_FORMAT(date_sub(now(),interval 3 month), '%Y-%m') union
-        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 2 month), '%Y-%m') as name from backUser t where
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 2 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 2 month), '%Y-%m') union
-        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 1 month), '%Y-%m') as name from backUser t where
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 1 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
         DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 1 month), '%Y-%m') union
-         select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 0 month), '%Y-%m') as name from backUser t where
+         select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 0 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
          DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 0 month), '%Y-%m')
         ) as a
     </select>

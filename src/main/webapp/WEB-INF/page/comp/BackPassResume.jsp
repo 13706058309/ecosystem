@@ -17,6 +17,12 @@
     <title>Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <style>
+        .layui-form-checkbox i {
+            top: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,10 +38,11 @@
 </script>
 
 <h1 style="text-align: center">通知面试简历</h1>
+<br>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<div class="demoTable layui-form" style="margin-left: 27%">
+<div class="demoTable layui-form" style="margin-left: 20%">
 
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="margin-left: -10%">
         <div class="layui-inline">
             <label class="layui-form-label">投递时间</label>
             <div class="layui-input-inline">
@@ -51,7 +58,7 @@
 
     </div>
 
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="margin-left: -10%">
 
         <div class="layui-inline">
             <label class="layui-form-label" >岗位名称:</label>
@@ -69,7 +76,7 @@
 
         <div class="layui-inline">
             <div class="layui-input-inline" style="margin-left: 8%">
-                <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" data-type="reload">查询</button>
+                <button type="button" class="layui-btn layui-btn-fluid" data-type="reload" style="width: 60%">查询</button>
             </div>
         </div>
     </div>

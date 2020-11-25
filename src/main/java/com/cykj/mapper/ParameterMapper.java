@@ -20,4 +20,8 @@ public interface ParameterMapper {
      * @return
      */
     List<Parameter> findParameter(@Param("condition") Map<String,Object> condition);
+
+    Parameter findDownFee(@Param("paramID") int paramID);
+
+    int changeFeeStand(@Param("standID") int standID);
 }
