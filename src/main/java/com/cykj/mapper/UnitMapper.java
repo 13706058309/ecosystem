@@ -19,9 +19,12 @@ public interface UnitMapper {
 
     int findNumOnPage(Map<String, Object> map);
 
-//    int deleteCourse(Integer courseId);
-//
-//    int updateCourseName(String courseName,Integer courseId);//更改课程名字
+    int deleteUnit(Integer unitId);
+
+    int updateunitName(String unitName,Integer unitId);//更改章节名字
+
+    int selectunitName(Integer unitId);//更改章节名字
+
 //
 //    int updatecourseImgURL(String courseImgURL,Integer courseId);//更改路径
 //

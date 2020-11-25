@@ -213,6 +213,26 @@
     })
 </script>--%>
 
+<%--<script >--%>
+<%--    // 循环插入--%>
+<%--    $(function PreNameOption(){--%>
+<%--        $.ajax({--%>
+<%--            type : "post",--%>
+<%--            url :  '../course/findOption',--%>
+
+<%--            success : function(fieldId,fieldName)--%>
+<%--            {--%>
+<%--                var  fieldId = eval(fieldId);--%>
+<%--                var  fieldName = eval(fieldName);--%>
+<%--                $('#dropDownMenu').empty();--%>
+<%--                for(i=0;i<fieldName.length;i++){--%>
+<%--                    $("#dropDownMenu ").append('<option id="'+i+'">'+fieldName[i]+'</option>');//写入表格数据--%>
+<%--                }--%>
+<%--            }--%>
+<%--        });--%>
+<%--    })--%>
+<%--</script>--%>
+
 <script type="text/html" id="toolbarDemo">
     <div class="demoTable" style="margin-left: 10%">
     <div class="layui-form-item">
@@ -227,6 +247,16 @@
                 <option value="5">嵌入式</option>
             </select>
             </div>
+
+
+
+<%--            <div id="dropDownMenu" class="layui-input-block" style="width: 200px">--%>
+<%--                <select id="fieldId"   >&lt;%&ndash;lay-verify="required"&ndash;%&gt;--%>
+<%--                    <option value="">请选择领域</option>--%>
+<%--                </select>--%>
+
+<%--            </div>--%>
+
             <input id="input_search" class="layui-input " type="text"  lay-verify="title" autocomplete="off" placeholder="请输入课程名"  style="width: 200px">
             <input id="layui-btn" class="layui-btn layui-btn-warm" type="button" lay-submit lay-filter="search"  data-type="reload" value="搜索">
 

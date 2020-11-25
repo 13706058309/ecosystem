@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/unit")
 public class UnitController {
-    @Resource
-private CourseServiceImpl courseServiceImpl;
+
     @Resource
 private UnitServiceImpl unitServiceImpl;
 
@@ -42,30 +43,45 @@ private UnitServiceImpl unitServiceImpl;
     }
 //
 //
-//    @RequestMapping("deleteCourse")
-//    @Loger(operationType = "表格执行删除",operationName = "表格执行删除")
-//    public void deleteCourse(HttpServletRequest req,HttpServletResponse resp,Integer courseId){
-//        System.out.println(courseId);
-//        System.out.println("走入删除 控制类");
-//
-////        Map<String,Object> map = new HashMap<>();
-//        if (courseId != 0){
-////            map.put("courseId",courseId);
-//            int course = courseServiceImpl.deleteCourse(courseId);
-//        }
-//
-//    }
-//
-//
-//    @RequestMapping("updateCourseName")//更改课程名称
-//    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
-//    public void updateCourseName(String courseName,Integer courseId) {
-//        System.out.println("走入更改控制类");
-//        System.out.println("courseName="+courseName+";courseId="+courseId);
-//        if ( courseName != null){
-//            int updatecourseName = courseServiceImpl.updateCourseName(courseName,courseId);
-//        }
-//    }
+    @RequestMapping("deleteUnit")
+    @Loger(operationType = "表格执行删除",operationName = "表格执行删除")
+    public void deleteCourse(HttpServletRequest req, HttpServletResponse resp, Integer unitId){
+        System.out.println(unitId);
+        System.out.println("走入删除 控制类");
+
+        if (unitId != 0){
+            int course = unitServiceImpl.deleteCourse(unitId);
+        }
+
+    }
+
+
+//更改课程名称
+    @RequestMapping("updateUnitName")
+    @Loger(operationType = "表格执行章节更改",operationName = "表格执行章节更改")
+    public void updateCourseName(String unitName,Integer unitId) {
+        System.out.println("走入更改控制类");
+        System.out.println("unitName="+unitName+";unitId="+unitId);
+        if ( unitName != null){
+            int updateunitName = unitServiceImpl.updateUnitName(unitName,unitId);
+        }
+    }
+
+
+
+    //查找框 根据ID查 上一章 课程名称
+    @RequestMapping("selectunitName")
+    @Loger(operationType = "表格执行章节搜索",operationName = "表格执行章节搜索")
+    public void selectunitName(Integer unitId) {
+        System.out.println("走入控制类");
+        System.out.println("unitId="+unitId);
+        if ( unitId != null){
+            int selectunitName = unitServiceImpl.selectunitName(unitId);
+        }
+    }
+
+
+
 //
 //
 //    //更改课程路径

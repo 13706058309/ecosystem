@@ -43,6 +43,7 @@
 
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="query">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改提示</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除章节</a>
 </script>
@@ -268,11 +269,12 @@
 
             ,cols: [[ //表头
                 {field: 'unitId', title: '序号', width:80, sort: true, fixed: 'left'}
-                ,{field: 'unitName', title: '章节名称', width:150,event:'courseName'}
+                ,{field: 'unitName', title: '章节名称', width:250,event:'unitName'}
                 ,{field: 'videoUrl', title: '路径', width:330,event:'courseImgURL'}
                 ,{field: 'timeLength', title: '时长', width:130,sort: true}
                 ,{field: 'preUnitId', title: '上章Id', width:130,sort: true}
                 ,{field: 'courseId', title: '课程id', width:130,sort: true}
+
                 // ,{field: 'fieldId', title: '课程名', width:130,templet:function (d) {
                 //         if (d.fieldId == 1){
                 //             return 'C++';
@@ -286,7 +288,7 @@
                 //             return '嵌入式';
                 //         }
                 //     }}
-                ,{field: '', title: '操作', width: 177,toolbar:'#barDemo'}
+                ,{field: '', title: '操作', width: 240,toolbar:'#barDemo'}
             ]]
 
         });
@@ -298,7 +300,7 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        courseName: $('#input_search').val(),
+                        unitName: $('#input_search').val(),
                         fieldId: $('#fieldId').val(),
                     }
                 }, 'data');
@@ -316,8 +318,8 @@
 
             console.log(data);
 
-            var courseName = $("#input_search").val();
-            console.log("courseName的值为："+courseName+",接下来将响应搜索按钮监听");
+            var unitName = $("#input_search").val();
+            console.log("unitName的值为："+unitName+",接下来将响应搜索按钮监听");
             //获取select对象
             // var myselect=document.getElementById("field_dropDownMenu");
             //取到选中项的索引
@@ -329,7 +331,7 @@
                     curr: 1 //重新从第 1 页开始
                 },
                 where: {
-                    courseName: $('#input_search').val(),
+                    unitName: $('#input_search').val(),
                     fieldId: $('#fieldId').val(),
                 }
             }, 'data');
@@ -354,7 +356,7 @@
 
         });
 
-        //监听提交【增加课程  按钮的监听】
+        //监听提交【增加章节  按钮的监听】
         form.on('submit(AddUnit)', function(data){
             console.log(data);
             // alert("成功提交“增加操作”");
@@ -410,9 +412,9 @@
                         '.file input { position: absolute; font-size: 100px;  right: 0;  top: 0;  opacity: 0; }'  +
                         '.file:hover { background: #AADFFD;  border-color: #78C3F3;  color: #004974; text-decoration: none;}</style>'+
 
-                        '<input id="courseName" placeholder="课程名"  style="width: 250px;margin:5px 110px">' +
+                        '<input id="courseName" placeholder="章节名"  style="width: 250px;margin:5px 110px">' +
                         '<select id="fieldId_add"  style="width: 250px;margin:5px 110px" >\n' +
-                        '                    <option value="">--请选择领域--</option>\n' +
+                        '                    <option value="">--请选择上一章节--</option>\n' +
                         '                    <option value="1" >C++</option>\n' +
                         '                    <option value="2">HTML</option>\n' +
                         '                    <option value="3">Java</option>\n' +
@@ -420,15 +422,7 @@
                         '                    <option value="5">嵌入式</option>\n' +
                         '                </select>' +
                         // '<input placeholder="请输入课程图片路径"  style="width: 250px;margin:5px 110px">' +
-                        '<a href="javascript:;" class="file" style="width: 230px;margin:5px 110px">选择修改后的图片路径<input type="file" name="file" id="courseImgURL"></a>' +
-                        '<input id="speakerName" placeholder="请输入讲师名"  style="width: 250px;margin:5px 110px">' +
-                        '<input id="courseIntroduce" placeholder="课程介绍"  style="width: 250px;margin:5px 110px">' +
-                        // '<input id="uploadTime" placeholder="上传时间"  style="width: 250px;margin:5px 110px">' +
-                        // '<input id="uploadTime" type="date"  style="width: 250px;margin:5px 110px">' +
-                        '<input id="collectionNumber" placeholder="观看人数"  style="width: 250px;margin:5px 110px">' +
-                        // '<input placeholder="头像路径"  style="width: 250px;margin:5px 110px">' +
-                        '<a href="javascript:;" class="file" style="width: 230px;margin:5px 110px">头像路径<input type="file" name="file" id="speakerHeadImgUrl"></a>' +
-                        '<input id="totalPlayTimes" placeholder="总播放时间"  style="width: 250px;margin:5px 110px">'
+                        '<a href="javascript:;" class="file" style="width: 230px;margin:5px 110px">选择视频文件<input type="file" name="file" id="courseImgURL"></a>'
                 });
             });
             // return false;
@@ -463,10 +457,10 @@
             var data = obj.data //获得当前行数据
                 ,layEvent = obj.event; //获得 lay-event 对应的值
 
-            //这是工具栏里“删除课程”的监听
+            //这是工具栏里“删除章节”的监听
             if(layEvent === 'del'){
-                var courseId=data.courseId;
-                alert(courseId);
+                var unitId=data.unitId;
+                alert(unitId);
                 layui.use('layer', function(){
                     var layer = layui.layer;
                     console.log("走入删除提示框");
@@ -481,8 +475,8 @@
                             $.ajax({
                                 type:"GET",
                                 dataType: "json",//预期服务器返回的数据类型
-                                url: "../course/deleteCourse" ,//url
-                                data: "courseId="+courseId,
+                                url: "../unit/deleteUnit" ,//url
+                                data: "unitId="+unitId,
                                 async:true,
                                 success:function () {
                                     // alert("成功")
@@ -491,8 +485,8 @@
                                             curr: 1 //重新从第 1 页开始
                                         },
                                         where: {
-                                            courseName: $('#input_search').val(),
-                                            fieldId: $('#fieldId').val(),
+                                            unitName: $('#input_search').val(),
+                                            unitId: $('#unitId').val(),
                                         }
                                     }, 'data');
 
@@ -504,8 +498,8 @@
                                             curr: 1 //重新从第 1 页开始
                                         },
                                         where: {
-                                            courseName: $('#input_search').val(),
-                                            fieldId: $('#fieldId').val(),
+                                            unitName: $('#input_search').val(),
+                                            unitId: $('#unitId').val(),
                                         }
                                     }, 'data');
                                 },
@@ -527,8 +521,41 @@
                 // });
             }
             //这是工具栏里“修改课程”的监听
-                else if(layEvent == 'edit'){
-                    alert("这里是温馨提示！只允许修改课程名称、路径、课程介绍、头像路径。直接点击需要修改部分即可修改！");
+            else if(layEvent == 'edit'){
+                alert("这里是温馨提示！只允许修改章节名称、路径。直接点击需要修改部分即可修改！");
+            }
+            //这里是“查看功能”的监听
+            else if (layEvent == 'query'){
+                var unitId=data.unitId;
+                var courseId = data.courseId;
+                var unitName = data.unitName;
+                var timeLength = data.timeLength;
+                var preUnitId = data.preUnitId;
+                var preUnitName = data.preUnitName;
+                var layer = layui.layer;
+                        layer.open({
+                            title: '详细信息'
+                            ,area: ['500px', '300px']//设定弹窗的宽、高
+                            ,btn:[ '查看完毕']//设定按钮组
+                            ,shade: [0.7, '#393D49']
+                            ,content:
+                            '<div style="font-size: 20px">所属课程：'+courseId+'</div>'+
+                            '<div style="font-size: 20px">章节名：'+unitName+'</div>'+
+                            '<div style="font-size: 20px">时长：'+timeLength+'</div>'+
+                            '<div style="font-size: 20px">前一章节：'+preUnitName+'</div>'+
+                            '<div style="font-size: 20px;color: red" >【若显示为undefined,则本章为第一章】</div>'
+                            // ,success: function(layero, index){
+                            //     // console.log(layero, index);
+                            //     $.ajax({
+                            //           type:"POST",
+                            //           dataType: "json",//预期服务器返回的数据类型
+                            //           url: "../course/selectunitName" ,//url
+                            //           data:"preUnitId"
+                            //
+                            //           });
+                            // }
+
+                        })
             }
 
             // else if(layEvent === 'edit'){
@@ -600,27 +627,27 @@
             // }
 
             //修改课程名称监听
-            else if (obj.event === 'courseName'){
+            else if (obj.event === 'unitName'){
                 layer.prompt({
                     formType: 2
-                    ,title: '修改 ID 为 ['+ data.courseId +'] 的课程名称'
-                    ,value: data.courseName
+                    ,title: '修改 ID 为 ['+ data.unitId +'] 的章节名称'
+                    ,value: data.unitName
                 }, function(value, index){
                     layer.close(index);
-                    var courseId = data.courseId;
-                    console.log("courseId的值为："+courseId);
+                    var unitId = data.unitId;
+                    console.log("unitId的值为："+unitId);
                     //这里一般是发送修改的Ajax请求
                     $.ajax({
                          type:"POST",
                           dataType: "json",//预期服务器返回的数据类型
-                          url: "../course/updateCourseName" ,//url
-                          data: 'courseName='+value+'&courseId='+courseId,
+                          url: "../unit/updateUnitName" ,//url
+                          data: 'unitName='+value+'&unitId='+unitId,
                           async:true,
 
                           });
                     //同步更新表格和缓存对应的值
                     obj.update({
-                        courseName: value
+                        unitName: value
                     });
                 });
             }

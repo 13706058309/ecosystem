@@ -5,9 +5,11 @@
 <mapper namespace="com.cykj.mapper.UnitMapper">
 
     <select id="findUnitOnPage" parameterType="java.util.HashMap" resultMap="results">
-        select * from unit where unitName like concat('%',#{unitName},'%') and unitId != 0
+        select u1.*,u2.unitName preUnitName  from unit u1
+        left join unit u2 on u1.preUnitId = u2.unitId
+        where u1.unitName like concat('%',#{unitName},'%') and u1.unitId != 0
         <if test="unitdId!=null">
-            and unitdId = #{unitdId}
+            and u1.unitdId = #{unitdId}
         </if>
         limit #{offset},#{limit}
     </select>
@@ -17,10 +19,25 @@
         <result property="videoUrl" column="videoUrl"></result>
         <result property="timeLength" column="timeLength"></result>
         <result property="preUnitId" column="preUnitId"></result>
+        <result property="preUnitName" column="preUnitName"></result>
         <result property="courseId" column="courseId"></result>
     </resultMap>
 
     <select id="findNumOnPage" parameterType="java.util.HashMap" resultType="int">
         select count(*) from unit where 1=1 and unitName like concat('%',#{unitName},'%') and unitId != 0
+    </select>
+
+
+    <delete id="deleteUnit" parameterType="java.lang.Integer" >
+        delete from unit where unitId = #{unitId}
+    </delete>
+
+    <!--更改章节名字-->
+    <update id="updateunitName" >
+        update unit set unitName = #{unitName} where unitId = #{unitId}
+    </update>
+
+    <select id="selectunitName" resultType="string">
+        select unitName from unit where unitId = #{unitId}
     </select>
 </mapper>

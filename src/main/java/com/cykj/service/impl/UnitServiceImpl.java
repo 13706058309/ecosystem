@@ -37,18 +37,27 @@ public class UnitServiceImpl implements UnitService {
         return tableInfo;
     }
 
-//    @Override
-//    public int deleteCourse(Integer courseId) {
-//        int course = courseMapper.deleteCourse(courseId);
-//        return  course;
-//    }
+    @Override
+    public int deleteCourse(Integer unitId) {
+        int course = unitMapper.deleteUnit(unitId);
+        return  course;
+    }
 //
-//    @Override//更改课程名字
-//    public int updateCourseName(String courseName,Integer courseId) {
-//        System.out.println("CourseServiceImpl里map的值为："+courseName+courseId);
-//        int updateCourseName = courseMapper.updateCourseName(courseName,courseId);
-//        return updateCourseName;
-//    }
+
+    @Override//更改课程名字
+    public int updateUnitName(String unitName,Integer unitId) {
+        System.out.println("UnitServiceImpl里map的值为："+unitName+unitId);
+        int updateunitName = unitMapper.updateunitName(unitName,unitId);
+        return updateunitName;
+    }
+
+
+    @Override//查看框 寻找上一章节 名字
+    public int selectunitName(Integer unitId) {
+        System.out.println("UnitServiceImpl里map的值为："+unitId);
+        int updateunitName = unitMapper.selectunitName(unitId);
+        return updateunitName;
+    }
 //
 //    @Override//更改路径
 //    public int updatecourseImgURL(String courseImgURL, Integer courseId) {

@@ -35,6 +35,7 @@ public interface CourseMapper {
             ,String courseIntroduce,String collectionNumber,String speakerHeadImgUrl,String totalPlayTimes);//新增课程
 
 
+    String findOption();
 //public List<Course> findCourse();
 //public List<Course> search(String courseName);
 }

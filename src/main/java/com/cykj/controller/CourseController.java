@@ -141,6 +141,19 @@ private CourseServiceImpl courseServiceImpl;
 
 
 
+
+    @RequestMapping("findOption")//寻找下拉框
+    @Loger(operationType = "表格执行新增",operationName = "表格执行新增")
+    public void findOption() {
+        System.out.println("走入控制类");
+
+        String  findOption = courseServiceImpl.findOption();
+    }
+
+
+
+
+
     //    @RequestMapping("updateCourse")
 //    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
 //    public void updateCourse(Integer courseId_table,String courseName_table,String courseImgURL_table,String courseIntroduce_table,String speakerHeadImgUrl_table

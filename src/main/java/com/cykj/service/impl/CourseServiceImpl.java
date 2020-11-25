@@ -69,6 +69,13 @@ public class CourseServiceImpl implements CourseService {
         return insertCourse;
     }
 
+    @Override
+    public String findOption() {
+
+        String findOption = courseMapper.findOption();
+        return findOption;
+    }
+
 //    @Resource
 //    private CourseMapper courseMapper;
 //    @Override

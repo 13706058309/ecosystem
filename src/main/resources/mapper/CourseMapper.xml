@@ -69,6 +69,13 @@
         (#{courseName},#{fieldId},#{courseImgURL},#{speakerName},#{courseIntroduce},#{collectionNumber},#{speakerHeadImgUrl},#{totalPlayTimes},now())
     </insert>
 
+    <select id="findOption" resultMap="results">
+        select * from field
+    </select>
+
+
+
+
 <!--    <select id="findCourse"  resultType="com.cykj.entity.Course">-->
 <!--        select courseId,fieldId,courseName,uploadTime  from course ;-->
 <!--    </select>-->
