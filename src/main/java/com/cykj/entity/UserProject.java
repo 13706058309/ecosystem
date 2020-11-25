@@ -1,15 +1,21 @@
 package com.cykj.entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 用户项目申请
  */
+@Component
 public class UserProject {
   private long id;
   private String orderNum;
   private long payMoney;
   private long paramId; //状态
+  private Parameter states; //状态实体类
   private long userId; //用户Id
   private long projectId; //项目Id
+  private ProjectInfo projectInfo; //项目实体类
+  private String appTime;
 
 
   public long getParamId() {
@@ -60,5 +66,29 @@ public class UserProject {
 
   public void setPayMoney(long payMoney) {
     this.payMoney = payMoney;
+  }
+
+  public Parameter getStates() {
+    return states;
+  }
+
+  public void setStates(Parameter states) {
+    this.states = states;
+  }
+
+  public ProjectInfo getProjectInfo() {
+    return projectInfo;
+  }
+
+  public void setProjectInfo(ProjectInfo projectInfo) {
+    this.projectInfo = projectInfo;
+  }
+
+  public String getAppTime() {
+    return appTime;
+  }
+
+  public void setAppTime(String appTime) {
+    this.appTime = appTime;
   }
 }

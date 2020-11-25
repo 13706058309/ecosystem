@@ -40,7 +40,7 @@ $(function () {
                         return data.states.paramName;
                     }
                 }
-                ,{field:'caozuo',title: '操作',width:300,align:'left', templet:"#barDemo"}
+                ,{field:'caozuo',title: '操作',width:300,align:'left',templet:"#toolbar"}
             ]]
         });
         //监听行工具事件

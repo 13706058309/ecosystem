@@ -9,15 +9,17 @@ public class ProjectInfo {
   private BackUser backUser;//企业实体类
   private String projectName; //项目标题
   private String projectSynopsis; //项目描述
+  private String projectCondition;//申请要求
   private String publishTime; //发布时间
   private long userId;
   private UserInfo userInfo; //承接人实体类
+  private long stateId;// 状态Id
   private Parameter states; //状态实体类
-  private String money;
+  private long money;
   private String docUrl;
   private long fieldId;
   private Parameter field;
-  private String orderNum;
+  private String pOrderNum;
   private long trueMoney;
 
   public ProjectInfo() {
@@ -48,66 +50,12 @@ public class ProjectInfo {
     this.projectId = projectId;
   }
 
-
-  public String getProjectName() {
-    return projectName;
-  }
-
-  public void setProjectName(String projectName) {
-    this.projectName = projectName;
-  }
-
-
-  public String getProjectSynopsis() {
-    return projectSynopsis;
-  }
-
-  public void setProjectSynopsis(String projectSynopsis) {
-    this.projectSynopsis = projectSynopsis;
-  }
-
-
-  public String getPublishTime() {
-    return publishTime;
-  }
-
-  public void setPublishTime(String publishTime) {
-    this.publishTime = publishTime;
-  }
-
-
   public long getbUserId() {
     return bUserId;
   }
 
   public void setbUserId(long bUserId) {
     this.bUserId = bUserId;
-  }
-
-  public long getUserId() {
-    return userId;
-  }
-
-  public void setUserId(long userId) {
-    this.userId = userId;
-  }
-
-
-  public String getMoney() {
-    return money;
-  }
-
-  public void setMoney(String money) {
-    this.money = money;
-  }
-
-
-  public String getDocUrl() {
-    return docUrl;
-  }
-
-  public void setDocUrl(String docUrl) {
-    this.docUrl = docUrl;
   }
 
   public BackUser getBackUser() {
@@ -118,6 +66,46 @@ public class ProjectInfo {
     this.backUser = backUser;
   }
 
+  public String getProjectName() {
+    return projectName;
+  }
+
+  public void setProjectName(String projectName) {
+    this.projectName = projectName;
+  }
+
+  public String getProjectSynopsis() {
+    return projectSynopsis;
+  }
+
+  public void setProjectSynopsis(String projectSynopsis) {
+    this.projectSynopsis = projectSynopsis;
+  }
+
+  public String getProjectCondition() {
+    return projectCondition;
+  }
+
+  public void setProjectCondition(String projectCondition) {
+    this.projectCondition = projectCondition;
+  }
+
+  public String getPublishTime() {
+    return publishTime;
+  }
+
+  public void setPublishTime(String publishTime) {
+    this.publishTime = publishTime;
+  }
+
+  public long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(long userId) {
+    this.userId = userId;
+  }
+
   public UserInfo getUserInfo() {
     return userInfo;
   }
@@ -126,12 +114,36 @@ public class ProjectInfo {
     this.userInfo = userInfo;
   }
 
+  public long getStateId() {
+    return stateId;
+  }
+
+  public void setStateId(long stateId) {
+    this.stateId = stateId;
+  }
+
   public Parameter getStates() {
     return states;
   }
 
   public void setStates(Parameter states) {
     this.states = states;
+  }
+
+  public long getMoney() {
+    return money;
+  }
+
+  public void setMoney(long money) {
+    this.money = money;
+  }
+
+  public String getDocUrl() {
+    return docUrl;
+  }
+
+  public void setDocUrl(String docUrl) {
+    this.docUrl = docUrl;
   }
 
   public long getFieldId() {
@@ -150,12 +162,12 @@ public class ProjectInfo {
     this.field = field;
   }
 
-  public String getOrderNum() {
-    return orderNum;
+  public String getpOrderNum() {
+    return pOrderNum;
   }
 
-  public void setOrderNum(String orderNum) {
-    this.orderNum = orderNum;
+  public void setpOrderNum(String pOrderNum) {
+    this.pOrderNum = pOrderNum;
   }
 
   public long getTrueMoney() {

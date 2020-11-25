@@ -34,7 +34,6 @@
             margin-right: 30px;
             vertical-align: top;
         }
-
         .beforeSuccess {
             max-height: 206px;
         }
@@ -57,9 +56,8 @@
             margin-top: 30px;
         }
     </style>
-
 </head>
-<body bgcolor="#f5f5f5">
+<body bgcolor="#fbfbfb">
 <input type="hidden" id="pageCounts" value="0">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div class="header-top-warp-v1">
@@ -108,14 +106,14 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="输入项目名称，如“App开发”" id="projectName" name="projectName">
                     <div class="input-group-append">
-                        <button class="btn-sm input-group-text" style="background-color: cyan;padding:0px 30px" onclick="findProject()">搜索</button>
+                        <button class="btn-sm input-group-text" style="background-color: #0ae5eb;padding:0px 20px;color: white" onclick="findProject()">搜&nbsp;&nbsp;&nbsp;索</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="page-main main-div task-desc-container" style="background-color: white;margin-top: 10px" >
-        <div style="width: 1024px;margin:auto;font-size: 14px">
+        <div style="width: 1024px;margin:auto;font-size: 18px">
             需求内容
         </div>
         <div class="content-item">
@@ -126,7 +124,7 @@
                 项目标题
             </span>
             <div class="item-value value">
-                    XXXXXXXXXXXXxxxxxxxxxxxxxxx
+                    ${projectDetail.projectName}
             </div>
         </div>
         <div class="content-item">
@@ -134,7 +132,7 @@
                 预算金额
             </span>
             <div class="item-value value">
-                ￥2000
+                ￥${projectDetail.money}
             </div>
         </div>
         <div class="content-item">
@@ -144,44 +142,15 @@
             <div class="item-value value desc beforeSuccess" style="padding-bottom: 0px;">
                 ${projectDetail.projectSynopsis}
             </div>
-
         </div>
         <div class="content-item">
             <span class="item-title">
                 需求文件
             </span>
             <div class="item-value value">
-                <a>点击下载</a>
+                <a style="color: cornflowerblue" href="javascript:;" onclick="downloadFile('${projectDetail.docUrl}')"><i class="layui-icon">&#xe601;</i>点击下载</a>
             </div>
         </div>
-<%--        <div class="content-item">--%>
-<%--            <span class="item-title">--%>
-<%--                需求描述--%>
-
-<%--            </span>--%>
-<%--            <div class="item-value value">--%>
-<%--                <textarea id="text">--%>
-<%--                </textarea>--%>
-<%--                <button onclick="showText()">啊</button>--%>
-<%--                <script>--%>
-<%--                    function showText(){--%>
-<%--                        var texts=$("#text").val().trim();--%>
-<%--                        texts=textareaTo(texts);--%>
-<%--                        console.log(texts);--%>
-<%--                        location.href=$("#path").val()+"/project/projectDetail?projectId=22&projectMiaoShu="+texts;--%>
-<%--                    }--%>
-<%--                    function textareaTo(str){--%>
-<%--                        var reg=new RegExp("\n","g");--%>
-<%--                        var regSpace=new RegExp(" ","g");--%>
-
-<%--                        str = str.replace(reg,"<br>");--%>
-<%--                        str = str.replace(regSpace,"&nbsp;");--%>
-
-<%--                        return str;--%>
-<%--                    }--%>
-<%--                </script>--%>
-<%--            </div>--%>
-<%--        </div>--%>
         <div class="content-item">
             <span class="item-title">
                 项目类型
@@ -195,21 +164,47 @@
                 申请要求
             </span>
             <div class="item-value value desc beforeSuccess" style="padding-bottom: 0px;">
-                申请要求1
-                <br>
-                申请要求2
-                <br>
-                申请要求3
-                <br>
-                申请要求4
+                ${projectDetail.projectCondition}
             </div>
         </div>
         <div class="bottom-opts">
-            <input type="checkbox">我已阅读并接受<a>《人才生态圈交易规则》</a>
-            <a class="layui-btn layui-btn-lg layui-btn-danger">立即申请</a>
+            <input type="checkbox"  id="xieYi"><span style="color: orangered"> 我已阅读并接受</span><a style="color: cornflowerblue">《人才生态圈交易规则》</a>
+            <a class="layui-btn layui-btn-lg layui-btn-danger" onclick="addUserProject(${projectDetail.projectId},${projectDetail.money})">立即申请</a>
         </div>
-    </div>
 
+    </div>
+    <c:if test="${not empty projectLists}">
+        <div class="page-main">
+            <div style="width: 1024px;margin:10px auto;font-size: 18px">
+                他还发布了
+            </div>
+            <div class="project-list" style="width: 1024px;margin-left: 0px">
+                <c:forEach items="${projectLists}" var="project">
+                    <div class="project-list-items" style="margin-bottom: 30px;width: 300px" onmouseover="mouseIn(this)" onmouseout="mouseOut(this)" onclick="projectDetail('${project.projectId}')">
+                        <div class="project-item-title">
+                            <span style="float: left">${project.backUser.bUserName} 于 ${project.publishTime} 发布</span>
+                        </div>
+                        <div class="project-item-body">
+                            <div class="project-item-name">
+                                    ${project.projectName}
+                            </div>
+                            <div class="project-item-price">
+                                ￥ ${project.money}
+                            </div>
+                            <div class="project-item-synopsis">
+                                <label>${project.projectSynopsis}</label>
+                            </div>
+                        </div>
+                        <div class="project-item-footer">
+                            <span style="font-size: 12px;float: left;display: inline-block;margin-top: 10px">${project.field.paramName}</span>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="padding:0px 10px;display: inline-block;float: right;border:1px solid orangered;height: 28px"  onclick="projectDetail('${project.projectId}')">查看详情</button>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </c:if>
 </div>
+
 </body>
 </html>

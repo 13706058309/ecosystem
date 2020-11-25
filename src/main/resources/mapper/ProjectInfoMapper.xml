@@ -4,6 +4,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.ProjectInfoMapper">
 
+    <insert id="addProject" parameterType="com.cykj.entity.ProjectInfo">
+        insert into projectInfo (bUserID, projectName, projectSynopsis,projectCondition, money, docUrl, fieldId, pOrderNum , trueMoney)
+        values(#{bUserId},#{projectName},#{projectSynopsis},#{projectCondition}, #{money}, #{docUrl}, #{fieldId}, #{pOrderNum}, #{trueMoney})
+    </insert>
+
+    <update id="updateProject" parameterType="com.cykj.entity.ProjectInfo">
+        update projectInfo
+            <set>
+                <if test="userId != null and userId>0">
+                    userId = #{userId},
+                </if>
+                <if test="stateId != null and stateId>0">
+                    states = #{stateId},
+                </if>
+            </set>
+        where 1=1
+        <if test="projectId !=null and projectId>0">
+            and projectId = #{projectId}
+        </if>
+        <if test="pOrderNum !=null">
+            and pOrderNum = #{pOrderNum}
+        </if>
+    </update>
+
+
+
     <select id="findProjectAll" resultMap="projectMap">
         select bU.*,uI.*,pI.*,pM.*,pF.paramId as fileId,pF.paramName as fieldName,pF.paramType as paramType from projectInfo pI
             left join backUser bU on pI.bUserID = bU.bUserID
@@ -19,7 +45,7 @@
                 and pM.paramId=#{condition.stateId}
             </if>
             <if test="null != condition.bUserId">
-                and pI.bUserID=#{condition.bUserId}
+                and pI.bUserId=#{condition.bUserId}
             </if>
             <if test="null != condition.fieldId">
                 and pI.fieldId = #{condition.fieldId}
@@ -50,7 +76,7 @@
             and pM.paramId=#{condition.stateId}
         </if>
         <if test="null != condition.bUserId">
-            and pI.bUserID=#{condition.bUserId}
+            and pI.bUserId=#{condition.bUserId}
         </if>
         <if test="null != condition.fieldId">
             and pI.fieldId = #{condition.fieldId}
@@ -73,8 +99,11 @@
         left join parameter pM on pM.paramId=pI.states
         left join parameter pF on pF.paramId=pI.fieldId
         where 1=1
-        <if test="null != projectId">
+        <if test="null != projectId and projectId>0">
             and projectId = #{projectId}
+        </if>
+        <if test="pOrderNum != null">
+            and pOrderNum = #{pOrderNum}
         </if>
         limit 1
     </select>
@@ -83,10 +112,13 @@
         <result property="bUserId" column="bUserID"></result>
         <result property="projectName" column="projectName"></result>
         <result property="projectSynopsis" column="projectSynopsis"></result>
+        <result property="projectCondition" column="projectCondition"></result>
         <result property="userId" column="userId"></result>
         <result property="money" column="money"></result>
         <result property="docUrl" column="docUrl"></result>
         <result property="publishTime" column="publishTime"></result>
+        <result property="pOrderNum" column="pOrderNum"></result>
+        <result property="trueMoney" column="trueMoney"></result>
         <association property="userInfo" javaType="com.cykj.entity.UserInfo">
             <id property="userId" column="userId"></id>
             <result property="userName" column="userName"></result>

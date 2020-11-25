@@ -68,7 +68,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="输入项目名称，如“App开发”" id="projectName" name="projectName" value="${projectName}">
                     <div class="input-group-append">
-                        <button class="btn-sm input-group-text" style="background-color: cyan;padding:0px 30px" onclick="findProject(1,9)">搜索</button>
+                        <button class="btn-sm input-group-text" style="background-color: #0ae5eb;padding:0px 20px;color: white" onclick="findProject(1,9)">搜&nbsp;&nbsp;&nbsp;索</button>
                     </div>
                 </div>
             </div>

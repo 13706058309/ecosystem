@@ -17,8 +17,32 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" >
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
     <script src="${pageContext.request.contextPath}/js/project/projectManage.js" charset="UTF-8"></script>
-    <script type="text/html" id="barDemo">
+    <script type="text/html" id="toolbar">
+
+        {{#  if(d.states.paramName=="待付款"){ }}
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
+            <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">立即付款</a>
+            <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">放弃项目</a>
+        {{#  } }}
+        {{#  if(d.states.paramName=="已发布"){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">选择承接人</a>
+        {{#  } }}
+        {{#  if(d.states.paramName=="已承接"){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">立即付款</a>
+        {{#  } }}
+        {{#  if(d.states.paramName=="待验收"){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">下载项目</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">确认完成</a>
+        {{#  } }}
+        {{#  if(d.states.paramName=="已完成"){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">立即付款</a>
+        {{#  } }}
+
+
     </script>
 </head>
 <body style="width:100%;margin: auto;height: 100%">
@@ -31,7 +55,7 @@
             <li class="layui-nav-item" style="line-height: 50px"><a  class="params" href="javascript:;" style="text-decoration: none;color: #414141"><input type="hidden" value="${parameter.paramId}">${parameter.paramName}</a></li>
         </c:forEach>
     </c:if>
-    <input  type="button" class="layui-btn layui-btn-warm" style="margin-left: 100px;padding:0px 20px" value="发布项目" >
+    <a  class="layui-btn layui-btn-warm" style="margin-left: 100px;padding:0px 20px" href="${pageContext.request.contextPath}/project/publishProject" >发布项目</a>
 </ul>
 <%--</div>--%>
 <table id="demo" lay-filter="test"></table>

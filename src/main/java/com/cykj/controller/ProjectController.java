@@ -1,5 +1,7 @@
 package com.cykj.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Parameter;
 import com.cykj.entity.ProjectInfo;
@@ -8,17 +10,21 @@ import com.cykj.service.ProjectService;
 import com.cykj.util.TableInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/project")
@@ -94,6 +100,11 @@ public class ProjectController {
         projectInfo.setProjectId(Integer.parseInt(projectId));
         ProjectInfo project=projectServiceImpl.findProject(projectInfo);
         request.setAttribute("projectDetail",project);
+        Map<String,Object> condition=new HashMap<>();
+        condition.put("bUserId",project.getBackUser().getbUserId());
+        condition.put("stateName","已发布");
+        List<ProjectInfo> projectInfos=projectServiceImpl.findProjectAll(condition,1,3);
+        request.setAttribute("projectLists",projectInfos);
         return "project/ProjectDetail";
     }
 
@@ -119,7 +130,7 @@ public class ProjectController {
      * @throws JsonProcessingException
      */
     @RequestMapping(value = "/findProjectAll")
-    public @ResponseBody String findProjectAll(HttpServletRequest request, HttpServletResponse response,String page,String limit,String stateId) throws JsonProcessingException {
+    public @ResponseBody String findProjectAll(HttpServletRequest request, HttpServletResponse response, String page, String limit, String stateId) throws JsonProcessingException {
         int pageNum=Integer.parseInt(page);
         int limitNum=Integer.parseInt(limit);
         Map<String,Object> condition=new HashMap<>();
@@ -150,4 +161,106 @@ public class ProjectController {
         return "project/ProjectEvolve";
     }
 
+    /**
+     * 企业发布项目
+     * @return
+     */
+    @RequestMapping("/publishProject")
+    public String goPublishProject( HttpServletRequest request){
+        String msg=null;
+        Map<String,Object> condition =new HashMap<>();
+        condition.put("paramType","项目一级分类");
+        List<Parameter> parameters=parameterServiceImpl.findParameter(condition);
+        request.setAttribute("parameters",parameters);
+        return "project/PublishProject";
+    }
+
+    @RequestMapping("/uploadDemandFile")
+    public @ResponseBody String upload(@RequestParam("file") MultipartFile demandfile , HttpServletRequest request) throws JsonProcessingException {
+        System.out.println("222222222222222222222222222222222222222222");
+//        1获取上传的目录路径
+        String path = request.getSession().getServletContext().getRealPath("/uploadDemand");
+        //2以天维单位创建文件夹
+        String date=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//        3创建目录
+        File file=new File(path,date);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+//        4文件上传
+        TableInfo tableInfo=new TableInfo();
+        JSONObject json=new JSONObject();
+//        4.1获取原始文件名
+        String fileName=demandfile.getOriginalFilename();
+        if (fileName!=null){
+            fileName= UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
+            System.out.println(UUID.randomUUID().toString());
+            try {
+//               4.2文件上传
+                demandfile.transferTo(new File(file,fileName));
+                json.put("code",0);
+                json.put("msg","success");
+                JSONObject data=new JSONObject();
+                data.put("docUrl","/uploadDemand/"+date+"/"+fileName);
+                json.put("data",data);
+                System.out.println("/uploadDemand/"+date+"/"+fileName);
+                tableInfo.setCode(0);
+                tableInfo.setMsg("success");
+            } catch (IOException e) {
+                e.printStackTrace();
+//                tableInfo.setCode(1);
+//                tableInfo.setMsg("failed");
+                json.put("code",1);
+                json.put("msg","failed");
+                json.put("data","");
+            }
+        }
+        return json.toString();
+    }
+
+    /**
+     *发布项目、生成订单
+     * @param request
+     * @param projectInfo
+     * @return
+     */
+    @RequestMapping("/addProject")
+    public @ResponseBody String addProject(HttpServletRequest request ,ProjectInfo projectInfo) throws JsonProcessingException {
+        String msg="";
+        BackUser backUser=(BackUser)request.getSession().getAttribute("admin");
+        if (backUser!=null){
+            projectInfo.setbUserId(projectInfo.getbUserId());
+        }else{
+            projectInfo.setbUserId(1);
+        }
+        Map<String,Object> condition=new HashMap<>();
+        condition.put("paramName","佣金");
+        condition.put("paramType","费用");
+        Parameter moneyRate=parameterServiceImpl.findParameter(condition).get(0);
+        long trueMoney=(long)(projectInfo.getMoney()*(1+(Integer.parseInt(moneyRate.getParamValues().trim())/100.0)));
+        System.out.println(trueMoney);
+        projectInfo.setTrueMoney(trueMoney);
+        ProjectInfo addRes=projectServiceImpl.addProject(projectInfo);
+        return new ObjectMapper().writeValueAsString(addRes);
+    }
+
+    //支付成功后的异步回调，用于处理服务端业务
+    @RequestMapping("/notifyUrl")
+    public void notifyUrl(HttpServletRequest request)throws Exception{
+        System.out.println("异步回调");
+        projectServiceImpl.notifyUrl(request);
+    }
+
+    //支付成功后同步回调，用于展示给用户查看
+    @RequestMapping("/returnUrl")
+    public String returnUrl(HttpServletRequest request)throws Exception{
+        System.out.println("同步回调");
+        return projectServiceImpl.returnUrl(request);
+    }
+
+    //用户点击付款后请求此方法
+    @RequestMapping("/alipayTradePagePay")
+    public String alipayTradePagePay(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        return projectServiceImpl.alipayTradePagePay(request,response);
+    }
 }

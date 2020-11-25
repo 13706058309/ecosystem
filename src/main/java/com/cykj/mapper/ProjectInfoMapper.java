@@ -37,4 +37,17 @@ public interface ProjectInfoMapper {
      */
     ProjectInfo findProject(ProjectInfo projectInfo);
 
+    /**
+     * 发布项目
+     * @param projectInfo
+     * @return
+     */
+    int addProject(ProjectInfo projectInfo);
+
+    /**
+     * 修改订单状态
+     * @param projectInfo
+     * @return
+     */
+    int updateProject(ProjectInfo projectInfo);
 }

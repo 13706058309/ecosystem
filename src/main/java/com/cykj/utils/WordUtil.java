@@ -44,9 +44,8 @@ public class WordUtil {
 //        map.put("image",imgs);
 //        test.createWord(map);
 //        test.createWord();
-        String path = WordUtil.class.getClassLoader().getResource("static/user").getPath();
-        System.out.println(path);
-
+        String s = "12345";
+        System.out.println(s.substring(3));
     }
 
     /*****
