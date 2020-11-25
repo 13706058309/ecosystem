@@ -261,17 +261,7 @@ public class PostPosition {
     this.contactEmail = contactEmail;
   }
 
-  public void setReleaseTime(String releaseTime) {
-    this.releaseTime = releaseTime;
-  }
 
-  public BackUser getBackUser() {
-    return backUser;
-  }
-
-  public void setBackUser(BackUser backUser) {
-    this.backUser = backUser;
-  }
 
   public Delivery getDelivery() {
     return delivery;

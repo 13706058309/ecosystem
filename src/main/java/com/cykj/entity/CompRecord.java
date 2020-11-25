@@ -10,6 +10,11 @@ public class CompRecord {
   private long companyId;//公司ID
   private String recored;//聊天记录
   private String recoredTime;//聊天时间
+  private UserInfo userInfo;
+  private BackUser backUser;
+  private long tUserId;
+  private long tCompId;
+  private long isRead;
 
   public CompRecord() {
   }
@@ -55,5 +60,45 @@ public class CompRecord {
 
   public void setRecoredTime(String recoredTime) {
     this.recoredTime = recoredTime;
+  }
+
+  public UserInfo getUserInfo() {
+    return userInfo;
+  }
+
+  public void setUserInfo(UserInfo userInfo) {
+    this.userInfo = userInfo;
+  }
+
+  public long gettUserId() {
+    return tUserId;
+  }
+
+  public void settUserId(long tUserId) {
+    this.tUserId = tUserId;
+  }
+
+  public long gettCompId() {
+    return tCompId;
+  }
+
+  public void settCompId(long tCompId) {
+    this.tCompId = tCompId;
+  }
+
+  public BackUser getBackUser() {
+    return backUser;
+  }
+
+  public void setBackUser(BackUser backUser) {
+    this.backUser = backUser;
+  }
+
+  public long getIsRead() {
+    return isRead;
+  }
+
+  public void setIsRead(long isRead) {
+    this.isRead = isRead;
   }
 }

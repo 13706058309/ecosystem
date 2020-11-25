@@ -1,6 +1,7 @@
 package com.cykj.service;
 
 import com.cykj.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public interface BackCompService {
     //查找高校人才信息
     Talent findTalentByID(int talentID);
     //简历导出
-    String outResume(int resumeID,String savePath);
+    String outResume(int resumeID,String savePath,String photoPath);
     //通过手机号找用户
     BackUser findByPhone(String phone);
     //修改密码
@@ -77,4 +78,18 @@ public interface BackCompService {
     String judgeResumeShowOrHidden();
     //查找下载简历需要的费用
     String findDownFee();
+    //企业查找聊天用户
+    String compfindChat(int compID);
+    //获取聊天记录
+    String findChatRec(int compID,int userID);
+    //用户查找聊天的企业
+    String userFindChat(int userID);
+    //用户查找和企业的聊天纪律
+    String findChatRecs(int compID,int userID);
+    //添加聊天纪律
+    int addCompRec(CompRecord compRecord);
+    //确认读过用户发了的消息
+    int readUserMsg( int compID, int userID);
+    //确认读过公司的消息
+    int readCompMsg( int compID, int userID);
 }
