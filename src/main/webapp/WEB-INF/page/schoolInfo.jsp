@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 </head>
 <body>
-<div id="body" style="margin-top:100px;margin-left: 200px">
+<div id="body" style="margin-top:100px;margin-left: 300px">
     <div id="container">
         <div class="clearfix">
             <div class="content_l">
@@ -66,12 +66,12 @@
                                 </form>
                             </dd>
                         </dl>
-                        <dl class="c_section" style="display: block" id="compName2">
+                        <dl class="c_section" style="display: block;width: 800px;" id="compName2">
                             <dt >
                                 <h2 class=" layui-icon layui-icon-flag" >学校名称</h2>
                             </dt>
                             <dd>
-                                <div class="c_intro" id="coreValues" style="width: 800px;text-align: center">${shool.compName}</div>
+                                <div class="c_intro" id="coreValues" style="text-align: center">${shool.compName}</div>
                                 <a title="编辑" id="editValue" class="c_edit"  onclick="show1()"></a>
                             </dd>
                         </dl>
@@ -119,7 +119,7 @@
                                 </form>
                             </dd>
                         </dl>
-                        <dl class="c_section" style="display: block" id="infoIntr2">
+                        <dl class="c_section" style="display: block;width: 800px;" id="infoIntr2">
                             <dt>
                                 <h2 class="layui-icon layui-icon-form">简介</h2>
                             </dt>
@@ -145,7 +145,7 @@
                                 </form>
                             </dd>
                         </dl>
-                        <dl class="c_section" style="display: block" id="coreValue2">
+                        <dl class="c_section" style="display: block;width: 800px;" id="coreValue2">
                             <dt  >
                                 <h2 class="layui-icon layui-icon-read">校训</h2>
                             </dt>
@@ -171,7 +171,7 @@
                                 </form>
                             </dd>
                         </dl>
-                        <dl class="c_section" style="display: block" id="address2">
+                        <dl class="c_section" style="display: block;width: 800px;" id="address2">
                             <dt>
                                 <h2 class="layui-icon layui-icon-location">地址</h2>
                             </dt>
@@ -197,7 +197,7 @@
                                 </form>
                             </dd>
                         </dl>
-                        <dl class="c_section" style="display: block" id="contactInfo2">
+                        <dl class="c_section" style="display: block;width: 800px;" id="contactInfo2">
                             <dt>
                                 <h2 class="layui-icon  layui-icon-cellphone" >电话</h2>
                             </dt>
@@ -223,7 +223,7 @@
                                 </form>
                             </dd>
                         </dl>
-                        <dl class="c_section" style="display: block" id="email2">
+                        <dl class="c_section" style="display: block;width: 800px;" id="email2">
                             <dt>
                                 <h2 class=" layui-icon layui-icon-email">eMail</h2>
                             </dt>
