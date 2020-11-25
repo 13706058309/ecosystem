@@ -34,7 +34,7 @@ public class HomePageController {
         List<Industry> industry = homePageService.findIndustry();
         request.setAttribute("industry",industry);
 //        热门企业
-        System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + city);
+        System.err.println("当前城市" + city);
         if (city!=null) {
             city = city.trim();
             List<BackUser> homeCompany = homePageService.CompanyCity(city);
@@ -43,6 +43,13 @@ public class HomePageController {
             List<PostPosition> postList = homePageService.postList(city);
             request.setAttribute("postList", postList);
         }
+//        是否登入成功
+        UserInfo qUser = (UserInfo) request.getSession().getAttribute("qUser");
+        if(qUser!=null){
+            System.out.println(qUser.getUserName());
+        }
+        request.setAttribute("qUser",qUser);
+
         return "HomePage";
     }
 
