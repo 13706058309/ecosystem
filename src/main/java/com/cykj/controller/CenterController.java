@@ -21,7 +21,7 @@ import java.util.*;
 @RequestMapping("/center")
 public class CenterController {
     private int resumeId;
-    private int userId=1;
+    private int userId;
     String workCity="厦门市";
     String workYear="工作经验";
     String education="学历要求";
@@ -31,6 +31,7 @@ public class CenterController {
     String releaseTime="发布时间";
     String search="";
     String position="职位类型";
+
     @Resource
     private ResumeService resumeService;
     @RequestMapping("/myCenter")
@@ -40,7 +41,8 @@ public class CenterController {
 
     @RequestMapping("/resumeInfo")
     public String resumeInfo(HttpServletRequest req){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         int page=0;
         int curr=1;
         int limit=2;
@@ -57,7 +59,8 @@ public class CenterController {
     }
     @RequestMapping("/resumeCommit")
     public String resumeCommit(HttpServletRequest req){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         int page=0;
         int curr=1;
         int limit=2;
@@ -74,7 +77,8 @@ public class CenterController {
     }
     @RequestMapping("/interview")
     public String interview(HttpServletRequest req){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         int page=0;
         int curr=1;
         int limit=2;
@@ -91,7 +95,8 @@ public class CenterController {
     }
     @RequestMapping("/communication")
     public String communication(HttpServletRequest req){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         int page=0;
         int curr=1;
         int limit=2;
@@ -108,7 +113,8 @@ public class CenterController {
     }
     @RequestMapping("/resumeCommitPage")
     public String resumeCommitPage(HttpServletRequest req,int curr,int limit){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         List<PostPosition> posts=resumeService.deliveryPosts(userId,(curr-1)*limit,limit);
         List<PostPosition> postsCount=resumeService.deliveryPostsCount(userId);
         int count=postsCount.size();
@@ -123,7 +129,8 @@ public class CenterController {
 
     @RequestMapping("/deliveryInfo")
     public String deliveryInfo(HttpServletRequest req){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         int page=0;
         int curr=1;
         int limit=2;
@@ -140,7 +147,8 @@ public class CenterController {
     }
     @RequestMapping("/deliveryInfoPage")
     public String deliveryInfoPage(HttpServletRequest req,int curr,int limit){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         List<PostPosition> posts=resumeService.deliveryInfo(userId,(curr-1)*limit,limit);
         List<PostPosition> postsCount=resumeService.deliveryInfoCount(userId);
         int count=postsCount.size();
@@ -156,7 +164,8 @@ public class CenterController {
 
     @RequestMapping("/resumePage")
     public String resumePage(HttpServletRequest req,int curr,int limit){
-        userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         List<PostPosition> posts=resumeService.findPosts(userId,(curr-1)*limit,limit);
         List<PostPosition> postsCount=resumeService.findPostsCount(userId);
         int count=postsCount.size();
@@ -171,7 +180,7 @@ public class CenterController {
     @RequestMapping("/postDel")
     public @ResponseBody String postDel(int pPostId){
 //        System.out.println(new Gson().toJson(resume));
-        userId=1;
+
         int n=resumeService.positionDel(userId,pPostId);
         String msg="lose";
         if (n>0){
@@ -181,8 +190,9 @@ public class CenterController {
     }
 
     @RequestMapping("/savePwd")
-    public @ResponseBody String savePwd(String oldpwd,String newpwd){
-        userId=1;
+    public @ResponseBody String savePwd(HttpServletRequest req,String oldpwd,String newpwd){
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         int n=0;
         Map map=new HashMap();
         map.put("userId",userId);
@@ -202,8 +212,9 @@ public class CenterController {
     }
 
     @RequestMapping("/saveShow")
-    public @ResponseBody String saveShow(String isOpen){
-        userId=1;
+    public @ResponseBody String saveShow(HttpServletRequest req,String isOpen){
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
 
         Map map=new HashMap();
         map.put("userId",userId);
@@ -223,7 +234,9 @@ public class CenterController {
     }
     @RequestMapping("/jianli")
     public  String jianli(HttpServletRequest req){
-        Resume resume=resumeService.resume(1);
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
+        Resume resume=resumeService.resume(userId);
         System.out.println(new Gson().toJson(resume));
         req.setAttribute("resume",resume);
         resumeId=(int)resume.getResumeId();
@@ -231,7 +244,8 @@ public class CenterController {
     }
     @RequestMapping("/accountSet")
     public String accountSet(HttpServletRequest req){
-        int userId=1;
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         UserInfo userInfo=resumeService.findUser(userId);
         req.setAttribute("user",userInfo);
         return "AccountSet";
@@ -243,6 +257,8 @@ public class CenterController {
     public @ResponseBody String userInfoUpdate(HttpServletRequest req,Resume resume,String education,String time){
 //        System.out.println(new Gson().toJson(resume));
 //        String time=new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").format(updateTime);
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         req.setAttribute("updateTime",time);
         resume.setUpdateTime(time);
         resume.setUserId(userId);
@@ -257,6 +273,8 @@ public class CenterController {
 //    工作经历
     @RequestMapping("/historyCommit")
     public @ResponseBody String historyCommit(HttpServletRequest req,WorkExperience workExperience,String time){
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         Resume resume=new Resume();
         System.out.println(new Gson().toJson(workExperience));
         req.setAttribute("updateTime",time);
@@ -271,6 +289,8 @@ public class CenterController {
     }
     @RequestMapping("/historySave")
     public @ResponseBody String historySave(HttpServletRequest req,WorkExperience workExperience,String time){
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         Resume resume=new Resume();
         req.setAttribute("updateTime",time);
         resume.setUpdateTime(time);
@@ -698,8 +718,15 @@ public class CenterController {
     }
     @RequestMapping("/job")
     public String pageJob(HttpServletRequest req,String findworkYear,String findSearch,String findWorkCity,String findEducation,String findSalary,String findFinanStage,String findScale,String findReleaseTime,String curr,String limit,String findPosition){
-        req.getSession().setAttribute("realName","小白");
-        System.out.println("6666666666");
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
+
+
         System.out.println(findworkYear+"1111"+findSearch+findWorkCity+findEducation+findSalary+findFinanStage+findScale+findReleaseTime+curr+limit+findPosition+"2222222222");
         int page=0;
         if (limit==null){
@@ -878,14 +905,16 @@ public class CenterController {
     }
 
     @RequestMapping("/postInfo")
-    public String postInfo(HttpServletRequest req,int pPostId){
-        PostPosition post=resumeService.findPost(pPostId);
+    public String postInfo(HttpServletRequest req,int lid){
+        PostPosition post=resumeService.findPost(lid);
         req.setAttribute("post",post);
         return "postInfo";
     }
 //    投递简历
     @RequestMapping("/sendResume")
     public @ResponseBody String sendResume(HttpServletRequest req,int pPostId){
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        userId= (int) user.getUserId();
         Resume r=resumeService.resume(userId);
         Delivery delivery=resumeService.findDelivery(userId,pPostId);
         if (null!=delivery){
@@ -966,13 +995,30 @@ public class CenterController {
         if (vCode.equals(req.getSession().getAttribute("vCodeMenu"))){
             System.out.println("11111111111");
             UserInfo userInfo=new UserInfo();
-            userInfo.setUserId(1);
+            userInfo.setUserId(userId);
             userInfo.setTelephone(newPhone);
             int n=resumeService.updatePhone(userInfo);
             if (n>0){
                 System.out.println("22222222");
                 return "succes";
             }
+        }
+        return "lose";
+    }
+
+
+    @RequestMapping("/saveName")
+    public @ResponseBody String saveName(HttpServletRequest req,String newName){
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserId(userId);
+        userInfo.setUserName(newName);
+        int n=resumeService.updateName(userInfo);
+        if (n>0){
+            UserInfo u=(UserInfo) req.getSession().getAttribute("qUser");
+            u.setUserName(newName);
+
+            req.getSession().setAttribute("qUser",u);
+            return "succes";
         }
         return "lose";
     }

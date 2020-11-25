@@ -308,4 +308,11 @@ public interface ResumeService {
      * @return
      */
     public Delivery findDelivery(int userId,int pPostId);
+
+    /**
+     * 修改用户名
+     * @param userInfo
+     * @return
+     */
+    public int updateName(UserInfo userInfo);
 }

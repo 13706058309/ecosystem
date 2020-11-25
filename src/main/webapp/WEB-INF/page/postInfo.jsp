@@ -17,63 +17,63 @@
 <head>
     <meta charset="utf-8">
     <title>「资产负债_软件开发岗（应届）招聘」_建信金科招聘-BOSS直聘</title>
-    <meta name="keywords" content="资产负债_软件开发岗（应届）,资产负债_软件开发岗（应届）招聘,建信金科资产负债_软件开发岗（应届）招聘"/>
-    <meta name="description" content="建信金科资产负债_软件开发岗（应届）招聘，薪资：8-13K，地点：厦门，要求：1年以内，学历：本科，福利：五险一金、补充医疗保险、定期体检、年终奖、带薪年假、餐补、节日福利、员工关怀、工会福利，资产负债业务高级经理刚刚在线，随时随地直接开聊。"/>
+<%--    <meta name="keywords" content="资产负债_软件开发岗（应届）,资产负债_软件开发岗（应届）招聘,建信金科资产负债_软件开发岗（应届）招聘"/>--%>
+<%--    <meta name="description" content="建信金科资产负债_软件开发岗（应届）招聘，薪资：8-13K，地点：厦门，要求：1年以内，学历：本科，福利：五险一金、补充医疗保险、定期体检、年终奖、带薪年假、餐补、节日福利、员工关怀、工会福利，资产负债业务高级经理刚刚在线，随时随地直接开聊。"/>--%>
     <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.zhipin.com/job_detail/d5632e1152a89f521nV639m9F1FZ.html">
     <link rel="canonical" href="https://www.zhipin.com/job_detail/d5632e1152a89f521nV639m9F1FZ.html">
     <meta name="applicable-device" content="pc">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <link href="${pageContext.request.contextPath}/css/main.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript">
-        var _userInfo = {
-            showTip: false,
-            text: '',
-            isLogin: true,
-            isPerfect: true,
-            hasKaAnotherS: false
-        };
-        var _reportData = {
-            reportedId: '7bc0cc6a6ab2edf90nR92ty5FlBW',
-            targetId: '110440739'
-        };
-        var _jobInfo = {
-            job_id: 'd5632e1152a89f521nV639m9F1FZ',
-            job_name: '资产负债_软件开发岗（应届）',
-            job_salary: '8-13K',
-            company:'建信金科',
-            brand_logo:'https://img.bosszhipin.com/beijin/upload/com/logo/20190717/9178f0aad8a239b97f921c6f5c192095cf8fce2ca5a3b1ae08dbafe854112624.png'
-        };
-    </script>
+<%--    <script type="text/javascript">--%>
+<%--        var _userInfo = {--%>
+<%--            showTip: false,--%>
+<%--            text: '',--%>
+<%--            isLogin: true,--%>
+<%--            isPerfect: true,--%>
+<%--            hasKaAnotherS: false--%>
+<%--        };--%>
+<%--        var _reportData = {--%>
+<%--            reportedId: '7bc0cc6a6ab2edf90nR92ty5FlBW',--%>
+<%--            targetId: '110440739'--%>
+<%--        };--%>
+<%--        var _jobInfo = {--%>
+<%--            job_id: 'd5632e1152a89f521nV639m9F1FZ',--%>
+<%--            job_name: '资产负债_软件开发岗（应届）',--%>
+<%--            job_salary: '8-13K',--%>
+<%--            company:'建信金科',--%>
+<%--            brand_logo:'https://img.bosszhipin.com/beijin/upload/com/logo/20190717/9178f0aad8a239b97f921c6f5c192095cf8fce2ca5a3b1ae08dbafe854112624.png'--%>
+<%--        };--%>
+<%--    </script>--%>
 
 </head>
 <body class="page-white">
 <div id="wrap">
-    <script>
-        var staticPath = 'https://static.zhipin.com/v2';
-        _PAGE = {
-            checkMobileUrl: "/registe/sendSms.json",
-            regMobileUrl: "/registe/save.json",
-            loginMobileUrl: "/login/phone.json",
-            loginAccountUrl: "/login/account.json",
-            getRandomKeyUrl: "/captcha/randkey.json",
-            verifyImgUrl: "/captcha/?randomKey={randomKey}",
-            getPositionUrl: "/user/position.json",
-            citySiteName:"全国站",
-            citySiteCode:"100010000",
-            skillsUrl: "/common/data/positionSkill"
-            ,
-            uid:82670547,
-            name: "吴世泽",
-            face: "https://img.bosszhipin.com/beijin/upload/avatar/20191127/983522633b91a32d3c06c43f75dcc8e5d28c90069eead34e1450918b517a0c3b_s.png",
-            token: "VhjuhGcU5VUmz7d|0",
-            clientIP: "117.28.135.106",
-            ws: {
-                useSSL: true,
-                server: "ws.zhipin.com",
-                port: 443
-            }
-        }
-    </script>
+<%--    <script>--%>
+<%--        var staticPath = 'https://static.zhipin.com/v2';--%>
+<%--        _PAGE = {--%>
+<%--            checkMobileUrl: "/registe/sendSms.json",--%>
+<%--            regMobileUrl: "/registe/save.json",--%>
+<%--            loginMobileUrl: "/login/phone.json",--%>
+<%--            loginAccountUrl: "/login/account.json",--%>
+<%--            getRandomKeyUrl: "/captcha/randkey.json",--%>
+<%--            verifyImgUrl: "/captcha/?randomKey={randomKey}",--%>
+<%--            getPositionUrl: "/user/position.json",--%>
+<%--            citySiteName:"全国站",--%>
+<%--            citySiteCode:"100010000",--%>
+<%--            skillsUrl: "/common/data/positionSkill"--%>
+<%--            ,--%>
+<%--            uid:82670547,--%>
+<%--            name: "吴世泽",--%>
+<%--            face: "https://img.bosszhipin.com/beijin/upload/avatar/20191127/983522633b91a32d3c06c43f75dcc8e5d28c90069eead34e1450918b517a0c3b_s.png",--%>
+<%--            token: "VhjuhGcU5VUmz7d|0",--%>
+<%--            clientIP: "117.28.135.106",--%>
+<%--            ws: {--%>
+<%--                useSSL: true,--%>
+<%--                server: "ws.zhipin.com",--%>
+<%--                port: 443--%>
+<%--            }--%>
+<%--        }--%>
+<%--    </script>--%>
 
     <div id="main">
     <div class="job-banner">
@@ -256,8 +256,7 @@
                     <div class="btns">
                         <div class="op-links">
 <%--                            <a ka="job_detail_wechat_share" href="javascript:;" class="link-wechat-share" data-url="/boss/share/job.json?jobId=d5632e1152a89f521nV639m9F1FZ&source=2">微信扫码分享</a>--%>
-                            <a href="javascript:;" ka="job_detail_unlike" class="link-like active"
-                               data-url="/geek/tag/jobtagupdate.json?jobId=d5632e1152a89f521nV639m9F1FZ&expectId=&tag=4&lid=a6k2lkE6id7.search.2">取消感兴趣</a>
+                            <a onclick="postDel(${post.pPostId})" class="link-wechat-share">取消感兴趣</a>
 <%--                            <a ka="job_detail_report" href="javascript:;" class="link-report">举报</a>--%>
                         </div>
                     </div>
@@ -1256,6 +1255,30 @@
 <script src="https://webapi.amap.com/maps?v=1.3&key=60085a6ee91616cf689ce0321e1f30c4&plugin=AMap.Geocoder"></script>
 </body>
 <input type="hidden" id="page_key_name" value="cpc_job_detail" />
+<script>
+    function postDel(id) {
+        $.ajax({
+            url: 'postDel',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "pPostId="+id,
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    //向服务端发送删除指令
+                    layer.msg('删除成功')
+                    location.reload()
+                } else if (data == "lose") {
+                    layer.msg("添加失败")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+    }
+</script>
 <script>
     function get_share_datas_from_html_inapp() {
         var shid = "shdefault",

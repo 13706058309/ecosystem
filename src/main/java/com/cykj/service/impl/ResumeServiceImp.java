@@ -485,6 +485,17 @@ public class ResumeServiceImp implements ResumeService {
         return jianliMapper.findDelivery(userId,pPostId);
     }
 
+    /**
+     * 修改用户名
+     *
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public int updateName(UserInfo userInfo) {
+        return jianliMapper.updateName(userInfo);
+    }
+
 
     /**
      * 修改简历联系方式

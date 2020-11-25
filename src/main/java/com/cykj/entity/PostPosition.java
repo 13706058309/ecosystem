@@ -279,4 +279,15 @@ public class PostPosition {
     this.parameter = parameter;
   }
 
+  public BackUser getBackUser() {
+    return backUser;
+  }
+
+  public void setBackUser(BackUser backUser) {
+    this.backUser = backUser;
+  }
+
+  public void setReleaseTime(String releaseTime) {
+    this.releaseTime = releaseTime;
+  }
 }

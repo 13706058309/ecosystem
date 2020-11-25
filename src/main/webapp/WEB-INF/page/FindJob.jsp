@@ -36,58 +36,42 @@
 <input type="hidden" id="curr" value="${curr}">
 
 
-<div id="header" style="background-color: #0d98ff">
+<div id="header" style="background-color: #0d98ff;height: 80px" >
     <div class="inner home-inner" >
-        <div class="logo" style="width: 150px">
+        <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo20.png) 3px 7px no-repeat;background-size:150px 30px;width: 150px"><span>钱程无忧</span></a>
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo11.png) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
-        <div class="nav">
+        <div class="nav" style="margin-top: 20px">
             <ul>
                 <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
                 <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
-                <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
-<%--                <li class=""><a ka="tab_overseas_click" href="https://www.zhipin.com/returnee_jobs/">简历</a></li>--%>
+                <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
                 <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
                 <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
             </ul>
         </div>
-        <div class="nav-search search-box">
-            <form action="https://www.zhipin.com/job_detail/" method="get" target="_blank">
-<%--                <div class="search-form-con">--%>
-<%--                    <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" maxlength="50" placeholder="搜索职位、公司"/></p>--%>
-<%--                </div>--%>
-                <input type="hidden" name="city" class="city-code" value="101230200"/>
-                <input type="hidden" name="source" value="8">
-<%--                <button type="submit" ka="search-job-top" class="btn btn-search">搜索</button>--%>
-                <div class="suggest-result">
-                    <ul></ul>
-                </div>
-            </form>
-        </div>
 
-        <div class="user-nav">
-            <c:if test="${empty realName}">
+        <div class="user-nav" style="margin-top: 20px">
+            <c:if test="${empty qUser}">
             <div class="btns" style="margin-top: 10%">
-                <a href="https://signup.zhipin.com" ka="header-register" class="btn btn-outline">注册</a>
-                <a href="https://login.zhipin.com" ka="header-login" class="btn btn-outline">登录</a>
+                <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline">注册</a>
+                <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline">登录</a>
             </div>
             </c:if>
-            <c:if test="${not empty realName}">
+            <c:if test="${not empty qUser}">
             <ul>
 <%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
                 <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
                 <li class="nav-figure">
                     <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
-                        <span class="label-text">${realName}</span><img src="${pageContext.request.contextPath}${photo}" alt=""/>
+                        <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                     </a>
                     <div class="dropdown">
-                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
-                        <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置</span></a>
-<%--                        <a href="https://www.zhipin.com/web/geek/account?type=privacySet" ka="privacy_set">隐私设置</a>--%>
+                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
+                        <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
                         <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
-                        <p class="recruit-tip"><img src="https://static.zhipin.com/v2/web/geek/images/recruit-tip.gif" alt=""><span>在 APP 端“我的 - 设置”中切换为Boss身份后，刷新本页面即可进行招聘</span></p>
                     </div>
                 </li>
             </ul></c:if>
@@ -370,26 +354,27 @@
                                 <div class="job-primary">
                                     <div class="info-primary">
                                         <div class="primary-wrapper">
-                                            <div class="primary-box" href="/job_detail/ef44ec169fb734ba33J53dy_EVo~.html"
+                                            <div class="primary-box"
+                                                 href="postInfo?pPostId=${job.pPostId}"
                                                  data-jid="ef44ec169fb734ba33J53dy_EVo~" data-itemid="1"
-                                                 data-lid="8YjKaEC3M3L.search.1" data-jobid="86361218" data-index="0"
+                                                 data-lid="${job.pPostId}" data-jobid="86361218" data-index="0"
                                                  ka="search_list_1" target="_blank">
                                                 <div class="job-title">
                                                 <span class="job-name"><a
-                                                        href="postInfo?pPostId=${job.pPostId}"
-                                                        title="资深前端开发工程师" target="_blank" ka="search_list_jname_1"
+                                                        href="postInfo?lid=${job.pPostId}"
+                                                        title="${job.postName}" target="_blank" ka="search_list_jname_1"
                                                         data-jid="ef44ec169fb734ba33J53dy_EVo~" data-itemid="1"
-                                                        data-lid="8YjKaEC3M3L.search.1" data-jobid="86361218"
+                                                        data-lid="${job.pPostId}" data-jobid="86361218"
                                                         data-index="0">${job.postName}</a></span>
-                                                    <span class="job-area-wrapper">
-                                                    <span class="job-area">${job.detailAddress}</span>
+                                                    <span class="job-area-wrapper" onclick="postInfo(${job.pPostId})">
+                                                    <span class="job-area" >${job.detailAddress}</span>
 
                                                 </span>
-                                                    <span class="job-pub-time">发布于:${job.releaseTime}</span>
+                                                    <span class="job-pub-time" title="发布于:${job.releaseTime}">发布于:${job.releaseTime}</span>
 
                                                 </div>
                                                 <div class="job-limit clearfix">
-                                                    <span class="red">${job.minSalary}-${job.maxSalary}k</span>
+                                                    <a><span class="red">${job.minSalary}-${job.maxSalary}k</span>
                                                     <p>${job.workYear}<em class="vline"></em>${job.education}</p>
 <%--                                                    <span class="job-area"><a>投递简历</a></span>--%>
                                                     <div class="info-publis">
@@ -397,7 +382,7 @@
                                                                               src="https://z.zhipin.com/web/geek/resource/icon-chat-v2.png">${job.backUser.bUserName}
 <%--                                                            <em class="vline"></em>技术总监--%>
                                                         </h3>
-                                                    </div>
+                                                    </div></a>
                                                     <button class="btn btn-startchat" href="javascript:;"
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
@@ -438,7 +423,9 @@
                                     </div>
                                     <div class="info-append clearfix">
                                         <div class="tags">
+
                                             <span class="tag-item"><a onclick="sendResume(${job.pPostId})">投递简历</a></span>
+
                                         </div>
                                         <div class="info-desc">${job.jobBenefits}</div>
                                     </div>

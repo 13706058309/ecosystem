@@ -129,7 +129,7 @@
         <ul class="layui-tab-title ">
             <li class="layui-this " style="margin-top: 20%">重置密码</li>
             <li class="layui-this" style="margin-top: 20%">手机号码</li>
-            <li class="layui-this" style="margin-top: 20%">绑定微信</li>
+            <li class="layui-this" style="margin-top: 20%">用户名修改</li>
             <li class="layui-this" style="margin-top: 20%">隐私设置</li>
         </ul>
         <div class="layui-tab-content" style="height: 12%;">
@@ -192,7 +192,23 @@
                     </div>
                 </form>
             </div>
-            <div class="layui-tab-item">内容3</div>
+            <div class="layui-tab-item" style="margin-top: 20%;margin-left: 20%">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新用户名：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" id="newName" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="button" value="立即提交 " class="layui-btn" onclick="saveName()">
+                            <input type="button" value="重置" class="layui-btn layui-btn-primary" onclick="quitName()">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="layui-tab-item"  style="margin-top: 20%;margin-left: 20%">
                 <form class="layui-form">
                     <label class="layui-form-label" style="width: 100px;margin-left: 15%">简历隐藏</label>
@@ -403,6 +419,31 @@
         document.getElementById("showPhone").style.display='none';
     }
 
+    function quitName() {
+        $('#newName').val("");
+    }
+    function saveName() {
+        $.ajax({
+            url: 'saveName',
+            charset:"UTF-8",
+            async: "true",
+            type: "post",
+            data: "newName="+$('#newName').val(),
+            dataType: "text",
+            success: function (data) {
+                if (data == "succes") {
+                    layer.msg("修改成功");
+                    $('#newName').val("");
+
+                } else if (data == "lose") {
+                    // layer.msg("手机号已被绑定")
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙')
+            }
+        })
+    }
 
 </script>
 <script>

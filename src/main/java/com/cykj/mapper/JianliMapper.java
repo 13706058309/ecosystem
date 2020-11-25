@@ -84,4 +84,7 @@ public interface JianliMapper {
 
 //    查看是否有投递过该岗位的简历
     public Delivery findDelivery(@Param("userId")int userId,@Param("pPostId")int pPostId);
+
+//    修改用户名
+    public int updateName(UserInfo userInfo);
 }

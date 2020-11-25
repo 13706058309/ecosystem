@@ -448,4 +448,8 @@
     <update id="updateHeadImgUrl" parameterType="com.cykj.entity.UserInfo">
         update userInfo set headImgUrl=#{headImgUrl} where userId=#{userId}
     </update>
+
+    <update id="updateName" parameterType="com.cykj.entity.UserInfo">
+        update userInfo set userName=#{userName} where userId=#{userId}
+    </update>
 </mapper>
