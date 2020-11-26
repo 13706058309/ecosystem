@@ -12,6 +12,9 @@
         select b.*,p.* from backUser b INNER JOIN parameter p ON b.stateId = p.paramId where account = #{account} and pwd = #{pwd}
     </select>
 
+    <select id="mesLog" parameterType="java.util.HashMap" resultMap="adminRes">
+        select u.*,p.paramName from userInfo u inner join parameter p on u.accStandID = p.paramId where telephone = #{phone}
+    </select>
 
 
     <select id="isRepeat" parameterType="java.lang.String" resultType="com.cykj.entity.UserInfo">
@@ -65,5 +68,15 @@
             <result property="paramType" column="paramType"></result>
         </association>
     </resultMap>
+
+
+    <select id="findPhone" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where telephone = #{phone}
+    </select>
+
+    <update id="changPasswordByPhone">
+        update userInfo set pwd = #{pwd} where telephone = #{phone}
+    </update>
+
 
 </mapper>

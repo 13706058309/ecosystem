@@ -6,7 +6,9 @@ import com.cykj.entity.UserInfo;
 //import com.cykj.log.Loger;
 import com.cykj.service.LoginService;
 import com.cykj.service.PowerService;
+import com.cykj.util.AliyunSmsUtils;
 import com.cykj.util.MD5Utils;
+import com.cykj.utils.PhoneCodeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +39,6 @@ public class LoginController {
     public String login() {
         return "Login";
     }
-
 
 
     //前端登录的动作
@@ -96,7 +97,6 @@ public class LoginController {
     String adlog(String account, String password, String sVCode, HttpServletRequest
             request) throws IOException {
         System.out.println("执行后端登录动作");
-        System.out.println("密码是:" + password);
         System.out.println("账号:" + account + ",密码:" + password + ",验证码:" + sVCode);
 
         String vCode = (String) request.getSession().getAttribute("vCode");
@@ -115,6 +115,47 @@ public class LoginController {
                     request.getSession().setAttribute("admin", backUser);
                     System.out.println("登录成功!");
                     return "success";
+                } else if (stateName.equals("待审核")) {
+//                    request.getSession().removeAttribute("qUser");
+                    System.out.println("此账号待审核!");
+                    return "noReviewed";
+                } else if (stateName.equals("审核不通过")) {
+//                    request.getSession().removeAttribute("qUser");
+                    System.out.println("此账号已被删除!");
+                    return "failedPass";
+                } else {
+//                    request.getSession().removeAttribute("qUser");
+                    System.out.println("登录失败!");
+                    return "failed";
+                }
+            }
+        } else {
+            System.out.println("验证码错误!");
+            return "vCodeError";
+        }
+    }
+
+    //短信登录
+    @RequestMapping("/mesLog")
+    public @ResponseBody
+    String mesLog(String phone,String code,HttpServletRequest request) {
+        System.out.println("执行短信验证登录!");
+        System.out.println("传过来的手机值为:"+phone+"验证码为:"+code);
+
+        String savePhone = (String) request.getSession().getAttribute("logPhone");
+        String saveCode = (String)request.getSession().getAttribute("logCode");
+
+        if (saveCode.equalsIgnoreCase(savePhone)) {
+            UserInfo userInfo = loginServiceImpl.mesLog(phone);
+            if (userInfo == null){
+                System.out.println("账号密码有误!");
+                return "0";
+            } else {
+                String stateName = userInfo.getStates().getParamName();
+                if (stateName.equals("启用")) {
+                    request.getSession().setAttribute("qUser", userInfo);
+                    System.out.println("登录成功!");
+                    return "0";
                 } else if (stateName.equals("禁用")) {
 //                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被禁用!");
@@ -130,10 +171,67 @@ public class LoginController {
                 }
             }
         } else {
-            System.out.println("验证码错误!");
-            return "vCodeError";
+            System.out.println("验证码错误");
+            return "1";
         }
     }
+
+    //发送短信验证码
+    @RequestMapping("/aliSend")
+    public @ResponseBody
+    String aliSend(String phone, HttpServletRequest request) {
+        UserInfo userInfo = loginServiceImpl.findPhone(phone);
+        if(userInfo==null) return "2";
+            String code = "";
+            for (int i = 0; i < 4; i++) {
+                int num = (int) (1 + Math.random() * 9);
+                code += num;
+            }
+            request.getSession().setAttribute("logPhone", phone);
+            request.getSession().setAttribute("logCode", code);
+            System.out.println("发送的验证码为:" + code);
+            String s = AliyunSmsUtils.sendCode(phone, code);
+            System.out.println(s);
+
+            return "1";
+        }
+
+        //修改密码发送验证码
+    @RequestMapping("/sendCode")
+    public @ResponseBody String sendCode(String phone,HttpServletRequest request){
+        UserInfo userInfo = loginServiceImpl.findPhone(phone);
+        if(userInfo==null) return "2";
+
+        String code = "";
+        for(int i=0;i<4;i++){
+            int num = (int)(1+Math.random()*9);
+            code += num;
+        }
+        System.out.println("code="+code);
+        request.getSession().setAttribute("phone",phone);
+        request.getSession().setAttribute("code",code);
+        String s = PhoneCodeUtil.sendCode(phone, code);
+        System.out.println(s);
+        return "1";
+    }
+
+        @RequestMapping("/findPass")
+        public @ResponseBody String findPass(String phone,String pwd,String vCode,HttpServletRequest request ){
+
+            String savePhone = (String) request.getSession().getAttribute("phone");
+            String saveCode = (String)request.getSession().getAttribute("code");
+            if(!phone.equals(savePhone)){
+                return "2";
+            }
+            if(!vCode.equals(saveCode)){
+                return "3";
+            }
+            int n = loginServiceImpl.changPasswordByPhone(pwd,phone);
+
+        return n>0?"1":"4";
+        }
+
+
 
     @RequestMapping(value = "/getCode")
 //    @Loger(operationName = "获取验证码")
@@ -142,7 +240,7 @@ public class LoginController {
         System.out.println("123");
         int width = 60;
         int height = 30;
-        String data = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghijklmnpqrstuvwxyz";    //随机字符字典，其中0，o，1，I 等难辨别的字符最好不要
+        String data = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghijkmnpqrstuvwxyz";    //随机字符字典，其中0，o，1，I 等难辨别的字符最好不要
         Random random = new Random();//随机类
         //1 创建图片数据缓存区域（核心类）
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);//创建一个彩色的图片
@@ -192,6 +290,11 @@ public class LoginController {
     }
 
 
+    //跳转注册页面
+    @RequestMapping("/reg")
+    public String reg(){
+        return "Register";
+    }
 
     //注册的动作
 //    @Loger(operationName = "执行前端注册")
@@ -221,7 +324,6 @@ public class LoginController {
     public String forget() {
         return "ForgetPass";
     }
-
 
 
     @RequestMapping("/adminMain")

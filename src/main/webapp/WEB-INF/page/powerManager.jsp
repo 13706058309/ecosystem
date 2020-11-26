@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>权限管理</title>
-    <script src="${pageContext.request.contextPath}/static/js/jquery-3.5.1.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/layui/layui.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" >
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/userManager.js"></script>
