@@ -145,6 +145,10 @@ public class LoginController {
         String savePhone = (String) request.getSession().getAttribute("logPhone");
         String saveCode = (String) request.getSession().getAttribute("logCode");
 
+        System.out.println("savePhone"+savePhone);
+        System.out.println("saveCode"+saveCode);
+
+
         if (!phone.equalsIgnoreCase(savePhone)) {
             System.out.println("手机号错误!");
             return "9";
@@ -158,6 +162,7 @@ public class LoginController {
 //            如果启用MD5解开即可
 //            UserInfo userInfo = loginServiceImpl.mesLog(MD5Utils.md5(phone));
             UserInfo userInfo= loginServiceImpl.mesLog(phone);
+            System.out.println("userInfo:"+userInfo.toString());
             if (userInfo == null){
                 System.out.println("登录失败！");
                 return "s";
@@ -168,45 +173,21 @@ public class LoginController {
                     request.getSession().setAttribute("qUser", userInfo);
                     System.out.println("登录成功!");
                     return "success";
+                } else if (stateName.equals("禁用")) {
+                    System.out.println("此账号已被禁用!");
+                    return "j";
+                } else if (stateName.equals("已删除")){
+                    System.out.println("此账号已被删除!");
+                    return "d";
+                } else {
+                   System.out.println("账号审核未通过，无法登录");
+                    return "f";
                 }
             }
         }
-
-
         return "";
     }
 
-
-
-//        if (saveCode.equalsIgnoreCase(savePhone)) {
-//            UserInfo userInfo = loginServiceImpl.mesLog(phone);
-//            if (userInfo == null){
-//                System.out.println("账号密码有误!");
-//                return "0";
-//            } else {
-//                String stateName = userInfo.getStates().getParamName();
-//                if (stateName.equals("启用")) {
-//                    request.getSession().setAttribute("qUser", userInfo);
-//                    System.out.println("登录成功!");
-//                    return "0";
-//                } else if (stateName.equals("禁用")) {
-////                    request.getSession().removeAttribute("qUser");
-//                    System.out.println("此账号已被禁用!");
-//                    return "disable";
-//                } else if (stateName.equals("已删除")) {
-////                    request.getSession().removeAttribute("qUser");
-//                    System.out.println("此账号已被删除!");
-//                    return "delete";
-//                } else {
-////                    request.getSession().removeAttribute("qUser");
-//                    System.out.println("账号审核未通过，无法登录");
-//                    return "auditFailed";
-//                }
-//            }
-//        } else {
-//            System.out.println("验证码错误");
-//            return "1";
-//        }
 
 
     //发送短信验证码

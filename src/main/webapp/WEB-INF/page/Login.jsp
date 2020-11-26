@@ -157,7 +157,8 @@
         // }
         var phone = $("#phone").val();
         var code = $("#acthCode").val();
-        // console.log(phone);
+        console.log(phone);
+        console.log(code);
         // alert(phone);
         // alert(code)
 
@@ -167,7 +168,6 @@
             type:'post',
             data:"phone=" + phone + "&code=" + code,
             dataType:'text',
-            contentType: 'text',
             beforeSend:function () {
                 if (code.length != 4){
                     alert("请输入四位验证码!");
@@ -183,6 +183,16 @@
             success:function (info) {
                 if(info == 'success'){
                     location.href = path + "/homePage/home";
+                } else if(info == 'j'){
+                    alert("此账号已被禁用!");
+                } else if (info=='d'){
+                    alert("此账号已被删除!");
+                } else if (info == 'f') {
+                    alert("账号审核未通过，无法登录!");
+                } else if (info=='8'){
+                    alert("验证码错误!");
+                } else if (info == '9'){
+                    alert("手机号错误!");
                 }
             }
         })
