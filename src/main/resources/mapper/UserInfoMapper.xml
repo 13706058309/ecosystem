@@ -31,10 +31,10 @@
     <result property="pwd" column="pwd"></result>
     <result property="telephone" column="telephone"></result>
     <result property="accStandId" column="accStandId"></result>
+    <result property="headImgUrl" column="headImgUrl"></result>
     <result property="address" column="address"></result>
     <result property="isOpen" column="isOpen"></result>
     <result property="regTime" column="regTime"></result>
-    <result property="headImgUrl" column="headImgUrl"></result>
     <association property="states"  javaType="com.cykj.entity.Parameter">
         <id property="paramId" column="paramId"></id>
         <result property="paramName" column="paramName"></result>

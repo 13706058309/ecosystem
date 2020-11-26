@@ -19,6 +19,7 @@ public class UserInfo {
   private long isOpen; // 是否公开
 
   private String headImgUrl; //用户头像路径
+
   private String regTime;//注册时间
 
   public UserInfo() {
