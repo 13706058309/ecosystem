@@ -36,7 +36,7 @@
 <input type="hidden" id="curr" value="${curr}">
 
 
-<div id="header" style="background-color: #0d98ff;height: 80px" >
+<div id="header" style="background-color:#00c2b3;height: 80px" >
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 

@@ -59,7 +59,7 @@
 <%--    </div>--%>
 
 
-<div id="header" style="background-color: #0d98ff;height: 80px" >
+<div id="header" style="background-color: #00c2b3;height: 80px" >
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
@@ -68,7 +68,7 @@
         <div class="nav" style="margin-top: 20px">
             <ul>
                 <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                 <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
                 <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
