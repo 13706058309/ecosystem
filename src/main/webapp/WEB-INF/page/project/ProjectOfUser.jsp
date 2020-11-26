@@ -156,7 +156,7 @@
             <ul class="header-top-left">
                 <%--                首页URL--%>
                 <li class="item-homeurl">
-                    <a><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>
+                    <a href="${pageContext.request.contextPath}/homePage/home"><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>
                 </li>
             </ul>
             <%--            用户信息，项目--%>

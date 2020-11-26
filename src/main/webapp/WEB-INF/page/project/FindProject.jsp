@@ -28,7 +28,7 @@
             <ul class="header-top-left">
 <%--                首页URL--%>
                 <li class="item-homeurl">
-                    <a><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>
+                    <a href="${pageContext.request.contextPath}/homePage/home"><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>
                 </li>
             </ul>
 <%--            用户信息，项目--%>
@@ -59,7 +59,7 @@
         <div class="page-main header-body-main">
             <%--                头部 logo--%>
             <div class="header-body-logotitle" style="vertical-align: middle">
-                <img src="${pageContext.request.contextPath}/style/images/logo.png" style="margin-left: 0px" width="150" height="60" alt="钱程无忧-关注你的钱程"/>
+                <img src="${pageContext.request.contextPath}/style/images/logo.png"  style="margin-left: 0px" width="150" height="60" alt="钱程无忧-关注你的钱程"/>
                 <i class="i1"></i>
                 <span style="font-size: 2em;font-family:'华文楷体';color:#44D0C7 ">找项目</span>
             </div>
