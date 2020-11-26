@@ -2,44 +2,40 @@
         <!DOCTYPE mapper
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cykj.mapper.BackLogMapper">
-        <select id="findLogOnPage" parameterType="java.util.Map" resultMap="adLogRes">
-        select l.*,u.bUserName from backLog l,backUser u where l.bUserID = u.bUserID and bUserName like concat('%',#{bUserName},'%')
-        <if test="beginTime != null">
-                and operaTime >= #{beginTime}
-        </if>
-                <if test="endTime != null">
+<mapper namespace="com.cykj.log.LogMapper">
+        <select id="findLogOnPage" parameterType="java.util.Map" resultMap="resultsHash">
+                select b.*, u.bUserName from backLog b, backUser u where b.bUserId = u.bUserId and bUserName like concat('%',#{bUserName},'%')
+                <if test="startTime!=null">
+                        and operaTime >= #{startTime}
+                </if>
+                <if test="endTime!=null">
                         and operaTime &lt;= #{endTime}
                 </if>
-        order by bUserID desc limit #{offset}, #{limit}
+                order by operaTime desc limit #{offset}, #{limit}
         </select>
-
-
-        <resultMap id="adLogRes" type="com.cykj.entity.BackLog">
+        <resultMap id="resultsHash" type="com.cykj.entity.BackLog">
                 <id property="bLogId" column="bLogId"></id>
-                <result property="bUserID" column="bUserID"></result>
+                <result property="bUserId" column="bUserId"></result>
                 <result property="operaTime" column="operaTime"></result>
                 <result property="matter" column="matter"></result>
-                <association property="backUser" column="" javaType="com.cykj.entity.BackLog">
-                <id property="bUserID" column="bUserID"></id>
-                <result property="bUserName" column="bUserName"></result>
+                <association property="backUser" column="bUserId" javaType="com.cykj.entity.BackUser">
+                        <id property="bUserId" column="bUserId"></id>
+                        <result property="bUserName" column="bUserName"></result>
                 </association>
+
         </resultMap>
 
-
-        <select id="findLogNum" resultType="java.lang.Integer">
-                select count(*) from backLog l,backUser u where l.bUserID = u.bUserID and bUserName like concat('%',#{bUserName},'%')
-                <if test="beginTime != null">
-                        and operaTime >= #{beginTime}
+        <select id="findLogNum" parameterType="java.util.Map" resultType="int">
+                select count(*) from backLog b,backUser u where b.bUserId = u.bUserId  and bUserName like concat('%',#{bUserName},'%')
+                <if test="startTime!=null">
+                        and operaTime >= #{startTime}
                 </if>
-                <if test="endTime != null">
+                <if test="endTime!=null">
                         and operaTime &lt;= #{endTime}
                 </if>
         </select>
 
-
-
-        <insert id="addBackLog"  parameterType="com.cykj.entity.BackLog">
-            insert into backLog(bUserID,matter) value (#{bUserID},#{matter})
+        <insert id="addLog" parameterType="com.cykj.entity.BackLog">
+            insert into backLog (bUserId,matter) values (#{bUserId},#{matter})
         </insert>
 </mapper>

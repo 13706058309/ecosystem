@@ -42,12 +42,44 @@ public class HomePageController {
         List<Industry> industry = homePageService.findIndustry();
         request.setAttribute("industry",industry);
 //        热门企业
+
         System.err.println("当前城市" + city);
         if (city!=null) {
             city = city.trim();
             List<BackUser> homeCompany = homePageService.CompanyCity(city);
             request.setAttribute("homeCompany", homeCompany);
 //        最新岗位
+
+            List<PostPosition> postList = homePageService.postList(city);
+            request.setAttribute("postList", postList);
+        }
+//        是否登入成功
+        UserInfo qUser = (UserInfo) request.getSession().getAttribute("qUser");
+        if(qUser!=null){
+            System.out.println(qUser.getUserName());
+        }
+        request.setAttribute("qUser",qUser);
+
+        return "HomePage";
+    }
+
+    @RequestMapping("/homes")
+    public String homes(HttpServletRequest request,String city){
+//城市集合
+        List<City> cityList = homePageService.cityList();
+        request.setAttribute("cityList",cityList);
+//        三级菜单 第一层 的集合
+        List<Industry> industry = homePageService.findIndustry();
+        request.setAttribute("industry",industry);
+//        热门企业
+        request.setAttribute("flag",city);
+        System.err.println("当前城市" + city);
+        if (city!=null) {
+            city = city.trim();
+            List<BackUser> homeCompany = homePageService.CompanyCity(city);
+            request.setAttribute("homeCompany", homeCompany);
+//        最新岗位
+
             List<PostPosition> postList = homePageService.postList(city);
             request.setAttribute("postList", postList);
         }
@@ -121,6 +153,14 @@ public class HomePageController {
         request.setAttribute("chooseFinan",chooseFinan);
         request.setAttribute("chooseScale",chooseScale);
         request.setAttribute("curr",(n-1)*li);
+
+        //        是否登入成功
+        UserInfo qUser = (UserInfo) request.getSession().getAttribute("qUser");
+        if(qUser!=null){
+            System.out.println(qUser.getUserName());
+        }
+        request.setAttribute("qUser",qUser);
+
         return "Companylist";
     }
 

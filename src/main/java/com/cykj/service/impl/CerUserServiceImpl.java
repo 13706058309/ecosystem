@@ -43,5 +43,14 @@ public class CerUserServiceImpl implements CerUserService {
         return cerUserMapper.findceruserlistsize(map);
     }
 
+    /**
+     * @param cerUser
+     * @return 增加已获得证书
+     */
+    @Override
+    public int insertCerUser(CerUser cerUser) {
+        return cerUserMapper.insertCerUser(cerUser);
+    }
+
 
 }

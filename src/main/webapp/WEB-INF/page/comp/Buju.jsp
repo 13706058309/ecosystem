@@ -442,10 +442,10 @@
             type:"post",
             beforeSend:function(){
                 if (photos.length === 0) return false;
-                if(photos.length>=20){
-                    layer.alert("logo名字长度不能超过20");
-                    return false;
-                }
+                // if(photos.length>=20){
+                //     layer.alert("logo名字长度不能超过20");
+                //     return false;
+                // }
                 return true;
 
             },
