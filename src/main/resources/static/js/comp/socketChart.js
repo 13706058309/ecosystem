@@ -96,6 +96,32 @@ $('.sendBtn').on('click',function(){
 
 })
 
+$('.ExP').on('mouseenter',function(){
+    $('.emjon').show();
+})
+
+$('.emjon').on('mouseleave',function(){
+    $('.emjon').hide();
+})
+
+$('.emjon li').on('click',function(){
+    var imgSrc=$(this).children('img').attr('src');
+    var str="";
+    str+='<li>'+
+        '<div class="nesHead"><img src="'+ctx+'/uploadLogo'+photo+'"/></div>'+
+        '<div class="news"><img class="jiao" src="'+ctx+'/chat/img/you.jpg"><img class="Expr" src="'+imgSrc+'"></div>'+
+        '</li>';
+    $('.newsList').append(str);
+    $('.emjon').hide();
+    $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
+    websocket.send(JSON.stringify({
+        "type": 1,
+        "tarUser": $("#userID").val(),
+        "srcUser": $("#compID").val(),
+        "message": '<img class="Expr" src="'+imgSrc+'" style="width: 100%;height: 100%">',
+    }));
+});
+
 //监听点击用户
 $("body").on("click", ".hz-group-list", function () {
     $(".hz-group-list").css("background-color", "");

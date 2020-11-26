@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.UserMapper">
+
+    <select id="findMenusByPid" parameterType="java.lang.Integer" resultType="com.cykj.entity.Menu">
+
+        select * from menu where pId=#{pId}
+    </select>
+
+    <select id="findUser" resultType="com.cykj.entity.FrontUser">
+       select * from userInfo
+   </select>
+
+    <update id="changeUserState">
+        update userInfo u,parameter p set accStandId=#{accStandId} where u.userId=p.paramId  and userId=#{userId}
+    </update>
+
+    <update id="deleteUser">
+      update userInfo u,parameter p  set accStandId=#{accStandId} where u.userId=p.paramId and userId=#{userId}
+    </update>
+
+    <select id="findBackUser" resultType="com.cykj.entity.BackUser">
+       select * from backUser
+   </select>
+
+    <update id="changeBackUserState">
+        update backUser b,parameter p set stateId=#{stateId} where b.bUserId=p.paramId and bUserId=#{bUserId}
+    </update>
+
+    <update id="changeEnterpriseState">
+        update backUser b,parameter p set stateId=#{stateId} where b.bUserId=p.paramId and bUserId=#{bUserId}
+    </update>
+
+    <update id="resetPassword">
+       update  backUser set pwd=#{pwd} where bUserId=#{bUserId}
+    </update>
+
+    <update id="deleteBackUser">
+       update  backUser b,parameter p set stateId=#{stateId} where b.bUserId=p.paramId and bUserId=#{bUserId}
+    </update>
+
+    <select id="enterprise" resultType="com.cykj.entity.BackUser">
+       select * from backUser
+   </select>
+
+
+    <select id="findUserOnPage" parameterType="java.util.HashMap" resultMap="results">
+        select u.*,p.paramName from userInfo u,parameter p where u.userId=p.paramId and userName like
+        concat('%',#{userName},'%')
+        <if test="accStandId!=null">
+            and accStandId = #{accStandId}
+        </if>
+        limit #{offset}, #{limit}
+    </select>
+    <resultMap id="results" type="com.cykj.entity.FrontUser">
+        <id property="userId" column="userId"></id>
+        <result property="userName" column="userName"></result>
+        <result property="telephone" column="telephone"></result>
+        <result property="address" column="address"></result>
+        <result property="accStandId" column="accStandId"></result>
+    </resultMap>
+    <!--新用户信息带条件查询后的总量-->
+    <select id="findNumOnPage" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from userInfo where 1=1 and userName like concat('%',#{userName},'%')
+        <if test="accStandId!=null">
+            and accStandId = #{accStandId}
+        </if>
+    </select>
+
+    <insert id="reg" parameterType="com.cykj.entity.BackUser" useGeneratedKeys="true">
+        insert into backUser(bUserName,account,pwd,contactInfo,roleId,stateId) values (#{bUserName},#{account},#{pwd},#{contactInfo},#{roleId},#{stateId})
+    </insert>
+
+    <insert id="addSchool" parameterType="com.cykj.entity.BackUser" useGeneratedKeys="true">
+        insert into backUser(bUserName,account,pwd,contactInfo,address,infoIntr,email,roleId,stateId,compName,coreValue) values (#{bUserName},#{account},#{pwd},#{contactInfo},#{address},#{infoIntr},#{email},#{roleId},#{stateId},#{compName},#{coreValue})
+    </insert>
+
+    <select id="backFindsUserOnPage" parameterType="java.util.HashMap" resultMap="result">
+        select b.*,r.roleName from backUser b,parameter p,roleInfo r where b.roleId=r.roleId and p.paramId=b.roleId and bUserName like concat('%',#{bUserName},'%')
+        <if test="stateId!=null">
+            and stateId = #{stateId}
+        </if>
+        <if test="type!=null">
+            and r.roleName = #{type}
+        </if>
+        limit #{offset}, #{limit}
+    </select>
+    <resultMap id="result" type="com.cykj.entity.BackUser">
+        <id property="bUserId" column="bUserId"></id>
+        <result property="bUserName" column="bUserName"></result>
+        <result property="account" column="account"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="roleId" column="roleId"></result>
+        <result property="stateId" column="stateId"></result>
+        <association property="roleInfo" column="roleId" javaType="com.cykj.entity.RoleInfo">
+            <id property="roleId" column="roleId"></id>
+            <result property="roleName" column="roleName"></result>
+        </association>
+    </resultMap>
+    <!--后台管理员信息带条件查询后的总量-->
+    <select id="backFindsNumOnPage" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from backUser b,roleInfo r  where b.roleId=r.roleId and bUserName like concat('%',#{bUserName},'%')
+        <if test="stateId!=null">
+            and stateId = #{stateId}
+        </if>
+    </select>
+
+
+    <select id="compNameFindsUserOnPage" parameterType="java.util.HashMap" resultMap="resulting">
+        select * from backUser where compName like concat('%',#{compName},'%')
+        <if test="stateId!=null">
+            and stateId = #{stateId}
+        </if>
+        order by bRegTime desc limit #{offset}, #{limit}
+    </select>
+    <resultMap id="resulting" type="com.cykj.entity.BackUser">
+        <id property="bUserId" column="bUserId"></id>
+        <result property="compName" column="compName"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <!--        <result property="bRegTime" column="bRegTime"></result>-->
+        <result property="stateId" column="stateId"></result>
+    </resultMap>
+    <!--企业信息带条件查询后的总量-->
+    <select id="compNameFindsNumOnPage" parameterType="java.util.HashMap" resultType="Integer">
+        select count(*) from backUser where 1=1 and compName like concat('%',#{compName},'%')
+        <if test="stateId!=null">
+            and stateId = #{stateId}
+        </if>
+    </select>
+
+    <select id="register" parameterType="java.lang.String" resultType="com.cykj.entity.BackUser">
+        select * from backUser where account = #{account}
+    </select>
+
+    <select id="getAll" resultType="com.cykj.entity.RoleInfo">
+        select * from roleInfo
+    </select>
+
+    <select id="findRole" resultType="com.cykj.entity.RoleInfo">
+        select * from roleInfo where roleId != 1;
+    </select>
+
+    <select id="query" parameterType="java.lang.String" resultType="com.cykj.entity.BackUser">
+        select * from backUser where contactInfo = #{contactInfo}
+    </select>
+
+
+    <select id="findByID" parameterType="int" resultType="com.cykj.entity.BackUser">
+        select * from backUser where bUserId = #{bUserId}
+    </select>
+
+</mapper>

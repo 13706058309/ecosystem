@@ -366,7 +366,7 @@
 <%--                                                            <em class="vline"></em>技术总监--%>
                                                         </h3>
                                                     </div></a>
-                                                    <button class="btn btn-startchat" href="javascript:;"
+                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('/springboot/rec/userChat?compID=${job.backUser.bUserId}')"
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
                                                         <img class="icon-chat icon-chat-hover"
