@@ -80,6 +80,9 @@ public class BackLog {
     this.matter = matter;
   }
 
+  public void setOperaTime(String operaTime) {
+    this.operaTime = operaTime;
+  }
 
   @Override
   public String toString() {
@@ -88,7 +91,7 @@ public class BackLog {
             ", bUserID=" + bUserId +
             ", backUser=" + backUser +
             ", operaTime='" + operaTime + '\'' +
-            ", matter='" + matter + '\'' +
+            ", matter='" + matter + '\'' + '\'' +
             '}';
   }
 }

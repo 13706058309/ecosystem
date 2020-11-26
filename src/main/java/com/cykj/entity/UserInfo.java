@@ -15,12 +15,12 @@ public class UserInfo {
   private String telephone; //手机号码
   private long accStandId; // 账号状态
   private Parameter states; //用户状态
-  private long jobStandId; //就业状态
-
   private String address; //地址
   private long isOpen; // 是否公开
+
+  private String headImgUrl; //用户头像路径
+
   private String regTime;//注册时间
-  private String headImgUrl;
 
   public UserInfo() {
 
@@ -84,7 +84,6 @@ public class UserInfo {
             ", telephone='" + telephone + '\'' +
             ", accStandId=" + accStandId +
             ", states=" + states +
-            ", jobStandId=" + jobStandId +
             ", address='" + address + '\'' +
             ", isOpen=" + isOpen +
             ", regTime='" + regTime + '\'' +
@@ -105,9 +104,6 @@ public class UserInfo {
   }
 
 
-  public long getJobStandId() {
-    return jobStandId;
-  }
 
 
 
@@ -127,9 +123,6 @@ public class UserInfo {
   public void setIsOpen(long isOpen) {
     this.isOpen = isOpen;
   }
-
-
-
 
   public Parameter getStates() {
     return states;

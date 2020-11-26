@@ -4,4 +4,131 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.UserProjectMapper">
 
+    <insert id="addUserProject" parameterType="com.cykj.entity.UserProject">
+        insert into userProject (userId, projectId, payMoney, orderNum)
+        values (#{userId}, #{projectId}, #{payMoney}, #{orderNum})
+    </insert>
+
+    <select id="findUserProjectByPage" resultMap="userProjectMap">
+        select uP.*,bU.*,p.*,pI.*,pIP.paramId pIPId,pIP.paramName pIPName,pIP.paramType pIPType from userProject uP
+        left join userInfo uI on uP.userId=uI.userId
+        LEFT JOIN projectInfo pI on uP.projectId = pI.projectId
+        left join backUser bU on bU.bUserId=pI.bUserId
+        left join parameter p on uP.paramId = p.paramId
+        left join parameter pIP on  pIP.paramId=pI.states
+        WHERE 1=1
+        <if test="condition.userId !=null">
+            and uP.userId=#{condition.userId}
+        </if>
+        <if test="condition.orderNum !=null">
+            and uP.orderNum=#{condition.orderNum}
+        </if>
+        <if test="condition.stateId !=null">
+            and uP.paramId=#{condition.stateId}
+        </if>
+        order by appTime desc
+        limit #{page},#{limit}
+    </select>
+
+    <select id="findUserProjectRecord" resultType="Integer">
+        select count(*) from userProject uP where 1=1
+        <if test="condition.userId !=null">
+            and uP.userId=#{condition.userId}
+        </if>
+        <if test="condition.orderNum !=null">
+            and uP.orderNum=#{condition.orderNum}
+        </if>
+        <if test="condition.stateId !=null">
+            and uP.paramId=#{condition.stateId}
+        </if>
+    </select>
+
+    <update id="changeState" parameterType="com.cykj.entity.UserProject">
+        update userProject
+        <set>
+            paramId=#{paramId}
+        </set>
+        where 1=1
+        <if test="orderNum!=null">
+            and orderNum = #{orderNum}
+        </if>
+        <if test="id!=null and id>0">
+            and id = #{id}
+        </if>
+    </update>
+
+    <update id="updateUserProject" parameterType="com.cykj.entity.UserProject">
+        update userProject
+        <set>
+            <if test="orderNum != null">
+                userId = #{userId},
+            </if>
+            <if test="stateId != null and stateId>0">
+                states = #{stateId},
+            </if>
+        </set>
+        where projectId = #{projectId}
+    </update>
+
+
+
+    <select id="findUserProjectAll" parameterType="com.cykj.entity.UserProject" resultMap="userProjectMap">
+        select uP.*,bU.*,p.*,pI.*,pIP.paramId pIPId,pIP.paramName pIPName,pIP.paramType pIPType from userProject uP
+        left join userInfo uI on uP.userId=uI.userId
+        LEFT JOIN projectInfo pI on uP.projectId = pI.projectId
+        left join backUser bU on bU.bUserId=pI.bUserId
+        left join parameter p on uP.paramId = p.paramId
+        left join parameter pIP on  pIP.paramId=pI.states
+        WHERE 1=1
+        <if test="id !=null and id>0">
+            and uP.id=#{id}
+        </if>
+        <if test="userId !=null and userId>0">
+            and uP.userId=#{userId}
+        </if>
+        <if test="orderNum !=null ">
+            and  uP.orderNum=#{orderNum}
+        </if>
+
+        <if test="projectId !=null and projectId>0">
+           and  uP.projectId=#{projectId}
+        </if>
+
+    </select>
+
+    <resultMap id="userProjectMap" type="com.cykj.entity.UserProject">
+        <id property="id" column="id"></id>
+        <result property="orderNum" column="orderNum"></result>
+        <result property="payMoney" column="payMoney"></result>
+        <result property="appTime" column="appTime"></result>
+        <association property="projectInfo" javaType="com.cykj.entity.ProjectInfo">
+            <id property="projectId" column="projectId"></id>
+            <result property="bUserId" column="bUserID"></result>
+            <result property="projectName" column="projectName"></result>
+            <result property="projectSynopsis" column="projectSynopsis"></result>
+            <result property="projectCondition" column="projectCondition"></result>
+            <result property="money" column="money"></result>
+            <result property="docUrl" column="docUrl"></result>
+            <result property="publishTime" column="publishTime"></result>
+            <result property="pOrderNum" column="pOrderNum"></result>
+            <result property="projectId" column="projectId"></result>
+            <association property="backUser" javaType="com.cykj.entity.BackUser">
+                <id property="bUserId" column="bUserID"></id>
+                <result property="bUserName" column="bUserName"></result>
+                <result property="compName" column="compName"></result>
+                <result property="contactInfo" column="contactInfo"></result>
+            </association>
+            <association property="states" javaType="com.cykj.entity.Parameter">
+                <id property="paramId" column="pIPId"></id>
+                <result property="paramName" column="pIPName"></result>
+                <result property="paramType" column="pIPName"></result>
+            </association>
+        </association>
+        <association property="states" javaType="com.cykj.entity.Parameter">
+            <id property="paramId" column="paramId"></id>
+            <result property="paramName" column="paramName"></result>
+            <result property="paramType" column="paramType"></result>
+        </association>
+    </resultMap>
+
 </mapper>

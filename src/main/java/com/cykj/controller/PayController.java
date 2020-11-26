@@ -19,7 +19,6 @@ public class PayController {
     @RequestMapping("/notifyUrl")
     public void notifyUrl(HttpServletRequest request)throws Exception{
         alipayService.notifyUrl(request);
-
     }
 
     //支付成功后同步回调，用于展示给用户查看

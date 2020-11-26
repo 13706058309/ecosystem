@@ -1,0 +1,170 @@
+.nav_left{
+    display: inline-block;
+    margin: 20px;
+}
+.nav_head{
+    display: inline-block;
+    width: 800px;
+}
+.nav_head>div,.nav_body>div{
+    display: inline-block;
+    margin: 10px;
+    padding: 3px 5px;
+    cursor:pointer
+}
+.nav_body{
+    display: inline-block;
+    width: 800px;
+}
+.nav_body>div{
+    display: inline-block;
+}
+.sortul>div:hover{
+    color: #fff;
+    background: none repeat scroll 0 0 #3eb0e0;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+.courseulr li{
+    height: auto;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+/*------------------课程页面样式start-----------------*/
+.floatL{
+    float: left;
+}
+.floatR{
+    float: right;
+}
+.overText{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.courseDiv{
+    width: 100%;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    -moz-box-shadow: 1px 5px 10px rgba(215, 215, 215, 0.349019607843137);
+    -webkit-box-shadow: 1px 5px 10px rgba(215, 215, 215, 0.349019607843137);
+    box-shadow: 1px 5px 10px rgba(215, 215, 215, 0.349019607843137);
+    overflow: hidden;
+}
+.courseDetail{
+    width: 335px;
+    height: 270px;
+    margin: 15px;
+    /*background-color: #E6E6E6;*/
+}
+.courseName{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    color: #E74434;
+}
+.courseDescribe{
+    font-size: 14px;
+    color: #797979;
+    line-height: 16px;
+}
+.courseInfo{
+    color: #797979;
+    margin: 20px 0;
+    line-height: 20px;
+    height: 20px;
+}
+.courseInfo>span{
+    float: left;
+    margin-right: 30px;
+    line-height: 20px;
+    height: 20px;
+    display: block;
+    font-size: 14px
+}
+.courseInfo img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}
+.div_group{
+    height: 821px;
+    margin-top: 0;
+}
+.videoDescribe{
+    top: 180px;
+}
+.ui-pagination-container .ui-pagination-page-item:hover{
+    border-color: rgba(231, 68, 52, 1);
+    color: rgba(231, 68, 52, 1);
+}
+.ui-pagination-container .ui-pagination-page-item.active{
+    background: rgba(231, 68, 52, 1);
+    border-color: rgba(231, 68, 52, 1);
+    color: white;
+}
+.hr1{ height:1px;border:none;border-top:1px solid #F0F0F0;}
+
+
+.safe_width {
+    width: 1100px;
+    margin: 10px auto;
+}
+
+/*****************未登录时登录注册按钮******************/
+.tkbtn {
+    display: inline-block;
+    width: 60px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: url(http://cymooc.org:80/common/images/btn1.png) no-repeat;
+    font-size: 14px;
+}
+
+.tkbtn:link,.tkbtn:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+.tkbtn:hover {
+    color: #fff;
+    background: url(http://cymooc.org:80/common/images/btn_hover1.png) no-repeat;
+}
+
+.tkbtn.tklog {
+    background-position: 0px 0px;
+    float: left;
+}
+
+.tkbtn.tkreg {
+    background-position: -0.87px -44px;
+    float: right;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #A9A9A9;
+}
+.navbar .nav > li .dropdown-menu {
+    margin: 0;
+}
+.navbar .nav > li:hover .dropdown-menu {
+    display: block;
+}
+ul.dropdown-menu {
+    top:30px;
+    left:-112px;
+    background:#fff;
+    border: none;
+}
+.dropdown-menu > li > a {
+    padding: 7px 20px;
+    color: gray;
+    letter-spacing: 1px;
+}
+.dropdown-menu > li > a:hover {
+    background-color:#F0F0F0;
+}

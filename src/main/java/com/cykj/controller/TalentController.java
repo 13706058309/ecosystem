@@ -43,7 +43,104 @@ import java.util.*;
 public class TalentController {
     @Resource
     private TalentService talentService;
+    @RequestMapping("/addIndustry")
+    public @ResponseBody String  addIndustry(HttpServletRequest request){
+        String industryName=request.getParameter("industryName");
+        if(talentService.lookIndustry(industryName)){
+            int a= talentService.addIndustry(industryName);
+            if(a>0){
+                return  "添加行业成功";
+            }else{
+                return  "添加行业失败";
+            }
+        }else{
+            return  "行业重复";
+        }
 
+
+    }
+    @RequestMapping("/addDepart")
+    public @ResponseBody String  addDepart(HttpServletRequest request){
+        String departName=request.getParameter("departName");
+        Long industryId=Long.parseLong(request.getParameter("industryId"));
+        if(talentService.lookDepart(departName)){
+            int a= talentService.addDepart(departName,industryId);
+            if(a>0){
+                return  "添加部门成功";
+            }else{
+                return  "添加部门失败";
+            }
+        }else{
+            return  "部门重复";
+        }
+
+
+    }
+    @RequestMapping("/addPosition")
+    public @ResponseBody String  addPosition(HttpServletRequest request){
+        String postName=request.getParameter("postName");
+        Long departId=Long.parseLong(request.getParameter("departId"));
+        if(talentService.lookPosition(postName)){
+            int a= talentService.addPosition(postName,departId);
+            if(a>0){
+                return  "添加岗位成功";
+            }else{
+                return  "添加岗位失败";
+            }
+        }else{
+            return  "岗位类型重复";
+        }
+
+
+    }
+    @RequestMapping("/changePosition")
+    public @ResponseBody String changePosition(HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
+        String postName=request.getParameter("postName");
+        Long postID=Long.parseLong(request.getParameter("postID"));
+        if(talentService.lookPosition(postName)) {
+            map.put("postID", postID);
+            map.put("postName", postName);
+            return talentService.changePosition(map);
+        }else{
+            return  "岗位类型重复";
+        }
+    }
+    @RequestMapping("/selectPosition")
+    public void selectPosition(HttpServletResponse response,HttpServletRequest request) throws IOException {
+
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        String postName = request.getParameter("postName");
+        String industryName = request.getParameter("industryName");
+        String departName = request.getParameter("departName");
+        Map<String,Object> map = new HashMap<>();
+        if(postName!=null&&postName.length()!=0){
+            map.put("postName",postName);
+        }
+        if(industryName!=null&&industryName.length()!=0){
+            map.put("industryName",industryName);
+        }
+        if(departName!=null&&departName.length()!=0){
+            map.put("departName",departName);
+        }
+
+        List<Positions> talents=talentService.selectPosition(map,limit,page);
+
+        TableInfo tableInfo=new TableInfo();
+        int records = talentService.selectPositionRecords(map);
+        tableInfo.setCode(0);
+        tableInfo.setCount(records);
+        tableInfo.setMsg("列表数据信息");
+        tableInfo.setData(talents);
+        String message=new Gson().toJson(tableInfo);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out=response.getWriter();
+        out.write(message);
+        out.flush();
+        out.close();
+
+    }
     @RequestMapping("/upload")
     public @ResponseBody  String upload(MultipartFile upload, HttpServletRequest request, HttpServletResponse response) throws IOException {
 //            String path = request.getSession().getServletContext().getRealPath("/upload");
@@ -95,7 +192,7 @@ public class TalentController {
                         String birthday = row.getCell(2).getStringCellValue();
 
                         //取到每一行第四个单元格的数据
-                        String contactInfo = String.valueOf((long)row.getCell(3).getNumericCellValue());
+                        String contactInfo = row.getCell(3).getStringCellValue();
 
                         //取到每一行第五个单元格的数据
                         String profession = row.getCell(4).getStringCellValue();
@@ -115,31 +212,77 @@ public class TalentController {
                         String certificate = row.getCell(10).getStringCellValue();
 
 
-//                        //取到每一行第九个单元格的数据
-//                        int smax = (int)row.getCell(8).getNumericCellValue();
-//
-//                        //取到每一行第十个个单元格的数据
-//                        int srole = (int)row.getCell(9).getNumericCellValue();
+
                         if (talentName.equals("")||school.equals("")||birthday.equals("")||profession.equals("")||politicalStatus.equals("")||education.equals("")
                             ||contactInfo.equals("")||address.equals("")||workExp.equals("")||certificate.equals("")||selfEva.equals("")){
-                        return "表格填写不完整";
+                        return "填写不完整";
+
                     }
-                        if(talentService.findTalent(talentName)){
+                        if (contactInfo.length()!=11){
+                            return "联系方式有误";
+
+                        }
+                        if (talentName.length()>4){
+                            return "名字太长了";
+
+                        }
+                        if (school.length()>12){
+                            return "学校名称太长了";
+
+                        }
+                        if (birthday.length()>20){
+                            return "出生年月限制20字";
+
+                        }
+                        if (profession.length()>10){
+                            return "专业限制10字";
+
+                        }
+                        if (politicalStatus.length()>5){
+                            return "政治面貌限制5字";
+
+                        }
+                        if (education.length()>4){
+                            return "学历限制10字";
+
+                        }
+                        if (address.length()>50){
+                            return "地址限制50字";
+
+                        }
+                        if (workExp.length()>50){
+                            return "工作经验限制50字";
+
+                        }
+                        if (certificate.length()>100){
+                            return "技能证书限制100字";
+
+                        }
+                        if (selfEva.length()>500){
+                            return "自我评价限制500字";
+
+                        }
+
+
+
+                        if(talentService.findTalent(contactInfo)){
                         Talent talent = new Talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva);
                          int a= talentService.addTalent(talent);
                             if(a>0){
                                 if(i==sum){
-                                    return "导入成功";
+                                    return "成功导入"+i+"个人才";
                                 }
 
                             }else{
                                 return"导入失败";
                             }
                         }else{
-                            return"简历重复";
+                            return"人才重复";
                         }
 
                     }
+        return "填写不完整";
+    }
 
 
 
@@ -173,8 +316,6 @@ public class TalentController {
 //                        return"简历重复";
 //                    }
 //            }
-             return "";
-    }
 
     public String readWord(String path) {
         String buffer = "";
@@ -252,6 +393,11 @@ public class TalentController {
 
         return talentService.changeSchoolInfo(map);
 
+    }
+    @RequestMapping("/positionManage")
+    public String positionManage(HttpServletRequest request) throws UnsupportedEncodingException {
+
+        return "positionManage";
     }
 
     @RequestMapping("/positionList")

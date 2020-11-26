@@ -6,6 +6,7 @@ import com.cykj.service.CerRecordService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -154,5 +155,41 @@ public class CerRecordServiceImpl implements CerRecordService {
     @Override
     public int findcerPSlistsize(Map<String, Object> findmap) {
         return cerRecordMapper.findcerPSlistsize(findmap);
+    }
+
+    /**
+     * 查询记录分页
+     *
+     * @param page
+     * @param limit
+     */
+    @Override
+    public List<CerRecord> allPage(String page, String limit) {
+        Map map = new HashMap<String,String>();
+        map.put("page",page);
+        map.put("limit",limit);
+        return cerRecordMapper.allPage(map);
+    }
+
+    /**
+     * 修改审核状态
+     *
+     * @param map
+     */
+    @Override
+    public int upSta(Map<String, Object> map) {
+        int result = cerRecordMapper.upSta(map);
+        return result;
+    }
+
+    /**
+     * 搜索
+     *
+     * @param map
+     */
+    @Override
+    public int search(Map<String, Object> map) {
+        int n = cerRecordMapper.search(map);
+        return n;
     }
 }

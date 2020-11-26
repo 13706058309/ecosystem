@@ -113,4 +113,19 @@ public interface CerRecordService {
      * @return 后台评审证书项目集合列表长度
      */
     public  int findcerPSlistsize(Map<String, Object> findmap);
+
+    /**
+     * 查询记录分页
+     */
+    public List<CerRecord> allPage(String page, String limit);
+
+    /**
+     * 修改审核状态
+     */
+    int upSta(Map<String,Object> map);
+
+    /**
+     * 搜索
+     */
+    int search(Map<String,Object> map);
 }

@@ -1,6 +1,8 @@
 package com.cykj.controller;
 
+//import com.cykj.log.Loger;
 import com.cykj.service.BackCompService;
+import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
