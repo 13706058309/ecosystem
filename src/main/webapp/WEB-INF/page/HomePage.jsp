@@ -95,9 +95,9 @@
                             <div>
                                     ${qUser.userName}
                             </div>
-                            <div style="margin: 100px;margin: -40px -50px;">
-                                <img src="../style/images/logo.png" width="50px" height="50px"/>
-                            </div>
+<%--                            <div style="margin: 100px;margin: -40px -50px;">--%>
+<%--                                <img src="../style/images/logo.png" width="50px" height="50px"/>--%>
+<%--                            </div>--%>
                         </div>
                     </div>
                     <div style="margin: 35px 230px;width: 200px;">
@@ -114,7 +114,6 @@
     </div><!-- end #header -->
 
     <%-----------------------------------------------------------------------------------------搜索框--%>
-
 
     <div class="content" style="margin-bottom: 20px;margin-left: 23%">
         <div id="search_box">
@@ -156,7 +155,6 @@
         </div>
     </div>
 
-
     <%-------------------------------------------------------------------------------轮播图--%>
     <div class="content">
         <script type="text/javascript" src="../style/js/search.min.js"></script>
@@ -167,46 +165,38 @@
             }
         </style>
         <div id="home_banner">
-            <ul class="banner_bg">
-                <li class="banner_bg_1 current">
-                    <a href="h/subject/s_buyfundation.html?utm_source=DH__lagou&utm_medium=banner&utm_campaign=haomai"
-                       target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="646"
-                                            height="160" alt="好买基金——来了就给100万"/></a>
+            <ul class="banner_bg" style="height: 1020px; margin-top: 0px;">
+                <li class="banner_bg_1 current" style="height: 340px" >
+                    <a target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="646" height="340" /></a>
                 </li>
-                <li class="banner_bg_2">
-                    <a href="h/subject/s_worldcup.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=wc"
-                       target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="646"
-                                            height="160" alt="世界杯放假看球，老板我也要！"/></a>
+                <li class="banner_bg_2" style="height: 340px" >
+                    <a target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="646" height="340" ></a>
                 </li>
-                <li class="banner_bg_3">
-                    <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
-                       target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
-                                            height="160" alt="出北京记——第一站厦门"/></a>
+                <li class="banner_bg_3" style="height: 340px" >
+                    <a target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646" height="340" /></a>
                 </li>
             </ul>
-            <%-----------------------------------------------------------------------企业小方块--%>
+
             <div class="banner_control">
                 <em></em>
                 <ul class="thumbs">
                     <li class="thumbs_1 current">
                         <i></i>
-                        <img src="../style/images/4469b1b83b1f46c7adec255c4b1e4802.jpg" width="113" height="42"/>
+                        <img src="../style/images/4469b1b83b1f46c7adec255c4b1e4802.jpg" width="113" height="65"/>
                     </li>
                     <li class="thumbs_2">
                         <i></i>
-                        <img src="../style/images/381b343557774270a508206b3a725f39.jpg" width="113" height="42"/>
+                        <img src="../style/images/381b343557774270a508206b3a725f39.jpg" width="113" height="65"/>
                     </li>
                     <li class="thumbs_3">
                         <i></i>
-                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="42"/>
-                    </li>
-                    <li class="thumbs_3">
-                        <i></i>
-                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="42"/>
+                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="65"/>
                     </li>
                 </ul>
             </div>
         </div><!--/#main_banner-->
+
+        <%-----------------------------------------------------------------------企业小方块--%>
 
         <ul id="da-thumbs" class="da-thumbs">
             <li>
@@ -293,12 +283,12 @@
 
 <%------------------------------------------------------------------热门职业、最新职业-------------%>
 <div id="hotList" align="center">
-    <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
-        <div style="font-size: 30px;color:#44D0C7;margin: 20px;font-family: 楷体">
-            ——&nbsp;&nbsp;<b>最新职位</b>&nbsp;&nbsp;——
+    <ul class="hc_list reset" style="width: 87%;margin: 0px 45px;margin-left: 10%;">
+        <div style="font-size: 30px;color:#dddfe4;margin: 45px;font-family: 楷体">
+            ——&nbsp;&nbsp;<b style="color: #414a60">最新职位</b>&nbsp;&nbsp;——
         </div>
         <c:forEach items="${postList}" var="post">
-            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="post(${post.pPostId})">
+            <li style="margin: 8px 15px;width: 280px;height: 120px" onclick="post(${post.pPostId})">
                 <div style="float: left">
                     <div class="comLogo" style="font-size: 18px">
                             ${post.postName}
@@ -309,8 +299,8 @@
                         </a>
                     </div>
                 </div>
-                <div style="float: right;color: #d9534f;font-size: 16px" align="center">
-                    <b>${post.minSalary}K&nbsp;-&nbsp; ${post.maxSalary}K</b>
+                <div style="float: right;color: #fd7240;font-size: 16px" align="center">
+                    ${post.minSalary}K&nbsp;-&nbsp; ${post.maxSalary}K
                 </div>
                 <ul class="reset ctags" style="margin-top: 73px;">
                     <div style="float: left">q
@@ -324,13 +314,20 @@
             </li>
         </c:forEach>
     </ul>
+    <div>
+        <button type="button" class="layui-btn layui-btn-primary"
+                style="width: 240px;margin-top: 25px;margin-bottom: 35px;background-color: #44d0c7;font-size: 16px;color: white;"
+                onclick="window.open('${pageContext.request.contextPath}/center/job')">
+            查看更多
+        </button>
+    </div>
 </div>
 
 <%-----------------------------------------------------------------------------热门企业--------------%>
 <div id="hotList" align="center">
     <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
-        <div style="font-size: 30px;color:#44D0C7;margin: 20px;font-family: 楷体">
-            ——&nbsp;&nbsp;<b>热门企业</b>&nbsp;&nbsp;——
+        <div style="font-size: 30px;color: #dddfe4;margin: 45px;font-family: 楷体">
+            ——&nbsp;&nbsp;<b style="color: #414a60">热门企业</b>&nbsp;&nbsp;——
         </div>
         <c:forEach items="${homeCompany}" var="hc">
             <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="compName(${hc.bUserId})">
@@ -353,6 +350,13 @@
             </li>
         </c:forEach>
     </ul>
+    <div>
+        <button type="button" class="layui-btn layui-btn-primary"
+                style="width: 240px;margin-top: 25px;margin-bottom: 35px;background-color: #44d0c7;font-size: 16px;color: white;"
+                onclick="window.open('${pageContext.request.contextPath}/homePage/companylist')">
+            查看更多
+        </button>
+    </div>
 </div>
 
 

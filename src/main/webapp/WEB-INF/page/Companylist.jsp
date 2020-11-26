@@ -40,10 +40,24 @@
                 <li><a href="${pageContext.request.contextPath}/center/job" rel="nofollow">职位</a></li>
                 <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
             </ul>
-            <ul class="loginTop">
-                <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
-                <li>|</li>
-                <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+            <ul class="loginTop" style="font-size: 18px;height: 68px;">
+                <c:if test="${qUser==null}">
+                    <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
+                    <li>|</li>
+                    <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+                </c:if>
+                <c:if test="${qUser!=null}">
+                    <div style="margin: 10px 0px 20px 350px">
+                        <div style="float: left;margin: 0px -90px;">
+                            <div style="margin: -10px 20px;">
+                                    欢迎您 &nbsp;:&nbsp;&nbsp;${qUser.userName}
+                            </div>
+                                <%--                            <div style="margin: 100px;margin: -40px -50px;">--%>
+                                <%--                                <img src="../style/images/logo.png" width="50px" height="50px"/>--%>
+                                <%--                            </div>--%>
+                        </div>
+                    </div>
+                </c:if>
             </ul>
         </div>
     </div>

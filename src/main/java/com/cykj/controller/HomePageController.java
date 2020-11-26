@@ -73,7 +73,6 @@ public class HomePageController {
         request.setAttribute("industry",industry);
 //        热门企业
         request.setAttribute("flag",city);
-
         System.err.println("当前城市" + city);
         if (city!=null) {
             city = city.trim();
@@ -154,6 +153,14 @@ public class HomePageController {
         request.setAttribute("chooseFinan",chooseFinan);
         request.setAttribute("chooseScale",chooseScale);
         request.setAttribute("curr",(n-1)*li);
+
+        //        是否登入成功
+        UserInfo qUser = (UserInfo) request.getSession().getAttribute("qUser");
+        if(qUser!=null){
+            System.out.println(qUser.getUserName());
+        }
+        request.setAttribute("qUser",qUser);
+
         return "Companylist";
     }
 
