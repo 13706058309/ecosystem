@@ -1,0 +1,159 @@
+body .my-class .layui-layer-btn a{background:#E74434;}
+
+#component-dialog{
+    display: inline-block;
+    vertical-align: middle;
+    width: 640px;
+    height: 468px;
+    box-sizing: border-box;
+    text-align: left;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+#component-dialog-hd{
+    height: 40px;
+}
+
+#component-dialog-bd{
+    padding:0 40px;
+}
+
+#courseTitle{
+    margin-bottom: 24px;
+    line-height: 26px;
+    font-size: 20px;
+    color: #333333;
+}
+
+#rateLabel{
+
+}
+
+#textareaComponent{
+    padding-top: 30px;
+    position: relative;
+}
+
+#evaLabel{
+    position: relative;
+    height: 19px;
+    margin-bottom: 10px;
+}
+
+#component-course-editor{
+
+}
+
+#component-course-editor-hd{
+    float: right;
+    margin-right: 40px;
+
+}
+
+#component-course-editor-warning{
+    color: red;
+}
+
+#component-course-editor-textarea{
+    width: 86%;
+    height: 240px;
+    margin-bottom: 5px;
+    margin-left: 50px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #E6E6E6;
+    font-family: "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
+}
+
+#ux-tip-error{
+    font-family: 'ux-icon-edu' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size: 12px;
+    padding: 0 6px;
+    border-radius: 2px;
+    margin-left: 40px;
+}
+
+input[type="radio"]{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.option{
+    margin-left: 20px;
+}
+
+.analysisInfo-right{
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 8px 13px;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.analysisInfo-wrong{
+    background: #fff3f3;
+    border: 1px solid #f6bbbb;
+    color: #666;
+    padding: 8px 13px;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.tt1{
+    font-size: 14px;
+}
+
+.tt2{
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+.tt3{
+    font-size: 12px;
+}
+
+.right{
+    color: #79a900;
+}
+
+.wrong{
+    color: #ff3f00;
+}
+
+#fileDiv{
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.fileDiv{
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.iconDiv{
+    margin-top: 5px;
+    float: left;
+}
+
+.dataDiv{
+    float: left;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.downloadDiv{
+    float: left;
+    margin-left: 40px;
+}
