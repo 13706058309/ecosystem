@@ -144,19 +144,16 @@ function findProjectOrder(curr,limit){
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                             "                            <a onclick='abandonProject("+project.orderNum+","+project.payMoney+")'> 放弃申请</a>\n" +
                             "                        </div>\n");
-                        $("#caoZuo"+project.id).append(" <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick='uploadProject("+project.projectInfo.projectId+")'> 上传项目</a>\n" +
-                            "                        </div>\n");
                     }
 
                     if (project.states.paramName==='申请成功'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                             "                            <a >查看详情</a>\n" +
-                            "                        </div>\n" +
-                            "                       <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a class=\"layui-btn layui-btn-xs layui-btn-danger\" style=\"width: 100px\">上传进度</a>\n" +
-                            "                                </div>\n");
+                            "                        </div>\n");
+                        // $("#caoZuo"+project.id).append( "                       <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
+                        //     "                            <a class=\"layui-btn layui-btn-xs layui-btn-danger\" style=\"width: 100px\">上传进度</a>\n" +
+                        //     "                                </div>\n");
                         $("#caoZuo"+project.id).append(" <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                             "                            <a onclick='uploadProject("+project.projectInfo.projectId+")'> 上传项目</a>\n" +
                             "                        </div>\n");
@@ -205,7 +202,7 @@ function updateProjectFile(){
         }, success:function (res) {
             console.log(res);
             if (res=="success"){
-                layer.use("layer",function () {
+                layui.use("layer",function () {
                     var layer=layui.layer;
                     layer.msg("上传成功，请等待对方验收！");
                     closeUp();

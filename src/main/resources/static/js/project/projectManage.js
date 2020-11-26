@@ -55,17 +55,17 @@ $(function () {
                 location.href=path+data.projectUrl;
             }else if(layEvent === 'finish'){
                 $.ajax({
-                    url:path+"/project/updateState",
+                    url:path+"/project/finish",
                     tyep:"post",
                     dataType:"text",
-                    data:{"stateId":38,"projectId":data.projectId},
+                    data:{"stateId":38,"projectId":data.projectId,"userId":data.userId},
                     success:function (res) {
                         if (res=="success"){
                             layer.msg("已完成！");
                             table.reload("demo",{
                                 url:path+'/project/findProjectAll'
                                 ,where:{
-                                    "stateId":38
+                                    "stateId":37
                                 },page: {curr:1}
                             });
                         }

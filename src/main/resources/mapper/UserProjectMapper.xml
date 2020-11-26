@@ -67,7 +67,7 @@
                 states = #{stateId},
             </if>
         </set>
-        where projectId = #{projectId}
+        where id = #{id}
     </update>
 
 
