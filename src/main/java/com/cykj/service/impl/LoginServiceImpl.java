@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
     public UserInfo mesLog(String phone) {
         System.out.println("短信登录"+phone);
         Map<String,Object> map = new HashMap<>();
-        map.put("telephone",phone);
+        map.put("phone",phone);
 
         UserInfo userInfo = userInfoMapper.mesLog(map);
         return userInfo;
