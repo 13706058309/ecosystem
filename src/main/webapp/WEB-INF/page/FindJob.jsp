@@ -48,8 +48,8 @@
                 <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                 <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
-                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
-                <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+                <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
             </ul>
         </div>
 
@@ -70,7 +70,7 @@
                     <div class="dropdown">
                         <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
                         <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
-                        <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
+                        <a href="${pageContext.request.contextPath}/homePage/quitAccount"  ka="header-logout">退出登录</a>
                     </div>
                 </li>
             </ul></c:if>
@@ -366,7 +366,8 @@
 <%--                                                            <em class="vline"></em>技术总监--%>
                                                         </h3>
                                                     </div></a>
-                                                    <button class="btn btn-startchat" href="javascript:;"
+
+                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('/springboot/rec/userChat?compID=${job.backUser.bUserId}')"
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
                                                         <img class="icon-chat icon-chat-hover"
@@ -382,7 +383,7 @@
                                         </div>
                                         <div class="info-company">
                                             <div class="company-text">
-                                                <h3 class="name"><a href="/gongsi/60272326a766224f1nBy3do~.html"
+                                                <h3 class="name"><a href="${pageContext.request.contextPath}/homePage/compProfile?bUserId=${job.backUser.bUserId}"
                                                                      ka="search_list_company_1_custompage"
                                                                     target="_blank">${job.backUser.compName}</a></h3>
                                                 <p><a href="/i100020/" class="false-link" target="_blank"
@@ -685,6 +686,10 @@
         });
 
     });
+
+    function gt() {
+        location.href="/springboot/center/jianli"
+    }
 </script>
 </body>
 
