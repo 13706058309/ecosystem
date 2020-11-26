@@ -55,10 +55,7 @@ public class LoginController {
 //            UserInfo userInfo = loginServiceImpl.log(account,MD5Utils.md5(pwd));
             UserInfo userInfo = loginServiceImpl.log(account, pwd);
 
-            if (userInfo == null) {
-                System.out.println("查无此账号!");
-                return "noAccount";
-            } else {
+            if (userInfo != null) {
                 System.out.println(userInfo.toString());
                 String stateName = userInfo.getStates().getParamName();
                 if (stateName.equals("启用")) {
@@ -66,18 +63,22 @@ public class LoginController {
                     System.out.println("登录成功!");
                     return "success";
                 } else if (stateName.equals("禁用")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被禁用!");
                     return "disable";
                 } else if (stateName.equals("已删除")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被删除!");
                     return "delete";
                 } else {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("账号审核未通过，无法登录");
                     return "auditFailed";
                 }
+
+            } else {
+                System.out.println("密码错误!");
+                return "passMiss";
             }
         } else {
             System.out.println("验证码错误!");
@@ -106,8 +107,8 @@ public class LoginController {
 //            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password) );
             BackUser backUser = loginServiceImpl.adminLog(account, password);
             if (backUser == null) {
-                System.out.println("查无此账号!");
-                return "noAccount";
+                System.out.println("管理员账号不存在!");
+                return "noAcc";
             } else {
                 System.out.println(backUser.toString());
                 String stateName = backUser.getStates().getParamName();
@@ -116,15 +117,15 @@ public class LoginController {
                     System.out.println("登录成功!");
                     return "success";
                 } else if (stateName.equals("待审核")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("admin");
                     System.out.println("此账号待审核!");
                     return "noReviewed";
                 } else if (stateName.equals("审核不通过")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("admin");
                     System.out.println("此账号已被删除!");
                     return "failedPass";
                 } else {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("admin");
                     System.out.println("登录失败!");
                     return "failed";
                 }
@@ -174,12 +175,15 @@ public class LoginController {
                     System.out.println("登录成功!");
                     return "success";
                 } else if (stateName.equals("禁用")) {
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被禁用!");
                     return "j";
                 } else if (stateName.equals("已删除")){
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被删除!");
                     return "d";
                 } else {
+                    request.getSession().removeAttribute("qUser");
                    System.out.println("账号审核未通过，无法登录");
                     return "f";
                 }
