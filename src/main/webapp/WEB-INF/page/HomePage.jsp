@@ -78,10 +78,10 @@
             <ul class="reset" id="navheader">
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="" target="_blank">校招</a></li>
-                <li><a href="" target="_blank">课程</a></li>
-                <li><a href="${pageContext.request.contextPath}/center/jianli" rel="nofollow">我的简历</a></li>
-                <li><a href="" rel="nofollow">发布职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li><a href="${pageContext.request.contextPath}/center/job" rel="nofollow">职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
             </ul>
             <ul class="loginTop" style="font-size: 18px;height: 68px;">
                 <c:if test="${qUser==null}">
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div style="margin: 35px 230px;width: 200px;">
-                        <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px">个人中心</button>
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px" onclick="window.open('${pageContext.request.contextPath}/center/jianli')">个人中心</button>
                         <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a">退出</button>
                     </div>
                 </c:if>
