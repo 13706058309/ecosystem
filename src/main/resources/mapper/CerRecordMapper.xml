@@ -109,15 +109,23 @@ where 1=1  and c.stateId in (29,30,31)
 
     <resultMap id="cermap" type="com.cykj.entity.CerRecord">
         <id property="cerRecordId" column="cerRecordId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="fileId" column="fileId"></result>
+        <result property="stateId" column="stateId"></result>
+        <result property="docUrl" column="docUrl"></result>
         <result property="trueName" column="trueName"></result>
         <result property="idNumber" column="idNumber"></result>
-        <result property="stateId" column="stateId"></result>
+        <result property="turnoverTime" column="turnoverTime"></result>
+        <result property="cerPhone" column="cerPhone"></result>
         <result property="beginTime" column="beginTime"></result>
+        <result property="cerTestReport" column="cerTestReport"></result>
+        <result property="cerFinalReport" column="cerFinalReport"></result>
         <result property="docUrl" column="docUrl"></result>
         <result property="turnoverTime" column="turnoverTime"></result>
         <result property="cerTestScore" column="cerTestScore"></result>
-        <result property="cerJudgeScore" column="cerJudgeScore"></result>
         <result property="cerFinalScore" column="cerFinalScore"></result>
+        <result property="cerJudgeScore" column="cerJudgeScore"></result>
+        <result property="cerReviewVideo" column="cerReviewVideo"></result>
         <result property="cerReviewVideo" column="cerReviewVideo"></result>
         <result property="cerTestReport" column="cerTestReport"></result>
         <result property="cerFinalReport" column="cerFinalReport"></result>
@@ -166,9 +174,24 @@ where 1=1  and c.stateId in (29,30,31)
         update cerRecord set cerTestScore = #{cerTestScore},stateId = #{stateId} where cerRecordId = #{cerRecordId}
     </update>
 
-    <update id="upcersqstandid" >
+    <update id="upcersqstandid" parameterType="java.util.HashMap">
        update cerRecord set stateId = #{stateId}  where cerRecordId= #{cerRecordId}
     </update>
+
+    <select id="allPage" parameterType="java.util.HashMap" resultMap="cermap">
+        select f.fieldName,p.paramName,u.userName,r.* from cerRecord r
+        inner join field f on r.fileId = f.fieldId
+        inner join parameter p on r.stateId = p.paramId
+        inner join userInfo u on r.userId = u.userId
+    </select>
+
+    <update id="upSta" parameterType="com.cykj.entity.CerRecord">
+        update cerRecord set stateId = #{stateId} where userId = #{userId}
+    </update>
+
+    <select id="search" parameterType="java.util.HashMap" resultMap="cermap">
+        select u.userName,c.* from userInfo u inner join cerRecord c on c.userId = u.userId where userName like concat('%','userName','%')
+     </select>
 
 
 </mapper>

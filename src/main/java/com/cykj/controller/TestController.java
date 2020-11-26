@@ -1,6 +1,8 @@
 package com.cykj.controller;
 
+//import com.cykj.log.Loger;
 import com.cykj.service.BackCompService;
+import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,22 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 public class TestController {
     @Resource
     private BackCompService backCompServiceImpl;
-
-
-
-    @RequestMapping("/userManage")
-    public String userManage()
-    {
-        System.out.println("运行界面");
-        return "UserManage";
-    }
-
-    @RequestMapping("/enterpriseManage")
-    public String enterpriseManage()
-    {
-        System.out.println("运行界面");
-        return "EnterpriseManage";
-    }
 
     @RequestMapping("/changePwd")
     public String changePwd(){
@@ -102,21 +88,6 @@ public class TestController {
         return "comp/BackCompFindUser";
     }
 
-    @RequestMapping("/st")
-    public String st(){
-        return "Login";
-    }
-
-    @RequestMapping("/ss")
-    public String ss(){
-        return "Register";
-    }
-
-    @RequestMapping("/sb")
-    public String sb(){
-        return "adminLog";
-    }
-
     @RequestMapping("/testMap")
     public String testMap(){
         return "comp/TestMap";
@@ -132,13 +103,4 @@ public class TestController {
         return "comp/charge";
     }
 
-    @RequestMapping("/chat")
-    public String chat(){
-        return "comp/Chat";
-    }
-
-    @RequestMapping("/chat2")
-    public String chat2(){
-        return "comp/Chat2";
-    }
 }

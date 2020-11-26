@@ -73,20 +73,38 @@
     <div id="header">
         <div class="wrapper">
             <a class="logo">
-                <img src="../style/images/logo.png" width="230" height="85" alt="钱程无忧-关注你的钱程"/>
+                <img src="../style/images/logo.png" width="230" height="85"/>
             </a>
             <ul class="reset" id="navheader">
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li><a href="" target="_blank">校招</a></li>
-                <li><a href="" target="_blank">课程</a></li>
+                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
                 <li><a href="${pageContext.request.contextPath}/center/jianli" rel="nofollow">我的简历</a></li>
                 <li><a href="" rel="nofollow">发布职位</a></li>
             </ul>
-            <ul class="loginTop" style="font-size: 18px">
-                <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
-                <li>|</li>
-                <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+            <ul class="loginTop" style="font-size: 18px;height: 68px;">
+                <c:if test="${qUser==null}">
+                    <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
+                    <li>|</li>
+                    <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+                </c:if>
+                <c:if test="${qUser!=null}">
+                    <div style="margin: 10px 0px 20px 350px">
+                        <div style="float: left;margin: 0px -90px;">
+                            <div>
+                                    ${qUser.userName}
+                            </div>
+                            <div style="margin: 100px;margin: -40px -50px;">
+                                <img src="../style/images/logo.png" width="50px" height="50px"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 35px 230px;width: 200px;">
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px">个人中心</button>
+                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a">退出</button>
+                    </div>
+                </c:if>
             </ul>
         </div>
         <div style="float: right" onclick="cutCity()">
@@ -100,7 +118,7 @@
 
     <div class="content" style="margin-bottom: 20px;margin-left: 23%">
         <div id="search_box">
-            <form id="searchForm"  method="get">
+            <form id="searchForm" method="get">
                 <ul id="searchType">
                     <li data-searchtype="1" class="type_selected">职位</li>
                 </ul>
@@ -111,11 +129,9 @@
         </div>
     </div>
 
-
-
     <%--------------------------------------------------------------------------------   左侧三级菜单--%>
     <div id="container">
-        <div id="sidebar" style="top: 240px">
+        <div id="sidebar" style="top: 205px">
             <div class="mainNavs" id="hidden">
                 <c:forEach items="${industry}" var="industry">
                     <div class="menu_box">
@@ -295,7 +311,7 @@
             <li style="margin: 3px 5px;width: 264px;height: 120px">
                 <div style="float: left">
                     <div class="comLogo" style="font-size: 18px">
-                           ${post.postName}
+                            ${post.postName}
                     </div>
                     <div>
                         <a target="_blank"
@@ -312,7 +328,7 @@
                         <img src="${pageContext.request.contextPath}/uploadLogo${post.backUser.logo}" width="40"
                              height="39" alt="CCIC"/>
                     </div>
-                    <div style="float: right"align="center">
+                    <div style="float: right" align="center">
                             ${post.backUser.finanStage}&nbsp;|&nbsp;${post.backUser.scale}
                     </div>
                 </ul>

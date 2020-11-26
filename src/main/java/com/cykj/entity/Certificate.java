@@ -23,6 +23,23 @@ public class Certificate {
   public Certificate() {
   }
 
+  @Override
+  public String toString() {
+    return "Certificate{" +
+            "cerId=" + cerId +
+            ", fieldId=" + fieldId +
+            ", field=" + field +
+            ", imgUrl='" + imgUrl + '\'' +
+            ", cerSketch='" + cerSketch + '\'' +
+            ", cerTrait='" + cerTrait + '\'' +
+            ", cerHeadPortrait='" + cerHeadPortrait + '\'' +
+            ", cershowState=" + cershowState +
+            ", cerChangeTime='" + cerChangeTime + '\'' +
+            ", certificationFee=" + certificationFee +
+            ", cerRequirement='" + cerRequirement + '\'' +
+            '}';
+  }
+
   public String getCerRequirement() {
     return cerRequirement;
   }

@@ -17,10 +17,14 @@
         .btn-danger:hover {
             color: lightgreen;
             background-color: #c9302c;
-            border-color: #ac2925;}
+            border-color: #ac2925;
+        }
+
         .btn-danger {
             color: lightgreen;
-            background-color: #d9534}
+            background-color: #d9534
+        }
+
         .btn {
             display: inline-block;
             padding: 6px 12px;
@@ -40,131 +44,163 @@
             -ms-user-select: none;
             background-image: none;
             border: 1px solid transparent;
-            border-radius: 4px;}
-        .btn:hover{
+            border-radius: 4px;
+        }
+
+        .btn:hover {
             color: #333;
             text-decoration: none;
         }
     </style>
 </head>
-<body>
+<body class="body">
 <div class="login-page">
     <div class="form">
-        <input type="hidden" id="path" value="${pageContext.request.contextPath}" />
+        <input type="hidden" id="path" value="${pageContext.request.contextPath}"/>
         <form class="register-form">
             <input type="text" name="account" id="account" placeholder="请输入账号">
             <input type="password" name="pwd1" id="pwd1" placeholder="请输入密码">
-            <img id="vCodeImg" src="${pageContext.request.contextPath}/golog/getCode" style="width: 270px;height: 47px" onclick="changeImg()">
+            <img id="vCodeImg" src="${pageContext.request.contextPath}/golog/getCode" style="width: 270px;height: 47px"
+                 onclick="changeImg()">
             <input type="text" name="vCode" id="vCode" placeholder="请输入图形验证码">
             <a onclick="ajax_Login()"><input type="button" value="登录"></a>
-            <p class="message">换种方式登录？<a href="javascript:">手机登录</a>或者<a href="${pageContext.request.contextPath}/golog/reg">成为会员</a></p>
+            <p class="message">换种方式登录？<a href="javascript:">手机登录</a>或者<a
+                    href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
         </form>
         <form class="login-form">
-            <input type="text" name="phoneNumber"  id="phone" placeholder="请输入手机号">
-            <input type="button" name="mesCode"  value="点击获取验证码" onclick="" class="btn btn-danger">
+            <input type="text" name="phoneNumber" id="phone" placeholder="请输入手机号">
+            <input type="button" name="mesCode" id="mesCode" value="点击获取验证码" onclick="sendMes()" class="btn btn-danger">
             <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码">
-            <a onclick=""><input type="button" value="登录"></a>
-            <p class="message">换种方式登录？<a href="javascript:">账号登录</a>或者<a href="${pageContext.request.contextPath}/golog/reg">成为会员</a></p>
+            <a onclick="mesLog()"><input type="button" value="登录"></a>
+            <p class="message">换种方式登录？<a href="javascript:">账号登录</a>或者<a
+                    href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
         </form>
+        <form ></form>
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/dmaku.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script>
     var path = $("#path").val();
-    var messageData;
-    var wait = 60;//验证码60秒后才可获取下一个
+    var layer;
+    var InterValObj;
+    var curCount=60;
+    layui.use('layer',function () {
+        layer = layui.layer;
+    })
 
-//图形验证码刷新
+    //图形验证码刷新
     function changeImg() {
-        $("#vCodeImg").attr("src",path+"/golog/getCode?dates="+new Date());
+        $("#vCodeImg").attr("src", path + "/golog/getCode?dates=" + new Date());
     }
 
-    // function getMsgNum() {
-    //     var phoneNumber = $("#phone").val();
-    //     setButtonStatus();
-    //     var obj = {
-    //         phoneNumber:phoneNumber
-    //     };
-    //
-    //     $.ajax({
-    //         url: path + '/Msg/send', // 后台短信发送接口
-    //         type: 'POST',
-    //         dataType: 'json',
-    //         contentType: "application/json",
-    //         async: false, //false 同步
-    //         data: JSON.stringify(obj),
-    //         success: function (result) {
-    //             if(result.code == '200') {
-    //                 messageData = result.data;
-    //             }else {
-    //                 alert("错误码:" + data.code + "  错误信息:" + data.message);
-    //             }
-    //         },
-    //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //             console.log(XMLHttpRequest.status);
-    //             console.log(XMLHttpRequest.readyState);
-    //             console.log(textStatus);
-    //         }
-    //     });
-    // }
 
 
 
-
-    //验证码更新计时器
-    function setButtonStatus() {
-        if(wait == 0){
-            this.removeAttribute("disabled");
-            this.value="免费获取验证码";
-            wait = 60;
+    //发送短信
+    function sendMes() {
+        var phone = $("#phone").val();
+        var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+        if (!pattern.test(phone)) {
+            alert("请输入正确手机号");
         } else {
-            this.setAttribute("disabled", true);
-            this.value=wait+"秒后可以重新发送";
-            wait--;
-            setTimeout(function() {
-                setButtonStatus()
-            }, 1000)
+            $.ajax({
+                url: path + "/golog/aliSend",
+                type: "post",
+                data: "phone=" + phone,
+                dataType: 'text',
+                success:function(data){
+                    if(data=='1'){
+                        layer.msg("发送成功");
+                        $("#codeBtn").attr("disabled", "true");
+                        $("#codeBtn").css("background-color", "grey");
+                        $("#codeBtn").val( curCount + "秒");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }else if(data=='2'){
+                        layer.msg("手机号错误，该手机未注册过");
+                    }else{
+                        layer.msg("发送失败，请稍后再发");
+                    }
+                },
+                error:function(){
+                    layer.alert('请求超时或系统出错!');
+                }
+            });
+
         }
     }
-    
-    
-    
-    
-    // function sendmessage(obj,second){
-    //     if(sendmessage){
-    //         countDown(obj,second)
-    //     }
-    //     else{
-    //         alert("错误，虽然永远走不到这里！");
-    //     }
-    // }
-    // function countDown(obj,second){
-    //     // 如果秒数还是大于0，则表示倒计时还没结束
-    //     if(second>=0){
-    //         // 获取默认按钮上的文字
-    //         if(typeof buttonDefaultValue === 'undefined' ){
-    //             buttonDefaultValue =  obj.defaultValue;
-    //         }
-    //         // 按钮置为不可点击状态
-    //         obj.disabled = true;
-    //         // 按钮里的内容呈现倒计时状态
-    //         obj.value = buttonDefaultValue+'('+second+')';
-    //         // 时间减一
-    //         second--;
-    //         // 一秒后重复执行
-    //         setTimeout(function(){countDown(obj,second);},1000);
-    //         // 否则，按钮重置为初始状态
-    //     }else{
-    //         // 按钮置未可点击状态
-    //         obj.disabled = false;
-    //         // 按钮里的内容恢复初始状态
-    //         obj.value = buttonDefaultValue;
-    //     }
-    // }
+
+    function SetRemainTime() {
+        if (curCount == 0) {
+            curCount=60;
+            window.clearInterval(InterValObj);//停止计时器
+            $("#codeBtn").removeAttr("disabled");//启用按钮
+            $("#codeBtn").css("background-color", "#0D9572");
+            $("#codeBtn").val("重新发送");
+        }
+        else {
+            curCount--;
+            $("#codeBtn").val(curCount +"秒");
+        }
+    }
 
 
-//ajax登录
+    //短信登录
+    function mesLog() {
+        // var value = $("#mesCode").val();
+        // if(value == '点击获取验证码'){
+        //     alert("验证码未发送!");
+        //     return false;
+        // }
+        var phone = $("#phone").val();
+        var code = $("#acthCode").val();
+        console.log(phone);
+        console.log(code);
+        // alert(phone);
+        // alert(code)
+
+        $.ajax({
+            // url:path,
+            url:path+"/golog/mesLog",
+            type:'post',
+            data:"phone=" + phone + "&code=" + code,
+            dataType:'text',
+            beforeSend:function () {
+                if (code.length != 4){
+                    alert("请输入四位验证码!");
+                    return false;
+                }
+                var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+                if(!pattern.test(phone)){
+                    alert("请输入正确手机号!");
+                    return false;
+                }
+                return true;
+            },
+            success:function (info) {
+                if(info == 'success'){
+                    location.href = path + "/homePage/home";
+                } else if(info == 'j'){
+                    alert("此账号已被禁用!");
+                } else if (info=='d'){
+                    alert("此账号已被删除!");
+                } else if (info == 'f') {
+                    alert("账号审核未通过，无法登录!");
+                } else if (info=='8'){
+                    alert("验证码错误!");
+                } else if (info == '9'){
+                    alert("手机号错误!");
+                }
+            }
+        })
+
+
+    }
+
+    //ajax登录
     function ajax_Login() {
         var account = $("#account").val();
         var pwd = $("#pwd1").val();
@@ -194,22 +230,18 @@
                 changeImg();
                 if (info == 'success') {
                     location.href = path + "/homePage/home";
+                } else if (info == 'noAccount') {
+                    alert("查无此账号,登录失败!");
+                    var isA = confirm("是否注册?");
+                    if (isA == true) location.href = path + "/golog/reg";
                 } else if (info == 'disable') {
                     alert("此账号已被禁用!请联系管理员!");
                 } else if (info == 'delete') {
                     alert("此账号已被删除!请重新注册!");
-                } else if (info == 'Audit failed') {
+                } else if (info == 'auditFailed') {
                     alert("此账号还未通过审核,请稍后重试!");
-                } else if (info == 'Vcode error') {
+                } else if (info == 'vCodeError') {
                     alert("验证码错误!");
-                } else if (info == 'no account') {
-                    alert("查无此账号,登录失败!");
-                    var isA = confirm("是否注册?");
-                    if (isA == true){
-                        location.href = path + "/golog/reg";
-                    }  else {
-
-                    }
                 }
             },
 

@@ -183,7 +183,7 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <input  type="button" class="layui-btn" onclick="sumb()" value="立即提交">  </input>
+                    <input  type="button" class="layui-btn" onclick="sumb()" value="立即发布">  </input>
                     <input  type="button" class="layui-btn" value="招聘预览" onclick="showDetail()"></input>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>

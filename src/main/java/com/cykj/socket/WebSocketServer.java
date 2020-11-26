@@ -112,13 +112,16 @@ public class WebSocketServer {
                 }
             }
         }else{
+            System.out.println("tarUser:"+tarUser);
             compRecord.setUserId(Integer.parseInt(srcUser));
             compRecord.settUserId(Integer.parseInt(srcUser));
             compRecord.setCompanyId(0);
             compRecord.settCompId(Integer.parseInt(tarUser));
             compRecord.setRecored(messages);
             backCompService.addCompRec(compRecord);
+            System.out.println(backMap.size());
             for (String s : backMap.keySet()) {
+                System.out.println("s:"+s);
                 if(s.equals(tarUser)){
                     hashMap.put("message",messages);
                     hashMap.put("tarUser",srcUser);
