@@ -117,6 +117,10 @@ public class CompController {
     public @ResponseBody String postPosition(PostPosition postPosition,HttpServletRequest request){
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
 //        int compID = 3;
+        if(backUser.getProduct()==null||backUser.getFinanStage()==null||backUser.getHomePage()==null||backUser.getScale()==null
+        ||backUser.getCoreValue()==null||backUser.getInfoIntr()==null){
+            return "3";
+        }
         int compID = (int) backUser.getbUserId();
         postPosition.setCompanyId(compID);
         String msg = backCompService.postPosition(postPosition);
