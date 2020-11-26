@@ -1080,7 +1080,11 @@ public class CenterController {
         userInfo.setHeadImgUrl("/resumePhoto/"+date+"/"+fileName);
         n=resumeService.updateHeadImgUrl(userInfo);
 
-        return "succes";
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        user.setHeadImgUrl("/resumePhoto/"+date+"/"+fileName);
+        req.getSession().setAttribute("qUser",user);
+
+        return "/resumePhoto/"+date+"/"+fileName;
     }
 
 //    修改手机号码--获取验证码

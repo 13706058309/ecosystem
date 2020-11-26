@@ -28,6 +28,7 @@
 
 <body>
 <input type="text" style="display: none" id="kong">
+<input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <input type="hidden" id="resumeId" value="${resume.resumeId}">
 <%--<div id="header" style="background-color: #0d98ff">--%>
 <%--<div class="inner home-inner" >--%>
@@ -78,7 +79,7 @@
                     <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
                     <li class="nav-figure">
                         <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
-                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                            <span class="label-text">${qUser.userName}</span><img id="topImg"  src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                         </a>
                         <div class="dropdown">
                             <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
@@ -885,6 +886,7 @@
 
 
 <script>
+    var path=$('#path').val();
     //基本信息
     var resumeId=$('#resumeId').val();
     var name;
@@ -967,13 +969,14 @@
             contentType:false,
             dataType: "text",
             success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    // layer.msg('修改成功')
-
-                } else if (data == "lose") {
-                    layer.msg("修改失败")
-                }
+                // if (data == "succes") {
+                //     //向服务端发送删除指令
+                //     // layer.msg('修改成功')
+                //
+                // } else if (data == "lose") {
+                //     layer.msg("修改失败")
+                // }
+                document.getElementById('topImg').src=path+data;
             },
             error: function () {
                 layer.msg('网络繁忙')
