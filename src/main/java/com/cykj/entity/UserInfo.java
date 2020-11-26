@@ -15,6 +15,7 @@ public class UserInfo {
   private String address; //地址
   private long isOpen; // 是否公开
 
+  private String headImgUrl; //用户头像路径
 
   public UserInfo() {
 
@@ -94,7 +95,11 @@ public class UserInfo {
     this.isOpen = isOpen;
   }
 
+  public String getHeadImgUrl() {
+    return headImgUrl;
+  }
 
-
-
+  public void setHeadImgUrl(String headImgUrl) {
+    this.headImgUrl = headImgUrl;
+  }
 }
