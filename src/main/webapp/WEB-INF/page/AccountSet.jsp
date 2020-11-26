@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -38,27 +39,7 @@
     </style>
 </head>
 <body>
-
-<%--<div id="header" style="background-color: #0cccb5">--%>
-<%--    <div class="inner home-inner" >--%>
-<%--        <div class="logo">--%>
-<%--            <a href="https://www.zhipin.com/" ka="header-home-logo" title="BOSS直聘"><span>BOSS直聘</span></a>--%>
-<%--        </div>--%>
-<%--        <div class="nav">--%>
-<%--            <ul>--%>
-<%--                <li class=""><a ka="header-home" href="https://www.zhipin.com/">首页</a></li>--%>
-<%--                <li class="cur"><a ka="header-job" href="https://www.zhipin.com/job_detail/">职位</a></li>--%>
-<%--                <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>--%>
-<%--                <li class=""><a ka="tab_overseas_click" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
-<%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
-<%--                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>--%>
-<%--                <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-
-<%--    </div>--%>
-
-
+<input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div id="header" style="background-color: #00c2b3;height: 80px" >
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
@@ -89,7 +70,7 @@
                     <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
                     <li class="nav-figure">
                         <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
-                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                            <span class="label-text"><label id="topName">${qUser.userName}</label></span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                         </a>
                         <div class="dropdown">
                             <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
@@ -179,8 +160,12 @@
             </div>
             <div class="layui-tab-item" style="margin-top: 20%;margin-left: 20%">
                 <form class="layui-form" action="">
+                    <div >
+                        <label class="layui-form-label" style="width: 22%">当前用户名：</label>
+                        <label class="layui-form-label" id="oldName">${qUser.userName}</label>
+                    </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">新用户名：</label>
+                        <label class="layui-form-label" >新用户名：</label>
                         <div class="layui-input-block">
                             <input type="text" name="title" id="newName" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
@@ -215,6 +200,7 @@
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
+    var psth=$('#path').val();
     layui.use(['form', 'element','layer'], function(){
         var $ = layui.jquery
             ,form=layui.form
@@ -275,7 +261,8 @@
                         if (data == "succes") {
                             //向服务端发送删除指令
                             layer.msg('修改成功')
-                            location.reload()
+                            location.href=$('#path').val()+"/homePage/home"
+
                         } else if (data == "lose") {
                             layer.msg("旧密码错误")
                         }
@@ -408,16 +395,19 @@
         $('#newName').val("");
     }
     function saveName() {
+        var newName=$('#newName').val();
         $.ajax({
             url: 'saveName',
             charset:"UTF-8",
             async: "true",
             type: "post",
-            data: "newName="+$('#newName').val(),
+            data: "newName="+newName,
             dataType: "text",
             success: function (data) {
                 if (data == "succes") {
                     layer.msg("修改成功");
+                    $('#oldName').text(newName)
+                    $('#topName').text(newName)
                     $('#newName').val("");
 
                 } else if (data == "lose") {

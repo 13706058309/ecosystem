@@ -254,6 +254,7 @@ public class CenterController {
         map.put("oldpwd",oldpwd);
         map.put("newpwd",newpwd);
         UserInfo userInfo=resumeService.findpwd(map);
+        req.getSession().removeAttribute("qUser");
         if (null==userInfo){
             return "lose";
         }else {

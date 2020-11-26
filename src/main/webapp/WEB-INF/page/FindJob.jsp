@@ -62,7 +62,6 @@
             </c:if>
             <c:if test="${not empty qUser}">
             <ul>
-<%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
                 <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
                 <li class="nav-figure">
                     <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
