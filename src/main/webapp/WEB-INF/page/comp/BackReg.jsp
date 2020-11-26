@@ -349,15 +349,15 @@
     function regs() {
         var value = $("#codeBtn").val();
 
-        if(value=='发送验证码'){
-            layer.alert("验证码未发送",{icon: 0,offset: '20%'});
-            return false;
-        }
-
-        if(value=='重新发送'){
-            layer.alert("验证码已超时,请重新发送",{icon: 0,offset: '20%'});
-            return false;
-        }
+        // if(value=='发送验证码'){
+        //     layer.alert("验证码未发送",{icon: 0,offset: '20%'});
+        //     return false;
+        // }
+        //
+        // if(value=='重新发送'){
+        //     layer.alert("验证码已超时,请重新发送",{icon: 0,offset: '20%'});
+        //     return false;
+        // }
 
         var form = new FormData(document.getElementById("regForm"))
         $.ajax({
@@ -397,10 +397,11 @@
                     layer.alert("需要上传营业执照",{icon: 0,offset: '20%'});
                     return false;
                 }
-                if(photo.length>=20){
-                    layer.alert("图片名字不能超过20",{icon: 0,offset: '20%'});
-                    return false;
-                }
+                // alert(photo.lastIndexOf("\\",1));
+                // if(photo.length>=20){
+                //     layer.alert("图片名字不能超过20",{icon: 0,offset: '20%'});
+                //     return false;
+                // }
 
                 var city = $("#city").val();
                 if(city==null||city=='请选择'||city.length==0){
@@ -473,6 +474,7 @@
                     $("#codeBtn").css("background-color", "#0D9572");
                     $("#codeBtn").val("发送验证码");
                     $("input[type=reset]").trigger("click");
+
                 }else if(data=='2'){
                     layer.alert("手机号输入错误");
                 }else if(data=='1'){
