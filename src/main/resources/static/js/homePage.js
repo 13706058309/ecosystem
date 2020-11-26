@@ -97,3 +97,6 @@ function City(node) {
     console.log("!!!!!!!!!!!!!!!!!!!!!"+$("#city").text());
 }
 
+function compName(bUserId) {
+    location.href=path+"/homePage/compProfile?bUserId="+bUserId;
+}

@@ -183,16 +183,6 @@
                        target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
                                             height="160" alt="出北京记——第一站厦门"/></a>
                 </li>
-                <li class="banner_bg_4">
-                    <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
-                       target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
-                                            height="160" alt="出北京记——第一站厦门"/></a>
-                </li>
-                <li class="banner_bg_4">
-                    <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
-                       target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
-                                            height="160" alt="出北京记——第一站厦门"/></a>
-                </li>
             </ul>
             <%-----------------------------------------------------------------------企业小方块--%>
             <div class="banner_control">
@@ -344,7 +334,7 @@
             ——&nbsp;&nbsp;<b>热门企业</b>&nbsp;&nbsp;——
         </div>
         <c:forEach items="${homeCompany}" var="hc">
-            <li style="margin: 3px 5px;width: 264px;height: 120px">
+            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="compName(${hc.bUserId})">
                 <div class="comLogo" style="float: left">
                     <img src="${pageContext.request.contextPath}/uploadLogo${hc.logo}" width="60"
                          height="60" alt="CCIC"/>
@@ -353,8 +343,7 @@
                     <h3 title="CCIC" style="margin: 2px 5px;width: 183px;text-overflow:ellipsis;" align="center">
                         <b>${hc.compName}</b>
                     </h3>
-                    <a href="h/jobs/148928.html" target="_blank"
-                       style="font-size: 13px;color: darkgrey">
+                    <a  target="_blank" style="font-size: 13px;color: darkgrey">
                             ${hc.finanStage}&nbsp;|&nbsp;${hc.city}
                     </a>
                 </div>
