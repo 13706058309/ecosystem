@@ -74,11 +74,13 @@
                         <h3>公司名称</h3> <!--非必填-->
                         <input type="text" placeholder="请输入公司简称，如:拉勾" value="" name="compName" id="compName" class="valid" style="height: 8%">
 
+                        <input type="text" placeholder="请输入公司简称，如:拉勾" value="" name="compName" id="compName" class="valid">
+
                         <h3>公司营业执照上传</h3>
                         <div id="logoNo">
                             <span>上传营业执照 大小：小于5M</span>
                             <div class="layui-upload">
-                                <input type="file" class="layui-btn layui-btn-normal" id="uploadFile" name="upload" ></input>
+                                <input type="file" class="layui-btn layui-btn-normal" id="uploadFile" name="upload" onclick="up()" />
                             </div>
                         </div>
 
@@ -170,6 +172,19 @@
                 form = layui.form;
                 form.render();
             })
+
+
+
+            function up() {
+                var path = $("#path").val();
+                var type = "file";  //后台接收时需要的参数名称，自定义即可
+                var id = $("#uploadFile").val(); //即input的id，用来寻找值
+                var formData = new FormData();
+                formData.append(type,$("#"+id)[0].files[0]);//生成一对表单属性
+                $.ajax({
+                    url:path,
+                })
+            }
 
             var avatar = {};
             avatar.uploadComplate = function( data ){

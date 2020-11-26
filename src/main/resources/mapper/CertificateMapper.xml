@@ -10,11 +10,14 @@
     <resultMap id="recmap" type="com.cykj.entity.Certificate">
         <id property="cerId" column="cerId"></id>
         <result property="imgUrl" column="imgUrl"></result>
+        <result property="fieldId" column="fieldId"></result>
         <result property="cerSketch" column="cerSketch"></result>
         <result property="cerTrait" column="cerTrait"></result>
         <result property="cerHeadPortrait" column="cerHeadPortrait"></result>
         <result property="cershowState" column="cershowState"></result>
         <result property="cerChangeTime" column="cerChangeTime"></result>
+        <result property="certificationFee" column="certificationFee"></result>
+        <result property="cerRequirement" column="cerRequirement"></result>
         <association property="field" column="fieldId" javaType="com.cykj.entity.Field">
             <id property="fieldId" column="fieldId"></id>
             <result property="fieldName" column="fieldName"></result>
@@ -25,6 +28,13 @@
     select * from certificate where fieldId = #{fieldid}
     </select>
 
+    <select id="findAll" parameterType="java.util.HashMap" resultMap="recmap">
+        select f.fieldName ,c.* from certificate c , field f where c.fieldId=f.fieldId
+    </select>
+
+    <delete id="deleteZs" parameterType="int">
+        delete from certificate where cerId = #{id}
+    </delete>
 
 
 </mapper>

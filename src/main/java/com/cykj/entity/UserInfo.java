@@ -110,6 +110,9 @@ public class UserInfo {
     return jobStandId;
   }
 
+  public void setJobStandId(long jobStandId) {
+    this.jobStandId = jobStandId;
+  }
 
 
   public String getAddress() {

@@ -1,8 +1,12 @@
 package com.cykj.mapper;
 
 
+import com.cykj.entity.BackLog;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 后台用户日志
@@ -10,5 +14,10 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface BackLogMapper {
+
+
+    List<BackLog> findLogOnPage(Map<String, Object> map);
+    int findLogNum(Map<String, Object> map);
+    int addBackLog(BackLog backLog);
 
 }

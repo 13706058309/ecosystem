@@ -2,6 +2,7 @@ package com.cykj.service.impl;
 
 import com.cykj.entity.BackUser;
 import com.cykj.entity.UserInfo;
+//import com.cykj.log.Loger;
 import com.cykj.mapper.UserInfoMapper;
 import com.cykj.service.LoginService;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,7 @@ public class LoginServiceImpl implements LoginService {
         return userInfo;
     }
 
+
     /**
      * 执行后台登录
      * @param account
@@ -45,13 +47,23 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public BackUser adminLog(String account, String pwd) {
-        System.out.println("实现类的密码:"+pwd);
+//        System.out.println("实现类的密码:"+pwd);
         Map<String,Object> map = new HashMap<>();
         map.put("account",account);
         map.put("pwd",pwd);
 
         BackUser backUser = userInfoMapper.adminLog(map);
         return backUser;
+    }
+
+    @Override
+    public UserInfo mesLog(String phone) {
+        System.out.println("短信登录"+phone);
+        Map<String,Object> map = new HashMap<>();
+        map.put("telephone",phone);
+
+        UserInfo userInfo = userInfoMapper.mesLog(map);
+        return userInfo;
     }
 
     @Override
@@ -64,5 +76,16 @@ public class LoginServiceImpl implements LoginService {
     public boolean isRepeat(String account) {
         UserInfo isRepeat = userInfoMapper.isRepeat(account);
         return isRepeat==null;
+    }
+
+
+    @Override
+    public UserInfo findPhone(String phone) {
+        return userInfoMapper.findPhone(phone);
+    }
+
+    @Override
+    public int changPasswordByPhone(String pwd, String phone) {
+        return userInfoMapper.changPasswordByPhone(pwd, phone);
     }
 }

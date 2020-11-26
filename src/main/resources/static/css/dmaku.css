@@ -4,7 +4,7 @@
   margin: auto;
 }
 .form {
-  position: relative;
+  position: right;
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
@@ -87,12 +87,21 @@
   color: #EF3B3A;
 }
 body {
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-  background: -moz-linear-gradient(right, #76b852, #8DC26F);
-  background: -o-linear-gradient(right, #76b852, #8DC26F);
-  background: linear-gradient(to left, #76b852, #8DC26F);
+  /*background: #76b852; !* fallback for old browsers *!*/
+  /*background: -webkit-linear-gradient(right, #76b852, #8DC26F);*/
+  /*background: -moz-linear-gradient(right, #76b852, #8DC26F);*/
+  /*background: -o-linear-gradient(right, #76b852, #8DC26F);*/
+  /*background: linear-gradient(to left, #76b852, #8DC26F);*/
+  background-image: url(../imgs/qdbj.jpg);
+  /*width:90%;*/
+  /*height: 100%;*/
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  /*background-size: cover;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;      */
 }
