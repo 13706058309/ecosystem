@@ -19,6 +19,8 @@ import java.util.Map;
 public interface CourseMapper {
     List<Course> findCourseOnPage(Map<String, Object> map);
 
+    List<Field> fieldList();
+
     int findNumOnPage(Map<String, Object> map);
 
     int deleteCourse(Integer courseId);

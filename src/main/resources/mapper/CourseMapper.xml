@@ -24,6 +24,12 @@
         <result property="speakerHeadImgUrl" column="speakerHeadImgUrl"></result>
         <result property="totalPlayTimes" column="totalPlayTimes"></result>
     </resultMap>
+
+
+    <select id="fieldList" resultType="com.cykj.entity.Field">
+        select * from field
+    </select>
+
 <!--    <resultMap id="results" type="com.cykj.entity.Course">-->
 <!--        <id property="courseId" column="courseId"></id>-->
 <!--        <id property="fieldId" column="fieldId"></id>-->

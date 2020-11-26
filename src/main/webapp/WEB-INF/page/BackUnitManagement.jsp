@@ -372,20 +372,13 @@
                     ,yes: function(index, layero){
                         //按钮【按钮一】的回调
                         layer.close(index); //如果设定了yes回调，需进行手工关闭
-                        var courseName = document.getElementById("courseName").value;    //【增加界面第一行】文本框输入的课程名
+
                         var fieldId_add = document.getElementById("fieldId_add");
                         var index = fieldId_add.selectedIndex;// selectedIndex是所选中的项的index
                         var fieldId = fieldId_add.options[index].value;                    //【增加界面第二行】下拉框选择的领域
                         var courseImgURL = document.getElementById('courseImgURL').value;//【增加界面第三行】选择后的文件路径
-                        var speakerName = document.getElementById("speakerName").value;  //【增加界面第四行】文本框输入的讲师名
-                        var courseIntroduce = document.getElementById("courseIntroduce").value;//【增加界面第五行】文本框输入的课程介绍
-                        // var uploadTime = document.getElementById("uploadTime").value;//【增加界面第六行】文本框输入的上传时间
-                        var collectionNumber = document.getElementById("collectionNumber").value;//【增加界面第六行】文本框输入的观看人数
-                        var speakerHeadImgUrl = document.getElementById('speakerHeadImgUrl').value;//【增加界面第七行】文本框输入的头像路径
-                        var totalPlayTimes = document.getElementById("totalPlayTimes").value;//【增加界面第八行】文本框输入的播放时间
-                        console.log("courseName:"+courseName+"；fieldId:"+fieldId+"；courseImgURL:"+courseImgURL
-                        +"；speakerName:"+speakerName+"；courseIntroduce:"+courseIntroduce +"；collectionNumber:"
-                            +collectionNumber+"；speakerHeadImgUrl:"+speakerHeadImgUrl+"；totalPlayTimes:"+totalPlayTimes);
+
+
                         $.ajax({
                             type:"POST",
                             dataType: "json",//预期服务器返回的数据类型
@@ -628,6 +621,7 @@
 
             //修改课程名称监听
             else if (obj.event === 'unitName'){
+                var layer = layui.layer;
                 layer.prompt({
                     formType: 2
                     ,title: '修改 ID 为 ['+ data.unitId +'] 的章节名称'
@@ -653,6 +647,7 @@
             }
             //修改课程路径监听
             else if (obj.event === 'courseImgURL'){
+                var layer = layui.layer;
                 layer.prompt({
                     formType: 2
                     ,title: '修改 ID 为 ['+ data.courseId +'] 的课程路径'

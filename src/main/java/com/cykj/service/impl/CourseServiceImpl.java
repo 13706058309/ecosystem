@@ -1,6 +1,7 @@
 package com.cykj.service.impl;
 
 import com.cykj.entity.Course;
+import com.cykj.entity.Field;
 import com.cykj.entity.TableInfo;
 import com.cykj.mapper.CourseMapper;
 import com.cykj.service.CourseService;
@@ -23,6 +24,12 @@ public class CourseServiceImpl implements CourseService {
         int numOnPage = courseMapper.findNumOnPage(map);
         TableInfo tableInfo = new TableInfo(0,"后台用户信息数据",numOnPage,allOnPage);
         return tableInfo;
+    }
+
+    @Override
+    public List<Field> fieldList() {
+        List<Field> fieldList = courseMapper.fieldList();
+        return fieldList;
     }
 
     @Override

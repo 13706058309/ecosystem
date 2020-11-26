@@ -1,6 +1,7 @@
 package com.cykj.controller;
 
 import com.cykj.entity.Course;
+import com.cykj.entity.Field;
 import com.cykj.entity.TableInfo;
 import com.cykj.interceptor.Loger;
 import com.cykj.service.impl.CourseServiceImpl;
@@ -27,10 +28,11 @@ private CourseServiceImpl courseServiceImpl;
 
     @RequestMapping("goBCM")
     @Loger(operationType = "走入管理表格",operationName = "走入管理表格数据")
-
-    public String goBackCourseManagement(){
+    public String goBackCourseManagement(HttpServletRequest request){
         System.out.println("走入汤某人的测试控制类，即将访问 后台课程管理的JSP！！");
 
+        List<Field> fieldList = courseServiceImpl.fieldList();
+        request.setAttribute("fieldList",fieldList);
         return "BackCourseManagement";
     }
 
