@@ -27,6 +27,149 @@
     <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
     <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 
+    <style>
+
+        .clearfix:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+        .clearfix{zoom:1}
+        ul,li{
+            list-style:none;
+        }
+        .qrm-input{
+            outline: none;
+            border:none;
+            height: 38px;
+
+            position: absolute;
+            left: 4px;
+            top: 0;
+            padding: 0 10px;
+        }
+        .qrm-input-border{
+            position: relative;
+        }
+        .qrm-pinming{
+            height: 30px;
+            line-height: 40px;
+            border:1px solid #dddddd;
+            border-radius: 5px;
+            position: relative;
+            width: 250px;
+            /*background-image: url("../images/qrm-arrow-down.png");*/
+            background-repeat: no-repeat;
+            background-position: 275px;
+        }
+        .qrm-pinming:hover{
+            cursor: pointer;
+        }
+        .qrm-pinming input:hover{
+            cursor: pointer;
+        }
+        .qrm-pinming-panel{
+            position: absolute;
+            top: 52px;
+            left: -1px;
+            z-index: 99999;
+            width: 250px;
+            height: 210px;
+            /*border: 1px solid #409EFF;*/
+            background: #ffffff;
+        }
+        .qrm-border1{
+            background-color: #eaecf0;
+            float: left;
+            width: 33%;
+            height: 208px;
+            /*overflow-y: scroll;*/
+            border-right: 1px solid #f1f1f1;
+            box-shadow: 0 0px 5px #f1f1f1;
+            position: absolute;
+            top: 50px;
+            overflow:auto
+            /*margin-left: 5px;*/
+        }
+        .qrm-border2{
+            background-color: #eaecf0;
+            float: left;
+            width: 33%;
+            height: 208px;
+            /*overflow-y: scroll;*/
+            border-right: 1px solid #f1f1f1;
+            box-shadow: 0 0px 5px #f1f1f1;
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            overflow:auto
+            /*margin-left: 5px;*/
+        }
+        .qrm-border3{
+            background-color: #eaecf0;
+            float: left;
+            width: 33%;
+            height: 208px;
+            /*overflow-y: scroll;*/
+            border-right: 1px solid #f1f1f1;
+            box-shadow: 0 0px 5px #f1f1f1;
+            position: absolute;
+            top: 50px;
+            left: 200px;
+            overflow:auto
+            /*margin-left: 5px;*/
+        }
+        .qrm-lev{
+            float: left;
+            width: 96.5%;
+            margin:0;
+            padding:0;
+            font-size: 12px;
+        }
+        .qrm-lev>li{
+            width: 95%;
+            position: relative;
+            display: block;
+            padding-left: 10px;
+            height: 35px;
+            line-height: 35px;
+        }
+        .qrm-lev>li:hover{
+            background: #F5F7FA;
+            /*color: #409EFF;*/
+        }
+
+        .qrm-arrow-right{
+            display: inline-block;
+            width: 4px;
+            height: 7px;
+            /*background: url("../images/qrm-arrow-right.png") no-repeat;*/
+            position: absolute;
+            right: 7px;
+            top: 14px;
+        }
+
+        .qrm-lev-1>li.active{
+            background: #F5F7FA;
+            color: #409EFF;
+
+        }
+        .qrm-lev-2>li.active{
+            background: #F5F7FA;
+            color: #409EFF;
+
+        }
+        .qrm-lev-3>li.active{
+            background: #F5F7FA;
+            color: #409EFF;
+
+        }
+        .qrm-lev-4>li.active{
+            background: #F5F7FA;
+            color: #409EFF;
+        }
+        .box{
+            width: 250px;
+            height: 300px;
+            margin: 0 auto;
+        }
+    </style>
 
 
 </head>
@@ -82,18 +225,84 @@
 <div id="wrap" class="search-job-list-wrap">
     <div id="filter-box" class="">
         <div class="inner home-inner">
-            <div class="search-box">
-                <div class="search-form ">
+            <div class="search-box" >
+                <div class="search-form " >
                     <form action="/job_detail/" method="get" class="">
-                        <div class="search-form-con">
-                            <div class="city-sel">
+                        <div class="search-form-con" >
+                            <div class="city-sel"  >
                                 <i class="line"></i>
                                 <span class="label-text" onclick="showCityDialog()"><b>${workCity}</b><i class="icon-arrow-down"></i></span>
                             </div>
-                            <div class="industry-sel" ka="search_bos_sel_industry">
+                            <div class="industry-sel" ka="search_bos_sel_industry" style="width: 250px">
                                 <i class="line"></i>
                                 <input type="hidden" id="findPosition" value="${position}">
-                                <span class="label-text" id="position9" onclick="industryBoxToggle()"><b>${position}</b><i class="icon-arrow-down"></i></span>
+                                <span class="label-text" id="position9" style="width: 250px" >
+<%--                                    <b>${position}</b><i class="icon-arrow-down"></i>  onclick="industryBoxToggle()"--%>
+                                </span>
+
+                                <div class="box" style="height: 15px">
+                                    <div class="qrm-pinming">
+                                        <div class="qrm-input-border">
+                                            <!--<span class="title">品名</span>-->
+                                            <input type="text" value="${position}" class="qrm-input" style="width: 250px;height: 30px">
+                                        </div>
+                                        <!--<div class="qrm-pinming-panel" style="display:none">-->
+                                        <div class="qrm-border1" style="display:none">
+                                            <ul class="qrm-lev-1 qrm-lev">
+                                                <!--统料-->
+                                                <c:if test="${not empty industrys}">
+                                                    <c:forEach var="industrys" items="${industrys}">
+                                                        <li class="active">
+                                                            <span>${industrys.industryName}</span><i class="qrm-arrow-right"></i>
+                                                            <ul class="li-zi-1" style="display: none">
+                                                                <c:if test="${not empty industrys.departs}">
+                                                                    <c:forEach var="departs" items="${industrys.departs}">
+                                                                        <li>
+                                                                            <span>${departs.departName}</span><i class="qrm-arrow-right"></i>
+                                                                            <ul class="li-zi-2" style="display: none">
+                                                                                <c:if test="${not empty departs.positions}">
+                                                                                    <c:forEach var="positions" items="${departs.positions}">
+                                                                                        <li>
+                                                                                            <span>${positions.postName}</span>
+                                                                                        </li>
+
+                                                                                    </c:forEach></c:if>
+
+                                                                            </ul>
+                                                                        </li>
+                                                                    </c:forEach></c:if>
+                                                            </ul>
+                                                        </li>
+                                                    </c:forEach>
+                                                </c:if>
+
+                                            </ul>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        <div class="qrm-border2" style="display:none">
+                                            <ul class="qrm-lev-2 qrm-lev">
+
+                                            </ul>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        <div class="qrm-border3" style="display:none">
+                                            <ul class="qrm-lev-3 qrm-lev">
+
+                                            </ul>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        <div class="qrm-border4" style="display:none">
+                                            <ul class="qrm-lev-4 qrm-lev">
+
+                                            </ul>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        <p class="clearfix"></p>
+                                        <!--</div>-->
+                                        <p class="clearfix"></p>
+                                    </div>
+                                </div>
+
                             </div>
                             <p class="ipt-wrap"><input type="text" id="search" name="query" ka="search-keyword" value="${search}"
                                                        autocomplete="off" class="ipt-search" maxlength="50" placeholder="搜索职位"></p>
@@ -108,36 +317,36 @@
                             <div class="dorpdown-city">
                             </div>
                         </div>
-                        <div class="industry-box" id="positionsShow"  >
-                            <ul >
-                                <li data-val=""><a onclick="findPosition(this)">不限</a></li>
-                                <c:if test="${not empty positions}">
-                                    <c:forEach var="position" items="${positions}">
-                                        <li data-val="100001" ka="sel-industry-1"><a onclick="findPosition(this)">${position.postName}</a></li>
-                                    </c:forEach>
-                                </c:if>
+<%--                        <div class="industry-box" id="positionsShow"  >--%>
+<%--                            <ul >--%>
+<%--                                <li data-val=""><a onclick="findPosition(this)">不限</a></li>--%>
+<%--                                <c:if test="${not empty positions}">--%>
+<%--                                    <c:forEach var="position" items="${positions}">--%>
+<%--                                        <li data-val="100001" ka="sel-industry-1"><a onclick="findPosition(this)">${position.postName}</a></li>--%>
+<%--                                    </c:forEach>--%>
+<%--                                </c:if>--%>
 
-<%--                                <li data-val="100002" ka="sel-industry-2"><a href="javascript:;">游戏</a></li>--%>
-
-
-
-                            </ul>
-                        </div>
-                        <div class="industry-box" id="citysShow">
-                            <ul>
-                                <li data-val=""><a href="javascript:;">不限</a></li>
-                                <c:if test="${not empty citys}">
-                                    <c:forEach var="city" items="${citys}">
-                                        <li data-val="100001" ka="sel-industry-1"><a onclick="findCity(this)">${city.cityName}</a></li>
-                                    </c:forEach>
-                                </c:if>
-
-                                <%--                                <li data-val="100002" ka="sel-industry-2"><a href="javascript:;">游戏</a></li>--%>
+<%--&lt;%&ndash;                                <li data-val="100002" ka="sel-industry-2"><a href="javascript:;">游戏</a></li>&ndash;%&gt;--%>
 
 
 
-                            </ul>
-                        </div>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="industry-box" id="citysShow">--%>
+<%--                            <ul>--%>
+<%--                                <li data-val=""><a href="javascript:;">不限</a></li>--%>
+<%--                                <c:if test="${not empty citys}">--%>
+<%--                                    <c:forEach var="city" items="${citys}">--%>
+<%--                                        <li data-val="100001" ka="sel-industry-1"><a onclick="findCity(this)">${city.cityName}</a></li>--%>
+<%--                                    </c:forEach>--%>
+<%--                                </c:if>--%>
+
+<%--                                &lt;%&ndash;                                <li data-val="100002" ka="sel-industry-2"><a href="javascript:;">游戏</a></li>&ndash;%&gt;--%>
+
+
+
+<%--                            </ul>--%>
+<%--                        </div>--%>
                     </form>
                 </div>
                 <!-- 广告 -->
@@ -442,39 +651,53 @@
         </div>
         <div class="dialog-con">
             <h4>请选择城市</h4>
-            <div class="layui-tab">
+            <div class="layui-tab" >
                 <ul class="layui-tab-title">
-                    <li class="layui-this">网站设置</li>
-                    <li>用户管理</li>
-                    <li>权限分配</li>
-                    <li>商品管理</li>
-                    <li>订单管理</li>
+                    <li class="layui-this">ABCDE</li>
+                    <li>FGHJ</li>
+                    <li>KLMNO</li>
+                    <li>PQRST</li>
+                    <li>WXYZ</li>
                 </ul>
-                <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show">
-                        <ul class="section-city">
-                            <li class="hot-city"><span class="city-cur" data-val="100010000">全国</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101010100">北京</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101020100">上海</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101280100">广州</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101280600">深圳</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101210100">杭州</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101030100">天津</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101110100">西安</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101190400">苏州</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101200100">武汉</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101230200">厦门</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101250100">长沙</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101270100">成都</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101180100">郑州</span></li>
-                            <li class="hot-city"><span class="city-cur" data-val="101040100">重庆</span></li>
-
-                        </ul>
+                <div class="layui-tab-content" >
+                    <div class="layui-tab-item layui-show" >
+                        <c:if test="${not empty ae}">
+                            <c:forEach var="ae" items="${ae}">
+                                <a style="margin-left: 5%" onclick="findCity(this)">${ae.cityName}</a>
+                            </c:forEach></c:if>
                     </div>
-                    <div class="layui-tab-item">内容2</div>
-                    <div class="layui-tab-item">内容3</div>
-                    <div class="layui-tab-item">内容4</div>
-                    <div class="layui-tab-item">内容5</div>
+                    <div class="layui-tab-item">
+                        <div class="layui-tab-item layui-show" >
+                            <c:if test="${not empty fj}">
+                                <c:forEach var="fj" items="${fj}">
+                                    <a style="margin-left: 5%" onclick="findCity(this)">${fj.cityName}</a>
+                                </c:forEach></c:if>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-tab-item layui-show" >
+                            <c:if test="${not empty ko}">
+                                <c:forEach var="ko" items="${ko}">
+                                    <a style="margin-left: 5%" onclick="findCity(this)">${ko.cityName}</a>
+                                </c:forEach></c:if>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-tab-item layui-show" >
+                            <c:if test="${not empty pt}">
+                                <c:forEach var="pt" items="${pt}">
+                                    <a style="margin-left: 5%" onclick="findCity(this)">${pt.cityName}</a>
+                                </c:forEach></c:if>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-tab-item layui-show" >
+                            <c:if test="${not empty wz}">
+                                <c:forEach var="wz" items="${wz}">
+                                    <a style="margin-left: 5%"  onclick="findCity(this)">${wz.cityName}</a>
+                                </c:forEach></c:if>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -485,6 +708,10 @@
 <%--                    <li ka="sel-province-2">FGHJ</li>--%>
 <%--                    <li ka="sel-province-3">KLMN</li>--%>
 <%--                    <li ka="sel-province-4">PQRST</li>--%>
+<%--                    <li ka="sel-province-5">WXYZ</li>--%>
+<%--                    <li ka="sel-province-5">WXYZ</li>--%>
+<%--                    <li ka="sel-province-5">WXYZ</li>--%>
+<%--                    <li ka="sel-province-5">WXYZ</li>--%>
 <%--                    <li ka="sel-province-5">WXYZ</li>--%>
 <%--                </ul>--%>
 <%--                <ul class="section-city">--%>
@@ -503,9 +730,8 @@
 <%--                    <li class="hot-city"><span class="city-cur" data-val="101270100">成都</span></li>--%>
 <%--                    <li class="hot-city"><span class="city-cur" data-val="101180100">郑州</span></li>--%>
 <%--                    <li class="hot-city"><span class="city-cur" data-val="101040100">重庆</span></li>--%>
-
 <%--                </ul>--%>
-            </div>
+<%--            </div>--%>
         </div>
     </div>
 </div>
@@ -523,16 +749,16 @@
 
     // 全部城市弹出框
     function showCityDialog() {
-        // $("#city-dialog").show()
-        $("#citysShow").toggle()
+        $("#city-dialog").show()
+        // $("#citysShow").toggle()
     }
 
 
 
     // 公司行业切换 隐藏/显示
-    function industryBoxToggle() {
-        $("#positionsShow").toggle()
-    }
+    // function industryBoxToggle() {
+    //     $("#positionsShow").toggle()
+    // }
 </script>
 <script>
     var findworkYear=$('#findworkYear').val();
@@ -584,16 +810,16 @@
         findWorkCity=condition.innerText;
         location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     }
-    function findPosition(condition) {
-        findposition=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
-    }
+    // function findPosition(condition) {
+    //     findposition=condition.innerText;
+    //     location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+    // }
     function findsearch() {
         location.href="searchJob?findSearch="+$('#search').val()+"&findWorkCity="+findWorkCity
     }
     function updateCityDialog() {
-        // $("#city-dialog").show()
-        $("#citysShow").toggle()
+        $("#city-dialog").show()
+        // $("#citysShow").toggle()
     }
     function sendResume(pPostId) {
         $.ajax({
@@ -618,6 +844,162 @@
             }
         })
     }
+
+
+    $(function () {
+        //控制边框高亮
+        $(".qrm-input-border").click(function () {
+            if($(".qrm-pinming").css("background-image").indexOf("qrm-arrow-down")!==-1){
+                if($(".qrm-input").val() == ''||$(".qrm-input").val()!=''){
+                    $(".qrm-pinming").css("background-image","url(images/qrm-arrow-top.png)");
+                    $(".qrm-pinming").css("border","1px solid #409EFF");
+                    $(".qrm-border1").show();
+                }else{
+                    var s=$(".qrm-input").val()
+                    console.log(s)
+                    var n=(s.split('/')).length-1;
+                    console.log(n)
+                    if(n==1){
+                        $(".qrm-border1").show();
+                        $(".qrm-border2").show();
+                    }else if (n==2){
+                        $(".qrm-border1").show();
+                        $(".qrm-border2").show();
+                        $(".qrm-border3").show();
+                    }
+                    $(".qrm-pinming").css("background-image","url(images/qrm-arrow-top.png)");
+                    $(".qrm-pinming").css("border","1px solid #409EFF");
+                }
+            }else {
+                $(".qrm-border1").hide();
+                $(".qrm-border2").hide();
+                $(".qrm-border3").hide();
+                $(".qrm-pinming").css("border","1px solid #ddd");
+                $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            }
+        });
+        //第一层
+        var lev1;
+        var lev2;
+        var lev3;
+        var lev4;
+        //第一层 事件代理
+        $("body").on("click",".qrm-lev-1>li",function () {
+            //控制背景颜色高亮
+            $(this).addClass("active").siblings("li").removeClass("active");
+            // 先将input中的值置空
+            lev1="";
+            lev2="";
+            lev3="";
+            lev4="";
+            // 获取当前点击的li的子元素的HTML节点 将获取的节点放到页面显示的第二级中
+            var html1=$(this).children(".li-zi-1").html();
+            $(".qrm-lev-2").html(html1);
+            $(".qrm-border2").show();
+            $(".qrm-border3").hide();
+            $(".qrm-lev-3").html("");
+//      $(".qrm-lev-4").html("");
+            //获取当前点击的li的span中的值 将值传到input中
+            lev1=$(this).children("span").html();
+//      $(".qrm-input").val("");
+//      $(".qrm-input").val(lev1);
+        });
+        //第二层 事件代理
+
+        $("body").on("click",".qrm-lev-2>li",function () {
+            $(this).addClass("active").siblings("li").removeClass("active");
+//      console.log($(this).children(".li-zi-2").html())
+            if($(this).children(".li-zi-2").html()== undefined){
+                lev2=$(this).children("span").html();
+                $(".qrm-input").val(lev1+"/"+lev2);
+                $(".qrm-border1").hide();
+                $(".qrm-border2").hide();
+                $(".qrm-border3").hide();
+                $(".qrm-pinming").css("border","1px solid #ddd");
+                $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            }else{
+                var html2=$(this).children(".li-zi-2").html();
+                lev2=$(this).children("span").html();
+                $(".qrm-border3").show();
+                $(".qrm-lev-3").html(html2);
+            }
+            if($(this).parent().parent().next().children(".qrm-lev").html()==""){
+                // 去掉输入框的高亮状态
+                $(".qrm-border1").hide();
+                $(".qrm-border2").hide();
+                $(".qrm-border3").hide();
+                $(".qrm-pinming").css("border","1px solid #ddd");
+                $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            }
+//      $(".qrm-lev-4").html("");
+//      $(".qrm-input").val(lev1+"/"+lev2);
+        });
+        //第三层 事件代理
+        $("body").on("click",".qrm-lev-3>li",function () {
+            $(this).addClass("active").siblings("li").removeClass("active");
+            var html3=$(this).children(".li-zi-3").html();
+            lev3=$(this).children("span").html();
+//      $(".qrm-lev-4").html(html3);
+            $(".qrm-input").val(lev3);
+            $(".qrm-border1").hide();
+            $(".qrm-border2").hide();
+            $(".qrm-border3").hide();
+            $(".qrm-pinming").css("border","1px solid #ddd");
+            $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            findposition=lev3;
+            location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+
+            if($(this).parent().parent().next().children(".qrm-lev").html()==""){
+                // 去掉输入框的高亮状态
+                $(".qrm-input").val(lev1+"/"+lev2);
+                $(".qrm-border1").hide();
+                $(".qrm-border2").hide();
+                $(".qrm-border3").hide();
+                $(".qrm-pinming").css("border","1px solid #ddd");
+                $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            }
+        });
+        //第三层 事件代理
+//  $("body").on("click",".qrm-lev-4>li",function () {
+//      $(this).addClass("active").siblings("li").removeClass("active");
+//      lev4=$(this).children("span").html();
+//      $(".qrm-pinming-panel").hide();
+//      $(".qrm-pinming").css("border","1px solid #ddd");
+//      $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+//      $(".qrm-input").val(lev1+"/"+lev2+"/"+lev3+"/"+lev4);
+//  });
+
+//给四个区域绑定点击事件 判断当前的下一个区域 如果为空 点击当前区域 qrm-pinming-panel 隐藏 并且把input高亮去掉
+        $("body").on("click",".qrm-lev>li",function () {
+            if($(this).parent().parent().next().children(".qrm-lev").html()==""){
+                // 去掉输入框的高亮状态
+                $(".qrm-border1").hide();
+                $(".qrm-border2").hide();
+                $(".qrm-border3").hide();
+                $(".qrm-pinming").css("border","1px solid #ddd");
+                $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            }
+        })
+    });
+    //点击空白处隐藏div
+    $(document).click(function(event){
+        var x1 = $('.box');  // 设置目标区域
+        if(!x1.is(event.target) && x1.has(event.target).length === 0){ // Mark 1
+            $(".qrm-border1").hide();
+            $(".qrm-border2").hide();
+            $(".qrm-border3").hide();
+            $(".qrm-pinming").css("border","1px solid #ddd");
+            $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            //$('#divTop').slideUp('slow');  //滑动消失
+//         $('.qrm-pinming-panel').hide(300);     //淡出消失
+        }
+    });
+
+
+
+
+
+
 
 
     layui.use(['laypage', 'layer'], function(){
@@ -691,6 +1073,12 @@
         location.href="/springboot/center/jianli"
     }
 </script>
+
+
+<script type="text/javascript">
+
+</script>
+
 </body>
 
 </html>

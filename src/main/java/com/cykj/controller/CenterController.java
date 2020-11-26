@@ -35,6 +35,13 @@ public class CenterController {
     String search="";
     String position="职位类型";
 
+    @RequestMapping("/ceshi")
+    public String ceshi(){
+        return "ceshi";
+    }
+
+
+
     @Resource
     private ResumeService resumeService;
     @RequestMapping("/myCenter")
@@ -513,6 +520,7 @@ public class CenterController {
 
     @RequestMapping("/pageJob")
     public String job(HttpServletRequest req,String findPosition){
+
         int page=0;
         int curr=1;
         int limit=10;
@@ -529,10 +537,18 @@ public class CenterController {
             map.put("position",findPosition);
         }
 
-        List<Position> positions=resumeService.positions();
-        req.setAttribute("positions",positions);
-        List<City>citys=resumeService.citys();
-        req.setAttribute("citys",citys);
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
 
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -561,6 +577,8 @@ public class CenterController {
 
     @RequestMapping("/clearjob")
     public String clearjob(HttpServletRequest req){
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
         int page=0;
         int curr=1;
         int limit=10;
@@ -605,7 +623,8 @@ public class CenterController {
         int page=0;
         int curr=1;
         int limit=10;
-
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
         Map map=new HashMap();
         map.put("workCity",findWorkCity);
         search=findSearch;
@@ -651,6 +670,8 @@ public class CenterController {
         int limit=10;
         workCity=findWorkCity;
         Map map=new HashMap();
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
         if (findWorkCity.equals("全国")){
 
         }else {
@@ -812,13 +833,24 @@ public class CenterController {
             curr="1";
         }
 
-        List<Position> positions=resumeService.positions();
-        req.setAttribute("positions",positions);
-        List<City>citys=resumeService.citys();
-        req.setAttribute("citys",citys);
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
+        System.out.println(new Gson().toJson(industrys));
+
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
 //        int curr=1;
 //        int limit=2;
         Map map=new HashMap();
+        System.out.println(findPosition+"??????????????!!!!!!!!!!");
         if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
             position="职位类型";
         }else if (findPosition.equals("不限")){
@@ -827,7 +859,7 @@ public class CenterController {
             position=findPosition;
             map.put("position",findPosition);
         }
-
+        System.out.println(position+"11111111111??????????????");
         if (findWorkCity==null){
             System.out.println("99999");
         }else if (findWorkCity.equals("全国")){
