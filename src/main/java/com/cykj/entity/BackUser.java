@@ -26,6 +26,7 @@ public class BackUser {
   private String finanStage; //融资阶段
   private String product; //公司产品
   private String logo; //logo
+  private String logp; //logo
   private long roleId; //角色ID
   private RoleInfo role; //角色实体类
   private String stateId;//状态

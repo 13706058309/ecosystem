@@ -25,7 +25,7 @@ public class PowerController{
 
     @RequestMapping({"/",""})
     public String toPower(){
-        return "powerManager";
+        return "PowerManager";
     }
 
 

@@ -346,17 +346,17 @@
     <div id="changeStatu" style="display: none;margin-top: 3%">
         <br>
         <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
-            <label class="layui-form-label" style="margin-right: 10%">融资阶段</label>
+            <label class="layui-form-label" style="margin-right: 10%">融资:</label>
             <div class="layui-input-inline">
                 <select name="newFinanStage" id="newFinanStage">
-                    <option>请选择</option>
-                    <option >未融资</option>
-                    <option >天使轮</option>
-                    <option >A轮</option>
-                    <option >B轮</option>
-                    <option >C轮</option>
-                    <option >D轮及以上</option>
-                    <option >上市公司</option>
+                    <option <c:if test="${empty comp.finanStage }">selected="selected"</c:if>>请选择</option>
+                    <option <c:if test="${comp.finanStage=='未融资'}">selected="selected"</c:if> >未融资</option>
+                    <option <c:if test="${comp.finanStage=='天使轮'}">selected="selected"</c:if> >天使轮</option>
+                    <option <c:if test="${comp.finanStage=='A轮'}">selected="selected"</c:if> >A轮</option>
+                    <option <c:if test="${comp.finanStage=='B轮'}">selected="selected"</c:if> >B轮</option>
+                    <option <c:if test="${comp.finanStage=='C轮'}">selected="selected"</c:if> >C轮</option>
+                    <option <c:if test="${comp.finanStage=='D轮及以上'}">selected="selected"</c:if> >D轮及以上</option>
+                    <option <c:if test="${comp.finanStage=='上市公司'}">selected="selected"</c:if>>上市公司</option>
                 </select>
             </div>
         </form>
@@ -370,20 +370,20 @@
 
             <div class="layui-input-inline">
                 <select name="newScale" id="newScale" lay-filter="province">
-                    <option>请选择</option>
-                    <option >少于15人</option>
-                    <option >15-50人</option>
-                    <option >50-150人</option>
-                    <option>150-500人</option>
-                    <option>500-999人</option>
-                    <option>1000人以上</option>
+                    <option <c:if test="${empty comp.scale }">selected="selected"</c:if>>请选择</option>
+                    <option <c:if test="${comp.scale=='少于15人' }">selected="selected"</c:if> >少于15人</option>
+                    <option <c:if test="${comp.scale=='15-50人' }">selected="selected"</c:if> >15-50人</option>
+                    <option <c:if test="${comp.scale=='50-150人' }">selected="selected"</c:if> >50-150人</option>
+                    <option <c:if test="${comp.scale=='150-500人' }">selected="selected"</c:if> >150-500人</option>
+                    <option <c:if test="${comp.scale=='500-999人' }">selected="selected"</c:if> >500-999人</option>
+                    <option <c:if test="${comp.scale=='1000人以上' }">selected="selected"</c:if> >1000人以上</option>
                 </select>
             </div>
 
 
             <label class="layui-form-label">主页：</label>
             <div class="layui-input-inline">
-                <input type="text" id="newHomePage" name="newHomePage"  autocomplete="off" class="layui-input" >
+                <input type="text" id="newHomePage" name="newHomePage" value="${comp.homePage}" autocomplete="off" class="layui-input" >
             </div>
 
         </div>
