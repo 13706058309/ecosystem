@@ -25,6 +25,14 @@ public class HomePageController {
     @Resource
     private CompanyService companyService;
 
+
+    //跳转访问
+
+//    @RequestMapping("/home")
+//    public String home(){
+//        return "HomePage";
+//    }
+
     @RequestMapping("/home")
     public String home(HttpServletRequest request,String city){
 //城市集合

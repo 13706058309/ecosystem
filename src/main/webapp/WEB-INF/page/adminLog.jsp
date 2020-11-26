@@ -65,7 +65,9 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="记住密码">
+                    <p></p>
+<%--                    <a><input type="button" name="forgetPass" id="forgetPass" src=""></a>--%>
+<%--                    <input type="button" name="rememberMe"  lay-skin="primary" value="忘记密码">--%>
                 </div>
                 <div class="layui-form-item">
 <%--                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" onclick="adminLog()">登 入</button>--%>
@@ -92,11 +94,11 @@
         var path = $("#path").val();
         var account = $("#username").val();
         var password = $("#password").val();
-        var vCode = $("#captcha").val();
+        var sVCode = $("#captcha").val();
 
         $.ajax({
             url:path+"/golog/adLog",
-            data:{"account":account,"password":password,"vCode":vCode},
+            data:{"account":account,"password":password,"sVCode":sVCode},
             type:"post",
             typeData:"text",
             beforeSend:function () {
@@ -109,7 +111,7 @@
                     layer.msg("密码不能为空!");
                     return false;
                 }
-                if(vCode.trim().length==0){
+                if(sVCode.trim().length==0){
                     layer.msg("验证码不能为空!");
                     return false;
                 }
@@ -118,18 +120,16 @@
             success:function (info) {
                 console.log(info);
 
-                // layer.msg(info);
+                 // layer.msg(info);
                 // changeImg();
                 if (info == 'success'){
                     layer.msg("登陆成功!");
                     location.href = path+"/golog/adminMain";
-                } else if (info = 'disable'){
-                    layer.msg("登录失败,此账号已被禁用!");
-                    // location.href = path+"/golog/admin";
-                } else if (info == 'delete'){
-                    layer.msg("登录失败,此账号已被删除!");
-                    // location.href = path+"/golog/admin";
-                } else if (info == 'Vcode error'){
+                } else if (info == 'noReviewed'){
+                    layer.msg("登录失败,此账号待审核!");
+                } else if (info = 'failedPass'){
+                    layer.msg("登录失败,此账号未通过审核!");
+                } else if (info == 'vCodeError'){
                     layer.msg("登录失败,验证码错误，请重试!");
                 } else {
                     layer.msg("当前账号无权限,请联系管理员!");

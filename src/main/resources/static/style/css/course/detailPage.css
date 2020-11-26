@@ -1,0 +1,441 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.overText{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.div_main{
+    width: 1120px;
+    margin: 20px auto;
+    height: 100%;
+}
+.div_top{
+    width: 1120px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    border-radius: 5px;
+}
+.span_top{
+    line-height: 40px;
+    margin-left: 20px;
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+}
+.span_c{
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+}
+.div_details{
+    margin-top: 10px;
+    box-sizing: border-box;
+    padding-top: 10px;
+    width: 825px;
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    float: left;
+}
+.div_detail{
+    width: 825px;
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    border-radius: 5px;
+    position: relative;
+}
+.div_detail h2{
+    margin-top: 10px;
+    font-weight: normal;
+    height: 50px;
+    line-height: 50px;
+    /*text-align:center;*/
+    font-family: "微软雅黑";
+    font-size: 30px;
+}
+.p_time{
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #999;
+    margin-right: 20px;
+}
+.hr{
+    margin-top:20px;
+    margin-bottom:30px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.div_html{
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #999;
+}
+.like_stu{
+    width: 825px;
+    height: 40px;
+    background-color: rgba(234, 234, 236, 1);
+}
+
+
+.div_group{
+    margin-top: 10px;
+    width: 280px;
+    /*! height: 1px; */
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    border-radius: 5px;
+    float: right;
+}
+.divTitle{
+    width: 253px;
+    margin: 15px auto 20px;
+    height: 35px;
+    position: relative;
+}
+.titleBottom{
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(231, 231, 231, 1);
+}
+.titleRight{
+    width: 10px;
+    position: absolute;
+    right: 0;
+    height: 22px;
+    border-right: 9px solid rgba(218, 58, 55, 1);
+    float: right;
+    top: 3px;
+}
+.titleText{
+    font-weight: 700;
+    font-style: normal;
+    color: #4C4C4C;
+    font-size: 18px;
+    position: absolute;
+    right: 19px;
+}
+.div_recommend_activity{
+    margin-top: 10px;
+    width: 280px;
+    height: 580px;
+    background: inherit;
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    border-radius: 5px;
+    float: right;
+}
+
+.div_video{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(240, 240, 240, 1);
+    padding-bottom: 0px;
+}
+.imgBox{
+    position: relative;
+    overflow: hidden;
+}
+
+.pagebtn{
+    color: #666666;
+    border-color: #666666;
+}
+.pagebtn:hover{
+    color: rgba(231, 68, 52, 1);
+    border-color: rgba(231, 68, 52, 1);
+}
+
+/*------活动视频模块------*/
+.videoDescribe{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    top: 175px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+.activityDiv{
+    width: 253px;
+    height: 220px;
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+    border-bottom: 1px dashed #BBBBBB;
+}
+.activityTop{
+    width: 100%;
+    height: 166px;
+    position: relative;
+    overflow: hidden;
+}
+.activityTop>img{
+    width: 253px;
+    height: 166px;
+}
+.activityDescribe{
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    top: 136px;
+    background-color: rgba(0,0,0,0.6);
+}
+.activityDescribe>p{
+    color: white;
+    font-size: 14px;
+    line-height: 30px;
+    width: 230px;
+    margin: 0 auto;
+}
+.activityInfo{
+    width: 100%;
+}
+.activityInfo>p{
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666666;
+    width: 100%;
+}
+.activityInfo>p>img{
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.left_img{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.right_img{
+    margin-top: 15px;
+    margin-right: 10px;
+    float: right;
+}
+
+
+.p_describe{
+    text-indent:2em;
+    word-break:break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    color: #666666;
+    font-size: 14px;
+}
+.video_img{
+    width: 100%;
+}
+.video_tilte{
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    color: #666666;
+    font-size: 14px;
+    margin-left: 5px;
+    float:left;
+}
+.teacher{
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #999999;
+    margin-left: 5px;
+}
+.num{
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #999999;
+    display: block;
+    margin-top: 4px;
+    margin-right: 10px;
+    float: right;
+}
+.people_img{
+    width:24px;
+    height:24px;
+    float: right;
+}
+
+/*------翻页模块-----*/
+.div_page{
+    width: 825px;
+    height: 50px;
+    position: relative;
+}
+.pagebtn {
+    position: absolute;
+    padding: 3px 15px;
+    margin-top: 10px;
+    border: 1px solid #666;
+    font-size: 14px;
+    border-radius: 10px;
+    text-decoration:none;
+    color: #999;
+}
+.pagebtn.lpage {
+    float: left;
+    left: 20px;
+}
+
+.pagebtn.npage {
+    float: right;
+    right: 20px;
+}
+.a_index{
+    text-decoration:none;
+    color: #999;
+}
+.a_index:HOVER {
+    color: red;
+}
+.pagebtn:HOVER {
+    color: red;
+}
+.clear{
+    clear: both;
+}
+.div_html img{
+    max-width: 90%;
+}
+
+.videoDescribe{
+    top: 180px;
+}
+.timeConcrol{
+    width:100%;
+    height:30px;
+    background-color:red;
+}
+.priceConcrol{
+    width:100%;
+    height:40px;
+}
+.time{
+    line-height:30px;
+}
+.rankUser{
+    float: left;
+    margin-left:30px;
+    height:40px;
+}
+.ranking{
+    width: 35px;
+    height: 20px;
+    background-color: rgba(218, 58, 55, 1);
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #FFFFFF;
+    float: right;
+    margin-right:15px;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.tryBtn{
+    width:60px;
+    height:22px;
+    float:right;
+    background-color:#F7C3BE;
+    color:#FF0000;
+    font-weight:bold;
+    margin-top:20px;
+    border-radius:10px;
+    border: none;
+}
+button:hover{
+    background-color:#FF0000;
+    color:#FFFFFF;
+}
+/* body .my-class .layui-layer-title{background:#c00; color:#fff; border: none;} */
+/* body .my-class .layui-layer-btn{border-top:1px solid #E9E7E7} */
+body .my-class .layui-layer-btn a{background:#E74434;}
+
+.safe_width {
+    width: 1100px;
+    margin: 10px auto;
+}
+
+/*****************未登录时登录注册按钮******************/
+.tkbtn {
+    display: inline-block;
+    width: 60px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: url(http://cymooc.org:80/common/images/btn1.png) no-repeat;
+    font-size: 14px;
+}
+
+.tkbtn:link,.tkbtn:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+.tkbtn:hover {
+    color: #fff;
+    background: url(http://cymooc.org:80/common/images/btn_hover1.png) no-repeat;
+}
+
+.tkbtn.tklog {
+    background-position: 0px 0px;
+    float: left;
+}
+
+.tkbtn.tkreg {
+    background-position: -0.87px -44px;
+    float: right;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #A9A9A9;
+}
+.navbar .nav > li .dropdown-menu {
+    margin: 0;
+}
+.navbar .nav > li:hover .dropdown-menu {
+    display: block;
+}
+ul.dropdown-menu {
+    top:30px;
+    left:-112px;
+    background:#fff;
+    border: none;
+}
+.dropdown-menu > li > a {
+    padding: 7px 20px;
+    color: gray;
+    letter-spacing: 1px;
+}
+.dropdown-menu > li > a:hover {
+    background-color:#F0F0F0;
+}
+
+.div_group{
+    margin-top: 32px;
+}
+
+#courseIframe{
+    min-height: 900px;
+}

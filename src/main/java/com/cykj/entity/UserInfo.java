@@ -19,8 +19,10 @@ public class UserInfo {
 
   private String address; //地址
   private long isOpen; // 是否公开
+
+  private String headImgUrl; //用户头像路径
+
   private String regTime;//注册时间
-  private String headImgUrl;
 
   public UserInfo() {
 
@@ -105,13 +107,7 @@ public class UserInfo {
   }
 
 
-  public long getJobStandId() {
-    return jobStandId;
-  }
 
-  public void setJobStandId(long jobStandId) {
-    this.jobStandId = jobStandId;
-  }
 
 
   public String getAddress() {

@@ -64,6 +64,7 @@
             <input type="text" name="address"  id="address" placeholder="请输入您的地址" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')">
 <%--            <input type="button" value="是否为应届生" onclick="isStu()">--%>
             <a onclick="ajax_reg()"><input type="button" value="提交"></a>
+    <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a></p>
         </form>
     </div>
 </div>

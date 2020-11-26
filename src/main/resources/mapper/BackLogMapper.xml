@@ -3,5 +3,43 @@
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.BackLogMapper">
+        <select id="findLogOnPage" parameterType="java.util.Map" resultMap="adLogRes">
+        select l.*,u.bUserName from backLog l,backUser u where l.bUserID = u.bUserID and bUserName like concat('%',#{bUserName},'%')
+        <if test="beginTime != null">
+                and operaTime >= #{beginTime}
+        </if>
+                <if test="endTime != null">
+                        and operaTime &lt;= #{endTime}
+                </if>
+        order by bUserID desc limit #{offset}, #{limit}
+        </select>
 
+
+        <resultMap id="adLogRes" type="com.cykj.entity.BackLog">
+                <id property="bLogId" column="bLogId"></id>
+                <result property="bUserID" column="bUserID"></result>
+                <result property="operaTime" column="operaTime"></result>
+                <result property="matter" column="matter"></result>
+                <association property="backUser" column="" javaType="com.cykj.entity.BackLog">
+                <id property="bUserID" column="bUserID"></id>
+                <result property="bUserName" column="bUserName"></result>
+                </association>
+        </resultMap>
+
+
+        <select id="findLogNum" resultType="java.lang.Integer">
+                select count(*) from backLog l,backUser u where l.bUserID = u.bUserID and bUserName like concat('%',#{bUserName},'%')
+                <if test="beginTime != null">
+                        and operaTime >= #{beginTime}
+                </if>
+                <if test="endTime != null">
+                        and operaTime &lt;= #{endTime}
+                </if>
+        </select>
+
+
+
+        <insert id="addBackLog"  parameterType="com.cykj.entity.BackLog">
+            insert into backLog(bUserID,matter) value (#{bUserID},#{matter})
+        </insert>
 </mapper>

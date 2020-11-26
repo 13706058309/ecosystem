@@ -3,6 +3,7 @@ package com.cykj.entity;
 import com.cykj.utils.MyUtil;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 发布岗位表
@@ -29,7 +30,10 @@ public class PostPosition {
   private String detailAddress;//详细地址
   private String contact;//联系方式
   private String contactEmail;//联系邮箱
-  private  BackUser backUser;
+  private BackUser backUser;
+  private List<Industry> industryList;
+  private Delivery delivery;
+  private Parameter parameter;
 
 
   @Override
@@ -62,6 +66,17 @@ public class PostPosition {
   public PostPosition() {
   }
 
+  public List<Industry> getIndustryList() {
+    return industryList;
+  }
+
+  public void setIndustryList(List<Industry> industryList) {
+    this.industryList = industryList;
+  }
+
+
+
+
   public long getpPostId() {
     return pPostId;
   }
@@ -70,13 +85,6 @@ public class PostPosition {
     this.pPostId = pPostId;
   }
 
-  public BackUser getBackUser() {
-    return backUser;
-  }
-
-  public void setBackUser(BackUser backUser) {
-    this.backUser = backUser;
-  }
 
   public long getPPostId() {
     return pPostId;
@@ -254,4 +262,32 @@ public class PostPosition {
   }
 
 
+
+  public Delivery getDelivery() {
+    return delivery;
+  }
+
+  public void setDelivery(Delivery delivery) {
+    this.delivery = delivery;
+  }
+
+  public Parameter getParameter() {
+    return parameter;
+  }
+
+  public void setParameter(Parameter parameter) {
+    this.parameter = parameter;
+  }
+
+  public BackUser getBackUser() {
+    return backUser;
+  }
+
+  public void setBackUser(BackUser backUser) {
+    this.backUser = backUser;
+  }
+
+  public void setReleaseTime(String releaseTime) {
+    this.releaseTime = releaseTime;
+  }
 }
