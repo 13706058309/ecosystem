@@ -1,9 +1,9 @@
 package com.cykj.mapper;
 
 import com.cykj.entity.Certificate;
-import com.cykj.entity.Field;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -43,4 +43,8 @@ public interface CertificateMapper {
     public int upbackzhengshu(Map<String, Object> map);
     //修改证书需求
     public int upbackzhengshuxuqiu(@Param("cerRequirement")String cerRequirement,@Param("cerId")String cerId);
+    //证书分页
+    List<Certificate> findAll(Map<String,Object> page);
+    //删除证书
+    int deleteZs(int cerId);
 }

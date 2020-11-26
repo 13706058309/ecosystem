@@ -2,11 +2,15 @@ package com.cykj.service.impl;
 
 import com.cykj.entity.Certificate;
 import com.cykj.entity.Field;
+import com.cykj.entity.TableInfo;
 import com.cykj.mapper.CertificateMapper;
 import com.cykj.service.CertificateService;
+import javafx.scene.control.Tab;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -117,4 +121,30 @@ public class CertificateServiceImpl implements CertificateService {
     public int upbackzhengshuxuqiu(String cerRequirement, String cerId) {
         return certificateMapper.upbackzhengshuxuqiu(cerRequirement,cerId);
     }
+
+    /**
+     * @param page
+     * @param limit
+     * @查到总数
+     */
+    @Override
+    public List<Certificate> findAll(String page, String limit) {
+        Map map = new HashMap<String,String>();
+        map.put("page",page);
+        map.put("limit",limit);
+        return certificateMapper.findAll(map);
+    }
+
+    /**
+     * 删除证书
+     *
+     * @param cerId
+     */
+    @Override
+    public int deleteZs(int cerId) {
+        int result = certificateMapper.deleteZs(cerId);
+        return result;
+    }
+
+
 }

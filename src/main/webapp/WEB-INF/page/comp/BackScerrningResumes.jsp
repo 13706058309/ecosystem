@@ -15,6 +15,11 @@
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        .layui-form-checkbox i {
+            top: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +36,7 @@
 <h1 style="text-align: center">简历过滤</h1>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
 <div class="demoTable layui-form" style="margin-left: 10%">
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="margin-left: -12%">
         <div class="layui-inline">
             <label class="layui-form-label">投递时间</label>
             <div class="layui-input-inline">
@@ -53,7 +58,7 @@
         </div>
 
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="margin-left: -12%">
 
         <label class="layui-form-label">学历</label>
         <div class="layui-input-inline">

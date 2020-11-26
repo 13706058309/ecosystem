@@ -123,6 +123,22 @@ public interface CerRecordMapper {
      */
     public  int findbackSQlistsize(Map<String, Object> findmap);
 
+
+    /**
+     * 查询记录分页
+     */
+    List<CerRecord> allPage(Map<String,Object> page);
+
+
+    /**
+     * 修改审核状态
+     */
+    int upSta(Map<String,Object> map);
+
+    /**
+     * 搜索
+     */
+    int search(Map<String,Object> map);
 }
 
 

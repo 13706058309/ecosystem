@@ -6,7 +6,26 @@ public class Positions {
     private String postName;
     private String industryName;
 private String companyID;
+private  String postID;
+private  String departName;
+
     public Positions() {
+    }
+
+    public String getPostID() {
+        return postID;
+    }
+
+    public void setPostID(String postID) {
+        this.postID = postID;
+    }
+
+    public String getDepartName() {
+        return departName;
+    }
+
+    public void setDepartName(String departName) {
+        this.departName = departName;
     }
 
     public String getCompanyID() {

@@ -205,7 +205,7 @@
                                 <svg class="icon-svg" style="margin-left: 50%">
                                     <use xlink:href="#icon-svg-add"></use>
                                 </svg>
-                                <span onclick="changeBase()">修改</span>
+                                <span onclick="changeBase()" style="color: #5bff67">修改</span>
                             </a>
                         </h2>
 
@@ -223,17 +223,19 @@
 
                                 <tr>
                                     <td width="33%"><h3>邮箱</h3></td>
-                                    <td width="67%" style="overflow: auto"> <h3>${comp.email}</h3></td>
+                                    <td width="67%" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                                        <h3>${comp.email}</h3>
+                                    </td>
                                 </tr>
 
                                 <tr>
                                     <td width="33%"><h3>规模</h3></td>
-                                    <td width="67%"><h3 id="scale">${comp.scale}</h3></td>
+                                    <td width="67%" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"><h3 id="scale">${comp.scale}</h3></td>
                                 </tr>
 
                                 <tr>
                                     <td width="33%"><h3>主页</h3></td>
-                                    <td width="67%"><h3 id="homePage">${comp.homePage}</h3></td>
+                                    <td width="67%" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"><h3 id="homePage">${comp.homePage}</h3></td>
                                 </tr>
                             </table>
                         </div>
@@ -248,7 +250,7 @@
                                 <svg class="icon-svg" style="margin-left: 50%">
                                     <use xlink:href="#icon-svg-add"></use>
                                 </svg>
-                                    <span onclick="changeStatu()">修改</span>
+                                    <span onclick="changeStatu()" style="color: #5bff67">修改</span>
                             </a>
                         </h2>
 
@@ -271,7 +273,7 @@
                                 <svg class="icon-svg" style="margin-left: 50%">
                                     <use xlink:href="#icon-svg-add"></use>
                                 </svg>
-                                <span onclick="changeProduct()">修改</span>
+                                <span onclick="changeProduct()" style="color: #5bff67">修改</span>
                             </a>
                         </h2>
 
@@ -303,7 +305,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">新地址:</label>
             <div class="layui-input-inline">
-                <input type="text" id="newAddress" name="newAddress"  autocomplete="off" class="layui-input" >
+                <input type="text" id="newAddress" name="newAddress"  autocomplete="off" class="layui-input" style="width: 200%">
             </div>
         </div>
     </div>
@@ -344,17 +346,17 @@
     <div id="changeStatu" style="display: none;margin-top: 3%">
         <br>
         <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
-            <label class="layui-form-label" style="margin-right: 10%">融资阶段</label>
+            <label class="layui-form-label" style="margin-right: 10%">融资:</label>
             <div class="layui-input-inline">
                 <select name="newFinanStage" id="newFinanStage">
-                    <option>请选择</option>
-                    <option >未融资</option>
-                    <option >天使轮</option>
-                    <option >A轮</option>
-                    <option >B轮</option>
-                    <option >C轮</option>
-                    <option >D轮及以上</option>
-                    <option >上市公司</option>
+                    <option <c:if test="${empty comp.finanStage }">selected="selected"</c:if>>请选择</option>
+                    <option <c:if test="${comp.finanStage=='未融资'}">selected="selected"</c:if> >未融资</option>
+                    <option <c:if test="${comp.finanStage=='天使轮'}">selected="selected"</c:if> >天使轮</option>
+                    <option <c:if test="${comp.finanStage=='A轮'}">selected="selected"</c:if> >A轮</option>
+                    <option <c:if test="${comp.finanStage=='B轮'}">selected="selected"</c:if> >B轮</option>
+                    <option <c:if test="${comp.finanStage=='C轮'}">selected="selected"</c:if> >C轮</option>
+                    <option <c:if test="${comp.finanStage=='D轮及以上'}">selected="selected"</c:if> >D轮及以上</option>
+                    <option <c:if test="${comp.finanStage=='上市公司'}">selected="selected"</c:if>>上市公司</option>
                 </select>
             </div>
         </form>
@@ -362,26 +364,26 @@
 
 <div id="changeBase" style="display: none;margin-top: 3%">
     <br>
-    <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
+    <form class="layui-form" action="" style="margin-left: 5%;margin-right: 5%">
         <div class="layui-form-item">
             <label class="layui-form-label">规模：</label>
 
             <div class="layui-input-inline">
                 <select name="newScale" id="newScale" lay-filter="province">
-                    <option>请选择</option>
-                    <option >少于15人</option>
-                    <option >15-50人</option>
-                    <option >50-150人</option>
-                    <option>150-500人</option>
-                    <option>500-999人</option>
-                    <option>1000人以上</option>
+                    <option <c:if test="${empty comp.scale }">selected="selected"</c:if>>请选择</option>
+                    <option <c:if test="${comp.scale=='少于15人' }">selected="selected"</c:if> >少于15人</option>
+                    <option <c:if test="${comp.scale=='15-50人' }">selected="selected"</c:if> >15-50人</option>
+                    <option <c:if test="${comp.scale=='50-150人' }">selected="selected"</c:if> >50-150人</option>
+                    <option <c:if test="${comp.scale=='150-500人' }">selected="selected"</c:if> >150-500人</option>
+                    <option <c:if test="${comp.scale=='500-999人' }">selected="selected"</c:if> >500-999人</option>
+                    <option <c:if test="${comp.scale=='1000人以上' }">selected="selected"</c:if> >1000人以上</option>
                 </select>
             </div>
 
 
             <label class="layui-form-label">主页：</label>
             <div class="layui-input-inline">
-                <input type="text" id="newHomePage" name="newHomePage"  autocomplete="off" class="layui-input" >
+                <input type="text" id="newHomePage" name="newHomePage" value="${comp.homePage}" autocomplete="off" class="layui-input" >
             </div>
 
         </div>
@@ -399,6 +401,19 @@
         layer = layui.layer;
         form = layui.form;
         form.render();
+    })
+
+    $(function () {
+        $("td").on("mouseenter",function() {
+            if (this.offsetWidth < this.scrollWidth) {
+                var that = this;
+                var text = $(this).text();
+                layer.tips(text, that,{
+                    tips: 1,
+                    time: 2000         //设置显示时间
+                });
+            }
+        });
     })
 
     $("#photo").change(function(){
@@ -496,7 +511,7 @@
         layer.open({
             type:1,
             title:"面试具体通知",
-            area:['30%','30%'],
+            area:['50%','30%'],
             offset: ['10%', '30%'],
             content:$("#changeAddress"),
             btn:['修改','取消'],

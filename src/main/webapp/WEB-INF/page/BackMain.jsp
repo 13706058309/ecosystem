@@ -15,15 +15,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <script>
         //JavaScript代码区域
-        $(function () {
-            layui.use(['element','layer'], function(){
-                var element = layui.element;
-                var layer=layui.layer;
-            });
-        })
+
     </script>
 </head>
 <body class="layui-layout-body">
+<input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">后台管理首页</div>
@@ -38,7 +34,7 @@
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="#" onclick="exitLogin()">退了</a></li>
         </ul>
     </div>
     <div class="layui-side layui-bg-black">
@@ -63,8 +59,10 @@
     </div>
 
     <div class="layui-body" style="bottom: 0px">
-        <iframe style="width: 100%; height: 100%" name="mainFrame"  frameborder="0">
-        </iframe>
+        <!-- 内容主体区域 -->
+<%--        <div style="padding: 15px;">--%>
+        <iframe style="width: 100%;height: 100%;border: 0px" name="mainFrame"> </iframe>
+<%--        </div>--%>
     </div>
 
 <%--    <div class="layui-footer">--%>
@@ -77,4 +75,43 @@
 
 
 </body>
+<script>
+    var resumeID = "";
+    var path = $("#path").val();
+    var layer;
+    layui.use(['element','layer'], function(){
+        var element = layui.element;
+        layer=layui.layer;
+    });
+    <%
+        String resumeID = (String) request.getSession().getAttribute("resumeID");
+        if(resumeID!=null){
+            out.write("resumeID="+resumeID);
+            request.getSession().removeAttribute("resumeID");
+        }
+
+    %>
+
+
+    $(function () {
+        if(resumeID.length!=0){
+            location.href = path+"/rec/outResume?resumeID="+resumeID;
+            resumeID == "";
+        }
+    })
+
+    function exitLogin() {
+        layer.confirm('确认退出',{
+            btn:['确定','取消'],
+                time:20000,
+        },function (index) {
+            location.href = path+"/rec/exitsLogin";
+        })
+
+    }
+
+    // $(function () {
+    //
+    // })
+</script>
 </html>

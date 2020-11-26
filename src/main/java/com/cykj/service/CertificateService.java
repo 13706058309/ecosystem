@@ -3,7 +3,9 @@ package com.cykj.service;
 
 import com.cykj.entity.Certificate;
 import com.cykj.entity.Field;
+import com.cykj.entity.TableInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 import java.util.Map;
@@ -11,8 +13,8 @@ import java.util.Map;
 public interface CertificateService {
 
     /**
-     * @param获取证书首页列表
      * @return
+     * @param获取证书首页列表
      */
     public List<Certificate> findcertificatelist();
 
@@ -92,4 +94,17 @@ public interface CertificateService {
      * @return 修改证书需求
      */
     public int upbackzhengshuxuqiu(@Param("cerRequirement")String cerRequirement,@Param("cerId")String cerId);
+
+
+
+    /**
+     *
+     * @证书分页
+     */
+   public List<Certificate> findAll(String page,String limit);
+
+    /**
+     * 删除证书
+     */
+    int deleteZs(int cerId);
 }

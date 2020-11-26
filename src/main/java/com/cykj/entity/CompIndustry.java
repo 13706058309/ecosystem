@@ -9,7 +9,36 @@ public class CompIndustry {
   private long compId;
   private long industryId;
 
+  private  BackUser backUser;
+  private  Industry industry;
+
   public CompIndustry() {
+  }
+
+  public CompIndustry(long compId, long industryId, BackUser backUser, Industry industry) {
+    this.compId = compId;
+    this.industryId = industryId;
+    this.backUser = backUser;
+    this.industry = industry;
+  }
+
+  @Override
+  public String toString() {
+    return "CompIndustry{" +
+            "compAndIndId=" + compAndIndId +
+            ", compId=" + compId +
+            ", industryId=" + industryId +
+            ", backUser=" + backUser +
+            ", industry=" + industry +
+            '}';
+  }
+
+  public long getCompAndIndId() {
+    return compAndIndId;
+  }
+
+  public void setCompAndIndId(long compAndIndId) {
+    this.compAndIndId = compAndIndId;
   }
 
   public long getCompId() {
@@ -20,7 +49,6 @@ public class CompIndustry {
     this.compId = compId;
   }
 
-
   public long getIndustryId() {
     return industryId;
   }
@@ -29,11 +57,19 @@ public class CompIndustry {
     this.industryId = industryId;
   }
 
-  public long getCompAndIndId() {
-    return compAndIndId;
+  public BackUser getBackUser() {
+    return backUser;
   }
 
-  public void setCompAndIndId(long compAndIndId) {
-    this.compAndIndId = compAndIndId;
+  public void setBackUser(BackUser backUser) {
+    this.backUser = backUser;
+  }
+
+  public Industry getIndustry() {
+    return industry;
+  }
+
+  public void setIndustry(Industry industry) {
+    this.industry = industry;
   }
 }

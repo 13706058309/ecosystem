@@ -28,7 +28,7 @@
         body {background: #1E9FFF;}
         body:after {content:'';background-repeat:no-repeat;background-size:cover;-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px);filter:blur(3px);position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;}
         .layui-container {width: 100%;height: 100%;overflow: hidden}
-        .admin-login-background {width:360px;height:300px;position:absolute;left:50%;top:40%;margin-left:-180px;margin-top:-100px;}
+        .admin-login-background {width:360px;height:300px;position:absolute;left:50%;top:30%;margin-left:-180px;margin-top:-100px;}
         .logo-title {text-align:center;letter-spacing:2px;padding:14px 0;}
         .logo-title h1 {color:#1E9FFF;font-size:25px;font-weight:bold;}
         .login-form {background-color:#fff;border:1px solid #fff;border-radius:3px;padding:14px 20px;box-shadow:0 0 8px #eeeeee;}
@@ -65,12 +65,17 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="记住密码">
+                    <p></p>
+<%--                    <a><input type="button" name="forgetPass" id="forgetPass" src=""></a>--%>
+<%--                    <input type="button" name="rememberMe"  lay-skin="primary" value="忘记密码">--%>
                 </div>
                 <div class="layui-form-item">
 <%--                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" onclick="adminLog()">登 入</button>--%>
 <%--                    <a class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" type="button" onclick="adminLog()" title="登录">--%>
                         <a onclick="adminLog()"><input type="button" value="登录" class="layui-btn layui-btn layui-btn-normal layui-btn-fluid"></a>
+                </div>
+                <div class="layui-form-item">
+                    <a href="${pageContext.request.contextPath}/test/reg"><input type="button" value="企业入住" class="layui-btn layui-btn layui-btn-normal layui-btn-fluid"></a>
                 </div>
             </form>
         </div>
@@ -89,11 +94,11 @@
         var path = $("#path").val();
         var account = $("#username").val();
         var password = $("#password").val();
-        var vCode = $("#captcha").val();
+        var sVCode = $("#captcha").val();
 
         $.ajax({
             url:path+"/golog/adLog",
-            data:{"account":account,"password":password,"vCode":vCode},
+            data:{"account":account,"password":password,"sVCode":sVCode},
             type:"post",
             typeData:"text",
             beforeSend:function () {
@@ -106,7 +111,7 @@
                     layer.msg("密码不能为空!");
                     return false;
                 }
-                if(vCode.trim().length==0){
+                if(sVCode.trim().length==0){
                     layer.msg("验证码不能为空!");
                     return false;
                 }
@@ -115,18 +120,16 @@
             success:function (info) {
                 console.log(info);
 
-                // layer.msg(info);
+                 // layer.msg(info);
                 // changeImg();
                 if (info == 'success'){
                     layer.msg("登陆成功!");
                     location.href = path+"/golog/adminMain";
-                } else if (info = 'disable'){
-                    layer.msg("登录失败,此账号已被禁用!");
-                    // location.href = path+"/golog/admin";
-                } else if (info == 'delete'){
-                    layer.msg("登录失败,此账号已被删除!");
-                    // location.href = path+"/golog/admin";
-                } else if (info == 'Vcode error'){
+                } else if (info == 'noReviewed'){
+                    layer.msg("登录失败,此账号待审核!");
+                } else if (info = 'failedPass'){
+                    layer.msg("登录失败,此账号未通过审核!");
+                } else if (info == 'vCodeError'){
                     layer.msg("登录失败,验证码错误，请重试!");
                 } else {
                     layer.msg("当前账号无权限,请联系管理员!");

@@ -1,13 +1,7 @@
 package com.cykj.service.impl;
 
-import com.cykj.entity.City;
-import com.cykj.entity.Depart;
-import com.cykj.entity.Industry;
-import com.cykj.entity.Position;
-import com.cykj.mapper.CityMapper;
-import com.cykj.mapper.DepartMapper;
-import com.cykj.mapper.IndustryMapper;
-import com.cykj.mapper.PositionMapper;
+import com.cykj.entity.*;
+import com.cykj.mapper.*;
 import com.cykj.service.HomePageService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -28,6 +22,12 @@ public class HomePageServiceImpl implements HomePageService {
     @Resource
     private CityMapper cityMapper;
 
+    @Resource
+    private BackUserMapper backUserMapper;
+
+    @Resource
+    private PostPositionMapper postPositionMapper;
+
     /**
      * 主页行业遍历显示
      * @return
@@ -35,19 +35,6 @@ public class HomePageServiceImpl implements HomePageService {
     @Override
     public List<Industry> findIndustry() {
         List<Industry> industries = industryMapper.findIndustry();
-//        Map<Industry,List<Depart>> oneMap = new HashMap<>();
-//        Map<Depart,List<Position>> twoMap = new HashMap<>();
-//
-//        for (Industry industrys:parent) {
-//            List<Depart> sonList =  departMapper.findDepart(industrys.getIndustryId());
-//            oneMap.put(industrys,sonList);
-//
-//            for (Depart depart:sonList) {
-//                List<Position> post = positionMapper.findPost(depart.getDepartId());
-//                twoMap.put(depart,post);
-//            }
-//        }
-//        Object[] obj = {oneMap, twoMap};
         return industries;
     }
 
@@ -67,5 +54,17 @@ public class HomePageServiceImpl implements HomePageService {
     public List<City> cityList() {
         List<City> cityList = cityMapper.cityList();
         return cityList;
+    }
+
+    @Override
+    public List<BackUser> CompanyCity(String city) {
+        List<BackUser> backUserList = backUserMapper.CompanyCity(city);
+        return backUserList;
+    }
+
+    @Override
+    public List<PostPosition> postList(String workCity) {
+        List<PostPosition> postList = postPositionMapper.postList(workCity);
+        return postList;
     }
 }

@@ -5,9 +5,12 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 
+import com.cykj.entity.Indent;
+import com.cykj.mapper.IndentMapper;
 import com.cykj.utils.PayConfig;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -16,6 +19,8 @@ import java.util.Map;
 
 @Service
 public class PayService {
+    @Resource
+    private IndentMapper indentMapper;
     //处理支付宝支付请求，返回给客户端浏览器一个二维码扫描付款
     public String alipayTradePagePay(HttpServletRequest request , HttpServletResponse response) throws Exception{
         //获得初始化的AlipayClient
@@ -128,7 +133,7 @@ public class PayService {
     }
 
     //处理用户支付成功后的同步回调业务代码，用于给用户展示支付后的信息
-    public String  returnUrl(HttpServletRequest request)throws Exception {
+    public String  returnUrl(HttpServletRequest request,long compID)throws Exception {
         //获取支付宝GET过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
@@ -163,14 +168,19 @@ public class PayService {
             System.out.println("wid++"+subject);
             String result = "trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount;
             request.getSession().setAttribute("session", result);
-            String resumeID =subject.substring(4);
+            String resumeID = "";
+            if(subject!=null){
+                resumeID =subject.substring(4);
+            }
             request.getSession().setAttribute("resumeID",resumeID);
             request.getSession().removeAttribute("subject");
-            return "comp/BackCompFindUser";
+            Indent indent = new Indent(compID,total_amount,out_trade_no,subject,trade_no);
+            indentMapper.addOrder(indent);
+            return "BackMain";
         } else {
             String result = "验签失败";
             request.getSession().setAttribute("session", result);
-            return "comp/BackCompFindUser";
+            return "BackMain";
         }
         //——请在这里编写您的程序（以上代码仅作参考）——
         }

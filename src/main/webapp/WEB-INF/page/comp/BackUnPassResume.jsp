@@ -17,6 +17,11 @@
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        .layui-form-checkbox i {
+            top: 15px;
+        }
+    </style>
 </head>
 
 <body>

@@ -163,6 +163,8 @@ where 1=1  and c.stateId in (29,30,31)
         <result property="idNumber" column="idNumber"></result>
         <result property="stateId" column="stateId"></result>
         <result property="beginTime" column="beginTime"></result>
+        <result property="cerTestReport" column="cerTestReport"></result>
+        <result property="cerFinalReport" column="cerFinalReport"></result>
         <result property="docUrl" column="docUrl"></result>
         <result property="turnoverTime" column="turnoverTime"></result>
         <result property="cerTestScore" column="cerTestScore"></result>
@@ -223,6 +225,21 @@ where 1=1  and c.stateId in (29,30,31)
     <update id="upcerpingshencaozuo" parameterType="java.util.HashMap" >
        update cerRecord set cerJudgeScore = #{cerJudgeScore},cerFinalScore= #{cerFinalScore} ,cerFinalReport= #{cerFinalReport} ,stateId= #{stateId} ,cerReviewVideo= #{cerReviewVideo} where cerRecordId= #{cerRecordId}
     </update>
+    <select id="allPage" parameterType="java.util.HashMap" resultMap="cermap">
+        select f.fieldName,p.paramName,u.userName,r.* from cerRecord r
+        inner join field f on r.fileId = f.fieldId
+        inner join parameter p on r.stateId = p.paramId
+        inner join userInfo u on r.userId = u.userId
+    </select>
+
+    <update id="upSta" parameterType="com.cykj.entity.CerRecord">
+        update cerRecord set stateId = #{stateId} where userId = #{userId}
+    </update>
+
+    <select id="search" parameterType="java.util.HashMap" resultMap="cermap">
+        select u.userName,c.* from userInfo u inner join cerRecord c on c.userId = u.userId where userName like concat('%','userName','%')
+     </select>
+
 
 </mapper>
 

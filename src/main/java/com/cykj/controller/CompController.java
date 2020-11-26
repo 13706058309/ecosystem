@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.zip.Inflater;
 
 @Controller
 @RequestMapping("/rec")
@@ -37,9 +38,11 @@ public class CompController {
 
     //查找高校推荐的人才
     @RequestMapping("/findUnviTalent")
-    public @ResponseBody String findUnviTalent(PageBean pageBean, Talent talent){
+    public @ResponseBody String findUnviTalent(PageBean pageBean, Talent talent,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-        int compID = 3;
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = 3;
+        int compID = (int) backUser.getbUserId();
         map.put("compID",compID);
         if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
             map.put("beginTime",pageBean.getBeginTime());
@@ -72,6 +75,17 @@ public class CompController {
         }
         return msg;
     }
+    //批量删除高校推荐人才
+    @RequestMapping("/delAllUnviTalent")
+    public @ResponseBody String delAllUnviTalent(String msg){
+        List<Talent> list = new Gson().fromJson(msg,new TypeToken<List<Talent>>(){}.getType());
+        int s = 0;
+        for (Talent talent : list) {
+            int n = backCompService.delUnviTalent(15, (int) talent.getCompAndtalent().getCompAndTalId());
+            if(n>0) s++;
+        }
+        return "成功删除"+s+"个";
+    }
     //查找所有行业
     @RequestMapping("/findAllIndustry")
     public @ResponseBody String findAllIndustry(){
@@ -101,7 +115,10 @@ public class CompController {
     //公司上线岗位
     @RequestMapping("/postPosition")
     public @ResponseBody String postPosition(PostPosition postPosition,HttpServletRequest request){
-        postPosition.setCompanyId(3);
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = 3;
+        int compID = (int) backUser.getbUserId();
+        postPosition.setCompanyId(compID);
         String msg = backCompService.postPosition(postPosition);
         return msg;
     }
@@ -109,9 +126,9 @@ public class CompController {
     @RequestMapping("/findOnlinePosition")
     public @ResponseBody String findOnlinePosition(PageBean pageBean,String postName,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
-        int compID = 3;
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",6);
         if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
@@ -133,9 +150,9 @@ public class CompController {
     public @ResponseBody String delPositionStand(int pPostId,HttpServletRequest request){
 
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
-        int compID = 3;
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",8);
         map.put("pPostID",pPostId);
@@ -148,9 +165,9 @@ public class CompController {
     @RequestMapping("/offLinePosition")
     public @ResponseBody String offLinePosition(int pPostId, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
-        int compID = 3;
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",7);
         map.put("pPostID",pPostId);
@@ -162,9 +179,9 @@ public class CompController {
     @RequestMapping("/findOfflinePosition")
     public @ResponseBody String findOfflinePosition(PageBean pageBean,String postName,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
-        int compID = 3;
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",7);
         if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
@@ -190,10 +207,10 @@ public class CompController {
     }
     //企业查询过滤简历
     @RequestMapping("/findScerResumes")
-    public @ResponseBody String findScerResumes(PageBean pageBean, Resume resume,String postName){
+    public @ResponseBody String findScerResumes(PageBean pageBean, Resume resume,String postName,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
         if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
             map.put("beginTime",pageBean.getBeginTime());
         }
@@ -215,7 +232,7 @@ public class CompController {
         System.out.println("lsjdf"+resume.getEducationId());
         map.put("limit",pageBean.getLimit());
         map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
-        int compID = 3;
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",20);
         TableInfo tableInfo = backCompService.findAllResume(map);
@@ -226,7 +243,6 @@ public class CompController {
     @RequestMapping("/scerrResume")
     public @ResponseBody String scerrResume(String msg){
         List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
-
         int successNum = backCompService.changeDeliStand(list,10);
         return successNum+"";
     }
@@ -238,10 +254,10 @@ public class CompController {
     }
     //企业查询被过滤的简历
     @RequestMapping("/findunPassResumes")
-    public @ResponseBody String findunPassResumes(PageBean pageBean, String postName){
+    public @ResponseBody String findunPassResumes(PageBean pageBean, String postName,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
         if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
             map.put("beginTime",pageBean.getBeginTime());
         }
@@ -254,7 +270,7 @@ public class CompController {
 
         map.put("limit",pageBean.getLimit());
         map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
-        int compID = 3;
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",10);
         TableInfo tableInfo = backCompService.findAllResume(map);
@@ -312,10 +328,10 @@ public class CompController {
 
     //企业查询被过滤的简历
     @RequestMapping("/findDeterResumes")
-    public @ResponseBody String findDeterResumes(PageBean pageBean, String postName,String userName){
+    public @ResponseBody String findDeterResumes(PageBean pageBean, String postName,String userName,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
 
         if(postName!=null&&!postName.equals("")){
             map.put("postName","%"+postName+"%");
@@ -326,7 +342,7 @@ public class CompController {
 
         map.put("limit",pageBean.getLimit());
         map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
-        int compID = 3;
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",11);
         TableInfo tableInfo = backCompService.findAllResume(map);
@@ -343,10 +359,10 @@ public class CompController {
 
     //企业查询收到的简历简历
     @RequestMapping("/findWaitResumes")
-    public @ResponseBody String findWaitResumes(PageBean pageBean, String postName,String evdu){
+    public @ResponseBody String findWaitResumes(PageBean pageBean, String postName,String evdu,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
         if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
             map.put("beginTime",pageBean.getBeginTime());
         }
@@ -363,7 +379,7 @@ public class CompController {
 
         map.put("limit",pageBean.getLimit());
         map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
-        int compID = 3;
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",20);
         TableInfo tableInfo = backCompService.findAllResume(map);
@@ -373,10 +389,10 @@ public class CompController {
 
     //企业查询通知面试简历
     @RequestMapping("/findPassResumes")
-    public @ResponseBody String findPassResumes(PageBean pageBean, String postName,String userName){
+    public @ResponseBody String findPassResumes(PageBean pageBean, String postName,String userName,HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = (int) backUser.getbUserId();
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
         if(pageBean.getBeginTime()!=null&&!pageBean.getBeginTime().equals("")){
             map.put("beginTime",pageBean.getBeginTime());
         }
@@ -393,7 +409,7 @@ public class CompController {
 
         map.put("limit",pageBean.getLimit());
         map.put("offset",(pageBean.getPage()-1)*pageBean.getLimit());
-        int compID = 3;
+//        int compID = 3;
         map.put("compID",compID);
         map.put("standID",12);
         TableInfo tableInfo = backCompService.findAllResume(map);
@@ -417,7 +433,7 @@ public class CompController {
         String postName = backCompService.findPostName((int) postPosition.getPostId());
         return msg.equals("1")? postName:"2";
     }
-
+    //企业查找用户简历
     @RequestMapping("/compFindResume")
     public @ResponseBody String compFindResume(PageBean pageBean,Resume resume){
         Map<String,Object> map = new HashMap<>();
@@ -454,7 +470,9 @@ public class CompController {
     //进入企业信息页面
     @RequestMapping("/testComps")
     public String test(HttpServletRequest request, HttpServletResponse response){
-        BackUser backUser = backCompService.findCompByID(3);
+        BackUser backUsers = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUsers.getbUserId();
+        BackUser backUser = backCompService.findCompByID(compID);
         request.setAttribute("comp",backUser);
         return "comp/Buju";
     }
@@ -462,9 +480,9 @@ public class CompController {
     @RequestMapping("/changeCompInfo")
     public @ResponseBody String changeCompInfo(BackUser backUser, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
-//        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = bUser.getbUserId();
-        map.put("compID",3);
+        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) bUser.getbUserId();
+        map.put("compID",compID);
         if(backUser.getAddress()!=null&&GaoDeMapUtil.getLocation(backUser.getAddress()).equals("null%null")){
             return "5";
         }
@@ -528,18 +546,19 @@ public class CompController {
         photo.transferTo(new File(file,fileName));
 
         Map<String,Object> map = new HashMap<>();
-//        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
-//        int compID = bUser.getbUserId();
-        map.put("compID",3);
+        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) bUser.getbUserId();
+        map.put("compID",compID);
         map.put("logo",savePath);
 
         return backCompService.changeCompInfo(map);
     }
 
     @RequestMapping("/compChangePwd")
-    public @ResponseBody String compChangePwd(String newPwd,String pwd){
-
-        return backCompService.changePwd(newPwd,pwd,3);
+    public @ResponseBody String compChangePwd(String newPwd,String pwd,HttpServletRequest request){
+        BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) bUser.getbUserId();
+        return backCompService.changePwd(newPwd,pwd,compID);
     }
 
     @RequestMapping("/outTalentResum")
@@ -578,7 +597,8 @@ public class CompController {
     @RequestMapping("/outResume")
     public ResponseEntity<byte[]> outResume(int resumeID,HttpServletRequest request) throws IOException {
         String savePath = request.getSession().getServletContext().getRealPath("/outResume/");
-        String path = backCompService.outResume(resumeID,savePath);
+        String photoPath = request.getSession().getServletContext().getRealPath("");
+        String path = backCompService.outResume(resumeID,savePath,photoPath);
         //把下载文件构成一个文件处理
         File file = new File(path);
         //设置头信息
@@ -598,7 +618,7 @@ public class CompController {
 
         String code = "";
         for(int i=0;i<4;i++){
-            int num = (int)(1+Math.random()*10);
+            int num = (int)(1+Math.random()*9);
             code += num;
         }
         System.out.println("code="+code);
@@ -626,7 +646,7 @@ public class CompController {
         System.out.println(s);
         return "1";
     }
-
+    //企业找回密码
     @RequestMapping("/findPwd")
     public @ResponseBody String findPwd(String phone,String vCode,String pwd,HttpServletRequest request){
         String savePhone = (String) request.getSession().getAttribute("phone");
@@ -641,12 +661,14 @@ public class CompController {
 
         return n>0?"1":"4";
     }
-
+    //企业注册
     @RequestMapping("/compReg")
     public @ResponseBody String compReg(BackUser backUser,MultipartFile photo, int industry,String code,HttpServletRequest request) throws IOException {
+
         System.out.println(backUser);
         String savePhone = (String) request.getSession().getAttribute("regPhone");
         String saveCode = (String)request.getSession().getAttribute("regCode");
+
         if(saveCode!=null&&!saveCode.equals(code)){
             return "1";//验证码错误
         }
@@ -687,5 +709,111 @@ public class CompController {
         int n = backCompService.RegComp(backUser,industry);
         return n+"";
     }
+    //判断是否下载简历开启收费
+    @RequestMapping("/judgeDownFee")
+    public @ResponseBody String judgeDownFee(){
+        return  backCompService.judegCharse();
+    }
+    //关闭下载简历收费
+    @RequestMapping("/closeFee")
+    public  @ResponseBody String closeFee(){
+        return backCompService.changeFeeStand(1);
+    }
+    //打开下载简历i收费
+    @RequestMapping("/openFee")
+    public  @ResponseBody String openFee(){
 
+        return backCompService.openFee(2);
+    }
+    //判断是否下载收费
+    @RequestMapping("/judgeResumeShowOrHidden")
+    public @ResponseBody String judgeResumeShowOrHidden(){
+        return backCompService.judgeResumeShowOrHidden();
+    }
+    //查找下载简历需要的费用
+    @RequestMapping("/findDownFee")
+    public @ResponseBody String findDownFee(){
+        return backCompService.findDownFee();
+    }
+    //跳转企业通讯页面
+    @RequestMapping("/chat")
+    public String chat(HttpServletRequest request){
+//        BackUser backUsers = (BackUser) request.getSession().getAttribute("admin");
+//        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
+//        BackUser backUser = backCompService.findCompByID(compID);
+//        request.setAttribute("admin",backUser);
+        return "comp/Chat";
+    }
+
+
+    @RequestMapping("/getChatUser")
+    public @ResponseBody String getChatUser(HttpServletRequest request){
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
+        return backCompService.compfindChat(compID);
+    }
+
+    @RequestMapping("/findChatRec")
+    public @ResponseBody String findChatRec(String userID,HttpServletRequest request){
+        System.out.println("收地点ID"+userID);
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
+        return backCompService.findChatRec(compID, Integer.parseInt(userID));
+    }
+
+    @RequestMapping("/userChat")
+    public String userChat(HttpServletRequest request,String compID){
+        BackUser backUser = backCompService.findCompByID(Integer.parseInt(compID));
+//        UserInfo userInfo = new UserInfo();
+//        userInfo.setUserId(1);
+//        userInfo.setUserName("慕莲");
+//        userInfo.setHeadImgUrl("/headimg/images/headImg.png");
+        request.getSession().setAttribute("bUser",backUser);
+//        request.getSession().setAttribute("qUser",userInfo);
+        return "comp/UserChat";
+    }
+    //查找用户聊过的公司
+    @RequestMapping("/getChatComp")
+    public @ResponseBody String getChatComp(HttpServletRequest request){
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+        int userID = (int) userInfo.getUserId();
+//        int userID = 1;
+        return backCompService.userFindChat(userID);
+    }
+    //用户查找具体和某个企业的聊天纪律
+    @RequestMapping("/findChatRecs")
+    public @ResponseBody String findChatRecs(String compID,HttpServletRequest request){
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+        int userID = (int) userInfo.getUserId();
+//        int userID = 1;
+        return backCompService.findChatRecs(Integer.parseInt(compID),userID);
+    }
+    //把读过的用户消息设为已读
+    @RequestMapping("/readUserMsg")
+    public @ResponseBody String readUserMsg(String userID,HttpServletRequest request){
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        int compID = (int) backUser.getbUserId();
+//        int compID = 3;
+        backCompService.readUserMsg(compID,Integer.parseInt(userID));
+        return "1";
+    }
+
+    //把读过的用户消息设为已读
+    @RequestMapping("/readCompMsg")
+    public @ResponseBody String readCompMsg(String compID,HttpServletRequest request){
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+        int userID = (int) userInfo.getUserId();
+//        int userID = 1;
+        backCompService.readCompMsg(Integer.parseInt(compID),userID);
+        return "1";
+    }
+    //后台用户退出登录
+    @RequestMapping("/exitsLogin")
+    public String exitsLogin(HttpServletRequest request){
+        request.getSession().removeAttribute("admin");
+        return "adminLog";
+    }
 }

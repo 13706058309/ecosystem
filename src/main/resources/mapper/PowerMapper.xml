@@ -29,8 +29,6 @@
             (#{roleId},#{menuId})
         </foreach>
     </insert>
-
-
     <delete id="delPower">
         delete from power where roleId=#{roleId} and menuId in
         <foreach collection="menuIds" item="menuId" close=")" open="(" separator=",">

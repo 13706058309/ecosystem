@@ -56,11 +56,11 @@
             </dt>
             <dd>
                 <form id="updatePswForm">
-                    <table class="savePassword">
+<%--                    <table class="savePassword">--%>
                         <tbody>
                         <tr>
                             <td>登录账号</td>
-                            <td class="c7">123</td>
+                            <td class="c7">${admin.account}</td>
                         </tr>
                         <tr>
                             <td class="label">当前密码</td>
@@ -79,19 +79,15 @@
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><input type="button" class="layui-btn" onclick="changePwd()" value="保 存"></td>
+                            <td><input type="button" class="layui-btn" onclick="changePwd()" value="修改"></td>
                         </tr>
                         </tbody></table>
                 </form>
             </dd>
         </dl>
     </div>
-            <!-- 修改密码 -->
-            <div style="display: none" class="popup" id="updatePassword">
-                <h3>修改密码成功，请重新登录</h3>
-                <h4><span>5</span>秒后将自动退出</h4>
-                <a class="btn" href="login.html">直接退出</a>
-            </div>
+
+
 
         </div>
         <!------------------------------------- end -----------------------------------------> <script src="${pageContext.request.contextPath}/style/js/setting.js"></script>
@@ -140,6 +136,7 @@
                     layer.alert("旧密码错误");
                 }else if(data=='2'){
                     layer.alert("修改成功，请重新登录");
+                    location.href = path+"/golog/admin";
                 }else{
                     layer.alert("业务繁忙，修改失败");
                 }
