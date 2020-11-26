@@ -298,7 +298,7 @@
             ——&nbsp;&nbsp;<b>最新职位</b>&nbsp;&nbsp;——
         </div>
         <c:forEach items="${postList}" var="post">
-            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="post(${post.pPostID})">
+            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="post(${post.pPostId})">
                 <div style="float: left">
                     <div class="comLogo" style="font-size: 18px">
                             ${post.postName}
@@ -412,6 +412,36 @@
 
 <script type="text/javascript" src="../style/js/core.min.js"></script>
 <script type="text/javascript" src="../style/js/popup.min.js"></script>
+<script>
+    var flag = "";
+    <%
+        String flag = (String) request.getAttribute("flag");
+        if(flag!=null){
+            out.write("flag='"+flag.trim()+"'");
+            request.removeAttribute("flag");
+        }
 
+    %>
+    $(function () {
+        if(flag.length==0){
+            var position = new BMap.Geolocation();
+            position.getCurrentPosition(function (r) {
+//    判断定位是否成功
+                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                    //    获取经度，维度，省份
+                    lat = r.positionLat;
+                    lng = r.positionLng;
+                    city = r.address.city;
+                    $("#city").text(city);
+                    $("#bCity").text(city);
+                    location.href="homes?city="+$("#city").text();
+                }
+            });
+        }else{
+            $("#city").text(flag);
+            $("#bCity").text(flag);
+        }
+    })
+</script>
 </body>
 </html>
