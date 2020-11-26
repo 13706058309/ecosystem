@@ -6,7 +6,9 @@ import com.cykj.entity.ProjectInfo;
 import com.cykj.entity.UserInfo;
 import com.cykj.entity.UserProject;
 import com.cykj.service.ParameterService;
+import com.cykj.service.ProjectService;
 import com.cykj.service.UserProjectService;
+import com.cykj.service.impl.ProjectServiceImpl;
 import com.cykj.util.TableInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +32,9 @@ public class UserProjectController {
 
     @Resource
     UserProjectService userProjectServiceImpl;
+
+    @Resource
+    ProjectService projectServiceImpl;
 
     @Resource
     ParameterService parameterServiceImpl;
@@ -75,7 +80,7 @@ public class UserProjectController {
     }
 
     /**
-     *
+     * 查询
      * @param request
      * @param page
      * @param limit
@@ -111,6 +116,17 @@ public class UserProjectController {
         return new ObjectMapper().writeValueAsString(tableInfo);
     }
 
+    @RequestMapping("/updateUrl")
+    public @ResponseBody String updateUrl(HttpServletRequest request,ProjectInfo projectInfo){
+        String msg="";
+        System.out.println("2222222222222222");
+        projectInfo.setStateId(37);
+        int n=projectServiceImpl.updateState(projectInfo);
+        if (n>0){
+            msg="success";
+        }
+        return msg;
+    }
 
 
 

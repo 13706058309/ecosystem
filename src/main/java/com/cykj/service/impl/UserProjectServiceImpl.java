@@ -112,6 +112,17 @@ public class UserProjectServiceImpl implements UserProjectService {
     }
 
     /**
+     * 修改状态
+     *
+     * @param userProject
+     * @return
+     */
+    @Override
+    public int updateState(UserProject userProject) {
+        return userProjectMapper.changeState(userProject);
+    }
+
+    /**
      * 查询用户订单列表记录数
      *
      * @param condition

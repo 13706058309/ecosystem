@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Parameter;
 import com.cykj.entity.ProjectInfo;
+import com.cykj.entity.UserProject;
 import com.cykj.service.ParameterService;
 import com.cykj.service.ProjectService;
 import com.cykj.util.TableInfo;
@@ -174,6 +175,17 @@ public class ProjectController {
         request.setAttribute("parameters",parameters);
         return "project/PublishProject";
     }
+
+    @RequestMapping("/updateState")
+    public @ResponseBody String updateUrl(HttpServletRequest request,ProjectInfo projectInfo){
+        String msg="";
+        int n=projectServiceImpl.updateState(projectInfo);
+        if (n>0){
+            msg="success";
+        }
+        return msg;
+    }
+
 
     @RequestMapping("/uploadDemandFile")
     public @ResponseBody String upload(@RequestParam("file") MultipartFile demandfile , HttpServletRequest request) throws JsonProcessingException {

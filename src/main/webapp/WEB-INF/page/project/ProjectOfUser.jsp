@@ -146,7 +146,7 @@
     </style>
 
 </head>
-<body bgcolor="#f5f5f5">
+<body bgcolor="#f5f5f5" style="height: 900px">
 <input type="hidden" id="pageCounts" value="0">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <input type="hidden" id="stateId" value="">
@@ -233,10 +233,39 @@
         </div>
         <div style="width: 100%;text-align: right;display: block;clear: both;padding-top: 20px">
             <div id="projectPage" style="display: block;margin-left: auto;"></div>
+
         </div>
 
     </div>
 </div>
 
+
+<div class="layui-row" id="uploadUpdateTest" style="display: none">
+    <div class="layui-col-md10">
+        <form class="layui-form">
+            <div style="display:block;text-align: center">
+                <button type="button" class="layui-btn" id="upload">
+                    <i class="layui-icon">&#xe67c;</i>选择文件
+                </button>
+                <span>只能上传压缩文件！</span>
+            </div>
+            <div class="layui-progress layui-progress-big" id="progress"  lay-filter="progress" lay-showPercent="true" style="display: inline-block; width: 270px;margin-top:10px;margin-left: 30px">
+                <div class="layui-progress-bar layui-bg-green" lay-percent="0%" style="margin:auto"></div>
+            </div>
+            <div id="uploadState" class="layui-input-inline layui-word-aux"> </div>
+<%--            上传后文件路径 value--%>
+            <input type="hidden" id="docUrl" name="docUrl" value="">
+            <input type="hidden" id="projectId" value="">
+            <input type="hidden" id="id" value="">
+
+            <div class="layui-form-item" style="margin-top:20px">
+                <div class="layui-input-block" style="margin-left: 100px">
+                    <button class="layui-btn " type="button" onclick="updateProjectFile()">保存</button>
+                    <input type="button" style="margin-left: 50px" value="取消" class="layui-btn" onclick="closeUp()">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

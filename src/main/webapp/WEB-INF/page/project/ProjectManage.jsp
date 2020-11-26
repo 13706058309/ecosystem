@@ -21,25 +21,24 @@
 
         {{#  if(d.states.paramName=="待付款"){ }}
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
-            <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">立即付款</a>
-            <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">放弃项目</a>
+            <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="payMoney">立即付款</a>
+            <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="aband">放弃项目</a>
         {{#  } }}
         {{#  if(d.states.paramName=="已发布"){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
-        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">选择承接人</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="chooseUser">选择承接人</a>
         {{#  } }}
         {{#  if(d.states.paramName=="已承接"){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
-        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">立即付款</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="evolve">查看进度</a>
         {{#  } }}
         {{#  if(d.states.paramName=="待验收"){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
-        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">下载项目</a>
-        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">确认完成</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downProject">下载项目</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="finish">确认完成</a>
         {{#  } }}
         {{#  if(d.states.paramName=="已完成"){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
-        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">立即付款</a>
         {{#  } }}
 
 

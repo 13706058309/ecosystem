@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface ProjectService {
+
+    int updateState(ProjectInfo projectInfo);
+
+
     /**
      * 查询所有企业发布的项目
      * @param condition

@@ -9,6 +9,7 @@ import com.cykj.entity.UserProject;
 import com.cykj.mapper.ProjectInfoMapper;
 import com.cykj.service.ProjectService;
 import com.cykj.util.MProjectPayConfig;
+import net.sf.mpxj.mspdi.schema.Project;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +25,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Resource
     ProjectInfoMapper projectInfoMapper;
+
+    @Override
+    public int updateState(ProjectInfo projectInfo) {
+        return projectInfoMapper.updateProject(projectInfo);
+    }
 
     /**
      * 查询所有企业发布的项目
@@ -238,11 +244,11 @@ public class ProjectServiceImpl implements ProjectService {
             System.out.println("success");
 
 
-            return "project/ProjectManage";
+            return "BackMain";
         }else {
             String result = "验签失败";
             request.getSession().setAttribute("session",result);
-            return "project/ProjectManage";
+            return "BackMain";
         }
         //——请在这里编写您的程序（以上代码仅作参考）——
     }

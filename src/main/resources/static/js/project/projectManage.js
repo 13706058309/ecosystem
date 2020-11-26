@@ -51,6 +51,26 @@ $(function () {
             if(layEvent === 'detail'){
                 // layer.msg('查看操作');
                 location.href=path+"/project/projectDetail"
+            }else if (layEvent === 'downProject'){
+                location.href=path+data.projectUrl;
+            }else if(layEvent === 'finish'){
+                $.ajax({
+                    url:path+"/project/updateState",
+                    tyep:"post",
+                    dataType:"text",
+                    data:{"stateId":38,"projectId":data.projectId},
+                    success:function (res) {
+                        if (res=="success"){
+                            layer.msg("已完成！");
+                            table.reload("demo",{
+                                url:path+'/project/findProjectAll'
+                                ,where:{
+                                    "stateId":38
+                                },page: {curr:1}
+                            });
+                        }
+                    }
+                })
             }
         });
     });

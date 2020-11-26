@@ -15,12 +15,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <script>
         //JavaScript代码区域
-        $(function () {
-            layui.use(['element','layer'], function(){
-                var element = layui.element;
-                var layer=layui.layer;
-            });
-        })
+        layui.use(['element','layer'], function(){
+            var element = layui.element;
+            var layer=layui.layer;
+        });
     </script>
 </head>
 <body class="layui-layout-body">
@@ -39,7 +37,7 @@
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="">退出</a></li>
         </ul>
     </div>
     <div class="layui-side layui-bg-black">
