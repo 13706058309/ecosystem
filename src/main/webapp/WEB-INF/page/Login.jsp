@@ -65,7 +65,7 @@
             <input type="text" name="vCode" id="vCode" placeholder="请输入图形验证码">
             <a onclick="ajax_Login()"><input type="button" value="登录"></a>
             <p class="message">换种方式登录？<a href="javascript:">手机登录</a>或者<a
-                    href="${pageContext.request.contextPath}/golog/reg">成为会员</a></p>
+                    href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
             <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
         </form>
         <form class="login-form">
@@ -74,7 +74,7 @@
             <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码">
             <a onclick="mesLog()"><input type="button" value="登录"></a>
             <p class="message">换种方式登录？<a href="javascript:">账号登录</a>或者<a
-                    href="${pageContext.request.contextPath}/golog/reg">成为会员</a></p>
+                    href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
             <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
         </form>
         <form ></form>
@@ -135,7 +135,7 @@
 
     function SetRemainTime() {
         if (curCount == 0) {
-            curCount=120;
+            curCount=60;
             window.clearInterval(InterValObj);//停止计时器
             $("#codeBtn").removeAttr("disabled");//启用按钮
             $("#codeBtn").css("background-color", "#0D9572");
@@ -165,7 +165,7 @@
             // url:path,
             url:path+"/golog/mesLog",
             type:'post',
-            data:"phone="+phone+"&code="+code,
+            data:"phone=" + phone + "&code=" + code,
             dataType:'text',
             contentType: 'text',
             beforeSend:function () {

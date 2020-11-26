@@ -138,43 +138,76 @@ public class LoginController {
     //短信登录
     @RequestMapping("/mesLog")
     public @ResponseBody
-    String mesLog(String phone,String code,HttpServletRequest request) {
+    String mesLog(String phone, String code, HttpServletRequest request) {
         System.out.println("执行短信验证登录!");
-        System.out.println("传过来的手机值为:"+phone+"验证码为:"+code);
+        System.out.println("传过来的手机值为:" + phone + "验证码为:" + code);
 
         String savePhone = (String) request.getSession().getAttribute("logPhone");
-        String saveCode = (String)request.getSession().getAttribute("logCode");
+        String saveCode = (String) request.getSession().getAttribute("logCode");
 
-        if (saveCode.equalsIgnoreCase(savePhone)) {
-            UserInfo userInfo = loginServiceImpl.mesLog(phone);
+        if (!phone.equalsIgnoreCase(savePhone)) {
+            System.out.println("手机号错误!");
+            return "9";
+        }
+        if (!code.equalsIgnoreCase(saveCode)){
+            System.out.println("验证码错误!");
+            return "8";
+        }
+        if (code.equalsIgnoreCase(saveCode)){
+            System.out.println("执行短信验证登录!");
+//            如果启用MD5解开即可
+//            UserInfo userInfo = loginServiceImpl.mesLog(MD5Utils.md5(phone));
+            UserInfo userInfo= loginServiceImpl.mesLog(phone);
             if (userInfo == null){
-                System.out.println("账号密码有误!");
-                return "0";
+                System.out.println("登录失败！");
+                return "s";
             } else {
+                System.out.println(userInfo.toString());
                 String stateName = userInfo.getStates().getParamName();
-                if (stateName.equals("启用")) {
+                if (stateName.equals("启用")){
                     request.getSession().setAttribute("qUser", userInfo);
                     System.out.println("登录成功!");
-                    return "0";
-                } else if (stateName.equals("禁用")) {
-//                    request.getSession().removeAttribute("qUser");
-                    System.out.println("此账号已被禁用!");
-                    return "disable";
-                } else if (stateName.equals("已删除")) {
-//                    request.getSession().removeAttribute("qUser");
-                    System.out.println("此账号已被删除!");
-                    return "delete";
-                } else {
-//                    request.getSession().removeAttribute("qUser");
-                    System.out.println("账号审核未通过，无法登录");
-                    return "auditFailed";
+                    return "success";
                 }
             }
-        } else {
-            System.out.println("验证码错误");
-            return "1";
         }
+
+
+        return "";
     }
+
+
+
+//        if (saveCode.equalsIgnoreCase(savePhone)) {
+//            UserInfo userInfo = loginServiceImpl.mesLog(phone);
+//            if (userInfo == null){
+//                System.out.println("账号密码有误!");
+//                return "0";
+//            } else {
+//                String stateName = userInfo.getStates().getParamName();
+//                if (stateName.equals("启用")) {
+//                    request.getSession().setAttribute("qUser", userInfo);
+//                    System.out.println("登录成功!");
+//                    return "0";
+//                } else if (stateName.equals("禁用")) {
+////                    request.getSession().removeAttribute("qUser");
+//                    System.out.println("此账号已被禁用!");
+//                    return "disable";
+//                } else if (stateName.equals("已删除")) {
+////                    request.getSession().removeAttribute("qUser");
+//                    System.out.println("此账号已被删除!");
+//                    return "delete";
+//                } else {
+////                    request.getSession().removeAttribute("qUser");
+//                    System.out.println("账号审核未通过，无法登录");
+//                    return "auditFailed";
+//                }
+//            }
+//        } else {
+//            System.out.println("验证码错误");
+//            return "1";
+//        }
+
 
     //发送短信验证码
     @RequestMapping("/aliSend")
@@ -221,9 +254,11 @@ public class LoginController {
             String savePhone = (String) request.getSession().getAttribute("phone");
             String saveCode = (String)request.getSession().getAttribute("code");
             if(!phone.equals(savePhone)){
+                System.out.println("登录手机号未找到!");
                 return "2";
             }
             if(!vCode.equals(saveCode)){
+                System.out.println("验证码错误");
                 return "3";
             }
             int n = loginServiceImpl.changPasswordByPhone(pwd,phone);
