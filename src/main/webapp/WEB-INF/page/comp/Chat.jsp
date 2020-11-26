@@ -21,8 +21,6 @@
             border: green 1px solid;
             height: 10%;
         }
-
-
     </style>
 
     <link rel="stylesheet"  href="${pageContext.request.contextPath}/chat/css/index.css">
@@ -84,8 +82,8 @@
                                 <!--消息-->
                                 <div class="tab-panel-item tab-active">
                                     <div class="tab-item">
-                                        <a href="javascript:;" class="aui-list-item">
-                                            <ul id="number" style="margin-top: -6%">
+<%--                                        <a href="javascript:;" class="aui-list-item">--%>
+                                            <ul id="number" style="margin-top:0%;position: absolute">
                                                 <li>
                                                     <div class="liLeft"><img
                                                             src="${pageContext.request.contextPath}/chat/index_files/20170926103645_04.jpg"></div>
@@ -95,7 +93,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </a>
+<%--                                        </a>--%>
                                     </div>
                                 </div>
 
@@ -129,16 +127,6 @@
                         <div class="nesHead"><img src="${pageContext.request.contextPath}/chat/index_files/6.jpg"></div>
                         <div class="news"><img class="jiao" src="${pageContext.request.contextPath}/chat/img/you.jpg"><img class="Expr"
                                                                                      src="${pageContext.request.contextPath}/chat/index_files/em_55.jpg"></div>
-                    </li>
-                    <li>
-                        <div class="nesHead"><img src="${pageContext.request.contextPath}/chat/index_files/6.jpg"></div>
-                        <div class="news"><img class="jiao" src="${pageContext.request.contextPath}/chat/img/you.jpg"><img class="Expr"
-                                                                                     src="${pageContext.request.contextPath}/chat/index_files/em_37.jpg"></div>
-                    </li>
-                    <li>
-                        <div class="nesHead"><img src="${pageContext.request.contextPath}/chat/index_files/6.jpg"></div>
-                        <div class="news"><img class="jiao" src="${pageContext.request.contextPath}/chat/img/you.jpg"><img class="Expr"
-                                                                                     src="${pageContext.request.contextPath}/chat/index_files/em_40.jpg"></div>
                     </li>
                 </ul>
             </div>

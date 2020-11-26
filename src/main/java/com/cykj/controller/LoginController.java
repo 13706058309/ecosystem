@@ -3,7 +3,6 @@ package com.cykj.controller;
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Menu;
 import com.cykj.entity.UserInfo;
-//import com.cykj.log.Loger;
 import com.cykj.service.LoginService;
 import com.cykj.service.PowerService;
 import com.cykj.util.AliyunSmsUtils;
@@ -39,6 +38,35 @@ public class LoginController {
     public String login() {
         return "Login";
     }
+
+
+//    @RequestMapping(value = "/sendNote",method = RequestMethod.GET)
+//    public void sendNote(String phone, HttpServletResponse response){
+//        String template = "SMS_205439841";
+//        try {
+//            response.getWriter().write(sendNoteUtil.sendNoteMessgae(phone,template));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    @RequestMapping(value = "/phonelog",method = RequestMethod.POST)
+//    public String login(String phoneNumber,String acthCode){
+//        //验证验证码
+//        if(!verifyAuthCode(acthCode,phoneNumber)){
+//            return"验证码错误";
+//        }
+//        return "登陆成功";
+//    }
+
+//    //对输入的验证码进行校验
+//    private boolean verifyAuthCode(String authCode, String telephone){
+//        if(StringUtils.isEmpty(authCode)){
+//            return false;
+//        }
+//        String realAuthCode = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
+//        return authCode.equals(realAuthCode);
+//    }
 
 
     //前端登录的动作
@@ -250,13 +278,12 @@ public class LoginController {
 
 
     @RequestMapping(value = "/getCode")
-//    @Loger(operationName = "获取验证码")
     public String getCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //声明验证码
         System.out.println("123");
         int width = 60;
         int height = 30;
-        String data = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghijkmnpqrstuvwxyz";    //随机字符字典，其中0，o，1，I 等难辨别的字符最好不要
+        String data = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghijklmnpqrstuvwxyz";    //随机字符字典，其中0，o，1，I 等难辨别的字符最好不要
         Random random = new Random();//随机类
         //1 创建图片数据缓存区域（核心类）
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);//创建一个彩色的图片

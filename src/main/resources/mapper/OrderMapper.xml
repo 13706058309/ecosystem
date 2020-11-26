@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.IndentMapper">
+    <insert id="addOrder" parameterType="com.cykj.entity.Indent">
+        insert into indent (compID, money, orderNum, detail, account) VALUES
+        (#{compID},#{money},#{orderNum},#{detail},#{account})
+    </insert>
+</mapper>

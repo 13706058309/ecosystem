@@ -16,23 +16,6 @@ function answers(){
     $('.newsList').append(answer);	
     $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
 }
-$('.ExP').on('mouseenter',function(){
-    $('.emjon').show();
-})
-$('.emjon').on('mouseleave',function(){
-    $('.emjon').hide();
-})
-$('.emjon li').on('click',function(){
-    var imgSrc=$(this).children('img').attr('src');
-    var str="";
-    str+='<li>'+
-            '<div class="nesHead"><img src="img/6.jpg"/></div>'+
-            '<div class="news"><img class="jiao" src="img/you.jpg"><img class="Expr" src="'+imgSrc+'"></div>'+
-        '</li>';
-    $('.newsList').append(str);
-    $('.emjon').hide();
-    $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
-});
 
 // 搜索框
 function searchToggle(obj, evt){
