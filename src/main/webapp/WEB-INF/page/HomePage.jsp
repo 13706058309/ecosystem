@@ -83,7 +83,7 @@
                 <li><a href="${pageContext.request.contextPath}/center/jianli" rel="nofollow">我的简历</a></li>
                 <li><a href="" rel="nofollow">发布职位</a></li>
             </ul>
-            <ul class="loginTop" style="font-size: 18px">
+            <ul class="loginTop" style="font-size: 18px;height: 68px;">
                 <c:if test="${qUser==null}">
                     <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
                     <li>|</li>
@@ -91,14 +91,18 @@
                 </c:if>
                 <c:if test="${qUser!=null}">
                     <div style="margin: 10px 0px 20px 350px">
-                        <div style="float: left;margin: 10px -90px;">
+                        <div style="float: left;margin: 0px -90px;">
                             <div>
                                     ${qUser.userName}
                             </div>
-                            <div style="margin: 100px;margin: -23px -70px;">
+                            <div style="margin: 100px;margin: -40px -50px;">
                                 <img src="../style/images/logo.png" width="50px" height="50px"/>
                             </div>
                         </div>
+                    </div>
+                    <div style="margin: 35px 230px;width: 200px;">
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px">个人中心</button>
+                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a">退出</button>
                     </div>
                 </c:if>
             </ul>
