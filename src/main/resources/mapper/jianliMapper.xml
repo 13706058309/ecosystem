@@ -192,6 +192,15 @@
     <delete id="pcDel" parameterType="java.lang.Integer">
         delete from postCellec where userId=#{userId} and pPostId=#{pPostId}
     </delete>
+<!--    添加感兴趣岗位-->
+    <insert id="pcInsert" parameterType="java.lang.Integer">
+        insert into postCellec(userId,pPostId)
+         values (#{userId},#{pPostId})
+    </insert>
+<!--    查看岗位是否被收藏-->
+    <select id="findPostCellec" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostCellec">
+        select * from postCellec where userId=#{userId} and pPostId=#{pPostId};
+    </select>
 <!--    <delete id="postPositionDel" parameterType="java.lang.Integer">-->
 <!--        delete from postPosition where  pPostId=#{pPostId}-->
 <!--    </delete>-->
@@ -229,6 +238,8 @@
             <result property="scale" column="scale"></result>
             <result property="homePage" column="homePage"></result>
             <result property="infoIntr" column="infoIntr"></result>
+            <result property="lng" column="lng"></result>
+            <result property="lat" column="lat"></result>
         </association>
     </resultMap>
 

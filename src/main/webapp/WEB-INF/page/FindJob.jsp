@@ -175,22 +175,6 @@
                         <a href="javascript:;" class="btn-allcity" onclick="updateCityDialog()">全部城市</a>
                     </dd>
                 </dl>
-<%--                <dl class="condition-district  show-condition-district ">--%>
-<%--                    <dd>--%>
-<%--                        <a class="selected" href="/c101230200-p100901/" ka="sel-business-0">不限</a>--%>
-<%--                        <a href="/c101230200-p100901/b_%E6%80%9D%E6%98%8E%E5%8C%BA/" ka="sel-business-0">思明区</a>--%>
-<%--                        <a href="/c101230200-p100901/b_%E6%B9%96%E9%87%8C%E5%8C%BA/" ka="sel-business-1">湖里区</a>--%>
-<%--                        <a href="/c101230200-p100901/b_%E9%9B%86%E7%BE%8E%E5%8C%BA/" ka="sel-business-2">集美区</a>--%>
-<%--                        <a href="/c101230200-p100901/b_%E6%B5%B7%E6%B2%A7%E5%8C%BA/" ka="sel-business-3">海沧区</a>--%>
-<%--                        <a href="/c101230200-p100901/b_%E7%BF%94%E5%AE%89%E5%8C%BA/" ka="sel-business-4">翔安区</a>--%>
-<%--                        <a href="/c101230200-p100901/b_%E5%90%8C%E5%AE%89%E5%8C%BA/" ka="sel-business-5">同安区</a>--%>
-<%--                    </dd>--%>
-<%--                </dl>--%>
-<%--                <dl class="condition-area ">--%>
-<%--                    <dd>--%>
-<%--                        <a class="selected" href="/c101230200-p100901/" ka="sel-area-0">不限</a>--%>
-<%--                    </dd>--%>
-<%--                </dl>--%>
             </div>
             <div class="box-shadow-box"></div>
             <div class="filter-select-box">

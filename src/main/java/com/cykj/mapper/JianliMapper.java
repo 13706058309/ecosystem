@@ -45,6 +45,10 @@ public interface JianliMapper {
 //    删除感兴趣岗位
 //    public int postPositionDel(@Param("pPostId")int pPostId);
     public int pcDel(@Param("userId")int userId,@Param("pPostId")int pPostId);
+//    添加刚兴趣岗位
+    public int pcInsert(@Param("userId")int userId,@Param("pPostId")int pPostId);
+//    查看岗位是否有被收藏
+    public PostCellec findPostCellec(@Param("userId")int userId,@Param("pPostId")int pPostId);
 
     //    查找投递岗位
     public List<PostPosition> deliveryPosts(@Param("userId")int userId,@Param("page")int page,@Param("size")int size);

@@ -59,63 +59,48 @@
 <%--    </div>--%>
 
 
-    <div id="header" style="background-color: #0d98ff">
-        <div class="inner home-inner" >
-            <div class="logo">
+<div id="header" style="background-color: #0d98ff;height: 80px" >
+    <div class="inner home-inner" >
+        <div class="logo" style="width: 150px;height: 70px">
 
-                <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo20.png) 3px 7px no-repeat;;background-size:150px 30px;width: 150px"><span>钱程无忧</span></a>
-            </div>
-            <div class="nav">
-                <ul>
-                    <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                    <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
-                    <li class=""><a class="nav-school" ka="header-school" href="https://www.zhipin.com/xiaoyuan/">公司</a></li>
-                    <%--                <li class=""><a ka="tab_overseas_click" href="https://www.zhipin.com/returnee_jobs/">简历</a></li>--%>
-                    <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
-                    <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
-                    <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
-                </ul>
-            </div>
-            <div class="nav-search search-box">
-                <form action="https://www.zhipin.com/job_detail/" method="get" target="_blank">
-                    <%--                <div class="search-form-con">--%>
-                    <%--                    <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" maxlength="50" placeholder="搜索职位、公司"/></p>--%>
-                    <%--                </div>--%>
-                    <input type="hidden" name="city" class="city-code" value="101230200"/>
-                    <input type="hidden" name="source" value="8">
-                    <%--                <button type="submit" ka="search-job-top" class="btn btn-search">搜索</button>--%>
-                    <div class="suggest-result">
-                        <ul></ul>
-                    </div>
-                </form>
-            </div>
-
-            <div class="user-nav">
-                <c:if test="${empty realName}">
-                    <div class="btns" style="margin-top: 10%">
-                        <a href="https://signup.zhipin.com" ka="header-register" class="btn btn-outline">注册</a>
-                        <a href="https://login.zhipin.com" ka="header-login" class="btn btn-outline">登录</a>
-                    </div>
-                </c:if>
-                <c:if test="${not empty realName}">
-                    <ul>
-                            <%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
-                        <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
-                        <li class="nav-figure">
-                            <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
-                                <span class="label-text">${realName}</span><img src="${pageContext.request.contextPath}${photo}" alt=""/>
-                            </a>
-                            <div class="dropdown">
-                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
-                                <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置</span></a>
-                                    <%--                        <a href="https://www.zhipin.com/web/geek/account?type=privacySet" ka="privacy_set">隐私设置</a>--%>
-                                <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
-                                <p class="recruit-tip"><img src="https://static.zhipin.com/v2/web/geek/images/recruit-tip.gif" alt=""><span>在 APP 端“我的 - 设置”中切换为Boss身份后，刷新本页面即可进行招聘</span></p>
-                            </div>
-                        </li>
-                    </ul></c:if>
-            </div>
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo11.png) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
+        <div class="nav" style="margin-top: 20px">
+            <ul>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
+                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
+                <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+            </ul>
+        </div>
+
+        <div class="user-nav" style="margin-top: 20px">
+            <c:if test="${empty qUser}">
+                <div class="btns" style="margin-top: 10%">
+                    <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline">注册</a>
+                    <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline">登录</a>
+                </div>
+            </c:if>
+            <c:if test="${not empty qUser}">
+                <ul>
+                        <%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
+                    <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
+                    <li class="nav-figure">
+                        <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
+                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                        </a>
+                        <div class="dropdown">
+                            <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
+                            <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                            <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
+                        </div>
+                    </li>
+                </ul></c:if>
+        </div>
+    </div>
+
 <%--    </div>--%>
 
 

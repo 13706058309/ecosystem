@@ -296,6 +296,30 @@ public class ResumeServiceImp implements ResumeService {
     }
 
     /**
+     * 添加刚兴趣岗位
+     *
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    @Override
+    public int pcInsert(int userId, int pPostId) {
+        return jianliMapper.pcInsert(userId,pPostId);
+    }
+
+    /**
+     * 查看岗位是否有被收藏
+     *
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    @Override
+    public PostCellec findPostCellec(int userId, int pPostId) {
+        return jianliMapper.findPostCellec(userId,pPostId);
+    }
+
+    /**
      * 查找投递岗位
      *
      * @param userId

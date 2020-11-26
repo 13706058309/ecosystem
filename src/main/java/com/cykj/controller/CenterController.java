@@ -42,7 +42,12 @@ public class CenterController {
     @RequestMapping("/resumeInfo")
     public String resumeInfo(HttpServletRequest req){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         int page=0;
         int curr=1;
         int limit=2;
@@ -60,7 +65,12 @@ public class CenterController {
     @RequestMapping("/resumeCommit")
     public String resumeCommit(HttpServletRequest req){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         int page=0;
         int curr=1;
         int limit=2;
@@ -78,7 +88,12 @@ public class CenterController {
     @RequestMapping("/interview")
     public String interview(HttpServletRequest req){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         int page=0;
         int curr=1;
         int limit=2;
@@ -96,7 +111,12 @@ public class CenterController {
     @RequestMapping("/communication")
     public String communication(HttpServletRequest req){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         int page=0;
         int curr=1;
         int limit=2;
@@ -114,7 +134,12 @@ public class CenterController {
     @RequestMapping("/resumeCommitPage")
     public String resumeCommitPage(HttpServletRequest req,int curr,int limit){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         List<PostPosition> posts=resumeService.deliveryPosts(userId,(curr-1)*limit,limit);
         List<PostPosition> postsCount=resumeService.deliveryPostsCount(userId);
         int count=postsCount.size();
@@ -130,7 +155,12 @@ public class CenterController {
     @RequestMapping("/deliveryInfo")
     public String deliveryInfo(HttpServletRequest req){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         int page=0;
         int curr=1;
         int limit=2;
@@ -148,7 +178,12 @@ public class CenterController {
     @RequestMapping("/deliveryInfoPage")
     public String deliveryInfoPage(HttpServletRequest req,int curr,int limit){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         List<PostPosition> posts=resumeService.deliveryInfo(userId,(curr-1)*limit,limit);
         List<PostPosition> postsCount=resumeService.deliveryInfoCount(userId);
         int count=postsCount.size();
@@ -165,7 +200,12 @@ public class CenterController {
     @RequestMapping("/resumePage")
     public String resumePage(HttpServletRequest req,int curr,int limit){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         List<PostPosition> posts=resumeService.findPosts(userId,(curr-1)*limit,limit);
         List<PostPosition> postsCount=resumeService.findPostsCount(userId);
         int count=postsCount.size();
@@ -177,6 +217,8 @@ public class CenterController {
         System.out.println(new Gson().toJson(posts));
         return "resumeInfo";
     }
+
+//    取消岗位收藏
     @RequestMapping("/postDel")
     public @ResponseBody String postDel(int pPostId){
 //        System.out.println(new Gson().toJson(resume));
@@ -188,7 +230,20 @@ public class CenterController {
         }
         return msg;
     }
+//    添加岗位收藏
+    @RequestMapping("/postInsert")
+    public @ResponseBody String postInsert(int pPostId){
+//        System.out.println(new Gson().toJson(resume));
 
+        int n=resumeService.pcInsert(userId,pPostId);
+        String msg="lose";
+        if (n>0){
+            msg="succes";
+        }
+        return msg;
+    }
+
+//    修改密码
     @RequestMapping("/savePwd")
     public @ResponseBody String savePwd(HttpServletRequest req,String oldpwd,String newpwd){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
@@ -211,6 +266,7 @@ public class CenterController {
         return msg;
     }
 
+//    隐私设置
     @RequestMapping("/saveShow")
     public @ResponseBody String saveShow(HttpServletRequest req,String isOpen){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
@@ -235,7 +291,12 @@ public class CenterController {
     @RequestMapping("/jianli")
     public  String jianli(HttpServletRequest req){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         Resume resume=resumeService.resume(userId);
         System.out.println(new Gson().toJson(resume));
         req.setAttribute("resume",resume);
@@ -245,7 +306,12 @@ public class CenterController {
     @RequestMapping("/accountSet")
     public String accountSet(HttpServletRequest req){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         UserInfo userInfo=resumeService.findUser(userId);
         req.setAttribute("user",userInfo);
         return "AccountSet";
@@ -258,7 +324,12 @@ public class CenterController {
 //        System.out.println(new Gson().toJson(resume));
 //        String time=new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").format(updateTime);
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
         req.setAttribute("updateTime",time);
         resume.setUpdateTime(time);
         resume.setUserId(userId);
@@ -907,6 +978,12 @@ public class CenterController {
     @RequestMapping("/postInfo")
     public String postInfo(HttpServletRequest req,int lid){
         PostPosition post=resumeService.findPost(lid);
+        PostCellec postCellec=resumeService.findPostCellec(userId,lid);
+        if (null==postCellec){
+
+        }else {
+            req.setAttribute("postCellec",postCellec);
+        }
         req.setAttribute("post",post);
         return "postInfo";
     }

@@ -176,6 +176,21 @@ public interface ResumeService {
      */
     public int positionDel(int userId,int pPostId);
 
+    /**
+     * 添加刚兴趣岗位
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    public int pcInsert(int userId,int pPostId);
+
+    /**
+     * 查看岗位是否有被收藏
+     * @param userId
+     * @param pPostId
+     * @return
+     */
+    public PostCellec findPostCellec(int userId,int pPostId);
 
 
     /**
