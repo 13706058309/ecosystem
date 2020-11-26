@@ -79,7 +79,7 @@
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li><a href="" target="_blank">校招</a></li>
-                <li><a href="" target="_blank">课程</a></li>
+                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
                 <li><a href="${pageContext.request.contextPath}/center/jianli" rel="nofollow">我的简历</a></li>
                 <li><a href="" rel="nofollow">发布职位</a></li>
             </ul>
