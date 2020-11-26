@@ -33,17 +33,31 @@
                 <img src="../style/images/logo.png" width="200" height="80">
             </a>
             <ul class="reset" id="navheader">
-                <li><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li ><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="h/toForum.html" target="_blank">校招</a></li>
-                <li><a href="h/toForum.html" target="_blank">课程</a></li>
-                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
-                <li><a href="create.html" rel="nofollow">发布职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li><a href="${pageContext.request.contextPath}/center/job" rel="nofollow">职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
             </ul>
-            <ul class="loginTop">
-                <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
-                <li>|</li>
-                <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+            <ul class="loginTop" style="font-size: 18px;height: 68px;">
+                <c:if test="${qUser==null}">
+                    <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
+                    <li>|</li>
+                    <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+                </c:if>
+                <c:if test="${qUser!=null}">
+                    <div style="margin: 10px 0px 20px 350px">
+                        <div style="float: left;margin: 0px -90px;">
+                            <div style="margin: -10px 20px;">
+                                    欢迎您 &nbsp;:&nbsp;&nbsp;${qUser.userName}
+                            </div>
+                                <%--                            <div style="margin: 100px;margin: -40px -50px;">--%>
+                                <%--                                <img src="../style/images/logo.png" width="50px" height="50px"/>--%>
+                                <%--                            </div>--%>
+                        </div>
+                    </div>
+                </c:if>
             </ul>
         </div>
     </div>

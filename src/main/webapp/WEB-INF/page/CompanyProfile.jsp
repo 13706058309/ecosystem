@@ -14,6 +14,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link href="https://static.zhipin.com/zhipin-geek/v334/web/geek/css/main.css" type="text/css" rel="stylesheet">
     <meta name="applicable-device" content="pc">
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=7c1d325554fabccbfb414e1ec058cf40&plugin=AMap.Autocomplete"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=85f285069a023533ccfb926369538910&plugin=AMap.Geocoder"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
     <style type="text/css">.amap-container {
         cursor: url(https://webapi.amap.com/theme/v1.3/openhand.cur), default;
     }
@@ -96,6 +99,11 @@
                         <h3>公司地址</h3>
                         <div class="text fold-text">
                             ${backUser.address}
+                        </div>
+                        <input type="hidden" id="lat" value="${backUser.lat}">
+                        <input type="hidden" id="lng" value="${backUser.lng}">
+                        <div id="container" style="height: 300px">
+
                         </div>
                     </div>
                     <div class="job-sec company-job company-desc">
@@ -230,14 +238,6 @@
             <a href="https://www.kanzhun.com/gsr11514.html" target="_blank" ka="friendly-link-8">百度怎么样</a>
             <a href="http://www.kanzhun.com/gso11363.html" target="_blank" ka="company_link_seo1">瑞杰科技</a>
             <a href="http://www.kanzhun.com/gso2080138.html" target="_blank" ka="company_link_seo2">好丽友it部门</a>
-            <a href="http://www.kanzhun.com/gso6978107.html" target="_blank" ka="company_link_seo3">百度东莞分公司</a>
-            <a href="http://www.kanzhun.com/gso2070269.html" target="_blank" ka="company_link_seo4">百度深圳分公司</a>
-            <a href="http://www.kanzhun.com/gso1820460.html" target="_blank" ka="company_link_seo5">百度广州分公司</a>
-            <a href="http://www.kanzhun.com/gso2083261.html" target="_blank" ka="company_link_seo6">百度北京分公司</a>
-            <a href="http://www.kanzhun.com/gso6652254.html" target="_blank" ka="company_link_seo7">百度上海研发中心</a>
-            <a href="http://www.kanzhun.com/gso4166403.html" target="_blank" ka="company_link_seo8">北京百度网讯科技有限公司</a>
-            <a href="http://www.kanzhun.com/gso5736034.html" target="_blank" ka="company_link_seo9">百度国际科技深圳有限公司</a>
-            <a href="http://www.kanzhun.com/gso248683.html" target="_blank" ka="company_link_seo10">百度ktv</a>
         </dd>
     </dl>
     <label><span>展开</span><i class="fz fz-slidedown"></i></label>
@@ -247,17 +247,35 @@
 <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
 <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 <iframe style="display: none;" name="zhipinFrame"></iframe>
-<div class="guide-download-app-v62" style="display:none">
-    <div class="app-icon-arrow"></div>
-    <div class="app-icon-v62"></div>
-    <div class="app-icon-des-v62">一键扫码 随时沟通</div>
-</div>
 <script src="https://webapi.amap.com/maps?v=1.3&amp;key=60085a6ee91616cf689ce0321e1f30c4&amp;plugin=AMap.Geocoder"></script>
 <input type="hidden" id="page_key_name" value="cpc_company_intro">
 <script>
+    $(function () {
+        var lng = $("#lng").val();
+        var lat = $("#lat").val();
+        var map = new AMap.Map('container', {
+            center: [lng, lat],
+            zoom: 15
+        });
+        map.plugin(["AMap.ToolBar"], function() {
+            map.addControl(new AMap.ToolBar());
+        });
+        <!-- 上面是定位，下面是打上标记 -->
+
+        var marker;
+        var icon = new AMap.Icon({
+            image: 'http://vdata.amap.com/icons/b18/1/2.png',
+            size: new AMap.Size(24, 24)
+        });
+        marker = new AMap.Marker({
+            offset: new AMap.Pixel(-12, -12),
+            zIndex: 101,
+            map: map
+        });
+    })
+
     function details(pPostId) {
         location.href="center/postInfo?pPostId="+pPostId;
-
     }
     function get_share_datas_from_html_inapp() {
         var shid = "shdefault",
