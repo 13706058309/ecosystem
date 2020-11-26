@@ -118,7 +118,7 @@ public class CompController {
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
 //        int compID = 3;
         if(backUser.getProduct()==null||backUser.getFinanStage()==null||backUser.getHomePage()==null||backUser.getScale()==null
-        ||backUser.getCoreValue()==null||backUser.getInfoIntr()==null){
+        ||backUser.getCoreValue()==null||backUser.getInfoIntr()==null||backUser.getLogo()==null){
             return "3";
         }
         int compID = (int) backUser.getbUserId();
