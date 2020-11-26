@@ -199,7 +199,8 @@ public class LoginController {
         }
 
     @RequestMapping("/admin")
-    public String admin(){
+    public String admin(HttpServletRequest request){
+        request.getSession().removeAttribute("admin");
         return "adminLog";
     }
 

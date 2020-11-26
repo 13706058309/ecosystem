@@ -15,12 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <script>
         //JavaScript代码区域
-        $(function () {
-            layui.use(['element','layer'], function(){
-                var element = layui.element;
-                var layer=layui.layer;
-            });
-        })
+
     </script>
 </head>
 <body class="layui-layout-body">
@@ -39,7 +34,7 @@
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="#" onclick="exitLogin()">退了</a></li>
         </ul>
     </div>
     <div class="layui-side layui-bg-black">
@@ -83,6 +78,11 @@
 <script>
     var resumeID = "";
     var path = $("#path").val();
+    var layer;
+    layui.use(['element','layer'], function(){
+        var element = layui.element;
+        layer=layui.layer;
+    });
     <%
         String resumeID = (String) request.getSession().getAttribute("resumeID");
         if(resumeID!=null){
@@ -91,11 +91,27 @@
         }
 
     %>
+
+
     $(function () {
         if(resumeID.length!=0){
             location.href = path+"/rec/outResume?resumeID="+resumeID;
             resumeID == "";
         }
     })
+
+    function exitLogin() {
+        layer.confirm('确认退出',{
+            btn:['确定','取消'],
+                time:20000,
+        },function (index) {
+            location.href = path+"/rec/exitsLogin";
+        })
+
+    }
+
+    // $(function () {
+    //
+    // })
 </script>
 </html>

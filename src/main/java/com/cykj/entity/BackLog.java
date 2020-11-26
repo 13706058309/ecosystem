@@ -13,7 +13,7 @@ import java.util.Date;
 public class BackLog {
 
   private long bLogId;   //ID
-  private long bUserID; //后台用户Id
+  private long bUserId; //后台用户Id
   private BackUser backUser; //后台用户
   private String operaTime; //操作时间
   private String matter; //操作事件
@@ -39,12 +39,12 @@ public class BackLog {
     this.backUser = backUser;
   }
 
-  public long getbUserID() {
-    return bUserID;
+  public long getbUserId() {
+    return bUserId;
   }
 
-  public void setbUserID(long bUserID) {
-    this.bUserID = bUserID;
+  public void setbUserId(long bUserId) {
+    this.bUserId = bUserId;
   }
 
   public String getOperaTime() {
@@ -85,7 +85,7 @@ public class BackLog {
   public String toString() {
     return "BackLog{" +
             "bLogId=" + bLogId +
-            ", bUserID=" + bUserID +
+            ", bUserID=" + bUserId +
             ", backUser=" + backUser +
             ", operaTime='" + operaTime + '\'' +
             ", matter='" + matter + '\'' +
