@@ -168,7 +168,10 @@ public class PayService {
             System.out.println("wid++"+subject);
             String result = "trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount;
             request.getSession().setAttribute("session", result);
-            String resumeID =subject.substring(4);
+            String resumeID = "";
+            if(subject!=null){
+                resumeID =subject.substring(4);
+            }
             request.getSession().setAttribute("resumeID",resumeID);
             request.getSession().removeAttribute("subject");
             Indent indent = new Indent(compID,total_amount,out_trade_no,subject,trade_no);
