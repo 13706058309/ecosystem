@@ -25,4 +25,8 @@ public interface CerUserMapper {
 
     //后台人员查询已获得证书总长度
     public int findceruserlistsize(Map<String, Object> map);
+    //增加已获得证书
+    public int insertCerUser(CerUser cerUser);
+
+
 }

@@ -113,4 +113,26 @@ public interface CerRecordService {
      * @return 后台评审证书项目集合列表长度
      */
     public  int findcerPSlistsize(Map<String, Object> findmap);
+
+    /**
+     *
+     * @param findmap
+     * @return 评审后修改状态报告视频分数
+     */
+    public  int upcerpingshencaozuo(Map<String, Object> findmap);
+
+
+    /**
+     *
+     * @param map
+     * @return 后台评审证书项目集合带时间和证书类型条件
+     */
+    public List<CerRecord> findbackSQlist(Map<String, Object> map);
+
+    /**
+     *
+     * @param findmap
+     * @return 后台评审证书项目集合列表长度
+     */
+    public  int findbackSQlistsize(Map<String, Object> findmap);
 }

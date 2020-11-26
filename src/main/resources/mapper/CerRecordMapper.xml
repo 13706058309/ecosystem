@@ -107,6 +107,56 @@ where 1=1  and c.stateId in (29,30,31)
 
     </select>
 
+
+    <select id="findbackSQlist" parameterType="java.util.HashMap" resultMap="cermap">
+        select * from cerRecord c join userInfo u on c.userId=u.userId join field f on c.fileId=f.fieldId join parameter p on c.stateId=p.paramId
+        where 1=1  and c.stateId in (22,23,24)
+
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+        <if test="trueName != null ">
+            and c.trueName like #{trueName}
+        </if>
+        <if test="top != null and down == null ">
+            and c.beginTime >= #{top}
+        </if>
+        <if test="top == null and down != null ">
+            and c.beginTime &lt;= #{down}
+        </if>
+        <if test="top != null and down != null ">
+            and c.beginTime >= #{top} and c.beginTime &lt;= #{down}
+        </if>
+
+        order by p.paramId limit #{page},#{limit}
+    </select>
+
+    <select id="findbackSQlistsize" parameterType="java.util.HashMap" resultType="integer">
+        select count(*) from cerRecord c join userInfo u on c.userId=u.userId join field f on c.fileId=f.fieldId join parameter p on c.stateId=p.paramId
+        where 1=1  and c.stateId in (22,23,24)
+
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+        <if test="trueName != null ">
+            and c.trueName like #{trueName}
+        </if>
+        <if test="top != null and down == null ">
+            and c.beginTime >= #{top}
+        </if>
+        <if test="top == null and down != null ">
+            and c.beginTime &lt;= #{down}
+        </if>
+        <if test="top != null and down != null ">
+            and c.beginTime >= #{top} and c.beginTime &lt;= #{down}
+        </if>
+
+    </select>
+
+
+
     <resultMap id="cermap" type="com.cykj.entity.CerRecord">
         <id property="cerRecordId" column="cerRecordId"></id>
         <result property="trueName" column="trueName"></result>
@@ -170,6 +220,9 @@ where 1=1  and c.stateId in (29,30,31)
        update cerRecord set stateId = #{stateId}  where cerRecordId= #{cerRecordId}
     </update>
 
+    <update id="upcerpingshencaozuo" parameterType="java.util.HashMap" >
+       update cerRecord set cerJudgeScore = #{cerJudgeScore},cerFinalScore= #{cerFinalScore} ,cerFinalReport= #{cerFinalReport} ,stateId= #{stateId} ,cerReviewVideo= #{cerReviewVideo} where cerRecordId= #{cerRecordId}
+    </update>
 
 </mapper>
 
