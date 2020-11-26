@@ -133,4 +133,14 @@ public class TestController {
     public String charge(){
         return "comp/charge";
     }
+
+    @RequestMapping("/chat")
+    public String chat(){
+        return "comp/Chat";
+    }
+
+    @RequestMapping("/chat2")
+    public String chat2(){
+        return "comp/Chat2";
+    }
 }

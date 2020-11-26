@@ -10,4 +10,13 @@
     <update id="changeFeeStand">
         update parameter set paramValues = #{standID} where paramID = 57;
     </update>
+    <select id="findParameter" resultType="com.cykj.entity.Parameter">
+        select * from parameter where 1=1
+        <if test="null !=condition.paramType">
+            and paramType=#{condition.paramType}
+        </if>
+        <if test="null != condition.paramName">
+            and paramName=#{condition.paramName}
+        </if>
+    </select>
 </mapper>

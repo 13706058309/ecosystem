@@ -224,7 +224,7 @@
                         {field: 'talentId', title: '人才ID',sort: true }
                         ,{field: 'talentName', title: '名字', sort: true}
                         ,{field: 'school', title: '学校', sort: true}
-                        ,{field: 'birthday', title: '出生年月日', sort: true}
+                        ,{field: 'birthday', title: '出生年月', sort: true}
                         ,{field:'contactInfo',title:'联系方式',sort: true}
                         ,{field:'profession',title:'专业',sort: true}
                         ,{field:'politicalStatus',title:'政治面貌',sort: true}
@@ -340,7 +340,7 @@
             type:"post",
             beforeSend:function(){
                 if(file.length==0){
-                    layer.msg("请先选择简历")
+                    layer.msg("请先上传文件")
                     return false;
                 }
                 if(!file.endsWith(".xls")){
@@ -355,7 +355,7 @@
                 layer.msg(info,{
                     time:1000,
                     end:function () {
-                        if (info=="导入成功"){
+                        if (info.endsWith("人才")){
                             location.href=path+"/talent/talentList";
                         }
                     }
