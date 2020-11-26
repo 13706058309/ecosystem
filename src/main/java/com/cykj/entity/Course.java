@@ -1,21 +1,20 @@
 package com.cykj.entity;
 
-import java.util.List;
 
-/**
- * 课程
- */
 public class Course {
 
-  private long courseId; //课程Id
-  private String courseName; //课程名称
-  private long unitCount; //章节数量
-  private List<Unit> unitList; //章节列表
-  private long fieldId; //领域Id
-  private Field field; //领域
+  private long courseId;// 课程ID
+  private String courseName;//课程名
+  private String courseImgUrl;//课程图像路径
+  private String speakerName;//讲师名
+  private String courseIntroduce;//课程详情
+  private String uploadTime;//发布时间
+  private long collectionNumber;//被收藏次数
+  private long fieldId;//所属领域名
+  private String speakerHeadImgUrl;//讲师头像
+  private long totalPlayTimes;//课程的总播放量
 
-  public Course() {
-  }
+  private long unitNumber;//课程所属的章节数
 
   public long getCourseId() {
     return courseId;
@@ -35,12 +34,48 @@ public class Course {
   }
 
 
-  public long getUnitCount() {
-    return unitCount;
+  public String getCourseImgUrl() {
+    return courseImgUrl;
   }
 
-  public void setUnitCount(long unitCount) {
-    this.unitCount = unitCount;
+  public void setCourseImgUrl(String courseImgUrl) {
+    this.courseImgUrl = courseImgUrl;
+  }
+
+
+  public String getSpeakerName() {
+    return speakerName;
+  }
+
+  public void setSpeakerName(String speakerName) {
+    this.speakerName = speakerName;
+  }
+
+
+  public String getCourseIntroduce() {
+    return courseIntroduce;
+  }
+
+  public void setCourseIntroduce(String courseIntroduce) {
+    this.courseIntroduce = courseIntroduce;
+  }
+
+
+  public String getUploadTime() {
+    return uploadTime;
+  }
+
+  public void setUploadTime(String uploadTime) {
+    this.uploadTime = uploadTime;
+  }
+
+
+  public long getCollectionNumber() {
+    return collectionNumber;
+  }
+
+  public void setCollectionNumber(long collectionNumber) {
+    this.collectionNumber = collectionNumber;
   }
 
 
@@ -52,19 +87,28 @@ public class Course {
     this.fieldId = fieldId;
   }
 
-  public List<Unit> getUnitList() {
-    return unitList;
+
+  public String getSpeakerHeadImgUrl() {
+    return speakerHeadImgUrl;
   }
 
-  public void setUnitList(List<Unit> unitList) {
-    this.unitList = unitList;
+  public void setSpeakerHeadImgUrl(String speakerHeadImgUrl) {
+    this.speakerHeadImgUrl = speakerHeadImgUrl;
   }
 
-  public Field getField() {
-    return field;
+  public long getUnitNumber() {
+    return unitNumber;
   }
 
-  public void setField(Field field) {
-    this.field = field;
+  public void setUnitNumber(long unitNumber) {
+    this.unitNumber = unitNumber;
+  }
+
+  public long getTotalPlayTimes() {
+    return totalPlayTimes;
+  }
+
+  public void setTotalPlayTimes(long totalPlayTimes) {
+    this.totalPlayTimes = totalPlayTimes;
   }
 }

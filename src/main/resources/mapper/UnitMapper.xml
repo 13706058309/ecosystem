@@ -3,5 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.UnitMapper">
+    <select id="selectUnitsByCourseId" parameterType="java.lang.Long" resultType="com.cykj.entity.Unit">
+        select unitId,unitName,videoUrl,timelength,preUnitId from unit where courseId=#{courseId} order by unitId
+    </select>
 
+    <select id="selectUnitFileByUnitId" parameterType="java.lang.Long" resultType="com.cykj.entity.StudyData">
+        select dataId,dataName,dataSize,dataUrl from studyData where unitId=#{unitID}
+    </select>
+
+    <select id="selectUnitsByUnitId" parameterType="java.lang.Long" resultType="com.cykj.entity.Unit">
+        select unitId,unitName,videoUrl,courseId from unit where courseId=(select courseId from unit where unitId=#{unitId})
+    </select>
+
+    <select id="selectUnitInfoByUnitId" parameterType="java.lang.Long" resultType="com.cykj.entity.Unit">
+        select unitName,videoUrl,courseId from unit where unitId=#{unitId}
+    </select>
 </mapper>

@@ -17,8 +17,9 @@ public class UserInfo {
   private Parameter states; //用户状态
   private String address; //地址
   private long isOpen; // 是否公开
+
+  private String headImgUrl; //用户头像路径
   private String regTime;//注册时间
-  private String headImgUrl;//头像
 
   public UserInfo() {
 
@@ -100,6 +101,10 @@ public class UserInfo {
   public void setAccStandId(long accStandId) {
     this.accStandId = accStandId;
   }
+
+
+
+
 
   public String getAddress() {
     return address;

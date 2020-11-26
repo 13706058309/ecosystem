@@ -3,5 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.FieldMapper">
+    <select id="selectAllFieldName" resultType="com.cykj.entity.Field">
+        select fieldId,fieldName from field
+    </select>
+
 
 </mapper>
