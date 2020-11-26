@@ -257,7 +257,6 @@
 <script>
     function details(pPostId) {
         location.href="center/postInfo?pPostId="+pPostId;
-
     }
     function get_share_datas_from_html_inapp() {
         var shid = "shdefault",

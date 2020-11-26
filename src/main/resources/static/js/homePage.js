@@ -97,6 +97,12 @@ function City(node) {
     console.log("!!!!!!!!!!!!!!!!!!!!!"+$("#city").text());
 }
 
+//热门企业
 function compName(bUserId) {
     location.href=path+"/homePage/compProfile?bUserId="+bUserId;
 }
+
+// //最新岗位
+// function post(pPostID) {
+//     location.href="center/postInfo?pPostId="+pPostID;
+// }

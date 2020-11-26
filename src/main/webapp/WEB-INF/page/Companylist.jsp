@@ -33,12 +33,12 @@
                 <img src="../style/images/logo.png" width="200" height="80">
             </a>
             <ul class="reset" id="navheader">
-                <li><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li ><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="h/toForum.html" target="_blank">校招</a></li>
-                <li><a href="h/toForum.html" target="_blank">课程</a></li>
-                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
-                <li><a href="create.html" rel="nofollow">发布职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li><a href="${pageContext.request.contextPath}/center/job" rel="nofollow">职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
             </ul>
             <ul class="loginTop">
                 <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>

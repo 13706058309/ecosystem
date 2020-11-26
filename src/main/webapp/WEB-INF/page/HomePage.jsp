@@ -298,14 +298,13 @@
             ——&nbsp;&nbsp;<b>最新职位</b>&nbsp;&nbsp;——
         </div>
         <c:forEach items="${postList}" var="post">
-            <li style="margin: 3px 5px;width: 264px;height: 120px">
+            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="post(${post.pPostID})">
                 <div style="float: left">
                     <div class="comLogo" style="font-size: 18px">
                             ${post.postName}
                     </div>
                     <div>
-                        <a target="_blank"
-                           style="font-size: 13px;color: darkgrey">
+                        <a target="_blank" style="font-size: 13px;color: darkgrey">
                                 ${post.workCity}&nbsp;|&nbsp;${post.workYear}|&nbsp;${post.education}
                         </a>
                     </div>
