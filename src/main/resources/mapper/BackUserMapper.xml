@@ -3,5 +3,193 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.BackUserMapper">
+    <select id="findCompByID" parameterType="int" resultMap="findBackUser">
+        select b.*,i.industryname from backUser b, industry i, comp_industry ci
+        where b.buserid = ci.compid and i.industryid = ci.industryid and b.buserid = #{compID}
+    </select>
+
+    <resultMap id="findBackUser" type="com.cykj.entity.BackUser">
+        <id property="bUserId" column="bUserId"></id>
+        <result property="bUserName" column="bUserName"></result>
+        <result property="account" column="account"></result>
+        <result property="pwd" column="pwd"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="infoIntr" column="infoIntr"></result>
+        <result property="busiLice" column="busiLice"></result>
+        <result property="email" column="email"></result>
+        <result property="address" column="address"></result>
+        <result property="scale" column="scale"></result>
+        <result property="city" column="city"></result>
+        <result property="province" column="province"></result>
+        <result property="homePage" column="homePage"></result>
+        <result property="finanStage" column="finanStage"></result>
+        <result property="product" column="product"></result>
+        <result property="logo" column="logo"></result>
+        <result property="roleId" column="roleId"></result>
+        <result property="bRegTime" column="bRegTime"></result>
+        <result property="coreValue" column="coreValue"></result>
+        <result property="compName" column="compName"></result>
+        <result property="lat" column="lat"></result>
+        <result property="lng" column="lng"></result>
+
+        <collection property="industrys" ofType="com.cykj.entity.Industry">
+            <id property="industryId" column="industryId"></id>
+            <result property="industryName" column="industryName"></result>
+        </collection>
+    </resultMap>
+
+    <update id="changeCompInfo" parameterType="java.util.Map">
+        update backUser
+        <set>
+            <if test="infoIntr!=null">
+                infoIntr = #{infoIntr},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+
+            <if test="coreValue!=null">
+                coreValue = #{coreValue},
+            </if>
+
+            <if test="scale!=null">
+                scale = #{scale},
+            </if>
+
+            <if test="homePage!=null">
+                homePage = #{homePage},
+            </if>
+
+            <if test="finanStage!=null">
+                finanStage = #{finanStage},
+            </if>
+
+            <if test="product!=null">
+                product = #{product},
+            </if>
+            <if test="logo!=null">
+                logo = #{logo},
+            </if>
+            <if test="lng!=null">
+                lng = #{lng},
+            </if>
+            <if test="lat!=null">
+                lat = #{lat},
+            </if>
+        </set>
+        where bUserId = #{compID}
+    </update>
+
+    <update id="changePwd">
+        update backUser set pwd = #{pwd} where buserid = #{compID}
+    </update>
+
+    <select id="findPwd" resultType="String">
+        select pwd from backUser where buserid = #{compID}
+    </select>
+
+    <select id="findByPhone" resultType="com.cykj.entity.BackUser">
+        select * from backUser where contactInfo = #{phone}
+    </select>
+
+    <update id="changePwdByPhone">
+        update backUser set pwd = #{pwd} where contactInfo = #{phone}
+    </update>
+
+    <select id="isRepeat" parameterType="java.lang.String" resultType="com.cykj.entity.BackUser">
+        select * from backUser where account = #{account} and compName = #{compName}
+    </select>
+
+    <insert id="register" parameterType="com.cykj.entity.BackUser" keyProperty="bUserId" useGeneratedKeys="true">
+        insert into backUser(bUserName,compName,contactInfo,account,pwd,roleId)
+        values (#{bUserName},#{compName},#{contactInfo},#{account},#{pwd},1)
+    </insert>
+
+    <insert id="addComp" parameterType="com.cykj.entity.BackUser">
+        insert into backUser (bUserName, account, pwd, contactInfo, busiLice, email,
+         city, province,  roleId, stateId, compName,address,lat,lng)
+        VALUES ( #{bUserName},#{account},#{pwd},#{contactInfo},#{busiLice},#{email},#{city},#{province}
+        ,#{roleId},#{stateId},#{compName},#{address},#{lat},#{lng});
+    </insert>
+
+    <select id="findByAccount" resultType="com.cykj.entity.BackUser">
+        select * from backUser where account = #{account};
+    </select>
+
+    <select id="findID" resultType="int">
+        select last_insert_id() ;
+    </select>
+
+<!--    根据条件展示企业-->
+    <select id="findCompany" parameterType="java.util.HashMap" resultMap="CompanyMap">
+        select i.industryName,b.bUserId,b.compName,b.city,b.finanStage,b.scale,b.product,b.homePage,b.logo
+        from backUser b,comp_industry ci,industry i
+        where b.roleId=1 and b.stateId=1 and i.industryID = ci.industryID and ci.compID = b.bUserID
+        <if test="chooseCity!=null">
+            and b.city = #{chooseCity}
+        </if>
+        <if test="chooseType!=null">
+            and i.industryName = #{chooseType}
+        </if>
+        <if test="chooseFinan!=null">
+            and b.finanStage = #{chooseFinan}
+        </if>
+        <if test="chooseScale!=null">
+            and b.scale = #{chooseScale}
+        </if>
+         limit #{curr} , #{limit}
+    </select>
+    <select id="findCount" parameterType="java.util.HashMap" resultMap="CompanyMap">
+        select i.industryName,b.bUserId,b.compName,b.city,b.finanStage,b.scale,b.product,b.homePage,b.logo
+        from backUser b,comp_industry ci,industry i
+        where b.roleId=1 and b.stateId=1 and i.industryID = ci.industryID and ci.compID = b.bUserID
+        <if test="chooseCity!=null">
+            and b.city = #{chooseCity}
+        </if>
+        <if test="chooseType!=null">
+            and i.industryName = #{chooseType}
+        </if>
+        <if test="chooseFinan!=null">
+            and b.finanStage = #{chooseFinan}
+        </if>
+        <if test="chooseScale!=null">
+            and b.scale = #{chooseScale}
+        </if>
+
+    </select>
+
+    <resultMap id="CompanyMap" type="com.cykj.entity.CompIndustry">
+        <id property="compAndIndID" column="compAndIndID"></id>
+        <result property="compID" column="compID"></result>
+        <result property="industryID" column="industryID"></result>
+        <association property="industry" column="industryID" javaType="com.cykj.entity.Industry">
+            <id property="industryID" column="industryID"></id>
+            <result property="industryName" column="industryName"></result>
+        </association>
+        <association property="backUser" column="compID" javaType="com.cykj.entity.BackUser">
+            <id property="bUserId" column="bUserId"></id>
+            <result property="compName" column="compName"></result>
+            <result property="city" column="city"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="scale" column="scale"></result>
+            <result property="product" column="product"></result>
+            <result property="homePage" column="homePage"></result>
+            <result property="logo" column="logo"></result>
+        </association>
+    </resultMap>
+
+<!--    根据城市查找企业信息-->
+    <select id="CompanyCity" resultType="com.cykj.entity.BackUser">
+        select * from backUser b where b.roleId=1 and b.stateId=1
+        <if test="city!=null">
+            and b.city = #{city}
+        </if>
+        limit 9
+    </select>
+
+<!--    根据id查企业信息-->
+    <select id="findProfile" resultType="com.cykj.entity.BackUser">
+        select * from backUser b where bUserID = #{bUserId}
+    </select>
 
 </mapper>

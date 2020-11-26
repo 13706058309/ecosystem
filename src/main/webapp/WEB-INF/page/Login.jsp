@@ -1,142 +1,245 @@
 <%--
   Created by IntelliJ IDEA.
   User: yuzhen
-  Date: 2020/11/10
-  Time: 15:26
+  Date: 2020/11/14
+  Time: 12:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <script id="allmobilize" charset="utf-8" src="../style/js/allmobilize.min.js"></script>
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="alternate" media="handheld"  />
-    <!-- end 云适配 -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>钱程无忧-登录</title>
-    <meta property="qc:admins" content="23635710066417756375" />
-    <meta content="拉勾网是3W旗下的互联网领域垂直招聘网站,互联网职业机会尽在拉勾网" name="description">
-    <meta content="拉勾,拉勾网,拉勾招聘,拉钩, 拉钩网 ,互联网招聘,拉勾互联网招聘, 移动互联网招聘, 垂直互联网招聘, 微信招聘, 微博招聘, 拉勾官网, 拉勾百科,跳槽, 高薪职位, 互联网圈子, IT招聘, 职场招聘, 猎头招聘,O2O招聘, LBS招聘, 社交招聘, 校园招聘, 校招,社会招聘,社招" name="keywords">
+    <meta charset="utf-8">
+    <title>前端登录</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dmaku.css">
+    <style>
+        .btn-danger:hover {
+            color: lightgreen;
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
 
-    <meta name="baidu-site-verification" content="QIQ6KC1oZ6" />
+        .btn-danger {
+            color: lightgreen;
+            background-color: #d9534
+        }
 
-    <!-- <div class="web_root"  style="display:none">h</div> -->
-    <script type="text/javascript">
-        var ctx = "h";
-        console.log(1);
-    </script>
-    <link rel="Shortcut Icon" href="h/images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../style/css/style.css"/>
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #C9302C;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: left;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
 
-    <script src="../style/js/jquery.1.10.1.min.js" type="text/javascript"></script>
-
-    <script type="text/javascript" src="../style/js/jquery.lib.min.js"></script>
-    <script type="text/javascript" src="../style/js/core.min.js"></script>
-
-
-    <script type="text/javascript">
-        var youdao_conv_id = 271546;
-    </script>
-    <script type="text/javascript" src="../style/js/conv.js"></script>
+        .btn:hover {
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
 </head>
-
-<body id="login_bg">
-<div class="login_wrapper">
-    <div class="login_header">
-        <a href="#"><img src="../style/images/logo.png" width="500" height="150" alt="钱程无忧" /></a>
-        <div id="cloud_s"><img src="../style/images/cloud_s.png" width="81" height="52" alt="cloud" /></div>
-        <div id="cloud_m"><img src="../style/images/cloud_m.png" width="136" height="95"  alt="cloud" /></div>
-    </div>
-
-    <input type="hidden" id="resubmitToken" value="" />
-    <div class="login_box">
-        <form id="loginForm" action="">
-            <input type="text" id="email" name="email" value="" tabindex="1" placeholder="请输入账号登录" />
-            <input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码" />
-<%--            <input type="text" id="vCode" name="vCode" placeholder="请输入验证码" />--%>
-            <span class="error" style="display:none;" id="beError"></span>
-            <label class="fl" for="remember"><input type="checkbox" id="remember" value="" checked="checked" name="autoLogin" /> 记住密码</label>
-            <a href="${pageContext.request.contextPath}/golog/forget" class="fr" target="_blank">忘记密码？</a>
-
-            <!--<input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录" />-->
-            <a style="color:#fff;" href="index.html" class="submitLogin" title="登 &nbsp; &nbsp; 录"/>登 &nbsp; &nbsp; 录</a>
-
-
-            <input type="hidden" id="callback" name="callback" value=""/>
-            <input type="hidden" id="authType" name="authType" value=""/>
-            <input type="hidden" id="signature" name="signature" value=""/>
-            <input type="hidden" id="timestamp" name="timestamp" value=""/>
+<body class="body">
+<div class="login-page">
+    <div class="form">
+        <input type="hidden" id="path" value="${pageContext.request.contextPath}"/>
+        <form class="register-form">
+            <input type="text" name="account" id="account" placeholder="请输入账号">
+            <input type="password" name="pwd1" id="pwd1" placeholder="请输入密码">
+            <img id="vCodeImg" src="${pageContext.request.contextPath}/golog/getCode" style="width: 270px;height: 47px"
+                 onclick="changeImg()">
+            <input type="text" name="vCode" id="vCode" placeholder="请输入图形验证码">
+            <a onclick="ajax_Login()"><input type="button" value="登录"></a>
+            <p class="message">换种方式登录？<a href="javascript:">手机登录</a>或者<a
+                    href="${pageContext.request.contextPath}/golog/reg">成为会员</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
         </form>
-        <div class="login_right">
-            <div>还没有钱程无忧帐号？</div>
-            <a  href="${pageContext.request.contextPath}/golog/reg"  class="registor_now">立即注册</a>
-            <div class="login_others">使用以下帐号直接登录:</div>
-            <a  href="h/ologin/auth/sina.html"  target="_blank" class="icon_wb" title="使用新浪微博帐号登录"></a>
-            <a  href="h/ologin/auth/qq.html"  class="icon_qq" target="_blank" title="使用腾讯QQ帐号登录"></a>
-        </div>
+        <form class="login-form">
+            <input type="text" name="phoneNumber" id="phone" placeholder="请输入手机号">
+            <input type="button" name="mesCode" id="mesCode" value="点击获取验证码" onclick="sendMes()" class="btn btn-danger">
+            <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码">
+            <a onclick="mesLog()"><input type="button" value="登录"></a>
+            <p class="message">换种方式登录？<a href="javascript:">账号登录</a>或者<a
+                    href="${pageContext.request.contextPath}/golog/reg">成为会员</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
+        </form>
+        <form ></form>
     </div>
-    <div class="login_box_btm"></div>
 </div>
-
-<script type="text/javascript">
-    $(function(){
-        //验证表单
-        $("#loginForm").validate({
-            /* onkeyup: false,
-           focusCleanup:true, */
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true
-                }
-            },
-            messages: {
-                email: {
-                    required: "请输入登录邮箱地址",
-                    email: "请输入有效的邮箱地址，如：vivi@lagou.com"
-                },
-                password: {
-                    required: "请输入密码"
-                }
-            },
-            submitHandler:function(form){
-                if($('#remember').prop("checked")){
-                    $('#remember').val(1);
-                }else{
-                    $('#remember').val(null);
-                }
-                var email = $('#email').val();
-                var password = $('#password').val();
-                var remember = $('#remember').val();
-
-                var callback = $('#callback').val();
-                var authType = $('#authType').val();
-                var signature = $('#signature').val();
-                var timestamp = $('#timestamp').val();
-
-                $(form).find(":submit").attr("disabled", true);
-                $.ajax({
-                    type:'POST',
-                    data:{email:email,password:password,autoLogin:remember, callback:callback, authType:authType, signature:signature, timestamp:timestamp},
-                    url:ctx+'/user/login.json'
-                }).done(function(result) {
-                    if(result.success){
-                        if(result.content.loginToUrl){
-                            window.location.href=result.content.loginToUrl;
-                        }else{
-                            window.location.href=ctx+'/';
-                        }
-                    }else{
-                        $('#beError').text(result.msg).show();
-                    }
-                    $(form).find(":submit").attr("disabled", false);
-                });
-            }
-        });
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/dmaku.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+<script>
+    var path = $("#path").val();
+    var layer;
+    var InterValObj;
+    var curCount=60;
+    layui.use('layer',function () {
+        layer = layui.layer;
     })
+
+    //图形验证码刷新
+    function changeImg() {
+        $("#vCodeImg").attr("src", path + "/golog/getCode?dates=" + new Date());
+    }
+
+
+
+
+    //发送短信
+    function sendMes() {
+        var phone = $("#phone").val();
+        var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+        if (!pattern.test(phone)) {
+            alert("请输入正确手机号");
+        } else {
+            $.ajax({
+                url: path + "/golog/aliSend",
+                type: "post",
+                data: "phone=" + phone,
+                dataType: 'text',
+                success:function(data){
+                    if(data=='1'){
+                        layer.msg("发送成功");
+                        $("#codeBtn").attr("disabled", "true");
+                        $("#codeBtn").css("background-color", "grey");
+                        $("#codeBtn").val( curCount + "秒");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }else if(data=='2'){
+                        layer.msg("手机号错误，该手机未注册过");
+                    }else{
+                        layer.msg("发送失败，请稍后再发");
+                    }
+                },
+                error:function(){
+                    layer.alert('请求超时或系统出错!');
+                }
+            });
+
+        }
+    }
+
+    function SetRemainTime() {
+        if (curCount == 0) {
+            curCount=120;
+            window.clearInterval(InterValObj);//停止计时器
+            $("#codeBtn").removeAttr("disabled");//启用按钮
+            $("#codeBtn").css("background-color", "#0D9572");
+            $("#codeBtn").val("重新发送");
+        }
+        else {
+            curCount--;
+            $("#codeBtn").val(curCount +"秒");
+        }
+    }
+
+
+    //短信登录
+    function mesLog() {
+        // var value = $("#mesCode").val();
+        // if(value == '点击获取验证码'){
+        //     alert("验证码未发送!");
+        //     return false;
+        // }
+        var phone = $("#phone").val();
+        var code = $("#acthCode").val();
+        // console.log(phone);
+        // alert(phone);
+        // alert(code)
+
+        $.ajax({
+            // url:path,
+            url:path+"/golog/mesLog",
+            type:'post',
+            data:"phone="+phone+"&code="+code,
+            dataType:'text',
+            contentType: 'text',
+            beforeSend:function () {
+                if (code.length != 4){
+                    alert("请输入四位验证码!");
+                    return false;
+                }
+                var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+                if(!pattern.test(phone)){
+                    alert("请输入正确手机号!");
+                    return false;
+                }
+                return true;
+            },
+            success:function (info) {
+                if(info == 'success'){
+                    location.href = path + "/homePage/home";
+                }
+            }
+        })
+
+
+    }
+
+    //ajax登录
+    function ajax_Login() {
+        var account = $("#account").val();
+        var pwd = $("#pwd1").val();
+        var sVCode = $("#vCode").val();
+        $.ajax({
+            url: path + "/golog/log",
+            data: "account=" + account + "&pwd=" + pwd + "&sVCode=" + sVCode,
+            type: "get",
+            typeData: "text",
+            beforeSend: function () {
+                if (account.length == 0) {
+                    alert("账号不能为空!");
+                    return false;
+                }
+                if (pwd.length == 0) {
+                    alert("密码不能为空!");
+                    return false;
+                }
+                if (vCode.length == 0) {
+                    alert("验证码不能为空!");
+                    return false;
+                }
+                return true;
+            },
+            success: function (info) {
+                // alert(info);
+                changeImg();
+                if (info == 'success') {
+                    location.href = path + "/homePage/home";
+                } else if (info == 'noAccount') {
+                    alert("查无此账号,登录失败!");
+                    var isA = confirm("是否注册?");
+                    if (isA == true) location.href = path + "/golog/reg";
+                } else if (info == 'disable') {
+                    alert("此账号已被禁用!请联系管理员!");
+                } else if (info == 'delete') {
+                    alert("此账号已被删除!请重新注册!");
+                } else if (info == 'auditFailed') {
+                    alert("此账号还未通过审核,请稍后重试!");
+                } else if (info == 'vCodeError') {
+                    alert("验证码错误!");
+                }
+            },
+
+            error: function () {
+
+            }
+        })
+    }
 </script>
 </body>
 </html>

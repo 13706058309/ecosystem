@@ -10,6 +10,8 @@ public class Parameter {
   private String paramType; //参数类型
   private String paramValues; // 值
 
+  public Parameter() {
+  }
 
   public long getParamId() {
     return paramId;
@@ -44,6 +46,16 @@ public class Parameter {
 
   public void setParamValues(String paramValues) {
     this.paramValues = paramValues;
+  }
+
+  @Override
+  public String toString() {
+    return "Parameter{" +
+            "paramId=" + paramId +
+            ", paramName='" + paramName + '\'' +
+            ", paramType='" + paramType + '\'' +
+            ", paramValues='" + paramValues + '\'' +
+            '}';
   }
 
 }

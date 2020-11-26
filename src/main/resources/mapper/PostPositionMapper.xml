@@ -3,5 +3,147 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.PostPositionMapper">
+    <insert id="addPostPosition" parameterType="com.cykj.entity.PostPosition">
+        insert into postPosition (companyID, postName, workNature, postID, department, maxSalary, minSalary, workCity, workYear, education, jobBenefits, jobDescription, postStandID, recruitsNum, province, detailAddress, contact, contactEmail) VALUES
+        (#{companyId},#{postName},#{workNature},#{postId},#{department},#{maxSalary},#{minSalary},#{workCity},#{workYear},#{education},#{jobBenefits},#{jobDescription},6,#{recruitsNum},#{province},#{detailAddress},#{contact},#{contactEmail})
+    </insert>
+
+    <select id="findPosition" parameterType="java.util.Map" resultType="com.cykj.entity.PostPosition">
+        select * from postPosition where companyId = #{compID} and postStandId = #{standID}
+
+        <if test="beginTime!=null">
+            and releaseTime >= #{beginTime}
+        </if>
+
+        <if test="endTime!=null">
+            and releaseTime &lt;= #{endTime}
+        </if>
+
+        <if test="postName!=null">
+            and postName like #{postName}
+        </if>
+
+        order by releaseTime desc limit #{offset}, #{limit}
+    </select>
+
+    <select id="findPositionNum" parameterType="java.util.Map" resultType="int">
+        select count(*) from postPosition where companyId = #{compID} and postStandId = #{standID}
+
+        <if test="beginTime!=null">
+            and releaseTime >= #{beginTime}
+        </if>
+
+        <if test="endTime!=null">
+            and releaseTime &lt;= #{endTime}
+        </if>
+
+        <if test="educationId!=null">
+            and educationId like #{educationId}
+        </if>
+
+    </select>
+
+    <update id="changePostPositionStand" parameterType="java.util.Map">
+        update postPosition set postStandID = #{standID} where companyID = #{compID} and pPostID = #{pPostID}
+    </update>
+
+    <update id="updatePostPosition" parameterType="java.util.Map">
+        update postPosition
+        <set>
+            <if test="postName!=null">
+                postName = #{postName},
+            </if>
+
+            <if test="workNature!=null">
+                workNature = #{workNature},
+            </if>
+
+            <if test="postId!=null">
+                postId = #{postId},
+            </if>
+
+            <if test="department!=null">
+                department = #{department},
+            </if>
+
+            <if test="maxSalary!=null">
+                maxSalary = #{maxSalary},
+            </if>
+
+            <if test="minSalary!=null">
+                minSalary = #{minSalary},
+            </if>
+
+            <if test="workCity!=null">
+                workCity = #{workCity},
+            </if>
+
+            <if test="workYear!=null">
+                workYear = #{workYear},
+            </if>
+
+            <if test="education!=null">
+                education = #{education},
+            </if>
+
+            <if test="jobBenefits!=null">
+                jobBenefits = #{jobBenefits},
+            </if>
+
+            <if test="jobDescription!=null">
+                jobDescription = #{jobDescription},
+            </if>
+
+            <if test="recruitsNum!=null">
+                recruitsNum = #{recruitsNum},
+            </if>
+
+            <if test="province!=null">
+                province = #{province},
+            </if>
+
+            <if test="detailAddress!=null">
+                detailAddress = #{detailAddress},
+            </if>
+
+            <if test="contact!=null">
+                contact = #{contact},
+            </if>
+
+            <if test="contactEmail!=null">
+                contactEmail = #{contactEmail},
+            </if>
+        </set>
+        where pPostId = #{pPostID}
+    </update>
+
+<!--    主页最新岗位9条信息查询-->
+    <select id="postList" resultType="com.cykj.entity.PostPosition" resultMap="postMap">
+        select p.postName,p.workCity,p.workYear,p.education,p.maxSalary,p.minSalary,
+        b.logo,b.finanStage,b.scale
+            from postPosition p,backUser b
+            where p.companyID = b.bUserID and workCity = #{workCity} order by releaseTime desc limit 9
+    </select>
+    <resultMap id="postMap" type="com.cykj.entity.PostPosition">
+        <id property="pPostID" column="pPostID"></id>
+        <result property="postName" column="postName"></result>
+        <result property="workCity" column="workCity"></result>
+        <result property="workYear" column="workYear"></result>
+        <result property="education" column="education"></result>
+        <result property="maxSalary" column="maxSalary"></result>
+        <result property="minSalary" column="minSalary"></result>
+        <result property="companyID" column="companyID"></result>
+        <association property="backUser" column="compID" javaType="com.cykj.entity.BackUser">
+            <id property="bUserID" column="compID"></id>
+            <result property="logo" column="logo"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="scale" column="scale"></result>
+        </association>
+    </resultMap>
+
+<!--    根据企业id查找岗位信息-->
+    <select id="findPost" resultType="com.cykj.entity.PostPosition">
+        select * from postPosition where companyId = #{bUserId}
+    </select>
 
 </mapper>

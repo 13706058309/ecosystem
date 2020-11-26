@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/jquery-3.5.1.js"></script>
 <script charset="UTF-8" src="${pageContext.request.contextPath}/js/value.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 

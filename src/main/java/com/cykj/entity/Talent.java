@@ -19,9 +19,27 @@ public class Talent {
   private String selfEva;//自我评价
   private String education;//学历
   private String entryTime;//上传时间
+  private String address;//地址
+  private String certificate;//技能证书
   private CompAndtalent compAndtalent;
 
   public Talent() {
+  }
+
+  public Talent(String talentName, String school, String birthday, String profession,
+                String politicalStatus, String education, String contactInfo, String address, String workExp,
+                String certificate, String selfEva) {
+    this.talentName = talentName;
+    this.school = school;
+    this.birthday = birthday;
+    this.profession = profession;
+    this.politicalStatus = politicalStatus;
+    this.education = education;
+    this.contactInfo = contactInfo;
+    this.address = address;
+    this.workExp = workExp;
+    this.certificate = certificate;
+    this.selfEva = selfEva;
   }
 
   public long getTalentId() {
@@ -135,6 +153,22 @@ public class Talent {
 
   public void setCompAndtalent(CompAndtalent compAndtalent) {
     this.compAndtalent = compAndtalent;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getCertificate() {
+    return certificate;
+  }
+
+  public void setCertificate(String certificate) {
+    this.certificate = certificate;
   }
 
   @Override

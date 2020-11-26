@@ -17,8 +17,80 @@ public class CerRecord {
   private String trueName; //真实姓名
   private String idNumber; //身份证号码
   private String beginTime; //申请时间
+  private String cerPhone;//联系号码
+  private String turnoverTime;//修改时间
+  private String cerTestReport;//测试报告
+  private String cerFinalReport;//最终报告
+  private int cerTestScore;//评测成绩
+  private int cerFinalScore;//最终成绩
+  private int cerJudgeScore;//评审成绩
+  private String cerReviewVideo;//评审视频
+
+  public String getCerReviewVideo() {
+    return cerReviewVideo;
+  }
+
+  public void setCerReviewVideo(String cerReviewVideo) {
+    this.cerReviewVideo = cerReviewVideo;
+  }
 
   public CerRecord() {
+  }
+
+  public int getCerJudgeScore() {
+    return cerJudgeScore;
+  }
+
+  public void setCerJudgeScore(int cerJudgeScore) {
+    this.cerJudgeScore = cerJudgeScore;
+  }
+
+  public String getCerTestReport() {
+    return cerTestReport;
+  }
+
+  public void setCerTestReport(String cerTestReport) {
+    this.cerTestReport = cerTestReport;
+  }
+
+  public String getCerFinalReport() {
+    return cerFinalReport;
+  }
+
+  public void setCerFinalReport(String cerFinalReport) {
+    this.cerFinalReport = cerFinalReport;
+  }
+
+  public int getCerTestScore() {
+    return cerTestScore;
+  }
+
+  public void setCerTestScore(int cerTestScore) {
+    this.cerTestScore = cerTestScore;
+  }
+
+  public int getCerFinalScore() {
+    return cerFinalScore;
+  }
+
+  public void setCerFinalScore(int cerFinalScore) {
+    this.cerFinalScore = cerFinalScore;
+  }
+
+  public String getTurnoverTime() {
+        return turnoverTime;
+    }
+
+    public void setTurnoverTime(String turnoverTime) {
+        this.turnoverTime = turnoverTime;
+    }
+
+    public String getCerPhone() {
+    return cerPhone;
+  }
+
+  public void setCerPhone(String cerPhone) {
+    this.cerPhone = cerPhone;
   }
 
   public long getCerRecordId() {

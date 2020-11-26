@@ -8,6 +8,7 @@ public class TableInfo {
     private int count;
     private List<?> data;
 
+
     public TableInfo() {
     }
 

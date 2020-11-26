@@ -3,5 +3,262 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.ResumeMapper">
+    <select id="findAllResume" parameterType="java.util.Map" resultMap="results">
+        select r.*,e.education,d.deliTime,d.deliveryId,p.postName   from resume r,education e,postPosition p,delivery d
+        where r.educationid=e.educationid  and  r.userID = d.userID and p.pPostID = d.pPostID and d.deliStandID = #{standID}
+        and p.companyID = #{compID}
 
+        <if test="beginTime!=null">
+            and deliTime >= #{beginTime}
+        </if>
+
+        <if test="endTime!=null">
+            and deliTime &lt;= #{endTime}
+        </if>
+
+        <if test="postName!=null">
+            and p.postName like #{postName}
+        </if>
+        <if test="isGraduate!=null">
+            and isGraduate = #{isGraduate}
+        </if>
+        <if test="wrokYear!=null">
+            and wrokYear >= #{wrokYear}
+        </if>
+        <if test="educationId!=null">
+            and e.educationID >= #{educationId}
+        </if>
+        <if test="userName!=null">
+            and r.realName >= #{userName}
+        </if>
+        <if test="evdu!=null">
+            and e.educationID = #{evdu}
+        </if>
+
+        order by deliTime desc limit #{offset}, #{limit}
+    </select>
+
+    <resultMap id="results" type="com.cykj.entity.Resume">
+    <id property="resumeId" column="resumeId"></id>
+    <result property="realName" column="realName"></result>
+    <result property="clan" column="clan"></result>
+    <result property="photo" column="photo"></result>
+    <result property="politicalStatus" column="politicalStatus"></result>
+    <result property="birthday" column="birthday"></result>
+    <result property="contactInfo" column="contactInfo"></result>
+    <result property="school" column="school"></result>
+    <result property="educationId" column="educationId"></result>
+    <result property="profession" column="profession"></result>
+    <result property="wrokYear" column="wrokYear"></result>
+        <result property="qualiCer" column="qualiCer"></result>
+    <result property="selfEva" column="selfEva"></result>
+    <result property="isShow" column="isShow"></result>
+    <result property="address" column="address"></result>
+    <result property="updateTime" column="updateTime"></result>
+    <result property="isGraduate" column="isGraduate"></result>
+    <result property="sex" column="sex"></result>
+    <result property="expectWork" column="expectWork"></result>
+    <result property="jobStandId" column="jobStandId"></result>
+    <result property="industry" column="industry"></result>
+    <association property="education" column="education" javaType="com.cykj.entity.Education">
+        <id property="educationId" column="educationId"></id>
+        <result property="education" column="education"></result>
+    </association>
+        <association property="delivery" column="userId" javaType="com.cykj.entity.Delivery">
+            <id property="deliveryId" column="deliveryId"></id>
+            <result property="deliTime" column="deliTime"></result>
+        </association>
+        <association property="postPosition" column="pPostId" javaType="com.cykj.entity.PostPosition">
+            <id property="pPostId" column="pPostId"></id>
+            <result property="postName" column="postName"></result>
+        </association>
+    </resultMap>
+
+
+    <select id="findAllResumeNum" parameterType="java.util.Map" resultMap="results">
+        select r.*,e.education,d.deliTime,p.postName  from resume r,education e,postPosition p,delivery d
+        where r.educationid=e.educationid and  r.userID = d.userID and p.pPostID = d.pPostID and d.deliStandID = #{standID}
+        and p.companyID = #{compID}
+
+        <if test="beginTime!=null">
+            and deliTime >= #{beginTime}
+        </if>
+
+        <if test="endTime!=null">
+            and deliTime &lt;= #{endTime}
+        </if>
+
+        <if test="postName!=null">
+            and p.postName like #{postName}
+        </if>
+        <if test="isGraduate!=null">
+            and isGraduate = #{isGraduate}
+        </if>
+        <if test="wrokYear!=null">
+            and wrokYear >= #{wrokYear}
+        </if>
+        <if test="educationId!=null">
+            and e.educationID >= #{educationId}
+        </if>
+
+        <if test="userName!=null">
+            and r.realName like #{userName}
+        </if>
+
+        <if test="evdu!=null">
+            and e.educationID = #{evdu}
+        </if>
+
+    </select>
+
+    <select id="compFindResume" parameterType="java.util.Map" resultMap="findResume">
+        select r.*,e.education  from resume r,userInfo u,education e
+           where  r.userid= u.userid and u.isopen = 1 and r.jobStandId in(5,13) and r.educationid=e.educationid
+        <if test="isGraduate!=null">
+            and isGraduate = #{isGraduate}
+        </if>
+
+        <if test="wrokYear!=null">
+            and wrokYear >= #{wrokYear}
+        </if>
+
+        <if test="educationId!=null">
+            and e.educationID = #{educationId}
+        </if>
+
+        <if test="profession!=null">
+            and r.profession = #{profession}
+        </if>
+
+        <if test="sex!=null">
+            and r.sex = #{sex}
+        </if>
+
+        order by r.updateTime desc limit #{offset}, #{limit}
+
+    </select>
+
+    <resultMap id="findResume" type="com.cykj.entity.Resume">
+        <id property="resumeId" column="resumeId"></id>
+        <result property="realName" column="realName"></result>
+        <result property="clan" column="clan"></result>
+        <result property="photo" column="photo"></result>
+        <result property="politicalStatus" column="politicalStatus"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="school" column="school"></result>
+        <result property="educationId" column="educationId"></result>
+        <result property="profession" column="profession"></result>
+        <result property="wrokYear" column="wrokYear"></result>
+        <result property="qualiCer" column="qualiCer"></result>
+        <result property="selfEva" column="selfEva"></result>
+        <result property="isShow" column="isShow"></result>
+        <result property="address" column="address"></result>
+        <result property="updateTime" column="updateTime"></result>
+        <result property="isGraduate" column="isGraduate"></result>
+        <result property="sex" column="sex"></result>
+        <result property="expectWork" column="expectWork"></result>
+        <result property="jobStandId" column="jobStandId"></result>
+        <result property="industry" column="industry"></result>
+        <association property="education" column="education" javaType="com.cykj.entity.Education">
+            <id property="educationId" column="educationId"></id>
+            <result property="education" column="education"></result>
+        </association>
+
+    </resultMap>
+
+    <select id="compFindResumeNum" parameterType="java.util.Map" resultType="int">
+        select count(*)  from resume r,userInfo u,education e
+        where  r.userid= u.userid and u.isopen = 1 and r.jobStandId in(5,13) and r.educationid=e.educationid
+
+        <if test="isGraduate!=null">
+            and isGraduate = #{isGraduate}
+        </if>
+
+        <if test="wrokYear!=null">
+            and wrokYear >= #{wrokYear}
+        </if>
+
+        <if test="educationId!=null">
+            and e.educationID = #{educationId}
+        </if>
+
+        <if test="profession!=null">
+            and r.profession = #{profession}
+        </if>
+
+        <if test="sex!=null">
+            and r.sex = #{sex}
+        </if>
+
+    </select>
+
+    <select id="findResumeDetail" parameterType="int" resultMap="findDetail">
+        select r.*,we.*,pe.*,eb.*,e.education   from
+            resume r left join education e on r.educationid=e.educationid
+                        left join resumeEduu re on r.resumeID=re.resumeID left join educationalBackground eb on re.ebID=eb.ebID
+                            left join resumePro rp on r.resumeID=rp.resumeID left join projectExperience pe on rp.peID=pe.peID
+                                left join resumeWork rw on r.resumeID=rw.resumeID left join workExperience we on rw.weID=we.weID
+                                    where r.resumeid=#{resumeID}
+    </select>
+
+
+    <resultMap id="findDetail" type="com.cykj.entity.Resume">
+        <id property="resumeId" column="resumeId"></id>
+        <result property="realName" column="realName"></result>
+        <result property="clan" column="clan"></result>
+        <result property="photo" column="photo"></result>
+        <result property="politicalStatus" column="politicalStatus"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="contactInfo" column="contactInfo"></result>
+        <result property="school" column="school"></result>
+        <result property="educationId" column="educationId"></result>
+        <result property="profession" column="profession"></result>
+        <result property="wrokYear" column="wrokYear"></result>
+        <result property="selfEva" column="selfEva"></result>
+        <result property="isShow" column="isShow"></result>
+        <result property="address" column="address"></result>
+        <result property="updateTime" column="updateTime"></result>
+        <result property="isGraduate" column="isGraduate"></result>
+        <result property="sex" column="sex"></result>
+        <result property="expectWork" column="expectWork"></result>
+        <result property="jobStandId" column="jobStandId"></result>
+        <result property="industry" column="industry"></result>
+        <association property="education" column="education" javaType="com.cykj.entity.Education">
+            <id property="educationId" column="educationId"></id>
+            <result property="education" column="education"></result>
+        </association>
+        <collection property="educationalBackgrounds" ofType="com.cykj.entity.EducationalBackground">
+            <id property="ebId" column="ebId"></id>
+            <result property="ebSchool" column="ebSchool"></result>
+            <result property="major" column="major"></result>
+            <result property="ebEducation" column="ebEducation"></result>
+            <result property="schBeginTime" column="schBeginTime"></result>
+            <result property="schEndTime" column="schEndTime"></result>
+            <result property="schExperience" column="schExperience"></result>
+        </collection>
+        <collection property="workExperiences" ofType="com.cykj.entity.WorkExperience">
+            <id property="weId" column="weId"></id>
+            <result property="companyName" column="companyName"></result>
+            <result property="companyTrade" column="companyTrade"></result>
+            <result property="companyPost" column="companyPost"></result>
+            <result property="beginTime" column="beginTime"></result>
+            <result property="endTime" column="endTime"></result>
+            <result property="duties" column="duties"></result>
+            <result property="performance" column="performance"></result>
+        </collection>
+        <collection property="projectExperiences" ofType="com.cykj.entity.ProjectExperience">
+            <id property="peId" column="peId"></id>
+            <result property="proName" column="proName"></result>
+            <result property="proPost" column="proPost"></result>
+            <result property="proBeginTime" column="proBeginTime"></result>
+            <result property="proEndTime" column="proEndTime"></result>
+            <result property="proDescription" column="proDescription"></result>
+            <result property="proPerformance" column="proPerformance"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findOne" resultType="com.cykj.entity.Resume">
+        select * from resume where resumeID = 1;
+    </select>
 </mapper>
