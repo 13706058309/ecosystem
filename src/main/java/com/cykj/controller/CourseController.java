@@ -1,9 +1,13 @@
 package com.cykj.controller;
 
 import com.cykj.entity.Course;
+
+import com.cykj.entity.CourseCollect;
 import com.cykj.entity.Field;
 import com.cykj.entity.TableInfo;
 import com.cykj.log.Loger;
+import com.cykj.entity.Unit;
+import com.cykj.service.CourseCollectService;
 import com.cykj.service.CourseService;
 import com.cykj.service.FieldService;
 import com.cykj.service.impl.CourseServiceImpl;
@@ -31,6 +35,8 @@ public class CourseController {
     private CourseService courseServiceImpl;
     @Resource
     private FieldService fieldServiceImpl;
+    @Resource
+    private CourseCollectService courseCollectServiceImpl;
 
     @RequestMapping("/goBCM")
     @Loger(operationType = "走入管理表格",operationName = "走入管理表格数据")
