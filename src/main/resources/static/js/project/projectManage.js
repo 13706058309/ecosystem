@@ -25,7 +25,7 @@ $(function () {
             ,url: path+'/project/findProjectAll' //数据接口
             ,page: "page" //开启分页
             // ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-            ,limit:5
+            ,limit:10
             ,limits:[5,10,15,20]
             ,cols: [[ //表头
                 {field: 'pOrderNum', title: '订单号',  fixed: 'left'}

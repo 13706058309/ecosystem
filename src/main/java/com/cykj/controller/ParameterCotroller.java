@@ -16,6 +16,8 @@ import java.util.Map;
 public class ParameterCotroller {
     @Resource
     ParameterService parameterServiceImpl;
+
+
     @RequestMapping("/findAssureMoney")
     public @ResponseBody String findAssureMoney(){
         Map<String,Object> condition =new HashMap<>();
