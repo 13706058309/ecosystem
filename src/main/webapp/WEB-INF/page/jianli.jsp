@@ -28,6 +28,7 @@
 
 <body>
 <input type="text" style="display: none" id="kong">
+<input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <input type="hidden" id="resumeId" value="${resume.resumeId}">
 <%--<div id="header" style="background-color: #0d98ff">--%>
 <%--<div class="inner home-inner" >--%>
@@ -58,11 +59,11 @@
         <div class="nav" style="margin-top: 20px">
             <ul>
                 <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                 <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
-                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
-                <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+                <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
             </ul>
         </div>
 
@@ -75,16 +76,15 @@
             </c:if>
             <c:if test="${not empty qUser}">
                 <ul>
-                        <%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
                     <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
                     <li class="nav-figure">
-                        <a  ka="header-username">
-                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                        <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
+                            <span class="label-text">${qUser.userName}</span><img id="topImg"  src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                         </a>
                         <div class="dropdown">
                             <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
                             <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
-                            <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
+                            <a href="${pageContext.request.contextPath}/homePage/quitAccount"  ka="header-logout">退出登录</a>
                         </div>
                     </li>
                 </ul></c:if>
@@ -747,8 +747,11 @@
                         <h2 style="color: #0cccb5">我的信息</h2>
                         <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/center/resumeInfo"  >收藏岗位</a></div>
                         <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/center/accountSet" >账号设置</a></div>
-                        <div style="margin-left: 20%"><a href=""  >收藏课程</a></div>
-                        <div style="margin-left: 20%"><a href=""  >观看历史</a></div>
+<%--                        <div style="margin-left: 20%"><a href=""  >收藏课程</a></div>--%>
+<%--                        <div style="margin-left: 20%"><a href=""  >观看历史</a></div>--%>
+                        <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/zhengshu/zxzsliebiao"  >证书申请</a></div>
+                        <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/zhengshu/zxzstushi"  >证书展示</a></div>
+                        <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/zhengshu/zxzskaifa"  >证书项目</a></div>
                     </div>
                 </div>
             </div>
@@ -883,6 +886,7 @@
 
 
 <script>
+    var path=$('#path').val();
     //基本信息
     var resumeId=$('#resumeId').val();
     var name;
@@ -965,13 +969,14 @@
             contentType:false,
             dataType: "text",
             success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    // layer.msg('修改成功')
-
-                } else if (data == "lose") {
-                    layer.msg("修改失败")
-                }
+                // if (data == "succes") {
+                //     //向服务端发送删除指令
+                //     // layer.msg('修改成功')
+                //
+                // } else if (data == "lose") {
+                //     layer.msg("修改失败")
+                // }
+                document.getElementById('topImg').src=path+data;
             },
             error: function () {
                 layer.msg('网络繁忙')

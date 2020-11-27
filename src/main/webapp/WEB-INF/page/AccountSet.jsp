@@ -49,11 +49,11 @@
         <div class="nav" style="margin-top: 20px">
             <ul>
                 <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                 <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
-                <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
-                <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+                <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
             </ul>
         </div>
 
@@ -66,16 +66,15 @@
             </c:if>
             <c:if test="${not empty qUser}">
                 <ul>
-                        <%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
                     <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
                     <li class="nav-figure">
                         <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
-                            <span class="label-text"><label id="topName">${qUser.userName}</label></span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                         </a>
                         <div class="dropdown">
                             <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
                             <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
-                            <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
+                            <a href="${pageContext.request.contextPath}/homePage/quitAccount"  ka="header-logout">退出登录</a>
                         </div>
                     </li>
                 </ul></c:if>
@@ -250,27 +249,36 @@
             var newpwd2=$('#newpwd2').val();
             console.log("22222222222222")
             if (newpwd==newpwd2){
-                $.ajax({
-                    url: 'savePwd',
-                    charset:"UTF-8",
-                    async: "true",
-                    type: "post",
-                    data: "oldpwd="+oldpwd+"&newpwd="+newpwd,
-                    dataType: "text",
-                    success: function (data) {
-                        if (data == "succes") {
-                            //向服务端发送删除指令
-                            layer.msg('修改成功')
-                            location.href=$('#path').val()+"/homePage/home"
+                if (pwdTest()){
+                    $.ajax({
+                        url: 'savePwd',
+                        charset:"UTF-8",
+                        async: "true",
+                        type: "post",
+                        data: "oldpwd="+oldpwd+"&newpwd="+newpwd,
+                        dataType: "text",
+                        success: function (data) {
+                            if (data == "succes") {
+                                //向服务端发送删除指令
+                                layer.msg('修改成功')
+                                location.href=$('#path').val()+"/homePage/home"
 
-                        } else if (data == "lose") {
-                            layer.msg("旧密码错误")
+                            } else if (data == "lose") {
+                                layer.msg("旧密码错误")
+                            }
+                        },
+                        error: function () {
+                            layer.msg('网络繁忙')
                         }
-                    },
-                    error: function () {
-                        layer.msg('网络繁忙')
-                    }
-                })
+                    })
+                }else {
+                    layer.open({
+                        title: '信息'
+                        ,content: '密码只能由字母数字_组成,且至少6位，最多14位'
+
+                    })
+                }
+
             }else {
 
                 layer.open({
@@ -418,6 +426,14 @@
                 layer.msg('网络繁忙')
             }
         })
+    }
+
+    function pwdTest(){
+        var flag= /\w{6,14}$/.test($("#newpwd").val());
+        // if (flag==false){
+        //     alert("");
+        // }
+        return flag;
     }
 
 </script>
