@@ -154,7 +154,7 @@ public class HomePageController {
         request.setAttribute("chooseCity",chooseCity);
         request.setAttribute("chooseFinan",chooseFinan);
         request.setAttribute("chooseScale",chooseScale);
-        request.setAttribute("curr",(n-1)*li);
+        request.setAttribute("curr",n);
 
         //        是否登入成功
         UserInfo qUser = (UserInfo) request.getSession().getAttribute("qUser");

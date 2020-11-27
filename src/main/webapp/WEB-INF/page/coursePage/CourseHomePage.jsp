@@ -102,7 +102,7 @@
 
             <c:if test="${not empty hotCourses}">
                 <c:forEach items="${hotCourses}" var="course">
-                    <a onclick="toDetailPage(${course.courseId})">
+                    <a onclick="toDetailPage(${course.courseId},${qUser.userId})">
                         <div class="div_video" style="border:none;">
                             <div class="imgBox" style="border-radius:5px;">
                                 <div>
@@ -241,9 +241,11 @@
         });
     }
 
-    function toDetailPage(courseId) {
-        // location.href="detailPage?courseId="+courseId;
-        window.open("detailPage?courseId="+courseId);
+    function toDetailPage(courseId,userId) {
+        if (userId==undefined){
+            userId=0;
+        }
+        window.open("detailPage?courseId="+courseId+"&userId="+userId);
     }
 </script>
 </body>

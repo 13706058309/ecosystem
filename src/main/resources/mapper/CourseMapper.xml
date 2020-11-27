@@ -3,24 +3,91 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.CourseMapper">
-    <select id="selectCourseByFieldId" parameterType="java.util.HashMap" resultType="com.cykj.entity.Course">
-        select courseId,courseName,courseImgUrl,uploadTime,collectionNumber,speakerName,speakerHeadImgUrl,totalPlayTimes from course where 1=1
-        <if test="fieldId !=0">
-            and fieldId=#{fieldId}
+
+    <select id="findCourseOnPage" parameterType="java.util.HashMap" resultMap="results">
+        select * from course where courseName like concat('%',#{courseName},'%') and courseId != 0
+        <if test="fieldId!=null">
+            and fieldId = #{fieldId}
         </if>
-        <choose>
-            <when test="latest != null">
-                order by uploadTime desc limit #{limit}
-            </when>
-            <when test="hot != null">
-                order by totalPlayTimes desc limit #{limit}
-            </when>
-            <otherwise>
-                order BY courseId limit #{curr},#{limit}
-            </otherwise>
-        </choose>
+        limit #{offset},#{limit}
+    </select>
+    <resultMap id="results" type="com.cykj.entity.Course">
+        <id property="courseId" column="courseId"></id>
+<!--        <id property="fieldId" column="fieldId"></id>-->
+        <result property="courseName" column="courseName"></result>
+        <result property="courseImgUrl" column="courseImgUrl"></result>
+        <result property="speakerName" column="speakerName"></result>
+        <result property="courseIntroduce" column="courseIntroduce"></result>
+        <result property="uploadTime" column="uploadTime"></result>
+        <result property="collectionNumber" column="collectionNumber"></result>
+        <result property="fieldId" column="fieldId"></result>
+        <result property="speakerHeadImgUrl" column="speakerHeadImgUrl"></result>
+        <result property="totalPlayTimes" column="totalPlayTimes"></result>
+    </resultMap>
+
+
+    <select id="fieldList" resultType="com.cykj.entity.Field">
+        select * from field
     </select>
 
+<!--    <resultMap id="results" type="com.cykj.entity.Course">-->
+<!--        <id property="courseId" column="courseId"></id>-->
+<!--        <id property="fieldId" column="fieldId"></id>-->
+<!--        <result property="courseName" column="courseName"></result>-->
+<!--        <result property="uploadTime" column="uploadTime"></result>-->
+<!--    </resultMap>-->
+
+
+
+<!--    &lt;!&ndash;查询订单表信息&ndash;&gt;-->
+<!--    <select id="getOrderList" parameterType="java.lang.String" resultMap="results">-->
+<!--       select courseId,fieldId,courseName,uploadTime from course where fieldId =(select f.fieldId from field f where f.fieldName = '#{selectvalue}')-->
+<!--    </select>-->
+
+
+    <select id="findNumOnPage" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from course where 1=1 and courseName like concat('%',#{courseName},'%') and courseId != 0
+    </select>
+
+    <delete id="deleteCourse" parameterType="java.lang.Integer" >
+        delete from course where courseId = #{courseId}
+    </delete>
+
+<!--更改课程名字-->
+    <update id="updateCourseName" >
+        update course set courseName = #{courseName} where courseId = #{courseId}
+    </update>
+<!--    更改路径-->
+    <update id="updatecourseImgUrl" >
+        update course set courseImgUrl = #{courseImgUrl} where courseId = #{courseId}
+    </update>
+<!--更改课程介绍-->
+    <update id="updatecourseIntroduce" >
+        update course set courseIntroduce = #{courseIntroduce} where courseId = #{courseId}
+    </update>
+<!--更改头像路径-->
+    <update id="updatespeakerHeadImgUrl" >
+        update course set speakerHeadImgUrl = #{speakerHeadImgUrl} where courseId = #{courseId}
+    </update>
+
+    <insert id="insertCourse">
+        insert into course (courseName,fieldId,courseImgUrl,speakerName,courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes,uploadTime) values
+        (#{courseName},#{fieldId},#{courseImgUrl},#{speakerName},#{courseIntroduce},#{collectionNumber},#{speakerHeadImgUrl},#{totalPlayTimes},now())
+    </insert>
+
+    <select id="findOption" resultMap="results">
+        select * from field
+    </select>
+
+
+
+
+<!--    <select id="findCourse"  resultType="com.cykj.entity.Course">-->
+<!--        select courseId,fieldId,courseName,uploadTime  from course ;-->
+<!--    </select>-->
+<!--    <select id="search" parameterType="java.lang.String" resultType="com.cykj.entity.Course">-->
+<!--        select courseId,fieldId,courseName,uploadTime  from course where courseName like concat('%',#{courseName},'%')-->
+<!--    </select>-->
     <select id="selectCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
         select count(*) from course
         <if test="fieldId !=0">
@@ -45,7 +112,7 @@
         <result property="totalPlayTimes" column="totalPlayTimes"/>
         <result property="unitNumber" column="unitNumber"/>
     </resultMap>
-    
+
     <select id="selectRelatedCourses" parameterType="java.lang.Long" resultType="com.cykj.entity.Course">
         select courseId,courseName,courseImgUrl,speakerName,totalPlayTimes from course
         where courseId in

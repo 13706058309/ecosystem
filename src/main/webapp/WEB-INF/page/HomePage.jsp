@@ -102,7 +102,8 @@
                     </div>
                     <div style="margin: 35px 230px;width: 200px;">
                         <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px" onclick="window.open('${pageContext.request.contextPath}/center/jianli')">个人中心</button>
-                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a">退出</button>
+<%--                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a" onclick="exit()">退出</button>--%>
+                        <a href="${pageContext.request.contextPath}/homePage/quitAccount" >退出登录</a>
                     </div>
                 </c:if>
             </ul>
@@ -156,128 +157,139 @@
     </div>
 
     <%-------------------------------------------------------------------------------轮播图--%>
-    <div class="content">
-        <script type="text/javascript" src="../style/js/search.min.js"></script>
-        <style>
-            .ui-menu-item a {
-                display: block;
-                overflow: hidden;
-            }
-        </style>
-        <div id="home_banner">
-            <ul class="banner_bg" style="height: 1020px; margin-top: 0px;">
-                <li class="banner_bg_1 current" style="height: 340px" >
-                    <a target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="646" height="340" /></a>
-                </li>
-                <li class="banner_bg_2" style="height: 340px" >
-                    <a target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="646" height="340" ></a>
-                </li>
-                <li class="banner_bg_3" style="height: 340px" >
-                    <a target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646" height="340" /></a>
-                </li>
-            </ul>
 
-            <div class="banner_control">
-                <em></em>
-                <ul class="thumbs">
-                    <li class="thumbs_1 current">
-                        <i></i>
-                        <img src="../style/images/4469b1b83b1f46c7adec255c4b1e4802.jpg" width="113" height="65"/>
-                    </li>
-                    <li class="thumbs_2">
-                        <i></i>
-                        <img src="../style/images/381b343557774270a508206b3a725f39.jpg" width="113" height="65"/>
-                    </li>
-                    <li class="thumbs_3">
-                        <i></i>
-                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="65"/>
-                    </li>
-                </ul>
-            </div>
-        </div><!--/#main_banner-->
+    <div class="layui-carousel" id="test1" style="margin-left: 33%;margin-top: 6%;margin-bottom: 20px">
+        <div carousel-item>
+            <div><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="768" height="487px" /></div>
+            <div><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="768" height="487px" /></div>
+            <div><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="768" height="487px" ></div>
+        </div>
+    </div>
+
+
+
+<%--    <div class="content">--%>
+<%--        <script type="text/javascript" src="../style/js/search.min.js"></script>--%>
+<%--        <style>--%>
+<%--            .ui-menu-item a {--%>
+<%--                display: block;--%>
+<%--                overflow: hidden;--%>
+<%--            }--%>
+<%--        </style>--%>
+<%--        <div id="home_banner">--%>
+<%--            <ul class="banner_bg" style="height: 1020px; margin-top: 0px;">--%>
+<%--                <li class="banner_bg_1 current" style="height: 340px" >--%>
+<%--                    <a target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="646" height="340" /></a>--%>
+<%--                </li>--%>
+<%--                <li class="banner_bg_2" style="height: 340px" >--%>
+<%--                    <a target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="646" height="340" ></a>--%>
+<%--                </li>--%>
+<%--                <li class="banner_bg_3" style="height: 340px" >--%>
+<%--                    <a target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646" height="340" /></a>--%>
+<%--                </li>--%>
+<%--            </ul>--%>
+
+<%--            <div class="banner_control">--%>
+<%--                <em></em>--%>
+<%--                <ul class="thumbs">--%>
+<%--                    <li class="thumbs_1 current">--%>
+<%--                        <i></i>--%>
+<%--                        <img src="../style/images/4469b1b83b1f46c7adec255c4b1e4802.jpg" width="113" height="65"/>--%>
+<%--                    </li>--%>
+<%--                    <li class="thumbs_2">--%>
+<%--                        <i></i>--%>
+<%--                        <img src="../style/images/381b343557774270a508206b3a725f39.jpg" width="113" height="65"/>--%>
+<%--                    </li>--%>
+<%--                    <li class="thumbs_3">--%>
+<%--                        <i></i>--%>
+<%--                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="65"/>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--        </div><!--/#main_banner-->--%>
 
         <%-----------------------------------------------------------------------企业小方块--%>
 
-        <ul id="da-thumbs" class="da-thumbs">
-            <li>
-                <a href="h/c/1650.html" target="_blank">
-                    <img src="../style/images/a254b11ecead45bda166afa8aaa9c8bc.jpg" width="113" height="113"
-                         alt="联想"/>
-                    <div class="hot_info">
-                        <h2 title="联想">联想</h2>
-                        <em></em>
-                        <p title="世界因联想更美好">
-                            世界因联想更美好
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="h/c/9725.html" target="_blank">
-                    <img src="../style/images/c75654bc2ab141df8218983cfe5c89f9.jpg" width="113" height="113"
-                         alt="淘米"/>
-                    <div class="hot_info">
-                        <h2 title="淘米">淘米</h2>
-                        <em></em>
-                        <p title="将心注入 追求极致">
-                            将心注入 追求极致
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="h/c/1914.html" target="_blank">
-                    <img src="../style/images/2bba2b71d0b0443eaea1774f7ee17c9f.png" width="113" height="113"
-                         alt="优酷土豆"/>
-                    <div class="hot_info">
-                        <h2 title="优酷土豆">优酷土豆</h2>
-                        <em></em>
-                        <p title="专注于视频领域，是中国网络视频行业领军企业">
-                            专注于视频领域，是中国网络视频行业领军企业
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="h/c/6630.html" target="_blank">
-                    <img src="../style/images/f4822a445a8b495ebad81fcfad3e40e2.jpg" width="113" height="113"
-                         alt="思特沃克"/>
-                    <div class="hot_info">
-                        <h2 title="思特沃克">思特沃克</h2>
-                        <em></em>
-                        <p title="一家全球信息技术服务公司">
-                            一家全球信息技术服务公司
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="h/c/2700.html" target="_blank">
-                    <img src="../style/images/5caf8f9631114bf990f87bb11360653e.png" width="113" height="113"
-                         alt="奇猫"/>
-                    <div class="hot_info">
-                        <h2 title="奇猫">奇猫</h2>
-                        <em></em>
-                        <p title="专注于移动互联网、互联网产品研发">
-                            专注于移动互联网、互联网产品研发
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="last">
-                <a href="h/c/1335.html" target="_blank">
-                    <img src="../style/images/c0052c69ef4546c3b7d08366d0744974.jpg" width="113" height="113"
-                         alt="堆糖网"/>
-                    <div class="hot_info">
-                        <h2 title="堆糖网">堆糖网</h2>
-                        <em></em>
-                        <p title="分享收集生活中的美好，遇见世界上的另外一个你">
-                            分享收集生活中的美好，遇见世界上的另外一个你
-                        </p>
-                    </div>
-                </a>
-            </li>
-        </ul>
+<%--        <ul id="da-thumbs" class="da-thumbs">--%>
+<%--            <li>--%>
+<%--                <a href="h/c/1650.html" target="_blank">--%>
+<%--                    <img src="../style/images/a254b11ecead45bda166afa8aaa9c8bc.jpg" width="113" height="113"--%>
+<%--                         alt="联想"/>--%>
+<%--                    <div class="hot_info">--%>
+<%--                        <h2 title="联想">联想</h2>--%>
+<%--                        <em></em>--%>
+<%--                        <p title="世界因联想更美好">--%>
+<%--                            世界因联想更美好--%>
+<%--                        </p>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--                <a href="h/c/9725.html" target="_blank">--%>
+<%--                    <img src="../style/images/c75654bc2ab141df8218983cfe5c89f9.jpg" width="113" height="113"--%>
+<%--                         alt="淘米"/>--%>
+<%--                    <div class="hot_info">--%>
+<%--                        <h2 title="淘米">淘米</h2>--%>
+<%--                        <em></em>--%>
+<%--                        <p title="将心注入 追求极致">--%>
+<%--                            将心注入 追求极致--%>
+<%--                        </p>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--                <a href="h/c/1914.html" target="_blank">--%>
+<%--                    <img src="../style/images/2bba2b71d0b0443eaea1774f7ee17c9f.png" width="113" height="113"--%>
+<%--                         alt="优酷土豆"/>--%>
+<%--                    <div class="hot_info">--%>
+<%--                        <h2 title="优酷土豆">优酷土豆</h2>--%>
+<%--                        <em></em>--%>
+<%--                        <p title="专注于视频领域，是中国网络视频行业领军企业">--%>
+<%--                            专注于视频领域，是中国网络视频行业领军企业--%>
+<%--                        </p>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--                <a href="h/c/6630.html" target="_blank">--%>
+<%--                    <img src="../style/images/f4822a445a8b495ebad81fcfad3e40e2.jpg" width="113" height="113"--%>
+<%--                         alt="思特沃克"/>--%>
+<%--                    <div class="hot_info">--%>
+<%--                        <h2 title="思特沃克">思特沃克</h2>--%>
+<%--                        <em></em>--%>
+<%--                        <p title="一家全球信息技术服务公司">--%>
+<%--                            一家全球信息技术服务公司--%>
+<%--                        </p>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--                <a href="h/c/2700.html" target="_blank">--%>
+<%--                    <img src="../style/images/5caf8f9631114bf990f87bb11360653e.png" width="113" height="113"--%>
+<%--                         alt="奇猫"/>--%>
+<%--                    <div class="hot_info">--%>
+<%--                        <h2 title="奇猫">奇猫</h2>--%>
+<%--                        <em></em>--%>
+<%--                        <p title="专注于移动互联网、互联网产品研发">--%>
+<%--                            专注于移动互联网、互联网产品研发--%>
+<%--                        </p>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li class="last">--%>
+<%--                <a href="h/c/1335.html" target="_blank">--%>
+<%--                    <img src="../style/images/c0052c69ef4546c3b7d08366d0744974.jpg" width="113" height="113"--%>
+<%--                         alt="堆糖网"/>--%>
+<%--                    <div class="hot_info">--%>
+<%--                        <h2 title="堆糖网">堆糖网</h2>--%>
+<%--                        <em></em>--%>
+<%--                        <p title="分享收集生活中的美好，遇见世界上的另外一个你">--%>
+<%--                            分享收集生活中的美好，遇见世界上的另外一个你--%>
+<%--                        </p>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
     </div>
 </div>
 
@@ -445,7 +457,33 @@
             $("#city").text(flag);
             $("#bCity").text(flag);
         }
-    })
+    });
+
+    //轮播图
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,width: '60%' //设置容器宽度
+            ,height:'487px'
+            ,arrow: 'always' //始终显示箭头
+            ,anim: 'default' //切换动画方式
+            ,autoplay:'true'//自动切换
+            ,interval:2000
+            ,arrow:'hover'
+        });
+//监听轮播切换事件
+        carousel.on('change(test1)', function(obj){ //test1来源于对应HTML容器的 lay-filter="test1" 属性值
+            console.log(obj.index); //当前条目的索引
+            console.log(obj.prevIndex); //上一个条目的索引
+            console.log(obj.item); //当前条目的元素对象
+        });
+    });
+    //退出当前账户
+    <%--function exit() {--%>
+    <%--    location.href=${pageContext.request.contextPath}+"/homePage/quitAccount";--%>
+    <%--}--%>
 </script>
 </body>
 </html>

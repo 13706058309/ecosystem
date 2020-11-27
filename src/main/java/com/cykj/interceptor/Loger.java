@@ -1,13 +1,14 @@
-package com.cykj.log;
+package com.cykj.interceptor;
 
 import java.lang.annotation.*;
 
-@Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER,ElementType.METHOD})
-//@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+
 public @interface Loger {
 
-    public String operationType() default "";
+    public String operationType() default "";//自定义注解
     public String operationName() default "";
 
 }

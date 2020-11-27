@@ -169,13 +169,13 @@
             data:"phone=" + phone + "&code=" + code,
             dataType:'text',
             beforeSend:function () {
-                if (code.length != 4){
-                    alert("请输入四位验证码!");
-                    return false;
-                }
                 var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
                 if(!pattern.test(phone)){
                     alert("请输入正确手机号!");
+                    return false;
+                }
+                if (code.length != 4){
+                    alert("请输入四位验证码!");
                     return false;
                 }
                 return true;
@@ -230,14 +230,14 @@
                 changeImg();
                 if (info == 'success') {
                     location.href = path + "/homePage/home";
-                } else if (info == 'noAccount') {
-                    alert("查无此账号,登录失败!");
-                    var isA = confirm("是否注册?");
-                    if (isA == true) location.href = path + "/golog/reg";
+                } else if (info == 'passMiss') {
+                    var isA = confirm("用户名或密码错误!");
+                    // if (isA == true) location.href = path + "/golog/reg";
                 } else if (info == 'disable') {
                     alert("此账号已被禁用!请联系管理员!");
                 } else if (info == 'delete') {
-                    alert("此账号已被删除!请重新注册!");
+                    var isA = confirm("此账号已被删除!是否重新注册?");
+                    if (isA == true) location.href = path + "/golog/reg";
                 } else if (info == 'auditFailed') {
                     alert("此账号还未通过审核,请稍后重试!");
                 } else if (info == 'vCodeError') {
