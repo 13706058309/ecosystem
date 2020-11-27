@@ -117,6 +117,7 @@ function findProjectOrder(curr,limit){
                         "                    </div>\n" +
                         "                    <div class=\"fl\" style=\"width: 200px;height: 100px;background-color:white;border-left: 1px solid #efefef;border-bottom: 1px solid #efefef;\">\n" +
                         "                        <p class=\"state\">订单状态 <span style=\"color: #000000\"> : &nbsp;"+project.states.paramName+"</span></p>\n" +
+                        "                        <p class=\"state\">项目需求 <span style=\"color: #000000\"> : &nbsp;<a onclick=\"downloadFile('"+project.projectInfo.docUrl+"')\"><i class='layui-icon layui-icon-down'></i> 文件下载 </a></span></p>\n"+
                         "                    </div>\n" +
                         "                    <div id=caoZuo"+project.id+" class=\"fl\" style=\"width: 206px;height:100px;background-color:white;border-left: 1px solid #efefef;border-right: 1px solid #efefef;border-bottom: 1px solid #efefef;\">\n" +
                         "                    </div>\n" +
@@ -133,7 +134,7 @@ function findProjectOrder(curr,limit){
                     "                            <a >查看详情</a>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                    "                            <a> 删除订单</a>\n" +
+                    "                            <a onclick=\"delOrder('"+project.id+"')\"> 删除订单</a>\n" +
                     "                        </div>\n");
                     }
                     if (project.states.paramName==='已申请'){
@@ -232,6 +233,28 @@ function uploadProject(projectId){
     })
 }
 
+function delOrder(id) {
+    if (confirm("确定删除该订单吗？")){
+        $.ajax({
+            url:path+"/userProject/del",
+            tyep:"post",
+            dataType:"text",
+            data:{"paramId":60 , "id":id},
+            success:function (res) {
+                if (res=="success"){
+                    layer.msg("已删除！");
+                    table.reload("demo",{
+                        url:path+'/project/findProjectAll'
+                        ,where:{
+                            "stateId":$(this).children().val()
+                        },page: {curr:1}
+                    });
+                }
+            }
+        });
+    }
+}
+
 function getPage(){
     console.log(pageCounts);
     layui.use('laypage', function(){
@@ -281,7 +304,6 @@ function abandonProject(orderNum,payMoney) {
                         }, function () {
                             location.href = path + "/userProject/projectOfUser";
                         });
-
                     }else{
                         layer.confirm("放弃失败，请刷新页面后重试！");
                     }
@@ -307,4 +329,29 @@ function closeUp() {
 }
 function findProject(){
     location.href=path+"/project?projectName="+$("#projectName").val();
+}
+
+function downloadFile(docUrl) {
+    if (docUrl!=null && docUrl.trim()!==""){
+        location.href=path+docUrl;
+    }else{
+        layui.use("layer", function() {
+            var layer = layui.layer;
+            layer.msg("对方未上传文件！");
+        });
+    }
+}
+
+function userExit(){
+    if (confirm("确定注销吗?")){
+        $.ajax({
+            url:path+"/userProject/userExit",
+            success:function (res) {
+                if (res=="success"){
+                    alert("退出成功！")
+                    location.href=path+"/project"
+                }
+            }
+        })
+    }
 }

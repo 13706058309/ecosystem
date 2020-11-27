@@ -24,4 +24,13 @@ public class ParameterCotroller {
         List<Parameter> parameters=parameterServiceImpl.findParameter(condition);
         return parameters.get(0).getParamValues();
     }
+
+    @RequestMapping("/findCommission")
+    public @ResponseBody String findCommission(){
+        Map<String,Object> condition =new HashMap<>();
+        condition.put("paramName","佣金");
+        condition.put("paramType","费用");
+        List<Parameter> parameters=parameterServiceImpl.findParameter(condition);
+        return parameters.get(0).getParamValues();
+    }
 }

@@ -1,9 +1,12 @@
 package com.cykj.service;
 
+import com.alipay.api.AlipayApiException;
 import com.cykj.entity.ProjectInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +44,17 @@ public interface ProjectService {
      * @return
      */
     ProjectInfo addProject(ProjectInfo projectInfo);
+
+    /**
+     * 支付宝退款
+     * @param request
+     * @param response
+     * @param session
+     * @return
+     */
+    String refund(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException, AlipayApiException;
+
+
     /**
      * 处理用户付款成功后的异步回调业务代码
      * @param request

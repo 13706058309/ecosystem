@@ -1,20 +1,26 @@
 package com.cykj.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.cykj.entity.ProjectInfo;
 import com.cykj.entity.UserProject;
 import com.cykj.mapper.ProjectInfoMapper;
+import com.cykj.mapper.UserProjectMapper;
 import com.cykj.service.ProjectService;
 import com.cykj.util.MProjectPayConfig;
-import net.sf.mpxj.mspdi.schema.Project;
+import com.cykj.util.ProjectPayConfig;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +31,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Resource
     ProjectInfoMapper projectInfoMapper;
+    @Resource
+    UserProjectMapper userProjectMapper;
 
     @Override
     public int updateState(ProjectInfo projectInfo) {
@@ -118,6 +126,116 @@ public class ProjectServiceImpl implements ProjectService {
         //输出
         request.getSession().setAttribute("session",result);
         return "project/MUserPayPage";
+    }
+
+
+    /**
+     * 退款
+     * @param response
+     * @param session
+     * @throws IOException
+     * @throws AlipayApiException
+     */
+    @Override
+    public String refund(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException, IOException, AlipayApiException {
+        // 设置编码格式
+        response.setContentType("text/html;charset=utf-8");
+//        PrintWriter out = response.getWriter();
+        //获得初始化的AlipayClient
+        String msg="notExist";
+
+        String out_trade_no =new String(request.getParameter("WIDout_trade_no").getBytes("UTF-8"),"UTF-8");
+        //需要退款的金额，该金额不能大于订单金额，必填
+        String refund_amount = new String(request.getParameter("WIDrefund_amount").getBytes("UTF-8"),"UTF-8");;
+
+        ProjectInfo condition=new ProjectInfo();
+        condition.setpOrderNum(out_trade_no);
+        ProjectInfo projectInfo=projectInfoMapper.findProject(condition);
+        if (projectInfo.getStates().getParamId()==35){
+            AlipayClient alipayClient = new DefaultAlipayClient(MProjectPayConfig.gatewayUrl, MProjectPayConfig.app_id, MProjectPayConfig.merchant_private_key,
+                    "json", MProjectPayConfig.charset, MProjectPayConfig.alipay_public_key, MProjectPayConfig.sign_type);
+            //设置请求参数
+            AlipayTradeRefundRequest alipayRequest = new AlipayTradeRefundRequest();
+            //商户订单号，必填
+            alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
+                    + "\"refund_amount\":\""+ refund_amount +"\"}");
+            //部分退款
+//                ,"+ "\"out_request_no\":\""+ out_request_no +"\"
+            //请求
+            String result = alipayClient.execute(alipayRequest).getBody();
+            //输出
+//        out.println(result);//以下写自己的订单退款代码
+            request.getSession().setAttribute("session",result);
+            msg=(String) JSONObject.parseObject(JSONObject.parseObject(result).get("alipay_trade_refund_response").toString()).get("msg");
+            if (msg.equalsIgnoreCase("success")){
+                ProjectInfo condition_two=new ProjectInfo();
+                condition_two.setProjectId(projectInfo.getProjectId());
+                condition_two.setStateId(41);
+                int n=projectInfoMapper.updateProject(condition_two);
+                if (n>0){
+                    System.out.println("===============================================退款成功！========================================");
+//                    企业退款成功！
+//                    申请人退款
+
+                  UserProject condition_find=new UserProject();
+                  condition_find.setProjectId(projectInfo.getProjectId());
+
+                  List<UserProject> userProjects=userProjectMapper.findUserProjectAll(condition_find);
+                  if (userProjects !=null){
+                      for (int i=0;i<userProjects.size();i++){
+                          if (userProjects.get(i).getParamId()==48){
+                              //对“待付款”的订单进行申请失败处理
+                              UserProject condition_change=new UserProject();
+                              condition_change.setParamId(53);
+                              condition_change.setOrderNum(userProjects.get(i).getOrderNum());
+                              int res=userProjectMapper.changeState(condition_change);
+                              if (res>0){
+                                  System.out.println("====================================待付款→申请失败。修改成功！===========================");
+                              }else{
+                                  System.out.println("====================================待付款→申请失败。修改失败！============================");
+                              }
+                          }else if (userProjects.get(i).getParamId()==49){
+                              //对已申请的订单进行终止处理并退款
+                              String out_trade_no_user =new String((userProjects.get(i).getOrderNum()).getBytes("UTF-8"),"UTF-8");
+                              //需要退款的金额，该金额不能大于订单金额，必填
+                              String refund_amount_user = new String((userProjects.get(i).getPayMoney()+"").getBytes("UTF-8"),"UTF-8");
+                                  AlipayClient alipayClient_user = new DefaultAlipayClient(ProjectPayConfig.gatewayUrl, ProjectPayConfig.app_id, ProjectPayConfig.merchant_private_key,
+                                          "json", ProjectPayConfig.charset, ProjectPayConfig.alipay_public_key, ProjectPayConfig.sign_type);
+                                  //设置请求参数
+                                  AlipayTradeRefundRequest alipayRequest_user = new AlipayTradeRefundRequest();
+                                  //商户订单号，必填
+                                  alipayRequest_user.setBizContent("{\"out_trade_no\":\""+ out_trade_no_user +"\","
+                                          + "\"refund_amount\":\""+ refund_amount_user +"\"}");
+                                  //请求
+                                  String result_user = alipayClient_user.execute(alipayRequest_user).getBody();
+                                  //输出
+//                                out.println(result);//以下写自己的订单退款代码
+                                  request.getSession().setAttribute("session_user",result_user);
+                                  msg=(String)JSONObject.parseObject(JSONObject.parseObject(result_user).get("alipay_trade_refund_response").toString()).get("msg");
+                                  if (msg.equalsIgnoreCase("success")){
+                                      UserProject newUserProject=new UserProject();
+                                      newUserProject.setParamId(51);
+                                      newUserProject.setOrderNum(out_trade_no_user);
+                                      int n_user=userProjectMapper.changeState(newUserProject);
+                                      if (n_user>0){
+                                          System.out.println("==========================================用户退款成功！============================");
+                                      }else{
+                                          System.out.println("===========================================用户退款失败！==========================================");
+                                      }
+                                  }
+
+                          }
+                      }
+                  }
+                }else{
+                    System.out.println("退款失败！");
+                }
+            }
+        }
+        //标识一次退款请求，同一笔交易多次退款需要保证唯一。如需部分退款，则此参数必传；不传该参数则代表全额退款
+//        String out_request_no = new String(UUID.randomUUID().toString());
+        // 字符转义很重要
+        return msg.toUpperCase();
     }
 
     //处理用户付款成功后的异步回调业务代码

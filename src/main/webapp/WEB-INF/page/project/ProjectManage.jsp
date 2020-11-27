@@ -25,8 +25,8 @@
             <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="del">删除订单</a>
         {{#  } }}
         {{#  if(d.states.paramName=="已发布"){ }}
-        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="aband">放弃项目</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
+        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="aband">放弃项目</a>
         <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="chooseUser">选择承接人</a>
         {{#  } }}
         {{#  if(d.states.paramName=="已承接"){ }}

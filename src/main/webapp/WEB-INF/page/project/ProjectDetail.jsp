@@ -77,7 +77,10 @@
                             <span class="hover-title">${qUser.userName}</span>
                         </li>
                         <li style="float: left;position: relative;">
-                            <span class="hover-title">我的项目</span>
+                            <span class="hover-title"><a href="${pageContext.request.contextPath}/userProject/projectOfUser">我的项目</a></span>
+                        </li>
+                        <li style="float: left;position: relative;">
+                            <span class="hover-title"><a href="javaScript:;" onclick="userExit()">注销</a></span>
                         </li>
                     </c:if>
                     <c:if test="${empty qUser}">

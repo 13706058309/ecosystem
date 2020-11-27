@@ -230,7 +230,7 @@ public class UserProjectServiceImpl implements UserProjectService {
             //商户订单号，必填
             alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
                     + "\"refund_amount\":\""+ refund_amount +"\"}");
-
+            //部分退款
 //                ,"+ "\"out_request_no\":\""+ out_request_no +"\"
             //请求
             String result = alipayClient.execute(alipayRequest).getBody();

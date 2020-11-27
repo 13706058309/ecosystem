@@ -28,7 +28,8 @@ $(function () {
             ,limit:5
             ,limits:[5,10,15,20]
             ,cols: [[ //表头
-                {field: 'projectName', title: '项目名称',  fixed: 'left'}
+                {field: 'pOrderNum', title: '订单号',  fixed: 'left'}
+                ,{field: 'projectName', title: '项目名称',  fixed: 'left'}
                 ,{field: 'projectSynopsis', title: '项目描述',  fixed: 'left',templet:function (data) {
                         var str=data.projectSynopsis.replaceAll("<br>"," ");
                         return str;
@@ -53,6 +54,28 @@ $(function () {
                 location.href=path+"/project/projectDetail"
             }else if (layEvent === 'downProject'){
                 location.href=path+data.projectUrl;
+            }else if(layEvent === 'payMoney'){
+                location.href= path +"/project/alipayTradePagePay?WIDout_trade_no="+data.pOrderNum+'&WIDtotal_amount='+data.trueMoney+'&WIDsubject='+"项目预算资金+佣金";
+            }else if(layEvent === 'del'){
+                if (confirm("确定删除该订单吗？")){
+                    $.ajax({
+                        url:path+"/project/del",
+                        tyep:"post",
+                        dataType:"text",
+                        data:{"stateId":59,"projectId":data.projectId},
+                        success:function (res) {
+                            if (res=="success"){
+                                layer.msg("已删除！");
+                                table.reload("demo",{
+                                    url:path+'/project/findProjectAll'
+                                    ,where:{
+                                        "stateId":$(this).children().val()
+                                    },page: {curr:1}
+                                });
+                            }
+                        }
+                    });
+                }
             }else if(layEvent === 'finish'){
                 $.ajax({
                     url:path+"/project/finish",
@@ -70,7 +93,30 @@ $(function () {
                             });
                         }
                     }
-                })
+                });
+            }else if(layEvent==='aband'){
+                if(confirm("确定放弃该项目吗？")){
+                    $.ajax({
+                        url: path + "/project/refund",
+                        type: "post",
+                        data: {'WIDout_trade_no': data.pOrderNum, 'WIDrefund_amount': data.trueMoney},
+                        dataType: "text",
+                        success: function (data) {
+                            if (data.toUpperCase() === "SUCCESS") {
+                                layer.confirm("放弃成功,费用已退还到您的账户!");
+                                table.reload("demo", {
+                                    url: path + '/project/findProjectAll',
+                                    where: {
+                                        "stateId": $(this).children().val()
+                                    }, page: {curr: 1}
+                                });
+                            } else {
+                                layer.confirm("放弃失败，请刷新页面后重试！");
+                            }
+                            console.log(data);
+                        }
+                    });
+                }
             }
         });
     });

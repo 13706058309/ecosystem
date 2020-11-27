@@ -217,3 +217,17 @@ function projectDetail(projectId){
     console.log(projectId);
     location.href=path+"/project/projectDetail?projectId="+projectId;
 }
+
+function userExit(){
+    if (confirm("确定注销吗?")){
+        $.ajax({
+            url:path+"/userProject/userExit",
+            success:function (res) {
+                if (res=="success"){
+                    alert("退出成功！")
+                    location.href=path+"/project"
+                }
+            }
+        })
+    }
+}
