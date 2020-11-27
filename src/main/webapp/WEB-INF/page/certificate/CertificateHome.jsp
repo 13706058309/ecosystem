@@ -35,7 +35,7 @@
 
 <div id="body">
 
-    <div id="container">
+    <div id="container" style="width: 70%">
 
         <div class="clearfix">
             <div class="content_l">
