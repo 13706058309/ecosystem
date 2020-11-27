@@ -231,8 +231,8 @@
                 if (info == 'success') {
                     location.href = path + "/homePage/home";
                 } else if (info == 'passMiss') {
-                    var isA = confirm("该账号不存在!是否重新注册？");
-                    if (isA == true) location.href = path + "/golog/reg";
+                    var isA = confirm("用户名或密码错误!");
+                    // if (isA == true) location.href = path + "/golog/reg";
                 } else if (info == 'disable') {
                     alert("此账号已被禁用!请联系管理员!");
                 } else if (info == 'delete') {

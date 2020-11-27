@@ -123,7 +123,7 @@
                     layer.msg("登陆成功!");
                     location.href = path+"/golog/adminMain";
                 } else if (info=='noAcc'){
-                    layer.msg("管理员账号不存在,登录失败!");
+                    layer.msg("用户名或密码错误!");
                 }else if (info == 'noReviewed'){
                     layer.msg("登录失败,此账号待审核!");
                 } else if (info == 'vCodeError'){

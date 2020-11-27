@@ -40,33 +40,6 @@ public class LoginController {
     }
 
 
-//    @RequestMapping(value = "/sendNote",method = RequestMethod.GET)
-//    public void sendNote(String phone, HttpServletResponse response){
-//        String template = "SMS_205439841";
-//        try {
-//            response.getWriter().write(sendNoteUtil.sendNoteMessgae(phone,template));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    @RequestMapping(value = "/phonelog",method = RequestMethod.POST)
-//    public String login(String phoneNumber,String acthCode){
-//        //验证验证码
-//        if(!verifyAuthCode(acthCode,phoneNumber)){
-//            return"验证码错误";
-//        }
-//        return "登陆成功";
-//    }
-
-//    //对输入的验证码进行校验
-//    private boolean verifyAuthCode(String authCode, String telephone){
-//        if(StringUtils.isEmpty(authCode)){
-//            return false;
-//        }
-//        String realAuthCode = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
-//        return authCode.equals(realAuthCode);
-//    }
 
 
     //前端登录的动作
@@ -105,7 +78,7 @@ public class LoginController {
                 }
 
             } else {
-                System.out.println("密码错误!");
+                System.out.println("用户名或密码错误!");
                 return "passMiss";
             }
         } else {
@@ -132,10 +105,10 @@ public class LoginController {
         request.getSession().removeAttribute("vCode");
         if (sVCode.equalsIgnoreCase(vCode)) {
 //            启用MD5解开即可
-//            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password) );
-            BackUser backUser = loginServiceImpl.adminLog(account, password);
+            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
+//            BackUser backUser = loginServiceImpl.adminLog(account, password);
             if (backUser == null) {
-                System.out.println("管理员账号不存在!");
+                System.out.println("用户名或密码错误!");
                 return "noAcc";
             } else {
                 System.out.println(backUser.toString());
