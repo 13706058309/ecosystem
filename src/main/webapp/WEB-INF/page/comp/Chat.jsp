@@ -123,11 +123,6 @@
             <div class="RightCont" style="overflow-x:auto; overflow-y:auto;width: 75%; height: 250px; ">
                 <ul class="newsList" id="chats">
 
-                    <li>
-                        <div class="nesHead"><img src="${pageContext.request.contextPath}/chat/index_files/6.jpg"></div>
-                        <div class="news"><img class="jiao" src="${pageContext.request.contextPath}/chat/img/you.jpg"><img class="Expr"
-                                                                                     src="${pageContext.request.contextPath}/chat/index_files/em_55.jpg"></div>
-                    </li>
                 </ul>
             </div>
             <div class="RightFoot">
