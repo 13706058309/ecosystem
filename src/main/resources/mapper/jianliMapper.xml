@@ -442,14 +442,32 @@
         update resume set updateTime=#{updateTime} where userId=#{userId}
     </update>
 
-<!--    查看所有职位类型-->
-    <select id="positions" resultType="com.cykj.entity.Position">
-        select * from position ;
+<!--    查看所有行业职位类型-->
+    <select id="industrys" resultMap="findIndustry" >
+        select i.*,d.departId,d.departName,p.postId,p.postName from
+            industry i left join depart d on i.industryId=d.industryId
+            left join position p on d.departId=p.departId;
+
     </select>
-<!--    查看所有城市-->
-    <select id="citys" resultType="com.cykj.entity.City">
-        select * from city ;
-    </select>
+
+    <resultMap id="findIndustry" type="com.cykj.entity.Industry">
+        <id property="industryId" column="industryId"></id>
+        <result property="industryName" column="industryName"></result>
+        <collection property="departs"   ofType="com.cykj.entity.Depart">
+            <id property="departId" column="departId"></id>
+            <result property="departName" column="departName"></result>
+<!--            <result property="positions" column="positions"></result>-->
+            <collection property="positions"   ofType="com.cykj.entity.Position">
+                <id property="postId" column="postId"></id>
+                <result property="postName" column="postName"></result>
+            </collection>
+        </collection>
+
+    </resultMap>
+
+
+
+
 
 <!--    头像修改-->
     <update id="updatePhoto" parameterType="com.cykj.entity.Resume">
@@ -463,4 +481,10 @@
     <update id="updateName" parameterType="com.cykj.entity.UserInfo">
         update userInfo set userName=#{userName} where userId=#{userId}
     </update>
+
+<!--    按字符查询城市-->
+    <select id="citys" parameterType="java.lang.Integer" resultType="com.cykj.entity.City">
+        select * from city  where
+    CONV(HEX(left(CONVERT(cityName USING gbk),1)),16,10) between #{begin} and #{end} ;
+    </select>
 </mapper>

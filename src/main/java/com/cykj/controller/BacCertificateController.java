@@ -1,8 +1,6 @@
 package com.cykj.controller;
 
-import com.cykj.entity.CerRecord;
-import com.cykj.entity.CerUser;
-import com.cykj.entity.TableInfo;
+import com.cykj.entity.*;
 import com.cykj.service.CerRecordService;
 import com.cykj.service.CerUserService;
 import com.cykj.service.CertificateService;
@@ -58,6 +56,20 @@ public class BacCertificateController {
     public String pingshenzhengshuliebiao() {
 
         return "certificate/BackCertificateReview";
+    }
+
+    //后台证书界面
+    @RequestMapping("/backzhengshuliebiao")
+    public String backzhengshuliebiao() {
+
+        return "certificate/BackCertificateList";
+    }
+
+    //后台申请证书界面
+    @RequestMapping("/backSQchulizhengshuliebiao")
+    public String backSQchulizhengshuliebiao() {
+
+        return "certificate/BackApplyCerList";
     }
 
 
@@ -224,8 +236,6 @@ public class BacCertificateController {
         TableInfo tableInfo = new TableInfo();
         if (n > 0) {
             multipartFile.transferTo(new File(file, fileName));
-
-
             tableInfo.setCode(0);
             tableInfo.setMsg("success");
             msg = new Gson().toJson(tableInfo);
@@ -307,4 +317,360 @@ public class BacCertificateController {
 
         return listJson;
     }
+
+    //修改申请证书状态为申请证书成功
+    @RequestMapping(value = "/xiugaicerwanchengzhuangtai")
+    public @ResponseBody
+    String xiugaizhuangtai(long cerid,long userid) {
+        String msg ="";
+        long standid = 33;
+        int n = cerRecordService.upcersqstandid(standid,cerid);
+        if (n!=0){
+            String dangqiantime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            CerUser cerUser = new CerUser();
+            cerUser.setCerId(cerid);
+            cerUser.setGainTime(dangqiantime);
+            cerUser.setbUserId(18);
+            cerUser.setUserId(userid);
+            int c =cerUserService.insertCerUser(cerUser);
+            if (c>0){
+                msg = "success";
+            }else {
+                msg = "fail";
+            }
+        }else {
+            msg = "fail";
+        }
+        return msg;
+    }
+
+    //测试人员上传测试报告
+    @RequestMapping("/pingshenfileupload")
+    public @ResponseBody
+    String pingshenupload(@RequestParam("videoup")MultipartFile multipartFile,@RequestParam("fileup")MultipartFile mtfile,@RequestParam("cerid")String cerid,@RequestParam("finalsocre")int finalsocre, HttpServletRequest request) throws IOException, ParseException {
+        System.out.println("8888888888888888888888888888888888888888888888");
+        String msg = "";
+        System.out.println("当前id"+cerid);
+
+        //获取评审视频，以及重命名文件
+        String fileName = multipartFile.getOriginalFilename();
+        //获取最终报告，以及重命名文件
+        String docname = mtfile.getOriginalFilename();
+
+        //获取上传目录
+        String path = this.getClass().getClassLoader().getResource("").getPath() + "static/wtqfile";
+
+        //获取当天日期为后面创建日期
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        //创建以日期来区分的文件夹目录
+        File file = new File(path, date);
+        if (!file.exists()) {
+            file.mkdirs();//创建子目录
+        }
+        System.out.println("123213123123123" + path);
+        fileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
+        docname =  UUID.randomUUID().toString() + docname.substring(docname.lastIndexOf("."));
+
+        String videourl = "/wtqfile/" + date + "/" + fileName;
+        String finalporsturl = "/wtqfile/" + date + "/" + docname;
+
+        CerRecord  cerRecord = cerRecordService.findcerRecordup(cerid);
+        int cerFinalScore = cerRecord.getCerTestScore()+finalsocre;
+        Map<String, Object> usersMap = new LinkedHashMap<>();
+        usersMap.put("cerRecordId",cerid);
+        usersMap.put("cerReviewVideo",videourl);
+        usersMap.put("cerFinalReport",finalporsturl);
+        usersMap.put("cerFinalScore",cerFinalScore);
+        usersMap.put("cerJudgeScore",finalsocre);
+        if (cerFinalScore >=60){
+            usersMap.put("stateId",31);
+        }else {
+            usersMap.put("stateId",30);
+        }
+        int c =cerRecordService.upcerpingshencaozuo(usersMap);
+        if (c>0){
+            msg = "success";
+            multipartFile.transferTo(new File(file, fileName));
+            mtfile.transferTo(new File(file, docname));
+        }else {
+            msg = "fail";
+        }
+
+        return msg;
+    }
+
+
+    //后台已获得证书集合
+    @RequestMapping(value = "/getbackzhengshulist", produces = "text/html;charset=utf-8")
+    public @ResponseBody
+    String findcertificatelist(String page, String limit, String fieldName) {
+
+        Map<String, Object> usersMap = new LinkedHashMap<>();
+
+        if (fieldName != null && !"".equals(fieldName.trim())) {
+            usersMap.put("fieldName", "%" + fieldName + "%");
+        }
+
+        int count = certificateService.findbackcertificatelistsize(usersMap);  // 查找数据条数
+        // 查找数据条数
+        int page1 = Integer.parseInt(page);
+        int limit1 = Integer.parseInt(limit);
+        int page_temp = page1;
+        int limit_temp = limit1;
+        if (count < page1 * limit1) {
+            limit1 = count - (page1 - 1) * limit1;
+        }
+        page1 = (page_temp - 1) * limit_temp;
+        usersMap.put("page", page1);
+        usersMap.put("limit", limit1);
+
+        List<Certificate> certificateList = certificateService.findbackcertificatelist(usersMap);
+        System.out.println("集合" + certificateList.size());
+        TableInfo tableinfo = new TableInfo();
+        tableinfo.setCode(0);
+        tableinfo.setCount(count);
+        tableinfo.setMsg("后台证书列表数据信息");
+        tableinfo.setData(certificateList);
+        String listJson = new Gson().toJson(tableinfo);
+
+        return listJson;
+    }
+
+    //证书名字双向验证
+    @RequestMapping(value = "/vuefiledname")
+    public @ResponseBody
+    String vuefiledname(String uname) {
+        String msg ="";
+        int n = certificateService.finduname(uname);
+
+            if (n==0){
+                msg = "fail";
+            }else {
+                msg = "success";
+            }
+
+        return msg;
+    }
+
+    //证书名字双向验证
+    @RequestMapping(value = "/upcershowState")
+    public @ResponseBody
+    String shangjiaxia(long id,int stateId) {
+        String msg ="";
+
+        int n = certificateService.upcershowState(stateId,id);
+
+        if (n>0){
+            if (stateId==1){
+                msg="1";
+            }else if (stateId==2){
+                msg="2";
+            }
+        }
+
+        return msg;
+    }
+
+    //后台新增证书
+    @RequestMapping("/insertzhengshu")
+    public @ResponseBody
+    String insertzhengshu(@RequestParam("xuqiu")MultipartFile xuqiufile,
+                          @RequestParam("touxiang")MultipartFile touxiangfile,
+                          @RequestParam("cerimage")MultipartFile cerimagefile,
+                          @RequestParam("zhengshuname")String zhengshuname,
+                          @RequestParam("tdian")String tdian,
+                          @RequestParam("zhengshuname")String jiansu,
+                          @RequestParam("feiyong")int feiyong,
+                          HttpServletRequest request
+                         ) throws IOException {
+        System.out.println("8888888888888888888888888888888888888888888888");
+        String msg = "";
+        int n = certificateService.insertfield(zhengshuname);
+        if (n>0){
+            //获取需求文件，以及重命名文件
+            String xuqiufilename = xuqiufile.getOriginalFilename();
+            //获取证书头像，以及重命名文件
+            String touxiangfilename = touxiangfile.getOriginalFilename();
+            //获取证书图片，以及重命名文件
+            String cerimagefilename = cerimagefile.getOriginalFilename();
+
+            //获取上传目录
+            String path = request.getServletContext().getRealPath("/wtqupload");
+            //this.getClass().getClassLoader().getResource("").getPath() + "static/wtqfile";
+
+            //获取当天日期为后面创建日期
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            //创建以日期来区分的文件夹目录
+            File file = new File(path, date);
+            if (!file.exists()) {
+                file.mkdirs();//创建子目录
+            }
+
+            System.out.println("123213123123123" + path);
+            xuqiufilename = UUID.randomUUID().toString() + xuqiufilename.substring(xuqiufilename.lastIndexOf("."));
+            touxiangfilename =  UUID.randomUUID().toString() + touxiangfilename.substring(touxiangfilename.lastIndexOf("."));
+            cerimagefilename =  UUID.randomUUID().toString() + cerimagefilename.substring(cerimagefilename.lastIndexOf("."));
+
+            String xuqiuurl = "/" + date + "/" + xuqiufilename;
+            String touxiangurl = "/" + date + "/" + touxiangfilename;
+            String tupianurl = "/" + date + "/" + cerimagefilename;
+
+            Field field = certificateService.findfieldid(zhengshuname);
+            Certificate certificate = new Certificate();
+            certificate.setFieldId(field.getFieldId());
+            certificate.setImgUrl(tupianurl);
+            certificate.setCerSketch(jiansu);
+            certificate.setCerTrait(tdian);
+            certificate.setCerHeadPortrait(touxiangurl);
+            certificate.setCershowState(1);
+            certificate.setCerRequirement(xuqiuurl);
+            certificate.setCertificationFee(feiyong);
+            certificate.setCerChangeTime(date);
+
+            int c = certificateService.insertcertificate(certificate);
+            if (c>0){
+                msg = "success";
+                xuqiufile.transferTo(new File(file, xuqiufilename));
+                touxiangfile.transferTo(new File(file, touxiangfilename));
+                cerimagefile.transferTo(new File(file, cerimagefilename));
+            }else {
+                msg = "fail";
+            }
+        }else {
+            msg = "fail";
+        }
+
+        return msg;
+    }
+
+
+    //后台修改证书
+    @RequestMapping("/backxiugaizhengshu")
+    public @ResponseBody
+    String xiugaizhengshu( @RequestParam("tdian")String tdian,
+                          @RequestParam("jiansu")String jiansu,
+                          @RequestParam("feiyong")int feiyong,
+                          @RequestParam("cerId")String cerId,
+                          HttpServletRequest request
+    ) throws IOException {
+        System.out.println("8888888888888888888888888888888888888888888888");
+        String msg = "";
+        Map<String, Object> usersMap = new LinkedHashMap<>();
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        usersMap.put("tdian", tdian);
+        usersMap.put("jiansu", jiansu);
+        usersMap.put("feiyong", feiyong);
+        usersMap.put("date",date);
+        usersMap.put("cerId",cerId);
+
+        int n = certificateService.upbackzhengshu(usersMap);
+        if (n>0){
+            msg = "success";
+        }else {
+            msg = "fail";
+        }
+
+
+        return msg;
+    }
+    //后台修改证书需求
+    @RequestMapping("/backxiugaizhengshuxuqiu")
+    public @ResponseBody
+    String xiugaizhengshuxuqiu( @RequestParam("xuqiu")MultipartFile xuqiufile,
+                                @RequestParam("cerId")String cerId,
+                           HttpServletRequest request
+    ) throws IOException {
+        System.out.println("8888888888888888888888888888888888888888888888");
+        String msg = "";
+
+        //获取需求文件，以及重命名文件
+        String xuqiufilename = xuqiufile.getOriginalFilename();
+        //获取上传目录
+        String path = request.getServletContext().getRealPath("/wtqupload");
+        //this.getClass().getClassLoader().getResource("").getPath() + "static/wtqfile";
+
+        //获取当天日期为后面创建日期
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        //创建以日期来区分的文件夹目录
+        File file = new File(path, date);
+        if (!file.exists()) {
+            file.mkdirs();//创建子目录
+        }
+        xuqiufilename = UUID.randomUUID().toString() + xuqiufilename.substring(xuqiufilename.lastIndexOf("."));
+        String xuqiuurl = "/" + date + "/" + xuqiufilename;
+        xuqiufile.transferTo(new File(file, xuqiufilename));
+
+        int n = certificateService.upbackzhengshuxuqiu(xuqiuurl,cerId);
+        if (n>0){
+            msg = "success";
+        }else {
+            msg = "fail";
+        }
+
+        return msg;
+    }
+
+
+    //后台已获得证书集合
+    @RequestMapping(value = "/getbackSQshenhelist", produces = "text/html;charset=utf-8")
+    public @ResponseBody
+    String getbackSQshenhelist(String page, String limit, String top, String down, String fieldName, String trueName) {
+
+        Map<String, Object> usersMap = new LinkedHashMap<>();
+
+        if (fieldName != null && !"".equals(fieldName.trim())) {
+            usersMap.put("fieldName", "%" + fieldName + "%");
+        }
+        if (trueName != null && !"".equals(trueName.trim())) {
+            usersMap.put("trueName", "%" + trueName + "%");
+        }
+
+        if (top != null && !"".equals(top.trim())) {
+            usersMap.put("top", top);
+        }
+        if (down != null && !"".equals(down.trim())) {
+            usersMap.put("down", down);
+        }
+
+        int count = cerRecordService.findbackSQlistsize(usersMap);  // 查找数据条数
+        // 查找数据条数
+        int page1 = Integer.parseInt(page);
+        int limit1 = Integer.parseInt(limit);
+        int page_temp = page1;
+        int limit_temp = limit1;
+        if (count < page1 * limit1) {
+            limit1 = count - (page1 - 1) * limit1;
+        }
+        page1 = (page_temp - 1) * limit_temp;
+        usersMap.put("page", page1);
+        usersMap.put("limit", limit1);
+
+        List<CerRecord> cerRecordList = cerRecordService.findbackSQlist(usersMap);
+        System.out.println("集合" + cerRecordList.size());
+        TableInfo tableinfo = new TableInfo();
+        tableinfo.setCode(0);
+        tableinfo.setCount(count);
+        tableinfo.setMsg("后台申请证书列表数据信息");
+        tableinfo.setData(cerRecordList);
+        String listJson = new Gson().toJson(tableinfo);
+
+        return listJson;
+    }
+
+    //证书名字双向验证
+    @RequestMapping(value = "/upbackzhengshustandid")
+    public @ResponseBody
+    String upzhengshushenqingstand(long standid,long cerid) {
+        String msg ="";
+        int n = cerRecordService.upcersqstandid(standid,cerid);
+
+        if (n>0){
+            msg = "success";
+        }else {
+            msg = "fail";
+        }
+
+        return msg;
+    }
+
 }

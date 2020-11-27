@@ -193,8 +193,8 @@ function sumb() {
                 layer.alert('招收人数未填写!',{icon: 0,offset: '20%'});
                 return false;
             }
-            if(recruitsNum.trim().length>6){
-                layer.alert('招收人数长度不能超过6!',{icon: 0,offset: '20%'});
+            if(recruitsNum.trim().length>15){
+                layer.alert('招收人数长度不能超过15!',{icon: 0,offset: '20%'});
                 return false;
             }
 
@@ -204,7 +204,7 @@ function sumb() {
                 return false;
             }
             if(jobBenefits.trim().length>20){
-                layer.alert('福利描述长度不能超过20!',{icon: 0,offset: '20%'});
+                layer.alert('福利描述长度不能超过30!',{icon: 0,offset: '20%'});
                 return false;
             }
 
@@ -244,6 +244,8 @@ function sumb() {
         success:function (info) {
             if(info=='1'){
                 layer.alert('发布成功!',{icon: 0,offset: '20%'});
+            }else if(info=='3'){
+                layer.alert('请完善公司信息再发布岗位!',{icon: 0,offset: '20%'});
             }
         },
     })

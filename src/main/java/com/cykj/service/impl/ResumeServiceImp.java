@@ -463,17 +463,26 @@ public class ResumeServiceImp implements ResumeService {
      * @return
      */
     @Override
-    public List<Position> positions() {
-        return jianliMapper.positions();
+    public List<Industry> industrys(){
+        return jianliMapper.industrys();
     }
 
     /**
+     * 根据首字母查询城市
+     *
+     * @param begin
+     * @param end
      * @return
      */
     @Override
-    public List<City> citys() {
-        return jianliMapper.citys();
+    public List<City> citys(int begin, int end) {
+        return jianliMapper.citys(begin,end);
     }
+//    public List<Position> positions() {
+//        return jianliMapper.positions();
+//    }
+
+
 
     /**
      * 修改简历头像
