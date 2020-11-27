@@ -106,8 +106,8 @@ public class LoginController {
         request.getSession().removeAttribute("vCode");
         if (sVCode.equalsIgnoreCase(vCode)) {
 //            启用MD5解开即可
-            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
-//            BackUser backUser = loginServiceImpl.adminLog(account, password);
+//            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
+            BackUser backUser = loginServiceImpl.adminLog(account, password);
             if (backUser == null) {
                 System.out.println("用户名或密码错误!");
                 return "noAcc";

@@ -528,8 +528,10 @@ public class CompController {
         if(backUser.getLng()!=null){
             map.put("lng",backUser.getLng());
         }
-
-        return backCompService.changeCompInfo(map);
+        String msg = backCompService.changeCompInfo(map);
+        BackUser comp = backCompService.findCompByID(compID);
+        request.getSession().setAttribute("admin",comp);
+        return msg;
     }
 
     @RequestMapping("/uploadLogo")
@@ -554,8 +556,11 @@ public class CompController {
         int compID = (int) bUser.getbUserId();
         map.put("compID",compID);
         map.put("logo",savePath);
+        String msgs = backCompService.changeCompInfo(map);
+        BackUser comp = backCompService.findCompByID(compID);
+        request.getSession().setAttribute("admin",comp);
 
-        return backCompService.changeCompInfo(map);
+        return msgs;
     }
 
     @RequestMapping("/compChangePwd")
