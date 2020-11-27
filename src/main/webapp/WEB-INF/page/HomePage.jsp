@@ -80,7 +80,7 @@
                 <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                 <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
                 <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
-                <li><a href="${pageContext.request.contextPath}/center/job" rel="nofollow">职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/center/job?findWorkCity=${nowCity}" rel="nofollow">职位</a></li>
                 <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
             </ul>
             <ul class="loginTop" style="font-size: 18px;height: 68px;">
@@ -303,7 +303,7 @@
                     ${post.minSalary}K&nbsp;-&nbsp; ${post.maxSalary}K
                 </div>
                 <ul class="reset ctags" style="margin-top: 73px;">
-                    <div style="float: left">q
+                    <div style="float: left">
                         <img src="${pageContext.request.contextPath}/uploadLogo${post.backUser.logo}" width="40"
                              height="39" alt="CCIC"/>
                     </div>
@@ -317,7 +317,7 @@
     <div>
         <button type="button" class="layui-btn layui-btn-primary"
                 style="width: 240px;margin-top: 25px;margin-bottom: 35px;background-color: #44d0c7;font-size: 16px;color: white;"
-                onclick="window.open('${pageContext.request.contextPath}/center/job')">
+                onclick="window.open('${pageContext.request.contextPath}/center/job?findWorkCity=${nowCity}')">
             查看更多
         </button>
     </div>
