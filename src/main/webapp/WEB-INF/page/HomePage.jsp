@@ -102,7 +102,8 @@
                     </div>
                     <div style="margin: 35px 230px;width: 200px;">
                         <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px" onclick="window.open('${pageContext.request.contextPath}/center/jianli')">个人中心</button>
-                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a" onclick="exit()">退出</button>
+<%--                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a" onclick="exit()">退出</button>--%>
+                        <a href="${pageContext.request.contextPath}/homePage/quitAccount" >退出登录</a>
                     </div>
                 </c:if>
             </ul>
