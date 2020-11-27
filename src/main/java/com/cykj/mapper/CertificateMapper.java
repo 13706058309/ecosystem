@@ -1,6 +1,7 @@
 package com.cykj.mapper;
 
 import com.cykj.entity.Certificate;
+import com.cykj.entity.Field;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
