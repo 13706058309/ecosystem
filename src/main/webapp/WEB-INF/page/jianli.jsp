@@ -342,7 +342,7 @@
                                         <div class="primary-info">
                                             <div class="info-labels"><span class="prev-line"><span
                                                     class="label-text"><i class="fz-resume fz-job"></i>
-                                                <label id="expectWork9">${resume.expectWork}</label>
+                                                <label id="expectWork9" title="${resume.expectWork}">${resume.expectWork}</label>
                                             </span></span></div>
                                         </div>
                                         <div class="op op-show">
