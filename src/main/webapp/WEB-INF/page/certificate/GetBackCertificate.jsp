@@ -169,16 +169,15 @@
             table.render({
                 elem: '#LAY_table_user'
                 , url: '${pageContext.request.contextPath}/backzhengshu/getbackceruserlist'
-                ,cellMinWidth: 80
                 , cols: [[
-                    {type: 'numbers', title: 'ID'}
-                    , {templet: '<div>{{d.cerRecord.trueName}}</div>',title: '申请人'}
-                    , {templet: '<div>{{d.cerRecord.cerPhone}}</div>', title: '联系号码'}
-                    , {templet: '<div>{{d.backUser.bUserName}}</div>', title: '评审员'}
-                    , {field: 'gainTime',title: '获得时间', sort: true}
-                    , {field: 'name',title: '证书', sort: true}
-                    , {templet: '<div>{{d.cerRecord.cerFinalScore}}</div>', title: '总分数'}
-                    , {field: 'score', title: '操作', align: 'center', toolbar: '#barDemo'}
+                    {type: 'numbers', title: 'ID', width: 80}
+                    , {templet: '<div>{{d.cerRecord.trueName}}</div>',title: '申请人', width: 120}
+                    , {templet: '<div>{{d.cerRecord.cerPhone}}</div>', title: '联系号码', width: 200}
+                    , {templet: '<div>{{d.backUser.bUserName}}</div>', title: '评审员', width: 120}
+                    , {field: 'gainTime',title: '获得时间', width: 200 ,sort: true}
+                    , {field: 'name',title: '证书', width: 100, sort: true}
+                    , {templet: '<div>{{d.cerRecord.cerFinalScore}}</div>', title: '总分数', width: 100}
+                    , {field: 'score', title: '操作', width: 250, align: 'center', toolbar: '#barDemo'}
                 ]]
                 , id: 'testReload'
                 , page: true
