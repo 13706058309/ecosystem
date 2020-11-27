@@ -1,25 +1,25 @@
-//package com.cykj.log;
-//
-//import com.cykj.entity.BackLog;
-//import com.cykj.entity.BackUser;
-//import org.aspectj.lang.JoinPoint;
-//import org.aspectj.lang.annotation.AfterReturning;
-//import org.aspectj.lang.annotation.Aspect;
-//import org.aspectj.lang.annotation.Before;
-//import org.aspectj.lang.annotation.Pointcut;
-//import org.springframework.stereotype.Component;
-//import org.springframework.web.context.request.RequestAttributes;
-//import org.springframework.web.context.request.RequestContextHolder;
-//import org.springframework.web.context.request.ServletRequestAttributes;
-//
-//import javax.annotation.Resource;
-//import javax.servlet.http.HttpServletRequest;
-//import java.lang.reflect.Method;
-//
-//@Aspect
-//@Component
-//public class LogMatter {
-//
+package com.cykj.log;
+
+import com.cykj.entity.BackLog;
+import com.cykj.entity.BackUser;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+
+@Aspect
+@Component
+public class LogMatter {
+
 //    @Resource
 //    LogService logService;//获取日志service对象
 //
@@ -73,11 +73,11 @@
 //        backLog.setMatter(operaName);
 //        logService.addLog(backLog);//数据库添加一个日志
 //    }
-//
-////    @Before("logpoint()")
-////    public void before() {
-////        System.out.println("前置通知");
-////    }
-//
-//
-//}
+
+//    @Before("logpoint()")
+//    public void before() {
+//        System.out.println("前置通知");
+//    }
+
+
+}

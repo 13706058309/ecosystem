@@ -93,7 +93,7 @@
     <input type="hidden"  name="lat" id="lat" value="${comp.lat}">
     <div id="main" class="inner">
         <div id="containers" class="resume-container">
-            <div class="resume-content" style="height: 1000px">
+            <div class="resume-content" style="height: 1100px">
                 <!---->
                 <div class="resume-content-box">
 

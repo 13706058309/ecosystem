@@ -44,7 +44,7 @@ public class HomePageController {
 //        热门企业
 
         System.err.println("当前城市" + city);
-        request.getSession().setAttribute("nowCity",city);
+
         if (city!=null) {
             city = city.trim();
             List<BackUser> homeCompany = homePageService.CompanyCity(city);
@@ -67,6 +67,7 @@ public class HomePageController {
     @RequestMapping("/homes")
     public String homes(HttpServletRequest request,String city){
 //城市集合
+        request.getSession().setAttribute("nowCity",city);
         List<City> cityList = homePageService.cityList();
         request.setAttribute("cityList",cityList);
 //        三级菜单 第一层 的集合

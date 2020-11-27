@@ -94,7 +94,7 @@
         <result property="contactInfo" column="contactInfo"></result>
         <result property="roleId" column="roleId"></result>
         <result property="stateId" column="stateId"></result>
-        <association property="roleInfo" column="roleId" javaType="com.cykj.entity.RoleInfo">
+        <association property="role" column="roleId" javaType="com.cykj.entity.RoleInfo">
             <id property="roleId" column="roleId"></id>
             <result property="roleName" column="roleName"></result>
         </association>
