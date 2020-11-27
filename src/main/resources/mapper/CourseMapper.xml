@@ -15,7 +15,7 @@
         <id property="courseId" column="courseId"></id>
 <!--        <id property="fieldId" column="fieldId"></id>-->
         <result property="courseName" column="courseName"></result>
-        <result property="courseImgURL" column="courseImgURL"></result>
+        <result property="courseImgUrl" column="courseImgUrl"></result>
         <result property="speakerName" column="speakerName"></result>
         <result property="courseIntroduce" column="courseIntroduce"></result>
         <result property="uploadTime" column="uploadTime"></result>
@@ -58,8 +58,8 @@
         update course set courseName = #{courseName} where courseId = #{courseId}
     </update>
 <!--    更改路径-->
-    <update id="updatecourseImgURL" >
-        update course set courseImgURL = #{courseImgURL} where courseId = #{courseId}
+    <update id="updatecourseImgUrl" >
+        update course set courseImgUrl = #{courseImgUrl} where courseId = #{courseId}
     </update>
 <!--更改课程介绍-->
     <update id="updatecourseIntroduce" >
@@ -71,8 +71,8 @@
     </update>
 
     <insert id="insertCourse">
-        insert into course (courseName,fieldId,courseImgURL,speakerName,courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes,uploadTime) values
-        (#{courseName},#{fieldId},#{courseImgURL},#{speakerName},#{courseIntroduce},#{collectionNumber},#{speakerHeadImgUrl},#{totalPlayTimes},now())
+        insert into course (courseName,fieldId,courseImgUrl,speakerName,courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes,uploadTime) values
+        (#{courseName},#{fieldId},#{courseImgUrl},#{speakerName},#{courseIntroduce},#{collectionNumber},#{speakerHeadImgUrl},#{totalPlayTimes},now())
     </insert>
 
     <select id="findOption" resultMap="results">

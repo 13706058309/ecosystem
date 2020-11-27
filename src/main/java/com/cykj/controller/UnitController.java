@@ -1,7 +1,8 @@
 package com.cykj.controller;
 
 import com.cykj.entity.TableInfo;
-import com.cykj.interceptor.Loger;
+
+import com.cykj.log.Loger;
 import com.cykj.service.impl.CourseServiceImpl;
 import com.cykj.service.impl.UnitServiceImpl;
 import com.google.gson.Gson;
@@ -32,8 +33,9 @@ import java.util.List;
 @RequestMapping("/unit")
 public class UnitController {
 
+
     @Resource
-private UnitServiceImpl unitServiceImpl;
+    private UnitService unitServiceImpl;
 
 
     @RequestMapping("goBUM")
@@ -49,8 +51,6 @@ private UnitServiceImpl unitServiceImpl;
     public @ResponseBody
     String getTableInfo(Integer page,Integer limit,String unitName){
 
-        System.out.println("我获取到了unitName,值为："+unitName);
-
         TableInfo tableInfo = unitServiceImpl.findCourse(page,limit,unitName);
         return new Gson().toJson(tableInfo);
     }
@@ -59,8 +59,6 @@ private UnitServiceImpl unitServiceImpl;
     @RequestMapping("deleteUnit")
     @Loger(operationType = "表格执行删除",operationName = "表格执行删除")
     public void deleteCourse(HttpServletRequest req, HttpServletResponse resp, Integer unitId){
-        System.out.println(unitId);
-        System.out.println("走入删除 控制类");
 
         if (unitId != 0){
             int course = unitServiceImpl.deleteCourse(unitId);
@@ -240,8 +238,7 @@ private UnitServiceImpl unitServiceImpl;
 //        out.close();
 //
 //    }
-    @Resource
-    UnitService unitServiceImpl;
+
 
     // 返回课程目录页
     @RequestMapping("/cataloguePage")

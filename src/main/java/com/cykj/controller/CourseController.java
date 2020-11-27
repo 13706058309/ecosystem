@@ -3,7 +3,9 @@ package com.cykj.controller;
 import com.cykj.entity.Course;
 import com.cykj.entity.Field;
 import com.cykj.entity.TableInfo;
-import com.cykj.interceptor.Loger;
+import com.cykj.log.Loger;
+import com.cykj.service.CourseService;
+import com.cykj.service.FieldService;
 import com.cykj.service.impl.CourseServiceImpl;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -24,14 +26,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/course")
 public class CourseController {
-    @Resource
-private CourseServiceImpl courseServiceImpl;
+
     @Resource
     private CourseService courseServiceImpl;
     @Resource
     private FieldService fieldServiceImpl;
 
-    @RequestMapping("goBCM")
+    @RequestMapping("/goBCM")
     @Loger(operationType = "走入管理表格",operationName = "走入管理表格数据")
     public String goBackCourseManagement(HttpServletRequest request){
         System.out.println("走入汤某人的测试控制类，即将访问 后台课程管理的JSP！！");
@@ -95,13 +96,13 @@ private CourseServiceImpl courseServiceImpl;
 
 
     //更改课程路径
-    @RequestMapping("updatecourseImgURL")
+    @RequestMapping("updatecourseImgUrl")
     @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
-    public void updatecourseImgURL(String courseImgURL,Integer courseId) {
+    public void updatecourseImgUrl(String courseImgUrl,Integer courseId) {
         System.out.println("走入更改控制类");
-        System.out.println("courseImgURL="+courseImgURL+";courseId="+courseId);
-        if ( courseImgURL != null){
-            int updatecourseImgURL = courseServiceImpl.updatecourseImgURL(courseImgURL,courseId);
+        System.out.println("courseImgUrl="+courseImgUrl+";courseId="+courseId);
+        if ( courseImgUrl != null){
+            int updatecourseImgUrl = courseServiceImpl.updatecourseImgUrl(courseImgUrl,courseId);
         }
     }
 
@@ -130,16 +131,16 @@ private CourseServiceImpl courseServiceImpl;
 
     @RequestMapping("insertCourse")//更改头像路径
     @Loger(operationType = "表格执行新增",operationName = "表格执行新增")
-    public void insertCourse(String courseName,Integer fieldId,String courseImgURL,String speakerName
+    public void insertCourse(String courseName,Integer fieldId,String courseImgUrl,String speakerName
     ,String courseIntroduce,String collectionNumber,String speakerHeadImgUrl,String totalPlayTimes) {
         System.out.println("走入更改控制类");
-        System.out.println("courseName:"+courseName+"；fieldId:"+fieldId+"；courseImgURL:"+courseImgURL
+        System.out.println("courseName:"+courseName+"；fieldId:"+fieldId+"；courseImgUrl:"+courseImgUrl
                 +"；speakerName:"+speakerName+"；courseIntroduce:"+courseIntroduce +"；collectionNumber:"
                 +collectionNumber+"；speakerHeadImgUrl:"+speakerHeadImgUrl+"；totalPlayTimes:"+totalPlayTimes);
 
-        if (courseName != null && fieldId !=null && courseImgURL !=null && speakerName != null &&
+        if (courseName != null && fieldId !=null && courseImgUrl !=null && speakerName != null &&
                 courseIntroduce != null && collectionNumber !=null && speakerHeadImgUrl !=null && totalPlayTimes !=null){
-            int insertCourse = courseServiceImpl.insertCourse(courseName,fieldId,courseImgURL,speakerName,
+            int insertCourse = courseServiceImpl.insertCourse(courseName,fieldId,courseImgUrl,speakerName,
                     courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes);
         }
 

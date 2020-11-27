@@ -13,10 +13,10 @@ public interface CourseService {
     public List<Field> fieldList();
     public int deleteCourse(Integer courseId);
     public int updateCourseName(String courseName,Integer courseId);//更改课程名字
-    public int updatecourseImgURL(String courseImgURL,Integer courseId);//更改路径
+    public int updatecourseImgUrl(String courseImgUrl,Integer courseId);//更改路径
     public int updatecourseIntroduce(String courseIntroduce,Integer courseId);//更改课程介绍
     public int updatespeakerHeadImgUrl(String speakerHeadImgUrl,Integer courseId);//更改头像路径
-    public int insertCourse(String courseName,Integer fieldId,String courseImgURL,String speakerName
+    public int insertCourse(String courseName,Integer fieldId,String courseImgUrl,String speakerName
             ,String courseIntroduce,String collectionNumber,String speakerHeadImgUrl,String totalPlayTimes);//增加课程
 
     public String findOption();

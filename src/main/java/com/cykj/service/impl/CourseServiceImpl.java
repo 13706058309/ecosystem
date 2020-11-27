@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Service
 public class CourseServiceImpl implements CourseService {
-        @Resource
+    @Resource
     private CourseMapper courseMapper;
     @Override
     public TableInfo findCourse(Map<String, Object> map, Integer page, Integer limit) {
@@ -47,10 +47,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override//更改路径
-    public int updatecourseImgURL(String courseImgURL, Integer courseId) {
-        System.out.println("CourseServiceImpl里map的值为："+courseImgURL+courseId);
-        int updatecourseImgURL = courseMapper.updatecourseImgURL(courseImgURL,courseId);
-        return updatecourseImgURL;
+    public int updatecourseImgUrl(String courseImgUrl, Integer courseId) {
+        System.out.println("CourseServiceImpl里map的值为："+courseImgUrl+courseId);
+        int updatecourseImgUrl = courseMapper.updatecourseImgUrl(courseImgUrl,courseId);
+        return updatecourseImgUrl;
     }
 
     @Override//更改课程介绍
@@ -68,11 +68,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override//新增课程
-    public int insertCourse(String courseName, Integer fieldId, String courseImgURL, String speakerName, String courseIntroduce, String collectionNumber, String speakerHeadImgUrl, String totalPlayTimes) {
-        System.out.println("CourseServiceImpl里的值为："+"courseName:"+courseName+"；fileId:"+fieldId+"；courseImgURL:"+courseImgURL
+    public int insertCourse(String courseName, Integer fieldId, String courseImgUrl, String speakerName, String courseIntroduce, String collectionNumber, String speakerHeadImgUrl, String totalPlayTimes) {
+        System.out.println("CourseServiceImpl里的值为："+"courseName:"+courseName+"；fileId:"+fieldId+"；courseImgUrl:"+courseImgUrl
                 +"；speakerName:"+speakerName+"；courseIntroduce:"+courseIntroduce +"；collectionNumber:"
                 +collectionNumber+"；speakerHeadImgUrl:"+speakerHeadImgUrl+"；totalPlayTimes:"+totalPlayTimes);
-        int insertCourse = courseMapper.insertCourse(courseName,fieldId,courseImgURL,speakerName,
+        int insertCourse = courseMapper.insertCourse(courseName,fieldId,courseImgUrl,speakerName,
                 courseIntroduce,collectionNumber,speakerHeadImgUrl,totalPlayTimes);
         return insertCourse;
     }
@@ -98,8 +98,7 @@ public class CourseServiceImpl implements CourseService {
 //        System.out.println("CourseServiceImpl里的courseName值为："+courseName);
 //        return courseMapper.search(courseName);
 //    }
-    @Resource
-    private CourseMapper courseMapper;
+
 
     /**
      * 根据领域ID查询该领域下的课程信息

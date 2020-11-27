@@ -25,7 +25,7 @@
 
         </resultMap>
 
-        <insert id="insertLog">
-               INSERT INTO backLog( buserid, operatime, matter)VALUES (#{buserid},now(),#{matter});
+        <insert id="addLog">
+               INSERT INTO backLog( bUserId, operatime, matter)VALUES (#{bUserId},now(),#{matter});
         </insert>
 </mapper>

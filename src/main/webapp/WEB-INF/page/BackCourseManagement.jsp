@@ -324,7 +324,7 @@
             ,cols: [[ //表头
                 {field: 'courseId', title: '序号', width:80, sort: true, fixed: 'left'}
                 ,{field: 'courseName', title: '课程名称', width:150,event:'courseName'}
-                ,{field: 'courseImgURL', title: '路径', width:330,event:'courseImgURL'}
+                ,{field: 'courseImgUrl', title: '路径', width:330,event:'courseImgUrl'}
                 ,{field: 'speakerName', title: '讲师', width:130}
                 ,{field: 'courseIntroduce', title: '课程介绍', width:150,event:'courseIntroduce'}
                 ,{field: 'uploadTime', title: '上传时间', width:220,sort: true}
@@ -432,21 +432,21 @@
                         var fieldId_add = document.getElementById("fieldId_add");
                         var index = fieldId_add.selectedIndex;// selectedIndex是所选中的项的index
                         var fieldId = fieldId_add.options[index].value;                    //【增加界面第二行】下拉框选择的领域
-                        var courseImgURL = document.getElementById('courseImgURL').value;//【增加界面第三行】选择后的文件路径
+                        var courseImgUrl = document.getElementById('courseImgUrl').value;//【增加界面第三行】选择后的文件路径
                         var speakerName = document.getElementById("speakerName").value;  //【增加界面第四行】文本框输入的讲师名
                         var courseIntroduce = document.getElementById("courseIntroduce").value;//【增加界面第五行】文本框输入的课程介绍
                         // var uploadTime = document.getElementById("uploadTime").value;//【增加界面第六行】文本框输入的上传时间
                         var collectionNumber = document.getElementById("collectionNumber").value;//【增加界面第六行】文本框输入的观看人数
                         var speakerHeadImgUrl = document.getElementById('speakerHeadImgUrl').value;//【增加界面第七行】文本框输入的头像路径
                         var totalPlayTimes = document.getElementById("totalPlayTimes").value;//【增加界面第八行】文本框输入的播放时间
-                        console.log("courseName:"+courseName+"；fieldId:"+fieldId+"；courseImgURL:"+courseImgURL
+                        console.log("courseName:"+courseName+"；fieldId:"+fieldId+"；courseImgUrl:"+courseImgUrl
                         +"；speakerName:"+speakerName+"；courseIntroduce:"+courseIntroduce +"；collectionNumber:"
                             +collectionNumber+"；speakerHeadImgUrl:"+speakerHeadImgUrl+"；totalPlayTimes:"+totalPlayTimes);
                         $.ajax({
                             type:"POST",
                             dataType: "json",//预期服务器返回的数据类型
                             url: "../course/insertCourse" ,//url
-                            data: "courseName="+courseName+"&fieldId="+fieldId+"&courseImgURL="+courseImgURL
+                            data: "courseName="+courseName+"&fieldId="+fieldId+"&courseImgUrl="+courseImgUrl
                                 +"&speakerName="+speakerName+"&courseIntroduce="+courseIntroduce +"&collectionNumber=" +collectionNumber+
                                 "&speakerHeadImgUrl="+speakerHeadImgUrl+"&totalPlayTimes="+totalPlayTimes,
                             async:true,
@@ -478,7 +478,7 @@
                         '                    <option value="5">嵌入式</option>\n' +
                         '                </select>' +
                         // '<input placeholder="请输入课程图片路径"  style="width: 250px;margin:5px 110px">' +
-                        '<a href="javascript:;" class="file" style="width: 230px;margin:5px 110px">选择修改后的图片路径<input type="file" name="file" id="courseImgURL"></a>' +
+                        '<a href="javascript:;" class="file" style="width: 230px;margin:5px 110px">选择修改后的图片路径<input type="file" name="file" id="courseImgUrl"></a>' +
                         '<input id="speakerName" placeholder="请输入讲师名"  style="width: 250px;margin:5px 110px">' +
                         '<input id="courseIntroduce" placeholder="课程介绍"  style="width: 250px;margin:5px 110px">' +
                         // '<input id="uploadTime" placeholder="上传时间"  style="width: 250px;margin:5px 110px">' +
@@ -683,11 +683,11 @@
                 });
             }
             //修改课程路径监听
-            else if (obj.event === 'courseImgURL'){
+            else if (obj.event === 'courseImgUrl'){
                 layer.prompt({
                     formType: 2
                     ,title: '修改 ID 为 ['+ data.courseId +'] 的课程路径'
-                    ,value: data.courseImgURL
+                    ,value: data.courseImgUrl
                 }, function(value, index){
                     layer.close(index);
                     var courseId = data.courseId;
@@ -696,14 +696,14 @@
                     $.ajax({
                         type:"POST",
                         dataType: "json",//预期服务器返回的数据类型
-                        url: "../course/updatecourseImgURL" ,//url
-                        data: 'courseImgURL='+value+'&courseId='+courseId,
+                        url: "../course/updatecourseImgUrl" ,//url
+                        data: 'courseImgUrl='+value+'&courseId='+courseId,
                         async:true,
 
                     });
                     //同步更新表格和缓存对应的值
                     obj.update({
-                        courseImgURL: value
+                        courseImgUrl: value
                     });
                 });
             }

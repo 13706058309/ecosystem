@@ -1,7 +1,8 @@
 package com.cykj.controller;
 
 import com.cykj.entity.TableInfo;
-import com.cykj.interceptor.Loger;
+
+import com.cykj.log.Loger;
 import com.cykj.service.impl.FieldServiceImpl;
 import com.cykj.service.impl.UnitServiceImpl;
 import com.google.gson.Gson;
