@@ -915,14 +915,13 @@ public class CenterController {
             map.put("position",findPosition);
         }
         System.out.println(position+"11111111111??????????????");
-        if (findWorkCity==null){
+        String nowCity=(String) req.getSession().getAttribute("nowCity");
+        if (findWorkCity==null||findWorkCity.equals("".trim())){
             System.out.println("99999");
-        }else if (findWorkCity.equals("".trim())){
-
-            workCity= (String) req.getSession().getAttribute("nowCity");
-            System.out.println(workCity+"2222222222222");
-            if (!workCity.equals("全国")){
-                map.put("workCity",workCity);
+            if (findWorkCity==null||findWorkCity.equals("".trim())){
+                workCity="全国";
+            }else {
+                workCity=nowCity;
             }
         }else if (findWorkCity.equals("全国")){
             System.out.println("88888");
