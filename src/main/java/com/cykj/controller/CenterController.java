@@ -25,7 +25,7 @@ import java.util.*;
 public class CenterController {
     private int resumeId;
     private int userId;
-    String workCity="厦门市";
+    String workCity="全国";
     String workYear="工作经验";
     String education="学历要求";
     String salary="薪资要求";
@@ -579,11 +579,27 @@ public class CenterController {
     public String clearjob(HttpServletRequest req){
         List<Industry> industrys=resumeService.industrys();
         req.setAttribute("industrys",industrys);
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
+
         int page=0;
         int curr=1;
         int limit=10;
         Map map=new HashMap();
-        map.put("workCity",workCity);
+        if (workCity.equals("全国")){
+
+        }else {
+            map.put("workCity",workCity);
+        }
+//        map.put("workCity",workCity);
         map.put("page",page);
         map.put("limit",limit);
         workYear="工作经验";
@@ -592,11 +608,12 @@ public class CenterController {
         finanStage="融资阶段";
         scale="公司规模";
         releaseTime="发布时间";
-        if (search.equals("".trim())){
-
-        }else {
-            map.put("search","%"+search+"%");
-        }
+        search="职位类型";
+//        if (null==search||search.equals("".trim())){
+//
+//        }else {
+//            map.put("search","%"+search+"%");
+//        }
 
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -620,13 +637,29 @@ public class CenterController {
 
     @RequestMapping("/searchJob")
     public String serachJob(HttpServletRequest req,String findSearch,String findWorkCity){
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
+
+
         int page=0;
         int curr=1;
         int limit=10;
         List<Industry> industrys=resumeService.industrys();
         req.setAttribute("industrys",industrys);
         Map map=new HashMap();
-        map.put("workCity",findWorkCity);
+        if (findWorkCity.equals("全国")){
+
+        }else {
+            map.put("workCity",findWorkCity);
+        }
         search=findSearch;
         if (findSearch.equals("".trim())){
 
@@ -668,6 +701,18 @@ public class CenterController {
         int page=0;
         int curr=1;
         int limit=10;
+
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
+
         workCity=findWorkCity;
         Map map=new HashMap();
         List<Industry> industrys=resumeService.industrys();
@@ -877,7 +922,7 @@ public class CenterController {
         }else {
             map.put("search","%"+findSearch+"%");
         }
-        map.put("workCity",workCity);
+//        map.put("workCity",workCity);
         map.put("page",(Integer.parseInt(curr)-1)*Integer.parseInt(limit));
         map.put("limit",Integer.parseInt(limit));
         System.out.println(findEducation+"??????????");
@@ -993,6 +1038,10 @@ public class CenterController {
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
         int count=jobsCount.size();
+        search=findSearch;
+//        if (null==findSearch||findSearch.equals("".trim())){
+//            search="职位类型";
+//        }
 
         req.setAttribute("count",count);
         req.setAttribute("limit",limit);
@@ -1004,8 +1053,7 @@ public class CenterController {
         req.setAttribute("findFinanStage",finanStage);
         req.setAttribute("findScale",scale);
         req.setAttribute("findReleaseTime",releaseTime);
-        req.setAttribute("search",findSearch);
-        System.out.println(workCity+"$$$$$$$$$$$$$$$$$$$$");
+        req.setAttribute("search",search);
         req.setAttribute("workCity",workCity);
         req.setAttribute("position",position);
 
@@ -1107,7 +1155,6 @@ public class CenterController {
     @RequestMapping("/updatePhone")
     public @ResponseBody String updatePhone(HttpServletRequest req,String vCode){
         String newPhone= (String) req.getSession().getAttribute("newPhone");
-
         System.out.println(vCode);
         System.out.println(req.getSession().getAttribute("vCodeMenu"));
         if (vCode.equals(req.getSession().getAttribute("vCodeMenu"))){

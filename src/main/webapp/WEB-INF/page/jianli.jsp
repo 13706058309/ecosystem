@@ -54,7 +54,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo11.png) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -68,17 +68,10 @@
         </div>
 
         <div class="user-nav" style="margin-top: 20px">
-            <c:if test="${empty qUser}">
-                <div class="btns" style="margin-top: 10%">
-                    <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline">注册</a>
-                    <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline">登录</a>
-                </div>
-            </c:if>
-            <c:if test="${not empty qUser}">
                 <ul>
-                    <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
+<%--                    <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
                     <li class="nav-figure">
-                        <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
+                        <a >
                             <span class="label-text">${qUser.userName}</span><img id="topImg"  src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                         </a>
                         <div class="dropdown">
@@ -87,7 +80,7 @@
                             <a href="${pageContext.request.contextPath}/homePage/quitAccount"  ka="header-logout">退出登录</a>
                         </div>
                     </li>
-                </ul></c:if>
+                </ul>
         </div>
     </div>
 </div>
