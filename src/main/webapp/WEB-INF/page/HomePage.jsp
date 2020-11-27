@@ -480,10 +480,6 @@
             console.log(obj.item); //当前条目的元素对象
         });
     });
-    //退出当前账户
-    <%--function exit() {--%>
-    <%--    location.href=${pageContext.request.contextPath}+"/homePage/quitAccount";--%>
-    <%--}--%>
 </script>
 </body>
 </html>
