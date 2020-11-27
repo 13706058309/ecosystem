@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <p></p>
+                    <a href="${pageContext.request.contextPath}/test/findPwd"><p>忘记密码</p></a>
 <%--                    <a><input type="button" name="forgetPass" id="forgetPass" src=""></a>--%>
 <%--                    <input type="button" name="rememberMe"  lay-skin="primary" value="忘记密码">--%>
                 </div>
@@ -119,18 +119,17 @@
             },
             success:function (info) {
                 console.log(info);
-
-                 // layer.msg(info);
-                // changeImg();
                 if (info == 'success'){
                     layer.msg("登陆成功!");
                     location.href = path+"/golog/adminMain";
-                } else if (info == 'noReviewed'){
+                } else if (info=='noAcc'){
+                    layer.msg("用户名或密码错误!");
+                }else if (info == 'noReviewed'){
                     layer.msg("登录失败,此账号待审核!");
-                } else if (info = 'failedPass'){
-                    layer.msg("登录失败,此账号未通过审核!");
                 } else if (info == 'vCodeError'){
                     layer.msg("登录失败,验证码错误，请重试!");
+                } else if (info == 'failedPass'){
+                    layer.msg("登录失败,此账号未通过审核!");
                 } else {
                     layer.msg("当前账号无权限,请联系管理员!");
                 }

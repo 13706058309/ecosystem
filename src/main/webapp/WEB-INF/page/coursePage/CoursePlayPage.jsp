@@ -262,7 +262,7 @@
                         $('#topicText').append(html);
                     }
                     var button = "";
-                    button+="<button type=\"button\" id='submit' class=\"layui-btn\" style='margin-left: 50%' onclick='checkAnswer("+data.length+")'>";
+                    button+="<button type=\"button\" id='submitBtn' class=\"layui-btn\" style='margin-left: 50%' onclick='submitAnswer("+data.length+")'>";
                     button+="提交";
                     button+="</button>";
 
@@ -277,6 +277,26 @@
                     $('#topicText').html(html);
                 }
             }
+        });
+    }
+
+    // 提交测试题答案
+    function submitAnswer(titleNums) {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+
+            layer.open({
+                type: 1,
+                content: '<div style="width:300px;height: 60px;text-align: center;margin-top: 20%;color: green;">提交后答案不可更改，确定提交吗？</div>', //这里content是一个普通的String
+                btn:['提交','取消'],
+                yes:function (index) {
+                    checkAnswer(titleNums);
+                    layer.close(index);
+                },
+                btn2:function (index) {
+                    layer.close(index);
+                }
+            });
         });
     }
     
@@ -316,6 +336,11 @@
                     "                        </div>");
             }
         }
+        // 将提交按钮移除
+        // $('#topicText')
+        $('#submitBtn').remove();
+        // 选项所在的单选按钮设置为不可选
+        $('input[type=radio]').attr("disabled",true);
     }
 
     // 加载更多评论

@@ -2,8 +2,10 @@ package com.cykj.controller;
 
 import com.cykj.entity.Course;
 
+import com.cykj.entity.CourseCollect;
 import com.cykj.entity.Field;
 import com.cykj.entity.Unit;
+import com.cykj.service.CourseCollectService;
 import com.cykj.service.CourseService;
 import com.cykj.service.FieldService;
 import com.google.gson.Gson;
@@ -25,6 +27,8 @@ public class CourseController {
     private CourseService courseServiceImpl;
     @Resource
     private FieldService fieldServiceImpl;
+    @Resource
+    private CourseCollectService courseCollectServiceImpl;
 
     // 初始化领域和课程信息并返回课程首页
     @RequestMapping("/homePage")
@@ -87,9 +91,18 @@ public class CourseController {
 
     // 返回课程详情页
     @RequestMapping("/detailPage")
-    public String returnDetailPage(HttpServletRequest request,String courseId){
+    public String returnDetailPage(HttpServletRequest request,String courseId,String userId){
+        // 查询当前课程的详细信息，显示在课程详情页。如课程名，课程图片，播放量，被收藏次数等
         Course course = courseServiceImpl.selectCourseById(courseId);
+        // 查询与当前课程相关的其他课程信息
         List relatedCourses = courseServiceImpl.selectRelatedCourses(courseId);
+        // 查询当前课程是否已被当前登录用户收藏
+        CourseCollect courseCollect = courseCollectServiceImpl.isCollectedByCourseIdAndUserId(courseId,userId);
+
+        // 已收藏
+        if (courseCollect!=null){
+            request.setAttribute("courseCollect",courseCollect);
+        }
         request.setAttribute("course",course);
         request.setAttribute("relatedCourses",relatedCourses);
         return "coursePage/CourseDetailPage";
