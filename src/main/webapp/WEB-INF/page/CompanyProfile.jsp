@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html class="standard"><!--<![endif]-->
+<html><!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <title>${backUser.compName}</title>
@@ -45,7 +45,7 @@
         <div class="inner home-inner">
             <div>
                 <div class="company-stat">
-                    <em class="vline"></em><span><b>${size}</b>在招职位BOSS</span>
+                    <em class="vline"></em><span><b>${size}</b>在招职位</span>
                 </div>
                 <div class="info-primary">
                     <img src="${pageContext.request.contextPath}/uploadLogo${backUser.logo}" class="fl">
@@ -153,76 +153,6 @@
     </div>
 </div>
 
-<div id="footer" class="">
-    <div class="inner home-inner">
-        <div class="footer-social">
-            <img src="https://static.zhipin.com/v2/web/geek/images/footer-logo.png" alt="">
-            <p>企业服务热线和举报投诉 <span>400 065 5799</span></p>
-            <p>工作日 <span>8:00 - 22:00</span></p>
-            <p>休息日 <span>9:30 - 18:30</span></p>
-            <p class="footer-icon">
-                <a href="http://www.weibo.com/bosszhipin" rel="nofollow" ka="link-weibo" target="_blank"
-                   class="icon-weibo"><span>官方微博</span></a>
-                <a href="javascript:;" class="icon-weixin" ka="link-weixin"><span>微信公众号</span><img
-                        src="https://static.zhipin.com/v2/web/geek/images/we_chat_qr.jpg" class="qrcode-weixin"></a>
-                <a href="https://app.zhipin.com" class="icon-app" ka="link-downloadapp"><span>下载</span></a>
-            </p>
-        </div>
-        <div class="footer-about clear-fix">
-            <dl>
-                <dt>企业服务</dt>
-                <dd>
-                    <a href="https://www.zhipin.com/job_detail/" ka="link-search">职位搜索</a>
-                    <a href="https://news.zhipin.com/" ka="link-news">新闻资讯</a>
-                    <a href="https://app.zhipin.com/" ka="link-app">BOSS直聘APP</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>使用与帮助</dt>
-                <dd>
-                    <a href="https://www.zhipin.com/web/common/protocol/index.html" rel="nofollow" ka="link-privacy"
-                       target="_blank">平台协议</a>
-                    <a href="https://www.zhipin.com/activity/cc/anticheatguide.html" rel="nofollow"
-                       ka="link-anticheatguide" target="_blank">防骗指南</a>
-                    <a href="https://www.zhipin.com/activity/cc/usehelp.html" rel="nofollow" ka="link-usehelp"
-                       target="_blank">使用帮助</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>联系BOSS直聘</dt>
-                <dd>
-                    <p>北京华品博睿网络技术有限公司</p>
-                    <p>公司地址 北京市朝阳区太阳宫中路16号院1号楼18层1801内09</p>
-                    <p>联系电话 010-84150633</p>
-                    <p>违法和不良信息举报邮箱 <a class="report-mail" href="mailto:jubao@kanzhun.com" rel="nofollow">jubao@kanzhun.com</a>
-                    </p>
-                </dd>
-            </dl>
-        </div>
-        <div class="copyright">
-            <p>
-                <span>Copyright © 2020 BOSS直聘</span><span>京ICP备14013441号-5</span><span>京ICP证150923号</span><span>京网文[2020]0399-066 号</span>
-                <span>
-                     <a href="https://www.zhipin.com/activity/cc/businesslicense.html" rel="nofollow"
-                        ka="link-businesslicense" target="_blank">
-                         <img src="https://static.zhipin.com/v2/web/geek/images/icon-badge-1.png" alt="">
-                         电子营业执照
-                     </a>
-                </span>
-                <span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502032801"
-                         rel="nofollow" ka="link-beian" target="_blank"><img
-                        src="https://static.zhipin.com/v2/web/geek/images/icon-beian.png"
-                        alt=""> 京公网安备11010502032801</a></span>
-                <span><a href="http://sdwj.zhipin.com/web/index.html" rel="nofollow" ka="link-sdwj"
-                         target="_blank">朝阳网警</a></span>
-                <span><a href="/web/common/protocol/hr-service.html" rel="nofollow" ka="link-hr-service"
-                         target="_blank">人力资源服务许可证</a></span>
-                <span><a href="https://www.12377.cn" rel="nofollow" ka="link-12377"
-                         target="_blank">网上有害信息举报专区</a></span>
-            </p>
-        </div>
-    </div>
-</div>
 <div class="links links-friends" style="height: 27px;">
     <dl class="links-item">
         <dt>友情链接：</dt>
