@@ -3,6 +3,7 @@ package com.cykj.controller;
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Menu;
 import com.cykj.entity.UserInfo;
+import com.cykj.log.Loger;
 import com.cykj.service.LoginService;
 import com.cykj.service.PowerService;
 import com.cykj.util.AliyunSmsUtils;
@@ -34,7 +35,7 @@ public class LoginController {
 
     //跳转登录界面
     @RequestMapping(value = {"/login"})
-//    @Loger(operationName = "跳转登录界面")
+    @Loger(operationName = "跳转登录界面")
     public String login() {
         return "Login";
     }
@@ -44,7 +45,7 @@ public class LoginController {
 
     //前端登录的动作
     @RequestMapping(value = {"/log"})
-//    @Loger(operationName = "执行前端用户登录")
+    @Loger(operationName = "执行前端用户登录")
     public @ResponseBody
     String log(String account, String pwd, String sVCode, HttpServletRequest request) {
         System.out.println("执行前端用户登录!");
@@ -88,7 +89,7 @@ public class LoginController {
     }
 
     @RequestMapping("/admin")
-//    @Loger(operationType = "跳转后台登录页面")
+    @Loger(operationType = "跳转后台登录页面")
     public String admin() {
         return "adminLog";
     }
@@ -105,8 +106,8 @@ public class LoginController {
         request.getSession().removeAttribute("vCode");
         if (sVCode.equalsIgnoreCase(vCode)) {
 //            启用MD5解开即可
-            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
-//            BackUser backUser = loginServiceImpl.adminLog(account, password);
+//            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
+            BackUser backUser = loginServiceImpl.adminLog(account, password);
             if (backUser == null) {
                 System.out.println("用户名或密码错误!");
                 return "noAcc";

@@ -302,7 +302,7 @@
                     title: '角色',
                     width: 280,
                     align: "center",
-                    templet: '<div>{{d.roleInfo.roleName}}</div>'
+                    templet: '<div>{{d.role.roleName}}</div>'
                 }
                 , {
                     field: 'stateId', title: '账号状态', width: 180, align: "center", templet: function (d) {
