@@ -3,6 +3,7 @@ package com.cykj.mapper;
 
 import com.cykj.entity.BackLog;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface BackLogMapper {
     int findLogNum(Map<String, Object> map);
     int addBackLog(BackLog backLog);
 
+    void insertLog(@Param("buserid") int buserid,@Param("matter") String  matter);
 }

@@ -141,7 +141,7 @@
 
 <div id="changePost" style="display: none;margin-top: 3%">
     <br>
-    <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
+    <form class="layui-form" action="" style="margin-left: 10%">
         <div class="layui-form-item">
             <label class="layui-form-label">职位类别</label>
             <div class="layui-input-inline" >
@@ -183,7 +183,7 @@
 
 <div id="changeCity" style="display: none;margin-top: 3%">
     <br>
-    <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
+    <form class="layui-form" action="" style="margin-left: 10%">
         <div class="layui-form-item">
             <label class="layui-form-label">工作城市</label>
 
@@ -250,7 +250,7 @@
 
 <div id="changeWorkType" style="display: none;margin-top: 3%">
     <br>
-    <form class="layui-form" action="" style="margin-left: 15%;margin-right: 15%">
+    <form class="layui-form" action="" style="margin-left: 10%">
         <label class="layui-form-label">工作性质</label>
         <div class="layui-input-block">
             <input type="radio" name="workNature" value="全职" title="全职" checked="">
@@ -284,7 +284,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">具体地址</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入内容" class="layui-textarea" style="width: 80%; height: 85%" id="detailAddress" name="detailAddress"></textarea>
+            <textarea placeholder="请输入内容" class="layui-textarea" style="width: 80%; height: 85%;resize: none" id="detailAddress" name="detailAddress"></textarea>
         </div>
     </div>
 </div>
@@ -293,7 +293,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">福利描述</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入内容" class="layui-textarea" style="width: 80%; height: 85%" id="jobBenefits" name="jobBenefits"></textarea>
+            <textarea placeholder="请输入内容" class="layui-textarea" style="width: 80%; height: 85%;resize: none" id="jobBenefits" name="jobBenefits"></textarea>
         </div>
     </div>
 </div>
@@ -302,7 +302,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">工作描述</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入内容" class="layui-textarea" style="width: 80%; height: 85%" id="jobDescription" name="jobDescription"></textarea>
+            <textarea placeholder="请输入内容" class="layui-textarea" style="width: 80%; height: 85%;resize: none" id="jobDescription" name="jobDescription" ></textarea>
         </div>
     </div>
 </div>

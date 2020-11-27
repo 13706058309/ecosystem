@@ -156,9 +156,10 @@ public class SystemController {
         } else {
             map.put("compName", "");
         }
-        if (stateId != null && stateId.length() != 0) {
-            map.put("stateId", stateId);
-        }
+//        if (stateId != null && stateId.length() != 0) {
+//
+//        }
+        map.put("stateId", 17);
         TableInfo tableInfo = userServiceImpI.compNameFindsAllOnPage(map, page, limit);
         return new Gson().toJson(tableInfo);
     }

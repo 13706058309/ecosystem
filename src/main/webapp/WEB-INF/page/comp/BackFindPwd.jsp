@@ -76,8 +76,20 @@
                 <input type="button" value="获取验证码" class="layui-btn layui-btn-normal " style="background-color: #0D9572" onclick="sendCode()" id="codeBtn">
 
             </div>
-            <input type="button" id="submitLogin" value="找回密码" style="margin-left: 24%" onclick="findPwd()">
 
+            <div class="layui-form-item" style="margin-left:2%;">
+
+                <div class="layui-input-inline" >
+                    <input type="button" value="找回密码" class="layui-btn layui-btn-lg " style="background-color: #2bffbc" onclick="findPwd()">
+                </div>
+
+                <div class="layui-input-inline" >
+                    <input type="button" value="返回登录" class="layui-btn layui-btn-lg " style="background-color: #74fdff" onclick="goLog()" >
+                </div>
+
+            </div>
+
+<%--            <input type="button" id="submitLogin" value="找回密码" style="margin-left: 0%" onclick="findPwd()">--%>
         </form>
     </div>
 </div>
@@ -142,6 +154,10 @@
             layer.alert("验证码未发送");
             return false;
         }
+        if(value=='重新发送'){
+            layer.alert("验证码过时，请重新发送");
+            return false;
+        }
         var phone = $("#phone").val();
         var vCode = $("#vCode").val();
         var pwd = $("#pwd").val();
@@ -192,6 +208,10 @@
             }
         });
 
+    }
+
+    function goLog() {
+        location.href = path+"/golog/admin";
     }
 
 </script>

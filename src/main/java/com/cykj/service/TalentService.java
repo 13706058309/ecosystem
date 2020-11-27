@@ -20,12 +20,12 @@ public interface TalentService {
     int addTalent(Talent talent);
 
 
-    List<BackUserNum> backUserNumMonth();
+    List<BackUserNum> backUserNumMonth(); //后台月统计
 
-    List<BackUserNum> backUserNumWeek();
+    List<BackUserNum> backUserNumWeek(); //后台周统计
 
 
-    List<BackUserNum> backUserNumHalfYear();
+    List<BackUserNum> backUserNumHalfYear(); //后台年统计
     List<BackUserNum> userNumMonth();
 
     List<BackUserNum> userNumWeek();

@@ -22,21 +22,12 @@ public class BackLog {
   public BackLog() {
   }
 
-  public long getBLogId() {
+  public long getbLogId() {
     return bLogId;
   }
 
-  public void setBLogId(long bLogId) {
+  public void setbLogId(long bLogId) {
     this.bLogId = bLogId;
-  }
-
-
-  public BackUser getBUserId() {
-    return backUser;
-  }
-
-  public void setBUserId(BackUser backUser) {
-    this.backUser = backUser;
   }
 
   public long getbUserId() {
@@ -47,18 +38,6 @@ public class BackLog {
     this.bUserId = bUserId;
   }
 
-  public String getOperaTime() {
-    return operaTime;
-  }
-
-  public long getbLogId() {
-    return bLogId;
-  }
-
-  public void setbLogId(long bLogId) {
-    this.bLogId = bLogId;
-  }
-
   public BackUser getBackUser() {
     return backUser;
   }
@@ -67,10 +46,13 @@ public class BackLog {
     this.backUser = backUser;
   }
 
-  public void setOperaTime(Date operaTime) {
-    this.operaTime = MyUtil.getDetailFoatTime(operaTime);
+  public String getOperaTime() {
+    return operaTime;
   }
 
+  public void setOperaTime(String operaTime) {
+    this.operaTime = operaTime;
+  }
 
   public String getMatter() {
     return matter;
@@ -78,10 +60,6 @@ public class BackLog {
 
   public void setMatter(String matter) {
     this.matter = matter;
-  }
-
-  public void setOperaTime(String operaTime) {
-    this.operaTime = operaTime;
   }
 
   @Override

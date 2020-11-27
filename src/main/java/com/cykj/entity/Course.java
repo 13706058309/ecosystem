@@ -3,19 +3,18 @@ package com.cykj.entity;
 
 public class Course {
 
-  private long courseId;// 课程ID
-  private String courseName;//课程名
+  private long courseId;
+  private String courseName;
   private String courseImgUrl;//课程图像路径
-  private String speakerName;//讲师名
-  private String courseIntroduce;//课程详情
-  private String uploadTime;//发布时间
-  private long collectionNumber;//被收藏次数
-  private long fieldId;//所属领域名
-  private String speakerHeadImgUrl;//讲师头像
-  private long totalPlayTimes;//课程的总播放量
+  private String speakerName;
+  private String courseIntroduce;
+  private String uploadTime;
+  private long collectionNumber;
+  private long fieldId;
+  private String speakerHeadImgUrl;
+  private long totalPlayTimes;
 
   private long unitNumber;//课程所属的章节数
-
   public long getCourseId() {
     return courseId;
   }

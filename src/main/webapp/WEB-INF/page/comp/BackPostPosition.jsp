@@ -200,7 +200,7 @@
             <hr class="layui-bg-green">
 
             <div class="layui-form-item">
-                <div class="layui-input-block">
+                <div class="layui-input-block" style="margin-left: 29%">
                     <input  type="button" class="layui-btn" onclick="sumb()" value="立即发布">  </input>
                     <input  type="button" class="layui-btn" value="招聘预览" onclick="showDetail()"></input>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
