@@ -194,23 +194,23 @@
             });
         </script>
         <script type="text/html" id="bar">
-            {{#  if(d.stateId == 1){ }}
+
             <a class="layui-btn layui-btn-sm" lay-event="approved" id="approved">审核通过</a>
             <a class="layui-btn layui-btn-sm" lay-event="notApproved" id="notApproved">审核不通过</a>
             <a class="layui-btn layui-btn-sm" lay-event="download" id="download">下载</a>
-            {{#  } }}
 
-            {{#  if(d.stateId == 2){ }}
-            <a class="layui-btn  layui-btn-sm" lay-event="approved">审核通过</a>
-            <a class="layui-btn  layui-btn-sm" lay-event="notApproved">审核不通过</a>
-            <a class="layui-btn  layui-btn-sm" lay-event="download">下载</a>
-            {{#  } }}
 
-            {{#  if(d.stateId == 3){ }}
-            <a class="layui-btn  layui-btn-sm" lay-event="approved">审核通过</a>
-            <a class="layui-btn  layui-btn-sm" lay-event="notApproved">审核不通过</a>
-            <a class="layui-btn  layui-btn-sm" lay-event="download">下载</a>
-            {{#  } }}
+<%--            {{#  if(d.stateId == 2){ }}--%>
+<%--            <a class="layui-btn  layui-btn-sm" lay-event="approved">审核通过</a>--%>
+<%--            <a class="layui-btn  layui-btn-sm" lay-event="notApproved">审核不通过</a>--%>
+<%--            <a class="layui-btn  layui-btn-sm" lay-event="download">下载</a>--%>
+<%--            {{#  } }}--%>
+
+<%--            {{#  if(d.stateId == 3){ }}--%>
+<%--            <a class="layui-btn  layui-btn-sm" lay-event="approved">审核通过</a>--%>
+<%--            <a class="layui-btn  layui-btn-sm" lay-event="notApproved">审核不通过</a>--%>
+<%--            <a class="layui-btn  layui-btn-sm" lay-event="download">下载</a>--%>
+<%--            {{#  } }}--%>
         </script>
     </div>
     </div>
