@@ -294,13 +294,16 @@ public interface ResumeService {
      * 查询所有职位类型
      * @return
      */
-    public List<Position> positions();
+    public List<Industry> industrys();
+//    public List<Position> positions();
 
     /**
-     *
+     * 根据首字母查询城市
+     * @param begin
+     * @param end
      * @return
      */
-    public List<City> citys();
+    public List<City> citys(int begin,int end);
 
     /**
      * 修改简历头像
