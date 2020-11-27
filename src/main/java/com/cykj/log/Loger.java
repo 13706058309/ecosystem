@@ -2,10 +2,9 @@ package com.cykj.log;
 
 import java.lang.annotation.*;
 
-@Target({ElementType.PARAMETER,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
-
+@Target({ElementType.PARAMETER,ElementType.METHOD})
+//@Documented
 public @interface Loger {
 
     public String operationType() default "";

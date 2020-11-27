@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -22,7 +25,7 @@ import java.util.*;
 public class CenterController {
     private int resumeId;
     private int userId;
-    String workCity="厦门市";
+    String workCity="全国";
     String workYear="工作经验";
     String education="学历要求";
     String salary="薪资要求";
@@ -31,6 +34,13 @@ public class CenterController {
     String releaseTime="发布时间";
     String search="";
     String position="职位类型";
+
+    @RequestMapping("/ceshi")
+    public String ceshi(){
+        return "ceshi";
+    }
+
+
 
     @Resource
     private ResumeService resumeService;
@@ -266,6 +276,7 @@ public class CenterController {
         }
         return msg;
     }
+
 
 //    隐私设置
     @RequestMapping("/saveShow")
@@ -509,6 +520,7 @@ public class CenterController {
 
     @RequestMapping("/pageJob")
     public String job(HttpServletRequest req,String findPosition){
+
         int page=0;
         int curr=1;
         int limit=10;
@@ -525,10 +537,18 @@ public class CenterController {
             map.put("position",findPosition);
         }
 
-        List<Position> positions=resumeService.positions();
-        req.setAttribute("positions",positions);
-        List<City>citys=resumeService.citys();
-        req.setAttribute("citys",citys);
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
 
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -557,11 +577,29 @@ public class CenterController {
 
     @RequestMapping("/clearjob")
     public String clearjob(HttpServletRequest req){
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
+
         int page=0;
         int curr=1;
         int limit=10;
         Map map=new HashMap();
-        map.put("workCity",workCity);
+        if (workCity.equals("全国")){
+
+        }else {
+            map.put("workCity",workCity);
+        }
+//        map.put("workCity",workCity);
         map.put("page",page);
         map.put("limit",limit);
         workYear="工作经验";
@@ -570,11 +608,13 @@ public class CenterController {
         finanStage="融资阶段";
         scale="公司规模";
         releaseTime="发布时间";
-        if (search.equals("".trim())){
-
-        }else {
-            map.put("search","%"+search+"%");
-        }
+        search="搜索职位";
+        position="职位类型";
+//        if (null==search||search.equals("".trim())){
+//
+//        }else {
+//            map.put("search","%"+search+"%");
+//        }
 
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -592,24 +632,49 @@ public class CenterController {
         req.setAttribute("findReleaseTime",releaseTime);
         req.setAttribute("search",search);
         req.setAttribute("workCity",workCity);
+        req.setAttribute("position",position);
 
         return "FindJob";
     }
 
     @RequestMapping("/searchJob")
-    public String serachJob(HttpServletRequest req,String findSearch,String findWorkCity){
+    public String serachJob(HttpServletRequest req,String findSearch,String findWorkCity,String findPosition){
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
+
+
         int page=0;
         int curr=1;
         int limit=10;
-
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
         Map map=new HashMap();
-        map.put("workCity",findWorkCity);
+        if (findWorkCity.equals("全国")){
+
+        }else {
+            map.put("workCity",findWorkCity);
+        }
         search=findSearch;
         if (findSearch.equals("".trim())){
 
         }else {
             map.put("search","%"+findSearch+"%");
         }
+        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+            position="职位类型";
+        }else {
+            position=findPosition;
+            map.put("position",position);
+        }
+
         workCity=findWorkCity;
         map.put("page",page);
         map.put("limit",limit);
@@ -636,6 +701,7 @@ public class CenterController {
         req.setAttribute("findReleaseTime",releaseTime);
         req.setAttribute("search",findSearch);
         req.setAttribute("workCity",findWorkCity);
+        req.setAttribute("position",position);
 
         return "FindJob";
     }
@@ -645,8 +711,22 @@ public class CenterController {
         int page=0;
         int curr=1;
         int limit=10;
+
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
+
         workCity=findWorkCity;
         Map map=new HashMap();
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
         if (findWorkCity.equals("全国")){
 
         }else {
@@ -808,13 +888,24 @@ public class CenterController {
             curr="1";
         }
 
-        List<Position> positions=resumeService.positions();
-        req.setAttribute("positions",positions);
-        List<City>citys=resumeService.citys();
-        req.setAttribute("citys",citys);
+        List<Industry> industrys=resumeService.industrys();
+        req.setAttribute("industrys",industrys);
+        System.out.println(new Gson().toJson(industrys));
+
+        List<City> ae=resumeService.citys(45217,47009);
+        List<City> fj=resumeService.citys(47010,49061);
+        List<City> ko=resumeService.citys(49062,50621);
+        List<City> pt=resumeService.citys(50622,52697);
+        List<City> wz=resumeService.citys(52698,55289);
+        req.setAttribute("ae",ae);
+        req.setAttribute("fj",fj);
+        req.setAttribute("ko",ko);
+        req.setAttribute("pt",pt);
+        req.setAttribute("wz",wz);
 //        int curr=1;
 //        int limit=2;
         Map map=new HashMap();
+        System.out.println(findPosition+"??????????????!!!!!!!!!!");
         if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
             position="职位类型";
         }else if (findPosition.equals("不限")){
@@ -823,9 +914,16 @@ public class CenterController {
             position=findPosition;
             map.put("position",findPosition);
         }
-
+        System.out.println(position+"11111111111??????????????");
         if (findWorkCity==null){
             System.out.println("99999");
+        }else if (findWorkCity.equals("".trim())){
+
+            workCity= (String) req.getSession().getAttribute("nowCity");
+            System.out.println(workCity+"2222222222222");
+            if (!workCity.equals("全国")){
+                map.put("workCity",workCity);
+            }
         }else if (findWorkCity.equals("全国")){
             System.out.println("88888");
             workCity=findWorkCity;
@@ -841,7 +939,7 @@ public class CenterController {
         }else {
             map.put("search","%"+findSearch+"%");
         }
-        map.put("workCity",workCity);
+//        map.put("workCity",workCity);
         map.put("page",(Integer.parseInt(curr)-1)*Integer.parseInt(limit));
         map.put("limit",Integer.parseInt(limit));
         System.out.println(findEducation+"??????????");
@@ -957,6 +1055,10 @@ public class CenterController {
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
         int count=jobsCount.size();
+        search=findSearch;
+//        if (null==findSearch||findSearch.equals("".trim())){
+//            search="职位类型";
+//        }
 
         req.setAttribute("count",count);
         req.setAttribute("limit",limit);
@@ -968,8 +1070,7 @@ public class CenterController {
         req.setAttribute("findFinanStage",finanStage);
         req.setAttribute("findScale",scale);
         req.setAttribute("findReleaseTime",releaseTime);
-        req.setAttribute("search",findSearch);
-        System.out.println(workCity+"$$$$$$$$$$$$$$$$$$$$");
+        req.setAttribute("search",search);
         req.setAttribute("workCity",workCity);
         req.setAttribute("position",position);
 
@@ -1044,7 +1145,11 @@ public class CenterController {
         userInfo.setHeadImgUrl("/resumePhoto/"+date+"/"+fileName);
         n=resumeService.updateHeadImgUrl(userInfo);
 
-        return "succes";
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        user.setHeadImgUrl("/resumePhoto/"+date+"/"+fileName);
+        req.getSession().setAttribute("qUser",user);
+
+        return "/resumePhoto/"+date+"/"+fileName;
     }
 
 //    修改手机号码--获取验证码
@@ -1067,7 +1172,6 @@ public class CenterController {
     @RequestMapping("/updatePhone")
     public @ResponseBody String updatePhone(HttpServletRequest req,String vCode){
         String newPhone= (String) req.getSession().getAttribute("newPhone");
-
         System.out.println(vCode);
         System.out.println(req.getSession().getAttribute("vCodeMenu"));
         if (vCode.equals(req.getSession().getAttribute("vCodeMenu"))){

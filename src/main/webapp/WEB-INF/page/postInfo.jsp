@@ -39,7 +39,7 @@
         <div class="inner home-inner" >
             <div class="logo" style="width: 150px;height: 70px">
 
-                <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo11.png) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+                <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
             </div>
             <div class="nav" style="margin-top: 20px">
                 <ul>
@@ -47,8 +47,8 @@
                     <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                     <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                     <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
-                    <li class=""><a ka="header-app" href="https://app.zhipin.com/">课程</a></li>
-                    <li class=""><a ka="header-article" href="https://news.zhipin.com/">资讯</a></li>
+                    <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                    <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
                 </ul>
             </div>
 
@@ -61,16 +61,15 @@
                 </c:if>
                 <c:if test="${not empty qUser}">
                     <ul>
-                            <%--                <li class=""><a ka="header-resume" href="${pageContext.request.contextPath}/center/jianli">简历</a></li>--%>
-                        <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
+<%--                        <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
                         <li class="nav-figure">
-                            <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
+                            <a >
                                 <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                             </a>
                             <div class="dropdown">
-                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
                                 <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
-                                <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
+                                <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
                             </div>
                         </li>
                     </ul></c:if>
@@ -114,8 +113,7 @@
                 <div class="job-op">
                     <div class="btn-container">
                         <!-- 未登录 -->
-                        <a class="btn btn-startchat" ka="go_chat_done_110440739" href="javascript:;" redirect-url="/web/geek/chat?id=7bc0cc6a6ab2edf90nR92ty5FlBW"
-                           data-url="/wapi/zpgeek/friend/add.json?jobId=d5632e1152a89f521nV639m9F1FZ&lid=a6k2lkE6id7.search.2">立即沟通</a>
+                        <a class="btn btn-startchat" onclick="window.open('/springboot/rec/userChat?compID=${post.backUser.bUserId}')">立即沟通</a>
 
                     </div>
 <%--                    <div class="op-container">--%>
@@ -132,8 +130,7 @@
         <div class="inner home-inner">
             <div class="detail-op">
                 <div class="btns">
-                    <a class="btn btn-startchat" ka="go_chat_done_110440739" href="javascript:;" redirect-url="/web/geek/chat?id=7bc0cc6a6ab2edf90nR92ty5FlBW"
-                       data-url="/wapi/zpgeek/friend/add.json?jobId=d5632e1152a89f521nV639m9F1FZ&lid=a6k2lkE6id7.search.2">立即沟通</a>
+                    <a class="btn btn-startchat" onclick="window.open('/springboot/rec/userChat?compID=${post.backUser.bUserId}')">立即沟通</a>
 
                 </div>
             </div>
@@ -171,12 +168,10 @@
                 <div class="sider-company">
                     <p class="title">公司基本信息</p>
                     <div class="company-info">
-                        <a ka="job-detail-company-logo_custompage" href="/gongsi/6e19637143bd80ad1HV_3N26GQ~~.html" title="                                    建信金科
-" target="_blank">
+                        <a >
                             <img src="${pageContext.request.contextPath}/uploadLogo/${post.backUser.logo}" alt=""/>
                         </a>
-                        <a ka="job-detail-company_custompage" href="/gongsir/6e19637143bd80ad1HV_3N26GQ~~.html"  title="                                    建信金科
-招聘" target="_blank">
+                        <a >
                             ${post.backUser.compName}
 
                         </a>
@@ -290,7 +285,7 @@
 <%--                            ■ 是中国建设银行股份有限公司旗下从事金融科技行业的全资子公司。<br/>■ 是国有大型商业银行设立的第一家金融科技公司，国内商业银行内部科研力量整体市场运作的第一家。<br/>■ 目前规模为4600人左右，注册资本16亿元。是迄今为止中国商业银行规模最大的科技公司。<br/>■ 经营范围包括软件科技、平台运营及金融信息服--%>
                         ${post.backUser.infoIntr}
                         </div>
-                        <a ka="job-comintroduce" href="/gongsi/6e19637143bd80ad1HV_3N26GQ~~.html" target="_blank" class="look-all"><span>...</span>查看全部</a>
+                        <a ka="job-comintroduce" href="${pageContext.request.contextPath}/homePage/compProfile?bUserId=${post.backUser.bUserId}" target="_blank" class="look-all"><span>...</span>查看全部</a>
                     </div>
 <%--                    <div class="job-sec prop-item">--%>
 <%--                        <h3>竞争力分析</h3>--%>
@@ -322,437 +317,56 @@
                         </div>
                     </div>
 
-<%--                    <div class="search-box detail-search">--%>
-<%--                        <div class="search-form">--%>
-<%--                            <form action="/job_detail/" method="get" target="_blank">--%>
-<%--                                <div class="search-form-con">--%>
-<%--                                    <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" placeholder="搜索职位、公司" value="全栈工程师"></p>--%>
-<%--                                    <div class="city-sel" ka="search-select-city">--%>
-<%--                                        <i class="line"></i>--%>
-<%--                                        <span class="label-text cur"><b data-val="101230200">厦门</b><i class="icon-arrow-down"></i></span>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <input type="hidden" name="city" class="city-code" value="101230200"/>--%>
-<%--                                <input type="hidden" name="source" value="9">--%>
-<%--                                <button type="submit" ka="search-job" class="btn btn-search">搜索</button>--%>
-<%--                                <div class="suggest-result">--%>
-<%--                                    <ul></ul>--%>
-<%--                                </div>--%>
-<%--                                <div class="city-box">--%>
-<%--                                    <ul class="dorpdown-province">--%>
-<%--                                    </ul>--%>
-<%--                                    <div class="dorpdown-city">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </form>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="recommend-box">--%>
-<%--                        <h3>推荐职位</h3>--%>
-<%--                        <div class="slider-main">--%>
-<%--                            <ul>--%>
-<%--                                <li class="cur">--%>
-<%--                                    <a ka="job_recommend_1" href="/job_detail/24f8d23e08470f6b1HV72dy9EFY~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">销售精英+应届毕业生+薪资8k+高福利 <span class="red">8-12K</span></div>--%>
-<%--                                        <p>优保集团</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_2" href="/job_detail/fcba17749d9f63160Xx_0tm6FVM~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">java中高级软件开发工程师 <span class="red">10-15K·13薪</span></div>--%>
-<%--                                        <p>盈趣科技</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_3" href="/job_detail/7fd8aa5901c686dd1Hdz2tq0Elo~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">C#/.Net软件开发工程师 <span class="red">8-13K</span></div>--%>
-<%--                                        <p>易维信息</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_4" href="/job_detail/1f710ec7e7ae2f450Xx529q_FFI~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">行政固定资产专员 <span class="red">5-8K</span></div>--%>
-<%--                                        <p>朴朴</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_5" href="/job_detail/9366c9c86fa75e5533Rz0ty6GFM~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">嵌入式软件开发（单片机方向） <span class="red">8-13K</span></div>--%>
-<%--                                        <p>厦门四信</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_6" href="/job_detail/55da97c55779937d0HFz0t2-F1M~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">Java软件开发工程师 <span class="red">10-11K</span></div>--%>
-<%--                                        <p>厦门惟尔拓科技有...</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_7" href="/job_detail/127f0f9ab4c523511HR53t-9EFc~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">C#软件开发工程师 <span class="red">7-14K</span></div>--%>
-<%--                                        <p>团队机器人</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_8" href="/job_detail/5a9189a6eda8538e3n1-2Nm9Elo~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">大专起招/实习生/应届毕业生/就近安排工作 <span class="red">8-13K</span></div>--%>
-<%--                                        <p>厦门链家</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_9" href="/job_detail/1e3536785807c4d11nR629q1GFVT.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">资本市场专员（应届生亦可） <span class="red">8-12K</span></div>--%>
-<%--                                        <p>厦门趣店科技有限公司</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_10" href="/job_detail/e81e8236107cccc80XV92t24FlU~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">市场策划（欢迎应届生） <span class="red">6-11K</span></div>--%>
-<%--                                        <p>大道同行</p>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="">--%>
-<%--                                    <a ka="job_recommend_11" href="/job_detail/425bd57968777a993nV42du-FVA~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">嵌入式软件开发工程师（模组开发） <span class="red">10-15K·14薪</span></div>--%>
-<%--                                        <p>星宸科技</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_12" href="/job_detail/b2fde0255d40f0a433N_2tq9FFY~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">初、中、高级软件开发工程师/JAVA <span class="red">10-15K·13薪</span></div>--%>
-<%--                                        <p>高伟达公司</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_13" href="/job_detail/6360e2a93c53e37f1HJ52tW6FFM~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">软件开发工程师 <span class="red">7-10K</span></div>--%>
-<%--                                        <p>时代银软</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_14" href="/job_detail/cbdeb05114b0c87433153N-0EVE~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">资产负债管理专家 <span class="red">15-30K·14薪</span></div>--%>
-<%--                                        <p>建信金科</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_15" href="/job_detail/ecb9efea131823cc0HJz3N25FlA~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">大数据研发工程师【应届生】 <span class="red">6-10K</span></div>--%>
-<%--                                        <p>厦门卫星定位</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_16" href="/job_detail/14231f582fb7a9c8331_2968GVU~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">3D引擎（OpenGL）开发工程师（可应届硕士） <span class="red">10-15K</span></div>--%>
-<%--                                        <p>同致电子科技(厦...</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_17" href="/job_detail/f806fb18d9331b861X1y2di_GVY~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">Unity3D程序/U3D程序（优秀应届生亦可） <span class="red">7-12K·14薪</span></div>--%>
-<%--                                        <p>勇仕</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_18" href="/job_detail/7d53b0c9c6273ced3nR52tW_GVI~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">软件开发岗 <span class="red">15-30K·14薪</span></div>--%>
-<%--                                        <p>建信金科</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_19" href="/job_detail/5ca3066234cc27900Hd50tq8EVE~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">资产保全专员 <span class="red">7-12K</span></div>--%>
-<%--                                        <p>交通银行</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_20" href="/job_detail/b4a989c85f4f3b513nV92t-_EFQ~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">嵌入式软件开发工程师 <span class="red">8-13K·13薪</span></div>--%>
-<%--                                        <p>厦门智瞳科技有限公司</p>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="">--%>
-<%--                                    <a ka="job_recommend_21" href="/job_detail/71bbd4b0402fdccc1XV-29m5FlY~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">C++软件开发工程师 <span class="red">6-11K</span></div>--%>
-<%--                                        <p>凤凰创壹软件</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_22" href="/job_detail/60db0a952e47affe03V63dy8E1Y~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">软件开发工程师（web方向） 厦门 <span class="red">11-22K·13薪</span></div>--%>
-<%--                                        <p>网龙</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_23" href="/job_detail/bdfa9953e49f236303J52Ni7GVs~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">软件开发工程师 <span class="red">10-15K</span></div>--%>
-<%--                                        <p>宇电自动化科技</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_24" href="/job_detail/4ad8edb249f0d3f60XV-3ti6F1c~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">游戏策划（欢迎应届生） <span class="red">6-10K</span></div>--%>
-<%--                                        <p>大道同行</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_25" href="/job_detail/80412104d6f01b8a03B93du0GFA~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">软件开发工程师 <span class="red">9-14K</span></div>--%>
-<%--                                        <p>视虹科技</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_26" href="/job_detail/f45916a7e71096ad1nZz292-EVY~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">Java软件开发工程师 <span class="red">7-12K</span></div>--%>
-<%--                                        <p>投融汇</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_27" href="/job_detail/03922ffffbeef50b3nR629-0ElM~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">应届生 <span class="red">7-12K</span></div>--%>
-<%--                                        <p>昱信泓</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_28" href="/job_detail/2b68228d229d84083nZ-3dm5GFU~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">数据资产评价岗 <span class="red">12-24K</span></div>--%>
-<%--                                        <p>建信金科</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_29" href="/job_detail/8f011cb2168d456f33Fy3N-8FVQ~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">固定资产会计 <span class="red">5-6K</span></div>--%>
-<%--                                        <p>厦门路达</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_30" href="/job_detail/d6cba7e28b7a730a33B40tq7GVI~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">软件开发工程师 <span class="red">6-10K</span></div>--%>
-<%--                                        <p>微伦科技</p>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="">--%>
-<%--                                    <a ka="job_recommend_31" href="/job_detail/03068832bf0c72050HZ-3dq0EVs~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">不良资产管理员 <span class="red">5-10K</span></div>--%>
-<%--                                        <p>万乘金融服务集团</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_32" href="/job_detail/0eb0dbe9610cc39e0Hx72N-1EVc~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">上位机软件开发工程师/自动化工程师 <span class="red">10-13K</span></div>--%>
-<%--                                        <p>大禾众邦</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_33" href="/job_detail/9fb6c01c455c73323nN60929GVI~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">软件开发岗 <span class="red">15-30K·14薪</span></div>--%>
-<%--                                        <p>建信金科</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_34" href="/job_detail/4547e404ff0ddef23nN-2tW_E1o~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">商务代表（欢迎应届生） <span class="red">8-13K·13薪</span></div>--%>
-<%--                                        <p>纳网科技</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_35" href="/job_detail/d2f1edfe1fbc61b21n1z2dS6.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">C/C++软件开发工程师 <span class="red">10-20K</span></div>--%>
-<%--                                        <p>视源股份(CVTE)</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_36" href="/job_detail/1eea118d6ee9baa41HZ53N-8EFY~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">高级软件开发工程师 <span class="red">10-12K</span></div>--%>
-<%--                                        <p>智慧图</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_37" href="/job_detail/22c8e3256d972cec0nR42dW8GFE~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">银行信用卡资产保全专员 <span class="red">7-10K</span></div>--%>
-<%--                                        <p>联信集团</p>--%>
-<%--                                    </a>--%>
-<%--                                    <a ka="job_recommend_38" href="/job_detail/d096ea3f047a7b4d3n172dW_Flc~.html" target="_blank" class="recommend-li">--%>
-<%--                                        <div class="name">C++软件开发工程师（算法实施/优化） <span class="red">7-12K</span></div>--%>
-<%--                                        <p>兴联智控</p>--%>
-<%--                                    </a>--%>
-<%--                            </ul>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="pos-bread city-job-guide">--%>
-<%--                        <a href="/" ka="job-breadcrumb-bottom1">首页</a>&nbsp;>&nbsp;<a href="/c101230200/" ka="job-breadcrumb-bottom2">厦门招聘</a>·<a href="/p100123/" ka="job-breadcrumb-bottom21">全栈工程师招聘</a>&nbsp;>&nbsp;<a href="/c101230200-p100123/" ka="job-breadcrumb-bottom3">厦门全栈工程师招聘</a>&nbsp;>&nbsp;<a href="/job_detail/d5632e1152a89f521nV639m9F1FZ.html" ka="job-breadcrumb-bottom4">建信金科全栈工程师招聘</a>--%>
-<%--                    </div>--%>
-                    <!-- SEO  -->
-<%--                    <div class="links-container links-container-new">--%>
-<%--                        <div class="links-box">--%>
-<%--                            <div class="title-box">--%>
-<%--                                <span class="title-item cur">城市招聘</span>--%>
-<%--                                <span class="title-item">热门职位</span>--%>
-<%--                                <span class="title-item">推荐公司</span>--%>
-<%--                                <span class="title-item">热门企业</span>--%>
-<%--                            </div>--%>
-<%--                            <div class="links-wrapper">--%>
-<%--                                <div class="links-content cur">--%>
-<%--                                    <a href="/c101301200/" target="_blank" ka="seo-city-1">河池招聘</a>--%>
-<%--                                    <a href="/c101040100/" target="_blank" ka="seo-city-2">重庆招聘</a>--%>
-<%--                                    <a href="/c101282200/" target="_blank" ka="seo-city-3">东沙群岛招聘</a>--%>
-<%--                                    <a href="/c101281800/" target="_blank" ka="seo-city-4">阳江招聘</a>--%>
-<%--                                    <a href="/c101301000/" target="_blank" ka="seo-city-5">百色招聘</a>--%>
-<%--                                    <a href="/c101280700/" target="_blank" ka="seo-city-6">珠海招聘</a>--%>
-<%--                                    <a href="/c101170200/" target="_blank" ka="seo-city-7">石嘴山招聘</a>--%>
-<%--                                    <a href="/c101240900/" target="_blank" ka="seo-city-8">萍乡招聘</a>--%>
-<%--                                    <a href="/c101290800/" target="_blank" ka="seo-city-9">临沧招聘</a>--%>
-<%--                                    <a href="/c101120900/" target="_blank" ka="seo-city-10">临沂招聘</a>--%>
-<%--                                </div>--%>
-<%--                                <div class="links-content">--%>
-<%--                                    <a href="/p190706/" target="_blank" ka="seo-position-1">篮球/羽毛球教练招聘</a>--%>
-<%--                                    <a href="/p250108/" target="_blank" ka="seo-position-2">供应商质量工程师招聘</a>--%>
-<%--                                    <a href="/p100601/" target="_blank" ka="seo-position-3">项目经理招聘</a>--%>
-<%--                                    <a href="/p170302/" target="_blank" ka="seo-position-4">媒介专员招聘</a>--%>
-<%--                                    <a href="/p100203/" target="_blank" ka="seo-position-5">iOS招聘</a>--%>
-<%--                                    <a href="/p100404/" target="_blank" ka="seo-position-6">系统工程师招聘</a>--%>
-<%--                                    <a href="/p290801/" target="_blank" ka="seo-position-7">养发师招聘</a>--%>
-<%--                                    <a href="/p130309/" target="_blank" ka="seo-position-8">咨询热线/呼叫中心客服招聘</a>--%>
-<%--                                    <a href="/p190199/" target="_blank" ka="seo-position-9">教育产品研发招聘</a>--%>
-<%--                                    <a href="/p100512/" target="_blank" ka="seo-position-10">数据架构师招聘</a>--%>
-<%--                                    <a href="/p100209/" target="_blank" ka="seo-position-11">U3D招聘</a>--%>
-<%--                                    <a href="/p100117/" target="_blank" ka="seo-position-12">自然语言处理招聘</a>--%>
-<%--                                    <a href="/p101016/" target="_blank" ka="seo-position-13">光通信工程师招聘</a>--%>
-<%--                                    <a href="/p101011/" target="_blank" ka="seo-position-14">通信项目专员招聘</a>--%>
-<%--                                    <a href="/p100405/" target="_blank" ka="seo-position-15">IT技术支持招聘</a>--%>
-<%--                                    <a href="/p290118/" target="_blank" ka="seo-position-16">产后康复师招聘</a>--%>
-<%--                                    <a href="/p100113/" target="_blank" ka="seo-position-17">Ruby招聘</a>--%>
-<%--                                    <a href="/p100307/" target="_blank" ka="seo-position-18">游戏测试招聘</a>--%>
-<%--                                    <a href="/p140201/" target="_blank" ka="seo-position-19">媒介经理招聘</a>--%>
-<%--                                    <a href="/p100207/" target="_blank" ka="seo-position-20">html5招聘</a>--%>
-<%--                                    <a href="/p101101/" target="_blank" ka="seo-position-21">其他技术职位招聘</a>--%>
-<%--                                    <a href="/p190701/" target="_blank" ka="seo-position-22">舞蹈老师招聘</a>--%>
-<%--                                    <a href="/p100116/" target="_blank" ka="seo-position-23">Golang招聘</a>--%>
-<%--                                    <a href="/p300316/" target="_blank" ka="seo-position-24">注塑工程师招聘</a>--%>
-<%--                                    <a href="/p100110/" target="_blank" ka="seo-position-25">Delphi招聘</a>--%>
-<%--                                    <a href="/p260104/" target="_blank" ka="seo-position-26">IT咨询顾问招聘</a>--%>
-<%--                                    <a href="/p290212/" target="_blank" ka="seo-position-27">餐饮学徒招聘</a>--%>
-<%--                                    <a href="/p290217/" target="_blank" ka="seo-position-28">洗碗工招聘</a>--%>
-<%--                                    <a href="/p100509/" target="_blank" ka="seo-position-29">数据挖掘招聘</a>--%>
-<%--                                    <a href="/p100409/" target="_blank" ka="seo-position-30">DBA招聘</a>--%>
-<%--                                </div>--%>
-<%--                                <div class="links-content">--%>
-<%--                                    <a href="/gongsi/dbef95f0650eca2e1HV_3N21EA~~.html" target="_blank" ka="seo-brand-1">卓匠网络</a>--%>
-<%--                                    <a href="/gongsi/d30803b4e74e1be51HV_3N21GQ~~.html" target="_blank" ka="seo-brand-2">仁述商贸</a>--%>
-<%--                                    <a href="/gongsi/2894b3e9d5239beb1HV_3N20FQ~~.html" target="_blank" ka="seo-brand-3">中邦干细胞</a>--%>
-<%--                                    <a href="/gongsis/9a04a38fb7d646f2i3V50t--ElBVxQ~~.html" target="_blank" ka="seo-brand-4">汝阳县陶营向渊美丽１+１日化店</a>--%>
-<%--                                    <a href="/zhaopin/d00d1c13d3fd61571nNy0tu1GA~~/" target="_blank" ka="seo-brand-5">桥梁第三方检测公司</a>--%>
-<%--                                    <a href="/gongsis/cb60740893f1d4d6i3Vz09u0FlRV.html" target="_blank" ka="seo-brand-6">淮安市楚州区淮城镇上坂街时装店</a>--%>
-<%--                                    <a href="/gongsis/d6eec1100eedb59bi3V-2tS9EFRXwQ~~.html" target="_blank" ka="seo-brand-7">咸阳市秦都区新荣欣电子经营部</a>--%>
-<%--                                    <a href="/zhaopin/c35deed01749325d1nx62d68FA~~/" target="_blank" ka="seo-brand-8">厦门昔酒酩庄</a>--%>
-<%--                                    <a href="/gongsis/df80621599d5c4b2i3V40tu9FFpUww~~.html" target="_blank" ka="seo-brand-9">建水县面甸兴隆通信经营部</a>--%>
-<%--                                    <a href="/zhaopin/3d34b124c2a07e441n193NW8EQ~~/" target="_blank" ka="seo-brand-10">韶关比亚迪股份有限公司</a>--%>
-<%--                                    <a href="/zhaopin/cc3a06b6dbbd6fba0Xx93Nq4/" target="_blank" ka="seo-brand-11">阿姨来了产品经理</a>--%>
-<%--                                    <a href="/zhaopin/4c7e7b3a02d5c4421HVy3di5/" target="_blank" ka="seo-brand-12">北京小子科技有限公司</a>--%>
-<%--                                    <a href="/gongsis/c73d5db81b3beee9i3V43N68EVdYxw~~.html" target="_blank" ka="seo-brand-13">苏尼特左旗永久自行车</a>--%>
-<%--                                    <a href="/zhaopin/fab08dbfc609df521n140tq6Ew~~/" target="_blank" ka="seo-brand-14">锦绣大唐摄影</a>--%>
-<%--                                    <a href="/gongsis/d463ffaa42f74304i3V509q_GVtWyw~~.html" target="_blank" ka="seo-brand-15">霸州市霸州镇苓苓超市</a>--%>
-<%--                                    <a href="/gongsis/8623b132bb6289ddi3V52NW7ElZVxQ~~.html" target="_blank" ka="seo-brand-16">莒县招贤彦永综合商店</a>--%>
-<%--                                    <a href="/gongsis/6f25d0fd6909c1aei3V52967GVZYww~~.html" target="_blank" ka="seo-brand-17">山西凯佳电子科技有限公司</a>--%>
-<%--                                    <a href="/gongsis/53eec77a55e672e5i3V42ti9ElNX.html" target="_blank" ka="seo-brand-18">北京宏莲顺商贸有限公司</a>--%>
-<%--                                    <a href="/companys/a0b631d91a52b8f21XB609S0Ew~~.html" target="_blank" ka="seo-brand-19">简悦创新科技（深圳）有限公司招聘</a>--%>
-<%--                                    <a href="/gongsis/68d21e95526ced5bi3V72Ny0FVVUxw~~.html" target="_blank" ka="seo-brand-20">拉萨才友广告有限公司</a>--%>
-<%--                                    <a href="/companys/6804935b860634611Xx73dq1Fg~~.html" target="_blank" ka="seo-brand-21">宁德市蕉城区蕉南纮鼎轻井泽火锅店招聘</a>--%>
-<%--                                    <a href="/gongsis/127e2266dd78ebfbi3V_3t-1GFRV.html" target="_blank" ka="seo-brand-22">广州南地信息科技有限公司</a>--%>
-<%--                                    <a href="/gongsis/83b9bbfb894fb47ai3V42Nm_F1FXxQ~~.html" target="_blank" ka="seo-brand-23">上林县艾尔丽斯服装店</a>--%>
-<%--                                    <a href="/gongsis/5a9f4bfd95d375abi3V53dm-GFdSww~~.html" target="_blank" ka="seo-brand-24">承德市双滦区宏达肉鸡养殖厂</a>--%>
-<%--                                    <a href="/gongsis/62957fed1cfe6ffbi3V429-_FFZRxQ~~.html" target="_blank" ka="seo-brand-25">保定市华粮购销公司</a>--%>
-<%--                                    <a href="/gongsis/67e9abb458f39ffei3V-3925E1ZUww~~.html" target="_blank" ka="seo-brand-26">吴江市松陵镇雨神干洗店</a>--%>
-<%--                                    <a href="/gongsis/064607f9eb2285d2i3V729i7GFpZxQ~~.html" target="_blank" ka="seo-brand-27">重庆双欣制冷设备有限公司</a>--%>
-<%--                                    <a href="/gongsis/0057ba4747ab652ei3V-2tq4FltSyw~~.html" target="_blank" ka="seo-brand-28">沧县万林农业专业合作社</a>--%>
-<%--                                    <a href="/gongsis/953bf0c476e76c3fi3V_3tS1F1RZ.html" target="_blank" ka="seo-brand-29">上海叶汇化工有限公司</a>--%>
-<%--                                    <a href="/companys/ff56fecf28741b8e1n1909i1Fw~~.html" target="_blank" ka="seo-brand-30">保定市拓远知识产权代理有限公司招聘</a>--%>
-<%--                                </div>--%>
-<%--                                <div class="links-content">--%>
-<%--                                    <a href="/gongsi/62539dee0c4c171f0HN42g~~.html" target="_blank" ka="seo-company-1">飞博共创</a>--%>
-<%--                                    <a href="/gongsi/60272326a766224f1nBy3do~.html" target="_blank" ka="seo-company-2">美图公司</a>--%>
-<%--                                    <a href="/gongsi/f5459f8f93341e461nZ92N6-.html" target="_blank" ka="seo-company-3">海底捞火锅</a>--%>
-<%--                                    <a href="/gongsi/bbd3ec37599d66c91HRy394~.html" target="_blank" ka="seo-company-4">厦门链家</a>--%>
-<%--                                    <a href="/gongsi/fa2f92669c66eee31Hc~.html" target="_blank" ka="seo-company-5">BOSS直聘</a>--%>
-<%--                                    <a href="/gongsi/ea7d3fa5ae83526e1Xx409g~.html" target="_blank" ka="seo-company-6">乔氏车品</a>--%>
-<%--                                    <a href="/gongsi/09fad0ef15edd3f403V62Ng~.html" target="_blank" ka="seo-company-7">4399游戏</a>--%>
-<%--                                    <a href="/gongsi/f24ec0c4ee1e997d1HVy0w~~.html" target="_blank" ka="seo-company-8">掌门1对1</a>--%>
-<%--                                    <a href="/gongsi/7b3f695df780b16e1XJy3dg~.html" target="_blank" ka="seo-company-9">易联众</a>--%>
-<%--                                    <a href="/gongsi/651600e34022f69e1nR529y-.html" target="_blank" ka="seo-company-10">锐特信息</a>--%>
-<%--                                    <a href="/gongsi/5d627415a46b4a750nJ9.html" target="_blank" ka="seo-company-11">阿里巴巴集团</a>--%>
-<%--                                    <a href="/gongsi/91d03cd7f22bbfbb3nZ62w~~.html" target="_blank" ka="seo-company-12">神州鹰</a>--%>
-<%--                                    <a href="/gongsi/59d4ed448adfd7db1HV42No~.html" target="_blank" ka="seo-company-13">九牧厨卫</a>--%>
-<%--                                    <a href="/gongsi/a67b361452e384e71XV82N4~.html" target="_blank" ka="seo-company-14">今日头条</a>--%>
-<%--                                    <a href="/gongsi/2c9fa6c6ba1068281HB43t4~.html" target="_blank" ka="seo-company-15">李宁公司</a>--%>
-<%--                                    <a href="/gongsi/0a960d0216b58ea31nx-2w~~.html" target="_blank" ka="seo-company-16">创元邦达软件</a>--%>
-<%--                                    <a href="/gongsi/5e139930da054b4233R43w~~.html" target="_blank" ka="seo-company-17">平安普惠</a>--%>
-<%--                                    <a href="/gongsi/fbba8ee602719fe11nR_2tS_.html" target="_blank" ka="seo-company-18">孩子王</a>--%>
-<%--                                    <a href="/gongsi/dd1db8274f5193c21nV42tS_.html" target="_blank" ka="seo-company-19">厦门本捷</a>--%>
-<%--                                    <a href="/gongsi/8531731ebc286f821nV73t4~.html" target="_blank" ka="seo-company-20">京北方</a>--%>
-<%--                                    <a href="/gongsi/5489c8629b74c3141Hx43Ns~.html" target="_blank" ka="seo-company-21">帮邦行</a>--%>
-<%--                                    <a href="/gongsi/cf6b65d4b25a438403R92d4~.html" target="_blank" ka="seo-company-22">飞鱼科技</a>--%>
-<%--                                    <a href="/gongsi/cee9c3b10e2213db3nN_0ts~.html" target="_blank" ka="seo-company-23">保障网</a>--%>
-<%--                                    <a href="/gongsi/e6c331a363868bb91XJ509Q~.html" target="_blank" ka="seo-company-24">奥佳华</a>--%>
-<%--                                    <a href="/gongsi/fb2c23c769f1ae5203R52tw~.html" target="_blank" ka="seo-company-25">衣邦人</a>--%>
-<%--                                    <a href="/gongsi/f602f61dc658db0a1XZ63dg~.html" target="_blank" ka="seo-company-26">多米诺教育</a>--%>
-<%--                                    <a href="/gongsi/3c9764d7e7b0c5e433V50t4~.html" target="_blank" ka="seo-company-27">平安普惠</a>--%>
-<%--                                    <a href="/gongsi/35636452b60aff451nZ-2tm4.html" target="_blank" ka="seo-company-28">互动创想</a>--%>
-<%--                                    <a href="/gongsi/929991d9982f5b381nR93Ng~.html" target="_blank" ka="seo-company-29">珍爱网</a>--%>
-<%--                                    <a href="/gongsi/fab8bf569da89ef81nR63d20.html" target="_blank" ka="seo-company-30">美承集团</a>--%>
-<%--                                    <a href="/gongsi/74112cee7ff26bcb1nd43NS8.html" target="_blank" ka="seo-company-31">上海利真</a>--%>
-<%--                                    <a href="/gongsi/0f868a5bdedf367703F9.html" target="_blank" ka="seo-company-32">捷顺科技</a>--%>
-<%--                                    <a href="/gongsi/1b28fe2d9ba585821XR809w~.html" target="_blank" ka="seo-company-33">朗新科技</a>--%>
-<%--                                    <a href="/gongsi/bbba6a86b6c7fc243nx70tQ~.html" target="_blank" ka="seo-company-34">明源云</a>--%>
-<%--                                    <a href="/gongsi/97881e9d90e3794b03F53N0~.html" target="_blank" ka="seo-company-35">千树科技</a>--%>
-<%--                                    <a href="/gongsi/e85e275f5f9d2ddc1HNy39k~.html" target="_blank" ka="seo-company-36">博也教育</a>--%>
-<%--                                    <a href="/gongsi/51a752c43a2d77e31Hd53Ns~.html" target="_blank" ka="seo-company-37">新通教育集团</a>--%>
-<%--                                    <a href="/gongsi/0154b9fd7a5e58cc1nBz2Nk~.html" target="_blank" ka="seo-company-38">美联国际教育</a>--%>
-<%--                                    <a href="/gongsi/e726798a1175de301X1939U~.html" target="_blank" ka="seo-company-39">三五互联</a>--%>
-<%--                                    <a href="/gongsi/0bc562732fcf91fe3nJy.html" target="_blank" ka="seo-company-40">货拉拉科技</a>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="expand-btn"><a href="javascript:;" class="more-view"><span>展开</span><i class="fz fz-slidedown"></i></a></div>--%>
-<%--                        </div>--%>
-<%--                    </div>                --%>
+              --%>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<%--    <div id="footer" class="">--%>
-<%--        <div class="inner home-inner">--%>
-<%--            <div class="footer-social">--%>
-<%--                <img src="https://static.zhipin.com/v2/web/geek/images/footer-logo.png" alt="">--%>
-<%--                <p>企业服务热线和举报投诉 <span>400 065 5799</span></p>--%>
-<%--                <p>工作日 <span>8:00 - 22:00</span></p>--%>
-<%--                <p>休息日 <span>9:30 - 18:30</span></p>--%>
-<%--                <p class="footer-icon">--%>
-<%--                    <a href="http://www.weibo.com/bosszhipin" rel="nofollow" ka="link-weibo" target="_blank" class="icon-weibo"><span>官方微博</span></a>--%>
-<%--                    <a href="javascript:;" class="icon-weixin" ka="link-weixin"><span>微信公众号</span><img src="https://static.zhipin.com/v2/web/geek/images/we_chat_qr.jpg" class="qrcode-weixin" /></a>--%>
-<%--                    <a href="https://app.zhipin.com" class="icon-app" ka="link-downloadapp"><span>下载</span></a>--%>
-<%--                </p>--%>
-<%--            </div>--%>
-<%--            <div class="footer-about clear-fix">--%>
-<%--                <dl>--%>
-<%--                    <dt>企业服务</dt>--%>
-<%--                    <dd>--%>
-<%--                        <a href="https://www.zhipin.com/job_detail/" ka="link-search">职位搜索</a>--%>
-<%--                        <a href="https://news.zhipin.com/" ka="link-news">新闻资讯</a>--%>
-<%--                        <a href="https://app.zhipin.com/" ka="link-app">BOSS直聘APP</a>--%>
-<%--                    </dd>--%>
-<%--                </dl>--%>
-<%--                <dl>--%>
-<%--                    <dt>使用与帮助</dt>--%>
-<%--                    <dd>--%>
-<%--                        <a href="https://www.zhipin.com/web/common/protocol/index.html" rel="nofollow" ka="link-privacy" target="_blank">平台协议</a>--%>
-<%--                        <a href="https://www.zhipin.com/activity/cc/anticheatguide.html" rel="nofollow" ka="link-anticheatguide" target="_blank">防骗指南</a>--%>
-<%--                        <a href="https://www.zhipin.com/activity/cc/usehelp.html" rel="nofollow" ka="link-usehelp" target="_blank">使用帮助</a>--%>
-<%--                    </dd>--%>
-<%--                </dl>--%>
-<%--                <dl>--%>
-<%--                    <dt>联系BOSS直聘</dt>--%>
-<%--                    <dd>--%>
-<%--                        <p>北京华品博睿网络技术有限公司</p>--%>
-<%--                        <p>公司地址 北京市朝阳区太阳宫中路16号院1号楼18层1801内09</p>--%>
-<%--                        <p>联系电话 010-84150633</p>--%>
-<%--                        <p>违法和不良信息举报邮箱 <a class="report-mail" href="mailto:jubao@kanzhun.com" rel="nofollow">jubao@kanzhun.com</a></p>--%>
-<%--                    </dd>--%>
-<%--                </dl>--%>
-<%--            </div>--%>
-<%--            <div class="copyright">--%>
-<%--                <p>--%>
-<%--                    <span>Copyright © 2020 BOSS直聘</span><span>京ICP备14013441号-5</span><span>京ICP证150923号</span><span>京网文[2020]0399-066 号</span>--%>
-<%--                    <span>--%>
-<%--                     <a href="https://www.zhipin.com/activity/cc/businesslicense.html" rel="nofollow" ka="link-businesslicense" target="_blank">--%>
-<%--                         <img src="https://static.zhipin.com/v2/web/geek/images/icon-badge-1.png" alt=""/>--%>
-<%--                         电子营业执照--%>
-<%--                     </a>--%>
-<%--                </span>--%>
-<%--                    <span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502032801" rel="nofollow" ka="link-beian" target="_blank"><img src="https://static.zhipin.com/v2/web/geek/images/icon-beian.png" alt=""/> 京公网安备11010502032801</a></span>--%>
-<%--                    <span><a href="http://sdwj.zhipin.com/web/index.html" rel="nofollow" ka="link-sdwj" target="_blank">朝阳网警</a></span>--%>
-<%--                    <span><a href="/web/common/protocol/hr-service.html" rel="nofollow" ka="link-hr-service" target="_blank">人力资源服务许可证</a></span>--%>
-<%--                    <span><a href="https://www.12377.cn" rel="nofollow" ka="link-12377" target="_blank">网上有害信息举报专区</a></span>--%>
-<%--                </p>--%>
-<%--            </div>--%>
+
+    <!-- 通用侧边栏 -->
+<%--    <div id="siderbar">--%>
+<%--        <div class="sider-index">--%>
+<%--            <ul class="siderbar-top">--%>
+<%--                <li data-value="interest">--%>
+<%--                    <a href="javascript:;" ka="side_interest"><i class="icon-sider-interest"></i>感兴趣</a>--%>
+<%--                </li>--%>
+<%--                <li data-value="contact">--%>
+<%--                    <a href="javascript:;" ka="side_chat"><i class="icon-sider-chat"></i>沟通过</a>--%>
+<%--                </li>--%>
+<%--                <li data-value="deliver">--%>
+<%--                    <a href="javascript:;" ka="side_deliver"><i class="icon-sider-resume"></i>已投递</a>--%>
+<%--                </li>--%>
+<%--                <li data-value="interview">--%>
+<%--                    <a href="javascript:;" ka="side_interview"><i class="icon-sider-interview"></i>面试</a>--%>
+<%--                </li>--%>
+<%--            </ul>--%>
+<%--            <ul class="siderbar-bottom">--%>
+<%--                <li>--%>
+<%--                    <a class="siderbar-back-top" href="javascript:;" title="返回顶部"></a>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <a class="siderbar-service" href="javascript:;">客服</a >--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <a class="siderbar-feedback" href="javascript:;">反馈</a>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <a class="siderbar-wechat" href="javascript:;">微信--%>
+<%--                        <div class="qrcode-layer "><i></i><img src="https://static.zhipin.com/v2/web/geek/images/wechat-qrcode.jpg" alt="">关注BOSS直聘微信服务号</div>--%>
+<%--                    </a>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <a class="siderbar-app" href="javascript:;">APP--%>
+<%--                        <div class="qrcode-layer"><i></i><img src="/wapi/zpgeek/qrcode/generate.json?content=https%3A%2F%2Fwww.zhipin.com%2Fd%2Fv2%2F%3Ftype%3Dqr%26pkn%3Dmain-m%26sid%3Dmoren_14&w=200&h=200" alt="">下载BOSS直聘APP</div>--%>
+<%--                    </a>--%>
+<%--                </li>--%>
+<%--            </ul>--%>
 <%--        </div>--%>
 <%--    </div>--%>
-    <!-- 通用侧边栏 -->
-    <div id="siderbar">
-        <div class="sider-index">
-            <ul class="siderbar-top">
-                <li data-value="interest">
-                    <a href="javascript:;" ka="side_interest"><i class="icon-sider-interest"></i>感兴趣</a>
-                </li>
-                <li data-value="contact">
-                    <a href="javascript:;" ka="side_chat"><i class="icon-sider-chat"></i>沟通过</a>
-                </li>
-                <li data-value="deliver">
-                    <a href="javascript:;" ka="side_deliver"><i class="icon-sider-resume"></i>已投递</a>
-                </li>
-                <li data-value="interview">
-                    <a href="javascript:;" ka="side_interview"><i class="icon-sider-interview"></i>面试</a>
-                </li>
-            </ul>
-            <ul class="siderbar-bottom">
-                <li>
-                    <a class="siderbar-back-top" href="javascript:;" title="返回顶部"></a>
-                </li>
-                <li>
-                    <a class="siderbar-service" href="javascript:;">客服</a >
-                </li>
-                <li>
-                    <a class="siderbar-feedback" href="javascript:;">反馈</a>
-                </li>
-                <li>
-                    <a class="siderbar-wechat" href="javascript:;">微信
-                        <div class="qrcode-layer "><i></i><img src="https://static.zhipin.com/v2/web/geek/images/wechat-qrcode.jpg" alt="">关注BOSS直聘微信服务号</div>
-                    </a>
-                </li>
-                <li>
-                    <a class="siderbar-app" href="javascript:;">APP
-                        <div class="qrcode-layer"><i></i><img src="/wapi/zpgeek/qrcode/generate.json?content=https%3A%2F%2Fwww.zhipin.com%2Fd%2Fv2%2F%3Ftype%3Dqr%26pkn%3Dmain-m%26sid%3Dmoren_14&w=200&h=200" alt="">下载BOSS直聘APP</div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
 
-    <!--通用注册登录-->
-    <div class="sign-wrap sign-wrap-v2" style="display: none">
+<%--    <!--通用注册登录-->--%>
+<%--    <div class="sign-wrap sign-wrap-v2" style="display: none">--%>
 
 
 

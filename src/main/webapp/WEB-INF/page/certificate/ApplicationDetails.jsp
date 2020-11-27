@@ -26,7 +26,7 @@
 <div id="body">
     <input type="hidden" value="${fileid}" id="fileid">
     <input type="hidden" value="${filename}" id="filename">
-    <div id="container" >
+    <div id="container" style="width: 70%" >
         <dl class="job_detail">
             <dt>
                 <h1 title="内容运营">

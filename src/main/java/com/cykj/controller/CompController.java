@@ -117,6 +117,10 @@ public class CompController {
     public @ResponseBody String postPosition(PostPosition postPosition,HttpServletRequest request){
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
 //        int compID = 3;
+        if(backUser.getProduct()==null||backUser.getFinanStage()==null||backUser.getHomePage()==null||backUser.getScale()==null
+        ||backUser.getCoreValue()==null||backUser.getInfoIntr()==null||backUser.getLogo()==null){
+            return "3";
+        }
         int compID = (int) backUser.getbUserId();
         postPosition.setCompanyId(compID);
         String msg = backCompService.postPosition(postPosition);
@@ -524,8 +528,10 @@ public class CompController {
         if(backUser.getLng()!=null){
             map.put("lng",backUser.getLng());
         }
-
-        return backCompService.changeCompInfo(map);
+        String msg = backCompService.changeCompInfo(map);
+        BackUser comp = backCompService.findCompByID(compID);
+        request.getSession().setAttribute("admin",comp);
+        return msg;
     }
 
     @RequestMapping("/uploadLogo")
@@ -550,8 +556,11 @@ public class CompController {
         int compID = (int) bUser.getbUserId();
         map.put("compID",compID);
         map.put("logo",savePath);
+        String msgs = backCompService.changeCompInfo(map);
+        BackUser comp = backCompService.findCompByID(compID);
+        request.getSession().setAttribute("admin",comp);
 
-        return backCompService.changeCompInfo(map);
+        return msgs;
     }
 
     @RequestMapping("/compChangePwd")

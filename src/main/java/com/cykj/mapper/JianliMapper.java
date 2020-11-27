@@ -79,9 +79,10 @@ public interface JianliMapper {
     public int updateResumeTime(Resume resume);
 
 //    查看所有职位类型
-    public List<Position> positions();
+//    public List<Position> positions();
+    public List<Industry> industrys();
 //    查看所有城市
-    public List<City> citys();
+    public List<City> citys(@Param("begin")int begin,@Param("end")int end);
 //    修改简历头像
     public int updatePhoto(Resume resume);
     public int updateHeadImgUrl(UserInfo userInfo);

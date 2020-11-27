@@ -8,4 +8,30 @@
     </select>
 
 
+    <select id="findFieldOnPage" parameterType="java.util.HashMap" resultMap="results">
+        select * from field where fieldName like concat('%',#{fieldName},'%') and fieldId != 0
+        <if test="fieldId!=null">
+            and fieldId = #{fieldId}
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <resultMap id="results" type="com.cykj.entity.Field">
+        <id property="courseId" column="courseId"></id>
+        <result property="fieldName" column="fieldName"></result>
+
+    </resultMap>
+
+
+    <select id="findNumOnPage" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from field where 1=1 and fieldName like concat('%',#{fieldName},'%') and fieldId != 0
+    </select>
+
+
+    <insert id="insertField">
+        insert into field (fieldName) values (#{fieldName})
+    </insert>
+
+    <delete id="deleteField" parameterType="java.lang.Integer" >
+        delete from field where fieldId = #{fieldId}
+    </delete>
 </mapper>

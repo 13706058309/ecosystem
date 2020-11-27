@@ -70,7 +70,7 @@
             <td width="19%" id="dName">2</td>
             <td width="19%">民族</td>
             <td width="19%" id="dClen">4</td>
-            <td rowspan="5" colspan="2" width="24%"><img src="" id="imgs" width="100%" height="100%"></td>
+            <td rowspan="5" colspan="2" width="24%" id="imgs"></td>
         </tr>
         <tr >
             <td>政治面貌</td>
@@ -110,14 +110,14 @@
         </tr>
         <tr>
             <td rowspan="1">自我评价</td>
-            <td colspan="5" id="DselfEva" id="imgs" > </td>
+            <td colspan="5" id="DselfEva" > </td>
         </tr>
         <tbody id="tbody">
 
         </tbody>
 
     </table>
-    <div class="layui-input-inline" style="margin-left: 50%">
+    <div class="layui-input-inline" style="margin-left: 45%">
         <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="outResume()" >简历导出</button>
     </div>
 </div>

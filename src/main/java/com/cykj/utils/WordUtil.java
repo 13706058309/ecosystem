@@ -1,9 +1,10 @@
 package com.cykj.utils;
 
+
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.util.HashMap;
@@ -154,9 +155,10 @@ public class WordUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BASE64Encoder encoder = new BASE64Encoder();
-        System.out.println(encoder.encode(data));
-        return encoder.encode(data);
+//        BASE64Encoder encoder = new BASE64Encoder();
+//        System.out.println(encoder.encode(data));
+//        return encoder.encode(data);
+        return null;
     }
 
 

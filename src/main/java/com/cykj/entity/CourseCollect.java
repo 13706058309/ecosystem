@@ -5,12 +5,20 @@ package com.cykj.entity;
  * 课程收藏
  */
 public class CourseCollect {
-
-  private long courseId; //收藏Id
+  private long collectId; //主键Id
+  private long courseId; //收藏的课程Id
   private long userId; //收藏人Id
-  private UserInfo user; //收藏人
+//  private UserInfo user; //收藏人
   private String collectTime; //收藏时间
 
+
+  public long getCollectId() {
+    return collectId;
+  }
+
+  public void setCollectId(long collectId) {
+    this.collectId = collectId;
+  }
 
   public long getCourseId() {
     return courseId;
@@ -28,13 +36,13 @@ public class CourseCollect {
     this.userId = userId;
   }
 
-  public UserInfo getUser() {
-    return user;
-  }
-
-  public void setUser(UserInfo user) {
-    this.user = user;
-  }
+//  public UserInfo getUser() {
+//    return user;
+//  }
+//
+//  public void setUser(UserInfo user) {
+//    this.user = user;
+//  }
 
   public String getCollectTime() {
     return collectTime;

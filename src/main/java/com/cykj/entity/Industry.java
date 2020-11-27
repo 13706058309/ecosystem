@@ -1,5 +1,7 @@
 package com.cykj.entity;
 
+import java.util.List;
+
 /**
  * 行业
  */
@@ -7,7 +9,7 @@ public class Industry {
 
   private long industryId;//行业ID
   private String industryName;//行业名称
-
+  private List<Depart> departs;
   public Industry() {
   }
 
@@ -40,5 +42,14 @@ public class Industry {
   public void setIndustryName(String industryName) {
     this.industryName = industryName;
   }
+
+  public List<Depart> getDeparts() {
+    return departs;
+  }
+
+  public void setDeparts(List<Depart> departs) {
+    this.departs = departs;
+  }
+
 
 }

@@ -18,7 +18,6 @@ layui.use(['laydate','layer','form'],function () {
     });
 
     form.on('select(industry)', function(data){
-        alert("123");
         $.ajax({
             url:path+"/rec/findDepartByID",
             data:"industryID="+data.value,
@@ -263,7 +262,7 @@ function changePostName() {
     var postIDs = $("#pID").val();
     layer.open({
         type:1,
-        title:"面试具体通知",
+        title:"岗位名称修改",
         area:['30%','30%'],
         offset: ['10%', '30%'],
         content:$("#changePostName"),
@@ -310,7 +309,7 @@ function changeDepartName() {
     var postIDs = $("#pID").val();
     layer.open({
         type:1,
-        title:"面试具体通知",
+        title:"部门名称修改",
         area:['30%','30%'],
         offset: ['10%', '30%'],
         content:$("#changeDepartMent"),
@@ -357,7 +356,7 @@ function changePostType() {
     var postIDs = $("#pID").val();
     layer.open({
         type:1,
-        title:"面试具体通知",
+        title:"岗位类型修改",
         area:['80%','70%'],
         offset: ['5%', '10%'],
         content:$("#changePost"),
@@ -515,8 +514,8 @@ function changeNum() {
                         alert("招收人数未填写");
                         return false;
                     }
-                    if(recruitsNum.trim().length>6){
-                        alert("招收人数长度不能超过6");
+                    if(recruitsNum.trim().length>15){
+                        alert("招收人数长度不能超过15");
                         return false;
                     }
                 },
@@ -616,9 +615,9 @@ function changeWorkType() {
     var postIDs = $("#pID").val();
     layer.open({
         type:1,
-        title:"修改学历",
-        area:['40%','60%'],
-        offset: ['30%', '20%'],
+        title:"修改工作性质",
+        area:['40%','40%'],
+        offset: ['30%', '30%'],
         content:$("#changeWorkType"),
         btn:['修改','取消'],
         btn1: function (index,layero) {
@@ -697,7 +696,7 @@ function changeContact() {
     var postIDs = $("#pID").val();
     layer.open({
         type:1,
-        title:"接受邮箱修改",
+        title:"修改联系方式",
         area:['30%','30%'],
         offset: ['10%', '30%'],
         content:$("#changContact"),
@@ -744,7 +743,7 @@ function changeAddre() {
     var postIDs = $("#pID").val();
     layer.open({
         type:1,
-        title:"接受邮箱修改",
+        title:"修改工作地址",
         area:['40%','40%'],
         offset: ['10%', '30%'],
         content:$("#changeAddress"),
