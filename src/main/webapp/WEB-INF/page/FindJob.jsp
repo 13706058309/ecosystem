@@ -576,7 +576,7 @@
 <%--                                                            <em class="vline"></em>技术总监--%>
                                                         </h3>
                                                     </div></a>
-
+                                                    <c:if test="${not empty qUser}">
                                                     <button class="btn btn-startchat" href="javascript:;" onclick="window.open('/springboot/rec/userChat?compID=${job.backUser.bUserId}')"
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
@@ -585,7 +585,7 @@
                                                              alt="">
                                                         <span>立即沟通</span>
                                                     </button>
-
+                                                    </c:if>
                                                 </div>
 
                                                 <div class="info-detail" style="top: 0px;"></div>
@@ -618,9 +618,9 @@
                                     </div>
                                     <div class="info-append clearfix">
                                         <div class="tags">
-
+                                            <c:if test="${not empty qUser}">
                                             <span class="tag-item"><a onclick="sendResume(${job.pPostId})">投递简历</a></span>
-
+                                            </c:if>
                                         </div>
                                         <div class="info-desc">${job.jobBenefits}</div>
                                     </div>
