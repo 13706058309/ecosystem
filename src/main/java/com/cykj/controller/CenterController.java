@@ -1093,7 +1093,7 @@ public class CenterController {
     public @ResponseBody String sendResume(HttpServletRequest req,int pPostId){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
-        Resume r=resumeService.0(userId);
+        Resume r=resumeService.resume(userId);
         Delivery delivery=resumeService.findDelivery(userId,pPostId);
         if (null!=delivery){
             return "repetition";
