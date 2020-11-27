@@ -4,19 +4,41 @@ package com.cykj.entity;
  * 公司 ----- 行业
  */
 public class CompIndustry {
-private  long compAndIndID;
+
+  private long compAndIndId;
   private long compId;
   private long industryId;
+
+  private  BackUser backUser;
+  private  Industry industry;
 
   public CompIndustry() {
   }
 
-  public long getCompAndIndID() {
-    return compAndIndID;
+  public CompIndustry(long compId, long industryId, BackUser backUser, Industry industry) {
+    this.compId = compId;
+    this.industryId = industryId;
+    this.backUser = backUser;
+    this.industry = industry;
   }
 
-  public void setCompAndIndID(long compAndIndID) {
-    this.compAndIndID = compAndIndID;
+  @Override
+  public String toString() {
+    return "CompIndustry{" +
+            "compAndIndId=" + compAndIndId +
+            ", compId=" + compId +
+            ", industryId=" + industryId +
+            ", backUser=" + backUser +
+            ", industry=" + industry +
+            '}';
+  }
+
+  public long getCompAndIndId() {
+    return compAndIndId;
+  }
+
+  public void setCompAndIndId(long compAndIndId) {
+    this.compAndIndId = compAndIndId;
   }
 
   public long getCompId() {
@@ -27,7 +49,6 @@ private  long compAndIndID;
     this.compId = compId;
   }
 
-
   public long getIndustryId() {
     return industryId;
   }
@@ -36,4 +57,19 @@ private  long compAndIndID;
     this.industryId = industryId;
   }
 
+  public BackUser getBackUser() {
+    return backUser;
+  }
+
+  public void setBackUser(BackUser backUser) {
+    this.backUser = backUser;
+  }
+
+  public Industry getIndustry() {
+    return industry;
+  }
+
+  public void setIndustry(Industry industry) {
+    this.industry = industry;
+  }
 }

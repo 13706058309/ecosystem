@@ -5,6 +5,7 @@ import com.cykj.mapper.*;
 import com.cykj.service.BackCompService;
 import com.cykj.utils.MyUtil;
 import com.cykj.utils.WordUtil;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 @Service
 public class BackCompServiceImpl implements BackCompService {
@@ -47,6 +49,15 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Resource
     private BackUserMapper backUserMapper;
+
+    @Resource
+    private CompIndustryMapper compIndustryMapper;
+
+    @Resource
+    private ParameterMapper parameterMapper;
+
+    @Resource
+    private CompRecordMapper compRecordMapper;
 
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
@@ -305,7 +316,7 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public String outResume(int resumeID,String savePath) {
+    public String outResume(int resumeID,String savePath,String photoPath) {
         Resume resume = resumeMapper.findResumeDetail(resumeID);
         Map<String,Object> map = new HashMap<>();
         map.put("realName",resume.getRealName());
@@ -397,7 +408,7 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("proWork2","");
         }
         WordUtil wordUtil = new WordUtil();
-        String imageBase = wordUtil.getImageBase("static"+resume.getPhoto());
+        String imageBase = wordUtil.getImageBase(photoPath+resume.getPhoto());
         map.put("image",imageBase);
         String path = wordUtil.createWord(map, MyUtil.RESUME,savePath);
         return path;
@@ -412,4 +423,114 @@ public class BackCompServiceImpl implements BackCompService {
     public int changePwdByPhone(String pwd, String phone) {
         return backUserMapper.changePwdByPhone(pwd,phone);
     }
+
+    @Override
+    public BackUser findCompByAcc(String account) {
+        return backUserMapper.findByAccount(account);
+    }
+
+    @Override
+    public int RegComp(BackUser backUser, int industryID) {
+
+        int provinceID = Integer.parseInt(backUser.getProvince());
+        Province province = provinceMapper.findByID(provinceID);
+        backUser.setProvince(province.getProvinceName());
+
+        int n = backUserMapper.addComp(backUser);
+        if(n<0){
+            return 4;
+        }
+
+        int compID = backUserMapper.findID();
+        int result = compIndustryMapper.addCompAndInd(compID, industryID);
+        return 5;
+    }
+    //判断下载简历是否收费
+    @Override
+    public String judegCharse() {
+        Parameter  parameter = parameterMapper.findDownFee(57);
+        int flag = Integer.parseInt(parameter.getParamValues());
+        String msg = "";
+        if(flag==1){
+            msg = "no";
+        }else{
+           msg = parameterMapper.findDownFee(56).getParamValues();
+        }
+        return msg;
+    }
+
+    @Override
+    public String changeFeeStand(int standID) {
+        int n = parameterMapper.changeFeeStand(standID);
+        return n>0? "1":"2";
+    }
+
+    @Override
+    public String openFee(int standID) {
+        int n = parameterMapper.changeFeeStand(standID);
+        if(n>0){
+          String msg = parameterMapper.findDownFee(56).getParamValues();
+          return msg;
+        }else{
+          return "failed";
+        }
+
+    }
+
+    @Override
+    public String judgeResumeShowOrHidden() {
+        Parameter  parameter = parameterMapper.findDownFee(57);
+        return parameter.getParamValues();
+    }
+
+    @Override
+    public String findDownFee() {
+        return parameterMapper.findDownFee(56).getParamValues();
+    }
+
+    @Override
+    public String compfindChat(int compID) {
+        List<CompRecord> list = compRecordMapper.findCompChatRec(compID);
+        if(list.size()!=0){
+            if(list.get(0).getIsRead()==1&&list.get(0).getCompanyId()==0){
+                compRecordMapper.readUserMsg(compID, (int) list.get(0).gettUserId());
+            }
+        }
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public String findChatRec(int compID, int userID) {
+        List<CompRecord> list = compRecordMapper.findChatRec(compID,userID);
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public String userFindChat(int userID) {
+        List<CompRecord> list = compRecordMapper.getChatComp(userID);
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public String findChatRecs(int compID, int userID) {
+        List<CompRecord> list = compRecordMapper.findChatRecs(compID,userID);
+        return new Gson().toJson(list);
+    }
+
+    @Override
+    public int addCompRec(CompRecord compRecord) {
+        return compRecordMapper.addCompRec(compRecord);
+    }
+
+    @Override
+    public int readUserMsg(int compID, int userID) {
+        return compRecordMapper.readUserMsg(compID,userID);
+    }
+
+    @Override
+    public int readCompMsg(int compID, int userID) {
+        return compRecordMapper.readCompMsg(compID,userID);
+    }
+
+
 }

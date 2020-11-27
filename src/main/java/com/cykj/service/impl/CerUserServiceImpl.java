@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class CerUserServiceImpl implements CerUserService {
 
@@ -22,4 +24,33 @@ public class CerUserServiceImpl implements CerUserService {
 
         return cerUserMapper.findceruserlist(userid);
     }
+
+    /**
+     * @param map
+     * @return 后台人员查询已获得证书
+     */
+    @Override
+    public List<CerUser> backfindceruserlist(Map<String, Object> map) {
+        return cerUserMapper.backfindceruserlist(map);
+    }
+
+    /**
+     * @param map
+     * @return 后台人员查询已获得证书总长度
+     */
+    @Override
+    public int findceruserlistsize(Map<String, Object> map) {
+        return cerUserMapper.findceruserlistsize(map);
+    }
+
+    /**
+     * @param cerUser
+     * @return 增加已获得证书
+     */
+    @Override
+    public int insertCerUser(CerUser cerUser) {
+        return cerUserMapper.insertCerUser(cerUser);
+    }
+
+
 }

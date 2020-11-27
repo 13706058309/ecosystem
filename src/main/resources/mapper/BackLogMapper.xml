@@ -2,7 +2,28 @@
         <!DOCTYPE mapper
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cykj.mapper.BackLogMapper">
+<mapper namespace="com.cykj.log.LogMapper">
+        <select id="findLogOnPage" parameterType="java.util.Map" resultMap="resultsHash">
+                select b.*, u.bUserName from backLog b, backUser u where b.bUserId = u.bUserId and bUserName like concat('%',#{bUserName},'%')
+                <if test="startTime!=null">
+                        and operaTime >= #{startTime}
+                </if>
+                <if test="endTime!=null">
+                        and operaTime &lt;= #{endTime}
+                </if>
+                order by operaTime desc limit #{offset}, #{limit}
+        </select>
+        <resultMap id="resultsHash" type="com.cykj.entity.BackLog">
+                <id property="bLogId" column="bLogId"></id>
+                <result property="bUserId" column="bUserId"></result>
+                <result property="operaTime" column="operaTime"></result>
+                <result property="matter" column="matter"></result>
+                <association property="backUser" column="bUserId" javaType="com.cykj.entity.BackUser">
+                        <id property="bUserId" column="bUserId"></id>
+                        <result property="bUserName" column="bUserName"></result>
+                </association>
+
+        </resultMap>
 
         <insert id="insertLog">
                INSERT INTO backLog( buserid, operatime, matter)VALUES (#{buserid},now(),#{matter});

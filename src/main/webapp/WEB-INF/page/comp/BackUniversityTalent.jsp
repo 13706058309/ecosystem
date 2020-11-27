@@ -15,6 +15,11 @@
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        .layui-form-checkbox i {
+            top: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,7 +32,7 @@
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">删除选中</button>
         <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
         <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
     </div>
@@ -222,7 +227,33 @@
             switch(obj.event){
                 case 'getCheckData':
                     var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
+                    layer.confirm('是否删除',{
+                        btn:['删除','取消'],
+                        time:20000,
+                    },function (index){
+                        $.ajax({
+                            url:path+"/rec/delAllUnviTalent",
+                            data:"msg="+JSON.stringify(data),
+                            type:"post",
+                            typeData:"text",
+                            success:function (info) {
+                                layer.msg(info);
+                                table.reload('testReload', {
+                                    page: {
+                                        curr: 1 //重新从第 1 页开始
+                                    },
+                                    where: {
+                                        talentName: $('#talentName').val(),
+                                        beginTime:$('#beginTime').val(),
+                                        endTime:$('#endTime').val(),
+                                        school:$('#school').val(),
+                                        profession:$('#profession').val(),
+                                    }
+                                }, 'data');
+
+                            },
+                        })
+                    })
                     break;
                 case 'getCheckLength':
                     var data = checkStatus.data;

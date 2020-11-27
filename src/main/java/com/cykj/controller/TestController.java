@@ -1,36 +1,21 @@
 package com.cykj.controller;
 
+//import com.cykj.log.Loger;
 import com.cykj.service.BackCompService;
+import jdk.nashorn.internal.runtime.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
     @Resource
     private BackCompService backCompServiceImpl;
-
-    @RequestMapping("/testComp")
-    public String test(){
-        return "comp/BackCompInfo";
-    }
-
-
-    @RequestMapping("/userManage")
-    public String userManage()
-    {
-        System.out.println("运行界面");
-        return "UserManage";
-    }
-
-    @RequestMapping("/enterpriseManage")
-    public String enterpriseManage()
-    {
-        System.out.println("运行界面");
-        return "EnterpriseManage";
-    }
 
     @RequestMapping("/changePwd")
     public String changePwd(){
@@ -63,7 +48,10 @@ public class TestController {
         return "comp/BackOnlinePosition";
     }
 
-
+    @RequestMapping("/reg")
+    public String reg(){
+        return "comp/BackReg";
+    }
 
     @RequestMapping("/findPwd")
     public String findPwd(){
@@ -100,19 +88,19 @@ public class TestController {
         return "comp/BackCompFindUser";
     }
 
-    @RequestMapping("/st")
-    public String st(){
-        return "Login";
+    @RequestMapping("/testMap")
+    public String testMap(){
+        return "comp/TestMap";
     }
 
-    @RequestMapping("/ss")
-    public String ss(){
-        return "Register";
+    @RequestMapping("/Buju")
+    public String Buju(){
+        return "comp/Buju";
     }
 
-    @RequestMapping("/sb")
-    public String sb(){
-        return "adminLog";
+    @RequestMapping("/charge")
+    public String charge(){
+        return "comp/charge";
     }
 
 }

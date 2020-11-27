@@ -100,13 +100,32 @@
         <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
         <if test="postName!=null">and p2.postName like concat('%',#{postName},'%')</if>
     </select>
+    <select id="selectPosition" parameterType="java.util.HashMap"  resultMap="result1">
+        select p.postID,p.postName,d.departName,i.industryName from position p,depart d,industry i where i.industryID=d.industryID and d.departID=p.departID
+        <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
+        <if test="postName!=null">and p.postName like concat('%',#{postName},'%')</if>
+        <if test="departName!=null">and d.departName like concat('%',#{departName},'%')</if>
+        limit #{limit} offset #{offset}
+    </select>
+    <resultMap id="result1" type="com.cykj.entity.Positions">
+        <result property="postID" column="postID"></result>
+        <result property="postName" column="postName"></result>
+        <result property="departName" column="departName"></result>
+        <result property="industryName" column="industryName"></result>
+    </resultMap>
+    <select id="selectPositionRecords" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from position p,depart d,industry i where i.industryID=d.industryID and d.departID=p.departID
+        <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
+        <if test="postName!=null">and p.postName like concat('%',#{postName},'%')</if>
+        <if test="departName!=null">and d.departName like concat('%',#{departName},'%')</if>
+    </select>
     <insert id="addTalent" parameterType="com.cykj.entity.Talent" keyProperty="talentId" useGeneratedKeys="true">
           insert into talent(talentName,school,birthday,profession,politicalStatus,education,contactInfo,address,workExp,certificate,selfEva)
           values (#{talentName},#{school},#{birthday},#{profession},#{politicalStatus},
           #{education},#{contactInfo},#{address},#{workExp},#{certificate},#{selfEva})
         </insert>
     <select id="selectTalent" parameterType="java.lang.String" resultType="com.cykj.entity.Talent">
-            select * from talent where talentName = #{talentName}
+            select * from talent where  contactInfo =  #{contactInfo}
         </select>
 
 
@@ -115,10 +134,61 @@
     </select>
 
     <insert id="addCompAndtalent" parameterType="com.cykj.entity.CompAndtalent" >
-          insert into compAndtalent(talent,compID,stand) values (#{c},#{companyID},16)
+          insert into compAndtalent (talent,compID,stand) values (#{c},#{companyID},16)
         </insert>
     <select id="selectCompAndtalent" parameterType="java.util.HashMap" resultType="com.cykj.entity.CompAndtalent">
             select * from compAndtalent where talent = #{c} and compID = #{companyID}
         </select>
+    <insert id="addPosition" parameterType="com.cykj.entity.Position" >
+          insert into position (postName,departID) values (#{postName},#{departId})
+        </insert>
+    <select id="lookPosition" parameterType="java.util.HashMap" resultType="com.cykj.entity.Position">
+            select * from position where postName = #{postName}
+        </select>
+    <insert id="addDepart" parameterType="com.cykj.entity.Depart" >
+          insert into depart (departName,industryID) values (#{departName},#{industryId})
+        </insert>
+    <select id="lookDepart" parameterType="java.util.HashMap" resultType="com.cykj.entity.Depart">
+            select * from depart where departName = #{departName}
+        </select>
+    <insert id="addIndustry" parameterType="com.cykj.entity.Industry" >
+          insert into industry (industryName) values (#{industryName})
+        </insert>
+    <select id="lookIndustry" parameterType="java.util.HashMap" resultType="com.cykj.entity.Industry">
+            select * from industry where industryName = #{industryName}
+        </select>
+    <update id="changeSchoolInfo" parameterType="java.util.Map">
+        update backUser
+        <set>
+            <if test="compName!=null">
+                compName = #{compName},
+            </if>
+            <if test="bUserName!=null">
+                bUserName = #{bUserName},
+            </if>
+            <if test="contactInfo!=null">
+                contactInfo = #{contactInfo},
+            </if>
+            <if test="infoIntr!=null">
+                infoIntr = #{infoIntr},
+            </if>
+            <if test="email!=null">
+                email = #{email},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+            <if test="coreValue!=null">
+                coreValue = #{coreValue},
+            </if>
+        </set>
+        where bUserID= #{schoolID}
+    </update>
+    <update id="changePosition" parameterType="java.util.Map">
+        update position set postName = #{postName} where postID= #{postID}
+    </update>
+    <select id="findShoolByID" parameterType="int" resultType="com.cykj.entity.BackUser">
+        select b.bUserName,b.contactInfo,b.infoIntr,b.email,b.address,b.compName,b.coreValue,b.logo from backUser b where b.bUserID=#{i}
+    </select>
 
 </mapper>

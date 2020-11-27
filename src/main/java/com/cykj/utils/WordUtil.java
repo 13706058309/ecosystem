@@ -45,6 +45,8 @@ public class WordUtil {
 //        map.put("image",imgs);
 //        test.createWord(map);
 //        test.createWord();
+        String s = "12345";
+        System.out.println(s.substring(3));
     }
 
     /*****
@@ -133,7 +135,7 @@ public class WordUtil {
     public String getImageBase(String path) {
 
 //        File file = new File(this.getClass().getClassLoader().getResource("").getPath(),"static/user/2020-11-18/66.jpg");
-        File file = new File(this.getClass().getClassLoader().getResource("").getPath(),path);
+        File file = new File(path);
         System.out.println(file);
         if(!file.exists()) {
             System.out.println("结束");

@@ -57,6 +57,7 @@ public class CertificateController {
         for (int i=0;i<certificateList.size();i++){
             certificateList.get(i).setCershowState(1);
         }
+
 //        if (cerUserList.size() != 0){
 //
 //            for (int i=0;i>certificateList.size();i++){
@@ -81,7 +82,8 @@ public class CertificateController {
         @RequestMapping("/cxiangqing")
     public String shenqingxiangqing(HttpServletRequest request,String filename,String fileid) {
         request.setAttribute("filename",filename);
-            request.setAttribute("fileid",fileid);
+        request.setAttribute("fileid",fileid);
+
         return "certificate/ApplicationDetails";
     }
 
@@ -132,7 +134,7 @@ public class CertificateController {
         String msg = "";
 //        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserId(1);
+        userInfo.setUserId(2);
 
         long fileid1 = Long.parseLong(fileid);
         String dangqiantime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -249,6 +251,8 @@ public class CertificateController {
 
         return listJson;
     }
+
+
     //修改申请证书状态为申请失败
     @RequestMapping(value = "/xiugaicersqzhuangtai")
     public @ResponseBody
@@ -269,7 +273,7 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+        String realpath   = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         Certificate certificate= certificateService.findCerFee(fileid);
@@ -338,6 +342,7 @@ public class CertificateController {
             if (betweenDate>=0&&betweenDate<=10) {
                 //获取上传目录
                 String path = request.getSession().getServletContext().getRealPath("/wtqupload");
+
                 //获取当天日期为后面创建日期
                 String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 //创建以日期来区分的文件夹目录
@@ -382,13 +387,14 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+        String realpath   = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);
+
         String lujing= cerRecord.getCerTestReport();
         String filename  = lujing.substring(lujing.lastIndexOf("/")+1);
-
+        realpath= realpath+lujing.substring(0,lujing.lastIndexOf("/")+1);
         File file = new File(realpath,filename);//吧下载文件构成文件处理，  filename 前台传送的文件名称
         System.out.println(file.getAbsoluteFile());
 
@@ -407,12 +413,14 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+//        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+        String realpath = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);
         String lujing= cerRecord.getCerFinalReport();
         String filename  = lujing.substring(lujing.lastIndexOf("/")+1);
+        realpath= realpath+lujing.substring(0,lujing.lastIndexOf("/")+1);
 
         File file = new File(realpath,filename);//吧下载文件构成文件处理，  filename 前台传送的文件名称
         System.out.println(file.getAbsoluteFile());

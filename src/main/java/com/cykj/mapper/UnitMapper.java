@@ -2,11 +2,15 @@ package com.cykj.mapper;
 
 import com.cykj.entity.Course;
 import com.cykj.entity.Unit;
+import com.cykj.entity.StudyData;
+import com.cykj.entity.Unit;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -35,4 +39,8 @@ public interface UnitMapper {
 //    int insertCourse(String courseName,Integer fieldId,String courseImgURL,String speakerName
 //            ,String courseIntroduce,String collectionNumber,String speakerHeadImgUrl,String totalPlayTimes);//新增课程
 
+    public List<Unit> selectUnitsByCourseId(long courseId);
+    public List<StudyData> selectUnitFileByUnitId(long unitId);
+    public List<Unit> selectUnitsByUnitId(long unitId);
+    public Unit selectUnitInfoByUnitId(long unitId);
 }

@@ -1,11 +1,14 @@
 package com.cykj.mapper;
 
 import com.cykj.entity.Unit;
+import com.cykj.entity.Field;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -32,4 +35,5 @@ public interface FieldMapper {
 //
     int insertField(String fieldName);//新增领域
 
+    public List<Field> selectAllFieldName();
 }

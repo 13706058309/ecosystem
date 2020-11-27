@@ -41,8 +41,4 @@ public class PhoneCodeUtil {
         }
         return "success";
     }
-
-    public static void main(String[] args) {
-
-    }
 }

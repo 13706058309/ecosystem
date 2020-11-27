@@ -38,9 +38,8 @@
     <script type="text/javascript"></script>
     <script type="text/javascript" src="../style/js/conv.js"></script>
     <script src="../js/homePage.js"></script>
-
 </head>
-<body>
+<body style="background-color: #f6f6f8">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <%--切换城市弹窗--%>
 <div id="choiceCity" style="display: none">
@@ -62,9 +61,9 @@
         <hr>
         <c:forEach items="${cityList}" var="city">
             <button type="button" class="layui-btn layui-btn-primary" style="margin: 13px 8px;"
-                    onmouseover="this.style.backgroundColor='#44D0C7',this.style.color='#fafafa'";
-                    onmouseout="this.style.backgroundColor='#fafafa',this.style.color='#0e1726'";
-                    onclick="City(this)" >
+                    onmouseover="this.style.backgroundColor='#44D0C7',this.style.color='#fafafa'" ;
+                    onmouseout="this.style.backgroundColor='#fafafa',this.style.color='#0e1726'" ;
+                    onclick="City(this)">
                     ${city.cityName}
             </button>
         </c:forEach>
@@ -74,94 +73,87 @@
     <div id="header">
         <div class="wrapper">
             <a class="logo">
-                <img src="../style/images/logo.png" width="230" height="85" alt="钱程无忧-关注你的钱程"/>
+                <img src="../style/images/logo.png" width="230" height="85"/>
             </a>
             <ul class="reset" id="navheader">
                 <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li><a href="">公司</a></li>
-                <li><a href="" target="_blank">校招</a></li>
-                <li><a href="" target="_blank">课程</a></li>
-                <li><a href="${pageContext.request.contextPath}/center/jianli"  rel="nofollow">我的简历</a></li>
-                <li><a href="" rel="nofollow">发布职位</a></li>
                 <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="h/toForum.html" target="_blank">校招</a></li>
-                <li><a href="h/toForum.html" target="_blank">课程</a></li>
-                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
-                <li><a href="create.html" rel="nofollow">发布职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li><a href="${pageContext.request.contextPath}/center/job" rel="nofollow">职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
             </ul>
-            <ul class="loginTop" style="font-size: 18px">
-                <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
-                <li>|</li>
-                <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+            <ul class="loginTop" style="font-size: 18px;height: 68px;">
+                <c:if test="${qUser==null}">
+                    <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
+                    <li>|</li>
+                    <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+                </c:if>
+                <c:if test="${qUser!=null}">
+                    <div style="margin: 10px 0px 20px 350px">
+                        <div style="float: left;margin: 0px -90px;">
+                            <div>
+                                    ${qUser.userName}
+                            </div>
+<%--                            <div style="margin: 100px;margin: -40px -50px;">--%>
+<%--                                <img src="../style/images/logo.png" width="50px" height="50px"/>--%>
+<%--                            </div>--%>
+                        </div>
+                    </div>
+                    <div style="margin: 35px 230px;width: 200px;">
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px" onclick="window.open('${pageContext.request.contextPath}/center/jianli')">个人中心</button>
+                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a">退出</button>
+                    </div>
+                </c:if>
             </ul>
         </div>
         <div style="float: right" onclick="cutCity()">
             <a id="city" class="layui-icon layui-icon-location" style="font-size: 15px; color: #0C0C0C;"></a>
-            <a style="font-size: 15px" >[切换城市]</a>
+            <a style="font-size: 15px">[切换城市]</a>
         </div>
     </div><!-- end #header -->
 
     <%-----------------------------------------------------------------------------------------搜索框--%>
-    <div id="search_box">
-        <form id="searchForm" name="searchForm" action="list.html" method="get">
-            <ul id="searchType">
-                <li data-searchtype="1" class="type_selected">职位</li>
-                <li data-searchtype="4">公司</li>
-            </ul>
-            <div class="searchtype_arrow"></div>
-            <input type="text" id="search_input" name="kd" tabindex="1" value="" placeholder="请输入职位名称，如：产品经理"/>
-            <input type="submit" id="search_button" value="搜索"/>
-        </form>
-    </div>
 
-    <script type="text/javascript" src="../style/js/search.min.js"></script>
-    <dl class="hotSearch">
-        <dt>热门搜索：</dt>
-        <dd><a href="list.htmlJava?labelWords=label&city=">Java</a></dd>
-        <dd><a href="list.htmlPHP?labelWords=label&city=">PHP</a></dd>
-        <dd><a href="list.htmlAndroid?labelWords=label&city=">Android</a></dd>
-        <dd><a href="list.htmliOS?labelWords=label&city=">iOS</a></dd>
-        <dd><a href="list.html前端?labelWords=label&city=">前端</a></dd>
-        <dd><a href="list.html产品经理?labelWords=label&city=">产品经理</a></dd>
-        <dd><a href="list.htmlUI?labelWords=label&city=">UI</a></dd>
-        <dd><a href="list.html运营?labelWords=label&city=">运营</a></dd>
-        <dd><a href="list.htmlBD?labelWords=label&city=">BD</a></dd>
-        <dd><a href="list.html?gx=实习&city=">实习</a></dd>
-    </dl>
+    <div class="content" style="margin-bottom: 20px;margin-left: 23%">
+        <div id="search_box">
+            <form id="searchForm" method="get">
+                <ul id="searchType">
+                    <li data-searchtype="1" class="type_selected">职位</li>
+                </ul>
+                <input type="text" id="search_input" name="kd" tabindex="1" value="" placeholder="请输入职位名称，如：产品经理"/>
+                <input type="button" id="search_button" value="搜索" onclick="searchBut()"/>
+
+            </form>
+        </div>
+    </div>
 
     <%--------------------------------------------------------------------------------   左侧三级菜单--%>
     <div id="container">
-        <div id="sidebar" style="top: 240px">
-
-            <div class="mainNavs">
+        <div id="sidebar" style="top: 205px">
+            <div class="mainNavs" id="hidden">
                 <c:forEach items="${industry}" var="industry">
-                    <div class="menu_box" >
-                        <div class="menu_main" onmouseenter="menu_box(${industry.industryId},this)" onmouseleave="out()">
-                            <h2>${industry.industryName}<span></span></h2 >
-                            <a href="h/jobs/list_Java?labelWords=label">Java</a>
-                            <a href="h/jobs/list_PHP?labelWords=label">PHP</a>
-                            <a href="h/jobs/list_C?labelWords=label">C</a>
+                    <div class="menu_box">
+                        <div class="menu_main" onmouseover="menu_box(${industry.industryId},this)">
+                            <h2><b>${industry.industryName}<span></span></b></h2>
                         </div>
                         <div class="menu_sub dn">
                             <dl class="reset">
-                                <dt>
-<%--                                    <a>--%>
-<%--                                        dfghj--%>
-<%--                                    </a>--%>
-                                </dt>
-                                <dd>
-<%--                                    <a href="h/jobs/list_Java?labelWords=label" class="curr">--%>
-<%--                                        esrtyt6y7ui--%>
-<%--                                    </a>--%>
-                                </dd>
+                                <dt id="dt"></dt>
+                                <dd></dd>
                             </dl>
                         </div>
                     </div>
                 </c:forEach>
             </div>
+            <div class="menu_box" id="aShow" STYLE="background-color: #FFFFFF;">
+                <div class="menu_main">
+                    <a onmouseover="show()" style="color: #44D0C7;margin: 8px 0px;font-size: 15px;">显示全部职位</a>
+                </div>
+            </div>
+
         </div>
     </div>
-
 
     <%-------------------------------------------------------------------------------轮播图--%>
     <div class="content">
@@ -173,56 +165,38 @@
             }
         </style>
         <div id="home_banner">
-            <ul class="banner_bg">
-                <li class="banner_bg_1 current">
-                    <a href="h/subject/s_buyfundation.html?utm_source=DH__lagou&utm_medium=banner&utm_campaign=haomai"
-                       target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="646"
-                                            height="160" alt="好买基金——来了就给100万"/></a>
+            <ul class="banner_bg" style="height: 1020px; margin-top: 0px;">
+                <li class="banner_bg_1 current" style="height: 340px" >
+                    <a target="_blank"><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="646" height="340" /></a>
                 </li>
-                <li class="banner_bg_2">
-                    <a href="h/subject/s_worldcup.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=wc"
-                       target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="646"
-                                            height="160" alt="世界杯放假看球，老板我也要！"/></a>
+                <li class="banner_bg_2" style="height: 340px" >
+                    <a target="_blank"><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="646" height="340" ></a>
                 </li>
-                <li class="banner_bg_3">
-                    <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
-                       target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
-                                            height="160" alt="出北京记——第一站厦门"/></a>
-                </li>
-                <li class="banner_bg_4">
-                    <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
-                       target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
-                                            height="160" alt="出北京记——第一站厦门"/></a>
-                </li>
-                <li class="banner_bg_4">
-                    <a href="h/subject/s_xiamen.html?utm_source=DH__lagou&utm_medium=home&utm_campaign=xiamen"
-                       target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646"
-                                            height="160" alt="出北京记——第一站厦门"/></a>
+                <li class="banner_bg_3" style="height: 340px" >
+                    <a target="_blank"><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="646" height="340" /></a>
                 </li>
             </ul>
-            <%-----------------------------------------------------------------------企业小方块--%>
+
             <div class="banner_control">
                 <em></em>
                 <ul class="thumbs">
                     <li class="thumbs_1 current">
                         <i></i>
-                        <img src="../style/images/4469b1b83b1f46c7adec255c4b1e4802.jpg" width="113" height="42"/>
+                        <img src="../style/images/4469b1b83b1f46c7adec255c4b1e4802.jpg" width="113" height="65"/>
                     </li>
                     <li class="thumbs_2">
                         <i></i>
-                        <img src="../style/images/381b343557774270a508206b3a725f39.jpg" width="113" height="42"/>
+                        <img src="../style/images/381b343557774270a508206b3a725f39.jpg" width="113" height="65"/>
                     </li>
                     <li class="thumbs_3">
                         <i></i>
-                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="42"/>
-                    </li>
-                    <li class="thumbs_3">
-                        <i></i>
-                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="42"/>
+                        <img src="../style/images/354d445c5fd84f1990b91eb559677eb5.jpg" width="113" height="65"/>
                     </li>
                 </ul>
             </div>
         </div><!--/#main_banner-->
+
+        <%-----------------------------------------------------------------------企业小方块--%>
 
         <ul id="da-thumbs" class="da-thumbs">
             <li>
@@ -307,111 +281,90 @@
     </div>
 </div>
 
-<%----------------------------------------------------------------------------热门职业、最新职业--%>
+<%------------------------------------------------------------------热门职业、最新职业-------------%>
 <div id="hotList" align="center">
-    <ul class="hot_pos reset">
-        <div style="font-size: 25px;color:#44D0C7">——热门企业——</div>
-        <li class="clearfix">
-            <div class="hot_pos_l">
-                <div class="mb10">
-                    <a href="h/jobs/147822.html" target="_blank">运营总监</a>
-                    &nbsp;
-                    <span class="c9">[北京]</span>
+    <ul class="hc_list reset" style="width: 87%;margin: 0px 45px;margin-left: 10%;">
+        <div style="font-size: 30px;color:#dddfe4;margin: 45px;font-family: 楷体">
+            ——&nbsp;&nbsp;<b style="color: #414a60">最新职位</b>&nbsp;&nbsp;——
+        </div>
+        <c:forEach items="${postList}" var="post">
+            <li style="margin: 8px 15px;width: 280px;height: 120px" onclick="post(${post.pPostId})">
+                <div style="float: left">
+                    <div class="comLogo" style="font-size: 18px">
+                            ${post.postName}
+                    </div>
+                    <div>
+                        <a target="_blank" style="font-size: 13px;color: darkgrey">
+                                ${post.workCity}&nbsp;|&nbsp;${post.workYear}|&nbsp;${post.education}
+                        </a>
+                    </div>
                 </div>
-                <span><em class="c7">月薪： </em>15k-20k</span>
-                <span><em class="c7">经验：</em> 3-5年</span>
-                <span><em class="c7">最低学历： </em>本科</span>
-                <br/>
-                <span><em class="c7">职位诱惑：</em>发展前景</span>
-                <br/>
-                <span>1天前发布</span>
-                <!-- <a  class="wb">分享到微博</a> -->
-            </div>
-            <div class="hot_pos_r">
-                <div class="mb10 recompany"><a href="h/c/399.html" target="_blank">节操精选</a></div>
-                <span><em class="c7">领域：</em> 移动互联网</span>
-                <span><em class="c7">创始人：</em>陈桦</span>
-                <br/>
-                <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
-                <span><em class="c7">规模：</em>少于15人</span>
-                <ul class="companyTags reset">
-                    <li>移动互联网</li>
-                    <li>五险一金</li>
-                    <li>扁平管理</li>
-                </ul>
-            </div>
-        </li>
-        <li class="odd clearfix">
-            <div class="hot_pos_l">
-                <div class="mb10">
-                    <a href="h/jobs/148429.html" target="_blank">葡萄酒内容运营专员</a>
-                    &nbsp;
-                    <span class="c9">[广州]</span>
+                <div style="float: right;color: #fd7240;font-size: 16px" align="center">
+                    ${post.minSalary}K&nbsp;-&nbsp; ${post.maxSalary}K
                 </div>
-                <span><em class="c7">月薪： </em>5k-8k</span>
-                <span><em class="c7">经验：</em> 1-3年</span>
-                <span><em class="c7">最低学历： </em>本科</span>
-                <br/>
-                <span><em class="c7">职位诱惑：</em>喝着世界美酒快乐地工作！</span>
-                <br/>
-                <span>1天前发布</span>
-                <!-- <a  class="wb">分享到微博</a> -->
-            </div>
-            <div class="hot_pos_r">
-                <div class="mb10 recompany"><a href="h/c/4474.html" target="_blank">酒咔嚓</a></div>
-                <span><em class="c7">领域：</em> 移动互联网,生活服务</span>
-                <br/>
-                <span><em class="c7">阶段：</em> 初创型(天使轮)</span>
-                <span><em class="c7">规模：</em>15-50人</span>
-                <ul class="companyTags reset">
-                    <li>五险一金</li>
-                    <li>股票期权</li>
-                    <li>带薪年假</li>
+                <ul class="reset ctags" style="margin-top: 73px;">
+                    <div style="float: left">q
+                        <img src="${pageContext.request.contextPath}/uploadLogo${post.backUser.logo}" width="40"
+                             height="39" alt="CCIC"/>
+                    </div>
+                    <div style="float: right" align="center">
+                            ${post.backUser.finanStage}&nbsp;|&nbsp;${post.backUser.scale}
+                    </div>
                 </ul>
-            </div>
-        </li>
-        <li class="clearfix">
-            <div class="hot_pos_l">
-                <div class="mb10">
-                    <a href="h/jobs/1221.html" target="_blank">百度移动游戏UI designer</a>
-                    &nbsp;
-                    <span class="c9">[北京]</span>
-                </div>
-                <span><em class="c7">月薪： </em>7k-14k</span>
-                <span><em class="c7">经验：</em> 1-3年</span>
-                <span><em class="c7">最低学历： </em>本科</span>
-                <br/>
-                <span><em class="c7">职位诱惑：</em>喜欢游戏，喜欢生活，游戏生活~</span>
-                <br/>
-                <span>1天前发布</span>
-                <!-- <a  class="wb">分享到微博</a> -->
-            </div>
-            <div class="hot_pos_r">
-                <div class="mb10 recompany"><a href="h/c/323.html" target="_blank">百度移动游戏</a></div>
-                <span><em class="c7">领域：</em> 移动互联网</span>
-                <span><em class="c7">创始人：</em>李彦宏</span>
-                <br/>
-                <span><em class="c7">阶段：</em> 上市公司</span>
-                <span><em class="c7">规模：</em>2000人以上</span>
-                <ul class="companyTags reset">
-                    <li>年终分红</li>
-                    <li>绩效奖金</li>
-                    <li>股票期权</li>
-                </ul>
-            </div>
-        </li>
-        <a href="list.html?city=%E5%85%A8%E5%9B%BD" class="btn fr" target="_blank">查看更多</a>
+            </li>
+        </c:forEach>
     </ul>
+    <div>
+        <button type="button" class="layui-btn layui-btn-primary"
+                style="width: 240px;margin-top: 25px;margin-bottom: 35px;background-color: #44d0c7;font-size: 16px;color: white;"
+                onclick="window.open('${pageContext.request.contextPath}/center/job')">
+            查看更多
+        </button>
+    </div>
 </div>
-<div class="clear"></div>
+
+<%-----------------------------------------------------------------------------热门企业--------------%>
+<div id="hotList" align="center">
+    <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
+        <div style="font-size: 30px;color: #dddfe4;margin: 45px;font-family: 楷体">
+            ——&nbsp;&nbsp;<b style="color: #414a60">热门企业</b>&nbsp;&nbsp;——
+        </div>
+        <c:forEach items="${homeCompany}" var="hc">
+            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="compName(${hc.bUserId})">
+                <div class="comLogo" style="float: left">
+                    <img src="${pageContext.request.contextPath}/uploadLogo${hc.logo}" width="60"
+                         height="60" alt="CCIC"/>
+                </div>
+                <div style="float: right">
+                    <h3 title="CCIC" style="margin: 2px 5px;width: 183px;text-overflow:ellipsis;" align="center">
+                        <b>${hc.compName}</b>
+                    </h3>
+                    <a  target="_blank" style="font-size: 13px;color: darkgrey">
+                            ${hc.finanStage}&nbsp;|&nbsp;${hc.city}
+                    </a>
+                </div>
+                <ul class="reset ctags" style="margin-top: 73px;">
+                    <li>${hc.scale}</li>
+                    <li>${hc.product}</li>
+                </ul>
+            </li>
+        </c:forEach>
+    </ul>
+    <div>
+        <button type="button" class="layui-btn layui-btn-primary"
+                style="width: 240px;margin-top: 25px;margin-bottom: 35px;background-color: #44d0c7;font-size: 16px;color: white;"
+                onclick="window.open('${pageContext.request.contextPath}/homePage/companylist')">
+            查看更多
+        </button>
+    </div>
+</div>
 
 
 <%------------------------------------------------------------------------------------友情连接--%>
 <div id="linkbox">
-    <dl>
+    <dl style="margin-left: 25%">
         <dt>友情链接</dt>
         <dd>
-            <a href="http://www.zhuqu.com/" target="_blank">住趣家居网</a> <span>|</span>
             <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
             <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
             <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
@@ -464,7 +417,35 @@
 <script type="text/javascript" src="../style/js/core.min.js"></script>
 <script type="text/javascript" src="../style/js/popup.min.js"></script>
 <script>
+    var flag = "";
+    <%
+        String flag = (String) request.getAttribute("flag");
+        if(flag!=null){
+            out.write("flag='"+flag.trim()+"'");
+            request.removeAttribute("flag");
+        }
 
+    %>
+    $(function () {
+        if(flag.length==0){
+            var position = new BMap.Geolocation();
+            position.getCurrentPosition(function (r) {
+//    判断定位是否成功
+                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                    //    获取经度，维度，省份
+                    lat = r.positionLat;
+                    lng = r.positionLng;
+                    city = r.address.city;
+                    $("#city").text(city);
+                    $("#bCity").text(city);
+                    location.href="homes?city="+$("#city").text();
+                }
+            });
+        }else{
+            $("#city").text(flag);
+            $("#bCity").text(flag);
+        }
+    })
 </script>
 </body>
 </html>

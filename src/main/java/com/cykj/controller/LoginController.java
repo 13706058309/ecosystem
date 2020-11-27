@@ -5,7 +5,9 @@ import com.cykj.entity.Menu;
 import com.cykj.entity.UserInfo;
 import com.cykj.service.LoginService;
 import com.cykj.service.PowerService;
+import com.cykj.util.AliyunSmsUtils;
 import com.cykj.util.MD5Utils;
+import com.cykj.utils.PhoneCodeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,23 +20,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Random;
 
 @Controller
 @RequestMapping("/golog")
 public class LoginController {
-
-
-
     @Resource
     private LoginService loginServiceImpl;
     @Resource
     private PowerService powerServiceImpl;
 
-
     //跳转登录界面
     @RequestMapping(value = {"/login"})
+//    @Loger(operationName = "跳转登录界面")
     public String login() {
         return "Login";
     }
@@ -71,6 +71,7 @@ public class LoginController {
 
     //前端登录的动作
     @RequestMapping(value = {"/log"})
+//    @Loger(operationName = "执行前端用户登录")
     public @ResponseBody
     String log(String account, String pwd, String sVCode, HttpServletRequest request) {
         System.out.println("执行前端用户登录!");
@@ -80,11 +81,11 @@ public class LoginController {
         if (sVCode.equalsIgnoreCase(vCode)) {
 //            启用MD5解开即可
 //            UserInfo userInfo = loginServiceImpl.log(account,MD5Utils.md5(pwd));
-            UserInfo userInfo = loginServiceImpl.log(account,pwd);
+            UserInfo userInfo = loginServiceImpl.log(account, pwd);
 
             if (userInfo == null) {
                 System.out.println("查无此账号!");
-                return "no account";
+                return "noAccount";
             } else {
                 System.out.println(userInfo.toString());
                 String stateName = userInfo.getStates().getParamName();
@@ -103,14 +104,178 @@ public class LoginController {
                 } else {
 //                    request.getSession().removeAttribute("qUser");
                     System.out.println("账号审核未通过，无法登录");
-                    return "Audit failed";
+                    return "auditFailed";
                 }
             }
         } else {
             System.out.println("验证码错误!");
-            return "Vcode error";
+            return "vCodeError";
         }
     }
+
+    @RequestMapping("/admin")
+//    @Loger(operationType = "跳转后台登录页面")
+    public String admin() {
+        return "adminLog";
+    }
+
+    @RequestMapping("/adLog")
+//    @Loger(operationName = "执行后端登录动作")
+    public @ResponseBody
+    String adlog(String account, String password, String sVCode, HttpServletRequest
+            request) throws IOException {
+        System.out.println("执行后端登录动作");
+        System.out.println("账号:" + account + ",密码:" + password + ",验证码:" + sVCode);
+
+        String vCode = (String) request.getSession().getAttribute("vCode");
+        request.getSession().removeAttribute("vCode");
+        if (sVCode.equalsIgnoreCase(vCode)) {
+//            启用MD5解开即可
+//            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password) );
+            BackUser backUser = loginServiceImpl.adminLog(account, password);
+            if (backUser == null) {
+                System.out.println("查无此账号!");
+                return "noAccount";
+            } else {
+                System.out.println(backUser.toString());
+                String stateName = backUser.getStates().getParamName();
+                if (stateName.equals("启用")) {
+                    request.getSession().setAttribute("admin", backUser);
+                    System.out.println("登录成功!");
+                    return "success";
+                } else if (stateName.equals("待审核")) {
+//                    request.getSession().removeAttribute("qUser");
+                    System.out.println("此账号待审核!");
+                    return "noReviewed";
+                } else if (stateName.equals("审核不通过")) {
+//                    request.getSession().removeAttribute("qUser");
+                    System.out.println("此账号已被删除!");
+                    return "failedPass";
+                } else {
+//                    request.getSession().removeAttribute("qUser");
+                    System.out.println("登录失败!");
+                    return "failed";
+                }
+            }
+        } else {
+            System.out.println("验证码错误!");
+            return "vCodeError";
+        }
+    }
+
+    //短信登录
+    @RequestMapping("/mesLog")
+    public @ResponseBody
+    String mesLog(String phone, String code, HttpServletRequest request) {
+        System.out.println("执行短信验证登录!");
+        System.out.println("传过来的手机值为:" + phone + "验证码为:" + code);
+
+        String savePhone = (String) request.getSession().getAttribute("logPhone");
+        String saveCode = (String) request.getSession().getAttribute("logCode");
+
+        System.out.println("savePhone"+savePhone);
+        System.out.println("saveCode"+saveCode);
+
+
+        if (!phone.equalsIgnoreCase(savePhone)) {
+            System.out.println("手机号错误!");
+            return "9";
+        }
+        if (!code.equalsIgnoreCase(saveCode)){
+            System.out.println("验证码错误!");
+            return "8";
+        }
+        if (code.equalsIgnoreCase(saveCode)){
+            System.out.println("执行短信验证登录!");
+//            如果启用MD5解开即可
+//            UserInfo userInfo = loginServiceImpl.mesLog(MD5Utils.md5(phone));
+            UserInfo userInfo= loginServiceImpl.mesLog(phone);
+            System.out.println("userInfo:"+userInfo.toString());
+            if (userInfo == null){
+                System.out.println("登录失败！");
+                return "s";
+            } else {
+                System.out.println(userInfo.toString());
+                String stateName = userInfo.getStates().getParamName();
+                if (stateName.equals("启用")){
+                    request.getSession().setAttribute("qUser", userInfo);
+                    System.out.println("登录成功!");
+                    return "success";
+                } else if (stateName.equals("禁用")) {
+                    System.out.println("此账号已被禁用!");
+                    return "j";
+                } else if (stateName.equals("已删除")){
+                    System.out.println("此账号已被删除!");
+                    return "d";
+                } else {
+                   System.out.println("账号审核未通过，无法登录");
+                    return "f";
+                }
+            }
+        }
+        return "";
+    }
+
+
+
+    //发送短信验证码
+    @RequestMapping("/aliSend")
+    public @ResponseBody
+    String aliSend(String phone, HttpServletRequest request) {
+        UserInfo userInfo = loginServiceImpl.findPhone(phone);
+        if(userInfo==null) return "2";
+            String code = "";
+            for (int i = 0; i < 4; i++) {
+                int num = (int) (1 + Math.random() * 9);
+                code += num;
+            }
+            request.getSession().setAttribute("logPhone", phone);
+            request.getSession().setAttribute("logCode", code);
+            System.out.println("发送的验证码为:" + code);
+            String s = AliyunSmsUtils.sendCode(phone, code);
+            System.out.println(s);
+
+            return "1";
+        }
+
+        //修改密码发送验证码
+    @RequestMapping("/sendCode")
+    public @ResponseBody String sendCode(String phone,HttpServletRequest request){
+        UserInfo userInfo = loginServiceImpl.findPhone(phone);
+        if(userInfo==null) return "2";
+
+        String code = "";
+        for(int i=0;i<4;i++){
+            int num = (int)(1+Math.random()*9);
+            code += num;
+        }
+        System.out.println("code="+code);
+        request.getSession().setAttribute("phone",phone);
+        request.getSession().setAttribute("code",code);
+        String s = PhoneCodeUtil.sendCode(phone, code);
+        System.out.println(s);
+        return "1";
+    }
+
+        @RequestMapping("/findPass")
+        public @ResponseBody String findPass(String phone,String pwd,String vCode,HttpServletRequest request ){
+
+            String savePhone = (String) request.getSession().getAttribute("phone");
+            String saveCode = (String)request.getSession().getAttribute("code");
+            if(!phone.equals(savePhone)){
+                System.out.println("登录手机号未找到!");
+                return "2";
+            }
+            if(!vCode.equals(saveCode)){
+                System.out.println("验证码错误");
+                return "3";
+            }
+            int n = loginServiceImpl.changPasswordByPhone(pwd,phone);
+
+        return n>0?"1":"4";
+        }
+
+
 
     @RequestMapping(value = "/getCode")
     public String getCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -167,13 +332,15 @@ public class LoginController {
         return null;
     }
 
-    //跳转注册界面
-    @RequestMapping(value = {"/reg"})
-    public String reg() {
+
+    //跳转注册页面
+    @RequestMapping("/reg")
+    public String reg(){
         return "Register";
     }
 
     //注册的动作
+//    @Loger(operationName = "执行前端注册")
     @RequestMapping(value = {"/regiest"})
     public @ResponseBody
     String regiest(UserInfo userInfo) {
@@ -195,76 +362,35 @@ public class LoginController {
         }
     }
 
-        //跳转忘记密码界面
-        @RequestMapping("/forget")
-        public String forget () {
-            return "ForgetPass";
-        }
-
-    @RequestMapping("/admin")
-    public String admin(){
-        return "adminLog";
+    //跳转忘记密码界面
+    @RequestMapping("/forget")
+    public String forget() {
+        return "ForgetPass";
     }
 
-        @RequestMapping("/adLog")
-        public @ResponseBody String adlog (String account, String password, String vCode, HttpServletRequest
-        request, HttpServletResponse response) throws IOException {
-            System.out.println("执行后端登录动作");
-            System.out.println("密码是:"+password);
-            System.out.println("账号:" + account + ",密码:" + password + ",验证码:" + vCode);
-            String code = (String)request.getSession().getAttribute("code");
-            request.getSession().removeAttribute("code");
-        if(!vCode.equalsIgnoreCase(code)){
-//            启用MD5解开即可
-//            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password) );
-            BackUser backUser = loginServiceImpl.adminLog(account,password);
-            if (backUser == null) {
-                System.out.println("查无此账号!");
-                return "no account";
-            } else {
-                System.out.println(backUser.toString());
-                String stateName = backUser.getStates().getParamName();
-                if (stateName.equals("启用")) {
-                    request.getSession().setAttribute("admin", backUser);
-                    System.out.println("登录成功!");
-                    return "success";
-                } else if (stateName.equals("禁用")) {
-                    System.out.println("此账号已被禁用!");
-                    return "disable";
-                } else if (stateName.equals("已删除")) {
-                    System.out.println("此账号已被删除!");
-                    return "delete";
-                } else {
-                    System.out.println("账号审核未通过，无法登录");
-                    return "Audit failed";
-                }
-            }
-        } else {
-            System.out.println("验证码错误!");
-            return "Vcode error";
-        }
-        }
 
-        @RequestMapping("/adminMain")
-        public String adminMain (HttpServletRequest request, HttpServletResponse response){
-            BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-            if (backUser != null) {
-                List<Menu> menuList = powerServiceImpl.findExistMenu(backUser.getRoleId());
-                request.getSession().setAttribute("menuList", menuList);
-                return "BackMain";
-            } else {
-                return "";
-            }
-        }
-
-        @RequestMapping("/toMain")
-        public String toMain (HttpServletRequest request, HttpServletResponse response){
-            BackUser backUser = new BackUser();
-            backUser.setRoleId(1);
-            backUser.setBUserName("测试1");
-            request.getSession().setAttribute("adminInfo", backUser);
+    @RequestMapping("/adminMain")
+//    @Loger(operationName = "登录后跳转菜单")
+    public String adminMain(HttpServletRequest request, HttpServletResponse response) {
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        if (backUser != null) {
             List<Menu> menuList = powerServiceImpl.findExistMenu(backUser.getRoleId());
             request.getSession().setAttribute("menuList", menuList);
             return "BackMain";
+        } else {
+            return "";
         }
     }
+
+    @RequestMapping("/toMain")
+    public String toMain(HttpServletRequest request, HttpServletResponse response) {
+        BackUser backUser = new BackUser();
+        backUser.setRoleId(1);
+        backUser.setBUserName("测试1");
+        request.getSession().setAttribute("adminInfo", backUser);
+        List<Menu> menuList = powerServiceImpl.findExistMenu(backUser.getRoleId());
+        request.getSession().setAttribute("menuList", menuList);
+        return "BackMain";
+    }
+
+}

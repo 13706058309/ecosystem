@@ -1,10 +1,7 @@
 package com.cykj.service.impl;
 
 
-import com.cykj.entity.BackUserNum;
-import com.cykj.entity.CompAndtalent;
-import com.cykj.entity.Positions;
-import com.cykj.entity.Talent;
+import com.cykj.entity.*;
 import com.cykj.mapper.TalentMapper;
 import com.cykj.mapper.UserNumMapper;
 import com.cykj.service.TalentService;
@@ -96,9 +93,66 @@ public class TalentServiceImpl implements TalentService {
     }
 
     @Override
-    public boolean findTalent(String talentName) {
-        return talentMapper.selectTalent(talentName)==null;
+    public boolean findTalent(String contactInfo) {
+        return talentMapper.selectTalent(contactInfo)==null;
     }
+
+    @Override
+    public List<Positions> selectPosition(Map<String, Object> map, int limit, int page) {
+        map.put("limit",limit);
+        map.put("offset",(page-1)*limit);
+        return talentMapper.selectPosition(map);
+    }
+
+    @Override
+    public int selectPositionRecords(Map<String, Object> map) {
+        int records = talentMapper.selectPositionRecords(map);
+        return records;
+    }
+
+    @Override
+    public String changePosition(Map<String, Object> map) {
+        int n = talentMapper.changePosition(map);
+        return n>0? "1":"2";
+    }
+
+    @Override
+    public boolean lookPosition(String postName) {
+        return talentMapper.lookPosition(postName)==null;
+    }
+
+    @Override
+    public int addPosition(String postName, Long departId) {
+
+        int n = talentMapper.addPosition(postName,departId);
+
+        return n;
+    }
+
+    @Override
+    public boolean lookDepart(String departName) {
+        return talentMapper.lookDepart(departName)==null;
+    }
+
+    @Override
+    public int addDepart(String departName, Long industryId) {
+        int n = talentMapper.addDepart(departName,industryId);
+
+        return n;
+    }
+
+    @Override
+    public boolean lookIndustry(String industryName) {
+        return talentMapper.lookIndustry(industryName)==null;
+    }
+
+    @Override
+    public int addIndustry(String industryName) {
+        int n = talentMapper.addIndustry(industryName);
+
+        return n;
+    }
+
 
     @Override
     public boolean findCompAndtalent(int companyID, char c) {
@@ -111,6 +165,17 @@ public class TalentServiceImpl implements TalentService {
         int n = talentMapper.addCompAndtalent(companyID,c);
 
         return n;
+    }
+
+    @Override
+    public String changeSchoolInfo(Map<String, Object> map) {
+        int n = talentMapper.changeSchoolInfo(map);
+        return n>0? "1":"2";
+    }
+
+    @Override
+    public BackUser findShoolByID(int i) {
+      return talentMapper.findShoolByID(i);
     }
 
 

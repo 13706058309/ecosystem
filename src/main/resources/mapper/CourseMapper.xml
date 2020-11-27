@@ -88,4 +88,40 @@
 <!--    <select id="search" parameterType="java.lang.String" resultType="com.cykj.entity.Course">-->
 <!--        select courseId,fieldId,courseName,uploadTime  from course where courseName like concat('%',#{courseName},'%')-->
 <!--    </select>-->
+    <select id="selectCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(*) from course
+        <if test="fieldId !=0">
+            where fieldId=#{fieldId}
+        </if>
+    </select>
+
+    <select id="hotCourses" resultType="com.cykj.entity.Course">
+        select courseId,courseName,courseImgUrl,speakerName,totalPlayTimes from course order by totalPlayTimes desc limit 5
+    </select>
+
+    <select id="selectCourseById" parameterType="java.lang.Long" resultMap="unitsMap">
+        select c.courseId,c.courseName,c.courseImgUrl,c.courseIntroduce,c.collectionNumber,c.totalPlayTimes, count(u.unitId) unitNumber
+        from course c,unit u where c.courseId=#{courseId} and u.courseId=#{courseId}
+    </select>
+    <resultMap id="unitsMap" type="com.cykj.entity.Course">
+        <id property="courseId" column="courseId"/>
+        <result property="courseName" column="courseName"/>
+        <result property="courseImgUrl" column="courseImgUrl"/>
+        <result property="courseIntroduce" column="courseIntroduce"/>
+        <result property="collectionNumber" column="collectionNumber"/>
+        <result property="totalPlayTimes" column="totalPlayTimes"/>
+        <result property="unitNumber" column="unitNumber"/>
+    </resultMap>
+
+    <select id="selectRelatedCourses" parameterType="java.lang.Long" resultType="com.cykj.entity.Course">
+        select courseId,courseName,courseImgUrl,speakerName,totalPlayTimes from course
+        where courseId in
+        (select courseId from course where fieldId in
+        (select fieldId from course where courseId=#{courseId}) and courseId!=#{courseId})
+        ORDER BY totalPlayTimes DESC limit 5
+    </select>
+
+    <select id="selectCourseNameByCourseId" parameterType="java.lang.Long" resultType="java.lang.String">
+        select courseName from course where courseId=#{courseId}
+    </select>
 </mapper>

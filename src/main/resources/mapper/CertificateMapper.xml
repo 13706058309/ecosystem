@@ -7,14 +7,39 @@
     <select id="findcertificatelist" resultMap="recmap">
     select * from certificate c join field f on c.fieldId=f.fieldId
     </select>
+
+    <select id="findbackcertificatelist" parameterType="java.util.HashMap" resultMap="recmap">
+    select * from certificate c join field f on c.fieldId=f.fieldId  where 1=1
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+
+         order by c.cerChangeTime desc limit #{page},#{limit}
+
+    </select>
+
+    <select id="findbackcertificatelistsize" parameterType="java.util.HashMap" resultType="integer">
+        select count(*) from certificate c join field f on c.fieldId=f.fieldId  where 1=1
+
+        <if test="fieldName != null ">
+            and f.fieldName like #{fieldName}
+        </if>
+    </select>
+
     <resultMap id="recmap" type="com.cykj.entity.Certificate">
         <id property="cerId" column="cerId"></id>
         <result property="imgUrl" column="imgUrl"></result>
+        <result property="fieldId" column="fieldId"></result>
         <result property="cerSketch" column="cerSketch"></result>
         <result property="cerTrait" column="cerTrait"></result>
         <result property="cerHeadPortrait" column="cerHeadPortrait"></result>
         <result property="cershowState" column="cershowState"></result>
         <result property="cerChangeTime" column="cerChangeTime"></result>
+        <result property="cerRequirement" column="cerRequirement"></result>
+        <result property="certificationFee" column="certificationFee"></result>
+        <result property="certificationFee" column="certificationFee"></result>
+        <result property="cerRequirement" column="cerRequirement"></result>
         <association property="field" column="fieldId" javaType="com.cykj.entity.Field">
             <id property="fieldId" column="fieldId"></id>
             <result property="fieldName" column="fieldName"></result>
@@ -25,6 +50,43 @@
     select * from certificate where fieldId = #{fieldid}
     </select>
 
+    <select id="findAll" parameterType="java.util.HashMap" resultMap="recmap">
+        select f.fieldName ,c.* from certificate c , field f where c.fieldId=f.fieldId
+    </select>
 
+    <delete id="deleteZs" parameterType="int">
+        delete from certificate where cerId = #{id}
+    </delete>
 
+    <update id="upcershowState" >
+       update certificate set cerShowState = #{cerShowState} where cerId= #{cerId}
+    </update>
+
+    <update id="upbackzhengshu" parameterType="java.util.HashMap">
+       update certificate set cerSketch = #{jiansu},cerTrait =#{tdian},certificationFee=#{feiyong},cerChangeTime= #{date}
+       <if test="touxiangurl != null">
+           ,cerHeadPortrait = #{touxiangurl}
+       </if>
+        <if test="tupianurl != null">
+            ,imgUrl = #{tupianurl}
+        </if>
+        where cerId= #{cerId}
+    </update>
+    <update id="upbackzhengshuxuqiu" >
+        update certificate set cerRequirement = #{cerRequirement} where cerId= #{cerId}
+    </update>
+    <insert id="insertcertificate" parameterType="com.cykj.entity.Certificate" keyProperty="cerId" useGeneratedKeys="true">
+      insert into certificate(imgUrl, fieldId, cerSketch, cerTrait, cerHeadPortrait, cerShowState, cerChangeTime, certificationFee, cerRequirement)
+        value (#{imgUrl},#{fieldId},#{cerSketch},#{cerTrait},#{cerHeadPortrait},#{cerShowState},#{cerChangeTime},#{certificationFee},#{cerRequirement})
+    </insert>
+
+    <select id="finduname"  resultType="integer">
+    select count(*) from field where fieldName= #{fieldName}
+    </select>
+    <select id="findfieldid"  resultType="integer">
+    select * from field where fieldName= #{fieldName}
+    </select>
+    <insert id="insertfield"  keyProperty="fieldId" useGeneratedKeys="true">
+       insert into field(fieldName) value (#{fieldName})
+    </insert>
 </mapper>

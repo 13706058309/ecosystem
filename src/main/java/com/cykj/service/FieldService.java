@@ -18,4 +18,10 @@ public interface FieldService {
 
 //    public List<Course> findCourse();
 //    public List<Course> search(String courseName);
+import com.cykj.entity.Field;
+
+import java.util.List;
+
+public interface FieldService {
+    public List<Field> selectAllFieldName();
 }

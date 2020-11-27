@@ -6,86 +6,180 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <script id="allmobilize" charset="utf-8" src="../style/js/allmobilize.min.js"></script>
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <link rel="alternate" media="handheld"  />
-    <!-- end 云适配 -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>钱程无忧找回密码</title>
-    <meta property="qc:admins" content="23635710066417756375" />
-    <meta content="拉勾网是3W旗下的互联网领域垂直招聘网站,互联网职业机会尽在拉勾网" name="description">
-    <meta content="拉勾,拉勾网,拉勾招聘,拉钩, 拉钩网 ,互联网招聘,拉勾互联网招聘, 移动互联网招聘, 垂直互联网招聘, 微信招聘, 微博招聘, 拉勾官网, 拉勾百科,跳槽, 高薪职位, 互联网圈子, IT招聘, 职场招聘, 猎头招聘,O2O招聘, LBS招聘, 社交招聘, 校园招聘, 校招,社会招聘,社招" name="keywords">
-
-    <meta name="baidu-site-verification" content="QIQ6KC1oZ6" />
-
-    <!-- <div class="web_root"  style="display:none">http://www.lagou.com</div> -->
-    <script type="text/javascript">
-        var ctx = "http://www.lagou.com";
-        console.log(1);
-    </script>
-    <link rel="Shortcut Icon" href="http://www.lagou.com/images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../style/css/style.css"/>
-
-    <script src="../style/js/jquery.1.10.1.min.js" type="text/javascript"></script>
-
-    <script type="text/javascript" src="../style/js/jquery.lib.min.js"></script>
-    <script type="text/javascript" src="../style/js/core.min.js"></script>
-    <script type="text/javascript" src="../style/js/analytics.js"></script>
-
-    <script type="text/javascript">
-        var youdao_conv_id = 271546;
-    </script>
-    <script type="text/javascript" src="../style/js/conv.js"></script>
+    <meta charset="utf-8">
+    <title>用户忘记密码</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dmaku.css">
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+    <script src="${pageContext.request.contextPath}/js/dmaku.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+    <style>
+        .btn-danger:hover {
+            color: lightgreen;
+            background-color: #c9302c;
+            border-color: #ac2925;}
+        .btn-danger {
+            color: lightgreen;
+            background-color: #d9534}
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #C9302C;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: left;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;}
+        .btn:hover{
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
 </head>
-
-<body id="login_bg">
-<div class="login_wrapper">
-    <div class="login_header">
-        <a href="#"><img src="../style/images/logo.png" width="500" height="150" alt="钱程无忧" /></a>
-        <div id="cloud_s"><img src="../style/images/cloud_s.png" width="81" height="52" alt="cloud" /></div>
-        <div id="cloud_m"><img src="../style/images/cloud_m.png" width="136" height="95"  alt="cloud" /></div>
-    </div>
-
-    <input type="hidden" id="resubmitToken" value="" />
-    <div class="find_psw">
-        <img src="../style/images/psw_step1.png" width="369" height="56" alt="找回密码第一步" />
-        <form id="pswForm" action="http://www.lagou.com/rs.html" method="post">
-            <input type="text" name="email" id="email" tabindex="1" value="" placeholder="请输入注册时使用的邮箱地址" />
-            <input type="submit" id="submitLogin" value="找回密码" />
+<body>
+<div class="login-page">
+    <div class="form">
+        <input type="hidden" value="${pageContext.request.contextPath}" id="path" />
+        <form class="login-form">
+            <input type="text" name="phoneNumber" id="phone" placeholder="请输入手机号">
+            <input type="button" name="mesCode" id="mesCode" value="点击获取验证码" onclick="sendCode()" class="btn btn-danger">
+            <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码">
+            <input type="password" name="pwd" id="pwd" placeholder="请输入您的新密码" maxlength="12">
+            <input type="password" name="pwd1"  id="pwd1" placeholder="请确认您的密码" maxlength="12">
+            <a onclick="findPwd()"><input type="button" value="提交"></a>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a></p>
         </form>
     </div>
 </div>
+<script>
+    var layer;
+    var InterValObj;
+    var path = $("#path").val();
+    var curCount=120;
+    layui.use('layer',function () {
+        layer = layui.layer;
+    })
+    function sendCode() {
+        var phone = $("#phone").val();
+        var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+        if(!pattern.test(phone)){
+            layer.alert("请输入正确手机号");
+        }else{
+            $.ajax({
+                url:path+"/golog/sendCode",
+                type:'post',
+                data:"phone=" + phone,
+                dataType:'text',
+                success:function(data){
+                    if(data=='1'){
+                        layer.msg("发送成功");
+                        $("#mesCode").attr("disabled", "true");
+                        $("#mesCode").css("background-color", "grey");
+                        $("#mesCode").val( curCount + "秒");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }else if(data=='2'){
+                        layer.msg("手机号错误，该手机未注册过");
+                    }else{
+                        layer.msg("发送失败，请稍后再发");
+                    }
+                },
+                error:function(){
+                    layer.alert('请求超时或系统出错!');
+                }
+            });
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#pswForm input[type="text"]').focus(function(){
-            $(this).siblings('.error').hide();
-        });
-        //验证表单
+        }
+    }
 
-        $("#pswForm").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
+    function SetRemainTime() {
+        if (curCount == 0) {
+            curCount=60;
+            window.clearInterval(InterValObj);//停止计时器
+            $("#mesCode").removeAttr("disabled");//启用按钮
+            $("#mesCode").css("background-color", "#0D9572");
+            $("#mesCode").val("重新发送");
+        }
+        else {
+            curCount--;
+            $("#mesCode").val(curCount +"秒");
+        }
+    }
+
+    function findPwd() {
+        // alert("123213213213213213123");
+        var value = $("#mesCode").val();
+        if(value=='获取验证码'){
+            layer.alert("验证码未发送");
+            return false;
+        }
+        var phone = $("#phone").val();
+        var vCode = $("#acthCode").val();
+        var pwd = $("#pwd").val();
+        var againPwd = $("#pwd1").val();
+
+        $.ajax({
+            url:path+"/golog/findPass",
+            type:'post',
+            data:"phone=" + phone+"&pwd="+pwd+"&vCode="+vCode,
+            dataType:'text',
+            beforeSend:function(){
+                if(pwd!==againPwd){
+                    layer.alert("两次密码不一致");
+                    return false;
+                }
+                if(vCode.trim().length!=4){
+                    layer.alert("验证码输入错误");
+                    return false;
+                }
+                var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+                if(!pattern.test(phone)){
+                    layer.alert("请输入正确手机号");
+                    return false;
                 }
             },
-            messages: {
-                email: {
-                    required: "请输入注册时使用的邮箱地址",
-                    email: "请输入有效的邮箱地址，如：vivi@lagou.com"
+            success:function(data){
+                if(data==1){
+                    layer.msg("修改成功");
+                    curCount=120;
+                    window.clearInterval(InterValObj);//停止计时器
+                    $("#codeBtn").removeAttr("disabled");//启用按钮
+                    $("#codeBtn").css("background-color", "#0D9572");
+                    $("#codeBtn").val("发送验证码");
+                    var phone = $("#phone").val("");
+                    var vCode = $("#acthCode").val("");
+                    var pwd = $("#pwd").val("");
+                    var againPwd = $("#pwd1").val("");
+                }else if(data=='2'){
+                    layer.alert("手机号输入错误");
+                }else if(data=='3'){
+                    layer.alert("验证码输入错误");
+                }else{
+                    layer.alert("系统繁忙，找回失败");
                 }
             },
-            submitHandler:function(form){
-                $(form).find(":submit").attr("disabled", true);
-                form.submit();
+            error:function(){
+                layer.alert('请求超时或系统出错!');
             }
         });
-    });
+
+    }
+
 </script>
+
 </body>
 </html>
 
