@@ -61,7 +61,8 @@
                 <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
                 <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                 <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
+<%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
                 <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
                 <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
             </ul>
@@ -342,7 +343,7 @@
                                         <div class="primary-info">
                                             <div class="info-labels"><span class="prev-line"><span
                                                     class="label-text"><i class="fz-resume fz-job"></i>
-                                                <label id="expectWork9">${resume.expectWork}</label>
+                                                <label id="expectWork9" title="${resume.expectWork}">${resume.expectWork}</label>
                                             </span></span></div>
                                         </div>
                                         <div class="op op-show">
