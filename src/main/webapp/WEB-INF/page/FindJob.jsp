@@ -183,7 +183,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo11.png) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -205,15 +205,15 @@
             </c:if>
             <c:if test="${not empty qUser}">
             <ul>
-                <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
+<%--                <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
                 <li class="nav-figure">
-                    <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
+                    <a >
                         <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                     </a>
                     <div class="dropdown">
-                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
+                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
                         <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
-                        <a href="${pageContext.request.contextPath}/homePage/quitAccount"  ka="header-logout">退出登录</a>
+                        <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
                     </div>
                 </li>
             </ul></c:if>
@@ -244,7 +244,7 @@
                                     <div class="qrm-pinming">
                                         <div class="qrm-input-border">
                                             <!--<span class="title">品名</span>-->
-                                            <input type="text" value="${position}" class="qrm-input" style="width: 250px;height: 30px">
+                                            <input type="text" id="position" value="${position}" class="qrm-input" style="width: 250px;height: 30px">
                                         </div>
                                         <!--<div class="qrm-pinming-panel" style="display:none">-->
                                         <div class="qrm-border1" style="display:none">
@@ -580,7 +580,7 @@
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
                                                         <img class="icon-chat icon-chat-hover"
-                                                             src="https://z.zhipin.com/web/geek/resource/icon-chat-hover-v2.png"
+<%--                                                             src="https://z.zhipin.com/web/geek/resource/icon-chat-hover-v2.png"--%>
                                                              alt="">
                                                         <span>立即沟通</span>
                                                     </button>
@@ -597,7 +597,7 @@
                                                                     target="_blank">${job.backUser.compName}</a></h3>
                                                 <p><a href="/i100020/" class="false-link" target="_blank"
                                                       ka="search_list_company_industry_1_custompage"
-                                                      title="互联网行业招聘信息">
+                                                      title="">
                                                 <c:if test="${not empty job.industryList}">
                                                     <c:forEach var="industry" items="${job.industryList}">
                                                         &ensp;${industry.industryName}
@@ -606,7 +606,8 @@
                                                 </a><em class="vline"></em>${job.backUser.finanStage}<em
                                                         class="vline"></em>${job.backUser.scale}</p>
                                             </div>
-                                            <a href="/gongsi/60272326a766224f1nBy3do~.html"
+                                            <a
+<%--                                                    href="/gongsi/60272326a766224f1nBy3do~.html"--%>
                                                ka="search_list_company_1_custompage_logo" target="_blank"><img
                                                     class="company-logo"
                                                     src="${pageContext.request.contextPath}/uploadLogo/${job.backUser.logo}"
@@ -815,7 +816,7 @@
     //     location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     // }
     function findsearch() {
-        location.href="searchJob?findSearch="+$('#search').val()+"&findWorkCity="+findWorkCity
+        location.href="searchJob?findSearch="+$('#search').val()+"&findWorkCity="+findWorkCity+"&findPosition="+$('#position').val();
     }
     function updateCityDialog() {
         $("#city-dialog").show()
