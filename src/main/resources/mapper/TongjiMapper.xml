@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.TongjiMapper">
+
+    <select id="userNumWeek" resultType="com.cykj.entity.BackUserNum">
+        select * from (
+        select count(0) NUM,'星期一' as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -0 DAY) union
+        select count(0) NUM,'星期二' as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -1 DAY) union
+        select count(0) NUM,'星期三' as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -2 DAY) union
+        select count(0) NUM,'星期四' as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -3 DAY) union
+        select count(0) NUM,'星期五' as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -4 DAY) union
+        select count(0) NUM,'星期六' as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -5 DAY) union
+        select count(0) NUM,'星期日' as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -6 DAY)
+        ) as a
+    </select>
+
+    <select id="userNumMonth" resultType="com.cykj.entity.BackUserNum">
+        select * from (
+        select count(0) NUM,'第1周' as name from userInfo t where t.regTime between
+        DATE_ADD(curdate(),interval -day(curdate())+1 day)and DATE_ADD(curdate(),interval -day(curdate())+7 day) union
+        select count(0) NUM,'第2周' as name from userInfo t where t.regTime between
+        DATE_ADD(curdate(),interval -day(curdate())+7 day) and DATE_ADD(curdate(),interval -day(curdate())+14 day) union
+        select count(0) NUM,'第3周' as name from userInfo t where t.regTime between
+        DATE_ADD(curdate(),interval -day(curdate())+14 day) and DATE_ADD(curdate(),interval -day(curdate())+21 day) union
+        select count(0) NUM,'第4周' as name from userInfo t where t.regTime between
+        DATE_ADD(curdate(),interval -day(curdate())+21 day) and DATE_ADD(curdate(),interval -day(curdate())+28 day) union
+        select count(0) NUM,'第5周' as name from userInfo t where t.regTime between
+        DATE_ADD(curdate(),interval -day(curdate())+28 day) and last_day(curdate())
+        ) as a order by name  asc
+    </select>
+
+    <select id="userNumHalfYear" resultType="com.cykj.entity.BackUserNum">
+        select * from (
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 5 month), '%Y-%m') as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 5 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 4 month), '%Y-%m') as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 4 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 3 month), '%Y-%m') as name from userInfo t where
+         DATE_FORMAT(t.regTime,'%Y-%m') = DATE_FORMAT(date_sub(now(),interval 3 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 2 month), '%Y-%m') as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 2 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 1 month), '%Y-%m') as name from userInfo t where
+        DATE_FORMAT(t.regTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 1 month), '%Y-%m') union
+         select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 0 month), '%Y-%m') as name from userInfo t where
+         DATE_FORMAT(t.regTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 0 month), '%Y-%m')
+        ) as a
+    </select>
+
+    <select id="adminNumWeek" resultType="com.cykj.entity.BackUserNum">
+        select * from (
+        select count(0) NUM,'星期一' as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -0 DAY) union
+        select count(0) NUM,'星期二' as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -1 DAY) union
+        select count(0) NUM,'星期三' as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -2 DAY) union
+        select count(0) NUM,'星期四' as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -3 DAY) union
+        select count(0) NUM,'星期五' as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -4 DAY) union
+        select count(0) NUM,'星期六' as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -5 DAY) union
+        select count(0) NUM,'星期日' as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m-%d')=date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -6 DAY)
+        ) as a
+    </select>
+
+    <select id="adminNumMon" resultType="com.cykj.entity.BackUserNum">
+        select * from (
+        select count(0) NUM,'第1周' as name from backUser t where  t.roleId=1 and t.bRegTime between
+        DATE_ADD(curdate(),interval -day(curdate())+1 day)and DATE_ADD(curdate(),interval -day(curdate())+7 day) union
+        select count(0) NUM,'第2周' as name from backUser t where   t.roleId=1 and  t.bRegTime between
+        DATE_ADD(curdate(),interval -day(curdate())+7 day) and DATE_ADD(curdate(),interval -day(curdate())+14 day) union
+        select count(0) NUM,'第3周' as name from backUser t where   t.roleId=1 and t.bRegTime between
+        DATE_ADD(curdate(),interval -day(curdate())+14 day) and DATE_ADD(curdate(),interval -day(curdate())+21 day) union
+        select count(0) NUM,'第4周' as name from backUser t where   t.roleId=1 and t.bRegTime between
+        DATE_ADD(curdate(),interval -day(curdate())+21 day) and DATE_ADD(curdate(),interval -day(curdate())+28 day) union
+        select count(0) NUM,'第5周' as name from backUser t where   t.roleId=1 and t.bRegTime between
+        DATE_ADD(curdate(),interval -day(curdate())+28 day) and last_day(curdate())
+        ) as a order by name  asc
+    </select>
+
+    <select id="adminNumHalfYear" resultType="com.cykj.entity.BackUserNum">
+        select * from (
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 5 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 5 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 4 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 4 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 3 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
+         DATE_FORMAT(t.bRegTime,'%Y-%m') = DATE_FORMAT(date_sub(now(),interval 3 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 2 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 2 month), '%Y-%m') union
+        select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 1 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
+        DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 1 month), '%Y-%m') union
+         select count(0) NUM,DATE_FORMAT(date_sub(now(),interval 0 month), '%Y-%m') as name from backUser t where  t.roleId=1 and
+         DATE_FORMAT(t.bRegTime,'%Y-%m')= DATE_FORMAT(date_sub(now(),interval 0 month), '%Y-%m')
+        ) as a
+    </select>
+
+</mapper>
