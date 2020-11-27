@@ -109,50 +109,50 @@
 </div>
 <div class="layui-row" id="PSUpdateTest" style="display:none">
     <div class="layui-col-md10">
-        <form class="layui-form layui-from-pane"  style="text-align: center;margin-top: 30px">
-            <div class="layui-form-item" style="margin-top: 30px">
+        <form class="layui-form layui-from-pane"  style="text-align: center">
+            <div class="layui-form-item" style="margin-top: 20px">
                 <label class="layui-form-label">申请人</label>
                 <div class="layui-input-block">
                     <input type="text" name="username" id="usernames" readonly  unselectable="on"  autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top: 30px">
+            <div class="layui-form-item" style="margin-top:20px">
                 <label class="layui-form-label">身份证</label>
                 <div class="layui-input-block">
                     <input type="text" name="usershenfen" id="usershenfens"   readonly  unselectable="on"  autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top: 30px">
+            <div class="layui-form-item" style="margin-top: 20px">
                 <label class="layui-form-label">联系电话</label>
                 <div class="layui-input-block">
                     <input type="text" name="userphone"   id="userphones"  readonly  unselectable="on"  autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top: 30px">
+            <div class="layui-form-item" style="margin-top: 20px">
                 <label class="layui-form-label">证书类型</label>
                 <div class="layui-input-block">
                     <input type="text" name="zhengshuss"   id="zhengshusss"   readonly  unselectable="on"  autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top: 30px">
+            <div class="layui-form-item" style="margin-top: 20px">
                 <label class="layui-form-label">测试分数</label>
                 <div class="layui-input-block">
                     <input type="text" name="testfenshu"  id="testfenshus"   readonly  unselectable="on"  autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top: 30px">
+            <div class="layui-form-item" style="margin-top: 20px">
                 <label class="layui-form-label">测试报告</label>
                 <div class="layui-input-block">
                     <button class="layui-btn " type="button"  lay-submit lay-filter="xiazaiceshis">下载</button>
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top: 30px">
+            <div class="layui-form-item" style="margin-top: 20px">
                 <label class="layui-form-label">评审分数</label>
                 <div class="layui-input-block">
                     <input type="text" name="testfenshu"  id="jugefenshus"   readonly  unselectable="on"  autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top: 30px">
+            <div class="layui-form-item" style="margin-top: 20px">
                 <label class="layui-form-label">评审报告</label>
                 <div class="layui-input-block">
                     <button class="layui-btn " type="button"  lay-submit lay-filter="xiazaipingshen">下载</button>
@@ -164,7 +164,7 @@
                     <input type="text" name="testfenshu"  id="zongfenshus"   readonly  unselectable="on"  autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" style="margin-top:60px">
+            <div class="layui-form-item" style="margin-top:20px">
                 <div class="layui-input-block" style="margin-left: 20px">
                     <button class="layui-btn " type="button"  lay-submit lay-filter="demo111">确认</button>
                 </div>
@@ -218,9 +218,9 @@
                 , url: '${pageContext.request.contextPath}/backzhengshu/getbackcerpingshenlist'
                 , cols: [[
                     {type: 'numbers', title: 'ID', width: 80}
-                    , {field: 'trueName',title: '申请人', width: 150}
+                    , {field: 'trueName',title: '申请人', width: 120}
                     , {field: 'cerPhone',title: '联系号码', width: 150}
-                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 150}
+                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 100}
                     , {field: 'beginTime',title: '申请时间', width: 200, sort: true}
                     , {field: 'turnoverTime',title: '更新时间', width: 200, sort: true}
                     , {field: 'cerTestScore',title: '测试分数', width: 120}
@@ -231,7 +231,7 @@
                             return d.cerJudgeScore;
                         }
                         }}
-                    , {templet: '<div>{{d.state.paramName}}</div>', title: '当前状态',  width: 150}
+                    , {templet: '<div>{{d.state.paramName}}</div>', title: '当前状态',  width: 120}
                     , {field: 'score', title: '操作', width: 258, align: 'center', toolbar: '#barDemo'}
                 ]]
                 , id: 'testReload'
@@ -282,7 +282,7 @@
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         title: "查看"+name+"的申请记录",
-                        area: ['500px', '780px'],
+                        area: ['500px', '700px'],
                         offset: '10px',
                         content: $("#PSUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
