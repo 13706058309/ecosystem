@@ -44,7 +44,7 @@
             <div class="nav" style="margin-top: 20px">
                 <ul>
                     <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                    <li class="cur"><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                    <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
                     <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
                     <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>
                     <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
@@ -67,9 +67,9 @@
                                 <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                             </a>
                             <div class="dropdown">
-                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
                                 <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
-                                <a href="${pageContext.request.contextPath}/homePage/quitAccount"  ka="header-logout">退出登录</a>
+                                <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
                             </div>
                         </li>
                     </ul></c:if>

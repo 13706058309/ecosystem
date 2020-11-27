@@ -211,9 +211,9 @@
                         <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
                     </a>
                     <div class="dropdown">
-                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">我的简历<span>编辑简历</span></a>
+                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
                         <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
-                        <a href="${pageContext.request.contextPath}/homePage/quitAccount"  ka="header-logout">退出登录</a>
+                        <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
                     </div>
                 </li>
             </ul></c:if>
@@ -244,7 +244,7 @@
                                     <div class="qrm-pinming">
                                         <div class="qrm-input-border">
                                             <!--<span class="title">品名</span>-->
-                                            <input type="text" value="${position}" class="qrm-input" style="width: 250px;height: 30px">
+                                            <input type="text" id="position" value="${position}" class="qrm-input" style="width: 250px;height: 30px">
                                         </div>
                                         <!--<div class="qrm-pinming-panel" style="display:none">-->
                                         <div class="qrm-border1" style="display:none">
@@ -816,7 +816,7 @@
     //     location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
     // }
     function findsearch() {
-        location.href="searchJob?findSearch="+$('#search').val()+"&findWorkCity="+findWorkCity
+        location.href="searchJob?findSearch="+$('#search').val()+"&findWorkCity="+findWorkCity+"&findPosition="+$('#position').val();
     }
     function updateCityDialog() {
         $("#city-dialog").show()

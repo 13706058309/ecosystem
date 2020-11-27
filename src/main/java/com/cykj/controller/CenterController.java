@@ -608,7 +608,8 @@ public class CenterController {
         finanStage="融资阶段";
         scale="公司规模";
         releaseTime="发布时间";
-        search="职位类型";
+        search="搜索职位";
+        position="职位类型";
 //        if (null==search||search.equals("".trim())){
 //
 //        }else {
@@ -631,12 +632,13 @@ public class CenterController {
         req.setAttribute("findReleaseTime",releaseTime);
         req.setAttribute("search",search);
         req.setAttribute("workCity",workCity);
+        req.setAttribute("position",position);
 
         return "FindJob";
     }
 
     @RequestMapping("/searchJob")
-    public String serachJob(HttpServletRequest req,String findSearch,String findWorkCity){
+    public String serachJob(HttpServletRequest req,String findSearch,String findWorkCity,String findPosition){
         List<City> ae=resumeService.citys(45217,47009);
         List<City> fj=resumeService.citys(47010,49061);
         List<City> ko=resumeService.citys(49062,50621);
@@ -666,6 +668,13 @@ public class CenterController {
         }else {
             map.put("search","%"+findSearch+"%");
         }
+        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+            position="职位类型";
+        }else {
+            position=findPosition;
+            map.put("position",position);
+        }
+
         workCity=findWorkCity;
         map.put("page",page);
         map.put("limit",limit);
@@ -692,6 +701,7 @@ public class CenterController {
         req.setAttribute("findReleaseTime",releaseTime);
         req.setAttribute("search",findSearch);
         req.setAttribute("workCity",findWorkCity);
+        req.setAttribute("position",position);
 
         return "FindJob";
     }
@@ -907,6 +917,13 @@ public class CenterController {
         System.out.println(position+"11111111111??????????????");
         if (findWorkCity==null){
             System.out.println("99999");
+        }else if (findWorkCity.equals("".trim())){
+
+            workCity= (String) req.getSession().getAttribute("nowCity");
+            System.out.println(workCity+"2222222222222");
+            if (!workCity.equals("全国")){
+                map.put("workCity",workCity);
+            }
         }else if (findWorkCity.equals("全国")){
             System.out.println("88888");
             workCity=findWorkCity;
