@@ -13,6 +13,7 @@ public class Depart {
   private long departId;//部门ID
   private long industryId;//行业ID
   private String departName;//部门名称
+  private List<Position> positions;
 
 
   public Depart() {
@@ -57,4 +58,11 @@ public class Depart {
     this.departName = departName;
   }
 
+  public List<Position> getPositions() {
+    return positions;
+  }
+
+  public void setPositions(List<Position> positions) {
+    this.positions = positions;
+  }
 }

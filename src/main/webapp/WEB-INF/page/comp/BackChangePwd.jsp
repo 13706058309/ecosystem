@@ -56,7 +56,7 @@
             </dt>
             <dd>
                 <form id="updatePswForm">
-<%--                    <table class="savePassword">--%>
+                    <table class="savePassword">
                         <tbody>
                         <tr>
                             <td>登录账号</td>

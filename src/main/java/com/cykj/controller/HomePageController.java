@@ -179,4 +179,28 @@ public class HomePageController {
     }
 
 
+//    退出登录
+    @RequestMapping("/quitAccount")
+    public String quitAccount(HttpServletRequest request,String city)  {
+        request.getSession().removeAttribute("qUser");
+        //城市集合
+        List<City> cityList = homePageService.cityList();
+        request.setAttribute("cityList",cityList);
+//        三级菜单 第一层 的集合
+        List<Industry> industry = homePageService.findIndustry();
+        request.setAttribute("industry",industry);
+//        热门企业
+        System.err.println("当前城市" + city);
+        if (city!=null) {
+            city = city.trim();
+            List<BackUser> homeCompany = homePageService.CompanyCity(city);
+            request.setAttribute("homeCompany", homeCompany);
+//        最新岗位
+            List<PostPosition> postList = homePageService.postList(city);
+            request.setAttribute("postList", postList);
+        }
+        return "HomePage";
+    }
+
+
 }
