@@ -33,8 +33,8 @@
 </head>
 <body>
 <div id="body">
-    <div class="container" >
-        <div id="container" >
+    <div class="container" style="width: 70%" >
+        <div id="container" style="width: 70%" >
             <dl class="company_center_content">
                 <dt>
                     <h1>
