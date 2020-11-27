@@ -2,15 +2,17 @@ package com.cykj.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayApiException;
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Parameter;
 import com.cykj.entity.ProjectInfo;
+import com.cykj.entity.UserProject;
 import com.cykj.service.ParameterService;
 import com.cykj.service.ProjectService;
+import com.cykj.service.UserProjectService;
 import com.cykj.util.TableInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -32,9 +36,12 @@ public class ProjectController {
 
     @Resource
     ProjectService projectServiceImpl;
+
     @Resource
     ParameterService parameterServiceImpl;
 
+    @Resource
+    UserProjectService userProjectServiceImpl;
     /**
      * 前端用户找项目首页
      * @param request
@@ -134,10 +141,11 @@ public class ProjectController {
         int pageNum=Integer.parseInt(page);
         int limitNum=Integer.parseInt(limit);
         Map<String,Object> condition=new HashMap<>();
-//        BackUser backUser=request.getSession().getAttribute("bUser");
-        BackUser backUser=new BackUser();
-        backUser.setBUserId(1);
-
+        BackUser backUser=(BackUser) request.getSession().getAttribute("admin");
+        if (backUser==null){
+            backUser=new BackUser();
+            backUser.setBUserId(3);
+        }
         if (stateId!=null && !stateId.trim().equals("")){
             condition.put("stateId",stateId);
         }
@@ -173,6 +181,37 @@ public class ProjectController {
         List<Parameter> parameters=parameterServiceImpl.findParameter(condition);
         request.setAttribute("parameters",parameters);
         return "project/PublishProject";
+    }
+
+    @RequestMapping("/finish")
+    public @ResponseBody String updateUrl(HttpServletRequest request,ProjectInfo projectInfo){
+        String msg="";
+        int n=projectServiceImpl.updateState(projectInfo);
+        if (n>0){
+            msg="success";
+            UserProject condition=new UserProject();
+            condition.setUserId(projectInfo.getUserId());
+            condition.setProjectId(projectInfo.getProjectId());
+            condition.setParamId(50);
+            UserProject userProject=userProjectServiceImpl.findUserProject(condition).get(0);
+            UserProject newProject=new UserProject();
+            newProject.setParamId(52);
+            newProject.setId(userProject.getId());
+            int res =userProjectServiceImpl.updateState(newProject);
+            if (res>0){
+                System.out.println("修改成功！");
+            }
+        }
+        return msg;
+    }
+    @RequestMapping("/del")
+    public @ResponseBody String delOrder(HttpServletRequest request,ProjectInfo projectInfo){
+        String msg="";
+        int n=projectServiceImpl.updateState(projectInfo);
+        if (n>0){
+            msg="success";
+        }
+        return msg;
     }
 
     @RequestMapping("/uploadDemandFile")
@@ -229,7 +268,7 @@ public class ProjectController {
         String msg="";
         BackUser backUser=(BackUser)request.getSession().getAttribute("admin");
         if (backUser!=null){
-            projectInfo.setbUserId(projectInfo.getbUserId());
+            projectInfo.setbUserId(backUser.getbUserId());
         }else{
             projectInfo.setbUserId(1);
         }
@@ -262,5 +301,11 @@ public class ProjectController {
     @RequestMapping("/alipayTradePagePay")
     public String alipayTradePagePay(HttpServletRequest request, HttpServletResponse response) throws Exception{
         return projectServiceImpl.alipayTradePagePay(request,response);
+    }
+
+    //用户点击付款后请求此方法
+    @RequestMapping("/refund")
+    public @ResponseBody String refund(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException, AlipayApiException {
+        return projectServiceImpl.refund(request,response,session);
     }
 }

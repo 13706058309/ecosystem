@@ -57,51 +57,72 @@ function textareaTo(str){
 }
 
 function addProject(){
-    var projectName=$("#projectName").val();
-    var money=$("#money").val();
-    var projectSynopsis=textareaTo($("#projectSynopsis").val());
-    var projectCondition=textareaTo($("#projectCondition").val());
-    var fieldId=$("#fieldId").val();
-    var docUrl=$("#docUrl").val();
-    var vNow = new Date();
-    var sNow = "";
-    sNow += String(vNow.getFullYear());
-    sNow += String(vNow.getMonth() + 1);
-    sNow += String(vNow.getDate());
-    sNow += String(vNow.getHours());
-    sNow += String(vNow.getMinutes());
-    sNow += String(vNow.getSeconds());
-    sNow += String(vNow.getMilliseconds());
-    console.log("projectName:"+projectName+"\n"+"money:"+money+"\n"+projectSynopsis+
-        "\n"+projectCondition+"\n"+ fieldId+"\n" +docUrl +"\n" +sNow);
+
     $.ajax({
-        url:path+"/project/addProject",
+        url:path+"/parameter/findCommission",
         type:"post",
-        dataType:"json",
-        data:{
-            "projectName":projectName,
-            "projectSynopsis":projectSynopsis,
-            "money":money,
-            "projectCondition":projectCondition,
-            "fieldId":fieldId,
-            "docUrl":docUrl,
-            "pOrderNum":sNow,
-        },
-        beforeSend:function () {
+        beforeSend:function(){
             if (!$("#xieYi").prop('checked')){
                 alert("请阅读并同意协议！");
                 return false;
             }
+            return true;
+        },success:function (data) {
+            layui.use("layer",function () {
+                var layer=layui.layer;
+                layer.confirm("发布项目需要支付“预算金额”以及 "+data+"% 的佣金，是否继续发布？",function () {
+                    var projectName=$("#projectName").val();
+                    var money=$("#money").val();
+                    var projectSynopsis=textareaTo($("#projectSynopsis").val());
+                    var projectCondition=textareaTo($("#projectCondition").val());
+                    var fieldId=$("#fieldId").val();
+                    var docUrl=$("#docUrl").val();
+                    var vNow = new Date();
+                    var sNow = "";
+                    sNow += String(vNow.getFullYear());
+                    sNow += String(vNow.getMonth() + 1);
+                    sNow += String(vNow.getDate());
+                    sNow += String(vNow.getHours());
+                    sNow += String(vNow.getMinutes());
+                    sNow += String(vNow.getSeconds());
+                    sNow += String(vNow.getMilliseconds());
+                    console.log("projectName:"+projectName+"\n"+"money:"+money+"\n"+projectSynopsis+
+                        "\n"+projectCondition+"\n"+ fieldId+"\n" +docUrl +"\n" +sNow);
+                    $.ajax({
+                        url:path+"/project/addProject",
+                        type:"post",
+                        dataType:"json",
+                        data:{
+                            "projectName":projectName,
+                            "projectSynopsis":projectSynopsis,
+                            "money":money,
+                            "projectCondition":projectCondition,
+                            "fieldId":fieldId,
+                            "docUrl":docUrl,
+                            "pOrderNum":sNow,
+                        },
+                        beforeSend:function () {
+                            if (!$("#xieYi").prop('checked')){
+                                alert("请阅读并同意协议！");
+                                return false;
+                            }
+                        },
+                        success:function (res) {
+                            console.log(res);
+                            if (res!=null){
+                                location.href= path +"/project/alipayTradePagePay?WIDout_trade_no="+res.pOrderNum+'&WIDtotal_amount='+res.trueMoney+'&WIDsubject='+"项目预算资金+佣金";
+                                // location.href=path+"/project/projectManage";
+                            }
+                        }
+                    })
+                })
+            })
+
         }
-        ,
-        success:function (res) {
-            console.log(res);
-            if (res!=null){
-                location.href= path +"/project/alipayTradePagePay?WIDout_trade_no="+res.pOrderNum+'&WIDtotal_amount='+res.trueMoney+'&WIDsubject='+"项目预算资金+佣金";
-                // location.href=path+"/project/projectManage";
-            }
-        }
-    })
+    });
+
+
+
 }
 function goProjectManage() {
     location.href=path+"/project/findProject";

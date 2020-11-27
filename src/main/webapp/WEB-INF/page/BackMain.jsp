@@ -37,7 +37,7 @@
             <li class="layui-nav-item"><a href="#" onclick="exitLogin()">退了</a></li>
         </ul>
     </div>
-    <div class="layui-side layui-bg-black">
+    <div  class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <c:if test="${not empty menuList}">
@@ -58,10 +58,10 @@
         </div>
     </div>
 
-    <div class="layui-body" style="bottom: 0px">
+    <div  class="layui-body" style="bottom: 0px">
         <!-- 内容主体区域 -->
 <%--        <div style="padding: 15px;">--%>
-        <iframe style="width: 100%;height: 100%;border: 0px" name="mainFrame"> </iframe>
+        <iframe style="width: 100%;height:100%;border: 0px" id="mainFrame" name="mainFrame"> </iframe>
 <%--        </div>--%>
     </div>
 
@@ -107,11 +107,6 @@
         },function (index) {
             location.href = path+"/rec/exitsLogin";
         })
-
     }
-
-    // $(function () {
-    //
-    // })
 </script>
 </html>

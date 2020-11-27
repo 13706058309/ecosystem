@@ -67,7 +67,7 @@
                 states = #{stateId},
             </if>
         </set>
-        where projectId = #{projectId}
+        where id = #{id}
     </update>
 
 
@@ -101,6 +101,8 @@
         <result property="orderNum" column="orderNum"></result>
         <result property="payMoney" column="payMoney"></result>
         <result property="appTime" column="appTime"></result>
+        <result property="projectId" column="projectId"></result>
+        <result property="paramId" column="paramId"></result>
         <association property="projectInfo" javaType="com.cykj.entity.ProjectInfo">
             <id property="projectId" column="projectId"></id>
             <result property="bUserId" column="bUserID"></result>

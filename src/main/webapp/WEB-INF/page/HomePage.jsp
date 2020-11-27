@@ -160,9 +160,10 @@
 
     <div class="layui-carousel" id="test1" style="margin-left: 33%;margin-top: 6%;margin-bottom: 20px">
         <div carousel-item>
-            <div><img src="../style/images/d03110162390422bb97cebc7fd2ab586.jpg" width="768" height="487px" /></div>
-            <div><img src="../style/images/d05a2cc6e6c94bdd80e074eb05e37ebd.jpg" width="768" height="487px" /></div>
-            <div><img src="../style/images/c9d8a0756d1442caa328adcf28a38857.jpg" width="768" height="487px" ></div>
+            <div><img src="../imgs/home7.png" width="768" height="487px" /></div>
+            <div><img src="../imgs/home2.jpg" width="768" height="487px" /></div>
+            <div><img src="../imgs/home3.jpg" width="768" height="487px" ></div>
+            <div><img src="../imgs/home6.jpg" width="768" height="487px" ></div>
         </div>
     </div>
 
@@ -480,10 +481,6 @@
             console.log(obj.item); //当前条目的元素对象
         });
     });
-    //退出当前账户
-    <%--function exit() {--%>
-    <%--    location.href=${pageContext.request.contextPath}+"/homePage/quitAccount";--%>
-    <%--}--%>
 </script>
 </body>
 </html>

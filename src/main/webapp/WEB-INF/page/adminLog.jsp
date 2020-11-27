@@ -118,6 +118,7 @@
                 return true;
             },
             success:function (info) {
+                changeImg();
                 console.log(info);
                 if (info == 'success'){
                     layer.msg("登陆成功!");

@@ -16,7 +16,8 @@ public class ProjectInfo {
   private long stateId;// 状态Id
   private Parameter states; //状态实体类
   private long money;
-  private String docUrl;
+  private String docUrl; //需求文件
+  private String projectUrl;//项目文件
   private long fieldId;
   private Parameter field;
   private String pOrderNum;
@@ -176,5 +177,13 @@ public class ProjectInfo {
 
   public void setTrueMoney(long trueMoney) {
     this.trueMoney = trueMoney;
+  }
+
+  public String getProjectUrl() {
+    return projectUrl;
+  }
+
+  public void setProjectUrl(String projectUrl) {
+    this.projectUrl = projectUrl;
   }
 }

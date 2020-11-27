@@ -287,7 +287,4 @@ public class PostPosition {
     this.backUser = backUser;
   }
 
-  public void setReleaseTime(String releaseTime) {
-    this.releaseTime = releaseTime;
-  }
 }
