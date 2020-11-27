@@ -19,6 +19,7 @@ public class Delivery {
   private String deliTime;//投递时间
 
 
+
   public long getDeliveryId() {
     return deliveryId;
   }

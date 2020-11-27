@@ -125,23 +125,13 @@
                     <li>
                         <div class="nesHead"><img src="${pageContext.request.contextPath}/chat/index_files/6.jpg"></div>
                         <div class="news"><img class="jiao" src="${pageContext.request.contextPath}/chat/img/you.jpg"><img class="Expr"
-                                                                                                                           src="${pageContext.request.contextPath}/chat/index_files/em_55.jpg"></div>
-                    </li>
-                    <li>
-                        <div class="nesHead"><img src="${pageContext.request.contextPath}/chat/index_files/6.jpg"></div>
-                        <div class="news"><img class="jiao" src="${pageContext.request.contextPath}/chat/img/you.jpg"><img class="Expr"
-                                                                                                                           src="${pageContext.request.contextPath}/chat/index_files/em_37.jpg"></div>
-                    </li>
-                    <li>
-                        <div class="nesHead"><img src="${pageContext.request.contextPath}/chat/index_files/6.jpg"></div>
-                        <div class="news"><img class="jiao" src="${pageContext.request.contextPath}/chat/img/you.jpg"><img class="Expr"
                                                                                                                            src="${pageContext.request.contextPath}/chat/index_files/em_40.jpg"></div>
                     </li>
                 </ul>
             </div>
             <div class="RightFoot">
                 <div class="emjon" style="display: none;">
-                    <ul>
+                    <ul id="face">
                         <li><img src="${pageContext.request.contextPath}/chat/index_files/em_02.jpg"></li>
                         <li><img src="${pageContext.request.contextPath}/chat/index_files/em_05.jpg"></li>
                         <li><img src="${pageContext.request.contextPath}/chat/index_files/em_07.jpg"></li>
@@ -184,7 +174,6 @@
     </div>
 </div>
 
-<%--<script type="text/javascript" src="${pageContext.request.contextPath}/chat/js/jquery.min.js"></script>--%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/chat/js/index.js"></script>
 
 

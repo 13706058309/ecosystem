@@ -28,47 +28,193 @@
 <script charset="UTF-8" src="${pageContext.request.contextPath}/js/value.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 <form class="layui-form" action="denglujieguo" method="post">
-    <div class="container">
-        <div class="layui-form-item" style="margin-top: 20px;margin-left: 20px">企业名称：<input type="text"></div>
+    <div class="demoTable">
+        <div class="layui-form-item" style="margin-left: 250px">
+            <div class="layui-inline" style="margin-top: 20px">
+                <label class="layui-form-label">企业名称</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="compName" id="compName" autocomplete="off" class="layui-input"
+                           style="width: 195px">
+                </div>
+            </div>
 
-        <div class="layui-form-item" style="height: 30px;margin-left: 300px;margin-top: -35px">状态：<input type="text">
-<%--            <select style="width: 180px">--%>
-<%--             <option>---</option>--%>
-<%--                <option>禁用</option>--%>
-<%--                <option>启用</option>--%>
-<%--            </select>--%>
+            <%--            <div class="layui-inline" style="margin-top: 20px;margin-left: 20px">--%>
+            <%--                <label class="layui-form-label">状态</label>--%>
+            <%--                <div class="layui-input-inline" style="width: 195px;">--%>
+            <%--                    <select name="stateId" id="stateId" lay-verify="required" style="margin-top: 140px">&ndash;%&gt;--%>
+            <%--                        <option value=""></option>--%>
+            <%--                        <option value="1">审核通过</option>--%>
+            <%--                        <option value="2">审核不通过</option>--%>
+            <%--                    </select>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
         </div>
 
-        <div class="layui-form-item">
-            <button type="submit" style="margin-left: 550px;margin-top: -35px;width: 75px">搜索</button>
+        <div class="layui-form-item" style="margin-left: 550px;margin-top: -47px;">
+            <button type="button" class="layui-btn" style="margin-top: -10px;margin-left: 200px;width: 75px"
+                    data-type="reload">搜索
+            </button>
         </div>
         <table id="demo" lay-filter="test"></table>
         <script>
-            layui.use('table', function(){
+            layui.use('table', function () {
                 var table = layui.table;
                 //第一个实例
                 table.render({
                     elem: '#demo'
-                    ,height: 312
-                    ,url: '/demo/table/user/' //数据接口
-                    ,page: true //开启分页
-                    ,cols: [[ //表头
-                        {field: '1', title: '序列', width:80, sort: true, fixed: 'left'}
-                        ,{field: '2', title: '企业名称', width:80}
-                        ,{field: '3', title: '联系方式', width:80, sort: true}
-                        ,{field: '5', title: '申请人', width: 177}
-                        ,{field: '5', title: '申请时间', width: 177}
-                        ,{field: '5', title: '操作', width: 177}
+                    , height: 510
+                    , url: "${pageContext.request.contextPath}/test/enterprise"
+                    , page: true //开启分页
+                    , limits: [10, 20]
+                    , limit: 10
+                    , id: 'testReload'
+                    , cols: [[ //表头
+                        {field: 'bUserId', title: '序列', width: 80, sort: true, fixed: 'left'}
+                        , {field: 'compName', title: '企业名称', width: 280}
+                        , {field: 'contactInfo', title: '联系方式', width: 180, sort: true}
+                        , {field: 'bUserName', title: '申请人', width: 180, sort: true}
+                        , {field: 'bRegTime', title: '申请时间', width: 230, sort: true}
+                        , {field: '', title: '操作', width: 300, toolbar: "#bar", align: "center"}
                     ]]
+                });
+                var $ = layui.$, active = {
+                    reload: function () {
+                        //执行重载
+                        table.reload('testReload', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            },
+                            where: {
+                                compName: $('#compName').val(),
+                                stateId: $('#stateId').val(),
+                            }
+                        }, 'data');
+                    }
+                };
+                $('.demoTable .layui-btn').on('click', function () {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+
+                table.on('tool(test)', function (obj) {
+                    var data = obj.data //获得当前行数据
+                        , layEvent = obj.event; //获得 lay-event 对应的值
+                    if (layEvent === 'approved') {//如果点击的是审核通过
+                        layer.confirm('确定审核通过吗？', function (index) {
+                            var bUserId = data.bUserId;
+                            var stateId = data.stateId;
+                            if (stateId == 3) {
+                                stateId = 1;
+                            } else if (stateId == 2) {
+                                stateId = 1;
+                            }
+                            $.ajax({
+                                url: "${pageContext.request.contextPath}/test/changeEnterpriseState",
+                                type: "post",
+                                async: true,
+                                data: "bUserId=" + bUserId + "&stateId=" + stateId,
+                                typeData: "text", //数据类型
+                                success: function (data) {
+                                    if (data == "success") {
+                                        alert("修改状态成功了");
+                                        obj.del(); //删除对应行（tr）的DOM结构
+                                        layer.close(index);
+                                    } else {
+                                        alert("修改状态失败了");
+                                    }
+                                },
+                                error: function () { //请求失效时执行的函数
+                                    alert("网络繁忙");
+                                }
+                            })
+                        })
+
+                    } else if (layEvent === 'notApproved') {//如果点击审核不通过
+                        layer.confirm('确定审核不通过吗？', function (index) {
+                            var bUserId = data.bUserId;
+                            var stateId = data.stateId;
+                            if (stateId == 1) {
+                                stateId = 2;
+                            } else if (stateId == 3) {
+                                stateId = 2;
+                            }
+                            $.ajax({
+                                url: "${pageContext.request.contextPath}/test/changeEnterpriseState",
+                                type: "post",
+                                async: true,
+                                data: "bUserId=" + bUserId + "&stateId=" + stateId,
+                                typeData: "text", //数据类型
+                                success: function (data) {
+                                    if (data == "success") {
+                                        alert("修改状态成功");
+                                        obj.del(); //删除对应行（tr）的DOM结构
+
+                                        layer.close(index);
+                                    } else {
+                                        alert("修改状态失败了");
+                                    }
+                                },
+                                error: function () { //请求失效时执行的函数
+                                    alert("网络繁忙");
+                                }
+                            })
+                        })
+
+                    } else if (layEvent === 'download') {//点击下载
+                        var datas = obj.data
+                        var bUserId = datas.bUserId;
+                        location.href = "${pageContext.request.contextPath}/test/upload?bUserId=" + bUserId;
+                        <%--alert("下载");--%>
+                        <%--var data = obj.data //获得当前行数据--%>
+                        <%--    , layEvent = obj.event; //获得 lay-event 对应的值--%>
+                        <%--var bUserId = data.bUserId;--%>
+                        <%--var compName = data.compName;--%>
+                        <%--var contactInfo = data.contactInfo;--%>
+                        <%--var bUserName = data.bUserName;--%>
+                        <%--var bRegTime = data.bRegTime;--%>
+                        <%--// alert("获取id" + bUserId);--%>
+                        <%--// alert("获取名字" + compName);--%>
+                        <%--// alert("获取手机号" + contactInfo);--%>
+                        <%--// alert("获取时间" + bRegTime);--%>
+                        <%--$.ajax({--%>
+                        <%--    url: "${pageContext.request.contextPath}/test/upload",--%>
+                        <%--    type: "post",--%>
+                        <%--    async: true,--%>
+                        <%--    data: "bUserId=" + bUserId + "&compName=" + compName + "&contactInfo=" + contactInfo + "&bUserName=" + bUserName + "&bRegTime=" + bRegTime,--%>
+                        <%--    typeData: "text", //数据类型--%>
+                        <%--    success: function (data) {--%>
+                        <%--       alert("下载成功")--%>
+                        <%--    },--%>
+                        <%--    error: function () { //请求失效时执行的函数--%>
+                        <%--        alert("网络繁忙");--%>
+                        <%--    }--%>
+                        <%--})--%>
+                    }
                 });
             });
         </script>
-<%--        <div style="margin-left: 150px;">上一页</div>--%>
-<%--        <div style="margin-left: 235px;margin-top: -20px">1/1</div>--%>
-<%--        <div style="margin-left: 300px;margin-top: -20px">下一页</div>--%>
-        </div>
-</form>
+        <script type="text/html" id="bar">
+            {{#  if(d.stateId == 1){ }}
+            <a class="layui-btn layui-btn-sm" lay-event="approved" id="approved">审核通过</a>
+            <a class="layui-btn layui-btn-sm" lay-event="notApproved" id="notApproved">审核不通过</a>
+            <a class="layui-btn layui-btn-sm" lay-event="download" id="download">下载</a>
+            {{#  } }}
 
+            {{#  if(d.stateId == 2){ }}
+            <a class="layui-btn  layui-btn-sm" lay-event="approved">审核通过</a>
+            <a class="layui-btn  layui-btn-sm" lay-event="notApproved">审核不通过</a>
+            <a class="layui-btn  layui-btn-sm" lay-event="download">下载</a>
+            {{#  } }}
+
+            {{#  if(d.stateId == 3){ }}
+            <a class="layui-btn  layui-btn-sm" lay-event="approved">审核通过</a>
+            <a class="layui-btn  layui-btn-sm" lay-event="notApproved">审核不通过</a>
+            <a class="layui-btn  layui-btn-sm" lay-event="download">下载</a>
+            {{#  } }}
+        </script>
+    </div>
+    </div>
+</form>
 
 
 </body>

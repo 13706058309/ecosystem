@@ -66,6 +66,8 @@ websocket.onmessage = function (event) {
 
 }
 
+
+
 //连接关闭的回调方法
 websocket.onclose = function () {
     //alert("WebSocket连接关闭");
@@ -163,6 +165,33 @@ $('.sendBtn').on('click',function(){
     }
 
 })
+
+$('.ExP').on('mouseenter',function(){
+    $('.emjon').show();
+})
+
+$('.emjon').on('mouseleave',function(){
+    $('.emjon').hide();
+})
+
+$('.emjon li').on('click',function(){
+    var tarID = $("#compID").val();
+    var imgSrc=$(this).children('img').attr('src');
+    var str="";
+    str+='<li>'+
+        '<div class="nesHead"><img src="'+ctx+'/'+photo+'"/></div>'+
+        '<div class="news"><img class="jiao" src="'+ctx+'/chat/img/you.jpg"><img class="Expr" src="'+imgSrc+'"></div>'+
+        '</li>';
+    $('.newsList').append(str);
+    $('.emjon').hide();
+    $('.RightCont').scrollTop($('.RightCont')[0].scrollHeight );
+    websocket.send(JSON.stringify({
+        "type": 2,
+        "tarUser": tarID,
+        "srcUser": uID,
+        "message": '<img class="Expr" src="'+imgSrc+'" style="width: 100%;height: 100%">',
+    }));
+});
 
 //监听点击用户
 $("body").on("click", ".hz-group-list", function () {

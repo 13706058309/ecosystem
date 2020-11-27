@@ -18,10 +18,10 @@ public interface UserInfoMapper {
 
      //前端登录
      UserInfo log(Map<String,Object> map);
+     //前端短信登录
+     UserInfo mesLog(Map<String,Object> map);
      //后端登录
      BackUser adminLog(Map<String,Object> map);
-     //手机登录
-     UserInfo mesLog(Map<String,Object> map);
      //前端注册
      int register(UserInfo userInfo);
      //判断账号是否重复

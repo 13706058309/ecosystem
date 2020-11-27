@@ -107,7 +107,7 @@
 </script>
 <body>
 <div id="body">
-    <div id="container">
+    <div id="container" style="width: 70%">
         <dl class="c_delivery">
             <dt>
                 <h1><em></em>官方证书</h1>

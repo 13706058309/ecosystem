@@ -49,8 +49,10 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="postName" name="postName" placeholder="填写岗位具体名称"  autocomplete="off" class="layui-input" >
+                    <input type="text" id="postName" name="postName" placeholder="填写岗位具体名称"  autocomplete="off" class="layui-input" onkeyup="testPost()">
 <%--                    <label class="layui-form-label" style="color: red;display: none">skfsadsads</label>--%>
+                    <span id="tip1" style="display: none;color: red" >请填写岗位名称</span>
+                    <span id="tip2" style="display: none;color: red" >岗位名称不能超过10个字符</span>
                 </div>
 
             </div>
@@ -59,6 +61,8 @@
                 <label class="layui-form-label">所属部门:</label>
                 <div class="layui-input-inline">
                     <input type="text" id="department" name="department" placeholder="职位所属部门"  autocomplete="off" class="layui-input" >
+                    <span id="tip3" style="display: none;color: red" >请填写部门</span>
+                    <span id="tip4" style="display: none;color: red" >部门长度不能超过10</span>
                 </div>
             </div>
 
@@ -85,6 +89,8 @@
                     </div>
                     <div class="layui-form-mid">k</div>
                 </div>
+                <span id="tip5" style="display: none;color: red" >工资只能是整数</span>
+                <span id="tip6" style="display: none;color: red" >最低工资不能大于最大工资</span>
             </div>
 
 
@@ -108,7 +114,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">具体地址:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="detailAddress" name="detailAddress" placeholder="工作的具体地址"  autocomplete="off" class="layui-input" >
+                    <input type="text" id="detailAddress" name="detailAddress" placeholder="工作的具体地址"  autocomplete="off" class="layui-input" style="width: 150%">
+                    <span id="tip7" style="display: none;color: red" >请填写详细地址</span>
+                    <span id="tip8" style="display: none;color: red" >地址长度不能超过20</span>
                 </div>
 <%--                <label class="layui-form-label">具体地址:</label>--%>
             </div>
@@ -116,7 +124,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">招收人数:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="recruitsNum" name="recruitsNum" placeholder="打算招收的人数" autocomplete="off" class="layui-input" >
+                    <input type="text" id="recruitsNum" name="recruitsNum" placeholder="打算招收的人数" autocomplete="off" class="layui-input" style="width: 150%">
+                    <span id="tip9" style="display: none;color: red" >招收人数未填写</span>
+                    <span id="tip10" style="display: none;color: red" >招收人数长度不能超过15</span>
                 </div>
             </div>
 
@@ -124,6 +134,8 @@
                 <label class="layui-form-label">福利描述</label>
                 <div class="layui-input-block">
                     <textarea placeholder="请输入内容" class="layui-textarea" placeholder="简单描述一下岗位的福利" style="width: 80%; height: 15%;resize: none" id="jobBenefits" name="jobBenefits"></textarea>
+                    <span id="tip11" style="display: none;color: red" >福利描述未填写</span>
+                    <span id="tip12" style="display: none;color: red" >福利描述长度不能超过30</span>
                 </div>
             </div>
 
@@ -161,21 +173,27 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">投递邮箱</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="contactEmail" name="contactEmail" placeholder="接收简历的邮箱" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                    <input type="text" id="contactEmail" name="contactEmail" placeholder="接收简历的邮箱" lay-verify="required|phone" autocomplete="off" class="layui-input" style="width: 150%">
+                    <span id="tip13" style="display: none;color: red" >请输入正确邮箱格式</span>
+
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">联系方式</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="contact" name="contact" placeholder="手机或固话" autocomplete="off" class="layui-input" >
+                    <input type="text" id="contact" name="contact" placeholder="请准确填写手机或固话" autocomplete="off" class="layui-input" style="width: 150%" >
+                    <span id="tip15" style="display: none;color: red" >联系方式未填写</span>
+                    <span id="tip16" style="display: none;color: red" >联系方式长度不能超过30</span>
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">工作描述</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="具体工作的描述" class="layui-textarea" style="width: 80%; height: 35%; resize: none" id="jobDescription" name="jobDescription"></textarea>
+                    <textarea placeholder="具体工作的描述" class="layui-textarea" style="width: 80%; height: 35%; resize: none" id="jobDescription" name="jobDescription" ></textarea>
+                    <span id="tip17" style="display: none;color: red" >工作描述过于简单，长度起码10以上!</span>
+                    <span id="tip18" style="display: none;color: red" >工作描述长度不能超过100!</span>
                 </div>
             </div>
 
@@ -183,7 +201,7 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <input  type="button" class="layui-btn" onclick="sumb()" value="立即提交">  </input>
+                    <input  type="button" class="layui-btn" onclick="sumb()" value="立即发布">  </input>
                     <input  type="button" class="layui-btn" value="招聘预览" onclick="showDetail()"></input>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
@@ -245,4 +263,175 @@
         </table>
     </div>
 </body>
+
+<script>
+    $("#postName").change(function () {
+        var postName = $("#postName").val();
+        if(postName.trim().length==0){
+            $("#tip1").css("display","block");
+            $("#tip2").css("display","none");
+            return false;
+        }
+        if(postName.trim().length>10){
+            $("#tip2").css("display","block");
+            $("#tip1").css("display","none");
+            return false;
+        }
+        $("#tip1").css("display","none");
+        $("#tip2").css("display","none");
+    })
+
+    $("#department").change(function () {
+        var department = $("#department").val();
+        if(department.trim().length==0){
+            $("#tip3").css("display","block");
+            $("#tip4").css("display","none");
+            return false;
+        }
+        if(department.trim().length>10){
+            $("#tip4").css("display","block");
+            $("#tip3").css("display","none");
+            return false;
+        }
+        $("#tip3").css("display","none");
+        $("#tip4").css("display","none");
+    })
+
+    $("#detailAddress").change(function () {
+        var detailAddress = $("#detailAddress").val();
+        if(detailAddress.trim().length==0){
+            $("#tip7").css("display","block");
+            $("#tip8").css("display","none");
+            return false;
+        }
+        if(detailAddress.trim().length>20){
+            $("#tip8").css("display","block");
+            $("#tip7").css("display","none");
+            return false;
+        }
+        $("#tip7").css("display","none");
+        $("#tip8").css("display","none");
+    })
+
+    $("#recruitsNum").change(function () {
+        var recruitsNum = $("#recruitsNum").val();
+        if(recruitsNum.trim().length==0){
+            $("#tip9").css("display","block");
+            $("#tip10").css("display","none");
+            return false;
+        }
+        if(recruitsNum.trim().length>15){
+            $("#tip10").css("display","block");
+            $("#tip9").css("display","none");
+            return false;
+        }
+        $("#tip9").css("display","none");
+        $("#tip10").css("display","none");
+    })
+
+    $("#jobBenefits").change(function () {
+        var jobBenefits = $("#jobBenefits").val();
+        if(jobBenefits.trim().length==0){
+            $("#tip11").css("display","block");
+            $("#tip12").css("display","none");
+            return false;
+        }
+        if(jobBenefits.trim().length>30){
+            $("#tip12").css("display","block");
+            $("#tip11").css("display","none");
+            return false;
+        }
+        $("#tip11").css("display","none");
+        $("#tip12").css("display","none");
+    })
+
+    $("#contactEmail").change(function () {
+        var contactEmail = $("#contactEmail").val();
+        var patterns = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        if(!patterns.test(contactEmail)){
+            $("#tip13").css("display","block");
+            return false;
+        }
+        $("#tip13").css("display","none");
+    })
+
+    $("#contact").change(function () {
+        var contact = $("#contact").val();
+        if(contact.trim().length==0){
+            $("#tip15").css("display","block");
+            $("#tip16").css("display","none");
+            return false;
+        }
+        if(contact.trim().length>30){
+            $("#tip16").css("display","block");
+            $("#tip15").css("display","none");
+            return false;
+        }
+        $("#tip15").css("display","none");
+        $("#tip16").css("display","none");
+    })
+
+    $("#jobDescription").change(function () {
+        var jobDescription = $("#jobDescription").val();
+        if(jobDescription.trim().length<=10){
+            $("#tip17").css("display","block");
+            $("#tip18").css("display","none");
+            return false;
+        }
+        if(jobDescription.trim().length>100){
+            $("#tip18").css("display","block");
+            $("#tip17").css("display","none");
+            return false;
+        }
+        $("#tip17").css("display","none");
+        $("#tip18").css("display","none");
+    })
+
+    // $("#minSalary").change(function () {
+    //     var minSalary = 0;
+    //     var maxSalary = 0;
+    //     minSalary = $("#minSalary").val();
+    //     maxSalary = $("#maxSalary").val();
+    //     var pattern = /^\+?[1-9][0-9]*$/;
+    //
+    //     if(parseInt($("#minSalary").val())>= parseInt($("#maxSalary").val())){
+    //         $("#tip6").css("display","block");
+    //         $("#tip5").css("display","none");
+    //         return false;
+    //     }
+    //
+    //     if(!pattern.test(minSalary)||!pattern.test(maxSalary)){
+    //         $("#tip5").css("display","block");
+    //         $("#tip6").css("display","none");
+    //         return false;
+    //     }
+    //
+    //     $("#tip5").css("display","none");
+    //     $("#tip6").css("display","none");
+    // })
+    //
+    // $("#maxSalary").change(function () {
+    //     var minSalary = 0;
+    //     var maxSalary = 0;
+    //     minSalary = $("#minSalary").val();
+    //     maxSalary = $("#maxSalary").val();
+    //     var pattern = /^\+?[1-9][0-9]*$/;
+    //
+    //     if(parseInt($("#minSalary").val())>= parseInt($("#maxSalary").val())){
+    //         $("#tip6").css("display","block");
+    //         $("#tip5").css("display","none");
+    //         return false;
+    //     }
+    //     if(!pattern.test(minSalary)||!pattern.test(maxSalary)){
+    //         $("#tip5").css("display","block");
+    //         $("#tip6").css("display","none");
+    //         return false;
+    //     }
+    //     $("#tip5").css("display","none");
+    //     $("#tip6").css("display","none");
+    // })
+</script>
+
 </html>
+
+

@@ -3,7 +3,6 @@ package com.cykj.controller;
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Menu;
 import com.cykj.entity.UserInfo;
-//import com.cykj.log.Loger;
 import com.cykj.service.LoginService;
 import com.cykj.service.PowerService;
 import com.cykj.util.AliyunSmsUtils;
@@ -41,6 +40,8 @@ public class LoginController {
     }
 
 
+
+
     //前端登录的动作
     @RequestMapping(value = {"/log"})
 //    @Loger(operationName = "执行前端用户登录")
@@ -55,10 +56,7 @@ public class LoginController {
 //            UserInfo userInfo = loginServiceImpl.log(account,MD5Utils.md5(pwd));
             UserInfo userInfo = loginServiceImpl.log(account, pwd);
 
-            if (userInfo == null) {
-                System.out.println("查无此账号!");
-                return "noAccount";
-            } else {
+            if (userInfo != null) {
                 System.out.println(userInfo.toString());
                 String stateName = userInfo.getStates().getParamName();
                 if (stateName.equals("启用")) {
@@ -66,18 +64,22 @@ public class LoginController {
                     System.out.println("登录成功!");
                     return "success";
                 } else if (stateName.equals("禁用")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被禁用!");
                     return "disable";
                 } else if (stateName.equals("已删除")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被删除!");
                     return "delete";
                 } else {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("账号审核未通过，无法登录");
                     return "auditFailed";
                 }
+
+            } else {
+                System.out.println("用户名或密码错误!");
+                return "passMiss";
             }
         } else {
             System.out.println("验证码错误!");
@@ -103,11 +105,11 @@ public class LoginController {
         request.getSession().removeAttribute("vCode");
         if (sVCode.equalsIgnoreCase(vCode)) {
 //            启用MD5解开即可
-//            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password) );
-            BackUser backUser = loginServiceImpl.adminLog(account, password);
+            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
+//            BackUser backUser = loginServiceImpl.adminLog(account, password);
             if (backUser == null) {
-                System.out.println("查无此账号!");
-                return "noAccount";
+                System.out.println("用户名或密码错误!");
+                return "noAcc";
             } else {
                 System.out.println(backUser.toString());
                 String stateName = backUser.getStates().getParamName();
@@ -116,15 +118,15 @@ public class LoginController {
                     System.out.println("登录成功!");
                     return "success";
                 } else if (stateName.equals("待审核")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("admin");
                     System.out.println("此账号待审核!");
                     return "noReviewed";
                 } else if (stateName.equals("审核不通过")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("admin");
                     System.out.println("此账号已被删除!");
                     return "failedPass";
                 } else {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("admin");
                     System.out.println("登录失败!");
                     return "failed";
                 }
@@ -138,43 +140,60 @@ public class LoginController {
     //短信登录
     @RequestMapping("/mesLog")
     public @ResponseBody
-    String mesLog(String phone,String code,HttpServletRequest request) {
+    String mesLog(String phone, String code, HttpServletRequest request) {
         System.out.println("执行短信验证登录!");
-        System.out.println("传过来的手机值为:"+phone+"验证码为:"+code);
+        System.out.println("传过来的手机值为:" + phone + "验证码为:" + code);
 
         String savePhone = (String) request.getSession().getAttribute("logPhone");
-        String saveCode = (String)request.getSession().getAttribute("logCode");
+        String saveCode = (String) request.getSession().getAttribute("logCode");
 
-        if (saveCode.equalsIgnoreCase(savePhone)) {
-            UserInfo userInfo = loginServiceImpl.mesLog(phone);
+        System.out.println("savePhone"+savePhone);
+        System.out.println("saveCode"+saveCode);
+
+
+        if (!phone.equalsIgnoreCase(savePhone)) {
+            System.out.println("手机号错误!");
+            return "9";
+        }
+        if (!code.equalsIgnoreCase(saveCode)){
+            System.out.println("验证码错误!");
+            return "8";
+        }
+        if (code.equalsIgnoreCase(saveCode)){
+            System.out.println("执行短信验证登录!");
+//            如果启用MD5解开即可
+//            UserInfo userInfo = loginServiceImpl.mesLog(MD5Utils.md5(phone));
+            UserInfo userInfo= loginServiceImpl.mesLog(phone);
+            System.out.println("userInfo:"+userInfo.toString());
             if (userInfo == null){
-                System.out.println("账号密码有误!");
-                return "0";
+                System.out.println("登录失败！");
+                return "s";
             } else {
+                System.out.println(userInfo.toString());
                 String stateName = userInfo.getStates().getParamName();
-                if (stateName.equals("启用")) {
+                if (stateName.equals("启用")){
                     request.getSession().setAttribute("qUser", userInfo);
                     System.out.println("登录成功!");
-                    return "0";
+                    return "success";
                 } else if (stateName.equals("禁用")) {
-//                    request.getSession().removeAttribute("qUser");
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被禁用!");
-                    return "disable";
-                } else if (stateName.equals("已删除")) {
-//                    request.getSession().removeAttribute("qUser");
+                    return "j";
+                } else if (stateName.equals("已删除")){
+                    request.getSession().removeAttribute("qUser");
                     System.out.println("此账号已被删除!");
-                    return "delete";
+                    return "d";
                 } else {
-//                    request.getSession().removeAttribute("qUser");
-                    System.out.println("账号审核未通过，无法登录");
-                    return "auditFailed";
+                    request.getSession().removeAttribute("qUser");
+                   System.out.println("账号审核未通过，无法登录");
+                    return "f";
                 }
             }
-        } else {
-            System.out.println("验证码错误");
-            return "1";
         }
+        return "";
     }
+
+
 
     //发送短信验证码
     @RequestMapping("/aliSend")
@@ -221,9 +240,11 @@ public class LoginController {
             String savePhone = (String) request.getSession().getAttribute("phone");
             String saveCode = (String)request.getSession().getAttribute("code");
             if(!phone.equals(savePhone)){
+                System.out.println("登录手机号未找到!");
                 return "2";
             }
             if(!vCode.equals(saveCode)){
+                System.out.println("验证码错误");
                 return "3";
             }
             int n = loginServiceImpl.changPasswordByPhone(pwd,phone);
@@ -234,13 +255,12 @@ public class LoginController {
 
 
     @RequestMapping(value = "/getCode")
-//    @Loger(operationName = "获取验证码")
     public String getCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //声明验证码
         System.out.println("123");
         int width = 60;
         int height = 30;
-        String data = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghijkmnpqrstuvwxyz";    //随机字符字典，其中0，o，1，I 等难辨别的字符最好不要
+        String data = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghijklmnpqrstuvwxyz";    //随机字符字典，其中0，o，1，I 等难辨别的字符最好不要
         Random random = new Random();//随机类
         //1 创建图片数据缓存区域（核心类）
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);//创建一个彩色的图片

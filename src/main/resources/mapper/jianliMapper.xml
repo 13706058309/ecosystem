@@ -4,11 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.JianliMapper">
     <select id="resume" parameterType="java.lang.Long" resultMap="findResume">
-        select r.*,we.*,pe.*,eb.*,e.education   from resume r,education e,educationalBackground eb,workExperience we,
-         projectExperience pe,resumeEduu re,resumeWork rw,resumePro rp
-           where r.educationid=e.educationid and r.resumeid=re.resumeid and r.resumeid=rw.resumeid and r.resumeid=rp.resumeid
-           and re.ebid=eb.ebid and rp.peid=pe.peid and rw.weid=we.weid
-           and r.userid=#{userid}
+        select r.*,we.*,pe.*,eb.*,e.education   from
+            resume r left join education e on r.educationid=e.educationid
+                        left join resumeEduu re on r.resumeID=re.resumeID left join educationalBackground eb on re.ebID=eb.ebID
+                            left join resumePro rp on r.resumeID=rp.resumeID left join projectExperience pe on rp.peID=pe.peID
+                                left join resumeWork rw on r.resumeID=rw.resumeID left join workExperience we on rw.weID=we.weID
+                                    where r.userid=#{userid}
+
     </select>
     <resultMap id="findResume" type="com.cykj.entity.Resume">
         <id property="resumeId" column="resumeId"></id>
@@ -65,7 +67,424 @@
         </collection>
     </resultMap>
 
+<!--    查找最新添加的id-->
+    <select id="insertid" resultType="java.lang.Integer">
+        select last_insert_id()
+    </select>
+<!--    工作经验和关系表的添加-->
+    <insert id="workInsert" parameterType="com.cykj.entity.WorkExperience">
+        insert into workExperience(companyName,companyTrade,companyPost,beginTime,endTime,duties,performance)
+         values (#{companyName},#{companyTrade},#{companyPost},#{beginTime},#{endTime},#{duties},#{performance})
+    </insert>
+    <insert id="rwInsert" parameterType="java.lang.Integer">
+        insert into resumeWork (weId,resumeId) values (#{weId},#{resumeId})
+    </insert>
+<!--    项目经历和关系表的添加-->
+    <insert id="projectInsert" parameterType="com.cykj.entity.ProjectExperience">
+        insert into projectExperience(proName,proPost,proBeginTime,proEndTime,proDescription,proPerformance)
+         values (#{proName},#{proPost},#{proBeginTime},#{proEndTime},#{proDescription},#{proPerformance})
+    </insert>
+    <insert id="rpInsert" parameterType="java.lang.Integer">
+        insert into resumePro (peId,resumeId) values (#{peId},#{resumeId})
+    </insert>
+<!--    教育背景和关系表的添加-->
+    <insert id="educationInsert" parameterType="com.cykj.entity.EducationalBackground">
+        insert into educationalBackground(ebSchool,major,ebEducation,schBeginTime,schEndTime,schExperience)
+         values (#{ebSchool},#{major},#{ebEducation},#{schBeginTime},#{schEndTime},#{schExperience})
+    </insert>
+    <insert id="reInsert" parameterType="java.lang.Integer">
+        insert into resumeEduu (ebId,resumeId) values (#{ebId},#{resumeId})
+    </insert>
+<!--    删除-->
+    <delete id="workDel" parameterType="java.lang.Integer">
+        delete from workExperience where weId=#{weId}
+    </delete>
+    <delete id="projectDel" parameterType="java.lang.Integer">
+        delete from projectExperience where peId=#{peId}
+    </delete>
+    <delete id="educationDel" parameterType="java.lang.Integer">
+        delete from educationalBackground where ebId=#{ebId}
+    </delete>
+
+    <delete id="rwDel" parameterType="java.lang.Integer">
+        delete from resumeWork where weId=#{weId} and resumeId=#{resumeId}
+    </delete>
+    <delete id="rpDel" parameterType="java.lang.Integer">
+        delete from resumePro where peId=#{peId} and resumeId=#{resumeId}
+    </delete>
+    <delete id="reDel" parameterType="java.lang.Integer">
+        delete from resumeEduu where ebId=#{ebId} and resumeId=#{resumeId}
+    </delete>
+
+    <update id="resumeUpdate" parameterType="com.cykj.entity.Resume">
+        update resume  set realName=#{realName},clan=#{clan},politicalStatus=#{politicalStatus}
+        ,contactInfo=#{contactInfo},birthday=#{birthday},educationId=#{educationId},
+           address=#{address},school=#{school},profession=#{profession} where resumeId=#{resumeId}
+    </update>
+
+    <update id="workUpdate" parameterType="com.cykj.entity.WorkExperience">
+        update workExperience  set companyName=#{companyName},companyTrade=#{companyTrade},companyPost=#{companyPost}
+        ,beginTime=#{beginTime},endTime=#{endTime},duties=#{duties},
+           performance=#{performance} where weId=#{weId}
+    </update>
+
+    <update id="projectUpdate" parameterType="com.cykj.entity.ProjectExperience">
+        update projectExperience  set proName=#{proName},proDescription=#{proDescription},proPost=#{proPost}
+        ,proBeginTime=#{proBeginTime},proEndTime=#{proEndTime},proPerformance=#{proPerformance}   where peId=#{peId}
+    </update>
+
+    <update id="educationUpdate" parameterType="com.cykj.entity.EducationalBackground">
+        update educationalBackground  set ebSchool=#{ebSchool},major=#{major},ebEducation=#{ebEducation}
+        ,schBeginTime=#{schBeginTime},schEndTime=#{schEndTime},schExperience=#{schExperience} where ebId=#{ebId}
+    </update>
+
+    <update id="selfEvaUpdate" parameterType="com.cykj.entity.Resume">
+        update resume  set selfEva=#{selfEva}   where resumeId=#{resumeId}
+    </update>
+
+    <update id="expectWorkUpdate" parameterType="com.cykj.entity.Resume">
+        update resume  set expectWork=#{expectWork}   where resumeId=#{resumeId}
+    </update>
 
 
 
+<!--    感兴趣岗位-->
+    <select id="findPosts" parameterType="java.lang.Integer" resultMap="findPosition">
+        select pp.*,b.*  from userInfo u left join postCellec p on u.userId=p.userID
+            left join postPosition pp on p.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId
+            where u.userId=#{userId} limit #{page},#{size};
+    </select>
+
+    <!--    查找岗位-->
+    <select id="findPost" parameterType="java.lang.Integer" resultMap="findPosition">
+        select pp.*,b.*  from  postPosition pp,backUser b where pp.companyID=b.bUserID and pPostID=#{pPostID};
+
+    </select>
+<!--    <resultMap id="findPosition" type="com.cykj.entity.PostPosition">-->
+<!--        <id property="pPostId" column="pPostId"></id>-->
+<!--        <result property="companyId" column="companyId"></result>-->
+<!--        <result property="postName" column="postName"></result>-->
+<!--        <result property="workNature" column="workNature"></result>-->
+<!--        <result property="postId" column="postId"></result>-->
+<!--        <result property="dapartment" column="dapartment"></result>-->
+<!--        <result property="workCity" column="workCity"></result>-->
+<!--        <result property="workYear" column="workYear"></result>-->
+<!--        <result property="education" column="education"></result>-->
+<!--        <result property="jobBenefits" column="jobBenefits"></result>-->
+<!--        <result property="jobDescription" column="jobDescription"></result>-->
+<!--        <result property="detailAddress" column="detailAddress"></result>-->
+<!--        <result property="releaseTime" column="detailAddress"></result>-->
+<!--        <result property="maxSalary" column="maxSalary"></result>-->
+<!--        <result property="minSalary" column="minSalary"></result>-->
+<!--        <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">-->
+<!--            <id property="bUserId" column="bUserId"></id>-->
+<!--            <result property="bUserName" column="bUserName"></result>-->
+<!--            <result property="compName" column="compName"></result>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+    <select id="findPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select pp.*,b.*  from userInfo u left join postCellec p on u.userId=p.userID
+            left join postPosition pp on p.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId} ;
+    </select>
+<!--    删除感兴趣岗位-->
+    <delete id="pcDel" parameterType="java.lang.Integer">
+        delete from postCellec where userId=#{userId} and pPostId=#{pPostId}
+    </delete>
+<!--    添加感兴趣岗位-->
+    <insert id="pcInsert" parameterType="java.lang.Integer">
+        insert into postCellec(userId,pPostId)
+         values (#{userId},#{pPostId})
+    </insert>
+<!--    查看岗位是否被收藏-->
+    <select id="findPostCellec" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostCellec">
+        select * from postCellec where userId=#{userId} and pPostId=#{pPostId};
+    </select>
+<!--    <delete id="postPositionDel" parameterType="java.lang.Integer">-->
+<!--        delete from postPosition where  pPostId=#{pPostId}-->
+<!--    </delete>-->
+<!--    投递简历-->
+    <select id="deliveryPosts" parameterType="java.lang.Integer" resultMap="findPosition">
+        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join postPosition pp on d.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId
+            where u.userId=#{userId} limit #{page},#{size};
+    </select>
+    <resultMap id="findPosition" type="com.cykj.entity.PostPosition">
+        <id property="pPostId" column="pPostId"></id>
+        <result property="companyId" column="companyId"></result>
+        <result property="postName" column="postName"></result>
+        <result property="workNature" column="workNature"></result>
+        <result property="postId" column="postId"></result>
+        <result property="dapartment" column="dapartment"></result>
+        <result property="workCity" column="workCity"></result>
+        <result property="workYear" column="workYear"></result>
+        <result property="education" column="education"></result>
+        <result property="jobBenefits" column="jobBenefits"></result>
+        <result property="jobDescription" column="jobDescription"></result>
+        <result property="detailAddress" column="detailAddress"></result>
+        <result property="releaseTime" column="detailAddress"></result>
+        <result property="maxSalary" column="maxSalary"></result>
+        <result property="minSalary" column="minSalary"></result>
+        <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">
+            <id property="bUserId" column="bUserId"></id>
+            <result property="bUserName" column="bUserName"></result>
+            <result property="compName" column="compName"></result>
+            <result property="city" column="city"></result>
+            <result property="address" column="address"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="logo" column="logo"></result>
+            <result property="scale" column="scale"></result>
+            <result property="homePage" column="homePage"></result>
+            <result property="infoIntr" column="infoIntr"></result>
+            <result property="lng" column="lng"></result>
+            <result property="lat" column="lat"></result>
+        </association>
+    </resultMap>
+
+    <select id="deliveryInfo" parameterType="java.lang.Integer" resultMap="findiobs">
+        select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join parameter p on d.deliStandId=p.paramId
+            left join postPosition pp on d.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId where  u.userId=#{userId}  limit #{page},#{limit};
+    </select>
+    <select id="deliveryInfoCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join parameter p on d.deliStandId=p.paramId
+            left join postPosition pp on d.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId} ;
+    </select>
+
+    <select id="deliveryPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+            left join postPosition pp on d.pPostID=pp.pPostID
+            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId};
+    </select>
+
+
+
+    <select id="jobsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
+        select  pp.*,b.*,i.*  from  postPosition pp left join postCellec pc on pp.pPostID=pc.pPostID
+        left join backUser b on pp.companyID=b.bUserID
+        left join comp_industry  ci on b.bUserId=ci.compId
+        left join industry i on ci.industryID=i.industryID
+        left join position p on pp.postId=p.postId where postStandId=6
+
+        <if test="workCity!=null" >
+            and pp.workCity=#{workCity}
+        </if>
+
+        <if test="workName!=null" >
+            and workName= #{workName}
+        </if>
+        <if test="education!=null" >
+            and education= #{education}
+        </if>
+        <if test="finanStage!=null" >
+            and finanStage= #{finanStage}
+        </if>
+        <if test="workYear!=null" >
+            and workYear= #{workYear}
+        </if>
+
+        <if test="scale!=null" >
+            and scale= #{scale}
+        </if>
+        <if test="releaseTime!=null" >
+            and DATE_SUB(CURDATE(),INTERVAL #{releaseTime} DAY) &lt;= DATE(releaseTime)
+        </if>
+        <if test="releaseTime2!=null" >
+            and DATE_SUB(CURDATE(),INTERVAL #{releaseTime2} Month) &lt;= DATE(releaseTime)
+        </if>
+        <if test="min!=null" >
+            and (maxSalary between #{min} and #{max} or minSalary between #{min} and #{max})
+        </if>
+        <if test="min2!=null" >
+            and  maxSalary  &gt;= #{min2}
+        </if>
+        <if test="search!=null" >
+            and  (pp.postName  like #{search} or compName like #{search} )
+        </if>
+            <if test="position!=null" >
+                and  p.postName=#{position}
+            </if>
+
+    </select>
+    <select id="jobs" parameterType="java.util.HashMap" resultMap="findiobs">
+
+            select  pp.*,b.*,i.*  from  postPosition pp
+            left join backUser b on pp.companyID=b.bUserID
+            left join comp_industry  ci on pp.companyId=ci.compId
+            left join industry i on ci.industryID=i.industryID
+            left join position p on pp.postId=p.postId
+            where postStandId=6
+
+            <if test="workCity!=null" >
+                and pp.workCity=#{workCity}
+            </if>
+            <if test="workName!=null" >
+                and workName= #{workName}
+            </if>
+            <if test="education!=null" >
+            and education= #{education}
+            </if>
+            <if test="finanStage!=null" >
+                and finanStage= #{finanStage}
+            </if>
+            <if test="workYear!=null" >
+                and workYear= #{workYear}
+            </if>
+
+            <if test="scale!=null" >
+                and scale= #{scale}
+            </if>
+            <if test="releaseTime!=null" >
+                and DATE_SUB(CURDATE(),INTERVAL #{releaseTime} DAY) &lt;= DATE(releaseTime)
+            </if>
+            <if test="releaseTime2!=null" >
+                and DATE_SUB(CURDATE(),INTERVAL #{releaseTime2} Month) &lt;= DATE(releaseTime)
+            </if>
+            <if test="min!=null" >
+                and (maxSalary between #{min} and #{max} or minSalary between #{min} and #{max})
+            </if>
+            <if test="min2!=null" >
+                and  maxSalary  &gt;= #{min2}
+            </if>
+            <if test="search!=null" >
+                and  (pp.postName  like #{search} or compName like #{search} )
+            </if>
+                <if test="position!=null" >
+                    and  p.postName=#{position}
+                </if>
+
+              limit #{page},#{limit}
+    </select>
+    <resultMap id="findiobs" type="com.cykj.entity.PostPosition">
+        <id property="pPostId" column="pPostId"></id>
+        <result property="companyId" column="companyId"></result>
+        <result property="postName" column="postName"></result>
+        <result property="workNature" column="workNature"></result>
+        <result property="postId" column="postId"></result>
+        <result property="dapartment" column="dapartment"></result>
+        <result property="workCity" column="workCity"></result>
+        <result property="workYear" column="workYear"></result>
+        <result property="education" column="education"></result>
+        <result property="jobBenefits" column="jobBenefits"></result>
+        <result property="jobDescription" column="jobDescription"></result>
+        <result property="detailAddress" column="detailAddress"></result>
+        <result property="releaseTime" column="releaseTime"></result>
+        <result property="maxSalary" column="maxSalary"></result>
+        <result property="minSalary" column="minSalary"></result>
+        <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">
+            <id property="bUserId" column="bUserId"></id>
+            <result property="bUserName" column="bUserName"></result>
+            <result property="compName" column="compName"></result>
+            <result property="city" column="city"></result>
+            <result property="address" column="address"></result>
+            <result property="finanStage" column="finanStage"></result>
+            <result property="logo" column="logo"></result>
+            <result property="scale" column="scale"></result>
+        </association>
+        <association property="delivery" column="delivery" javaType="com.cykj.entity.Delivery">
+            <id property="deliveryId" column="deliveryId"></id>
+            <result property="deliStandId" column="deliStandId"></result>
+            <result property="feedBackInfo" column="feedBackInfo"></result>
+            <result property="feedBackTime" column="feedBackTime"></result>
+        </association>
+        <association property="parameter" column="parameter" javaType="com.cykj.entity.Parameter">
+            <id property="paramId" column="paramId"></id>
+            <result property="paramName" column="paramName"></result>
+            <result property="paramType" column="paramType"></result>
+            <result property="paramValues" column="paramValues"></result>
+        </association>
+        <collection property="industryList"   ofType="com.cykj.entity.Industry">
+            <id property="industryId" column="industryId"></id>
+            <result property="industryName" column="industryName"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findpwd" parameterType="java.util.HashMap" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where userId=#{userId} and pwd=#{oldpwd}
+    </select>
+    <select id="findUser" parameterType="java.lang.Integer" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where userId=#{userId}
+    </select>
+    <update id="savepwd" parameterType="java.util.HashMap">
+        update userInfo set pwd=#{newpwd} where userId=#{userId}
+    </update>
+    <update id="saveShow" parameterType="java.util.HashMap">
+        update userInfo set isOpen=#{isOpen} where userId=#{userId}
+    </update>
+
+    <update id="phone" parameterType="java.util.HashMap">
+        update userInfo set isOpen=#{isOpen} where userId=#{userId}
+    </update>
+
+<!--    简历投递-->
+    <insert id="sendResume" parameterType="java.lang.Integer">
+        insert into delivery (userId,pPostId) values (#{userId},#{pPostId})
+    </insert>
+    <select id="findDelivery" parameterType="java.lang.Integer" resultType="com.cykj.entity.Delivery">
+        select * from delivery where userId=#{userId} and pPostId=#{pPostId}
+    </select>
+<!--    查看手机号码是否存在-->
+    <select id="findTtelephone" parameterType="java.lang.String" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where telephone=#{telephone}
+    </select>
+<!--    修改yonghu手机号-->
+    <update id="updatePhone" parameterType="com.cykj.entity.UserInfo">
+        update userInfo set telephone=#{telephone} where userId=#{userId}
+    </update>
+
+<!--    简历更新时间-->
+    <update id="updateResumeTime" parameterType="com.cykj.entity.Resume">
+        update resume set updateTime=#{updateTime} where userId=#{userId}
+    </update>
+
+<!--    查看所有行业职位类型-->
+    <select id="industrys" resultMap="findIndustry" >
+        select i.*,d.departId,d.departName,p.postId,p.postName from
+            industry i left join depart d on i.industryId=d.industryId
+            left join position p on d.departId=p.departId;
+
+    </select>
+
+    <resultMap id="findIndustry" type="com.cykj.entity.Industry">
+        <id property="industryId" column="industryId"></id>
+        <result property="industryName" column="industryName"></result>
+        <collection property="departs"   ofType="com.cykj.entity.Depart">
+            <id property="departId" column="departId"></id>
+            <result property="departName" column="departName"></result>
+<!--            <result property="positions" column="positions"></result>-->
+            <collection property="positions"   ofType="com.cykj.entity.Position">
+                <id property="postId" column="postId"></id>
+                <result property="postName" column="postName"></result>
+            </collection>
+        </collection>
+
+    </resultMap>
+
+
+
+
+
+<!--    头像修改-->
+    <update id="updatePhoto" parameterType="com.cykj.entity.Resume">
+        update resume set photo=#{photo} where userId=#{userId}
+    </update>
+
+    <update id="updateHeadImgUrl" parameterType="com.cykj.entity.UserInfo">
+        update userInfo set headImgUrl=#{headImgUrl} where userId=#{userId}
+    </update>
+
+    <update id="updateName" parameterType="com.cykj.entity.UserInfo">
+        update userInfo set userName=#{userName} where userId=#{userId}
+    </update>
+
+<!--    按字符查询城市-->
+    <select id="citys" parameterType="java.lang.Integer" resultType="com.cykj.entity.City">
+        select * from city  where
+    CONV(HEX(left(CONVERT(cityName USING gbk),1)),16,10) between #{begin} and #{end} ;
+    </select>
 </mapper>

@@ -38,12 +38,12 @@ function menu_box(industryId, dos) {
 
 //第三岗位的值，跳转界面
 function postName(node) {
-    location.href="center/job?findWorkCity="+$("#city").text()+"&findPosition="+node.text();
+    location.href=path+"/center/job?findWorkCity="+$("#city").text()+"&findPosition="+node.innerText;
 }
 //搜索第三岗位，跳转界面
 function searchBut() {
     var search = $("#search_input").val()
-    location.href="center/job?city="+$("#city").text()+"&findSearch="+search;
+    location.href=path+"/center/job?findWorkCity="+$("#city").text()+"&findSearch="+search;
 
 }
 
@@ -59,19 +59,10 @@ var currCity = $("#city").text();
 $(function () {
     currCity = $("#city").text();
 });
+
 //定位当前城市
-var position = new BMap.Geolocation();
-position.getCurrentPosition(function (r) {
-//    判断定位是否成功
-    if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-        //    获取经度，维度，省份
-        lat = r.positionLat;
-        lng = r.positionLng;
-        city = r.address.city;
-        $("#city").text(city);
-        $("#bCity").text(city);
-    }
-});
+
+
 
 //切换城市弹窗
 function cutCity() {
@@ -93,7 +84,16 @@ function City(node) {
     $("#city").text(currentCity.text());
     $("#bCity").text(currentCity.text());
     layer.closeAll();
-    location.href="home?city="+$("#city").text();
+    location.href="homes?city="+$("#city").text();
     console.log("!!!!!!!!!!!!!!!!!!!!!"+$("#city").text());
 }
 
+//热门企业
+function compName(bUserId) {
+    location.href=path+"/homePage/compProfile?bUserId="+bUserId;
+}
+
+//最新岗位
+function post(pPostID) {
+    location.href=path+"/center/postInfo?lid="+pPostID;
+}

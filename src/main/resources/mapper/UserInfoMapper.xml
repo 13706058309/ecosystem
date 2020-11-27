@@ -8,14 +8,13 @@
         select u.*,p.* from userInfo u INNER JOIN parameter p ON u.accStandID = p.paramId where account = #{account} and pwd = #{pwd}
     </select>
 
+    <select id="mesLog" parameterType="java.util.HashMap" resultMap="userRes">
+        select u.*,p.* from userInfo u INNER JOIN parameter p ON u.accStandID = p.paramId where telephone = #{phone}
+    </select>
+
     <select id="adminLog" parameterType="java.util.HashMap" resultMap="adminRes">
         select b.*,p.* from backUser b INNER JOIN parameter p ON b.stateId = p.paramId where account = #{account} and pwd = #{pwd}
     </select>
-
-    <select id="mesLog" parameterType="java.util.HashMap" resultMap="adminRes">
-        select u.*,p.paramName from userInfo u inner join parameter p on u.accStandID = p.paramId where telephone = #{phone}
-    </select>
-
 
     <select id="isRepeat" parameterType="java.lang.String" resultType="com.cykj.entity.UserInfo">
         select * from userInfo where account = #{account}
@@ -32,10 +31,10 @@
     <result property="pwd" column="pwd"></result>
     <result property="telephone" column="telephone"></result>
     <result property="accStandId" column="accStandId"></result>
-    <result property="jobStandId" column="jobStandId"></result>
+    <result property="headImgUrl" column="headImgUrl"></result>
     <result property="address" column="address"></result>
     <result property="isOpen" column="isOpen"></result>
-    <result property="industry" column="industry"></result>
+    <result property="regTime" column="regTime"></result>
     <association property="states"  javaType="com.cykj.entity.Parameter">
         <id property="paramId" column="paramId"></id>
         <result property="paramName" column="paramName"></result>
@@ -77,6 +76,7 @@
     <update id="changPasswordByPhone">
         update userInfo set pwd = #{pwd} where telephone = #{phone}
     </update>
+
 
 
 </mapper>
