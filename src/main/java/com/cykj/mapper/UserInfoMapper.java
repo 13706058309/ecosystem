@@ -1,6 +1,7 @@
 package com.cykj.mapper;
 
 import com.cykj.entity.BackUser;
+import com.cykj.entity.Resume;
 import com.cykj.entity.UserInfo;
 import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -24,6 +25,10 @@ public interface UserInfoMapper {
      BackUser adminLog(Map<String,Object> map);
      //前端注册
      int register(UserInfo userInfo);
+     //查找最新添加的id
+     int insertid();
+     //添加简历对象
+     int resumeInsert(Resume resume);
      //判断账号是否重复
      UserInfo isRepeat(String account);
      //查询手机

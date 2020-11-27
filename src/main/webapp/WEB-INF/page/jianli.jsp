@@ -224,7 +224,7 @@
                                         <div class="layui-inline">
                                             <label class="layui-form-label" style="width: 100px">出生日期</label>
                                             <div class="layui-input-inline">
-                                                <input type="text" class="layui-input" name="birthday" id="birthday" placeholder="yyyy-MM-dd" value="${resume.birthday}">
+                                                <input type="date" class="layui-input" name="birthday" id="birthday" placeholder="yyyy-MM-dd" value="${resume.birthday}">
                                             </div>
                                         </div>
                                     </div>

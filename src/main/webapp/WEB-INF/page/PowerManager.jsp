@@ -14,6 +14,8 @@
     <script src="${pageContext.request.contextPath}/layui/layui.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" >
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/powerManager.js"></script>
+    <script>
+    </script>
     <style>
         .transfer-box{
             width: 660px;
@@ -61,7 +63,15 @@
 </head>
 <body>
 <input id="path" type="hidden" value="${pageContext.request.contextPath}">
-<div><select class="layui-form-item" id="roleId" onchange="changeRole()" style="width: 200px"></select></div>
+<div style="width: 900px;margin:auto">
+    <div style="margin-left:200px;margin-top: 30px;margin-bottom: 10px;width:500px">
+        <label style="line-height: 30px">选择角色</label>
+            <select class="layui-form-item" id="roleId" onchange="changeRole()"  style="height: 30px;width: 200px">
+        </select>
+        </form>
+    </div>
+</div>
+<div style="width: 800px;margin: auto">
     <div class="transfer-box">
         <div class="transfer-box-item">
             <div class="transfer-box-title">
@@ -86,5 +96,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

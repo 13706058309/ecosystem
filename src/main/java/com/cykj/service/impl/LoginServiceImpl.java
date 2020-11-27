@@ -1,6 +1,7 @@
 package com.cykj.service.impl;
 
 import com.cykj.entity.BackUser;
+import com.cykj.entity.Resume;
 import com.cykj.entity.UserInfo;
 //import com.cykj.log.Loger;
 import com.cykj.mapper.UserInfoMapper;
@@ -67,8 +68,11 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public int register(UserInfo userInfo) {
+    public int register(UserInfo userInfo, Resume resume) {
         int n = userInfoMapper.register(userInfo);
+        int k=userInfoMapper.insertid();
+        resume.setUserId(k);
+        n=userInfoMapper.resumeInsert(resume);
         return n;
     }
 
