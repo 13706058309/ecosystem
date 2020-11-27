@@ -126,10 +126,10 @@
                     layer.msg("管理员账号不存在,登录失败!");
                 }else if (info == 'noReviewed'){
                     layer.msg("登录失败,此账号待审核!");
-                } else if (info = 'failedPass'){
-                    layer.msg("登录失败,此账号未通过审核!");
                 } else if (info == 'vCodeError'){
                     layer.msg("登录失败,验证码错误，请重试!");
+                } else if (info == 'failedPass'){
+                    layer.msg("登录失败,此账号未通过审核!");
                 } else {
                     layer.msg("当前账号无权限,请联系管理员!");
                 }
