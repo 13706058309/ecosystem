@@ -135,21 +135,21 @@ function showDetails(data) {
 
 function showDetail(data) {
     var paths = $("#path").val();
-    $("#dName").text(data.realName);
-    $("#dBir").text(data.birthday);
-    $("#DAddress").text(data.address);
-    $("#dClen").text(data.clan);
-    $("#dPolistatu").text(data.politicalStatus);
-    $("#dSex").text(data.sex);
-    $("#DSchool").text(data.school);
-    $("#dProf").text(data.profession);
-    $("#dWorkYear").text(data.wrokYear);
-    $("#dEdu").text(data.education.education);
-    $("#DHIndustry").text(data.industry);
-    $("#DHwork").text(data.expectWork);
-    $("#DRealInfo").text(data.contactInfo);
-    $("#DselfEva").text(data.selfEva);
-    var num = data.jobStandId;
+    $("#dName").text(data.resume.realName);
+    $("#dBir").text(data.resume.birthday);
+    $("#DAddress").text(data.resume.address);
+    $("#dClen").text(data.resume.clan);
+    $("#dPolistatu").text(data.resume.politicalStatus);
+    $("#dSex").text(data.resume.sex);
+    $("#DSchool").text(data.resume.school);
+    $("#dProf").text(data.resume.profession);
+    $("#dWorkYear").text(data.resume.wrokYear);
+    $("#dEdu").text(data.education);
+    $("#DHIndustry").text(data.resume.industry);
+    $("#DHwork").text(data.resume.expectWork);
+    $("#DRealInfo").text(data.resume.contactInfo);
+    $("#DselfEva").text(data.resume.selfEva);
+    var num = data.resume.jobStandId;
     if(num==4){
         $("#jobStand").text("已就业")
     }else if(num==5){
@@ -161,7 +161,7 @@ function showDetail(data) {
     $("#imgs").empty();
     // var img=new Image();
     // img.src=paths+data.photo;
-    var $img = $("<img width='200px' height='200px' src='"+paths+data.photo+"'>")
+    var $img = $("<img width='200px' height='200px' src='"+paths+data.resume.photo+"'>")
 
     $("#imgs").append($img);
     $("#tbody").empty();

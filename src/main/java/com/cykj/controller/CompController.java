@@ -246,7 +246,7 @@ public class CompController {
     //批量过滤简历
     @RequestMapping("/scerrResume")
     public @ResponseBody String scerrResume(String msg){
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.changeDeliStand(list,10);
         return successNum+"";
     }
@@ -292,7 +292,7 @@ public class CompController {
     //批量待定单个简历
     @RequestMapping("/deterResume")
     public @ResponseBody String deterResume(String msg){
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
 
         int successNum = backCompService.changeDeliStand(list,11);
         return successNum+"";
@@ -316,7 +316,7 @@ public class CompController {
     @RequestMapping("/delResume")
     public @ResponseBody String delResume(String msg){
 
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.delResume(list,9);
         return successNum+"";
     }
@@ -325,7 +325,7 @@ public class CompController {
     @RequestMapping("/delPassResume")
     public @ResponseBody String delPassResume(String msg){
 
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.changeDeliStand(list,21);
         return successNum+"";
     }

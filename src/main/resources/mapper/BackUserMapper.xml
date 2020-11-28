@@ -31,6 +31,7 @@
         <result property="compName" column="compName"></result>
         <result property="lat" column="lat"></result>
         <result property="lng" column="lng"></result>
+        <result property="balance" column="balance"></result>
 
         <collection property="industrys" ofType="com.cykj.entity.Industry">
             <id property="industryId" column="industryId"></id>

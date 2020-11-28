@@ -33,13 +33,13 @@ public interface BackCompService {
     //查找企业收到的简历
     TableInfo findAllResume(Map<String,Object> map);
     //批量改变投机企业简历的状态
-    int changeDeliStand(List<Resume> list,int standID);
+    int changeDeliStand(List<Delivery> list,int standID);
     //改变企业简历状态
     int changeDeliStand(int deliID,int standID);
     //企业删除应聘者简历
     int delResume(int deliID,int standID);
     //企业批量删除应聘者简历
-    int delResume(List<Resume> list,int standID);
+    int delResume(List<Delivery> list,int standID);
     //企业通知应聘者面试
     int passResume(int deliID,int standID,String msg);
     //通过ID查找岗位名字
@@ -92,4 +92,6 @@ public interface BackCompService {
     int readUserMsg( int compID, int userID);
     //确认读过公司的消息
     int readCompMsg( int compID, int userID);
+
+    void test();
 }

@@ -133,20 +133,20 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Override
     public TableInfo findAllResume(Map<String, Object> map) {
-        List<Resume> resumes = resumeMapper.findAllResume(map);
-        List<Resume> num = resumeMapper.findAllResumeNum(map);
-        System.out.println(num.size());
-        TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num.size(),resumes );
+        List<Delivery> resumes = deliveryMapper.findAllResume(map);//2020-11-28
+        int num = deliveryMapper.findAllResumeNum(map);//2020-11-28
+        System.out.println(num+"数量");
+        TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num,resumes );
         return tableInfo;
     }
 
     @Override
-    public int changeDeliStand(List<Resume> list,int standID) {
+    public int changeDeliStand(List<Delivery> list,int standID) {
         int n = 0;
-        for (Resume resume : list) {
+        for (Delivery delivery : list) {
             Map<String,Object> map = new HashMap<>();
             map.put("standID",standID);
-            map.put("deliID",resume.getDelivery().getDeliveryId());
+            map.put("deliID",delivery.getDeliveryId());
             int i = deliveryMapper.changeDeliStand(map);
             n = n+i;
         }
@@ -174,12 +174,12 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public int delResume(List<Resume> list, int standID) {
+    public int delResume(List<Delivery> list, int standID) {
         int n = 0;
-        for (Resume resume : list) {
+        for (Delivery delivery : list) {
             Map<String,Object> map = new HashMap<>();
             map.put("standID",standID);
-            map.put("deliID",resume.getDelivery().getDeliveryId());
+            map.put("deliID",delivery.getDeliveryId());
             map.put("feedTime",new Date());
             map.put("feedInfo","您被企业拒绝，请再接再厉");
             int i = deliveryMapper.delResume(map);
@@ -342,12 +342,20 @@ public class BackCompServiceImpl implements BackCompService {
         map.put("address",resume.getAddress());
         map.put("contactInfo",resume.getContactInfo());
         map.put("selfEva",resume.getSelfEva());
+        if(resume.getEducationalBackgrounds()!=null&&resume.getEducationalBackgrounds().size()!=0){
+            map.put("school1",resume.getEducationalBackgrounds().get(0).getEbSchool());
+            map.put("schBegin1",resume.getEducationalBackgrounds().get(0).getSchBeginTime());
+            map.put("edu1",resume.getEducationalBackgrounds().get(0).getEbEducation());
+            map.put("schEnd1",resume.getEducationalBackgrounds().get(0).getSchEndTime());
+            map.put("schoolExp1",resume.getEducationalBackgrounds().get(0).getSchExperience());
+        }else{
+            map.put("school1","");
+            map.put("schBegin1","");
+            map.put("edu1","");
+            map.put("schEnd1","");
+            map.put("schoolExp1","");
+        }
 
-        map.put("school1",resume.getEducationalBackgrounds().get(0).getEbSchool());
-        map.put("schBegin1",resume.getEducationalBackgrounds().get(0).getSchBeginTime());
-        map.put("edu1",resume.getEducationalBackgrounds().get(0).getEbEducation());
-        map.put("schEnd1",resume.getEducationalBackgrounds().get(0).getSchEndTime());
-        map.put("schoolExp1",resume.getEducationalBackgrounds().get(0).getSchExperience());
         if(resume.getEducationalBackgrounds().size()==2){
             map.put("school2",resume.getEducationalBackgrounds().get(1).getEbSchool());
             map.put("schBegin2",resume.getEducationalBackgrounds().get(1).getSchBeginTime());
@@ -361,13 +369,22 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("schEnd2","");
             map.put("schoolExp2","");
         }
+        if(resume.getWorkExperiences()!=null&&resume.getWorkExperiences().size()!=0){
+            map.put("compName1",resume.getWorkExperiences().get(0).getCompanyName());
+            map.put("begin1",resume.getWorkExperiences().get(0).getBeginTime());
+            map.put("post1",resume.getWorkExperiences().get(0).getCompanyPost());
+            map.put("end1",resume.getWorkExperiences().get(0).getEndTime());
+            map.put("trade1",resume.getWorkExperiences().get(0).getDuties());
+            map.put("performace1",resume.getWorkExperiences().get(0).getPerformance());
+        }else{
+            map.put("compName1","");
+            map.put("begin1","");
+            map.put("post1","");
+            map.put("end1","");
+            map.put("trade1","");
+            map.put("performace1","");
+        }
 
-        map.put("compName1",resume.getWorkExperiences().get(0).getCompanyName());
-        map.put("begin1",resume.getWorkExperiences().get(0).getBeginTime());
-        map.put("post1",resume.getWorkExperiences().get(0).getCompanyPost());
-        map.put("end1",resume.getWorkExperiences().get(0).getEndTime());
-        map.put("trade1",resume.getWorkExperiences().get(0).getDuties());
-        map.put("performace1",resume.getWorkExperiences().get(0).getPerformance());
         if(resume.getWorkExperiences().size()==2){
             map.put("compName2",resume.getWorkExperiences().get(1).getCompanyName());
             map.put("begin2",resume.getWorkExperiences().get(1).getBeginTime());
@@ -384,13 +401,22 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("performace2","");
         }
 
+        if(resume.getProjectExperiences()!=null&&resume.getProjectExperiences().size()!=0){
+            map.put("projectName1",resume.getProjectExperiences().get(0).getProName());
+            map.put("proBegin1",resume.getProjectExperiences().get(0).getProBeginTime());
+            map.put("proPost1",resume.getProjectExperiences().get(0).getProPost());
+            map.put("proEnd1",resume.getProjectExperiences().get(0).getProEndTime());
+            map.put("proDes1",resume.getProjectExperiences().get(0).getProDescription());
+            map.put("proWork1",resume.getProjectExperiences().get(0).getProPerformance());
+        }else{
+            map.put("projectName1","");
+            map.put("proBegin1","");
+            map.put("proPost1","");
+            map.put("proEnd1","");
+            map.put("proDes1","");
+            map.put("proWork1","");
+        }
 
-        map.put("projectName1",resume.getProjectExperiences().get(0).getProName());
-        map.put("proBegin1",resume.getProjectExperiences().get(0).getProBeginTime());
-        map.put("proPost1",resume.getProjectExperiences().get(0).getProPost());
-        map.put("proEnd1",resume.getProjectExperiences().get(0).getProEndTime());
-        map.put("proDes1",resume.getProjectExperiences().get(0).getProDescription());
-        map.put("proWork1",resume.getProjectExperiences().get(0).getProPerformance());
 
         if(resume.getProjectExperiences().size()==2){
             map.put("projectName2",resume.getProjectExperiences().get(1).getProName());
@@ -408,7 +434,9 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("proWork2","");
         }
         WordUtil wordUtil = new WordUtil();
+        System.out.println(photoPath+resume.getPhoto()+"我的");
         String imageBase = wordUtil.getImageBase(photoPath+resume.getPhoto());
+        System.out.println(imageBase);
         map.put("image",imageBase);
         String path = wordUtil.createWord(map, MyUtil.RESUME,savePath);
         return path;
@@ -530,6 +558,21 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public int readCompMsg(int compID, int userID) {
         return compRecordMapper.readCompMsg(compID,userID);
+    }
+
+    @Override
+    public void test() {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("compID",3);
+//        map.put("standID",20);
+//        map.put("offset",0);
+//        map.put("limit",5);
+//        List<Delivery> allResume = deliveryMapper.findAllResume(map);
+//        System.out.println("allress"+allResume.size());
+//        for (Delivery delivery : allResume) {
+//            System.out.println(delivery);
+//            System.out.println(delivery.getResume());
+//        }
     }
 
 

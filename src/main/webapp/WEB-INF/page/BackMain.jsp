@@ -13,6 +13,11 @@
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/layui/layui.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/pay/js/amazeui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/pay/js/ui-choose.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/pay/css/amazeui.min.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/pay/css/main.css" />
     <script>
         //JavaScript代码区域
 
@@ -23,15 +28,15 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">后台管理首页</div>
-        <ul class="layui-nav layui-layout-right">
+        <ul class="layui-nav layui-layout-right" style="margin-top: 0%">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
                     ${admin.bUserName}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="#">积分余额</a></dd>
+                    <dd><a href="#" onclick="showPay()">积分充值</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="#" onclick="exitLogin()">退了</a></li>
@@ -69,10 +74,81 @@
 <%--        <!-- 底部固定区域 -->--%>
 <%--        © layui.com - 底部固定区域--%>
 <%--    </div>--%>
+
 </div>
 
+<div class="pay" id="pay" style="display: none">
+    <!--主内容开始编辑-->
+    <div class="tr_recharge">
+        <div class="tr_rechtext">
+            <p class="te_retit"><img src="${pageContext.request.contextPath}/pay/images/coin.png" alt="" />充值中心</p>
+            <p>1.人才币是钱程无忧退出的虚拟货币，你可以使用人才币购买站内的简历。</p>
+            <p>2.人才币与人民币换算为1：1，即1元=1人才币，你可以选择支付宝的付款方式来进行充值，人才币每次10个起充。</p>
+        </div>
+        <form action="#" class="am-form" id="doc-vld-msg">
+            <div class="tr_rechbox">
+                <div class="tr_rechhead">
+                    <img src="${pageContext.request.contextPath}/pay/images/ys_head2.jpg" />
+                    <p>充值帐号：
+                        <a>${admin.account}</a>
+                    </p>
+                    <div class="tr_rechheadcion">
+                        <img src="images/coin.png" alt="" />
+                        <span>当前余额：<span>1000招兵币</span></span>
+                    </div>
+                </div>
+                <div class="tr_rechli am-form-group">
+                    <ul class="ui-choose am-form-group" id="uc_01">
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio"  value="" name="docVlGender" required data-validation-message="请选择一项充值额度"> 10￥
+                            </label>
+                        </li>
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio" name="docVlGender" data-validation-message="请选择一项充值额度"> 20￥
+                            </label>
+                        </li>
 
-
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio" name="docVlGender" data-validation-message="请选择一项充值额度"> 50￥
+                            </label>
+                        </li>
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio" name="docVlGender" data-validation-message="请选择一项充值额度"> 其他金额
+                            </label>
+                        </li>
+                    </ul>
+                    <!--<span>1招兵币=1元 10元起充</span>-->
+                </div>
+                <div class="tr_rechoth am-form-group">
+                    <span>其他金额：</span>
+                    <input type="number" min="10" max="10000" value="10.00元" class="othbox" data-validation-message="充值金额范围：10-10000元" />
+<%--                    <p>充值金额范围：10-10000元</p>--%>
+                </div>
+                <div class="tr_rechcho am-form-group" style="margin-left: 1%">
+                    <span>充值方式：</span>
+                    <label class="am-radio" style="margin-right:30px;">
+                        <img src="${pageContext.request.contextPath}/pay/images/zfbpay.png">
+                    </label>
+<%--                    <label class="am-radio" style="margin-right:30px;">--%>
+<%--                        <input type="radio" name="radio1" value="" data-am-ucheck data-validation-message="请选择一种充值方式"><img src="${pageContext.request.contextPath}/pay/images/zfbpay.png">--%>
+<%--                    </label>--%>
+                </div>
+                <div class="tr_rechnum">
+                    <span>应付金额：</span>
+                    <p class="rechnum">0.00元</p>
+                </div>
+            </div>
+            <div class="tr_paybox">
+                <input type="button" value="确认支付" class="tr_pay am-btn" onclick="pay()" />
+                <span>温馨提示：人才币只限于购买简历，遇到问题请拨打联系电话13706058309。</span>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 <script>
@@ -107,6 +183,102 @@
         },function (index) {
             location.href = path+"/rec/exitsLogin";
         })
+    }
+
+    function showPay() {
+        layer.open({
+            type:1,
+            title:"积分充值",
+            area:['60%','80%'],
+            offset: ['10%', '30%'],
+            content:$("#pay")
+        })
+    }
+
+//
+    // 将所有.ui-choose实例化
+    $('.ui-choose').ui_choose();
+    // uc_01 ul 单选
+    var uc_01 = $('#uc_01').data('ui-choose'); // 取回已实例化的对象
+    uc_01.click = function(index, item) {
+        console.log('click', index, item.text())
+    }
+    uc_01.change = function(index, item) {
+        console.log('change', index, item.text())
+    }
+    $(function() {
+        $('#uc_01 li:eq(3)').click(function() {
+            $('.tr_rechoth').show();
+            $('.tr_rechoth').find("input").attr('required', 'true')
+            $('.rechnum').text('10.00元');
+            $('.othbox').val('10');
+        })
+        $('#uc_01 li:eq(0)').click(function() {
+            $('.tr_rechoth').hide();
+            $('.rechnum').text('10.00元');
+            $('.othbox').val('');
+        })
+        $('#uc_01 li:eq(1)').click(function() {
+            $('.tr_rechoth').hide();
+            $('.rechnum').text('20.00元');
+            $('.othbox').val('');
+        })
+        $('#uc_01 li:eq(2)').click(function() {
+            $('.tr_rechoth').hide();
+            $('.rechnum').text('50.00元');
+            $('.othbox').val('');
+        })
+        $(document).ready(function() {
+            $('.othbox').on('input propertychange', function() {
+                var num = $(this).val();
+                $('.rechnum').html(num + ".00元");
+            });
+        });
+    })
+
+    $(function() {
+        $('#doc-vld-msg').validator({
+            onValid: function(validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+            onInValid: function(validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                if(!$alert.length) {
+                    $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                    appendTo($group);
+                }
+                $alert.html(msg).show();
+            }
+        });
+    });
+
+    function pay() {
+        var money = $(".othbox").val();
+        if(money.length!=0){
+            var pattern = /^\+?[1-9][0-9]*$/;
+            if(!pattern.test(money)){
+                layer.msg("请输入正整数");
+                return false;
+            }
+            if(parseInt(money)<10||parseInt(money)>(10000)){
+                layer.msg("充值金额范围：10-10000元");
+                return false;
+            }
+        }
+        var pay = $('.rechnum').text();
+        if(pay==".00元"){
+            layer.msg("请输入正整数");
+            return false;
+        }
+        if(pay=="0.00元"){
+            layer.msg("请选择或输入充值金额");
+            return false;
+        }
     }
 </script>
 </html>
