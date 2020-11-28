@@ -305,7 +305,7 @@
                                 </div>
 
                             </div>
-                            <p class="ipt-wrap"><input type="text" id="search" name="query" ka="search-keyword" value="${search}"
+                            <p class="ipt-wrap"><input type="text" id="search" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="query" ka="search-keyword" value="${search}"
                                                        autocomplete="off" class="ipt-search" maxlength="50" placeholder="搜索职位"></p>
                         </div>
                         <input type="hidden" name="city" class="city-code" value="101230200">
@@ -577,7 +577,7 @@
                                                         </h3>
                                                     </div></a>
                                                     <c:if test="${not empty qUser}">
-                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('/springboot/rec/userChat?compID=${job.backUser.bUserId}')"
+                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${job.backUser.bUserId}')"
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
                                                         <img class="icon-chat icon-chat-hover"

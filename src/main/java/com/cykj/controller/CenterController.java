@@ -60,10 +60,13 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.findPosts(userId,page,limit);
         List<PostPosition> postsCount=resumeService.findPostsCount(userId);
         int count=postsCount.size();
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",1);
+        }
 
         req.setAttribute("posts",posts);
         req.setAttribute("count",count);
@@ -83,10 +86,13 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.deliveryPosts(userId,page,limit);
         List<PostPosition> postsCount=resumeService.deliveryPostsCount(userId);
         int count=postsCount.size();
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",2);
+        }
 
         req.setAttribute("postss",posts);
         req.setAttribute("count",count);
@@ -106,7 +112,7 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.findPosts(userId,page,limit);
         List<PostPosition> postsCount=resumeService.findPostsCount(userId);
         int count=postsCount.size();
@@ -129,18 +135,43 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
-        List<PostPosition> posts=resumeService.findPosts(userId,page,limit);
-        List<PostPosition> postsCount=resumeService.findPostsCount(userId);
+        int limit=10;
+        List<BackUser> posts=resumeService.communication(userId,page,limit);
+        List<BackUser> postsCount=resumeService.communicationCount(userId);
         int count=postsCount.size();
-
-        req.setAttribute("posts",posts);
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",4);
+        }
+        req.setAttribute("postssss",posts);
         req.setAttribute("count",count);
         req.setAttribute("limit",limit);
         req.setAttribute("curr",curr);
         System.out.println(new Gson().toJson(posts));
         return "resumeInfo";
     }
+    @RequestMapping("/communicationPage")
+    public String communicationPage(HttpServletRequest req,int curr,int limit){
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
+        List<BackUser> posts=resumeService.communication(userId,(curr-1)*limit,limit);
+        List<BackUser> postsCount=resumeService.communicationCount(userId);
+        int count=postsCount.size();
+
+        req.setAttribute("postssss",posts);
+        req.setAttribute("count",count);
+        req.setAttribute("limit",limit);
+        req.setAttribute("curr",curr);
+        System.out.println(new Gson().toJson(posts));
+        return "resumeInfo";
+    }
+
+
+
     @RequestMapping("/resumeCommitPage")
     public String resumeCommitPage(HttpServletRequest req,int curr,int limit){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
@@ -173,10 +204,13 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.deliveryInfo(userId,page,limit);
         List<PostPosition> postsCount=resumeService.deliveryInfoCount(userId);
         int count=postsCount.size();
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",3);
+        }
 
         req.setAttribute("postsss",posts);
         req.setAttribute("count",count);
@@ -528,7 +562,7 @@ public class CenterController {
         map.put("workCity",workCity);
         map.put("page",page);
         map.put("limit",limit);
-        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+        if (null==findPosition||findPosition.trim().equals("")||findPosition.equals("职位类型")){
             position="职位类型";
         }else if (findPosition.equals("不限")){
             position=findPosition;
@@ -650,7 +684,7 @@ public class CenterController {
         req.setAttribute("pt",pt);
         req.setAttribute("wz",wz);
 
-
+        System.out.println("77777777"+findSearch.trim()+"88888888");
         int page=0;
         int curr=1;
         int limit=10;
@@ -663,12 +697,12 @@ public class CenterController {
             map.put("workCity",findWorkCity);
         }
         search=findSearch;
-        if (findSearch.equals("".trim())){
-
+        if (findSearch.trim().equals("")){
+            search="";
         }else {
             map.put("search","%"+findSearch+"%");
         }
-        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+        if (null==findPosition||findPosition.trim().equals("")||findPosition.equals("职位类型")){
             position="职位类型";
         }else {
             position=findPosition;
@@ -738,7 +772,7 @@ public class CenterController {
         System.out.println(findWorkCity+"!!!!!!!!!");
         System.out.println(findEducation+"??????????");
         search=findSearch;
-        if (findSearch.equals("".trim())||findSearch==null){
+        if (findSearch.trim().equals("")||findSearch==null){
 
         }else {
             map.put("search","%"+findSearch+"%");
@@ -906,7 +940,7 @@ public class CenterController {
 //        int limit=2;
         Map map=new HashMap();
         System.out.println(findPosition+"??????????????!!!!!!!!!!");
-        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+        if (null==findPosition||findPosition.trim().equals("")||findPosition.equals("职位类型")){
             position="职位类型";
         }else if (findPosition.equals("不限")){
             position=findPosition;
@@ -916,9 +950,9 @@ public class CenterController {
         }
         System.out.println(position+"11111111111??????????????");
         String nowCity=(String) req.getSession().getAttribute("nowCity");
-        if (findWorkCity==null||findWorkCity.equals("".trim())){
+        if (findWorkCity==null||findWorkCity.trim().equals("")){
             System.out.println("99999");
-            if (findWorkCity==null||findWorkCity.equals("".trim())){
+            if (findWorkCity==null||findWorkCity.trim().equals("")){
                 workCity="全国";
             }else {
                 workCity=nowCity;
@@ -933,8 +967,9 @@ public class CenterController {
         }
         System.out.println(workCity+"???????????????????");
         search=findSearch;
-        if (findSearch==null||findSearch.equals("".trim())){
 
+        if (findSearch==null||findSearch.trim().equals("")||findSearch.equals("搜索职位".trim())){
+            search="";
         }else {
             map.put("search","%"+findSearch+"%");
         }
@@ -1054,7 +1089,7 @@ public class CenterController {
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
         int count=jobsCount.size();
-        search=findSearch;
+//        search=findSearch;
 //        if (null==findSearch||findSearch.equals("".trim())){
 //            search="职位类型";
 //        }
@@ -1094,11 +1129,12 @@ public class CenterController {
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
         Resume r=resumeService.resume(userId);
+        System.out.println(new Gson().toJson(r));
         Delivery delivery=resumeService.findDelivery(userId,pPostId);
         if (null!=delivery){
             return "repetition";
         }
-        if (r.getClan().equals("".trim())||r.getBirthday().equals("".trim())||r.getSchool().equals("".trim())||r.getEducation().getEducation().equals("".trim())||r.getSelfEva().equals("".trim())||r.getAddress().equals("".trim())||r.getExpectWork().equals("".trim())||r.getProjectExperiences().size()==0||r.getWorkExperiences().size()==0||r.getEducationalBackgrounds().size()==0){
+        if (r.getClan()==null||r.getBirthday()==null||r.getSchool()==null||r.getSelfEva()==null||r.getAddress()==null||r.getExpectWork()==null||r.getSex().trim().equals("")||r.getIndustry().trim().equals("")||r.getClan().trim().equals("")||r.getBirthday().trim().equals("")||r.getSchool().trim().equals("")||r.getEducationId()==0||r.getSelfEva().trim().equals("")||r.getAddress().trim().equals("")||r.getExpectWork().trim().equals("")||r.getProjectExperiences().size()==0||r.getWorkExperiences().size()==0||r.getEducationalBackgrounds().size()==0){
             return "lose";
         }
         int n=resumeService.sendResume(userId,pPostId);
