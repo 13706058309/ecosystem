@@ -224,7 +224,7 @@
         <result property="jobBenefits" column="jobBenefits"></result>
         <result property="jobDescription" column="jobDescription"></result>
         <result property="detailAddress" column="detailAddress"></result>
-        <result property="releaseTime" column="detailAddress"></result>
+        <result property="releaseTime" column="releaseTime"></result>
         <result property="maxSalary" column="maxSalary"></result>
         <result property="minSalary" column="minSalary"></result>
         <association property="backUser" column="backUser" javaType="com.cykj.entity.BackUser">

@@ -1,6 +1,7 @@
 package com.cykj.service;
 
 import com.cykj.entity.BackUser;
+import com.cykj.entity.Resume;
 import com.cykj.entity.UserInfo;
 
 
@@ -18,6 +19,6 @@ public interface LoginService {
     public BackUser adminLog(String account,String pwd); //后台登录
     public UserInfo mesLog(String phone); //手机登录
 
-    int register(UserInfo userInfo); //注册
+    int register(UserInfo userInfo,Resume Resume); //注册
     boolean isRepeat(String account);//判断账号是否重复
 }

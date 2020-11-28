@@ -484,7 +484,7 @@
 
     });
     function postInfo(id) {
-        location.href="postInfo?pPostId="+id;
+        location.href="postInfo?lid="+id;
     }
 </script>
 </body>
