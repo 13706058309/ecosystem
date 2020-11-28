@@ -244,7 +244,21 @@
         <img src="https://static.zhipin.com/zhipin-geek/v331/web/geek/images/tip.png">
     </div>
 </div>
-
+<div class="links links-friends">
+    <dl class="links-item">
+        <dt>友情链接：</dt>
+        <dd>
+            <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+            <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+            <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+            <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+            <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+            <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+            <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+            <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+        </dd>
+    </dl>
+</div>
 <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
 <script src="https://static.zhipin.com/zhipin-geek/v331/web/geek/js/main.js"></script>
 <script src="https://webapi.amap.com/maps?v=1.3&key=60085a6ee91616cf689ce0321e1f30c4&plugin=AMap.Geocoder"></script>
