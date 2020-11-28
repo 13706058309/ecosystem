@@ -139,7 +139,6 @@
 </div>
 <div class="clear"></div>
 <!-- foot -->
-
 <script src="${pageContext.request.contextPath}/style/js/jquery-3.5.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>

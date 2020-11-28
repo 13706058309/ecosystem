@@ -86,7 +86,6 @@
         <div class="tabs">
             <div id="courseList" class="coursetab hoverTab">课程目录</div>
             <div id="courseIntroduce" class="coursetab">相关评价</div>
-<%--            <div id="courseMaterial" class="coursetab">课程详情</div>--%>
         </div>
         <iframe id="courseIframe" src="" width="820px" scrolling="yes"  data-pro="10607"></iframe>
     </div>

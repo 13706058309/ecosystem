@@ -72,6 +72,11 @@ public class CourseAppraiseController {
         return "coursePage/CoursePlayPage";
     }
 
+    @RequestMapping("/testPage")
+    public String toTestPage(){
+        return "coursePage/VideoTestPage";
+    }
+
     @RequestMapping("/publish")
     public void publishEvaluation(HttpServletResponse response,String unitId,String userId,String appraiseText,String appraiseTime){
 
