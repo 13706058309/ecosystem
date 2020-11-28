@@ -37,7 +37,7 @@ public class BackUser {
   private String lng;
   private String lat;
   private List<Industry> industrys;
-
+  private long balance;
 
 
   public BackUser() {
@@ -300,6 +300,14 @@ public class BackUser {
 
   public void setLat(String lat) {
     this.lat = lat;
+  }
+
+  public long getBalance() {
+    return balance;
+  }
+
+  public void setBalance(long balance) {
+    this.balance = balance;
   }
 
   @Override

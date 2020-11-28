@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface ResumeMapper {
     List<Resume> findAllResume(Map<String,Object> map);
-    List<Resume> findAllResumeNum(Map<String,Object> map);
+    int findAllResumeNum(Map<String,Object> map);
 
     List<Resume> compFindResume(Map<String,Object> map);
     int compFindResumeNum(Map<String,Object> map);

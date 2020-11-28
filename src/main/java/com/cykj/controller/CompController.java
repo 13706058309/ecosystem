@@ -204,9 +204,12 @@ public class CompController {
     }
     //重新上线岗位
     @RequestMapping("/onLinePosition")
-    public @ResponseBody String onLinePosition(String position){
+    public @ResponseBody String onLinePosition(String position,HttpServletRequest request){
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        long compID = backUser.getbUserId();
         PostPosition postPosition = new Gson().fromJson(position,PostPosition.class);
-        String result = backCompService.rePostPosition(postPosition);
+
+        String result = backCompService.rePostPosition(postPosition,compID);
         return result;
     }
     //企业查询过滤简历
@@ -246,7 +249,7 @@ public class CompController {
     //批量过滤简历
     @RequestMapping("/scerrResume")
     public @ResponseBody String scerrResume(String msg){
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.changeDeliStand(list,10);
         return successNum+"";
     }
@@ -292,7 +295,7 @@ public class CompController {
     //批量待定单个简历
     @RequestMapping("/deterResume")
     public @ResponseBody String deterResume(String msg){
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
 
         int successNum = backCompService.changeDeliStand(list,11);
         return successNum+"";
@@ -316,7 +319,7 @@ public class CompController {
     @RequestMapping("/delResume")
     public @ResponseBody String delResume(String msg){
 
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.delResume(list,9);
         return successNum+"";
     }
@@ -325,7 +328,7 @@ public class CompController {
     @RequestMapping("/delPassResume")
     public @ResponseBody String delPassResume(String msg){
 
-        List<Resume> list = new Gson().fromJson(msg,new TypeToken<List<Resume>>(){}.getType());
+        List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.changeDeliStand(list,21);
         return successNum+"";
     }
@@ -744,6 +747,16 @@ public class CompController {
     public @ResponseBody String findDownFee(){
         return backCompService.findDownFee();
     }
+    //花费积分下载简历
+    @RequestMapping("/downFeeResume")
+    public @ResponseBody String downFeeResume(HttpServletRequest request){
+//        BackUser backUser = (BackUser)request.getSession().getAttribute("admin");
+//        long fee = Long.parseLong(backCompService.findDownFee());
+//        if(backUser.getBalance()<fee) return "1";
+//        long newBanlace = (backUser.getBalance()-fee);
+
+        return backCompService.downFeeResume(request);
+    }
     //跳转企业通讯页面
     @RequestMapping("/chat")
     public String chat(HttpServletRequest request){
@@ -824,5 +837,11 @@ public class CompController {
     public String exitsLogin(HttpServletRequest request){
         request.getSession().removeAttribute("admin");
         return "adminLog";
+    }
+
+    @RequestMapping("/changeFee")
+    public @ResponseBody String changeFee(String money){
+        int result = backCompService.changeFee(money);
+        return result>0? "success":"failed";
     }
 }

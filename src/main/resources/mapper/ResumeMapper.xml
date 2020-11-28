@@ -4,9 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.ResumeMapper">
     <select id="findAllResume" parameterType="java.util.Map" resultMap="results">
-        select r.*,e.education,d.deliTime,d.deliveryId,p.postName   from resume r,education e,postPosition p,delivery d
-        where r.educationid=e.educationid  and  r.userID = d.userID and p.pPostID = d.pPostID and d.deliStandID = #{standID}
-        and p.companyID = #{compID}
+        select r.*,e.education,d.deliTime,d.deliveryId,p.postName from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+        where p.companyID = #{compID} and deliStandID = #{standID}
 
         <if test="beginTime!=null">
             and deliTime >= #{beginTime}
@@ -60,10 +59,11 @@
     <result property="expectWork" column="expectWork"></result>
     <result property="jobStandId" column="jobStandId"></result>
     <result property="industry" column="industry"></result>
-    <association property="education" column="education" javaType="com.cykj.entity.Education">
-        <id property="educationId" column="educationId"></id>
-        <result property="education" column="education"></result>
-    </association>
+
+        <association property="education" column="education" javaType="com.cykj.entity.Education">
+            <id property="educationId" column="educationId"></id>
+            <result property="education" column="education"></result>
+        </association>
         <association property="delivery" column="userId" javaType="com.cykj.entity.Delivery">
             <id property="deliveryId" column="deliveryId"></id>
             <result property="deliTime" column="deliTime"></result>
@@ -72,13 +72,13 @@
             <id property="pPostId" column="pPostId"></id>
             <result property="postName" column="postName"></result>
         </association>
+
     </resultMap>
 
 
-    <select id="findAllResumeNum" parameterType="java.util.Map" resultMap="results">
-        select r.*,e.education,d.deliTime,p.postName  from resume r,education e,postPosition p,delivery d
-        where r.educationid=e.educationid and  r.userID = d.userID and p.pPostID = d.pPostID and d.deliStandID = #{standID}
-        and p.companyID = #{compID}
+    <select id="findAllResumeNum" parameterType="java.util.Map" resultType="int">
+        select count(*) from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+        where p.companyID = #{compID} and deliStandID = #{standID}
 
         <if test="beginTime!=null">
             and deliTime >= #{beginTime}

@@ -167,7 +167,7 @@
     </div>
 </div>
 <div id="payForm" style="display: none;padding: 5%">
-    <form action="${pageContext.request.contextPath}/alipayTradePagePay" method=post>
+
         <input name="WIDout_trade_no" id="WIDout_trade_no" type="hidden">
         <input name="WIDsubject" id="WIDsubject" type="hidden">
         <input name="WIDtotal_amount" id="WIDtotal_amount" type="hidden">
@@ -175,17 +175,17 @@
 
         <table class="layui-table">
             <tr>
-                <div class="layui-input-inline" style="margin-left: 27%">
-                <h1 id="money">支付20元下载？</h1>
-                </div>
+                <td>
+                <h2 id="money">支付20个人才币下载？</h2>
+                </td>
             </tr>
             <tr style="margin-top: 3%">
-                <div class="layui-input-inline" style="margin-left: 34%">
-                <input type="submit" class="layui-btn layui-btn-lg layui-btn-fluid" value="支付宝支付" >
-                </div>
+                <td>
+                <input type="button" class="layui-btn layui-btn-lg layui-btn-fluid" value="支付下载" onclick="pays()" >
+                </td>
             </tr>
         </table>
-    </form>
+
 </div>
 <table id="userTable" lay-filter="test"></table>
 
@@ -284,5 +284,6 @@ $(function () {
         resumeID == "";
    }
 })
+
 </script>
 </html>

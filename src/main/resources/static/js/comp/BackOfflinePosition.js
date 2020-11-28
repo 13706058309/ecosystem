@@ -96,6 +96,7 @@ layui.use('table',function () {
             {field:'department',title:'部门'},
             {field:'education',title:'学历'},
             {field:'workNature',title:'工作性质'},
+            {field:'postNum',title:'收到简历数'},
             {field:'workYear',title:'工作时间'},
             {field:'releaseTime',title:'发布时间'},
             {title:'操作',toolbar:'#btns',width:250}
@@ -139,6 +140,8 @@ layui.use('table',function () {
                         if(info=='1'){
                             layer.msg("重新上线成功");
                             obj.del();
+                        }else if(info=='3'){
+                            layer.msg("岗位名与在线岗位名重复，请修改岗位名后上线");
                         }else{
                             layer.msg("网络繁忙，上线失败");
                         }
