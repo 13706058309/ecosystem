@@ -3,6 +3,7 @@ package com.cykj.service;
 import com.cykj.entity.*;
 import org.apache.ibatis.annotations.Param;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public interface BackCompService {
     //发布岗位
     String postPosition(PostPosition postPosition);
     //重新发布岗位
-    String rePostPosition(PostPosition postPosition);
+    String rePostPosition(PostPosition postPosition,long compID);
 
     //企业查询发布的岗位
     TableInfo findPosition(Map<String,Object> map);
@@ -78,6 +79,8 @@ public interface BackCompService {
     String judgeResumeShowOrHidden();
     //查找下载简历需要的费用
     String findDownFee();
+    //花费积分下载简历
+    String downFeeResume(HttpServletRequest request);
     //企业查找聊天用户
     String compfindChat(int compID);
     //获取聊天记录
@@ -92,6 +95,7 @@ public interface BackCompService {
     int readUserMsg( int compID, int userID);
     //确认读过公司的消息
     int readCompMsg( int compID, int userID);
-
+    //修改下载简历收费额度
+    int changeFee(String money);
     void test();
 }

@@ -159,7 +159,6 @@ public class WordUtil {
         BASE64Encoder encoder = new BASE64Encoder();
         System.out.println(encoder.encode(data));
         return encoder.encode(data);
-//        return null;
     }
 
 

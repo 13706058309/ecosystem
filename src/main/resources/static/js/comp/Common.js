@@ -250,25 +250,47 @@ function outResumes(){
     if($("#DAddress").text()!="*********"){
         location.href = path+"/rec/outResume?resumeID="+reID;
     }else{
+
         $.ajax({
             url:paths+"/rec/findDownFee",
             type:"post",
             async:false,
             typeData:"text",
             success:function (info) {
-                $("#WIDout_trade_no").val(RandomRange);
-                $("#WIDsubject").val("下载费用"+reID);
-                $("#WIDtotal_amount").val(info);
-                $("#WIDbody").val("人才简历下载查看");
-                $("#money").text("支付"+info+"元下载？")
+
+                $("#money").text("支付"+info+"人才币下载？")
                 layer.open({
+                    title:"支付下载",
                     type:1,
-                    area:['30%','30%'],
+                    area:['30%','40%'],
                     offset: ['35%', '25%'],
                     content:$("#payForm"),
                 })
             },
         })
-
     }
+}
+
+function pays() {
+    var paths = $("#path").val();
+    $.ajax({
+        url:paths+"/rec/downFeeResume",
+        type:"post",
+        async:false,
+        typeData:"text",
+        success:function (info) {
+            // $("#WIDout_trade_no").val(RandomRange);
+            // $("#WIDsubject").val("下载费用"+reID);
+            // $("#WIDtotal_amount").val(info);
+            // $("#WIDbody").val("人才简历下载查看");
+            // $("#money").text("支付"+info+"元下载？")
+
+            if(info=='1'){
+                layer.msg("人才币不足，请充值");
+            }else if(info=='2'){
+                layer.closeAll();
+                location.href = path+"/rec/outResume?resumeID="+reID;
+            }
+        },
+    })
 }

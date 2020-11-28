@@ -35,7 +35,7 @@
                     ${admin.bUserName}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="#">积分余额</a></dd>
+                    <dd><a href="#" onclick="showBalance()">积分查看</a></dd>
                     <dd><a href="#" onclick="showPay()">积分充值</a></dd>
                 </dl>
             </li>
@@ -94,7 +94,7 @@
                     </p>
                     <div class="tr_rechheadcion">
                         <img src="images/coin.png" alt="" />
-                        <span>当前余额：<span>1000招兵币</span></span>
+                        <span>当前余额：<span>${admin.balance}招兵币</span></span>
                     </div>
                 </div>
                 <div class="tr_rechli am-form-group">
@@ -150,6 +150,45 @@
     </div>
 </div>
 
+<div id="payDetail" style="display: none;padding: 3%">
+    <form action="${pageContext.request.contextPath}/alipayTradePagePay" method=post>
+        <table class="layui-table" >
+            <tr>
+                <td>订单号</td>
+                <td><input readonly="true" id="WIDout_trade_no" name="WIDout_trade_no" style="border: none"></td>
+            </tr>
+            <tr>
+                <td>订单名称</td>
+                <td><input readonly="true" id="WIDsubject" name="WIDsubject" value="人才币充值" style="border: none"></td>
+            </tr>
+            <tr>
+                <td>商品描述</td>
+                <td><input readonly="true" id="WIDbody" name="WIDbody" value="虚拟货币" style="border: none"></td>
+            </tr>
+            <tr>
+                <td>充值金额(元)</td>
+                <td><input readonly="true" id="WIDtotal_amount" name="WIDtotal_amount" style="border: none"></td>
+            </tr>
+
+        </table>
+        <div class="layui-input-inline" style="margin-left: 39%">
+            <input type="submit" class="layui-btn layui-btn-lg layui-btn-fluid" value="确认" >
+        </div>
+    </form>
+</div>
+
+<div id="balanceDetail" style="display: none;padding: 3%">
+    <table class="layui-table" >
+        <tr>
+            <td>用户</td>
+            <td>${admin.bUserName}</td>
+        </tr>
+        <tr>
+            <td>当前持有人才币</td>
+            <td>${admin.balance}</td>
+        </tr>
+    </table>
+</div>
 </body>
 <script>
     var resumeID = "";
@@ -159,22 +198,22 @@
         var element = layui.element;
         layer=layui.layer;
     });
-    <%
-        String resumeID = (String) request.getSession().getAttribute("resumeID");
-        if(resumeID!=null){
-            out.write("resumeID="+resumeID);
-            request.getSession().removeAttribute("resumeID");
-        }
+<%--    <%--%>
+<%--        String resumeID = (String) request.getSession().getAttribute("resumeID");--%>
+<%--        if(resumeID!=null){--%>
+<%--            out.write("resumeID="+resumeID);--%>
+<%--            request.getSession().removeAttribute("resumeID");--%>
+<%--        }--%>
 
-    %>
+<%--    %>--%>
 
 
-    $(function () {
-        if(resumeID.length!=0){
-            location.href = path+"/rec/outResume?resumeID="+resumeID;
-            resumeID == "";
-        }
-    })
+    // $(function () {
+    //     if(resumeID.length!=0){
+    //         location.href = path+"/rec/outResume?resumeID="+resumeID;
+    //         resumeID == "";
+    //     }
+    // })
 
     function exitLogin() {
         layer.confirm('确认退出',{
@@ -188,10 +227,20 @@
     function showPay() {
         layer.open({
             type:1,
-            title:"积分充值",
+            title:"人才币充值",
             area:['60%','80%'],
             offset: ['10%', '30%'],
             content:$("#pay")
+        })
+    }
+
+    function showBalance() {
+        layer.open({
+            type:1,
+            title:"人才币查看",
+            area:['30%','30%'],
+            offset: ['10%', '30%'],
+            content:$("#balanceDetail")
         })
     }
 
@@ -257,6 +306,16 @@
         });
     });
 
+    function RandomRange() {
+        var returnStr = "";
+        var arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        for(var i=0; i<12 ; i++){
+            var index = Math.round(Math.random() * (arr.length-1));
+            returnStr += arr[index];
+        }
+        return returnStr;
+    }
+
     function pay() {
         var money = $(".othbox").val();
         if(money.length!=0){
@@ -279,6 +338,18 @@
             layer.msg("请选择或输入充值金额");
             return false;
         }
+
+        $("#WIDout_trade_no").val(RandomRange);
+        $("#WIDtotal_amount").val(pay.replace(".00元",""));
+
+        layer.open({
+            type:1,
+            title:"充值明细",
+            area:['40%','50%'],
+            offset: ['20%', '40%'],
+            content:$("#payDetail")
+        })
+
     }
 </script>
 </html>

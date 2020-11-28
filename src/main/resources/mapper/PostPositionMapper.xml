@@ -8,6 +8,10 @@
         (#{companyId},#{postName},#{workNature},#{postId},#{department},#{maxSalary},#{minSalary},#{workCity},#{workYear},#{education},#{jobBenefits},#{jobDescription},6,#{recruitsNum},#{province},#{detailAddress},#{contact},#{contactEmail})
     </insert>
 
+    <select id="findRepName" resultType="com.cykj.entity.PostPosition">
+        select * from postPosition where postName = #{postName} and postStandID = 6 and companyID = #{compID};
+    </select>
+
     <select id="findPosition" parameterType="java.util.Map" resultType="com.cykj.entity.PostPosition">
         select * from postPosition where companyId = #{compID} and postStandId = #{standID}
 

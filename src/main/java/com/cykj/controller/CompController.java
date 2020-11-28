@@ -204,9 +204,12 @@ public class CompController {
     }
     //重新上线岗位
     @RequestMapping("/onLinePosition")
-    public @ResponseBody String onLinePosition(String position){
+    public @ResponseBody String onLinePosition(String position,HttpServletRequest request){
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        long compID = backUser.getbUserId();
         PostPosition postPosition = new Gson().fromJson(position,PostPosition.class);
-        String result = backCompService.rePostPosition(postPosition);
+
+        String result = backCompService.rePostPosition(postPosition,compID);
         return result;
     }
     //企业查询过滤简历
@@ -744,6 +747,16 @@ public class CompController {
     public @ResponseBody String findDownFee(){
         return backCompService.findDownFee();
     }
+    //花费积分下载简历
+    @RequestMapping("/downFeeResume")
+    public @ResponseBody String downFeeResume(HttpServletRequest request){
+//        BackUser backUser = (BackUser)request.getSession().getAttribute("admin");
+//        long fee = Long.parseLong(backCompService.findDownFee());
+//        if(backUser.getBalance()<fee) return "1";
+//        long newBanlace = (backUser.getBalance()-fee);
+
+        return backCompService.downFeeResume(request);
+    }
     //跳转企业通讯页面
     @RequestMapping("/chat")
     public String chat(HttpServletRequest request){
@@ -824,5 +837,11 @@ public class CompController {
     public String exitsLogin(HttpServletRequest request){
         request.getSession().removeAttribute("admin");
         return "adminLog";
+    }
+
+    @RequestMapping("/changeFee")
+    public @ResponseBody String changeFee(String money){
+        int result = backCompService.changeFee(money);
+        return result>0? "success":"failed";
     }
 }

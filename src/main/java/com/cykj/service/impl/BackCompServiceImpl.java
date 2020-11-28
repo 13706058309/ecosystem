@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +60,9 @@ public class BackCompServiceImpl implements BackCompService {
     @Resource
     private CompRecordMapper compRecordMapper;
 
+    @Resource
+    private PayRecordMapper payRecordMapper;
+
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
         List<Talent> unviTalentOnPage = talentMapper.findUnviTalentOnPage(map);
@@ -103,6 +107,10 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Override
     public String postPosition(PostPosition postPosition) {
+        PostPosition repName = postPositionMapper.findRepName(postPosition.getPostName(), postPosition.getCompanyId());
+        if(repName!=null){
+            return "5";
+        }
         int provinceID = Integer.parseInt(postPosition.getProvince());
         postPosition.setProvince(provinceMapper.findByID(provinceID).getProvinceName());
         int n = postPositionMapper.addPostPosition(postPosition);
@@ -110,7 +118,11 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public String rePostPosition(PostPosition postPosition) {
+    public String rePostPosition(PostPosition postPosition,long compID) {
+        PostPosition repName = postPositionMapper.findRepName(postPosition.getPostName(), compID);
+        if(repName!=null){
+            return "3";
+        }
         int n = postPositionMapper.addPostPosition(postPosition);
         return n>0? "1":"2";
     }
@@ -512,10 +524,23 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
+    public String downFeeResume(HttpServletRequest request) {
+        BackUser backUser = (BackUser)request.getSession().getAttribute("admin");
+        long fee = Long.parseLong(parameterMapper.findDownFee(56).getParamValues());
+        PayRecord payRecord = new PayRecord(fee,backUser.getbUserId(),"下载简历","减少");
+        if(backUser.getBalance()<fee) return "1";
+        long newBanlace = (backUser.getBalance()-fee);
+        backUserMapper.updateBalance(newBanlace,backUser.getbUserId());
+        payRecordMapper.addPayRecord(payRecord);
+        backUser.setBalance(newBanlace);
+        request.getSession().setAttribute("admin",backUser);
+        return "2";
+    }
+
+    @Override
     public String findDownFee() {
         return parameterMapper.findDownFee(56).getParamValues();
     }
-
     @Override
     public String compfindChat(int compID) {
         List<CompRecord> list = compRecordMapper.findCompChatRec(compID);
@@ -558,6 +583,11 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public int readCompMsg(int compID, int userID) {
         return compRecordMapper.readCompMsg(compID,userID);
+    }
+
+    @Override
+    public int changeFee(String money) {
+        return parameterMapper.changeFee(money);
     }
 
     @Override

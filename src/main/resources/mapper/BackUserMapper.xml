@@ -193,4 +193,7 @@
         select * from backUser b where bUserID = #{bUserId}
     </select>
 
+    <update id="updateBalance" >
+        update backUser set balance = #{balance} where buserId = #{compID}
+    </update>
 </mapper>
