@@ -27,6 +27,7 @@ layui.use('table',function () {
             {field:'education',title:'学历'},
             {field:'workNature',title:'工作性质'},
             {field:'workYear',title:'工作时间'},
+            {field:'postNum',title:'收到简历数'},
             {field:'releaseTime',title:'发布时间'},
             {title:'操作',toolbar:'#btns',width:250}
         ]]

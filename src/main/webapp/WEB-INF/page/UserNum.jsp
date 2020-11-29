@@ -66,7 +66,7 @@ option = {
 	    	show:true,position:'left'  
 	    },
 	    series: [{
-	    	type: 'bar',data: yData,itemStyle: {
+	    	type: 'line',data: yData,itemStyle: {
                 normal: {
                     label: {
                         show: true,		//开启显示

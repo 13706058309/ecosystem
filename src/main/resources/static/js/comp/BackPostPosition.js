@@ -22,8 +22,8 @@ layui.use('form',function () {
                 for(var i=0;i<arr.length;i++){
                     var $option = $("<option value='"+arr[i].departId+"' >"+arr[i].departName+"</option>");
                     $("#depart").append($option);
-                    form.render();
                 }
+                form.render();
             },
         })
     })
@@ -43,8 +43,8 @@ layui.use('form',function () {
                 for(var i=0;i<arr.length;i++){
                     var $option = $("<option value='"+arr[i].postId+"' >"+arr[i].postName+"</option>");
                     $("#postId").append($option);
-                    form.render();
                 }
+                form.render();
             },
         })
     })
@@ -63,8 +63,8 @@ layui.use('form',function () {
                 for(var i=0;i<arr.length;i++){
                     var $option = $("<option value='"+arr[i].cityName+"' >"+arr[i].cityName+"</option>");
                     $("#workCity").append($option);
-                    form.render();
                 }
+                form.render();
             },
         })
     })
@@ -88,8 +88,8 @@ $(function () {
             for(var i=0;i<arr.length;i++){
                 var $option = $("<option value='"+arr[i].industryId+"' onclick='findDepart(1)'>"+arr[i].industryName+"</option>");
                 $("#industry").append($option);
-                form.render();
             }
+            form.render();
         },
     })
 })
@@ -108,8 +108,8 @@ $(function () {
             for(var i=0;i<arr.length;i++){
                 var $option = $("<option value='"+arr[i].provinceId+"'>"+arr[i].provinceName+"</option>");
                 $("#province").append($option);
-                form.render();
             }
+            form.render();
         },
     })
 })
@@ -236,8 +236,8 @@ function sumb() {
                 return false;
             }
 
-            if(jobDescription.trim().length>100){
-                layer.alert('工作描述长度不能超过100!',{icon: 0,offset: '20%'});
+            if(jobDescription.trim().length>200){
+                layer.alert('工作描述长度不能超过200!',{icon: 0,offset: '20%'});
                 return false;
             }
         },
@@ -246,6 +246,8 @@ function sumb() {
                 layer.alert('发布成功!',{icon: 0,offset: '20%'});
             }else if(info=='3'){
                 layer.alert('请完善公司信息再发布岗位!',{icon: 0,offset: '20%'});
+            }else if(info=='5'){
+                layer.alert('岗位名与在线岗位名重复，请修改岗位名后上线!',{icon: 0,offset: '20%'});
             }
         },
     })

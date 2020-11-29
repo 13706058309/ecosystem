@@ -54,7 +54,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -90,7 +90,8 @@
         <div id="container" class="resume-container">
             <div class="resume-content">
                 <!---->
-
+                <input type="hidden" id="edId" value="${resume.educationId}">
+                <input type="hidden" id="jobId" value="${resume.jobStandId}">
                 <div class="resume-content-box">
                     <div class="update-time">
 <%--                        <a href="javascript:;" ka="user_resume_preview"--%>
@@ -111,16 +112,24 @@
                                                         class="prev-line"><i
                                                         class="fz-resume fz-experience"></i>政治面貌：<label id="politicalStatus9">${resume.politicalStatus}</label></span><span
                                                         class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i><label id="wrokYear9">工作年限：${resume.wrokYear}年</label></span><span
+                                                        class="fz-resume fz-experience"></i>工作年限：<label id="wrokYear9">${resume.wrokYear}</label>年</span><span
                                                         class="prev-line"><i
                                                         class="fz-resume fz-degree"></i>学历：<label id="education9">${resume.education.education}</label></span></p>
                                                 <p><span class="prev-line"><i
+                                                        class="fz-resume fz-status"></i>性别：<label id="sex9">${resume.sex}</label></span><span class="prev-line"><i
                                                         class="fz-resume fz-status"></i>专业：<label id="profession9">${resume.profession}</label></span><span class="prev-line"><i
                                                         class="fz-resume fz-experience"></i>毕业学校：<label id="school9">${resume.school}</label></span><span
                                                         class="prev-line"><i
-                                                        class="fz-resume fz-experience"></i>出生年月：<label id="birthday9">${resume.birthday}</label></span>
+                                                        class="fz-resume fz-experience"></i>出生日期：<label id="birthday9">${resume.birthday}</label></span>
                                                     <!---->
                                                     <!---->
+                                                </p>
+                                                <p><span class="prev-line"><i
+                                                        class="fz-resume fz-tel"></i>求职状态：<label id="jobStandId9">${resume.parameter.paramName}</label></span>
+                                                    <span class="prev-line"><i
+                                                            class="fz-resume fz-tel"></i>意向行业：<label id="industry9">${resume.industry}</label></span>
+<%--                                                    <span class="prev-line"><i--%>
+<%--                                                            class="fz-resume fz-tel"></i>工作年限：<label id="wrokYear9">${resume.wrokYear}年</label></span>--%>
                                                 </p>
                                                 <p><span class="prev-line"><i
                                                         class="fz-resume fz-tel"></i>联系方式：<label id="contactInfo9">${resume.contactInfo}</label></span>
@@ -203,21 +212,32 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 100px" >姓名</label>
                                         <div class="layui-input-inline" >
-                                            <input type="text" id="realName" name="realName" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input" value="${resume.realName}">
+                                            <input type="text" id="realName" name="realName" required  lay-verify="required" placeholder="请输入姓名" maxlength="20" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')"        autocomplete="off" class="layui-input" value="${resume.realName}">
                                         </div>
                                         <label class="layui-form-label" style="width: 100px">民族</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="clan" name="clan" required  lay-verify="required" placeholder="请输入民族" autocomplete="off" class="layui-input" value="${resume.clan}">
+                                            <input type="text" id="clan" name="clan" required  lay-verify="required" placeholder="请输入民族"  maxlength="4" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" autocomplete="off" class="layui-input" value="${resume.clan}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 100px">政治面貌</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="politicalStatus" name="politicalStatus" required  lay-verify="required" placeholder="请输入政治面貌" autocomplete="off" class="layui-input" value="${resume.politicalStatus}">
+                                            <input type="text" id="politicalStatus" name="politicalStatus" required  lay-verify="required" placeholder="请输入政治面貌" maxlength="15" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" autocomplete="off" class="layui-input" value="${resume.politicalStatus}">
                                         </div>
                                         <label class="layui-form-label" style="width: 100px">联系方式</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="contactInfo" name="contactInfo" required  lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input" value="${resume.contactInfo}">
+                                            <input type="text" id="contactInfo" name="contactInfo" maxlength="11"  onkeyup="this.value=this.value.replace(/\D/g,'')"   required  lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input" value="${resume.contactInfo}">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">性别：</label>
+                                        <div class="layui-input-inline">
+                                            <input type="radio" name="sex" value="男" title="男"  <c:if test="${resume.sex=='男'}">checked</c:if>>
+                                            <input type="radio" name="sex" value="女" title="女" <c:if test="${resume.sex=='女'}">checked</c:if>>
+                                        </div>
+                                        <label class="layui-form-label" style="width: 100px">工作年限</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="wrokYear" name="wrokYear" required  lay-verify="required" maxlength="2" oninput="if(value>40)value=40" onkeyup="this.value=this.value.replace(/\D/g,'')"  placeholder="请输入年限，不超过40" autocomplete="off" class="layui-input" value="${resume.wrokYear}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -229,12 +249,33 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
+                                        <label class="layui-form-label" style="width: 12%">就业状态</label>
+                                        <div class="layui-input-block" style="width: 12%">
+                                            <select class="educationId" id="jobStandId" name="jobStandId" lay-filter="aihao" >
+
+                                                <option value="4" <c:if test="${resume.jobStandId==4}">selected </c:if>
+                                                >已就业</option>
+
+                                                <option value="5" <c:if test="${resume.jobStandId==5}">selected</c:if>
+                                                >未就业</option>
+                                                <option value="13" <c:if test="${resume.jobStandId==13}"> selected</c:if>
+                                                >在职月内到岗</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label" style="width: 12%"   >意向行业</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="industry" name="industry" required maxlength="10" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"  lay-verify="required"  placeholder="请输入意向行业" autocomplete="off" class="layui-input" value="${resume.industry}">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 12%">学历</label>
                                         <div class="layui-input-block" style="width: 12%">
                                             <select class="educationId" id="educationId" name="educationId" lay-filter="aihao" >
 
-                                                <option value="0" <c:if test="${resume.educationId==0}">selected </c:if>
-                                                >学历选择</option>
+<%--                                                <option value="0" <c:if test="${resume.educationId==0}">selected </c:if>--%>
+<%--                                                >学历选择</option>--%>
                                                 <option value="1"
                                                         <c:if test="${resume.educationId==1}"> selected</c:if>
                                                 >高中</option>
@@ -252,23 +293,19 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 12%">专业</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="profession" name="profession" required  lay-verify="required" placeholder="请输入专业" autocomplete="off" class="layui-input" value="${resume.profession}">
+                                            <input type="text" id="profession" name="profession" required maxlength="15"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" lay-verify="required" placeholder="请输入专业" autocomplete="off" class="layui-input" value="${resume.profession}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label" style="width: 100px">毕业学校</label>
+                                        <label class="layui-form-label" style="width: 100px" maxlength="15"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')">毕业学校</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="school" name="school" required  lay-verify="required" placeholder="请输入毕业学校" autocomplete="off" class="layui-input" value="${resume.school}">
+                                            <input type="text" id="school" name="school" required  maxlength="15"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"  lay-verify="required" placeholder="请输入毕业学校" autocomplete="off" class="layui-input" value="${resume.school}">
                                         </div>
-<%--                                        <label class="layui-form-label" style="width: 100px">简历隐藏</label>--%>
-<%--                                        <div class="layui-input-inline">--%>
-<%--                                            <input type="checkbox" id="isShow" name="isShow" lay-skin="switch">--%>
-<%--                                        </div>--%>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 12%">居住地址</label>
                                         <div class="layui-input-block">
-                                            <input type="text"  id="address" name="address" required  lay-verify="required" placeholder="请输入现居住地址" autocomplete="off" class="layui-input" value="${resume.address}">
+                                            <input type="text"  id="address" name="address" required maxlength="30"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"   lay-verify="required" placeholder="请输入现居住地址" autocomplete="off" class="layui-input" value="${resume.address}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -288,7 +325,7 @@
                                     <li ka="user-resume-edit-advantage" class="">
                                         <div class="primary-info">
                                             <div class="info-text advantage-text" style="white-space: normal;">
-                                                <p><label id="selfEva9">${resume.selfEva}</label></p>
+                                                <p><label id="selfEva9"  >${resume.selfEva}</label></p>
                                             </div>
                                         </div>
                                         <div class="op op-show">
@@ -312,8 +349,8 @@
                                             <!---->
 <%--                                            <!----><input autocomplete="on" spellcheck="false" type="text"--%>
 <%--                                                          placeholder="输入内容" maxlength="44" class="input">--%>
-                                            <textarea autocomplete="on" spellcheck="false" class="input" style="height: 5%"
-                                                      placeholder="输入内容" maxlength="50" id="selfEva" name="selfEva" >${resume.selfEva}</textarea>
+                                            <textarea   onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="100"  autocomplete="on" spellcheck="false" class="input" style="height: 8%"
+                                                      placeholder="输入内容" id="selfEva" name="selfEva" >${resume.selfEva}</textarea>
                                         </div>
                                         <!---->
                                         <!---->
@@ -366,7 +403,7 @@
                                     <div class="item-content">
                                         <div class="input-wrap input-wrap-text input-group input-group-with-append input-hide-icon"
                                                ka="resume_form_edit_name">
-                                            <textarea autocomplete="on" spellcheck="false" class="input" style="height: 5%"
+                                            <textarea  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" autocomplete="on" spellcheck="false" class="input" style="height: 5%"
                                                       placeholder="输入内容" maxlength="50"
                                                       id="expectWork" name="expectWork" >${resume.expectWork}</textarea>
                                         </div>
@@ -410,7 +447,7 @@
                                                     <!---->
                                                     <div class="info-text">
                                                         <h4 class="name">公司：<label id="companyName9">${works.companyName}</label></h4><span
-                                                            class="gray period">项目时间：<label id="beginTime9">${works.beginTime}</label>--<label id="endTime9"> ${works.endTime}</label></span>
+                                                            class="gray period">工作时间：<label id="beginTime9">${works.beginTime}</label>--<label id="endTime9">${works.endTime}</label></span>
                                                     </div>
                                                     <h4><span class="prev-line">行业：<label id="companyTrade9">${works.companyTrade}</label></span><span
                                                             class="prev-line">担任角色：<label id="companyPost9"> ${works.companyPost}</label></span></h4>
@@ -424,11 +461,13 @@
                                                 <div class="op"><a href="javascript:;" ka="user-resume-del-workexp3"
                                                                    class="link-delete"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-delete"></use>
-                                                </svg><span onclick="historyDelete(${works.weId})">删除</span></a><a href="javascript:;"
+                                                </svg>
+                                                    <c:if test="${fn:length(resume.workExperiences)==2}">
+                                                    <span onclick="historyDelete(${works.weId})">删除</span></a><a href="javascript:;"
                                                                             ka="user-resume-edit-workexp3" class="link-edit"><svg
                                                         class="icon-svg">
                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                </svg><span onclick="historyUpdate(${works.weId})">编辑</span></a></div>
+                                                </svg></c:if><span onclick="historyUpdate(${works.weId})">编辑</span></a></div>
                                             </li>
                                         </ul>
                                         </div>
@@ -446,45 +485,45 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="width: 12%">公司</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="companyName" name="companyName" required  lay-verify="required" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
+                                        <input type="text" id="companyName" name="companyName" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="18"  required  lay-verify="required" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="width: 12%">行业</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="companyTrade" name="companyTrade" required  lay-verify="required" placeholder="请输入公司行业" autocomplete="off" class="layui-input">
+                                        <input type="text" id="companyTrade" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="companyTrade" maxlength="18"  required  lay-verify="required" placeholder="请输入公司行业" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="width: 12%">职位</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="companyPost" name="companyPost" required  lay-verify="required" placeholder="请输入担任职务" autocomplete="off" class="layui-input">
+                                        <input type="text" id="companyPost" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="8" name="companyPost" required  lay-verify="required" placeholder="请输入担任职务" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-inline">
                                         <label class="layui-form-label" style="width: 100px">在职时间</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" id="beginTime" name="beginTime" placeholder="yyyy-MM-dd">
+                                            <input type="text" class="layui-input" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" lay-verify="date" id="beginTime" name="beginTime" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
                                     <div class="layui-inline">
                                         <label class="layui-form-label">至</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" name="endTime" id="endTime" placeholder="yyyy-MM-dd">
+                                            <input type="text" class="layui-input" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" lay-verify="date" name="endTime" id="endTime" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
                                     <label class="layui-form-label" style="width: 12%">工作内容</label>
                                     <div class="layui-input-block">
-                                        <textarea name="duties" id="duties" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
+                                        <textarea name="duties" id="duties" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="100" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
                                     <label class="layui-form-label" style="width: 12%">工作业绩</label>
                                     <div class="layui-input-block">
-                                        <textarea name="performance" id="performance" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
+                                        <textarea name="performance" id="performance" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="100" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -532,11 +571,13 @@
                                                 <div class="op"><a href="javascript:;" ka="user-resume-del-project2"
                                                                    class="link-delete"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-delete"></use>
-                                                </svg><span onclick="projectDelete(${projects.peId})">删除</span></a><a href="javascript:;"
+                                                </svg>
+                                                    <c:if test="${fn:length(resume.projectExperiences)==2}">
+                                                    <span onclick="projectDelete(${projects.peId})">删除</span></a><a href="javascript:;"
                                                                             ka="user-resume-edit-project2" class="link-edit"><svg
                                                         class="icon-svg">
                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                </svg><span onclick="projectUpdate(${projects.peId})" >编辑</span></a></div>
+                                                </svg></c:if><span onclick="projectUpdate(${projects.peId})" >编辑</span></a></div>
                                             </li>
                                         </ul>
                                         </form>
@@ -554,39 +595,39 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="width: 12%">项目名称</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="proName" name="proName" required  lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input">
+                                        <input type="text" id="proName" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="18" name="proName" required  lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="width: 12%">担任职务</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="proPost" name="proPost" required  lay-verify="required" placeholder="请输入担任职务" autocomplete="off" class="layui-input">
+                                        <input type="text" id="proPost" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="18" name="proPost" required  lay-verify="required" placeholder="请输入担任职务" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-inline">
                                         <label class="layui-form-label" style="width: 100px">项目时间</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" name="proBeginTime" id="proBeginTime" placeholder="yyyy-MM-dd">
+                                            <input type="text" class="layui-input" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="proBeginTime" id="proBeginTime" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
                                     <div class="layui-inline">
                                         <label class="layui-form-label">至</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" name="proEndTime" id="proEndTime" placeholder="yyyy-MM-dd">
+                                            <input type="text" class="layui-input" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="proEndTime" id="proEndTime" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
                                     <label class="layui-form-label" style="width: 12%">项目描述</label>
                                     <div class="layui-input-block">
-                                        <textarea id="proDescription" name="proDescription" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
+                                        <textarea id="proDescription" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="100" name="proDescription" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
                                     <label class="layui-form-label" style="width: 12%">项目业绩</label>
                                     <div class="layui-input-block">
-                                        <textarea id="proPerformance" name="proPerformance" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
+                                        <textarea id="proPerformance" maxlength="100" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="proPerformance" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -620,7 +661,7 @@
 
                                                     <div class="info-text">
                                                         <h4 class="name">学校：<label id="ebSchool9">${educationalBackgrounds.ebSchool}</label></h4><span
-                                                            class="gray period">在校时间：<label id="schBeginTime9">${educationalBackgrounds.schBeginTime}</label>--<label id="schEndTime9"> ${educationalBackgrounds.schEndTime}</label></span>
+                                                            class="gray period">在校时间：<label id="schBeginTime9">${educationalBackgrounds.schBeginTime}</label>--<label id="schEndTime9">${educationalBackgrounds.schEndTime}</label></span>
                                                     </div>
 
                                                     <div class="info-text">
@@ -636,11 +677,14 @@
                                                 <div class="op"><a href="javascript:;" ka="user-resume-del-project2"
                                                                    class="link-delete"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-delete"></use>
-                                                </svg><span onclick="educationDelete(${educationalBackgrounds.ebId})">删除</span></a>
+                                                </svg>
+                                                    <c:if test="${fn:length(resume.educationalBackgrounds)==2}">
+                                                    <span onclick="educationDelete(${educationalBackgrounds.ebId})">删除</span></a>
                                                     <!----><a href="javascript:;" ka="user-resume-edit-eduexp0"
                                                               class="link-edit"><svg class="icon-svg">
                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                </svg><span onclick="educationtUpdate(${educationalBackgrounds.ebId})">编辑</span></a></div>
+                                                </svg></c:if>
+                                                        <span onclick="educationtUpdate(${educationalBackgrounds.ebId})">编辑</span></a></div>
                                             </li>
                                         </ul>
                                         </form>
@@ -658,39 +702,39 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"  style="width: 12%">学校</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="ebSchool"  name="ebSchool" required  lay-verify="required" placeholder="请输入学校名称" autocomplete="off" class="layui-input">
+                                        <input type="text" id="ebSchool" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="18" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')"  name="ebSchool" required  lay-verify="required" placeholder="请输入学校名称" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"  style="width: 12%">学历</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="ebEducation" name="ebEducation" required  lay-verify="required" placeholder="请输入学历" autocomplete="off" class="layui-input">
+                                        <input type="text" id="ebEducation" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="8" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" name="ebEducation" required  lay-verify="required" placeholder="请输入学历" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"  style="width: 12%">专业</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="major" name="major" required  lay-verify="required" placeholder="请输入所学专业" autocomplete="off" class="layui-input">
+                                        <input type="text" id="major" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" maxlength="10" name="major" required  lay-verify="required" placeholder="请输入所学专业" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-inline">
                                         <label class="layui-form-label" style="width: 100px">学习时间</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" name="schBeginTime" id="schBeginTime" placeholder="yyyy-MM-dd">
+                                            <input type="text" class="layui-input" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="schBeginTime" id="schBeginTime" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
                                     <div class="layui-inline">
                                         <label class="layui-form-label">至</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" name="schEndTime" id="schEndTime" placeholder="yyyy-MM-dd">
+                                            <input type="text" class="layui-input" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="schEndTime" id="schEndTime" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
                                     <label class="layui-form-label" style="width: 12%">在校经历</label>
                                     <div class="layui-input-block">
-                                        <textarea id="schExperience" name="schExperience" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
+                                        <textarea id="schExperience" maxlength="100" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="schExperience" placeholder="请输入内容" class="layui-textarea" style="width: 50%"></textarea>
                                     </div>
                                 </div>
 
@@ -754,7 +798,21 @@
     <div>
         <div id="footer" style="min-height: 120px;">
             <div class="inner home-inner">
-
+                <div class="links links-friends">
+                    <dl class="links-item">
+                        <dt>友情链接：</dt>
+                        <dd>
+                            <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+                            <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+                            <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+                            <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+                            <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+                            <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+                            <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+                            <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+                        </dd>
+                    </dl>
+                </div>
             </div>
         </div>
 
@@ -873,7 +931,9 @@
         laydate.render({
             elem: '#schEndTime',
         });
-
+        laydate.render({
+            elem: '#birthday',
+        });
 
     });
 </script>
@@ -892,6 +952,11 @@
     var sion;
     var school;
     var address;
+    var sex;
+    var industry;
+    var jobStand;
+    var educationId;
+    var jobStandId;
     // 个人优势
     var selfEva;
     // 期望工作
@@ -999,7 +1064,16 @@
         sion=$('#profession').val()
         school=$('#school').val()
         address=$('#address').val()
-        $("#educationId").find("option[text='5']").attr("selected",true);
+        industry=$('#industry').val();
+        // sex=$("input[name='sex']:checked").val();
+        sex=$("input[name='sex']:checked").val();
+        console.log(sex+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11")
+        jobStand=$('#jobStandId').val();
+        educationId=$('#edId').val();
+        jobStandId=$('#jobId').val();
+        wrokyear=$('#wrokyear').val();
+        // $("#educationId").find("option[text='1']").attr("selected",true);
+        // $(".sex").find("input[value='男']").attr("checked",true);
 
 
         $("#userinfo-show").hide()
@@ -1010,9 +1084,18 @@
 
     }
     function userInfoSave(resumeId) {
+        if (!contactInfoTest()&&$('#contactInfo').val()!=""){
+            layer.msg('联系方式填写错误')
+            return;
+        }
         event.preventDefault()
         var information=new FormData(document.getElementById("userInfoUpdate"))
         var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+        if ($('#wrokYear').val()==""){
+            console.log("*******88888888888888")
+            $('#wrokYear').val(0)
+        }
+        var information=new FormData(document.getElementById("userInfoUpdate"))
         console.log(time)
         // var resumeId=resumeId;
         $.ajax({
@@ -1040,6 +1123,10 @@
                     $('#school9').text($('#school').val())
                     $('#address9').text($('#address').val())
                     $('#updateTime9').text(time)
+                    $('#sex9').text($("input[name='sex']:checked").val())
+                    $('#industry9').text($('#industry').val())
+                    $('#wrokYear9').text($('#wrokYear').val())
+                    $('#jobStandId9').text($('#jobStandId').find("option:selected").text())
                     // location.href = path+"/jsp/user.jsp";
                 } else if (data == "lose") {
                     layer.msg("修改失败")
@@ -1065,13 +1152,28 @@
         $('#politicalStatus').val(statu)
         $('#contactInfo').val(info)
         $('#birthday').val(day)
-        $('#educationId').val(4)
+        $('#educationId').val(educationId)
+        $('#jobStandId').val(jobStandId)
         $('#profession').val(sion)
         $('#school').val(school)
         $('#address').val(address)
-        layui.form.render('select')
+        $('#wrokYear').val(wrokyear)
+        $('#industry').val(industry)
+        var radio=document.getElementsByName('sex');
+        console.log(sex+"???????????????????????????/")
+        for (var i=0;i<radio.length;i++){
+            if (radio[i].value==sex){
+                radio[i].checked=true;
+                console.log(radio[i].value+"99999999999999")
+                break;
+            }
+        }
+        // $('.sex').val(sex)
         console.log($('#educationId').val())
+        layui.form.render('select')
+        layui.form.render('radio')
         $("#userinfo-update").hide()
+
     }
     // 期望工作
     function workUpdate() {
@@ -1236,75 +1338,102 @@
         })
     }
     function historyCommit2() {
-        $('#weId').val(0);
-        var  workInsert=new FormData(document.getElementById("workInsert"));
-        var information=new FormData(document.getElementById("userInfoUpdate"))
-        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
-        console.log(workInsert)
-        $.ajax({
-            url: 'historyCommit?time='+time,
-            charset:"UTF-8",
-            async: "true",
-            type: "post",
-            data: workInsert,
-            processData:false,
-            contentType:false,
-            dataType: "text",
-            success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    layer.msg('添加成功')
-                    location.reload()
-                } else if (data == "lose") {
-                    layer.msg("添加失败")
-                }
-            },
-            error: function () {
-                layer.msg('网络繁忙')
+        if ($('#companyName').val().trim()==""||$('#companyTrade').val().trim()==""||$('#performance').val().trim()==""||$('#duties').val().trim()==""||$('#beginTime').val().trim()==""||$('#endTime').val().trim()==""||$('#companyPost').val().trim()==""){
+            layer.msg("内容不能为空")
+        }else {
+            if (new Date($('#beginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
+                $('#weId').val(0);
+                var  workInsert=new FormData(document.getElementById("workInsert"));
+                var information=new FormData(document.getElementById("userInfoUpdate"))
+                var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+                console.log(workInsert)
+                $.ajax({
+                    url: 'historyCommit?time='+time,
+                    charset:"UTF-8",
+                    async: "true",
+                    type: "post",
+                    data: workInsert,
+                    processData:false,
+                    contentType:false,
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "succes") {
+                            //向服务端发送删除指令
+                            layer.msg('添加成功')
+                            location.reload()
+                        } else if (data == "lose") {
+                            layer.msg("添加失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg('网络繁忙')
+                    }
+                })
+                event.preventDefault()
+                $("#history").show()
+                $("#history-update").hide()
+            }else {
+                layer.msg("时间填写有误")
             }
-        })
+        }
+
     }
     function historySave2() {
-
-        var  workInsert=new FormData(document.getElementById("workInsert"));
-        var information=new FormData(document.getElementById("userInfoUpdate"))
-        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
-        console.log(workInsert)
-        $.ajax({
-            url: 'historySave?time='+time,
-            charset:"UTF-8",
-            async: "true",
-            type: "post",
-            data: workInsert,
-            processData:false,
-            contentType:false,
-            dataType: "text",
-            success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    layer.msg('添加成功')
-                    $('#'+worksid).find('#companyName9').text($('#companyName').val());
-                    $('#'+worksid).find('#companyTrade9').text($('#companyTrade').val());
-                    $('#'+worksid).find('#companyPost9').text($('#companyPost').val());
-                    $('#'+worksid).find('#beginTime9').text($('#beginTime').val());
-                    $('#'+worksid).find('#endTime9').text($('#endTime').val());
-                    $('#'+worksid).find('#duties9').text($('#duties').val());
-                    $('#'+worksid).find('#performance9').text($('#performance').val());
-                    $('#updateTime9').text(time)
-                    // location.reload()
-                } else if (data == "lose") {
-                    layer.msg("添加失败")
-                }
-            },
-            error: function () {
-                layer.msg('网络繁忙')
+        console.log("!!!!!!!"+new Date($('#beginTime').val()).format("yyyy-MM-dd  hh:mm:ss")+"?????")
+        console.log("!!!!!!!"+new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")+"?????")
+        console.log("!!!!!!!"+$('#endTime').val()+"?????")
+        console.log("!!!!!!!"+new Date().format("yyyy-MM-dd  hh:mm:ss")+"?????")
+        if ($('#companyName').val().trim()==""||$('#companyTrade').val().trim()==""||$('#performance').val().trim()==""||$('#duties').val().trim()==""||$('#beginTime').val().trim()==""||$('#endTime').val().trim()==""||$('#companyPost').val().trim()==""){
+            layer.msg("内容不能为空")
+        }else {
+            if (new Date($('#beginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
+                var  workInsert=new FormData(document.getElementById("workInsert"));
+                var information=new FormData(document.getElementById("userInfoUpdate"))
+                var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+                console.log(workInsert)
+                $.ajax({
+                    url: 'historySave?time='+time,
+                    charset:"UTF-8",
+                    async: "true",
+                    type: "post",
+                    data: workInsert,
+                    processData:false,
+                    contentType:false,
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "succes") {
+                            //向服务端发送删除指令
+                            layer.msg('添加成功')
+                            $('#'+worksid).find('#companyName9').text($('#companyName').val());
+                            $('#'+worksid).find('#companyTrade9').text($('#companyTrade').val());
+                            $('#'+worksid).find('#companyPost9').text($('#companyPost').val());
+                            $('#'+worksid).find('#beginTime9').text($('#beginTime').val());
+                            $('#'+worksid).find('#endTime9').text($('#endTime').val());
+                            $('#'+worksid).find('#duties9').text($('#duties').val());
+                            $('#'+worksid).find('#performance9').text($('#performance').val());
+                            $('#updateTime9').text(time)
+                            // location.reload()
+                        } else if (data == "lose") {
+                            layer.msg("修改失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg('网络繁忙')
+                    }
+                })
+                event.preventDefault()
+                $("#history").show()
+                $("#history-update").hide()
+            }else {
+                layer.msg("时间填写有误")
             }
-        })
+
+        }
 
 
-        event.preventDefault()
-        $("#history").show()
-        $("#history-update").hide()
+
+
+
 
     }
     function historyQuit() {
@@ -1380,77 +1509,95 @@
         $("#project-update").show()
     }
     function projectSave2() {
-        var  projectInsert=new FormData(document.getElementById("projectInsert"));
-        console.log(workInsert);
-        var information=new FormData(document.getElementById("userInfoUpdate"))
-        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
-        $.ajax({
-            url: 'projectSave?time='+time,
-            charset:"UTF-8",
-            async: "true",
-            type: "post",
-            data: projectInsert,
-            dataType: "text",
-            processData:false,
-            contentType:false,
-            success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    layer.msg('修改成功')
-                    $('#'+projects).find('#proName9').text($('#proName').val());
-                    $('#'+projects).find('#proPost9').text($('#proPost').val());
-                    $('#'+projects).find('#proBeginTime9').text($('#proBeginTime').val());
-                    $('#'+projects).find('#proEndTime9').text($('#proEndTime').val());
-                    $('#'+projects).find('#proDescription9').text($('#pproDescription').val());
-                    $('#'+projects).find('#proPerformance9').text($('#proPerformance').val());
-                    $('#updateTime9').text(time)
-                } else if (data == "lose") {
-                    layer.msg("添加失败")
-                }
-            },
-            error: function () {
-                layer.msg('网络繁忙')
+        if ($('#proName').val().trim()==""||$('#proPost').val().trim()==""||$('#proBeginTime').val().trim()==""||$('#proEndTime').val().trim()==""||$('#proDescription').val().trim()==""||$('#proPerformance').val().trim()==""){
+            layer.msg("内容不能为空")
+        }else {
+            if (new Date($('#proBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
+                var  projectInsert=new FormData(document.getElementById("projectInsert"));
+                console.log(workInsert);
+                var information=new FormData(document.getElementById("userInfoUpdate"))
+                var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+                $.ajax({
+                    url: 'projectSave?time='+time,
+                    charset:"UTF-8",
+                    async: "true",
+                    type: "post",
+                    data: projectInsert,
+                    dataType: "text",
+                    processData:false,
+                    contentType:false,
+                    success: function (data) {
+                        if (data == "succes") {
+                            //向服务端发送删除指令
+                            layer.msg('修改成功')
+                            $('#'+projects).find('#proName9').text($('#proName').val());
+                            $('#'+projects).find('#proPost9').text($('#proPost').val());
+                            $('#'+projects).find('#proBeginTime9').text($('#proBeginTime').val());
+                            $('#'+projects).find('#proEndTime9').text($('#proEndTime').val());
+                            $('#'+projects).find('#proDescription9').text($('#pproDescription').val());
+                            $('#'+projects).find('#proPerformance9').text($('#proPerformance').val());
+                            $('#updateTime9').text(time)
+                        } else if (data == "lose") {
+                            layer.msg("修改失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg('网络繁忙')
+                    }
+                })
+
+
+                event.preventDefault()
+                $("#project").show()
+                $("#project-update").hide()
+            }else {
+                layer.msg("时间填写有误")
             }
-        })
+        }
 
-
-        event.preventDefault()
-        $("#project").show()
-        $("#project-update").hide()
     }
     function projectCommit2() {
-        $('#peId').val(0);
-        var  projectInsert=new FormData(document.getElementById("projectInsert"));
-        var information=new FormData(document.getElementById("userInfoUpdate"))
-        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
-        console.log(workInsert)
-        $.ajax({
-            url: 'projectCommit?time='+time,
-            charset:"UTF-8",
-            async: "true",
-            type: "post",
-            data: projectInsert,
-            dataType: "text",
-            processData:false,
-            contentType:false,
-            success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    layer.msg('添加成功')
-                    location.reload()
-                } else if (data == "lose") {
-                    layer.msg("添加失败")
-                }
-            },
-            error: function () {
-                layer.msg('网络繁忙')
+        if ($('#proName').val().trim()==""||$('#proPost').val().trim()==""||$('#proBeginTime').val().trim()==""||$('#proEndTime').val().trim()==""||$('#proDescription').val().trim()==""||$('#proPerformance').val().trim()==""){
+            layer.msg("内容不能为空")
+        }else {
+            if (new Date($('#proBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
+                $('#peId').val(0);
+                var  projectInsert=new FormData(document.getElementById("projectInsert"));
+                var information=new FormData(document.getElementById("userInfoUpdate"))
+                var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+                console.log(workInsert)
+                $.ajax({
+                    url: 'projectCommit?time='+time,
+                    charset:"UTF-8",
+                    async: "true",
+                    type: "post",
+                    data: projectInsert,
+                    dataType: "text",
+                    processData:false,
+                    contentType:false,
+                    success: function (data) {
+                        if (data == "succes") {
+                            //向服务端发送删除指令
+                            layer.msg('添加成功')
+                            location.reload()
+                        } else if (data == "lose") {
+                            layer.msg("添加失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg('网络繁忙')
+                    }
+                })
+
+
+                event.preventDefault()
+                $("#project").show()
+                $("#project-update").hide()
+            }else {
+                layer.msg("时间填写有误")
             }
-        })
+        }
 
-
-        event.preventDefault()
-        $("#project").show()
-        $("#project-update").hide()
     }
     function projectQuit() {
         event.preventDefault()
@@ -1525,82 +1672,107 @@
         $("#education-update").show()
     }
     function educationSave2() {
-        var  educationInsert=new FormData(document.getElementById("educationInsert"));
-        var information=new FormData(document.getElementById("userInfoUpdate"))
-        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
-        $.ajax({
-            url: 'educationSave?time='+time,
-            charset:"UTF-8",
-            async: "true",
-            type: "post",
-            data: educationInsert,
-            processData:false,
-            contentType:false,
-            dataType: "text",
-            success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    layer.msg('修改成功')
-                    $('#'+educationsid).find('#ebSchool9').text($('#ebSchool').val());
-                    $('#'+educationsid).find('#major9').text($('#major').val());
-                    $('#'+educationsid).find('#ebEducation9').text($('#ebEducation').val());
-                    $('#'+educationsid).find('#schBeginTime9').text($('#schBeginTime').val());
-                    $('#'+educationsid).find('#schEndTime9').text($('#schEndTime').val());
-                    $('#'+educationsid).find('#schExperience9').text($('#schExperience').val());
-                    $('#updateTime9').text(time)
-                } else if (data == "lose") {
-                    layer.msg("添加失败")
-                }
-            },
-            error: function () {
-                layer.msg('网络繁忙')
+        if ($('#schEndTime').val().trim()==""||$('#schExperience').val().trim()==""||$('#schBeginTime').val().trim()==""||$('#ebEducation').val().trim()==""||$('#major').val().trim()==""||$('#ebSchool').val().trim()==""){
+            layer.msg("内容不能为空")
+        }else {
+            if (new Date($('#schBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
+                var  educationInsert=new FormData(document.getElementById("educationInsert"));
+                var information=new FormData(document.getElementById("userInfoUpdate"))
+                var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+                $.ajax({
+                    url: 'educationSave?time='+time,
+                    charset:"UTF-8",
+                    async: "true",
+                    type: "post",
+                    data: educationInsert,
+                    processData:false,
+                    contentType:false,
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "succes") {
+                            //向服务端发送删除指令
+                            layer.msg('修改成功')
+                            $('#'+educationsid).find('#ebSchool9').text($('#ebSchool').val());
+                            $('#'+educationsid).find('#major9').text($('#major').val());
+                            $('#'+educationsid).find('#ebEducation9').text($('#ebEducation').val());
+                            $('#'+educationsid).find('#schBeginTime9').text($('#schBeginTime').val());
+                            $('#'+educationsid).find('#schEndTime9').text($('#schEndTime').val());
+                            $('#'+educationsid).find('#schExperience9').text($('#schExperience').val());
+                            $('#updateTime9').text(time)
+                        } else if (data == "lose") {
+                            layer.msg("修改失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg('网络繁忙')
+                    }
+                })
+
+
+
+                event.preventDefault()
+                $("#education").show()
+                $("#education-update").hide()
+            }else {
+                layer.msg("时间填写有误")
             }
-        })
+        }
 
 
 
-        event.preventDefault()
-        $("#education").show()
-        $("#education-update").hide()
     }
     function educationCommit2() {
-        $('#ebId').val(0);
-        console.log($('#ebId'))
-        var information=new FormData(document.getElementById("userInfoUpdate"))
-        var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
-        var  educationInsert=new FormData(document.getElementById("educationInsert"));
-        $.ajax({
-            url: 'educationCommit?time='+time,
-            charset:"UTF-8",
-            async: "true",
-            type: "post",
-            data: educationInsert,
-            processData:false,
-            contentType:false,
-            dataType: "text",
-            success: function (data) {
-                if (data == "succes") {
-                    //向服务端发送删除指令
-                    layer.msg('添加成功')
-                    location.reload()
-                } else if (data == "lose") {
-                    layer.msg("添加失败")
-                }
-            },
-            error: function () {
-                layer.msg('网络繁忙')
+        if ($('#schEndTime').val().trim()==""||$('#schExperience').val().trim()==""||$('#schBeginTime').val().trim()==""||$('#ebEducation').val().trim()==""||$('#major').val().trim()==""||$('#ebSchool').val().trim()==""){
+            layer.msg("内容不能为空")
+        }else {
+            if (new Date($('#schBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
+                $('#ebId').val(0);
+                console.log($('#ebId'))
+                var information=new FormData(document.getElementById("userInfoUpdate"))
+                var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
+                var  educationInsert=new FormData(document.getElementById("educationInsert"));
+                $.ajax({
+                    url: 'educationCommit?time='+time,
+                    charset:"UTF-8",
+                    async: "true",
+                    type: "post",
+                    data: educationInsert,
+                    processData:false,
+                    contentType:false,
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "succes") {
+                            //向服务端发送删除指令
+                            layer.msg('添加成功')
+                            location.reload()
+                        } else if (data == "lose") {
+                            layer.msg("添加失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg('网络繁忙')
+                    }
+                })
+
+
+                event.preventDefault()
+                $("#education").show()
+                $("#education-update").hide()
+            }else {
+                layer.msg("时间填写有误")
             }
-        })
+        }
 
-
-        event.preventDefault()
-        $("#education").show()
-        $("#education-update").hide()
     }
     function educationQuit() {
         event.preventDefault()
         $("#education").show()
         $("#education-update").hide()
+    }
+
+    function contactInfoTest(){
+        var flag=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/.test($("#contactInfo").val());
+        return flag;
     }
 </script>
 </body>

@@ -2,6 +2,7 @@ package com.cykj.controller;
 
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Menu;
+import com.cykj.entity.Resume;
 import com.cykj.entity.UserInfo;
 import com.cykj.log.Loger;
 import com.cykj.service.LoginService;
@@ -39,8 +40,6 @@ public class LoginController {
     public String login() {
         return "Login";
     }
-
-
 
 
     //前端登录的动作
@@ -195,6 +194,25 @@ public class LoginController {
     }
 
 
+    //注册发送短信
+    @RequestMapping("/recReg")
+    public @ResponseBody String recReg(String phone,HttpServletRequest request){
+        UserInfo userInfo = loginServiceImpl.findRecPhone(phone);
+        if (userInfo != null) return "2";
+        String code = "";
+        for (int i = 0; i < 4; i++) {
+            int num = (int) (1 + Math.random() * 9);
+            code += num;
+        }
+        request.getSession().setAttribute("recPhone", phone);
+        request.getSession().setAttribute("recCode", code);
+        System.out.println("发送的验证码为:" + code);
+        String s = AliyunSmsUtils.sendCode(phone, code);
+        System.out.println(s);
+
+        return "1";
+    }
+
 
     //发送短信验证码
     @RequestMapping("/aliSend")
@@ -321,14 +339,28 @@ public class LoginController {
 //    @Loger(operationName = "执行前端注册")
     @RequestMapping(value = {"/regiest"})
     public @ResponseBody
-    String regiest(UserInfo userInfo) {
+    String regiest(String vmesCode,UserInfo userInfo,HttpServletRequest request) {
+        Resume resume=new Resume();
+        resume.setRealName(userInfo.getUserName());
         System.out.println("执行注册!");
 
+
+
         String account = userInfo.getAccount();
+        String savePhone = (String) request.getSession().getAttribute("recPhone");
+        String saveCode = (String) request.getSession().getAttribute("recCode");
+        System.out.println("前端传过来的手机:"+userInfo.getTelephone()+"验证码:"+vmesCode);
 //        启用MD5解开即可
 //        userInfo.setPwd(MD5Utils.md5(userInfo.getPwd()));
-        if (loginServiceImpl.isRepeat(account)) {
-            int i = loginServiceImpl.register(userInfo);
+        if (saveCode != null&&!saveCode.equalsIgnoreCase(vmesCode)){
+            System.out.println("验证码错误!");
+            return "1";
+        }
+        if(savePhone!=null&&!savePhone.equals(userInfo.getTelephone())){
+            return "2";//手机号与验证码接收手机号不同
+        }
+        if (saveCode.equalsIgnoreCase(vmesCode)) {
+            int i = loginServiceImpl.register(userInfo,resume);
             if (i > 0) {
                 return "regsuccess";
             } else {

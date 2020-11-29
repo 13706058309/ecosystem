@@ -71,6 +71,7 @@
         <result property="cerId" column="cerId"></result>
         <result property="gainTime" column="gainTime"></result>
         <result property="bUserId" column="bUserId"></result>
+
         <result property="userId" column="userId"></result>
         <result property="name" column="name"></result>
         <result property="url" column="url"></result>
@@ -79,6 +80,7 @@
             <result property="userName" column="userName"></result>
             <result property="trueName" column="trueName"></result>
             <result property="idNumber" column="idNumber"></result>
+            <result property="fileId" column="fileId"></result>
             <result property="stateId" column="stateId"></result>
             <result property="beginTime" column="beginTime"></result>
             <result property="turnoverTime" column="turnoverTime"></result>

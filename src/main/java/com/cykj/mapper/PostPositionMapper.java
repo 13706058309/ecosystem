@@ -30,4 +30,6 @@ public interface PostPositionMapper {
 //    根据企业id查找岗位信息
     public List<PostPosition> findPost(@Param("bUserId") int bUserId);
 
+    PostPosition findRepName(@Param("postName") String postName, @Param("compID") long compID);
+
 }

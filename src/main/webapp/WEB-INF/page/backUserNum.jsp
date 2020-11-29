@@ -21,7 +21,8 @@
 <p align="center">
 <input type= "button" value="本周" style="width: 100px;height: 40px" onclick="week()"  > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <input type= "button" value="本月" style="width: 100px;height: 40px" onclick="mon()"  > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<input type= "button" value="近半年" style="width: 100px;height: 40px" onclick="half()"  >
+<input type= "button" value="近半年" style="width: 100px;height: 40px" onclick="half()"  >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <input type= "button" value="全量统计" style="width: 100px;height: 40px" onclick="alls()"  >
 </p>
 <div id="main" style="width: 1000px;height:600px;margin:auto;margin-top:50px;">
 
@@ -38,6 +39,9 @@
 	}
 	function half() {
 		location.href= '<%=path %>talent/backUserNumHalfYear';
+	}
+	function alls()  {
+        location.href= '<%=path %>talent/all';
 	}
 </script>
 

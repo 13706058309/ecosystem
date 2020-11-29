@@ -25,9 +25,9 @@ public interface TalentMapper {
     int findPositionRecords(Map<String, Object> map);
     Talent selectTalent( String contactInfo);
 
-    CompAndtalent selectCompAndtalent(@Param("companyID") int companyID, @Param("c") char c);
+    CompAndtalent selectCompAndtalent(@Param("companyID") int companyID, @Param("c") String c);
 
-    int addCompAndtalent(@Param("companyID") int companyID,@Param("c") char c);
+    int addCompAndtalent(@Param("companyID") int companyID,@Param("c") String c);
 
 
     int changeSchoolInfo(Map<String, Object> map);
