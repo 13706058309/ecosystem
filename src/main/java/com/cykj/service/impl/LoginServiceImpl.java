@@ -89,6 +89,11 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
+    public UserInfo findRecPhone(String phone) {
+        return userInfoMapper.findRecPhone(phone);
+    }
+
+    @Override
     public int changPasswordByPhone(String pwd, String phone) {
         return userInfoMapper.changPasswordByPhone(pwd, phone);
     }

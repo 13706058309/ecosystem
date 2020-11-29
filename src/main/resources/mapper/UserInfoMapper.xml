@@ -81,6 +81,10 @@
         select * from userInfo where telephone = #{phone}
     </select>
 
+    <select id="findRecPhone" resultType="com.cykj.entity.UserInfo">
+        select * from userInfo where telephone = #{phone}
+    </select>
+
     <update id="changPasswordByPhone">
         update userInfo set pwd = #{pwd} where telephone = #{phone}
     </update>

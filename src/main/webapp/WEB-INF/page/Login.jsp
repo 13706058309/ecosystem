@@ -77,7 +77,6 @@
                     href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
             <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
         </form>
-        <form ></form>
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
@@ -98,8 +97,6 @@
     }
 
 
-
-
     //发送短信
     function sendMes() {
         var phone = $("#phone").val();
@@ -115,9 +112,9 @@
                 success:function(data){
                     if(data=='1'){
                         layer.msg("发送成功");
-                        $("#codeBtn").attr("disabled", "true");
-                        $("#codeBtn").css("background-color", "grey");
-                        $("#codeBtn").val( curCount + "秒");
+                        $("#mesCode").attr("disabled", "true");
+                        $("#mesCode").css("background-color", "grey");
+                        $("#mesCode").val( curCount + "秒");
                         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
                     }else if(data=='2'){
                         layer.msg("手机号错误，该手机未注册过");
@@ -137,13 +134,13 @@
         if (curCount == 0) {
             curCount=60;
             window.clearInterval(InterValObj);//停止计时器
-            $("#codeBtn").removeAttr("disabled");//启用按钮
-            $("#codeBtn").css("background-color", "#0D9572");
-            $("#codeBtn").val("重新发送");
+            $("#mesCode").removeAttr("disabled");//启用按钮
+            $("#mesCode").css("background-color", "#0D9572");
+            $("#mesCode").val("重新发送");
         }
         else {
             curCount--;
-            $("#codeBtn").val(curCount +"秒");
+            $("#mesCode").val(curCount +"秒");
         }
     }
 

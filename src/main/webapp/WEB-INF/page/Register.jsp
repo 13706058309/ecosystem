@@ -52,8 +52,8 @@
     <div class="form">
         <input type="hidden" value="${pageContext.request.contextPath}" id="path" />
         <form class="login-form">
-            <input type="text" name="userName"  id="username" placeholder="请输入您的姓名" maxlength="4">
-            <input type="text" name="account" id="account" placeholder="请输入您的账号" maxlength="12">
+            <input type="text" name="userName"  id="username" placeholder="请输入您的姓名">
+            <input type="text" name="account" id="account" placeholder="请输入您的账号" maxlength="13">
             <input type="password" name="pwd" id="pwd" placeholder="请输入您的密码" maxlength="12">
             <input type="password" name="pwd1"  id="pwd1" placeholder="请确认您的密码" maxlength="12">
             <input type="text" name="telephone"  id="telephone" placeholder="请输入您的手机" maxlength="11" >
@@ -66,7 +66,18 @@
         </form>
     </div>
 </div>
+
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/dmaku.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script>
+    var path = $("#path").val();
+    var layer;
+    var InterValObj;
+    var curCount=60;
+    layui.use('layer',function () {
+        layer = layui.layer;
+    })
 
     $(function () {
         //用户名限制必须有汉字
@@ -85,14 +96,14 @@
                 $(this).val("");
             }
         })
-        // //密码只能有字母，数字，下划线组成
-        // $("#pwd").blur(function () {
-        //     var pattern = /\w{6,14}$/;
-        //     if(!pattern.test($(this).val())){
-        //         alert("密码只能由字母数字_组成,且至少6位，最多14位");
-        //         $(this).val("");
-        //     }
-        // })
+        //密码只能有字母，数字，下划线组成
+        $("#pwd").blur(function () {
+            var pattern = /\w{6,14}$/;
+            if(!pattern.test($(this).val())){
+                alert("密码只能由字母数字_组成,且至少6位，最多14位");
+                $(this).val("");
+            }
+        })
 
         //手机号验证方法
         $("#telephone").blur(function () {
@@ -122,19 +133,19 @@
             alert("请输入正确手机号");
         } else {
             $.ajax({
-                url: path + "/golog/aliSend",
+                url: path + "/golog/recReg",
                 type: "post",
                 data: "phone=" + phone,
                 dataType: 'text',
                 success:function(data){
                     if(data=='1'){
                         layer.msg("发送成功");
-                        $("#codeBtn").attr("disabled", "true");
-                        $("#codeBtn").css("background-color", "grey");
-                        $("#codeBtn").val( curCount + "秒");
+                        $("#mesCode").attr("disabled", "true");
+                        $("#mesCode").css("background-color", "grey");
+                        $("#mesCode").val( curCount + "秒");
                         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
                     }else if(data=='2'){
-                        layer.msg("手机号错误，该手机未注册过");
+                        layer.msg("该账号已存在!");
                     }else{
                         layer.msg("发送失败，请稍后再发");
                     }
@@ -151,13 +162,13 @@
         if (curCount == 0) {
             curCount=60;
             window.clearInterval(InterValObj);//停止计时器
-            $("#codeBtn").removeAttr("disabled");//启用按钮
-            $("#codeBtn").css("background-color", "#0D9572");
-            $("#codeBtn").val("重新发送");
+            $("#mesCode").removeAttr("disabled");//启用按钮
+            $("#mesCode").css("background-color", "#0D9572");
+            $("#mesCode").val("重新发送");
         }
         else {
             curCount--;
-            $("#codeBtn").val(curCount +"秒");
+            $("#mesCode").val(curCount +"秒");
         }
     }
 
@@ -170,13 +181,13 @@
         var pwd = $("#pwd").val().trim();
         var pwd1 = $("#pwd1").val().trim();
         var telephone= $("#telephone").val().trim();
-        // var vmesCode = $("#vmesCode").val().trim();
+        var vmesCode = $("#acthCode").val().trim();
         var address = $("#address").val().trim();
 
 
         $.ajax({
             url:path+"/golog/regiest",
-            data:{"userName":userName,"account":account,"pwd":pwd,"telephone":telephone,"address":address},
+            data:{"userName":userName,"account":account,"pwd":pwd,"telephone":telephone,"vmesCode":vmesCode,"address":address},
             type:"post",
             typeData:"text",
             beforeSend:function () {
@@ -196,10 +207,13 @@
                     alert("两次密码要一致!");
                     return false;
                 }
-                if(telephone.length==0){
-                    alert("请填写手机号!");
-                    return false;
+                if (vmesCode.length==0){
+                    alert("验证码不能改空!")
                 }
+                // if(telephone.length==0){
+                //     alert("请填写手机号!");
+                //     return false;
+                // }
                 return true;
             },
             success:function (info) {
@@ -209,17 +223,21 @@
                     if (mes == true){
                         location.href = path+"/golog/login";
                     } else{
-                        alert("欢迎加入我们的大家庭!");
+                        alert("欢迎成为我们的会员!");
                     }
                 } else if (info == 'regfaid'){
                     var mess = confirm("对不起注册失败!是否重新注册？");
                     if(mess == true){
                         location.href = path+"/golog/reg";
                     } else {
-                        alert("期待您的下一次到来哦!");
+                        // alert("期待您的下一次到来哦!");
                     }
                 } else if (info == 'repeat') {
                     alert("对不起账号已经存在,请重新注册!");
+                } else if (info == '1'){
+                    alert("验证码错误!");
+                } else if (info == '2'){
+                    alert("手机号与验证码接收手机号不同！");
                 }
             },
         })
@@ -237,8 +255,5 @@
     }
 
 </script>
-<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
-<script src="${pageContext.request.contextPath}/js/dmaku.js"></script>
-<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 </body>
 </html>

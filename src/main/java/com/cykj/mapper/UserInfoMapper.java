@@ -33,6 +33,8 @@ public interface UserInfoMapper {
      UserInfo isRepeat(String account);
      //查询手机
      UserInfo findPhone(@Param("phone") String phone );
+     //查询注册手机号
+     UserInfo findRecPhone(@Param("phone") String phone);
      //通过手机找回密码
      int changPasswordByPhone(@Param("pwd") String pwd,@Param("phone") String phone);
 }
