@@ -50,29 +50,21 @@ public class CertificateController {
     @RequestMapping("/cshouye")
     public String shouye(HttpServletRequest request) {
 
-//        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("tuser");
-//        List<CerUser> cerUserList = cerUserService.findceruserlist(userInfo.getUserId());
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+
         List<Certificate> certificateList = certificateService.findcertificatelist();
-
-        for (int i=0;i<certificateList.size();i++){
-            certificateList.get(i).setCershowState(1);
+        if (userInfo!=null){
+        List<CerUser> cerUserList = cerUserService.findceruserlist(userInfo.getUserId());
+        if (cerUserList.size() > 0){
+            for (int i=0;i<certificateList.size();i++){
+                for (int j= 0;j<cerUserList.size();j++){
+                    if (certificateList.get(i).getFieldId()==cerUserList.get(j).getCerRecord().getFileId()&&certificateList.get(i).getFieldId()!=2){
+                        certificateList.get(i).setCershowState(0);
+                    }
+                }
+            }
         }
-
-//        if (cerUserList.size() != 0){
-//
-//            for (int i=0;i>certificateList.size();i++){
-//                for (int j= 0;j>cerUserList.size();j++){
-//                    if (certificateList.get(i).getCerId()==cerUserList.get(j).getCerId()){
-//                        certificateList.get(i).setCershowState(0);
-//                    }else {
-//                        certificateList.get(i).setCershowState(1);
-//                    }
-//                }
-//            }
-//        }else {
-
-//        }
-
+        }
         request.getSession().setAttribute("certificateList",certificateList);
 
         return "certificate/CertificateHome";
@@ -132,9 +124,8 @@ public class CertificateController {
     @RequestMapping("/upupzhengshu")
     public @ResponseBody String querenzhengshu(HttpServletRequest request,String username,String usernumber,String phone,String fileid) throws ParseException {
         String msg = "";
-//        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUserId(2);
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+
 
         long fileid1 = Long.parseLong(fileid);
         String dangqiantime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -210,10 +201,10 @@ public class CertificateController {
 
     @RequestMapping(value = "/getcersqlist",produces = "text/html;charset=utf-8")
     public @ResponseBody
-    String finddoclist(String page, String limit, String top, String down, String fieldName) {
+    String finddoclist(String page, String limit, String top, String down, String fieldName,HttpServletRequest request) {
 
         Map<String, Object> usersMap = new LinkedHashMap<>();
-
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
         if (fieldName != null  && !"".equals(fieldName.trim())) {
             usersMap.put("fieldName","%"+fieldName+"%" );
         }
@@ -224,7 +215,7 @@ public class CertificateController {
         if (down != null  && !"".equals(down.trim())){
             usersMap.put("down",down);
         }
-        usersMap.put("userid",1);
+        usersMap.put("userid",userInfo.getUserId());
         // 查找数据条数
 
         int count = cerRecordService.findcersqlistsize(usersMap);  // 查找数据条数
@@ -273,12 +264,12 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = this.getClass().getClassLoader().getResource("").getPath()+"static";
+        String realpath   = request.getServletContext().getRealPath("/wtqupload");
         System.out.println("下载的路径是"+realpath);
 
         Certificate certificate= certificateService.findCerFee(fileid);
         String lujing= certificate.getCerRequirement();
-//        realpath = realpath+lujing.substring(0,lujing.lastIndexOf("/")+1);
+        realpath = realpath+lujing.substring(0,lujing.lastIndexOf("/")+1);
 
         String filename  = lujing.substring(lujing.lastIndexOf("/")+1);
 
@@ -306,15 +297,16 @@ public class CertificateController {
     //个人中心已获得证书图示
     @RequestMapping("/zxzstushi")
     public  String zhongxinzhengshutushi(HttpServletRequest request) {
-        List<CerUser> cerUserList =  cerUserService.findceruserlist(1);
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+        List<CerUser> cerUserList =  cerUserService.findceruserlist(userInfo.getUserId());
         request.setAttribute("cerUserList",cerUserList);
         return "certificate/CertificateGraphic";
     }
     //个人中心开发证书项目
     @RequestMapping("/zxzskaifa")
     public  String zhongxinzhengshuxiangmu(HttpServletRequest request) {
-
-        List<CerRecord> cerRecordList = cerRecordService.findcerKFList("1");
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+        List<CerRecord> cerRecordList = cerRecordService.findcerKFList(userInfo.getUserId()+"");
         request.setAttribute("kaifacerRecordList",cerRecordList);
         return "certificate/DevelopmentProject";
     }
@@ -387,7 +379,8 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-        String realpath   = this.getClass().getClassLoader().getResource("").getPath()+"static";
+        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+//        String realpath   = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);
@@ -413,8 +406,8 @@ public class CertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-//        String realpath   = request.getServletContext().getRealPath("/wtqupload");
-        String realpath = this.getClass().getClassLoader().getResource("").getPath()+"static";
+        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+//        String realpath = this.getClass().getClassLoader().getResource("").getPath()+"static";
         System.out.println("下载的路径是"+realpath);
 
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);
