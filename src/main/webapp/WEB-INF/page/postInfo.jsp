@@ -39,7 +39,7 @@
         <div class="inner home-inner" >
             <div class="logo" style="width: 150px;height: 70px">
 
-                <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+                <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
             </div>
             <div class="nav" style="margin-top: 20px">
                 <ul>
@@ -78,36 +78,31 @@
         </div>
     </div>
     <div id="main">
-    <div class="job-banner">
-        <div class="inner home-inner">
+    <div class="job-banner" style="background-color: #00c2b3;">
+        <div class="inner home-inner" >
             <div class="job-primary detail-box">
-                <div class="pos-bread">
-                    <a href="/" ka="job-breadcrumb-top1">首页</a>
-                    <i class="icon-arrow-right"></i>
-                    <a href="/c101230200/" ka="job-breadcrumb-top2">厦门招聘</a>·<a href="/p100123/" ka="job-breadcrumb-top21">全栈工程师招聘</a>
-                    <i class="icon-arrow-right"></i>
-                    <a href="/c101230200-p100123/" ka="job-breadcrumb-top3">厦门全栈工程师招聘</a>
-                    <i class="icon-arrow-right"></i>
-<%--                    <a href="/job_detail/d5632e1152a89f521nV639m9F1FZ.html" ka="job-breadcrumb-top4">建信金科资产负债_软件开发岗（应届）招聘</a>--%>
-                </div>
+<%--                <div class="pos-bread">--%>
+<%--                    <a href="/" ka="job-breadcrumb-top1">首页</a>--%>
+<%--                    <i class="icon-arrow-right"></i>--%>
+<%--                    <a href="/c101230200/" ka="job-breadcrumb-top2">厦门招聘</a>·<a href="/p100123/" ka="job-breadcrumb-top21">全栈工程师招聘</a>--%>
+<%--                    <i class="icon-arrow-right"></i>--%>
+<%--                    <a href="/c101230200-p100123/" ka="job-breadcrumb-top3">厦门全栈工程师招聘</a>--%>
+<%--                    <i class="icon-arrow-right"></i>--%>
+<%--&lt;%&ndash;                    <a href="/job_detail/d5632e1152a89f521nV639m9F1FZ.html" ka="job-breadcrumb-top4">建信金科资产负债_软件开发岗（应届）招聘</a>&ndash;%&gt;--%>
+<%--                </div>--%>
                 <div class="info-primary">
 <%--                    <div class="job-status"><span>最新</span>--%>
 
                     </div>
                     <div class="name">
-                        <h1>${post.postName}</h1>
+                        <h1 style="color: #0b2e13">${post.postName}</h1>
                         <span class="salary">${post.minSalary}-${post.maxSalary}K</span>
                     </div>
                     <p style="color: #f0ad4e"><a class="text-city" href="/xiamen/" style="color:#f0ad4e">${post.workCity}</a><em class="dolt"></em>${post.workYear}<em class="dolt"></em>${post.education}</p>
                     <div class="tag-container">
-<%--                        <div class="tag-more" style="opacity: 1;">--%>
-<%--                            <span class="link-more">...</span>--%>
-<%--                            <div class="tag-all job-tags">--%>
-<%--                                <span>五险一金</span><span>补充医疗保险</span><span>定期体检</span><span>年终奖</span><span>带薪年假</span><span>餐补</span><span>节日福利</span><span>员工关怀</span><span>工会福利</span>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
+
                         <div class="job-tags">
-                            <span>${post.jobBenefits}</span>
+                            <span style="color: #0b2e13">${post.jobBenefits}</span>
                         </div>
                     </div>
                 </div>
@@ -115,54 +110,44 @@
                     <div class="btn-container">
                         <!-- 未登录 -->
                         <c:if test="${not empty qUser}">
-                        <a class="btn btn-startchat" onclick="window.open('/springboot/rec/userChat?compID=${post.backUser.bUserId}')">立即沟通</a>
+                        <a class="btn btn-startchat" onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${post.backUser.bUserId}')" style="background-color: #0C0C0C">立即沟通</a>
                         </c:if>
                     </div>
-<%--                    <div class="op-container">--%>
-<%--                        <!-- 在线简历 -->--%>
-<%--                        <a href="/web/geek/resume" class="fl icon-resume-login" ka="job_online_resume_1"><i class="icon"></i>完善在线简历</a>--%>
-<%--                        <!-- 附件简历 -->--%>
-<%--                        <a href="javascript:;" class="fr icon-upload-login attachment-resume-upload" ka="job_attach_resume_1"><i class="icon"></i>上传附件简历</a>--%>
-<%--                    </div>--%>
+
                 </div>
             </div>
         </div>
     </div>
-    <div class="smallbanner">
-        <div class="inner home-inner">
-            <div class="detail-op">
-                <div class="btns">
-                    <c:if test="${not empty qUser}">
-                    <a class="btn btn-startchat" onclick="window.open('/springboot/rec/userChat?compID=${post.backUser.bUserId}')">立即沟通</a>
-                    </c:if>
-                </div>
-            </div>
-            <div class="company-info">
-                <div class="name">
-                    <h1>${post.postName}</h1>
-                    <span class="badge">${post.minSalary}-${post.maxSalary}K</span></div>
-                <div class="tag-container">
-                    <div class="tag-more" style="opacity: 1;">
-                        <span class="link-more">...</span>
-                        <div class="tag-all job-tags">
-                            <span>${post.jobBenefits}</span>
-                        </div>
-                    </div>
-                    <div class="job-tags">
-                        <span>${post.jobBenefits}</span>
-                    </div>
-                </div>
-                <div class="info">
-                    ${post.backUser.compName}
-<%--                    <a href="/gongsir/6e19637143bd80ad1HV_3N26GQ~~.html" target="_blank" class="link-more" ka="look-all-position">查看所有职位</a>--%>
-<%--                    <div class="job-detail-guide-download-app">--%>
-<%--                        <div class="job-detail-guide-download-app-icon"></div>--%>
-<%--                        下载App, 不错过Boss每一条消息--%>
+<%--    <div class="smallbanner">--%>
+<%--        <div class="inner home-inner">--%>
+<%--            <div class="detail-op">--%>
+<%--                <div class="btns">--%>
+<%--                    <c:if test="${not empty qUser}">--%>
+<%--                    <a class="btn btn-startchat" onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${post.backUser.bUserId}')">立即沟通</a>--%>
+<%--                    </c:if>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="company-info">--%>
+<%--                <div class="name">--%>
+<%--                    <h1>${post.postName}</h1>--%>
+<%--                    <span class="badge">${post.minSalary}-${post.maxSalary}K</span></div>--%>
+<%--                <div class="tag-container">--%>
+<%--                    <div class="tag-more" style="opacity: 1;">--%>
+<%--                        <span class="link-more">...</span>--%>
+<%--                        <div class="tag-all job-tags">--%>
+<%--                            <span>${post.jobBenefits}</span>--%>
+<%--                        </div>--%>
 <%--                    </div>--%>
-                </div>
-            </div>
-        </div>
-    </div>
+<%--                    <div class="job-tags">--%>
+<%--                        <span>${post.jobBenefits}</span>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="info">--%>
+<%--                    ${post.backUser.compName}--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
     <div class="job-box">
         <div class="inner home-inner">
             <div class="job-sider">
@@ -192,10 +177,12 @@
                 <div class="detail-op">
                     <div class="btns">
                         <div class="op-links">
+                            <c:if test="${not empty qUser}">
 <%--                            <a ka="job_detail_wechat_share" href="javascript:;" class="link-wechat-share" data-url="/boss/share/job.json?jobId=d5632e1152a89f521nV639m9F1FZ&source=2">微信扫码分享</a>--%>
                             <c:if test="${not empty postCellec}"><a onclick="postDel(${post.pPostId})" class="link-wechat-share">取消感兴趣</a></c:if>
                             <c:if test="${empty postCellec}"><a onclick="postInsert(${post.pPostId})" class="link-wechat-share">感兴趣</a></c:if>
 <%--                            <a ka="job_detail_report" href="javascript:;" class="link-report">举报</a>--%>
+                            </c:if>
                         </div>
                     </div>
 
@@ -205,9 +192,6 @@
                     <h2 class="name">${post.backUser.bUserName}<i class="icon-vip"></i>
 
                     </h2>
-<%--                    <p class="gray">--%>
-<%--                        资产负债业务高级经理<em class="vdot">·</em>刚刚在线--%>
-<%--                    </p>--%>
                 </div>
                 <div class="detail-content">
                     <!--已关闭职位-->
@@ -260,7 +244,21 @@
         <img src="https://static.zhipin.com/zhipin-geek/v331/web/geek/images/tip.png">
     </div>
 </div>
-
+<div class="links links-friends">
+    <dl class="links-item">
+        <dt>友情链接：</dt>
+        <dd>
+            <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+            <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+            <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+            <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+            <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+            <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+            <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+            <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+        </dd>
+    </dl>
+</div>
 <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
 <script src="https://static.zhipin.com/zhipin-geek/v331/web/geek/js/main.js"></script>
 <script src="https://webapi.amap.com/maps?v=1.3&key=60085a6ee91616cf689ce0321e1f30c4&plugin=AMap.Geocoder"></script>
@@ -313,54 +311,7 @@
         })
     }
 </script>
-<%--<script>--%>
-<%--    function get_share_datas_from_html_inapp() {--%>
-<%--        var shid = "shdefault",--%>
-<%--            urlShid,--%>
-<%--            urlSid,--%>
-<%--            pk = "pkdefault",--%>
-<%--            pp = "ppdefault",--%>
-<%--            pkn = (typeof _PK != 'undefined' ? _PK : document.getElementById("page_key_name")),--%>
-<%--            getQueryString = function(name) {--%>
-<%--                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"),--%>
-<%--                    r = window.location.search.substr(1).match(reg);--%>
-<%--                if (r != null) {--%>
-<%--                    return unescape(r[2])--%>
-<%--                }--%>
-<%--                return null;--%>
-<%--            };--%>
-<%--        urlShid = getQueryString("shid");--%>
-<%--        urlSid = getQueryString("sid");--%>
-<%--        if (urlShid) {--%>
-<%--            shid = urlShid;--%>
-<%--        } else if (urlSid) {--%>
-<%--            shid = urlSid;--%>
-<%--        }--%>
-<%--        if (pkn) {--%>
-<%--            var pknVal = pkn.value;--%>
-<%--            if (pknVal) {--%>
-<%--                var pkArray = pknVal.split("|");--%>
-<%--                if (pkArray.length == 1) {--%>
-<%--                    pk = pkArray[0];--%>
-<%--                } else if (pkArray.length >= 2) {--%>
-<%--                    pk = pkArray[0];--%>
-<%--                    pp = pkArray[1];--%>
-<%--                }--%>
-<%--            }--%>
-<%--        }--%>
-<%--        var ret = [];--%>
-<%--        ret["shid"] = shid;--%>
-<%--        ret["pk"] = pk;--%>
-<%--        ret["pp"] = pp;--%>
-<%--        return ret;--%>
-<%--    }--%>
-<%--    function getQueryString(name)--%>
-<%--    {--%>
-<%--        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");--%>
-<%--        var r = window.location.search.substr(1).match(reg);--%>
-<%--        if(r!=null)return  unescape(r[2]); return null;--%>
-<%--    }--%>
-<%--</script>--%>
+
 <script>
     window.onload=function () {
         // function postLocation() {
@@ -389,33 +340,9 @@
             });
         // }
     }
-    // var _T = _T || [];
-    // (function() {
-    //     var script = document.createElement("script");
-    //     script.src = "https://static.zhipin.com/library/js/analytics/ka.zhipin.min.js";
-    //     var s = document.getElementsByTagName("script")[0];
-    //     s.parentNode.insertBefore(script, s);
-    // })();
-    //
-    // var _hmt = _hmt || [];
-    // (function() {
-    //     var hm = document.createElement("script");
-    //     hm.src = "//hm.baidu.com/hm.js?194df3105ad7148dcf2b98a91b5e727a";
-    //     var s = document.getElementsByTagName("script")[0];
-    //     s.parentNode.insertBefore(hm, s);
-    // })();
 
 
 
 </script>
-<%--<script type="application/ld+json">--%>
-<%--    {--%>
-<%--        "@context": "https://zhanzhang.baidu.com/contexts/cambrian.jsonld",--%>
-<%--        "@id": "https://www.zhipin.com/job_detail/d5632e1152a89f521nV639m9F1FZ.html",--%>
-<%--        "title": "「资产负债_软件开发岗（应届）招聘」_建信金科招聘-BOSS直聘",--%>
-<%--        "description": "建信金科资产负债_软件开发岗（应届）招聘，薪资：8-13K，地点：厦门，要求：1年以内，学历：本科，福利：五险一金、补充医疗保险、定期体检、年终奖、带薪年假、餐补、节日福利、员工关怀、工会福利，资产负债业务高级经理刚刚在线，随时随地直接开聊。",--%>
-<%--        "pubDate": "2020-11-16T09:32:20",--%>
-<%--        "upDate":  "2020-11-19T22:41:42"--%>
-<%--    }--%>
-<%--</script>--%>
+
 </html>

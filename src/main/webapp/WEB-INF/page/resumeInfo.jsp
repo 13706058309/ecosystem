@@ -47,7 +47,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -90,10 +90,15 @@
         <li  <c:if test="${not empty posts}">class="layui-this"</c:if> lay-id="resumeInfo">感兴趣</li>
         <li  <c:if test="${not empty postss}">class="layui-this"</c:if> lay-id="resumeCommit">已投递</li>
         <li lay-id="deliveryInfo" <c:if test="${not empty postsss}">class="layui-this"</c:if> >投递反馈</li>
-        <li lay-id="communication">沟通过</li>
+        <li lay-id="communication" <c:if test="${not empty postssss}">class="layui-this"</c:if>>沟通过</li>
     </ul>
     <div class="layui-tab-content" style="height: 90%">
+        <c:if test="${zanwu1==1}"><h2>暂无感兴趣岗位</h2></c:if>
+        <c:if test="${zanwu1==2}"><h2>暂无投递岗位</h2></c:if>
+        <c:if test="${zanwu1==3}"><h2>暂无投递反馈</h2></c:if>
+        <c:if test="${zanwu1==4}"><h2>暂无沟通公司</h2></c:if>
         <div class="layui-tab-item <c:if test="${not empty posts}"> layui-show</c:if>">
+
             <c:if test="${not empty posts}">
 
             <div id="wrap" class=""><c:if test="${not empty posts}">
@@ -125,13 +130,13 @@
                                                                                 class="fz-resume fz-place"></i> ${post.jobDescription} </span></div>
                                                                 </div>
                                                                 <div class="op op-show">
-                                                                    <!----><a href="javascript:;" ka="user-resume-edit-expectation0"
+                                                                    <!----><a href="${pageContext.request.contextPath}/homePage/compProfile?bUserId=${post.backUser.bUserId}" ka="user-resume-edit-expectation0"
                                                                               class="link-edit"><svg class="icon-svg">
                                                                     <use xlink:href="#icon-svg-edit"></use>
                                                                 </svg><span>${post.backUser.compName}</span></a><a href="javascript:;" ka="user-resume-edit-expectation0"
                                                                                               class="link-edit"><svg class="icon-svg">
                                                                     <use xlink:href="#icon-svg-edit"></use>
-                                                                </svg><span>继续沟通</span></a></div>
+                                                                </svg><span onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${post.backUser.bUserId}')">继续沟通</span></a></div>
                                                             </li>
                                                             <li ka="user-resume-edit-expectation0" class="">
                                                                 <div class="primary-info">
@@ -194,20 +199,20 @@
                                                                 <li ka="user-resume-edit-expectation0" class="">
                                                                     <div class="primary-info">
                                                                         <div class="info-labels"><span class="prev-line"><span
-                                                                                class="label-text"><i class="fz-resume fz-job"></i><a onclick="">${post.postName}</a>
+                                                                                class="label-text"><i class="fz-resume fz-job"></i><a >${post.postName}</a>
                                                         </span></span><span class="prev-line"><i
                                                                                 class="fz-resume fz-salary"></i> ${post.minSalary}--${post.maxSalary}k </span>
                                                                             <span class="prev-line"><i
                                                                                     class="fz-resume fz-place"></i> ${post.jobDescription} </span></div>
                                                                     </div>
                                                                     <div class="op op-show">
-                                                                        <!----><a href="javascript:;" ka="user-resume-edit-expectation0"
+                                                                        <!----><a href="${pageContext.request.contextPath}/homePage/compProfile?bUserId=${post.backUser.bUserId}" ka="user-resume-edit-expectation0"
                                                                                   class="link-edit"><svg class="icon-svg">
                                                                         <use xlink:href="#icon-svg-edit"></use>
                                                                     </svg><span>${post.backUser.compName}</span></a><a href="javascript:;" ka="user-resume-edit-expectation0"
                                                                                                   class="link-edit"><svg class="icon-svg">
                                                                         <use xlink:href="#icon-svg-edit"></use>
-                                                                    </svg><span>继续沟通</span></a></div>
+                                                                    </svg><span onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${post.backUser.bUserId}')">继续沟通</span></a></div>
                                                                 </li>
                                                                 <li ka="user-resume-edit-expectation0" class="">
                                                                     <div class="primary-info">
@@ -333,13 +338,108 @@
                 </div></c:if>
             </c:if>
         </div>
-        <div class="layui-tab-item">内容4</div>
+        <div class="layui-tab-item  <c:if test="${not empty postssss}" >layui-show</c:if>">
+            <c:if test="${not empty postssss}">
+                <div id="wrap" class=""><c:if test="${not empty postssss}">
+                <div id="main" class="inner"><c:if test="${not empty postssss}">
+                <div id="container" class="resume-container">
+                    <div class="resume-content">
+                        <!---->
+                        <div class="resume-content-box">
+
+                            <div class="resume-box"><c:if test="${not empty postssss}">
+                                <div id="userinfo" class="resume-item resume-userinfo"><c:if test="${not empty postssss}">
+                                    <div id="purpose" class="resume-item resume-purpose">
+                                        <c:if test="${not empty postssss}">
+                                            <c:forEach var="post" items="${postssss}">
+                                                <div class="item-primary">
+                                                    <h3 class="title"> ${post.bUserName}
+                                                    </h3>
+                                                    <ul>
+                                                        <li ka="user-resume-edit-expectation0" class="">
+                                                            <div class="primary-info">
+                                                                <div class="info-labels"><span class="prev-line"><span
+                                                                        class="label-text"><i class=" "></i>${post.compName}
+                                                                    &nbsp; &nbsp;
+                                                        </span>
+<%--                                                                </span><span class="prev-line"><i--%>
+<%--                                                                        class="fz-resume fz-salary"></i> ${post.minSalary}--${post.maxSalary}k </span>--%>
+<%--                                                                    <span class="prev-line"><i--%>
+<%--                                                                            class="fz-resume fz-place"></i> ${post.jobDescription} </span>--%>
+                                                                </div>
+                                                            </div>
+                                                            <div class="op op-show">
+                                                                    <%--                                                                <!----><a href="javascript:;" ka="user-resume-edit-expectation0"--%>
+                                                                    <%--                                                                          class="link-edit"><svg class="icon-svg">--%>
+                                                                    <%--                                                                <use xlink:href="#icon-svg-edit"></use>--%>
+                                                                    <%--                                                            </svg><span>${post.backUser.compName}</span></a>--%>
+                                                                <a href="javascript:;" ka="user-resume-edit-expectation0"
+                                                                   class="link-edit"><svg class="icon-svg">
+                                                                    <use xlink:href="#icon-svg-edit"></use>
+                                                                </svg><span onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${post.bUserId}')">继续沟通</span></a></div>
+                                                        </li>
+                                                        <li ka="user-resume-edit-expectation0" class="">
+                                                            <div class="primary-info">
+                                                                <div class="info-labels"><span class="prev-line"><span
+                                                                        class="label-text"><i class="fz-resume fz-job"></i> 公司简介：${post.infoIntr}
+                                                        </span></span>
+                                                                        <%--                                                                    <span class="prev-line"><i--%>
+                                                                        <%--                                                                        class="fz-resume fz-salary"></i> ${post.education} </span><span--%>
+                                                                        <%--                                                                        class="prev-line"><i class="fz-resume fz-salary"></i>--%>
+                                                                        <%--                                                        ${post.jobBenefits} </span>--%>
+                                                                </div>
+                                                            </div>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </c:forEach>
+                                        </c:if>
+
+                                    </div></c:if>
+                                </div></c:if>
+                            </div>
+                            <div id="fenye4" style="text-align: center"></div>
+                        </div>
+                    </div>
+                        <%--                        <div class="user-sider" style="height: 600px;background: #fff;">--%>
+                        <%--                            <div data-v-3b220faa="" class="sider-box sider-resume">--%>
+                        <%--                                <div data-v-3b220faa="" class="resume-attachment">--%>
+                        <%--                                    <h3 data-v-3b220faa="" class="sider-title">附件管理--%>
+                        <%--                                    </h3>--%>
+                        <%--                                    <div data-v-3b220faa="" class="btns"><button data-v-3b220faa="" type="button"--%>
+                        <%--                                                                                 class="btn btn-primary">上传简历</button>--%>
+                        <%--                                    </div>--%>
+                        <%--                                    <div data-v-3b220faa="" class="">--%>
+                        <%--                                    </div>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                        </div>--%>
+                </div>
+                </div></c:if>
+                </div></c:if>
+            </c:if>
+        </div>
     </div>
 
 </div>
 
 </form>
-
+<div class="links links-friends" style="margin-left: 25%">
+    <dl class="links-item">
+        <dt>友情链接：</dt>
+        <dd>
+            <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+            <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+            <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+            <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+            <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+            <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+            <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+            <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+        </dd>
+    </dl>
+</div>
 
 <script>
     layui.use(['element','form'], function(){
@@ -480,7 +580,20 @@
             }
         });
 
-
+        laypage.render({
+            elem: 'fenye4'
+            ,count: count
+            ,curr:curr
+            ,theme: '#1E9FFF'
+            ,limit:limit
+            ,jump:function (obj,first) {
+                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                console.log(obj.limit); //得到每页显示的条数
+                if(!first){
+                    location.href="communicationPage?curr="+obj.curr+"&limit="+obj.limit;
+                }
+            }
+        });
 
     });
     function postInfo(id) {

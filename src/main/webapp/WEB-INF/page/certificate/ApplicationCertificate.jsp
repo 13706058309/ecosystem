@@ -17,7 +17,13 @@
     <link href="${pageContext.request.contextPath}/style/css/external.min.css" type="text/css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/style/css/popup.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" media="all">
+    <link href="${pageContext.request.contextPath}/css/vendor.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jianli.css" rel="stylesheet">
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
     <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+
     <style>
         #xieyi{
             color: #980e3b;
@@ -28,11 +34,58 @@
          #container {
              margin:35px auto 0;
          }
-
+        #tijiao{
+            display: inline-block;
+            height: 38px;
+            line-height: 38px;
+            padding: 0 18px;
+            background-color: #009688;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer
+        }
     </style>
 </head>
 <body>
-<div id="body">
+<div id="header" style="background-color:#00c2b3;height: 80px" >
+    <div class="inner home-inner" >
+        <div class="logo" style="width: 150px;height: 70px">
+
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px;margin-top: -20px"><span>钱程无忧</span></a>
+        </div>
+        <div class="nav" style="margin-top: 20px">
+            <ul>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                <%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+            </ul>
+        </div>
+
+        <div class="user-nav" style="margin-top: 20px">
+            <ul>
+                <%--                    <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
+                <li class="nav-figure">
+                    <a >
+                        <span class="label-text">${qUser.userName}</span><img id="topImg"  src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                    </a>
+                    <div class="dropdown">
+                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                        <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                        <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
     <div class="container" style="width: 70%;margin-left: 16%">
         <div id="container"  >
             <dl class="company_center_content">
@@ -53,7 +106,7 @@
                                 </td>
                                 <td>
                                         <input type="file" name="file_idcard" id="file_idcard" class="file" multiple data-min-file-count="2" >
-                                        <input type="button" value="提交" onclick="load()">
+
                                 </td>
                             </tr>
                             <tr>
@@ -61,6 +114,9 @@
                                 <td>身份证</td>
                                 <td>
                                     <input type="text"  style="height: 45px" readonly unselectable="on" onkeyup="shenfenzhengZZ()"  name="identityNumber" id="identityNumber">
+                                </td>
+                                <td>
+                                    <input type="button" id="tijiao" value="提交" onclick="load()">
                                 </td>
                             </tr>
                             <tr>
@@ -109,7 +165,7 @@
         </div>
     </div><!-- end .content -->
     <input type="hidden" value="${fileids}" id="fileid">
-</div>
+
 
 
 <script src="${pageContext.request.contextPath}/layui/dist/layui.js" charset="utf-8"></script>
@@ -225,7 +281,7 @@
     function phoneZZ() {
         layui.use('layer', function() {
             layer = layui.layer;
-            var mPattern = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/.test($("#phoneNumber").val());
+            var mPattern = /^1[3456789]\d{9}$/.test($("#phoneNumber").val());
             if (mPattern) {
                 layer.msg('输入手机号正确', {icon: 6});
             }else{
