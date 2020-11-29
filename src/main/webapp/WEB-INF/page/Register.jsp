@@ -54,8 +54,8 @@
         <form class="login-form">
             <input type="text" name="userName"  id="username" placeholder="请输入您的姓名">
             <input type="text" name="account" id="account" placeholder="请输入您的账号" maxlength="13">
-            <input type="password" name="pwd" id="pwd" placeholder="请输入您的密码" maxlength="12">
-            <input type="password" name="pwd1"  id="pwd1" placeholder="请确认您的密码" maxlength="12">
+            <input type="password" name="pwd" id="pwd" placeholder="请输入您的密码" maxlength="14">
+            <input type="password" name="pwd1"  id="pwd1" placeholder="请确认您的密码" maxlength="14">
             <input type="text" name="telephone"  id="telephone" placeholder="请输入您的手机" maxlength="11" >
             <input type="button" name="mesCode" id="mesCode" value="点击获取验证码" onclick="sendMes()">
             <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码" maxlength="4">
