@@ -42,6 +42,9 @@ public interface JianliMapper {
 //    查找感兴趣岗位
     public List<PostPosition> findPosts(@Param("userId")int userId,@Param("page")int page,@Param("size")int size);
     public List<PostPosition> findPostsCount(@Param("userId")int userId);
+    //    查找沟通过公司
+    public List<BackUser> communication(@Param("userId")int userId,@Param("page")int page,@Param("size")int size);
+    public List<BackUser> communicationCount(@Param("userId")int userId);
 //    删除感兴趣岗位
 //    public int postPositionDel(@Param("pPostId")int pPostId);
     public int pcDel(@Param("userId")int userId,@Param("pPostId")int pPostId);
@@ -92,4 +95,9 @@ public interface JianliMapper {
 
 //    修改用户名
     public int updateName(UserInfo userInfo);
+
+//    岗位被点击次数
+    public int clicks(@Param("pPostId")int pPostId);
+//    岗位收到简历次数
+    public int postNum(@Param("pPostId")int pPostId);
 }

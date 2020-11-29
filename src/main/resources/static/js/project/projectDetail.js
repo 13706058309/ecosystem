@@ -90,3 +90,16 @@ function mouseIn(items){
     $(items).children(".project-item-footer").children(".layui-btn").removeClass("layui-btn-primary");
     $(items).children(".project-item-footer").children(".layui-btn").addClass("layui-btn-danger");
 }
+function userExit(){
+    if (confirm("确定注销吗?")){
+        $.ajax({
+            url:path+"/userProject/userExit",
+            success:function (res) {
+                if (res=="success"){
+                    alert("退出成功！")
+                    location.href=path+"/project"
+                }
+            }
+        })
+    }
+}

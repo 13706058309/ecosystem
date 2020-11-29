@@ -91,9 +91,7 @@
 </div>
 
 <table id="userTable" lay-filter="test"></table>
-<div class="layui-input-inline" style="margin-left: 50%">
-    <button type="button" class="layui-btn layui-btn-lg layui-btn-fluid" onclick="oper()" >返回</button>
-</div>
+
 <div id="detailDiv" style="display: none;padding: 3%">
     <table class="layui-table">
         <tr><td colspan="6">简历详情</td></tr>
@@ -178,16 +176,16 @@
         var table = layui.table;
         table.render({
             elem:'#userTable',
-            height:340,
+            height:300,
             limits:[5],
             limit:5,
             url:"${pageContext.request.contextPath}/rec/findWaitResumes",
             page:true,
             id: 'testReload',
             cols:[[
-                {field:'realName',title:'姓名'},
+                {field:'realName',title:'姓名',templet:'<div>{{d.resume.realName}}</div>'},
                 {field:'isGraduate',title:'是否应届生',templet:function (d) {
-                        if(d.isGraduate==1){
+                        if(d.resume.isGraduate==1){
                             res = "是";
                         }else{
                             res = "否";
@@ -195,17 +193,17 @@
                         return res;
                     }},
                 {field:'profession',title:'应聘岗位',templet:'<div>{{d.postPosition.postName}}</div>'},
-                {field:'wrokYear',title:'工作时间',sort:true},
-                {field:'education',title:'学历',templet:'<div>{{d.education.education}}</div>'},
-                {field:'deliTime',title:'投递时间',sort:true,templet:'<div>{{d.delivery.deliTime}}</div>'},
+                {field:'wrokYear',title:'工作时间',sort:true,templet:'<div>{{d.resume.wrokYear}}</div>'},
+                {field:'education',title:'学历'},
+                {field:'deliTime',title:'投递时间',sort:true},
                 {title:'操作',toolbar:'#btns',width:300}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            var deliID = data.delivery.deliveryId;
-            var resumeID = data.resumeId;
+            var deliID = data.deliveryId;
+            var resumeID = data.resume.resumeId;
 
             if(obj.event === 'refuse'){
                 layer.confirm('是否拒绝选中的简历',{

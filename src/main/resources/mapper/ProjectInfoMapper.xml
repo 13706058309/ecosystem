@@ -18,6 +18,10 @@
                 <if test="stateId != null and stateId>0">
                     states = #{stateId},
                 </if>
+                <if test="projectUrl!=null">
+                    projectUrl=#{projectUrl}
+                </if>
+
             </set>
         where 1=1
         <if test="projectId !=null and projectId>0">
@@ -119,6 +123,7 @@
         <result property="publishTime" column="publishTime"></result>
         <result property="pOrderNum" column="pOrderNum"></result>
         <result property="trueMoney" column="trueMoney"></result>
+        <result property="projectUrl" column="projectUrl"></result>
         <association property="userInfo" javaType="com.cykj.entity.UserInfo">
             <id property="userId" column="userId"></id>
             <result property="userName" column="userName"></result>

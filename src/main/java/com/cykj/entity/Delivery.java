@@ -17,8 +17,24 @@ public class Delivery {
   private String feedBackTime;//反馈时间
   private long isRead;//是否读过
   private String deliTime;//投递时间
+  private PostPosition postPosition;
+  private Resume resume;
+  private String education;
 
-
+  @Override
+  public String toString() {
+    return "Delivery{" +
+            "deliveryId=" + deliveryId +
+            ", userId=" + userId +
+            ", pPostId=" + pPostId +
+            ", deliStandId=" + deliStandId +
+            ", feedBackInfo='" + feedBackInfo + '\'' +
+            ", feedBackTime='" + feedBackTime + '\'' +
+            ", isRead=" + isRead +
+            ", deliTime='" + deliTime + '\'' +
+            ", education='" + education + '\'' +
+            '}';
+  }
 
   public long getDeliveryId() {
     return deliveryId;
@@ -87,5 +103,29 @@ public class Delivery {
 
   public void setDeliTime(Date deliTime) {
     this.deliTime = MyUtil.getFoatTime(deliTime);
+  }
+
+  public PostPosition getPostPosition() {
+    return postPosition;
+  }
+
+  public void setPostPosition(PostPosition postPosition) {
+    this.postPosition = postPosition;
+  }
+
+  public Resume getResume() {
+    return resume;
+  }
+
+  public void setResume(Resume resume) {
+    this.resume = resume;
+  }
+
+  public String getEducation() {
+    return education;
+  }
+
+  public void setEducation(String education) {
+    this.education = education;
   }
 }

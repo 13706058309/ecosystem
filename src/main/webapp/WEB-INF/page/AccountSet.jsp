@@ -39,12 +39,13 @@
     </style>
 </head>
 <body>
+
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div id="header" style="background-color: #00c2b3;height: 80px" >
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -129,7 +130,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label"  style="width: 25%">新手机号码：</label>
                             <div class="layui-input-block">
-                                <input style="width: 65%" type="text" id="newPhone" name="title" required  lay-verify="required" placeholder="请输入新手机号码" autocomplete="off" class="layui-input">
+                                <input style="width: 65%" type="text" id="newPhone" maxlength="11"  onkeyup="this.value=this.value.replace(/\D/g,'')" name="title" required  lay-verify="required" placeholder="请输入新手机号码" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -144,7 +145,7 @@
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <input class="layui-btn" id="updatePhone" value="立即提交">
+                                <input class="layui-btn" id="updatePhone"  value="立即提交">
 <%--                                <button class="layui-btn" id="updatePhone"  >立即提交</button>--%>
                                 <button type="reset" class="layui-btn layui-btn-primary" onclick="quitPhone()">取消</button>
                             </div>
@@ -156,7 +157,7 @@
                 <form class="layui-form" action="">
                     <div >
                         <label class="layui-form-label" style="width: 22%">当前用户名：</label>
-                        <label class="layui-form-label" id="oldName">${qUser.userName}</label>
+                        <label class="layui-form-label" id="oldName" style="width: 42%">${qUser.userName}</label>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label" >新用户名：</label>
@@ -191,6 +192,7 @@
 </div>
 
 </div>
+
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
@@ -348,6 +350,8 @@
                         $('#oldPhone').text(newPhone);
                         $('#newPhone').val("");
                         $('#vCode').val("");
+                        $("#vCodeMenu").removeAttr('disabled');
+                        $('#vCodeMenu').val("获取验证码")
 
                     } else if (data == "lose") {
                         layer.msg("验证码错误")
@@ -360,6 +364,10 @@
 
         })
         $('#vCodeMenu').on('click',function () {
+            if (!newPhoneTest()){
+                layer.msg('新手机号填写错误')
+                return;
+            }
             $.ajax({
                 url: 'vCodeMenu',
                 charset:"UTF-8",
@@ -370,6 +378,7 @@
                 success: function (data) {
                     if (data == "succes") {
                         layer.msg("已发送验证码，请注意查看");
+                        $("#vCodeMenu").attr('disabled',false);
                         $('#vCodeMenu').val("已发送")
 
                     } else if (data == "lose") {
@@ -390,6 +399,8 @@
         document.getElementById("hidePhone").style.display='none';
     }
     function quitPhone() {
+        $("#vCodeMenu").removeAttr('disabled');
+        $('#vCodeMenu').val("获取验证码")
         document.getElementById("hidePhone").style.display='block';
         document.getElementById("showPhone").style.display='none';
     }
@@ -428,6 +439,11 @@
         // if (flag==false){
         //     alert("");
         // }
+        return flag;
+    }
+
+    function newPhoneTest(){
+        var flag=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/.test($("#newPhone").val());
         return flag;
     }
 

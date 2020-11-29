@@ -183,7 +183,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -305,7 +305,7 @@
                                 </div>
 
                             </div>
-                            <p class="ipt-wrap"><input type="text" id="search" name="query" ka="search-keyword" value="${search}"
+                            <p class="ipt-wrap"><input type="text" id="search" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="query" ka="search-keyword" value="${search}"
                                                        autocomplete="off" class="ipt-search" maxlength="50" placeholder="搜索职位"></p>
                         </div>
                         <input type="hidden" name="city" class="city-code" value="101230200">
@@ -576,8 +576,8 @@
 <%--                                                            <em class="vline"></em>技术总监--%>
                                                         </h3>
                                                     </div></a>
-
-                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('/springboot/rec/userChat?compID=${job.backUser.bUserId}')"
+                                                    <c:if test="${not empty qUser}">
+                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${job.backUser.bUserId}')"
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
                                                         <img class="icon-chat icon-chat-hover"
@@ -585,7 +585,7 @@
                                                              alt="">
                                                         <span>立即沟通</span>
                                                     </button>
-
+                                                    </c:if>
                                                 </div>
 
                                                 <div class="info-detail" style="top: 0px;"></div>
@@ -618,9 +618,9 @@
                                     </div>
                                     <div class="info-append clearfix">
                                         <div class="tags">
-
+                                            <c:if test="${not empty qUser}">
                                             <span class="tag-item"><a onclick="sendResume(${job.pPostId})">投递简历</a></span>
-
+                                            </c:if>
                                         </div>
                                         <div class="info-desc">${job.jobBenefits}</div>
                                     </div>
@@ -700,7 +700,9 @@
                                 </c:forEach></c:if>
                         </div>
                     </div>
+
                 </div>
+
             </div>
 
 <%--            <div class="city-wrapper">--%>
@@ -736,6 +738,22 @@
 <%--            </div>--%>
         </div>
     </div>
+
+</div>
+<div class="links links-friends">
+    <dl class="links-item">
+        <dt>友情链接：</dt>
+        <dd>
+            <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+            <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+            <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+            <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+            <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+            <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+            <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+            <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+        </dd>
+    </dl>
 </div>
 <script>
     $(document).ready(function(){

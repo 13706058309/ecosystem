@@ -1,12 +1,11 @@
 package com.cykj.controller;
 
 import com.alipay.api.AlipayApiException;
-import com.cykj.entity.Parameter;
-import com.cykj.entity.ProjectInfo;
-import com.cykj.entity.UserInfo;
-import com.cykj.entity.UserProject;
+import com.cykj.entity.*;
 import com.cykj.service.ParameterService;
+import com.cykj.service.ProjectService;
 import com.cykj.service.UserProjectService;
+import com.cykj.service.impl.ProjectServiceImpl;
 import com.cykj.util.TableInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +31,9 @@ public class UserProjectController {
     UserProjectService userProjectServiceImpl;
 
     @Resource
+    ProjectService projectServiceImpl;
+
+    @Resource
     ParameterService parameterServiceImpl;
 
     @RequestMapping("/projectOfUser")
@@ -40,7 +42,6 @@ public class UserProjectController {
         parameterCondition.put("paramType","项目订单状态");
         List<Parameter> parameters=parameterServiceImpl.findParameter(parameterCondition);
         request.setAttribute("parameters",parameters);
-
         return "project/ProjectOfUser";
     }
 
@@ -75,7 +76,7 @@ public class UserProjectController {
     }
 
     /**
-     *
+     * 查询
      * @param request
      * @param page
      * @param limit
@@ -111,6 +112,44 @@ public class UserProjectController {
         return new ObjectMapper().writeValueAsString(tableInfo);
     }
 
+    /**
+     *发布项目、生成订单
+     * @param request
+     * @param userProject
+     * @return
+     */
+    @RequestMapping("/del")
+    public @ResponseBody String delOrder(HttpServletRequest request ,UserProject userProject) throws JsonProcessingException {
+        String msg="";
+        int n=userProjectServiceImpl.updateState(userProject);
+        if (n>0){
+            msg="success";
+            System.out.println("删除成功！！！！！！");
+        }
+        return msg;
+    }
+
+
+    @RequestMapping("/updateUrl")
+    public @ResponseBody String updateUrl(HttpServletRequest request,ProjectInfo projectInfo){
+        String msg="";
+        System.out.println("2222222222222222");
+        projectInfo.setStateId(37);
+        int n=projectServiceImpl.updateState(projectInfo);
+        if (n>0){
+            msg="success";
+        }
+        return msg;
+    }
+
+    @RequestMapping("/userExit")
+    public @ResponseBody String userExit(HttpServletRequest request,ProjectInfo projectInfo){
+        UserInfo userInfo=(UserInfo) request.getSession().getAttribute("qUser");
+        if (userInfo!=null){
+            request.getSession().removeAttribute("qUser");
+        }
+        return "success";
+    }
 
 
 
@@ -140,5 +179,7 @@ public class UserProjectController {
     public @ResponseBody String refund(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException, AlipayApiException {
          return userProjectServiceImpl.refund(request,response,session);
     }
+
+
 
 }
