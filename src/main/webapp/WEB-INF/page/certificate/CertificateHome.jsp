@@ -10,12 +10,18 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>证书首页</title>
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js" type="text/javascript"></script>
     <link href="${pageContext.request.contextPath}/style/css/style.css" type="text/css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/style/css/external.min.css" type="text/css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/style/css/popup.css" type="text/css" rel="stylesheet">
+
+    <link href="${pageContext.request.contextPath}/css/vendor.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jianli.css" rel="stylesheet">
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 
     <style>
         .collection_link{
@@ -33,12 +39,43 @@
 </head>
 <body>
 
-<div id="body">
+<div id="header" style="background-color:#00c2b3;height: 80px" >
+    <div class="inner home-inner" >
+        <div class="logo" style="width: 150px;height: 70px">
 
-    <div id="container" style="width: 70%">
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px;margin-top: -20px"><span>钱程无忧</span></a>
+        </div>
+        <div class="nav" style="margin-top: 20px">
+            <ul>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                <%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+            </ul>
+        </div>
 
-        <div class="clearfix">
-            <div class="content_l">
+        <div class="user-nav" style="margin-top: 20px">
+            <ul>
+                <%--                    <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
+                <li class="nav-figure">
+                    <a >
+                        <span class="label-text">${qUser.userName}</span><img id="topImg"  src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                    </a>
+                    <div class="dropdown">
+                        <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                        <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                        <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div id="container" style="width: 60%">
                 <dl class="c_collections">
                     <dt>
                         <h1><em></em>热门证书</h1>
@@ -77,22 +114,13 @@
                         </form>
                     </dd>
                 </dl>
-            </div>
-            <div class="content_r">
-                <div class="mycenterR" id="myInfo">
-                    <h2>公告专栏</h2>
-                    <a href="collections.html">最火热的潮流</a>
-                    <br>
-                    <a target="_blank" href="subscribe.html">最棒的语言</a>
 
-                </div><!--end #myInfo-->
 
-            </div>
-        </div>
+
         <div class="clear"></div>
         <a rel="nofollow" title="回到顶部" id="backtop"></a>
     </div><!-- end #container -->
-</div><!-- end #body -->
+<!-- end #body -->
 
 <script>
     function shenqingpanduan(fileid,filename) {
