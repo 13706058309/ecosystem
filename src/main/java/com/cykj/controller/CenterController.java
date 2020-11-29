@@ -5,6 +5,7 @@ import com.cykj.entity.*;
 import com.cykj.log.Loger;
 import com.cykj.service.ResumeService;
 import com.cykj.service.impl.ResumeServiceImp;
+import com.cykj.util.MD5Utils;
 import com.cykj.utils.PhoneCodeUtil;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -300,7 +301,7 @@ public class CenterController {
         Map map=new HashMap();
         map.put("userId",userId);
         map.put("oldpwd",oldpwd);
-        map.put("newpwd",newpwd);
+        map.put("newpwd",MD5Utils.md5(newpwd));
         UserInfo userInfo=resumeService.findpwd(map);
         req.getSession().removeAttribute("qUser");
         if (null==userInfo){
