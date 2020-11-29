@@ -28,6 +28,15 @@ public interface UserProjectService {
     List<UserProject> findUserProjectByPage(Map<String,Object> condition,int page,int limit);
 
     /**
+     * 修改状态
+     * @param userProject
+     * @return
+     */
+    int updateState(UserProject userProject);
+
+
+
+    /**
      * 查询用户订单列表记录数
      * @param condition
      * @return
@@ -41,9 +50,6 @@ public interface UserProjectService {
      * @return
      */
     List<UserProject> findUserProject(UserProject userProject);
-
-
-
 
     /**
      * 处理用户付款成功后的异步回调业务代码

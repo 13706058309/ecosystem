@@ -146,9 +146,9 @@
             id: 'testReload',
             cols:[[
                 {type: 'checkbox', fixed: 'left'},
-                {field:'realName',title:'姓名'},
+                {field:'realName',title:'姓名',templet:'<div>{{d.resume.realName}}</div>'},
                 {field:'isGraduate',title:'是否应届生',templet:function (d) {
-                        if(d.isGraduate==1){
+                        if(d.resume.isGraduate==1){
                             res = "是";
                         }else{
                             res = "否";
@@ -156,17 +156,17 @@
                         return res;
                     }},
                 {field:'profession',title:'应聘岗位',templet:'<div>{{d.postPosition.postName}}</div>'},
-                {field:'wrokYear',title:'工作时间',sort:true},
-                {field:'education',title:'学历',templet:'<div>{{d.education.education}}</div>'},
-                {field:'deliTime',title:'投递时间',sort:true,templet:'<div>{{d.delivery.deliTime}}</div>'},
+                {field:'wrokYear',title:'工作时间',templet:'<div>{{d.resume.wrokYear}}</div>',sort:true},
+                {field:'education',title:'学历'},
+                {field:'deliTime',title:'投递时间',sort:true},
                 {title:'操作',toolbar:'#btns',width:250}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            var deliID = data.delivery.deliveryId;
-            var resumeID = data.resumeId;
+            var deliID = data.deliveryId;
+            var resumeID = data.resume.resumeId;
             if(obj.event === 'del'){
                 layer.confirm('是否删除选中的简历',{
                     btn:['删除','取消'],

@@ -168,6 +168,18 @@ public interface ResumeService {
     public List<PostPosition> findPosts(int userId,int page,int size);
     public List<PostPosition> findPostsCount(int userId);
 
+
+
+    /**
+     * 查找沟通过公司
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    public List<BackUser> communication(int userId,int page,int size);
+    public List<BackUser> communicationCount(int userId);
+
     /**
      * 删除感兴趣岗位
      * @param userId

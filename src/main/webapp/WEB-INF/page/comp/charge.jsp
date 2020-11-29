@@ -23,15 +23,17 @@
 <!-- main -->
 <div class="main-w3layouts wrapper">
     <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-    <div class="main-agileinfo">
-        <div class="agileits-top">
-<%--            <form method="post">--%>
 
-                <input type="submit" value="" id="command" onclick="change()">
-<%--            </form>--%>
+    <div class="main-agileinfo">
+
+        <div class="agileits-top">
+            <input class="text" type="text" name="Username" placeholder="人才币" required="" id="money" >
+            <input type="submit" value="" id="commands" onclick="changeMoney()" style="margin-bottom: 0%">
+            <input type="submit" value="" id="command" onclick="change()">
             <p id="detail">暂未开启收费</p>
         </div>
     </div>
+
     <!-- copyright -->
 <%--    <div class="w3copyright-agile">--%>
 <%--        <p>© 2019 站长素材 . All rights <a href="" title="站长素材">Reserved</a></p>--%>
@@ -60,17 +62,22 @@
         layer = layui.layer;
     })
     $(function () {
+        $("#commands").val("修改收费额度")
         $.ajax({
             url:path+"/rec/judgeDownFee",
             type:"post",
             typeData:"text",
             success:function (data) {
                 if(data=="no"){
+                    $("#money").css("display","none");
+                    $("#commands").css("display","none");
                     $("#command").val("开启收费");
                     $("#detail").text("暂未开启简历下载收费");
                 }else{
+                    $("#money").css("display","block");
+                    $("#commands").css("display","block");
                     $("#command").val("关闭收费");
-                    $("#detail").text("简历下载收费已开启，费用为"+data+"元");
+                    $("#detail").text("简历下载收费已开启，费用为"+data+"人才币");
                 }
             }
         })
@@ -90,6 +97,8 @@
                    success:function (info) {
                        if(info=='1'){
                            layer.msg('关闭成功');
+                           $("#money").css("display","none");
+                           $("#commands").css("display","none");
                            $("#command").val("开启收费");
                            $("#detail").text("暂未开启简历下载收费");
                        }else{
@@ -112,13 +121,47 @@
                            layer.msg("网络繁忙，关闭失败");
                        }else{
                            layer.msg('开启成功');
+                           $("#money").css("display","block");
+                           $("#commands").css("display","block");
                            $("#command").val("关闭收费");
-                           $("#detail").text("简历下载收费已开启，费用为"+info+"元");
+                           $("#detail").text("简历下载收费已开启，费用为"+info+"人才币");
                        }
                    },
                })
            })
        }
+    }
+
+    function changeMoney() {
+        var money = $("#money").val();
+        var pattern = /^\+?[1-9][0-9]*$/;
+        if(!pattern.test(money)){
+            layer.msg("请输入正整数")
+            return false;
+        }
+        layer.confirm('是否确认修改收费额度',{
+            btn:['确定','取消'],
+            time:20000,
+        },function (index) {
+            $.ajax({
+                url:path+"/rec/changeFee",
+                type:"post",
+                typeData:"text",
+                data:"money="+money,
+                success:function (info) {
+                    if(info=='failed'){
+                        layer.msg("网络繁忙，修改失败");
+                    }else{
+                        layer.msg('修改成功');
+                        $("#money").val("");
+                        $("#detail").text("简历下载收费已开启，费用为"+money+"人才币");
+                    }
+                },
+            })
+        })
+
+
+
     }
 </script>
 </html>

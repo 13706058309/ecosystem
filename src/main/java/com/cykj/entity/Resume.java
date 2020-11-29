@@ -37,6 +37,7 @@ public class Resume {
   private List<EducationalBackground> educationalBackgrounds;
   private List<WorkExperience> workExperiences;
   private List<ProjectExperience> projectExperiences;
+  private Parameter parameter;
 
   public Resume() {
   }
@@ -276,6 +277,13 @@ public class Resume {
     this.postPosition = postPosition;
   }
 
+  public Parameter getParameter() {
+    return parameter;
+  }
+
+  public void setParameter(Parameter parameter) {
+    this.parameter = parameter;
+  }
 
   @Override
   public String toString() {

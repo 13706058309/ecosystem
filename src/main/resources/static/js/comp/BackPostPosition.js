@@ -246,6 +246,8 @@ function sumb() {
                 layer.alert('发布成功!',{icon: 0,offset: '20%'});
             }else if(info=='3'){
                 layer.alert('请完善公司信息再发布岗位!',{icon: 0,offset: '20%'});
+            }else if(info=='5'){
+                layer.alert('岗位名与在线岗位名重复，请修改岗位名后上线!',{icon: 0,offset: '20%'});
             }
         },
     })

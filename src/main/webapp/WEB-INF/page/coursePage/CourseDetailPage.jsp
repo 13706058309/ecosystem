@@ -185,7 +185,7 @@
                 var tip="";
                 if (data=="cancelSuccess"){
                     tip = "取消收藏成功";
-                    $('#collectIcon').attr("onclick","cancelCollectCourse("+courseId+","+userId+")");
+                    $('#collectIcon').attr("onclick","collectCourse("+courseId+","+userId+")");
                     $("img[class='imging']").attr("src",basePath+"/style/images/courseImg/noCollect.png");
                     $('#productName').text("收藏课程");
                 }else {

@@ -36,25 +36,7 @@ public class ResumeServiceImp implements ResumeService {
         return n;
     }
 
-//    /**
-//     * @param workExperience
-//     * @return
-//     */
-//    @Override
-//    public int workInsert(WorkExperience workExperience) {
-//        int n=jianliMapper.workInsert(workExperience);
-//        return n;
-//    }
-//    /**
-//     * @param weId
-//     * @param resumeId
-//     * @return
-//     */
-//    @Override
-//    public int rwInsert(int weId, int resumeId) {
-//        int n=jianliMapper.rwInsert(weId,resumeId);
-//        return n;
-//    }
+
 
     /**
      * @param workExperience
@@ -74,26 +56,6 @@ public class ResumeServiceImp implements ResumeService {
         return false;
     }
 
-//    /**
-//     * @param projectExperience
-//     * @return
-//     */
-//    @Override
-//    public int projectInsert(ProjectExperience projectExperience) {
-//        int n=jianliMapper.projectInsert(projectExperience);
-//        return n;
-//    }
-//
-//    /**
-//     * @param peId
-//     * @param resumeId
-//     * @return
-//     */
-//    @Override
-//    public int rpInsert(int peId, int resumeId) {
-//        int n=jianliMapper.rpInsert(peId,resumeId);
-//        return n;
-//    }
 
     /**
      * @param projectExperience
@@ -112,30 +74,6 @@ public class ResumeServiceImp implements ResumeService {
         return false;
     }
 
-//    /**
-//     * 背景表数据添加
-//     *
-//     * @param educationalBackground
-//     * @return
-//     */
-//    @Override
-//    public int educationInsert(EducationalBackground educationalBackground) {
-//        int n=jianliMapper.educationInsert(educationalBackground);
-//        return n;
-//    }
-//
-//    /**
-//     * 背景关系表数据添加
-//     *
-//     * @param ebId
-//     * @param resumeId
-//     * @return
-//     */
-//    @Override
-//    public int reInsert(int ebId, int resumeId) {
-//        int n=jianliMapper.reInsert(ebId,resumeId);
-//        return n;
-//    }
 
     /**
      * 背景事务整合
@@ -282,6 +220,24 @@ public class ResumeServiceImp implements ResumeService {
     }
 
     /**
+     * 查找沟通过公司
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public List<BackUser> communication(int userId, int page, int size) {
+        return jianliMapper.communication(userId,page,size);
+    }
+
+    @Override
+    public List<BackUser> communicationCount(int userId) {
+        return jianliMapper.communicationCount(userId);
+    }
+
+    /**
      * 删除感兴趣岗位
      *
      * @param userId
@@ -369,6 +325,7 @@ public class ResumeServiceImp implements ResumeService {
      */
     @Override
     public PostPosition findPost(int pPostID) {
+        int n=jianliMapper.clicks(pPostID);
         return jianliMapper.findPost(pPostID);
     }
 
@@ -425,6 +382,7 @@ public class ResumeServiceImp implements ResumeService {
      */
     @Override
     public int sendResume(int userId, int pPostId) {
+        int n=jianliMapper.postNum(pPostId);
         return jianliMapper.sendResume(userId,pPostId);
     }
 

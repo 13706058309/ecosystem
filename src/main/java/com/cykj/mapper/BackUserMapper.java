@@ -45,6 +45,8 @@ public interface BackUserMapper {
     BackUser findByAccount(@Param("account") String account);
     //查找刚插入数据的ID
     int findID();
+    //更新企业用户积分
+    int updateBalance(@Param("balance") long balance, @Param("compID") long compID);
 
 
 }

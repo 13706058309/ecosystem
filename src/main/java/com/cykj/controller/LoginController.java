@@ -2,6 +2,7 @@ package com.cykj.controller;
 
 import com.cykj.entity.BackUser;
 import com.cykj.entity.Menu;
+import com.cykj.entity.Resume;
 import com.cykj.entity.UserInfo;
 import com.cykj.log.Loger;
 import com.cykj.service.LoginService;
@@ -320,13 +321,15 @@ public class LoginController {
     @RequestMapping(value = {"/regiest"})
     public @ResponseBody
     String regiest(UserInfo userInfo) {
+        Resume resume=new Resume();
+        resume.setRealName(userInfo.getUserName());
         System.out.println("执行注册!");
 
         String account = userInfo.getAccount();
 //        启用MD5解开即可
 //        userInfo.setPwd(MD5Utils.md5(userInfo.getPwd()));
         if (loginServiceImpl.isRepeat(account)) {
-            int i = loginServiceImpl.register(userInfo);
+            int i = loginServiceImpl.register(userInfo,resume);
             if (i > 0) {
                 return "regsuccess";
             } else {

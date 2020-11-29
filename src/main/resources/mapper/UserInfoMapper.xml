@@ -23,6 +23,13 @@
         insert into userInfo(userName,account,pwd,telephone,address) values (#{userName},#{account},
         #{pwd},#{telephone},#{address})
     </insert>
+    <!--    查找最新添加的id-->
+    <select id="insertid" resultType="java.lang.Integer">
+        select last_insert_id()
+    </select>
+    <insert id="resumeInsert" parameterType="com.cykj.entity.Resume">
+        insert into resume(userId,realName) values (#{userId},#{realName})
+    </insert>
 
 <resultMap id="userRes" type="com.cykj.entity.UserInfo">
     <id property="userId" column="userId"></id>
@@ -61,6 +68,7 @@
         <result property="logo" column="logo"></result>
         <result property="roleId" column="roleId"></result>
         <result property="stateId" column="stateId"></result>
+        <result property="balance" column="balance"></result>
         <association property="states"  javaType="com.cykj.entity.Parameter">
             <id property="paramId" column="paramId"></id>
             <result property="paramName" column="paramName"></result>

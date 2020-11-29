@@ -34,6 +34,8 @@ public class PostPosition {
   private List<Industry> industryList;
   private Delivery delivery;
   private Parameter parameter;
+  private long clicks;
+  private long postNum;
 
 
   @Override
@@ -287,7 +289,19 @@ public class PostPosition {
     this.backUser = backUser;
   }
 
-  public void setReleaseTime(String releaseTime) {
-    this.releaseTime = releaseTime;
+  public long getClicks() {
+    return clicks;
+  }
+
+  public void setClicks(long clicks) {
+    this.clicks = clicks;
+  }
+
+  public long getPostNum() {
+    return postNum;
+  }
+
+  public void setPostNum(long postNum) {
+    this.postNum = postNum;
   }
 }
