@@ -37,10 +37,10 @@ public interface TalentService {
 
 
 
-    boolean findCompAndtalent(int companyID, char c);
+    boolean findCompAndtalent(int companyID, String c);
 
 
-    int addCompAndtalent(int companyID, char c);
+    int addCompAndtalent(int companyID, String c);
 
 
     String changeSchoolInfo(Map<String, Object> map);
@@ -75,4 +75,7 @@ public interface TalentService {
 
 
     int addIndustry(String industryName);
+
+
+    List<BackUserNum> all();
 }
