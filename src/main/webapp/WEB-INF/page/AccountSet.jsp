@@ -45,7 +45,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -157,7 +157,7 @@
                 <form class="layui-form" action="">
                     <div >
                         <label class="layui-form-label" style="width: 22%">当前用户名：</label>
-                        <label class="layui-form-label" id="oldName">${qUser.userName}</label>
+                        <label class="layui-form-label" id="oldName" style="width: 42%">${qUser.userName}</label>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label" >新用户名：</label>

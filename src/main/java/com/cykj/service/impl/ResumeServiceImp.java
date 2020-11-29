@@ -383,6 +383,9 @@ public class ResumeServiceImp implements ResumeService {
     @Override
     public int sendResume(int userId, int pPostId) {
         int n=jianliMapper.postNum(pPostId);
+        for (int i=0;i<5;i++){
+            n=jianliMapper.clicks(pPostId);
+        }
         return jianliMapper.sendResume(userId,pPostId);
     }
 

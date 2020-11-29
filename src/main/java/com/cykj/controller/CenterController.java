@@ -2,6 +2,7 @@ package com.cykj.controller;
 
 
 import com.cykj.entity.*;
+import com.cykj.log.Loger;
 import com.cykj.service.ResumeService;
 import com.cykj.service.impl.ResumeServiceImp;
 import com.cykj.utils.PhoneCodeUtil;
@@ -264,6 +265,7 @@ public class CenterController {
 
 //    取消岗位收藏
     @RequestMapping("/postDel")
+//    @Loger(operationType = "取消岗位收藏",operationName = "取消岗位收藏")
     public @ResponseBody String postDel(int pPostId){
 //        System.out.println(new Gson().toJson(resume));
 
@@ -276,6 +278,7 @@ public class CenterController {
     }
 //    添加岗位收藏
     @RequestMapping("/postInsert")
+//    @Loger(operationType = "添加岗位收藏",operationName = "添加岗位收藏")
     public @ResponseBody String postInsert(int pPostId){
 //        System.out.println(new Gson().toJson(resume));
 
@@ -289,6 +292,7 @@ public class CenterController {
 
 //    修改密码
     @RequestMapping("/savePwd")
+    //    @Loger(operationType = "修改密码",operationName = "修改密码")
     public @ResponseBody String savePwd(HttpServletRequest req,String oldpwd,String newpwd){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -314,6 +318,7 @@ public class CenterController {
 
 //    隐私设置
     @RequestMapping("/saveShow")
+    //    @Loger(operationType = "隐私设置",operationName = "隐私设置")
     public @ResponseBody String saveShow(HttpServletRequest req,String isOpen){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -366,6 +371,7 @@ public class CenterController {
 
 //    简历信息修改
     @RequestMapping("/userInfoUpdate")
+    //    @Loger(operationType = "简历信息修改",operationName = "简历信息修改")
     public @ResponseBody String userInfoUpdate(HttpServletRequest req,Resume resume,String education,String time){
 //        System.out.println(new Gson().toJson(resume));
 //        String time=new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").format(updateTime);
@@ -389,6 +395,7 @@ public class CenterController {
 
 //    工作经历
     @RequestMapping("/historyCommit")
+    //    @Loger(operationType = "工作经历添加",operationName = "工作经历添加")
     public @ResponseBody String historyCommit(HttpServletRequest req,WorkExperience workExperience,String time){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -405,6 +412,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/historySave")
+    //    @Loger(operationType = "工作经历修改",operationName = "工作经历修改")
     public @ResponseBody String historySave(HttpServletRequest req,WorkExperience workExperience,String time){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -421,6 +429,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/historyDelete")
+    //    @Loger(operationType = "工作经历删除",operationName = "工作经历删除")
     public @ResponseBody String historyDelect(HttpServletRequest req,int weId,String time){
         Resume resume=new Resume();
         req.setAttribute("updateTime",time);
@@ -437,6 +446,7 @@ public class CenterController {
 
 //    项目经历
     @RequestMapping("/projectCommit")
+    //    @Loger(operationType = "项目经历添加",operationName = "项目经历添加")
     public @ResponseBody String projectCommit(HttpServletRequest req,ProjectExperience projectExperience,String time){
         Resume resume=new Resume();
         req.setAttribute("updateTime",time);
@@ -452,6 +462,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/projectSave")
+    //    @Loger(operationType = "项目经历修改",operationName = "项目经历修改")
     public @ResponseBody String projectSave(HttpServletRequest req,ProjectExperience projectExperience,String time){
         Resume resume=new Resume();
         req.setAttribute("updateTime",time);
@@ -466,6 +477,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/projectDelete")
+    //    @Loger(operationType = "项目经历删除",operationName = "项目经历删除")
     public @ResponseBody String projectDelect(int peId,String time){
         Resume resume=new Resume();
         resume.setUpdateTime(time);
@@ -482,6 +494,7 @@ public class CenterController {
 
 //    教育背景
     @RequestMapping("/educationCommit")
+    //    @Loger(operationType = "添加经历修改",operationName = "添加经历修改")
     public @ResponseBody String educationCommit(EducationalBackground educationalBackground,String time){
 //        System.out.println(new Gson().toJson(educationalBackground));
         Resume resume=new Resume();
@@ -495,6 +508,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/educationSave")
+    //    @Loger(operationType = "教育背景修改",operationName = "教育背景修改")
     public @ResponseBody String educationSave(EducationalBackground educationalBackground,HttpServletRequest req,String time){
 //        System.out.println(new Gson().toJson(educationalBackground));
         Resume resume=new Resume();
@@ -508,6 +522,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/educationDelete")
+    //    @Loger(operationType = "教育背景删除",operationName = "教育背景删除")
     public @ResponseBody String educationDelect(int ebId,String time){
         System.out.println("edid="+ebId);
 
@@ -522,6 +537,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/expectWorkUpdate")
+    //    @Loger(operationType = "期望工作修改",operationName = "期望工作修改")
     public @ResponseBody String expectWorkUpdate(Resume resume,HttpServletRequest req,String time){
 //        Resume resume=new Resume();
 
@@ -536,6 +552,7 @@ public class CenterController {
     }
 
     @RequestMapping("/selfEvaUpdate")
+    //    @Loger(operationType = "个人优势修改",operationName = "个人优势修改")
     public @ResponseBody String selfEvaUpdate(Resume resume,HttpServletRequest req,String time){
 //        Resume resume=new Resume();
 
@@ -644,11 +661,7 @@ public class CenterController {
         releaseTime="发布时间";
         search="搜索职位";
         position="职位类型";
-//        if (null==search||search.equals("".trim())){
-//
-//        }else {
-//            map.put("search","%"+search+"%");
-//        }
+
 
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -1125,6 +1138,7 @@ public class CenterController {
     }
 //    投递简历
     @RequestMapping("/sendResume")
+    //    @Loger(operationType = "投递简历",operationName = "投递简历")
     public @ResponseBody String sendResume(HttpServletRequest req,int pPostId){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -1147,6 +1161,7 @@ public class CenterController {
 
 
     @RequestMapping("/photoUpdate")
+    //    @Loger(operationType = "头像修改简历",operationName = "头像修改简历")
     public @ResponseBody String photoUpdate(MultipartFile imgFile, HttpServletRequest req) throws Exception {
 
 //        创建文件夹路径
@@ -1198,6 +1213,7 @@ public class CenterController {
         if (resumeService.findTtelephone(newPhone).size()!=0){
             return "lose";
         }
+        String msg=PhoneCodeUtil.sendCode(newPhone,code);
         req.getSession().setAttribute("vCodeMenu",code);
         req.getSession().setAttribute("newPhone",newPhone);
         System.out.println(code+"???????????????????"+newPhone);
@@ -1205,6 +1221,7 @@ public class CenterController {
     }
 
     @RequestMapping("/updatePhone")
+    //    @Loger(operationType = "修改手机号",operationName = "修改手机号")
     public @ResponseBody String updatePhone(HttpServletRequest req,String vCode){
         String newPhone= (String) req.getSession().getAttribute("newPhone");
         System.out.println(vCode);
@@ -1225,6 +1242,7 @@ public class CenterController {
 
 
     @RequestMapping("/saveName")
+    //    @Loger(operationType = "修改用户名",operationName = "修改用户名")
     public @ResponseBody String saveName(HttpServletRequest req,String newName){
         UserInfo userInfo=new UserInfo();
         userInfo.setUserId(userId);

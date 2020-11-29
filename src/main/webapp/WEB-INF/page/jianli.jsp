@@ -54,7 +54,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -447,7 +447,7 @@
                                                     <!---->
                                                     <div class="info-text">
                                                         <h4 class="name">公司：<label id="companyName9">${works.companyName}</label></h4><span
-                                                            class="gray period">项目时间：<label id="beginTime9">${works.beginTime}</label>--<label id="endTime9">${works.endTime}</label></span>
+                                                            class="gray period">工作时间：<label id="beginTime9">${works.beginTime}</label>--<label id="endTime9">${works.endTime}</label></span>
                                                     </div>
                                                     <h4><span class="prev-line">行业：<label id="companyTrade9">${works.companyTrade}</label></span><span
                                                             class="prev-line">担任角色：<label id="companyPost9"> ${works.companyPost}</label></span></h4>
@@ -1341,7 +1341,7 @@
         if ($('#companyName').val().trim()==""||$('#companyTrade').val().trim()==""||$('#performance').val().trim()==""||$('#duties').val().trim()==""||$('#beginTime').val().trim()==""||$('#endTime').val().trim()==""||$('#companyPost').val().trim()==""){
             layer.msg("内容不能为空")
         }else {
-            if (new Date($('#beginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date().format("yyyy-MM-dd  hh:mm:ss")){
+            if (new Date($('#beginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
                 $('#weId').val(0);
                 var  workInsert=new FormData(document.getElementById("workInsert"));
                 var information=new FormData(document.getElementById("userInfoUpdate"))
@@ -1386,7 +1386,7 @@
         if ($('#companyName').val().trim()==""||$('#companyTrade').val().trim()==""||$('#performance').val().trim()==""||$('#duties').val().trim()==""||$('#beginTime').val().trim()==""||$('#endTime').val().trim()==""||$('#companyPost').val().trim()==""){
             layer.msg("内容不能为空")
         }else {
-            if (new Date($('#beginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date().format("yyyy-MM-dd  hh:mm:ss")){
+            if (new Date($('#beginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#endTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
                 var  workInsert=new FormData(document.getElementById("workInsert"));
                 var information=new FormData(document.getElementById("userInfoUpdate"))
                 var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
@@ -1512,7 +1512,7 @@
         if ($('#proName').val().trim()==""||$('#proPost').val().trim()==""||$('#proBeginTime').val().trim()==""||$('#proEndTime').val().trim()==""||$('#proDescription').val().trim()==""||$('#proPerformance').val().trim()==""){
             layer.msg("内容不能为空")
         }else {
-            if (new Date($('#proBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date().format("yyyy-MM-dd  hh:mm:ss")){
+            if (new Date($('#proBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
                 var  projectInsert=new FormData(document.getElementById("projectInsert"));
                 console.log(workInsert);
                 var information=new FormData(document.getElementById("userInfoUpdate"))
@@ -1560,7 +1560,7 @@
         if ($('#proName').val().trim()==""||$('#proPost').val().trim()==""||$('#proBeginTime').val().trim()==""||$('#proEndTime').val().trim()==""||$('#proDescription').val().trim()==""||$('#proPerformance').val().trim()==""){
             layer.msg("内容不能为空")
         }else {
-            if (new Date($('#proBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date().format("yyyy-MM-dd  hh:mm:ss")){
+            if (new Date($('#proBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#proEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
                 $('#peId').val(0);
                 var  projectInsert=new FormData(document.getElementById("projectInsert"));
                 var information=new FormData(document.getElementById("userInfoUpdate"))
@@ -1675,7 +1675,7 @@
         if ($('#schEndTime').val().trim()==""||$('#schExperience').val().trim()==""||$('#schBeginTime').val().trim()==""||$('#ebEducation').val().trim()==""||$('#major').val().trim()==""||$('#ebSchool').val().trim()==""){
             layer.msg("内容不能为空")
         }else {
-            if (new Date($('#schBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date().format("yyyy-MM-dd  hh:mm:ss")){
+            if (new Date($('#schBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
                 var  educationInsert=new FormData(document.getElementById("educationInsert"));
                 var information=new FormData(document.getElementById("userInfoUpdate"))
                 var time=new Date().format("yyyy-MM-dd  hh:mm:ss");
@@ -1725,7 +1725,7 @@
         if ($('#schEndTime').val().trim()==""||$('#schExperience').val().trim()==""||$('#schBeginTime').val().trim()==""||$('#ebEducation').val().trim()==""||$('#major').val().trim()==""||$('#ebSchool').val().trim()==""){
             layer.msg("内容不能为空")
         }else {
-            if (new Date($('#schBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date().format("yyyy-MM-dd  hh:mm:ss")){
+            if (new Date($('#schBeginTime').val()).format("yyyy-MM-dd  hh:mm:ss")<new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")&&new Date($('#schEndTime').val()).format("yyyy-MM-dd  hh:mm:ss")<=new Date().format("yyyy-MM-dd  hh:mm:ss")){
                 $('#ebId').val(0);
                 console.log($('#ebId'))
                 var information=new FormData(document.getElementById("userInfoUpdate"))
