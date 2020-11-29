@@ -114,7 +114,7 @@
                         <li class="cate-name" ><a id="fieldAll" class="cate-name-select" href="javascript:void(0);" onclick="chooseField(this,null)">全部</a></li>
                         <c:if test="${not empty parameterList}">
                             <c:forEach items="${parameterList}" var="parameter">
-                                <li class="cate-name"><a href="javascript:void(0);" onclick="chooseField(this,${parameter.paramId})">${parameter.paramName}</a></li>
+                                <li class="cate-name "><a href="javascript:void(0);" onclick="chooseField(this,${parameter.paramId})">${parameter.paramName}</a></li>
                             </c:forEach>
                         </c:if>
                     </ul>

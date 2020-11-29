@@ -127,12 +127,13 @@ function findProjectOrder(curr,limit){
 
                     if (project.states.paramName==='待付款'){
                         $("#caoZuo"+project.id).append(
+                            "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
+                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                        </div>");
+                        $("#caoZuo"+project.id).append(
                     "                       <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                     "                            <a class=\"layui-btn layui-btn-xs layui-btn-danger\" style=\"width: 100px\" onclick=\"payMoney("+project.orderNum+","+project.payMoney+")\">立即付款</a>\n" +
                     "                                </div>\n" +
-                    "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                    "                            <a >查看详情</a>\n" +
-                    "                        </div>\n" +
                     "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                     "                            <a onclick=\"delOrder('"+project.id+"')\"> 删除订单</a>\n" +
                     "                        </div>\n");
@@ -140,8 +141,9 @@ function findProjectOrder(curr,limit){
                     if (project.states.paramName==='已申请'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a >查看详情</a>\n" +
-                            "                        </div>\n" +
+                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                        </div>");
+                        $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                             "                            <a onclick='abandonProject("+project.orderNum+","+project.payMoney+")'> 放弃申请</a>\n" +
                             "                        </div>\n");
@@ -150,11 +152,8 @@ function findProjectOrder(curr,limit){
                     if (project.states.paramName==='申请成功'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a >查看详情</a>\n" +
-                            "                        </div>\n");
-                        // $("#caoZuo"+project.id).append( "                       <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                        //     "                            <a class=\"layui-btn layui-btn-xs layui-btn-danger\" style=\"width: 100px\">上传进度</a>\n" +
-                        //     "                                </div>\n");
+                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                        </div>");
                         $("#caoZuo"+project.id).append(" <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                             "                            <a onclick='uploadProject("+project.projectInfo.projectId+")'> 上传项目</a>\n" +
                             "                        </div>\n");
@@ -162,25 +161,29 @@ function findProjectOrder(curr,limit){
                     if (project.states.paramName==='申请失败'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a >查看详情</a>\n" +
+                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
                     }
                     if (project.states.paramName==='已完成'){
                         $("#caoZuo"+project.id).append(
                         "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                        "                            <a >查看详情</a>\n" +
+                        "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                         "                        </div>");
                     }
                     if (project.states.paramName==='已终止'){
                         $("#caoZuo"+project.id).append(
-                        "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                        "                            <a >查看详情</a>\n" +
-                        "                        </div>");
+                            "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
+                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                        </div>");
                     }
                 }
             }
         }
     })
+}
+
+function xiangQing(projectId) {
+    location.href=path+"/project/projectDetail/?projectId="+projectId;
 }
 
 function updateProjectFile(){
@@ -299,7 +302,7 @@ function abandonProject(orderNum,payMoney) {
                 dataType: "text",
                 success: function (data) {
                     if (data.toUpperCase() == "SUCCESS") {
-                        layer.confirm("放弃成功,保证金已退还到您的账户!", function () {
+                        layer.confirm("放弃成功,保证金将在1~3个工作日内退还到您的账户!", function () {
                             location.href = path + "/userProject/projectOfUser";
                         }, function () {
                             location.href = path + "/userProject/projectOfUser";
