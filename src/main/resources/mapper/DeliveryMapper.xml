@@ -119,4 +119,100 @@
                 </if>
 
         </select>
+
+
+        <select id="findScreeResume" parameterType="java.util.Map" resultMap="results">
+                select r.*,e.education,d.deliTime,d.deliveryId,p.postName from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+                where p.companyID = #{compID} and deliStandID = #{standID}
+
+                <if test="beginTime!=null">
+                        and deliTime >= #{beginTime}
+                </if>
+
+                <if test="endTime!=null">
+                        and deliTime &lt;= #{endTime}
+                </if>
+
+                <if test="postName!=null">
+                        and p.postName like #{postName}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId!=null">
+                        and ( wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId==null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear})
+                </if>
+
+                <if test="isGraduate==null and wrokYear==null and educationId!=null">
+                        and e.educationID &lt;= #{educationId}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId==null">
+                        and  isGraduate = #{isGraduate}
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId==null">
+                        and  wrokYear &lt;= #{wrokYear}
+                </if>
+
+
+                order by deliTime desc limit #{offset}, #{limit}
+
+        </select>
+
+        <select id="findScreeResumeNum" parameterType="java.util.Map" resultType="int">
+                select count(*) from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+                where p.companyID = #{compID} and deliStandID = #{standID}
+
+                <if test="beginTime!=null">
+                        and deliTime >= #{beginTime}
+                </if>
+
+                <if test="endTime!=null">
+                        and deliTime &lt;= #{endTime}
+                </if>
+
+                <if test="postName!=null">
+                        and p.postName like #{postName}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId!=null">
+                        and ( wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId==null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear})
+                </if>
+
+                <if test="isGraduate==null and wrokYear==null and educationId!=null">
+                        and e.educationID &lt;= #{educationId}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId==null">
+                        and  isGraduate = #{isGraduate}
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId==null">
+                        and  wrokYear &lt;= #{wrokYear}
+                </if>
+
+        </select>
 </mapper>

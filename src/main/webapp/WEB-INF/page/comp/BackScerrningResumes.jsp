@@ -76,10 +76,10 @@
         <div class="layui-input-inline">
             <select class="layui-input" id="wrokYear">
                 <option value="0">不限</option>
-                <option value="1">1年以上</option>
-                <option value="3">3年以上</option>
-                <option value="5">5年以上</option>
-                <option value="10">10年以上</option>
+                <option value="1">1年及以下</option>
+                <option value="3">3年及以下</option>
+                <option value="5">5年及以下</option>
+                <option value="10">10年以下</option>
             </select>
         </div>
 

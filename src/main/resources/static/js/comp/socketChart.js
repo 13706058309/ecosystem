@@ -109,7 +109,7 @@ $('.emjon li').on('click',function(){
     var str="";
     str+='<li>'+
         '<div class="nesHead"><img src="'+ctx+'/uploadLogo'+photo+'"/></div>'+
-        '<div class="news"><img class="jiao" src="'+ctx+'/chat/img/you.jpg"><img class="Expr" src="'+imgSrc+'"></div>'+
+        '<div class="news"><img class="jiao" src="'+ctx+'/chat/img/you.jpg"><img class="Expr" src="'+imgSrc+'" style="width: 100%;height: 100%"></div>'+
         '</li>';
     $('.newsList').append(str);
     $('.emjon').hide();

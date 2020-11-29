@@ -19,4 +19,7 @@ public interface DeliveryMapper {
 
     List<Delivery> findAllResume(Map<String,Object> map);
     int findAllResumeNum(Map<String,Object> map);
+
+    List<Delivery> findScreeResume(Map<String,Object> map);
+    int findScreeResumeNum(Map<String,Object> map);
 }
