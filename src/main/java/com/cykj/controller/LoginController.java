@@ -41,8 +41,6 @@ public class LoginController {
     }
 
 
-
-
     //前端登录的动作
     @RequestMapping(value = {"/log"})
     @Loger(operationName = "执行前端用户登录")

@@ -52,69 +52,116 @@
     <div class="form">
         <input type="hidden" value="${pageContext.request.contextPath}" id="path" />
         <form class="login-form">
-<%--    只能输入中文--%>
-            <input type="text" name="userName"  id="username" placeholder="请输入您的姓名" maxlength="4" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')">
-<%--    只能输入数字--%>
-            <input type="text" name="account" id="account" placeholder="请输入您的账号" onkeyup="this.value=this.value.replace(/\D/g,'')">
+            <input type="text" name="userName"  id="username" placeholder="请输入您的姓名" maxlength="4">
+            <input type="text" name="account" id="account" placeholder="请输入您的账号" maxlength="12">
             <input type="password" name="pwd" id="pwd" placeholder="请输入您的密码" maxlength="12">
             <input type="password" name="pwd1"  id="pwd1" placeholder="请确认您的密码" maxlength="12">
-<%--只能输入十一位的手机--%>
-            <input type="text" name="telephone"  id="telephone" placeholder="请输入您的手机" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')">
-<%--    只能输入中文--%>
-            <input type="text" name="address"  id="address" placeholder="请输入您的地址" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')">
+            <input type="text" name="telephone"  id="telephone" placeholder="请输入您的手机" maxlength="11" >
+            <input type="button" name="mesCode" id="mesCode" value="点击获取验证码" onclick="sendMes()">
+            <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码" maxlength="4">
+            <input type="text" name="address"  id="address" placeholder="请输入您的地址" >
 <%--            <input type="button" value="是否为应届生" onclick="isStu()">--%>
             <a onclick="ajax_reg()"><input type="button" value="提交"></a>
-    <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a>或者<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
     </div>
 </div>
 <script>
 
-    // $(function () {
-    //     //用户名限制必须有汉字
-    //     $("#username").blur(function () {
-    //         var pattern = /[\u4e00-\u9fa5]{2,6}$/;
-    //         if(!pattern.test($(this).val())){
-    //             alert("必须是汉字且2个字以上，最多6位");
-    //             $(this).val("");
-    //         }
-    //     })
-    //     //账号不能包含特殊符号和汉字
-    //     $("#account").blur(function () {
-    //         var pattern = /^[A-z_]\w{5,13}$/;
-    //         if(!pattern.test($(this).val())){
-    //             alert("账号首位要字母只能由字母数字_组成，至少6位，最多14位");
-    //             $(this).val("");
-    //         }
-    //     })
-    //     //密码只能有字母，数字，下划线组成
-    //     $("#pwd").blur(function () {
-    //         var pattern = /\w{6,14}$/;
-    //         if(!pattern.test($(this).val())){
-    //             alert("密码只能由字母数字_组成,且至少6位，最多14位");
-    //             $(this).val("");
-    //         }
-    //     })
-    //     //手机号验证方法
-    //     $("#telephone").blur(function () {
-    //         var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
-    //         if(!pattern.test($(this).val())){
-    //             alert("请输入正确手机号");
-    //             $(this).val("");
-    //         }
-    //     })
-    //
-    //     //地址限制必须有汉字
-    //     $("#address").blur(function () {
-    //         var pattern = /[\u4e00-\u9fa5]{6,12}$/;
-    //         if(!pattern.test($(this).val())){
-    //             alert("必须是汉字且6字以上，最多12位");
-    //             $(this).val("");
-    //         }
-    //     })
-    //
-    // })
-    //
+    $(function () {
+        //用户名限制必须有汉字
+        $("#username").blur(function () {
+            var pattern = /[\u4e00-\u9fa5]{2,6}$/;
+            if(!pattern.test($(this).val())){
+                alert("必须是汉字且2个字以上，最多6位");
+                $(this).val("");
+            }
+        })
+        //账号不能包含特殊符号和汉字
+        $("#account").blur(function () {
+            var pattern = /^[A-z_]\w{5,13}$/;
+            if(!pattern.test($(this).val())){
+                alert("账号首位要字母只能由字母数字_组成，至少6位，最多14位");
+                $(this).val("");
+            }
+        })
+        // //密码只能有字母，数字，下划线组成
+        // $("#pwd").blur(function () {
+        //     var pattern = /\w{6,14}$/;
+        //     if(!pattern.test($(this).val())){
+        //         alert("密码只能由字母数字_组成,且至少6位，最多14位");
+        //         $(this).val("");
+        //     }
+        // })
+
+        //手机号验证方法
+        $("#telephone").blur(function () {
+            var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+            if(!pattern.test($(this).val())){
+                alert("请输入正确手机号");
+                $(this).val("");
+            }
+        })
+
+        //地址限制必须有汉字
+        $("#address").blur(function () {
+            var pattern = /[\u4e00-\u9fa5]{6,12}$/;
+            if(!pattern.test($(this).val())){
+                alert("必须是汉字且6字以上，最多12位");
+                $(this).val("");
+            }
+        })
+
+    })
+
+    //获取短信
+    function sendMes() {
+        var phone = $("#telephone").val();
+        var pattern = /0?(13|14|15|18|17)[0-9]{9}/;
+        if (!pattern.test(phone)) {
+            alert("请输入正确手机号");
+        } else {
+            $.ajax({
+                url: path + "/golog/aliSend",
+                type: "post",
+                data: "phone=" + phone,
+                dataType: 'text',
+                success:function(data){
+                    if(data=='1'){
+                        layer.msg("发送成功");
+                        $("#codeBtn").attr("disabled", "true");
+                        $("#codeBtn").css("background-color", "grey");
+                        $("#codeBtn").val( curCount + "秒");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }else if(data=='2'){
+                        layer.msg("手机号错误，该手机未注册过");
+                    }else{
+                        layer.msg("发送失败，请稍后再发");
+                    }
+                },
+                error:function(){
+                    layer.alert('请求超时或系统出错!');
+                }
+            });
+
+        }
+    }
+
+    function SetRemainTime() {
+        if (curCount == 0) {
+            curCount=60;
+            window.clearInterval(InterValObj);//停止计时器
+            $("#codeBtn").removeAttr("disabled");//启用按钮
+            $("#codeBtn").css("background-color", "#0D9572");
+            $("#codeBtn").val("重新发送");
+        }
+        else {
+            curCount--;
+            $("#codeBtn").val(curCount +"秒");
+        }
+    }
+
+
     // ajax注册
     function ajax_reg() {
         var path = $("#path").val();
@@ -189,40 +236,9 @@
         }
     }
 
-    //短信获取验证码
-    function sendmessage(obj,second){
-        if(sendmessage){
-            countDown(obj,second)
-        }
-        else{
-            alert("错误，虽然永远走不到这里！");
-        }
-    }
-    function countDown(obj,second){
-        // 如果秒数还是大于0，则表示倒计时还没结束
-        if(second>=0){
-            // 获取默认按钮上的文字
-            if(typeof buttonDefaultValue === 'undefined' ){
-                buttonDefaultValue =  obj.defaultValue;
-            }
-            // 按钮置为不可点击状态
-            obj.disabled = true;
-            // 按钮里的内容呈现倒计时状态
-            obj.value = buttonDefaultValue+'('+second+')';
-            // 时间减一
-            second--;
-            // 一秒后重复执行
-            setTimeout(function(){countDown(obj,second);},1000);
-            // 否则，按钮重置为初始状态
-        }else{
-            // 按钮置未可点击状态
-            obj.disabled = false;
-            // 按钮里的内容恢复初始状态
-            obj.value = buttonDefaultValue;
-        }
-    }
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/dmaku.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 </body>
 </html>
