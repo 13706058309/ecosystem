@@ -216,7 +216,7 @@
                                         </div>
                                         <label class="layui-form-label" style="width: 100px">民族</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="clan" name="clan" required  lay-verify="required" placeholder="请输入民族"  maxlength="4" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" autocomplete="off" class="layui-input" value="${resume.clan}">
+                                            <input type="text" id="clan" name="clan" required  lay-verify="required" placeholder="请输入民族"  maxlength="8" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" autocomplete="off" class="layui-input" value="${resume.clan}">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
