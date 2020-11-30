@@ -92,26 +92,26 @@
             </div>
         </div>
     </div>
-    <div class="company-banner" style="background-color: #00c2b3">
+    <div class="company-banner" style="background-color: #ffffff">
         <div class="inner home-inner">
             <div>
-                <div class="company-stat">
-                    <em class="vline"></em><span><b>${size}</b>在招职位</span>
+                <div class="company-stat" style="color: #00c7b1">
+                    <em class="vline"></em><span><b style="color: #00c7b1">${size}</b>在招职位</span>
                 </div>
                 <div class="info-primary">
                     <img src="${pageContext.request.contextPath}/uploadLogo${backUser.logo}" class="fl">
                     <div class="info">
-                        <h1 class="name">${backUser.compName}<i class="icon-brand"></i></h1>
-                        <p>${backUser.finanStage}<em class="dolt"></em>${backUser.scale}<em class="dolt"></em>
+                        <h1 class="name" style="color: #00c7b1">${backUser.compName}<i class="icon-brand"></i></h1>
+                        <p style="color: #00c7b1">${backUser.finanStage}<em class="dolt"></em>${backUser.scale}<em class="dolt"></em>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="job-box">
-        <div class="inner home-inner">
-            <div class="job-detail">
+    <div class="job-box" style="width: 1250px ;margin: 0 auto">
+        <div class="inner home-inner" style="float: left;margin-left: 4%;width: 870px">
+            <div class="job-detail" style="width: 870px">
                 <div class="detail-content">
                     <div class="job-sec">
                         <h3>${backUser.compName}简介</h3>
@@ -143,7 +143,7 @@
                         <div class="job-list">
                             <ul>
                                 <c:forEach items="${postPositions}" var="pps">
-                                    <li    onclick="window.open('${pageContext.request.contextPath}/center/postInfo?lid=${pps.pPostId}')">
+                                    <li  onclick="window.open('${pageContext.request.contextPath}/center/postInfo?lid=${pps.pPostId}')">
                                         <div data-lid="${pps.pPostId}" data-jid="5c76e78924d36df41nN40927F1I~"
                                              ka="comp_desc_joblist_7">
                                             <div class="job-primary">
@@ -182,6 +182,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div style="float: right">
+            <div>
+                公司高管：
+                <br>啦啦啦
+            </div>
+
         </div>
     </div>
 </div>
