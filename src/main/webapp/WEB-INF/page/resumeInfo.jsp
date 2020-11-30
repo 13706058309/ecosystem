@@ -42,7 +42,7 @@
     </script>
 </head>
 <body>
-
+<div>
 <div id="header" style="background-color: #00c2b3;height: 80px" >
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
@@ -440,7 +440,7 @@
         </dd>
     </dl>
 </div>
-
+</div>
 <script>
     layui.use(['element','form'], function(){
         var $ = layui.jquery

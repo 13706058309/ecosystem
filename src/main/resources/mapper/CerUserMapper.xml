@@ -102,6 +102,6 @@
 
 
     <insert id="insertCerUser" parameterType="com.cykj.entity.CerUser" keyProperty="cuid" useGeneratedKeys="true">
-       insert into cerUser(cerId, gainTime, bUserID, userId) VALUE (#{cerId},#{gainTime},#{bUserID},#{userId})
+       insert into cerUser(cerId, gainTime, bUserID, userId) VALUE (#{cerId},#{gainTime},#{bUserId},#{userId})
     </insert>
 </mapper>
