@@ -244,17 +244,6 @@
         })
     }
 
-    //是否为应届生
-    // function isStu() {
-    //     var stu = confirm("是否为应届生？");
-    //     if(stu == true){
-    //
-    //     } else{
-    //         prompt("请输入您的工作经验!");
-    //
-    //     }
-    // }
-
 </script>
 </body>
 </html>
