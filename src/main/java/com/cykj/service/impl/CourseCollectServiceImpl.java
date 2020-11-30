@@ -1,5 +1,6 @@
 package com.cykj.service.impl;
 
+import com.cykj.entity.Course;
 import com.cykj.entity.CourseCollect;
 import com.cykj.mapper.CourseCollectMapper;
 import com.cykj.service.CourseCollectService;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -37,5 +39,10 @@ public class CourseCollectServiceImpl implements CourseCollectService {
         parameterMap.put("courseId",Long.parseLong(courseId));
         parameterMap.put("userId",Long.parseLong(userId));
         return courseCollectMapper.deleteCollectionByCourseIdAndUserId(parameterMap);
+    }
+
+    @Override
+    public List<Course> selectCollectCoursesByUserId(String userId) {
+        return courseCollectMapper.selectCollectCoursesByUserId(Long.parseLong(userId));
     }
 }

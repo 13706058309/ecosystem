@@ -14,19 +14,19 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="http://cymooc.org:80/common/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/course/playPage.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/course/playPage2.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/layui/css/layui.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css/uc.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css/ux.css" />
+    <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/uc.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/ux.css">
 </head>
 <%--评价弹出框--%>
 <div id="publish" style="display: none;">
     <div id="component-dialog">
         <div id="component-dialog-hd"></div>
         <div id="component-dialog-bd">
-            <div id="courseTitle">撰写《Java编程》的评价</div>
+            <div id="courseTitle">撰写《${currCourseName}》的评价</div>
         </div>
         <div id="courseRateWrapper">
             <div id="rateLabel">
@@ -56,55 +56,83 @@
 <input type="hidden" id="listLength" value="${totalNums}"/>
 <input type="hidden" id="unitId" value="${unitId}"/>
 <input type="hidden" id="userId" value="${qUser.userId}"/>
-<div style="width: 100%;height: 20px;"></div>
 
-<!--视频播放板块-->
-<div class="playfm safe">
-    <div class="playfmL">
-        <div class="playfmLBox" data-seq="0">
-            <div class="playfmLong" idx="0">
-                <c:forEach items="${unitList}" var="unit" varStatus="unitStatus">
-                    <div class="cNameSpan" data-chtname="${unit.unitName}" onclick="assignJump(${unit.unitId})" style="color: white; background-color: rgb(231, 68, 52);">
-                        ${unitStatus.count}
-                    </div>
-                </c:forEach>
-            </div>
+<div id="header" style="background-color:#00c2b3;height: 80px" >
+    <div class="inner home-inner" >
+        <div class="logo" style="width: 150px;height: 70px">
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
-        <div class="playLast" style="">
-            <img src="http://cymooc.org:80/common/images/course/u1045.png">
+        <div class="nav" style="margin-top: 20px">
+            <ul>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                <%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li class="cur"><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+            </ul>
         </div>
-        <div class="playNext">
-            <img src="http://cymooc.org:80/common/images/course/u1053.png">
-        </div>
-        <div class="courseNameTips" style="background-image: url('http://cymooc.org:80/common/images/course/cnameTips.png'); display: none; top: 385px;">
-            <p style="width: 100px;height:52px;color: white;font-size: 14px;padding-left: 22px;text-align: center;overflow: hidden;vertical-align: middle;display: table-cell;"></p>
+
+        <div class="user-nav" style="margin-top: 20px">
+            <c:if test="${empty qUser}">
+                <div class="btns" style="margin-top: 10%">
+                    <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline" style="background-color: #228b81;border: 0px">注册</a>
+                    <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline" style="background-color: #228b81;border: 0px">登录</a>
+                </div>
+            </c:if>
+            <c:if test="${not empty qUser}">
+                <ul>
+                        <%--                <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
+                    <li class="nav-figure">
+                        <a >
+                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                        </a>
+                        <div class="dropdown">
+                            <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                            <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                            <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                        </div>
+                    </li>
+                </ul>
+            </c:if>
         </div>
     </div>
-    <div class="playfmM" id="vdfm" data-prod="10612" data-cht="11132">
-        <!--video-->
-        <div class="playfmMT">
-            <video controls="" controlslist="nodownload" id="video-active" style="background-color: #000000;padding-top:10px;padding-bottom: 10px " class="video-active" width="1000" height="460" autoplay="autoplay">
-                <source src="http://117.27.136.49:8078/mp4/1Python语言概述.mp4" type="video/mp4">
-                当前浏览器不支持 video直接播放，请更新浏览器版本或者更换浏览器进行视频观看
-            </video>
+</div>
+
+<div style="width: 100%;height: 20px;"></div>
+<div>
+<div>
+    <div style="float:left;margin-left: 193px">
+        <video controls="controls" preload="auto" height="360">
+            <source src="http://117.27.136.49:8078/mp4/1Python语言概述.mp4" type="video/mp4">
+            当前浏览器不支持直接播放，请更新浏览器版本或者更换浏览器进行视频观看
+        </video>
+        <div style="height: 40px;margin-top: 20px;font-size: 20px;">
+            ${currCourseName}
+<%--            <a class="shareDiv" onclick="_WXShare()">--%>
+<%--                <span style="border: none; float:right">--%>
+<%--                    <img src="http://cymooc.org:80/common/images/course/fx.png">分享--%>
+<%--                </span>--%>
+<%--            </a>--%>
         </div>
-        <div class="playfmMB">
-            <div class="cnameTitle floatL overText">
-                ${currCourseName}
-            </div>
-            <div class="playfmMBR floatR">
-                 <span style="border: none; float:right">
-                 <img src="http://cymooc.org:80/common/images/course/fx.png">分享
-                 </span>
-            </div>
-        </div>
-        <!--video END-->
+
     </div>
+    <div style="float: left;margin-left: 2px;width: 399px;height: 360px;overflow-x: hidden;overflow-y: scroll;">
+        <c:forEach items="${unitList}" var="unit" varStatus="unitStatus">
+            <div style="height: 40px">
+            <a class="unitName" style="margin-left: 40px;font-family: 微软雅黑" onclick="assignJump(this,${unit.unitId})">
+                第${unitStatus.count}章&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${unit.unitName}
+            </a>
+            </div>
+        </c:forEach>
+    </div>
+    <diV id="clearFloat"></diV>
 </div>
 
 <!--左下角tab切换区域-->
 <div class="safe">
-    <div class="courseLeft">
+    <div class="courseLeft" style="margin-left: 75px;">
         <div class="layui-tab layui-tab-card" lay-filter="test">
             <ul class="layui-tab-title">
                 <li class="layui-this" lay-id="11">资料下载</li>
@@ -137,40 +165,44 @@
     </div>
     <div class="clear"></div>
 </div>
+</div>
 <div class="clear"></div>
 <!-- foot -->
 <script src="${pageContext.request.contextPath}/style/js/jquery-3.5.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    $(function(){
+        loadUnitFiles();
+
+        // 选项卡切换
+        layui.use('element', function(){
+            var $ = layui.jquery
+                ,element = layui.element //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+            //Hash地址的定位
+            var layid = location.hash.replace(/^#test=/, '');
+            element.tabChange('test', layid);
+            element.on('tab(test)', function(elem){
+                var val=$(this).attr("lay-id");
+                if (val == '11'){
+                    loadUnitFiles();
+                }
+                if (val == '22'){
+                    loadMoreEvaluations();
+                }
+                if (val == '33'){
+                    loadTopics();
+                }
+                location.hash = 'test='+ $(this).attr('lay-id');
+            });
+        });
+    });
 
     // 点击视频播放区左侧章节列表的章节，跳转到该章节的播放页
-    function assignJump(unitId){
+    function assignJump(obj,unitId){
         var basePath = $('#basePath').val();//项目上下文
         location.href=basePath+"/courseAppraise/playPage?unitId="+unitId;
     }
-
-    // 选项卡切换
-    layui.use('element', function(){
-        var $ = layui.jquery
-            ,element = layui.element //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-        //Hash地址的定位
-        var layid = location.hash.replace(/^#test=/, '');
-        element.tabChange('test', layid);
-        element.on('tab(test)', function(elem){
-            var val=$(this).attr("lay-id");
-            if (val == '11'){
-                loadUnitFiles();
-            }
-            if (val == '22'){
-                loadMoreEvaluations();
-            }
-            if (val == '33'){
-                loadTopics();
-            }
-            location.hash = 'test='+ $(this).attr('lay-id');
-        });
-    });
     
     // 加载章节资料
     function loadUnitFiles() {
@@ -182,6 +214,7 @@
             , dataType: 'json'
             , success:function (data) {
                 if (data.length>0){
+                    $('#unitFiles').empty();
                     for (var i=0;i<data.length;i++){
                         $('#unitFiles').append("<div class=\"fileDiv\">\n" +
                             "                        <div class=\"iconDiv\">\n" +
@@ -217,6 +250,7 @@
             ,success:function (data) {
                 console.log(data);
                 if (data.length>0){
+                    $('#topicText').empty();
                     for (var i=0;i<data.length;i++){
                         var html = "";
 
@@ -502,57 +536,6 @@
     function getNow(s){
         return s < 10 ? '0' + s: s;
     }
-
-    $(function(){
-        //左侧视频list移入显示课程名称，样式变化
-        $('.cNameSpan').mouseenter(function(){
-            var top = $(this).offset().top-30;
-            $(this).css({color:"white",backgroundColor:"rgba(231, 68, 52, 1)"});
-            $(".courseNameTips p").html($(this).data("chtname"));
-            $('.courseNameTips').css({display:"table","top":top+"px"});
-        }).mouseleave(function(){
-            var dataSeq = parseInt($(".playfmLBox").data("seq"));
-            var videoId = parseInt($(this).text()) - 1;
-            $('.courseNameTips').css({display:"none"})
-            if(dataSeq != videoId){
-                $(this).css({color:"#979797",backgroundColor:"#646464"});
-            }
-        }).click(function(){
-
-        });
-        $('.cNameSpan').eq($(".playfmLBox").data("seq")).css({color:"white",backgroundColor:"rgba(231, 68, 52, 1)"});
-        /*------------视频向上按钮--------------*/
-        $('.playLast').click(function(){
-            var index = parseInt($('.playfmLong').attr('idx'));
-            index--;
-            // console.log(index);
-            if(index==-1){
-                alert('当前已经是第一个视频啦~~')
-            }
-            var spanCount = $('.playfmLong').children().length;
-            if (index<=-(spanCount-10)) {
-                index = 0;
-            }
-            $('.playfmLong').attr('idx',index);
-            var top = 50*index;
-            // console.log(top)
-            $('.playfmLong').animate({top:-top+'px'},1000,'swing');
-        });
-        /*------------视频向下按钮--------------*/
-        $('.playNext').click(function(){
-            var index = parseInt($('.playfmLong').attr('idx'));
-            index++;
-            // console.log(index)
-            var spanCount = $('.playfmLong').children().length;
-            if (index>spanCount-10) {
-                index = 0;
-            }
-            $('.playfmLong').attr('idx',index);
-            var top = 50*index;
-            // console.log(top)
-            $('.playfmLong').animate({top:-top+'px'},1000,'swing');
-        });
-    });
 </script>
 <div class="xl-chrome-ext-bar" id="xl_chrome_ext_{4DB361DE-01F7-4376-B494-639E489D19ED}" style="position: fixed; left: 186.5px; top: -408px; width: 98px; height: 24px; z-index: 1000000; display: none;">
     <div class="xl-chrome-ext-bar__logo"></div>
