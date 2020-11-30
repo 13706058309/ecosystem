@@ -223,8 +223,6 @@
                     <input class="layui-input" id="orderNum" style="width: 160px;height: 30px;" placeholder="订单号搜索">
                 </div>
                 <a style="float:left;margin-top:10px;margin-left:5px;font-size: 30px;" onclick="chooseState('')"> <i class="layui-icon layui-icon-search" ></i></a>
-
-
             </div>
         </div>
 

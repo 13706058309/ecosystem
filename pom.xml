@@ -23,7 +23,7 @@
         <dependency>
             <groupId>net.sf.mpxj</groupId>
             <artifactId>mpxj</artifactId>
-            <version>5.2.2</version>
+            <version>7.1.0</version>
         </dependency>
 
         <!-- 引入poi -->

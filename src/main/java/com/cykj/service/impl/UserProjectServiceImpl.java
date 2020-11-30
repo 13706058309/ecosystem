@@ -52,17 +52,16 @@ public class UserProjectServiceImpl implements UserProjectService {
         UserProject condition=new UserProject();
         condition.setUserId(userProject.getUserId());
         condition.setProjectId(userProject.getProjectId());
+        System.out.println(userProject.getUserId()+"====================================================="+userProject.getProjectId());
         List<UserProject> userProjectList=userProjectMapper.findUserProjectAll(condition);
         if (userProjectList.size()>0){
             boolean flag=true;
             for (int i=0;i<userProjectList.size();i++){
-                if (userProjectList.get(i).getStates().getParamName()!=null
-                        && userProjectList.get(i).getStates().getParamName().trim().equals("已申请")){
+                if (userProjectList.get(i).getStates().getParamName().trim().equals("已申请")){
                     flag=false;
                     break;
                 }
-                if (userProjectList.get(i).getStates().getParamName()!=null
-                        && userProjectList.get(i).getStates().getParamName().trim().equals("待付款")){
+                if (userProjectList.get(i).getStates().getParamName().trim().equals("待付款")){
                     flag=false;
                     break;
                 }
@@ -393,20 +392,16 @@ public class UserProjectServiceImpl implements UserProjectService {
             userProject.setParamId(49);
             int n=userProjectMapper.changeState(userProject);
             if (n>0){
-
-
                 System.out.println("申请成功！");
-                Map<String,Object> parameterCondition=new HashMap<>();
-                parameterCondition.put("paramType","项目订单状态");
-                List<Parameter> parameters=parameterMapper.findParameter(parameterCondition);
-                request.setAttribute("parameters",parameters);
-
             }else{
                 System.out.println("申请失败！");
             }
             System.out.println("success");
 
-
+            Map<String,Object> parameterCondition=new HashMap<>();
+            parameterCondition.put("paramType","项目订单状态");
+            List<Parameter> parameters=parameterMapper.findParameter(parameterCondition);
+            request.setAttribute("parameters",parameters);
             return "project/ProjectOfUser";
         }else {
             String result = "验签失败";

@@ -30,10 +30,6 @@ $(function () {
             ,cols: [[ //表头
                 {field: 'pOrderNum', title: '订单号',  fixed: 'left'}
                 ,{field: 'projectName', title: '项目名称',  fixed: 'left'}
-                ,{field: 'projectSynopsis', title: '项目描述',  fixed: 'left',templet:function (data) {
-                        var str=data.projectSynopsis.replaceAll("<br>"," ");
-                        return str;
-                    }}
                 ,{field: 'publishTime', title: '发布时间', fixed: 'center',width:200}
                 ,{field: 'money', title: '预算费用（元）',fixed: 'center',width:140}
                 ,{field: 'states', title: '状态', fixed: 'center',width:100,

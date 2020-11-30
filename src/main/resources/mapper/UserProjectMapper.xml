@@ -97,11 +97,11 @@
             and uP.userId=#{userId}
         </if>
 
-        <if test="orderNum !=null ">
+        <if test="orderNum !=null">
             and  uP.orderNum=#{orderNum}
         </if>
 
-        <if test="paramId !=null ">
+        <if test="paramId !=null and paramId>0">
             and  uP.paramId=#{paramId}
         </if>
 

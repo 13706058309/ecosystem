@@ -65,10 +65,14 @@ function findProjectOrder(curr,limit){
     if (limit==null){
         limit=5;
     }
+    var orderNum=$("#orderNum").val();
+    if (orderNum !== ""){
+        orderNum=orderNum.trim();
+    }
     $.ajax({
         url: path+"/userProject/findUserProject",
         type:"post",
-        data:{"page":curr,"limit":limit,"orderNum":$("#orderNum").val(),"stateId":$("#stateId").val()},
+        data:{"page":curr,"limit":limit,"orderNum":orderNum,"stateId":$("#stateId").val()},
         dataType:"json",
         success:function (res) {
             console.log(res);
@@ -128,52 +132,52 @@ function findProjectOrder(curr,limit){
                     if (project.states.paramName==='待付款'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
                         $("#caoZuo"+project.id).append(
                     "                       <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                    "                            <a class=\"layui-btn layui-btn-xs layui-btn-danger\" style=\"width: 100px\" onclick=\"payMoney("+project.orderNum+","+project.payMoney+")\">立即付款</a>\n" +
+                    "                            <a href='javascript:;' class=\"layui-btn layui-btn-xs layui-btn-danger\" style=\"width: 100px\" onclick=\"payMoney("+project.orderNum+","+project.payMoney+")\">立即付款</a>\n" +
                     "                                </div>\n" +
                     "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                    "                            <a onclick=\"delOrder('"+project.id+"')\"> 删除订单</a>\n" +
+                    "                            <a href='javascript:;' onclick=\"delOrder('"+project.id+"')\"> 删除订单</a>\n" +
                     "                        </div>\n");
                     }
                     if (project.states.paramName==='已申请'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick='abandonProject("+project.orderNum+","+project.payMoney+")'> 放弃申请</a>\n" +
+                            "                            <a href='javascript:;' onclick='abandonProject("+project.orderNum+","+project.payMoney+")'> 放弃申请</a>\n" +
                             "                        </div>\n");
                     }
 
                     if (project.states.paramName==='申请成功'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
                         $("#caoZuo"+project.id).append(" <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick='uploadProject("+project.projectInfo.projectId+")'> 上传项目</a>\n" +
+                            "                            <a href='javascript:;' onclick='uploadProject("+project.projectInfo.projectId+")'> 上传项目</a>\n" +
                             "                        </div>\n");
                     }
                     if (project.states.paramName==='申请失败'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
                     }
                     if (project.states.paramName==='已完成'){
                         $("#caoZuo"+project.id).append(
                         "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                        "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                        "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                         "                        </div>");
                     }
                     if (project.states.paramName==='已终止'){
                         $("#caoZuo"+project.id).append(
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
                     }
                 }
@@ -283,7 +287,7 @@ function getPage(){
  */
 function payMoney(orderNum,payMoney){
     console.log(orderNum   +"  "  + payMoney);
-    location.href= path +"/userProject//alipayTradePagePay?WIDout_trade_no="+orderNum+'&WIDtotal_amount='+payMoney+'&WIDsubject='+"用户承接项目保证金";
+    location.href= path +"/userProject/alipayTradePagePay?WIDout_trade_no="+orderNum+'&WIDtotal_amount='+payMoney+'&WIDsubject='+"用户承接项目保证金";
 }
 
 /**
