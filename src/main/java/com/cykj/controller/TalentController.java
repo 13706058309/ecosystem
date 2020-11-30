@@ -544,7 +544,7 @@ public class TalentController {
     }
     @RequestMapping("/all")
     public String  all(HttpServletRequest request, HttpServletResponse response)  {
-        System.out.println("dhf");
+
         List<BackUserNum> list=talentService.all();
         request.setAttribute("list",list);
         String s="新增总企业数：";
@@ -552,7 +552,7 @@ public class TalentController {
         return "backUserNum";
     }
     @RequestMapping("/backUserNumMonth")
-    public String  backUserNumMonth(HttpServletRequest request, HttpServletResponse response)  {
+    public String  bUserNumMonth(HttpServletRequest request, HttpServletResponse response)  {
         List<BackUserNum> list=talentService.backUserNumMonth();
         request.setAttribute("list",list);
         String s="本月新增企业：";
@@ -561,7 +561,7 @@ public class TalentController {
         return "backUserNum";
     }
     @RequestMapping("/backUserNumWeek")
-    public String  backUserNumWeek(HttpServletRequest request, HttpServletResponse response)  {
+    public String  bUserNumWeek(HttpServletRequest request, HttpServletResponse response)  {
         List<BackUserNum> list=talentService.backUserNumWeek();
         request.setAttribute("list",list);
         String s="本周新增企业：";
@@ -570,7 +570,7 @@ public class TalentController {
         return "backUserNum";
     }
     @RequestMapping("/backUserNumHalfYear")
-    public String  backUserNumHalfYear(HttpServletRequest request, HttpServletResponse response)  {
+    public String  bUserNumHalfYear(HttpServletRequest request, HttpServletResponse response)  {
         List<BackUserNum> list=talentService.backUserNumHalfYear();
         request.setAttribute("list",list);
         String s="近半年新增企业：";

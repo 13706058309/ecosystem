@@ -10,7 +10,7 @@ if ('WebSocket' in window) {
     }
 
     var username = window.btoa(encodeURIComponent(JSON.stringify(ss)))
-    websocket = new WebSocket("ws://localhost:8080/springboot/websocket/"+username);
+    websocket = new WebSocket("ws://47.116.134.152:8080/springboot/websocket/"+username);
 } else {
     console.error("不支持WebSocket");
 }
