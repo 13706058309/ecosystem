@@ -30,7 +30,7 @@
     </update>
 
     <update id="changeEnterpriseState">
-        update backUser b,parameter p set stateId=#{stateId} where b.bUserId=p.paramId and bUserId=#{bUserId}
+        update backUser  set stateId=#{stateId} where bUserId=#{bUserId}
     </update>
 
     <update id="resetPassword">
