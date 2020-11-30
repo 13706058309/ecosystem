@@ -113,14 +113,7 @@
             }
         })
 
-        //地址限制必须有汉字
-        // $("#address").blur(function () {
-        //     var pattern = /[\u4e00-\u9fa5]{6,12}$/;
-        //     if(!pattern.test($(this).val())){
-        //         alert("必须是汉字且6字以上，最多12位");
-        //         $(this).val("");
-        //     }
-        // })
+
 
     })
 

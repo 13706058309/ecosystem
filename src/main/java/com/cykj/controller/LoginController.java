@@ -94,7 +94,7 @@ public class LoginController {
     }
 
     @RequestMapping("/adLog")
-//    @Loger(operationName = "执行后端登录动作")
+    @Loger(operationName = "执行后端登录动作")
     public @ResponseBody
     String adlog(String account, String password, String sVCode, HttpServletRequest
             request) throws IOException {
@@ -139,6 +139,7 @@ public class LoginController {
 
     //短信登录
     @RequestMapping("/mesLog")
+    @Loger(operationName = "短信登录")
     public @ResponseBody
     String mesLog(String phone, String code, HttpServletRequest request) {
         System.out.println("执行短信验证登录!");
@@ -196,6 +197,7 @@ public class LoginController {
 
     //注册发送短信
     @RequestMapping("/recReg")
+    @Loger(operationName = "注册发送短信")
     public @ResponseBody String recReg(String phone,HttpServletRequest request){
         UserInfo userInfo = loginServiceImpl.findRecPhone(phone);
         if (userInfo != null) return "2";
@@ -216,6 +218,7 @@ public class LoginController {
 
     //发送短信验证码
     @RequestMapping("/aliSend")
+    @Loger(operationName = "登录发送短信")
     public @ResponseBody
     String aliSend(String phone, HttpServletRequest request) {
         UserInfo userInfo = loginServiceImpl.findPhone(phone);
@@ -236,6 +239,7 @@ public class LoginController {
 
         //修改密码发送验证码
     @RequestMapping("/sendCode")
+    @Loger(operationName = "修改密码发送短信")
     public @ResponseBody String sendCode(String phone,HttpServletRequest request){
         UserInfo userInfo = loginServiceImpl.findPhone(phone);
         if(userInfo==null) return "2";
@@ -254,6 +258,7 @@ public class LoginController {
     }
 
         @RequestMapping("/findPass")
+        @Loger(operationName = "修改密码时")
         public @ResponseBody String findPass(String phone,String pwd,String vCode,HttpServletRequest request ){
 
             String savePhone = (String) request.getSession().getAttribute("phone");
@@ -266,7 +271,8 @@ public class LoginController {
                 System.out.println("验证码错误");
                 return "3";
             }
-            int n = loginServiceImpl.changPasswordByPhone(pwd,phone);
+            int n = loginServiceImpl.changPasswordByPhone(MD5Utils.md5(pwd),phone);
+
 
         return n>0?"1":"4";
         }
@@ -274,6 +280,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "/getCode")
+    @Loger(operationName = "图形验证码")
     public String getCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //声明验证码
         System.out.println("123");
@@ -331,12 +338,13 @@ public class LoginController {
 
     //跳转注册页面
     @RequestMapping("/reg")
+    @Loger(operationName = "注册页面")
     public String reg(){
         return "Register";
     }
 
     //注册的动作
-//    @Loger(operationName = "执行前端注册")
+    @Loger(operationName = "执行前端注册")
     @RequestMapping(value = {"/regiest"})
     public @ResponseBody
     String regiest(String vmesCode,UserInfo userInfo,HttpServletRequest request) {
@@ -344,7 +352,7 @@ public class LoginController {
         resume.setRealName(userInfo.getUserName());
         System.out.println("执行注册!");
 
-        String account = userInfo.getAccount();
+//        String account = userInfo.getAccount();
         String savePhone = (String) request.getSession().getAttribute("recPhone");
         String saveCode = (String) request.getSession().getAttribute("recCode");
         System.out.println("前端传过来的手机:"+userInfo.getTelephone()+"验证码:"+vmesCode);
@@ -372,13 +380,14 @@ public class LoginController {
 
     //跳转忘记密码界面
     @RequestMapping("/forget")
+    @Loger(operationName = "忘记密码界面")
     public String forget() {
         return "ForgetPass";
     }
 
 
     @RequestMapping("/adminMain")
-//    @Loger(operationName = "登录后跳转菜单")
+    @Loger(operationName = "登录后跳转菜单")
     public String adminMain(HttpServletRequest request) {
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
         if (backUser != null) {
@@ -390,15 +399,15 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("/toMain")
-    public String toMain(HttpServletRequest request) {
-        BackUser backUser = new BackUser();
-        backUser.setRoleId(1);
-        backUser.setBUserName("测试1");
-        request.getSession().setAttribute("adminInfo", backUser);
-        List<Menu> menuList = powerServiceImpl.findExistMenu(backUser.getRoleId());
-        request.getSession().setAttribute("menuList", menuList);
-        return "BackMain";
-    }
+//    @RequestMapping("/toMain")
+//    public String toMain(HttpServletRequest request) {
+//        BackUser backUser = new BackUser();
+//        backUser.setRoleId(1);
+//        backUser.setBUserName("测试1");
+//        request.getSession().setAttribute("adminInfo", backUser);
+//        List<Menu> menuList = powerServiceImpl.findExistMenu(backUser.getRoleId());
+//        request.getSession().setAttribute("menuList", menuList);
+//        return "BackMain";
+//    }
 
 }

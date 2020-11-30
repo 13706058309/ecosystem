@@ -67,7 +67,7 @@ layui.use(['laypage', 'layer'], function(){
         elem: 'paging',
         theme: '#44D0C7',
         count:$('#size').val(),
-        limit:4,
+        limit:8,
         curr:$('#curr').val(),
         jump: function(obj,first){
             if(!first){

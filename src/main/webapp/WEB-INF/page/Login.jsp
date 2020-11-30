@@ -75,7 +75,7 @@
             <a onclick="mesLog()"><input type="button" value="登录"></a>
             <p class="message">换种方式登录？<a href="javascript:">账号登录</a>或者<a
                     href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
-            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a><a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
     </div>
 </div>
@@ -147,20 +147,17 @@
 
     //短信登录
     function mesLog() {
-        // var value = $("#mesCode").val();
-        // if(value == '点击获取验证码'){
-        //     alert("验证码未发送!");
-        //     return false;
-        // }
+        var value = $("#mesCode").val();
+        if(value == '点击获取验证码'){
+            alert("验证码未发送!");
+            return false;
+        }
         var phone = $("#phone").val();
         var code = $("#acthCode").val();
-        console.log(phone);
-        console.log(code);
-        // alert(phone);
-        // alert(code)
+        // console.log(phone);
+        // console.log(code);
 
         $.ajax({
-            // url:path,
             url:path+"/golog/mesLog",
             type:'post',
             data:"phone=" + phone + "&code=" + code,
