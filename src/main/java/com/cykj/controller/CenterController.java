@@ -295,18 +295,19 @@ public class CenterController {
     @RequestMapping("/savePwd")
     //    @Loger(operationType = "修改密码",operationName = "修改密码")
     public @ResponseBody String savePwd(HttpServletRequest req,String oldpwd,String newpwd){
-        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+//        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+//        userId= (int) user.getUserId();
         int n=0;
         Map map=new HashMap();
         map.put("userId",userId);
-        map.put("oldpwd",oldpwd);
+        map.put("oldpwd",MD5Utils.md5(oldpwd));
         map.put("newpwd",MD5Utils.md5(newpwd));
         UserInfo userInfo=resumeService.findpwd(map);
-        req.getSession().removeAttribute("qUser");
+
         if (null==userInfo){
             return "lose";
         }else {
+            req.getSession().removeAttribute("qUser");
             n=resumeService.savepwd(map);
         }
         String msg="";
@@ -705,13 +706,14 @@ public class CenterController {
         List<Industry> industrys=resumeService.industrys();
         req.setAttribute("industrys",industrys);
         Map map=new HashMap();
-        if (findWorkCity.equals("全国")){
-
+        if (null==findWorkCity||findWorkCity.equals("全国")){
+            workCity="全国";
+            findWorkCity="全国";
         }else {
             map.put("workCity",findWorkCity);
         }
         search=findSearch;
-        if (findSearch.trim().equals("")){
+        if (null==findSearch||findSearch.trim().equals("")){
             search="";
         }else {
             map.put("search","%"+findSearch+"%");

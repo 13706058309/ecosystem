@@ -13,7 +13,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../JS/layui/css/layui.css">
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" media="all">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,7 +24,6 @@
 
 <body>
 
-<script src="${pageContext.request.contextPath}/jquery-3.5.1.js"></script>
 <script charset="UTF-8" src="${pageContext.request.contextPath}/js/value.js"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 <form class="layui-form" action="denglujieguo" method="post">

@@ -188,7 +188,7 @@ public class SystemController {
         String stateId = request.getParameter("stateId");
         System.out.println("修改的是企业ID:" + bUserId);
         System.out.println("修改的是企业状态ID:" + stateId);
-        boolean isSuccess = userServiceImpI.changeEnterpriseState(bUserId, stateId);
+        boolean isSuccess = userServiceImpI.changeEnterpriseState(bUserId, "1");
         if (isSuccess) {
             response.getWriter().write("success");
         } else {
