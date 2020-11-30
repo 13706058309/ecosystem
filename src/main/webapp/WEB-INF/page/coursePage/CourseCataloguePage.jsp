@@ -21,11 +21,11 @@
 <input type="hidden" id="basePath" value="${pageContext.request.contextPath}"/>
     <div style="width: 100%;height: 720px;">
         <c:if test="${not empty units}">
-            <c:forEach items="${units}" var="unit">
+            <c:forEach items="${units}" var="unit" varStatus="unitStatus">
             <div class="courseDiv" id="${unit.unitId}" style="line-height: 50px">
                 <a href="${pageContext.request.contextPath}/courseAppraise/playPage?unitId=${unit.unitId}" target="_top">
                     <i class="layui-icon layui-icon-play" style="font-size: 35px; float: left; margin: 1px 20px;color: #0d9572"></i>
-                    <p class="courseName overText">${unit.unitName}</p>
+                    <p class="courseName overText">第${unitStatus.count}章&nbsp;&nbsp;${unit.unitName}</p>
                 </a>
             </div>
             </c:forEach>

@@ -59,6 +59,9 @@ public class CourseAppraiseController {
 
     @RequestMapping("/playPage")
     public String getPlayPage(HttpServletRequest request,String unitId){
+        // 课程表中的播放量字段增加1
+        courseServiceImpl.updateTotalPlayTimesByUnitId(unitId);
+
         int totalNums =  courseAppraiseServiceImpl.selectCountByUnitId(unitId);
         List<Unit> unitList = unitServiceImpl.selectUnitsByUnitId(unitId);
         Unit currPlayUnit = unitServiceImpl.selectUnitInfoByUnitId(unitId);
