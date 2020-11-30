@@ -14,8 +14,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link href="https://static.zhipin.com/zhipin-geek/v334/web/geek/css/main.css" type="text/css" rel="stylesheet">
     <meta name="applicable-device" content="pc">
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=7c1d325554fabccbfb414e1ec058cf40&plugin=AMap.Autocomplete"></script>
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=85f285069a023533ccfb926369538910&plugin=AMap.Geocoder"></script>
+    <script type="text/javascript"
+            src="https://webapi.amap.com/maps?v=1.4.15&key=7c1d325554fabccbfb414e1ec058cf40&plugin=AMap.Autocomplete"></script>
+    <script type="text/javascript"
+            src="https://webapi.amap.com/maps?v=1.4.15&key=85f285069a023533ccfb926369538910&plugin=AMap.Geocoder"></script>
     <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
     <style type="text/css">.amap-container {
         cursor: url(https://webapi.amap.com/theme/v1.3/openhand.cur), default;
@@ -25,23 +27,72 @@
 <body class="page-white">
 
 <div id="wrap">
-    <script>
-        var staticPath = 'https://static.zhipin.com/v2';
-        _PAGE = {
-            checkMobileUrl: "/registe/sendSms.json",
-            regMobileUrl: "/registe/save.json",
-            loginMobileUrl: "/login/phone.json",
-            loginAccountUrl: "/login/account.json",
-            getRandomKeyUrl: "/captcha/randkey.json",
-            verifyImgUrl: "/captcha/?randomKey={randomKey}",
-            getPositionUrl: "/user/position.json",
-            citySiteName: "全国站",
-            citySiteCode: "100010000",
-            skillsUrl: "/common/data/positionSkill"
-        }
-    </script>
+    <%--    <script>--%>
+    <%--        var staticPath = 'https://static.zhipin.com/v2';--%>
+    <%--        _PAGE = {--%>
+    <%--            checkMobileUrl: "/registe/sendSms.json",--%>
+    <%--            regMobileUrl: "/registe/save.json",--%>
+    <%--            loginMobileUrl: "/login/phone.json",--%>
+    <%--            loginAccountUrl: "/login/account.json",--%>
+    <%--            getRandomKeyUrl: "/captcha/randkey.json",--%>
+    <%--            verifyImgUrl: "/captcha/?randomKey={randomKey}",--%>
+    <%--            getPositionUrl: "/user/position.json",--%>
+    <%--            citySiteName: "全国站",--%>
+    <%--            citySiteCode: "100010000",--%>
+    <%--            skillsUrl: "/common/data/positionSkill"--%>
+    <%--        }--%>
+    <%--    </script>--%>
+    <div id="header" style="background-color: #00c2b3;height: 95px">
+        <div class="inner home-inner">
+            <div class="logo" style="width: 150px;height: 70px">
+                <a ka="header-home-logo" title="钱程无忧"
+                   style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            </div>
+            <div class="nav" style="margin-top: 45px">
+                <ul>
+                    <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                    <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                    <li class=""><a class="nav-school" ka="header-school"
+                                    href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                    <%--                    <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                    <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                    <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a>
+                    </li>
+                    <li class=""><a ka="header-article"
+                                    href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+                </ul>
+            </div>
 
-    <div class="company-banner" style="">
+            <div class="user-nav" style="margin-top: 20px">
+                <c:if test="${empty qUser}">
+                    <div class="btns" style="margin-top: 10%">
+                        <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register"
+                           class="btn btn-outline">注册</a>
+                        <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline">登录</a>
+                    </div>
+                </c:if>
+                <c:if test="${not empty qUser}">
+                    <ul>
+                        <li class="nav-figure">
+                            <a>
+                                <span class="label-text">${qUser.userName}</span><img
+                                    src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                            </a>
+                            <div class="dropdown">
+                                <a href="${pageContext.request.contextPath}/center/jianli"
+                                   ka="header-personal">个人中心<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/center/accountSet"
+                                   ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                                <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"
+                                   ka="header-logout">退出登录</a>
+                            </div>
+                        </li>
+                    </ul>
+                </c:if>
+            </div>
+        </div>
+    </div>
+    <div class="company-banner" style="background-color: #00c2b3">
         <div class="inner home-inner">
             <div>
                 <div class="company-stat">
@@ -55,25 +106,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="smallbanner notag" style="display: none;">
-                <div class="smallbanner-content">
-                    <div class="info-primary">
-                        <img src="${pageContext.request.contextPath}/uploadLogo${backUser.logo}" class="fl">
-                        <div class="info">
-                            <span class="name">${backUser.compName}<i class="icon-brand"></i></span>
-                        </div>
-                    </div>
-                    <div class="company-tab">
-                        <a ka="company-intro" class="cur">公司简介</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="company-tab">
-                <a ka="company-intro" class="cur">公司简介</a>
-            </div>
-
         </div>
     </div>
 
@@ -111,8 +143,8 @@
                         <div class="job-list">
                             <ul>
                                 <c:forEach items="${postPositions}" var="pps">
-                                    <li onclick="details(${pps.pPostId})">
-                                        <div data-lid="a3RHnJumGtK.search.10" data-jid="5c76e78924d36df41nN40927F1I~"
+                                    <li    onclick="window.open('${pageContext.request.contextPath}/center/postInfo?lid=${pps.pPostId}')">
+                                        <div data-lid="${pps.pPostId}" data-jid="5c76e78924d36df41nN40927F1I~"
                                              ka="comp_desc_joblist_7">
                                             <div class="job-primary">
                                                 <div class="info-primary">
@@ -126,7 +158,7 @@
                                                     </h3>
                                                     <p>
                                                         <span class="red">${pps.minSalary}-${pps.maxSalary}K</span>
-                                                        ${pps.workYear}<em class="vline"></em>${pps.education}
+                                                            ${pps.workYear}<em class="vline"></em>${pps.education}
                                                     </p>
                                                 </div>
                                                 <div class="info-publis">
@@ -136,12 +168,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="startchat-box">
-                                            <a ka="job-7-chat" href="javascript:;"
-                                               data-url="/wapi/zpgeek/friend/add.json?jobId=5c76e78924d36df41nN40927F1I~&amp;lid=a3RHnJumGtK.search.10"
-                                               redirect-url="/web/geek/chat?id=622ae9145e69b5af1HV739i8GFo~&amp;lid=a3RHnJumGtK.search.10"
-                                               class="btn btn-startchat">立即沟通</a>
-                                        </div>
+                                        <c:if test="${not empty qUser}">
+                                            <div class="startchat-box">
+                                                <a ka="job-7-chat" href="javascript:;" class="btn btn-startchat"
+                                                   onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${backUser.bUserId}')">
+                                                    立即沟通</a>
+                                            </div>
+                                        </c:if>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -171,15 +204,17 @@
         </dd>
     </dl>
     <label><span>展开</span><i class="fz fz-slidedown"></i></label>
+    <input id="user" value="${qUser}" type="hidden">
 </div>
 
 
 <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
 <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 <iframe style="display: none;" name="zhipinFrame"></iframe>
-<script src="https://webapi.amap.com/maps?v=1.3&amp;key=60085a6ee91616cf689ce0321e1f30c4&amp;plugin=AMap.Geocoder"></script>
+<%--<script src="https://webapi.amap.com/maps?v=1.3&amp;key=60085a6ee91616cf689ce0321e1f30c4&amp;plugin=AMap.Geocoder"></script>--%>
 <input type="hidden" id="page_key_name" value="cpc_company_intro">
 <script>
+
     $(function () {
         var lng = $("#lng").val();
         var lat = $("#lat").val();
@@ -187,7 +222,7 @@
             center: [lng, lat],
             zoom: 15
         });
-        map.plugin(["AMap.ToolBar"], function() {
+        map.plugin(["AMap.ToolBar"], function () {
             map.addControl(new AMap.ToolBar());
         });
         <!-- 上面是定位，下面是打上标记 -->
@@ -204,9 +239,6 @@
         });
     })
 
-    function details(pPostId) {
-        location.href="center/postInfo?pPostId="+pPostId;
-    }
     function get_share_datas_from_html_inapp() {
         var shid = "shdefault",
             urlShid,
@@ -254,6 +286,8 @@
         if (r != null) return unescape(r[2]);
         return null;
     }
+
+
 </script>
 <script>
     var _T = _T || [];

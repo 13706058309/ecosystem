@@ -61,7 +61,7 @@
             <input type="password" name="pwd" id="pwd" placeholder="请输入您的新密码" maxlength="12">
             <input type="password" name="pwd1"  id="pwd1" placeholder="请确认您的密码" maxlength="12">
             <a onclick="findPwd()"><input type="button" value="提交"></a>
-            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a>或者<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
     </div>
 </div>
@@ -69,7 +69,7 @@
     var layer;
     var InterValObj;
     var path = $("#path").val();
-    var curCount=120;
+    var curCount=60;
     layui.use('layer',function () {
         layer = layui.layer;
     })
@@ -120,7 +120,6 @@
     }
 
     function findPwd() {
-        // alert("123213213213213213123");
         var value = $("#mesCode").val();
         if(value=='获取验证码'){
             layer.alert("验证码未发送");
@@ -154,11 +153,11 @@
             success:function(data){
                 if(data==1){
                     layer.msg("修改成功");
-                    curCount=120;
+                    curCount=60;
                     window.clearInterval(InterValObj);//停止计时器
-                    $("#codeBtn").removeAttr("disabled");//启用按钮
-                    $("#codeBtn").css("background-color", "#0D9572");
-                    $("#codeBtn").val("发送验证码");
+                    $("#mesCode").removeAttr("disabled");//启用按钮
+                    $("#mesCode").css("background-color", "#0D9572");
+                    $("#mesCode").val("发送验证码");
                     var phone = $("#phone").val("");
                     var vCode = $("#acthCode").val("");
                     var pwd = $("#pwd").val("");

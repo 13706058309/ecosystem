@@ -319,11 +319,11 @@ public class BackCompServiceImpl implements BackCompService {
     public String changePwd(String newPwd, String pwd, int compID) {
         String findPwd = backUserMapper.findPwd(compID);
         String msg = "";
-//        pwd = MD5Utils.md5(pwd);
+        pwd = MD5Utils.md5(pwd);
         if(!pwd.equals(findPwd)){
             msg = "1";
         }else{
-//            newPwd = MD5Utils.md5(newPwd);
+            newPwd = MD5Utils.md5(newPwd);
             int n = backUserMapper.changePwd(newPwd,compID);
             if(n>0){
                 msg = "2";
@@ -511,7 +511,7 @@ public class BackCompServiceImpl implements BackCompService {
         int provinceID = Integer.parseInt(backUser.getProvince());
         Province province = provinceMapper.findByID(provinceID);
         backUser.setProvince(province.getProvinceName());
-//        backUser.setPwd(MD5Utils.md5(backUser.getPwd()));
+        backUser.setPwd(MD5Utils.md5(backUser.getPwd()));
         int n = backUserMapper.addComp(backUser);
         if(n<0){
             return 4;

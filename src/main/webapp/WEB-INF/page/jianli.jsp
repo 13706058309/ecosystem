@@ -785,8 +785,7 @@
                         <h2 style="color: #0cccb5">我的信息</h2>
                         <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/center/resumeInfo"  >收藏岗位</a></div>
                         <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/center/accountSet" >账号设置</a></div>
-<%--                        <div style="margin-left: 20%"><a href=""  >收藏课程</a></div>--%>
-<%--                        <div style="margin-left: 20%"><a href=""  >观看历史</a></div>--%>
+                        <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/collect/collectionPage"  >关注课程</a></div>
                         <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/zhengshu/zxzsliebiao"  >证书申请</a></div>
                         <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/zhengshu/zxzstushi"  >证书展示</a></div>
                         <div style="margin-left: 20%"><a href="${pageContext.request.contextPath}/zhengshu/zxzskaifa"  >证书项目</a></div>
