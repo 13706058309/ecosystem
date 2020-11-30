@@ -10,7 +10,7 @@
 
     <select id="findcersqlistsize" parameterType="java.util.HashMap" resultType="integer">
         select count(*) from cerRecord c join userInfo u on c.userId=u.userId join field f on c.fileId=f.fieldId join parameter p on c.stateId=p.paramId
-        where 1=1 and c.userId= #{userid} and p.paramType='申请证书状态'  or p.paramType='开发证书状态'
+        where 1=1 and c.userId=#{userid} and p.paramType in ('申请证书状态','开发证书状态')
 
         <if test="fieldName != null ">
             and f.fieldName like #{fieldName}
@@ -30,7 +30,7 @@
 
     <select id="findcersqlist" parameterType="java.util.HashMap" resultMap="cermap">
         select * from cerRecord c join userInfo u on c.userId=u.userId join field f on c.fileId=f.fieldId join parameter p on c.stateId=p.paramId
-        where 1=1 and c.userId= #{userid} and p.paramType='申请证书状态' or p.paramType='开发证书状态'
+        where 1=1 and c.userId=#{userid} and p.paramType in ('申请证书状态','开发证书状态')
 
         <if test="fieldName != null ">
             and f.fieldName like #{fieldName}
@@ -162,6 +162,7 @@ where 1=1  and c.stateId in (29,30,31)
         <result property="trueName" column="trueName"></result>
         <result property="idNumber" column="idNumber"></result>
         <result property="fileId" column="fileId"></result>
+        <result property="userId" column="userId"></result>
         <result property="stateId" column="stateId"></result>
         <result property="beginTime" column="beginTime"></result>
         <result property="cerTestReport" column="cerTestReport"></result>

@@ -109,7 +109,7 @@
         </div>
     </div>
     </div>
-    <div>
+    </div>
 <script type="text/html" id="barDemo">
 
     {{#  if(d.stateId==22){ }}
@@ -185,7 +185,8 @@
                             }
                         });
                     });
-                } else if (obj.event === 'daifukuan') {
+                }
+                else if (obj.event === 'daifukuan') {
                     var fileid = data.field.fieldId;
                     var cerid = data.cerRecordId;
                     console.log("当前id"+fileid);
@@ -213,12 +214,19 @@
                         }
                     });
 
-                } else if (obj.event === 'downxuqiu') {
+                }
+                else if (obj.event === 'downxuqiu') {
                     var fileid = data.field.fieldId;
                     var filename = data.field.fieldName;
                         layer.confirm('是否下载:' + filename + '的证书项目需求', function (index) {
+                            layer.closeAll();
                         location.href="${pageContext.request.contextPath}/zhengshu/filedownload?fileid="+fileid;
 
+                    });
+                }
+                else if (obj.event === 'tiaozhun') {
+                    layer.confirm('是否进入证书项目', function (index) {
+                        location.href="${pageContext.request.contextPath}/zhengshu/zxzskaifa";
                     });
                 }
             });

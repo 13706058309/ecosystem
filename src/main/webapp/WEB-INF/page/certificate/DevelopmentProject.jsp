@@ -210,7 +210,7 @@
                                                     <li class="top">
                                                         <div class="list_time"><em></em>${list.turnoverTime}</div>
                                                         <div class="list_body">
-                                                            <a href="${pageContext.request.contextPath}/rec/userChat?compID=5" target="_blank" style="color: #009688">临时会话</a>
+                                                            <label onclick="linshi(23)" style="color: #009688">临时会话</label>
                                                             <div>1-3工作日请主动联系评审人员</div>
                                                         </div>
                                                     </li>
@@ -426,6 +426,9 @@
             }
 
         });
+    }
+    function linshi(id) {
+        window.open('${pageContext.request.contextPath}/rec/userChat?compID='+id);
     }
     function xiazaipingcebaogao(id) {
         layui.use('layer', function() {
