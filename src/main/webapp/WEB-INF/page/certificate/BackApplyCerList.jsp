@@ -172,6 +172,7 @@
                     });
                 }
                 else  if (obj.event === 'quxiao') {
+                    var cerid = data.cerRecordId;
                     layer.confirm('是否确认申请失败', function (index) {
                         xiugaistandid('24',cerid);
                     });

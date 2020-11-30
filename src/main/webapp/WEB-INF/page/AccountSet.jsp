@@ -39,7 +39,7 @@
     </style>
 </head>
 <body>
-
+<div>
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div id="header" style="background-color: #00c2b3;height: 80px" >
     <div class="inner home-inner" >
@@ -192,7 +192,7 @@
 </div>
 
 </div>
-
+</div>
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>

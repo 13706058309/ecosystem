@@ -632,7 +632,7 @@
                             return confirm("确定要重置密码吗？");
                         },
                         success: function (data) {//请求成功后，返回的结果
-                            alert("重置密码成功,密码为六个1");
+                            alert("重置密码成功,密码为111111");
                             obj.update({
                                 pwd: pwd,
                             });

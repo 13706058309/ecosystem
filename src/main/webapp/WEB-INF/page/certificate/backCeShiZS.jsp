@@ -30,7 +30,35 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="pingce">测评</a>
 
 </script>
+<%--//这里是弹出层的表单信息--%>
+<%--//表单的id用于表单的选择，style是在本页隐藏，只有点击编辑才会弹出--%>
+<div class="layui-row" id="popUpdateTest" style="display:none">
+    <div class="layui-col-md10">
+        <form class="layui-form layui-from-pane"  style="text-align: center;margin-top: 30px">
 
+            <div class="layui-upload">
+                <label class="layui-form-label"> 测试报告(doc|docx):</label>
+                <button type="button" accept="file" style="margin-top: 8px"  class="layui-btn layui-btn-normal"  id="test8">选择文件</button>
+                <br>
+                <button type="button" style="margin-left: 220px" class="layui-btn" id="test9">开始上传</button>
+            </div>
+            <div class="layui-form-item" style="margin-top: 30px">
+                <label class="layui-form-label">成绩(0-50)</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cerTestScore"  required  lay-verify="chengji" autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-top:60px">
+                <div class="layui-input-block" style="margin-left: 20px">
+                    <button class="layui-btn " type="button"  lay-submit lay-filter="demo11">确认</button>
+                    <input type="button" value="取消" class="layui-btn" onclick="guan()">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" value="" id="guankong">
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
@@ -68,34 +96,22 @@
                     var mingzi = data.trueName;
                     var id = data.cerRecordId;
                     layer.confirm('是否下载:' + mingzi + '的证书项目', function (index) {
+                        layer.closeAll();
                         location.href='${pageContext.request.contextPath}/backzhengshu/backzsxmdownload?cerid='+id;
                     });
-                } else if (obj.event === 'pingce') {
+                }
+                else if (obj.event === 'pingce') {
                     var cerid = data.cerRecordId;
                     console.log("asdsadasdasd"+cerid);
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         title: "上传测试结果",
-                        area: ['450px', '400px'],
+                        area: ['500px', '400px'],
                         content: $("#popUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
 //选完文件后不自动上传
-                    upload.render({
-                        elem: '#test8'
-                        ,url: '${pageContext.request.contextPath}/backzhengshu/ceshifileupload?cerid='+cerid //改成您自己的上传接口
-                        ,auto: false
-                        ,bindAction: '#test9'
-                        ,exts: 'doc|docx'
-                        ,done: function(res){
-                            if (res.msg=='success'){
-                                layer.msg('上传成功');
-                                $('#guankong').val("success");
-                            }else if (res.msg=='fail'){
-                                layer.msg('上传失败');
-                            }
-                        }
-                    });
+
                     form.on('submit(demo11)', function(massage) {
                         var guankong = $('#guankong').val();
                         if (guankong=="success"){
@@ -121,6 +137,21 @@
                         }
                     });
                 }
+                upload.render({
+                    elem: '#test8'
+                    ,url: '${pageContext.request.contextPath}/backzhengshu/ceshifileupload?cerid='+cerid //改成您自己的上传接口
+                    ,auto: false
+                    ,bindAction: '#test9'
+                    ,exts: 'doc|docx'
+                    ,done: function(res){
+                        if (res.msg=='success'){
+                            layer.msg('上传成功');
+                            $('#guankong').val("success");
+                        }else if (res.msg=='fail'){
+                            layer.msg('上传失败');
+                        }
+                    }
+                });
             });
 
             $('.demoTable .layui-btn').on('click', function () {
@@ -137,35 +168,7 @@
         });
     }
 </script>
-<%--//这里是弹出层的表单信息--%>
-<%--//表单的id用于表单的选择，style是在本页隐藏，只有点击编辑才会弹出--%>
-<div class="layui-row" id="popUpdateTest" style="display:none">
-    <div class="layui-col-md10">
-        <form class="layui-form layui-from-pane"  style="text-align: center;margin-top: 30px">
 
-            <div class="layui-upload">
-                <label class="layui-form-label"> 测试报告(doc|docx):</label>
-                <button type="button" style="margin-left: -170px;margin-top: 8px"  class="layui-btn layui-btn-normal"  id="test8">选择文件</button>
-                <br>
-                <button type="button" style="margin-left: 220px" class="layui-btn" id="test9">开始上传</button>
-            </div>
-            <div class="layui-form-item" style="margin-top: 30px">
-                <label class="layui-form-label">成绩(0-50)</label>
-                <div class="layui-input-block">
-                    <input type="text" name="cerTestScore"  required  lay-verify="chengji" autocomplete="off" placeholder="请输入测试成绩" class="layui-input">
-                </div>
-            </div>
-
-            <div class="layui-form-item" style="margin-top:60px">
-                <div class="layui-input-block" style="margin-left: 20px">
-                    <button class="layui-btn " type="button"  lay-submit lay-filter="demo11">确认</button>
-                    <input type="button" value="取消" class="layui-btn" onclick="guan()">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<input type="hidden" value="" id="guankong">
 
 <script>
     function guan(){
