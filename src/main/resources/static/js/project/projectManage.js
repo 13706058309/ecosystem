@@ -15,10 +15,10 @@ $(function () {
                 },page: {curr:1}
             });
         });
-        laypage.render({
-            elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
-            ,count: 50 //数据总数，从服务端得到
-        });
+        // laypage.render({
+        //     elem: 'page'
+        //     ,count: 50 //数据总数，从服务端得到
+        // });
         //第一个实例
         table.render({
             elem: '#demo'
@@ -51,7 +51,7 @@ $(function () {
             console.log(layEvent);
             if(layEvent === 'detail'){
                 // layer.msg('查看操作');
-                location.href=path+"/project/projectDetail"
+                location.href=path+"/project/projectEvolve?projectId="+data.projectId;
             }else if (layEvent === 'downProject'){
                 location.href=path+data.projectUrl;
             }else if(layEvent === 'payMoney'){
@@ -103,7 +103,7 @@ $(function () {
                         dataType: "text",
                         success: function (data) {
                             if (data.toUpperCase() === "SUCCESS") {
-                                layer.confirm("放弃成功,费用已退还到您的账户!");
+                                layer.confirm("放弃成功,已交费用将在1~3个工作日内退还到您的账户!");
                                 table.reload("demo", {
                                     url: path + '/project/findProjectAll',
                                     where: {
@@ -117,6 +117,8 @@ $(function () {
                         }
                     });
                 }
+            }else if(layEvent==='chooseUser'){
+                location.href=path+"/project/projectEvolve?projectId="+data.projectId;
             }
         });
     });
@@ -126,26 +128,6 @@ function initUserInfo() {
     document.getElementById("userInfoForm").reset();
 }
 
-// function changeUserState(obj,code) {
-//     var obj=obj;
-//     var code=code;
-//     $.ajax({
-//         url:path+"/userManager/changeUserState",
-//         type:'post',
-//         data:{"user":JSON.stringify(obj.data),"code":code},
-//         dataType:'json',
-//         success:function (res) {
-//             console.log(res);
-//             if (res.code=='success'){
-//                 obj.data=res.userInfo;
-//                 console.log(res.userInfo);
-//                 obj.update(obj.data);
-//                 layer.alert("修改成功！")
-//             }else{
-//                 layer.alert("修改失败！")
-//             }
-//         }
-//     })
-// }
+
 
 

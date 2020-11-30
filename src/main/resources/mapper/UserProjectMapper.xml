@@ -9,6 +9,14 @@
         values (#{userId}, #{projectId}, #{payMoney}, #{orderNum})
     </insert>
 
+    <select id="findUserByProjectId" resultType="com.cykj.entity.Resume">
+        select r.* from userProject uP
+        left join userInfo uI on uP.userId=uI.userId
+        left join resume r on uI.userId=r.userId
+        where projectId=#{projectId} and uP.paramId=#{paramId}
+    </select>
+
+
     <select id="findUserProjectByPage" resultMap="userProjectMap">
         select uP.*,bU.*,p.*,pI.*,pIP.paramId pIPId,pIP.paramName pIPName,pIP.paramType pIPType from userProject uP
         left join userInfo uI on uP.userId=uI.userId
@@ -73,21 +81,28 @@
 
 
     <select id="findUserProjectAll" parameterType="com.cykj.entity.UserProject" resultMap="userProjectMap">
-        select uP.*,bU.*,p.*,pI.*,pIP.paramId pIPId,pIP.paramName pIPName,pIP.paramType pIPType from userProject uP
+        select uP.*,bU.*,p.*,pI.*,pIP.paramId pIPId,pIP.paramName pIPName,pIP.paramType pIPType,pF.paramId as fileId,pF.paramName as fieldName,pF.paramType as paramType from userProject uP
         left join userInfo uI on uP.userId=uI.userId
         LEFT JOIN projectInfo pI on uP.projectId = pI.projectId
         left join backUser bU on bU.bUserId=pI.bUserId
         left join parameter p on uP.paramId = p.paramId
         left join parameter pIP on  pIP.paramId=pI.states
+        left join parameter pF on pI.fieldId=pF.paramId
         WHERE 1=1
         <if test="id !=null and id>0">
             and uP.id=#{id}
         </if>
+
         <if test="userId !=null and userId>0">
             and uP.userId=#{userId}
         </if>
+
         <if test="orderNum !=null ">
             and  uP.orderNum=#{orderNum}
+        </if>
+
+        <if test="paramId !=null ">
+            and  uP.paramId=#{paramId}
         </if>
 
         <if test="projectId !=null and projectId>0">
@@ -98,6 +113,7 @@
 
     <resultMap id="userProjectMap" type="com.cykj.entity.UserProject">
         <id property="id" column="id"></id>
+        <result property="userId" column="userId"></result>
         <result property="orderNum" column="orderNum"></result>
         <result property="payMoney" column="payMoney"></result>
         <result property="appTime" column="appTime"></result>
@@ -105,6 +121,7 @@
         <result property="paramId" column="paramId"></result>
         <association property="projectInfo" javaType="com.cykj.entity.ProjectInfo">
             <id property="projectId" column="projectId"></id>
+            <result property="userId" column="userId"></result>
             <result property="bUserId" column="bUserID"></result>
             <result property="projectName" column="projectName"></result>
             <result property="projectSynopsis" column="projectSynopsis"></result>
@@ -124,6 +141,11 @@
                 <id property="paramId" column="pIPId"></id>
                 <result property="paramName" column="pIPName"></result>
                 <result property="paramType" column="pIPName"></result>
+            </association>
+            <association property="field" javaType="com.cykj.entity.Parameter">
+                <id property="paramId" column="fieldId"></id>
+                <result property="paramName" column="fieldName"></result>
+                <result property="paramType" column="fieldType"></result>
             </association>
         </association>
         <association property="states" javaType="com.cykj.entity.Parameter">

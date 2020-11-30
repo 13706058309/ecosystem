@@ -1,6 +1,8 @@
 package com.cykj.service;
 
 import com.alipay.api.AlipayApiException;
+import com.cykj.entity.Resume;
+import com.cykj.entity.UserInfo;
 import com.cykj.entity.UserProject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,4 +76,12 @@ public interface UserProjectService {
      * @param session
      */
     public String refund(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException, AlipayApiException;
+
+    /**
+     * 查询项目的申请人
+     * @param projectId
+     * @return
+     */
+    List<Resume> findUserByProjectInfo(String projectId, String paramId);
+
 }

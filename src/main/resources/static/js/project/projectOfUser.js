@@ -210,6 +210,7 @@ function updateProjectFile(){
                     var layer=layui.layer;
                     layer.msg("上传成功，请等待对方验收！");
                     closeUp();
+                    findProjectOrder(1,5);
                 })
 
             }
@@ -246,12 +247,7 @@ function delOrder(id) {
             success:function (res) {
                 if (res=="success"){
                     layer.msg("已删除！");
-                    table.reload("demo",{
-                        url:path+'/project/findProjectAll'
-                        ,where:{
-                            "stateId":$(this).children().val()
-                        },page: {curr:1}
-                    });
+                    findProjectOrder(1,5);
                 }
             }
         });
@@ -287,7 +283,7 @@ function getPage(){
  */
 function payMoney(orderNum,payMoney){
     console.log(orderNum   +"  "  + payMoney);
-    location.href= path +"/userProject/refund?WIDout_trade_no="+orderNum+'&WIDtotal_amount='+payMoney+'&WIDsubject='+"用户承接项目保证金";
+    location.href= path +"/userProject//alipayTradePagePay?WIDout_trade_no="+orderNum+'&WIDtotal_amount='+payMoney+'&WIDsubject='+"用户承接项目保证金";
 }
 
 /**
@@ -301,14 +297,11 @@ function abandonProject(orderNum,payMoney) {
                 url: path + "/userProject/refund?WIDout_trade_no=" + orderNum + '&WIDrefund_amount=' + payMoney,
                 dataType: "text",
                 success: function (data) {
-                    if (data.toUpperCase() == "SUCCESS") {
-                        layer.confirm("放弃成功,保证金将在1~3个工作日内退还到您的账户!", function () {
-                            location.href = path + "/userProject/projectOfUser";
-                        }, function () {
-                            location.href = path + "/userProject/projectOfUser";
-                        });
+                    if (data.toUpperCase() === "SUCCESS") {
+                        alert("放弃成功,保证金将在1~3个工作日内退还到您的账户!");
+                        findProjectOrder(1,5);
                     }else{
-                        layer.confirm("放弃失败，请刷新页面后重试！");
+                        layer.msg("放弃失败，请刷新页面后重试！");
                     }
                     console.log(data);
                 }
