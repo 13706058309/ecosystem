@@ -30,7 +30,7 @@ websocket.onmessage = function (event) {
 
     var messageJson = eval("(" + event.data + ")");
     var curID = $("#compID").val();
-    var curImg = $("#curImg").val();
+    var curImg = $("#bPhoto").val();
     //普通消息(私聊)
 
     //来源用户
