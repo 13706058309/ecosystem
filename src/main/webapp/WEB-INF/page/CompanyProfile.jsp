@@ -27,6 +27,21 @@
 <body class="page-white">
 
 <div id="wrap">
+    <%--    <script>--%>
+    <%--        var staticPath = 'https://static.zhipin.com/v2';--%>
+    <%--        _PAGE = {--%>
+    <%--            checkMobileUrl: "/registe/sendSms.json",--%>
+    <%--            regMobileUrl: "/registe/save.json",--%>
+    <%--            loginMobileUrl: "/login/phone.json",--%>
+    <%--            loginAccountUrl: "/login/account.json",--%>
+    <%--            getRandomKeyUrl: "/captcha/randkey.json",--%>
+    <%--            verifyImgUrl: "/captcha/?randomKey={randomKey}",--%>
+    <%--            getPositionUrl: "/user/position.json",--%>
+    <%--            citySiteName: "全国站",--%>
+    <%--            citySiteCode: "100010000",--%>
+    <%--            skillsUrl: "/common/data/positionSkill"--%>
+    <%--        }--%>
+    <%--    </script>--%>
     <div id="header" style="background-color: #00c2b3;height: 95px">
         <div class="inner home-inner">
             <div class="logo" style="width: 150px;height: 70px">
@@ -94,34 +109,6 @@
         </div>
     </div>
 
-    <input id="user" value="${qUser}" type="hidden">
-
-    <script>
-
-        function judge() {
-            var user = $("#user").val()
-            if (user == "") {
-                console.log("为空")
-                return false
-            } else {
-                console.log("不为空")
-                return true;
-            }
-        }
-
-        function goutong() {
-            alert("11111111111111111")
-            if (judge()) {
-                window.open('${pageContext.request.contextPath}/rec/userChat?compID=
-                ${backUser.bUserId}
-            } else {
-                alert("请先登入")
-            }
-        }
-
-    </script>
-
-
     <div class="job-box">
         <div class="inner home-inner">
             <div class="job-detail">
@@ -156,17 +143,14 @@
                         <div class="job-list">
                             <ul>
                                 <c:forEach items="${postPositions}" var="pps">
-                                    <li>
+                                    <li    onclick="window.open('${pageContext.request.contextPath}/center/postInfo?lid=${pps.pPostId}')">
                                         <div data-lid="${pps.pPostId}" data-jid="5c76e78924d36df41nN40927F1I~"
                                              ka="comp_desc_joblist_7">
                                             <div class="job-primary">
                                                 <div class="info-primary">
                                                     <h3 class="name">
                                                         <div class="title-box">
-                                                                <%--                                                            onclick="details(${pps.pPostId})"--%>
-                                                            <a data-lid="${pps.pPostId}" target="_blank"
-                                                               class="job-title"
-                                                               href="${pageContext.request.contextPath}/center/postInfo?lid=${pps.pPostId}">${pps.postName}</a>
+                                                            <a target="_blank" class="job-title">${pps.postName}</a>
                                                             <span class="job-area">[${pps.workCity}]</span>
                                                             <span class="job-pub-time"></span>
                                                         </div>
@@ -220,6 +204,7 @@
         </dd>
     </dl>
     <label><span>展开</span><i class="fz fz-slidedown"></i></label>
+    <input id="user" value="${qUser}" type="hidden">
 </div>
 
 
@@ -228,7 +213,6 @@
 <iframe style="display: none;" name="zhipinFrame"></iframe>
 <%--<script src="https://webapi.amap.com/maps?v=1.3&amp;key=60085a6ee91616cf689ce0321e1f30c4&amp;plugin=AMap.Geocoder"></script>--%>
 <input type="hidden" id="page_key_name" value="cpc_company_intro">
-
 <script>
 
     $(function () {
@@ -254,10 +238,6 @@
             map: map
         });
     })
-
-    function details(pPostId) {
-        location.href = ${pageContext.request.contextPath}+"/center/postInfo?lid=" + pPostId;
-    }
 
     function get_share_datas_from_html_inapp() {
         var shid = "shdefault",
