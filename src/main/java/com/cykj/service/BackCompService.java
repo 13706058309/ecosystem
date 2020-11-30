@@ -33,6 +33,8 @@ public interface BackCompService {
     int changePostPositionStand(Map<String,Object> map);
     //查找企业收到的简历
     TableInfo findAllResume(Map<String,Object> map);
+    //查询符合过滤条件的简历
+    TableInfo findScreeResume(Map<String,Object> map);
     //批量改变投机企业简历的状态
     int changeDeliStand(List<Delivery> list,int standID);
     //改变企业简历状态

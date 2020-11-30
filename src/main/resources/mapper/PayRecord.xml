@@ -5,6 +5,6 @@
 <mapper namespace="com.cykj.mapper.PayRecordMapper">
     <insert id="addPayRecord" parameterType="com.cykj.entity.PayRecord">
         insert into payRecord (score, compID, detail, state) VALUES
-        (#{score},#{compID},#{detail},#{state})
+        (#{score},#{compId},#{detail},#{state})
     </insert>
 </mapper>
