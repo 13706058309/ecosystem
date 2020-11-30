@@ -4,8 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.JianliMapper">
     <select id="resume" parameterType="java.lang.Long" resultMap="findResume">
-        select r.*,we.*,pe.*,eb.*,e.education   from
+        select r.*,we.*,pe.*,eb.*,e.education,p.*   from
             resume r left join education e on r.educationid=e.educationid
+                       left join parameter p on r.jobStandId=p.paramId
                         left join resumeEduu re on r.resumeID=re.resumeID left join educationalBackground eb on re.ebID=eb.ebID
                             left join resumePro rp on r.resumeID=rp.resumeID left join projectExperience pe on rp.peID=pe.peID
                                 left join resumeWork rw on r.resumeID=rw.resumeID left join workExperience we on rw.weID=we.weID
@@ -36,6 +37,12 @@
         <association property="education" column="education" javaType="com.cykj.entity.Education">
             <id property="educationId" column="educationId"></id>
             <result property="education" column="education"></result>
+        </association>
+        <association property="parameter" column="parameter" javaType="com.cykj.entity.Parameter">
+            <id property="paramId" column="paramId"></id>
+            <result property="paramName" column="paramName"></result>
+            <result property="paramType" column="paramType"></result>
+            <result property="paramValues" column="paramValues"></result>
         </association>
         <collection property="educationalBackgrounds" ofType="com.cykj.entity.EducationalBackground">
             <id property="ebId" column="ebId"></id>
@@ -119,7 +126,8 @@
     <update id="resumeUpdate" parameterType="com.cykj.entity.Resume">
         update resume  set realName=#{realName},clan=#{clan},politicalStatus=#{politicalStatus}
         ,contactInfo=#{contactInfo},birthday=#{birthday},educationId=#{educationId},
-           address=#{address},school=#{school},profession=#{profession} where resumeId=#{resumeId}
+           address=#{address},school=#{school},profession=#{profession}
+           ,wrokYear=#{wrokYear},jobStandId=#{jobStandId},industry=#{industry},sex=#{sex} where resumeId=#{resumeId}
     </update>
 
     <update id="workUpdate" parameterType="com.cykj.entity.WorkExperience">
@@ -150,10 +158,10 @@
 
 <!--    感兴趣岗位-->
     <select id="findPosts" parameterType="java.lang.Integer" resultMap="findPosition">
-        select pp.*,b.*  from userInfo u left join postCellec p on u.userId=p.userID
+        select pp.*,b.*  from postCellec p left join userInfo u  on u.userId=p.userID
             left join postPosition pp on p.pPostID=pp.pPostID
             left join backUser b on pp.companyId=b.bUserId
-            where u.userId=#{userId} limit #{page},#{size};
+            where p.userId=#{userId}  order by  collectime desc  limit #{page},#{size};
     </select>
 
     <!--    查找岗位-->
@@ -184,9 +192,9 @@
 <!--        </association>-->
 <!--    </resultMap>-->
     <select id="findPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
-        select pp.*,b.*  from userInfo u left join postCellec p on u.userId=p.userID
+        select pp.*,b.*  from postCellec p left join userInfo u on u.userId=p.userID
             left join postPosition pp on p.pPostID=pp.pPostID
-            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId} ;
+            left join backUser b on pp.companyId=b.bUserId where p.userId=#{userId} ;
     </select>
 <!--    删除感兴趣岗位-->
     <delete id="pcDel" parameterType="java.lang.Integer">
@@ -206,10 +214,10 @@
 <!--    </delete>-->
 <!--    投递简历-->
     <select id="deliveryPosts" parameterType="java.lang.Integer" resultMap="findPosition">
-        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+        select pp.*,b.*  from delivery d left join userInfo u on u.userId=d.userID
             left join postPosition pp on d.pPostID=pp.pPostID
             left join backUser b on pp.companyId=b.bUserId
-            where u.userId=#{userId} limit #{page},#{size};
+            where d.userId=#{userId} order by  delitime desc limit #{page},#{size};
     </select>
     <resultMap id="findPosition" type="com.cykj.entity.PostPosition">
         <id property="pPostId" column="pPostId"></id>
@@ -244,22 +252,39 @@
     </resultMap>
 
     <select id="deliveryInfo" parameterType="java.lang.Integer" resultMap="findiobs">
-        select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
+        select pp.*,b.*,d.*,p.*  from delivery d left join userInfo u on u.userId=d.userID
             left join parameter p on d.deliStandId=p.paramId
             left join postPosition pp on d.pPostID=pp.pPostID
-            left join backUser b on pp.companyId=b.bUserId where  u.userId=#{userId}  limit #{page},#{limit};
+            left join backUser b on pp.companyId=b.bUserId where  d.userId=#{userId}
+              order by  delitime desc limit #{page},#{limit};
     </select>
     <select id="deliveryInfoCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
-        select pp.*,b.*,d.*,p.*  from userInfo u left join delivery d on u.userId=d.userID
+        select pp.*,b.*,d.*,p.*  from delivery d left join userInfo u on u.userId=d.userID
             left join parameter p on d.deliStandId=p.paramId
             left join postPosition pp on d.pPostID=pp.pPostID
-            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId} ;
+            left join backUser b on pp.companyId=b.bUserId where d.userId=#{userId} ;
+    </select>
+
+
+    <select id="communication" parameterType="java.lang.Integer" resultType="com.cykj.entity.BackUser">
+
+
+    select u.* from
+    (select max(recoredTime),userID,max(compRecID) as cID from compRecord where userID = #{userId} group by tCompID) t
+       left join compRecord r on t.cID = r.compRecID left join backUser u on r.tCompID = u.bUserID order by recoredTime desc  limit #{page},#{size};
+    </select>
+    <select id="communicationCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.BackUser">
+
+select u.* from
+    (select max(recoredTime),userID,max(compRecID) as cID from compRecord where userID = #{userId} group by tCompID) t
+       left join compRecord r on t.cID = r.compRecID left join backUser u on r.tCompID = u.bUserID order by recoredTime desc ;
+
     </select>
 
     <select id="deliveryPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
-        select pp.*,b.*  from userInfo u left join delivery d on u.userId=d.userID
+        select pp.*,b.*  from delivery d left join userInfo u on u.userId=d.userID
             left join postPosition pp on d.pPostID=pp.pPostID
-            left join backUser b on pp.companyId=b.bUserId where u.userId=#{userId};
+            left join backUser b on pp.companyId=b.bUserId where d.userId=#{userId};
     </select>
 
 
@@ -357,7 +382,7 @@
                 <if test="position!=null" >
                     and  p.postName=#{position}
                 </if>
-
+            order by  clicks desc
               limit #{page},#{limit}
     </select>
     <resultMap id="findiobs" type="com.cykj.entity.PostPosition">
@@ -487,4 +512,14 @@
         select * from city  where
     CONV(HEX(left(CONVERT(cityName USING gbk),1)),16,10) between #{begin} and #{end} ;
     </select>
+
+
+<!--    岗位被点击次数-->
+    <update id="clicks" parameterType="java.lang.Integer">
+        update postPosition set clicks=clicks+1 where pPostId=#{pPostId};
+    </update>
+    <!--    岗位收到简历次数-->
+    <update id="postNum" parameterType="java.lang.Integer">
+        update postPosition set postNum=postNum+1 where pPostId=#{pPostId};
+    </update>
 </mapper>

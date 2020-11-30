@@ -183,7 +183,7 @@
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
 
-            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
         </div>
         <div class="nav" style="margin-top: 20px">
             <ul>
@@ -305,7 +305,7 @@
                                 </div>
 
                             </div>
-                            <p class="ipt-wrap"><input type="text" id="search" name="query" ka="search-keyword" value="${search}"
+                            <p class="ipt-wrap"><input type="text" id="search" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" name="query" ka="search-keyword" value="${search}"
                                                        autocomplete="off" class="ipt-search" maxlength="50" placeholder="搜索职位"></p>
                         </div>
                         <input type="hidden" name="city" class="city-code" value="101230200">
@@ -577,7 +577,7 @@
                                                         </h3>
                                                     </div></a>
                                                     <c:if test="${not empty qUser}">
-                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('/springboot/rec/userChat?compID=${job.backUser.bUserId}')"
+                                                    <button class="btn btn-startchat" href="javascript:;" onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${job.backUser.bUserId}')"
                                                             data-url="/wapi/zpgeek/friend/add.json?jobId=ef44ec169fb734ba33J53dy_EVo~&amp;lid=8YjKaEC3M3L.search.1"
                                                             redirect-url="/web/geek/chat?id=73a464069ec2b4ca0XZ93928EVo~">
                                                         <img class="icon-chat icon-chat-hover"
@@ -700,7 +700,9 @@
                                 </c:forEach></c:if>
                         </div>
                     </div>
+
                 </div>
+
             </div>
 
 <%--            <div class="city-wrapper">--%>
@@ -736,6 +738,22 @@
 <%--            </div>--%>
         </div>
     </div>
+
+</div>
+<div class="links links-friends">
+    <dl class="links-item">
+        <dt>友情链接：</dt>
+        <dd>
+            <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+            <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+            <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+            <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+            <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+            <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+            <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+            <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+        </dd>
+    </dl>
 </div>
 <script>
     $(document).ready(function(){
@@ -780,37 +798,37 @@
     function workYear(condition) {
         findworkYear=condition.innerText;
         //+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function workCity(condition) {
         findworkYear=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
 
     }
     function education(condition) {
         findEducation=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
 
     }
     function salary(condition) {
         findSalary=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function financing(condition) {
         findFinanStage=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function scale(condition) {
         findScale=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function releaseTime(condition) {
         findReleaseTime=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function findCity(condition) {
         findWorkCity=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     // function findPosition(condition) {
     //     findposition=condition.innerText;
@@ -948,8 +966,10 @@
             $(".qrm-border3").hide();
             $(".qrm-pinming").css("border","1px solid #ddd");
             $(".qrm-pinming").css("background-image","url(images/qrm-arrow-down.png)");
+            lev3=lev3.replace(/\+/g,"%2B");
+            lev3=lev3.replace(/\#/g,"%23");
             findposition=lev3;
-            location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition;
+            location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition+'';
 
             if($(this).parent().parent().next().children(".qrm-lev").html()==""){
                 // 去掉输入框的高亮状态

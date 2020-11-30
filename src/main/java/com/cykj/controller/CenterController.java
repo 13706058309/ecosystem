@@ -2,8 +2,10 @@ package com.cykj.controller;
 
 
 import com.cykj.entity.*;
+import com.cykj.log.Loger;
 import com.cykj.service.ResumeService;
 import com.cykj.service.impl.ResumeServiceImp;
+import com.cykj.util.MD5Utils;
 import com.cykj.utils.PhoneCodeUtil;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -60,10 +62,13 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.findPosts(userId,page,limit);
         List<PostPosition> postsCount=resumeService.findPostsCount(userId);
         int count=postsCount.size();
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",1);
+        }
 
         req.setAttribute("posts",posts);
         req.setAttribute("count",count);
@@ -83,10 +88,13 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.deliveryPosts(userId,page,limit);
         List<PostPosition> postsCount=resumeService.deliveryPostsCount(userId);
         int count=postsCount.size();
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",2);
+        }
 
         req.setAttribute("postss",posts);
         req.setAttribute("count",count);
@@ -106,7 +114,7 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.findPosts(userId,page,limit);
         List<PostPosition> postsCount=resumeService.findPostsCount(userId);
         int count=postsCount.size();
@@ -129,18 +137,43 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
-        List<PostPosition> posts=resumeService.findPosts(userId,page,limit);
-        List<PostPosition> postsCount=resumeService.findPostsCount(userId);
+        int limit=10;
+        List<BackUser> posts=resumeService.communication(userId,page,limit);
+        List<BackUser> postsCount=resumeService.communicationCount(userId);
         int count=postsCount.size();
-
-        req.setAttribute("posts",posts);
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",4);
+        }
+        req.setAttribute("postssss",posts);
         req.setAttribute("count",count);
         req.setAttribute("limit",limit);
         req.setAttribute("curr",curr);
         System.out.println(new Gson().toJson(posts));
         return "resumeInfo";
     }
+    @RequestMapping("/communicationPage")
+    public String communicationPage(HttpServletRequest req,int curr,int limit){
+        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+        if (user==null){
+
+        }else {
+            userId= (int) user.getUserId();
+            System.out.println(new Gson().toJson(user));
+        }
+        List<BackUser> posts=resumeService.communication(userId,(curr-1)*limit,limit);
+        List<BackUser> postsCount=resumeService.communicationCount(userId);
+        int count=postsCount.size();
+
+        req.setAttribute("postssss",posts);
+        req.setAttribute("count",count);
+        req.setAttribute("limit",limit);
+        req.setAttribute("curr",curr);
+        System.out.println(new Gson().toJson(posts));
+        return "resumeInfo";
+    }
+
+
+
     @RequestMapping("/resumeCommitPage")
     public String resumeCommitPage(HttpServletRequest req,int curr,int limit){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
@@ -173,10 +206,13 @@ public class CenterController {
         }
         int page=0;
         int curr=1;
-        int limit=2;
+        int limit=10;
         List<PostPosition> posts=resumeService.deliveryInfo(userId,page,limit);
         List<PostPosition> postsCount=resumeService.deliveryInfoCount(userId);
         int count=postsCount.size();
+        if (posts.size()==0){
+            req.setAttribute("zanwu1",3);
+        }
 
         req.setAttribute("postsss",posts);
         req.setAttribute("count",count);
@@ -230,6 +266,7 @@ public class CenterController {
 
 //    取消岗位收藏
     @RequestMapping("/postDel")
+//    @Loger(operationType = "取消岗位收藏",operationName = "取消岗位收藏")
     public @ResponseBody String postDel(int pPostId){
 //        System.out.println(new Gson().toJson(resume));
 
@@ -242,6 +279,7 @@ public class CenterController {
     }
 //    添加岗位收藏
     @RequestMapping("/postInsert")
+//    @Loger(operationType = "添加岗位收藏",operationName = "添加岗位收藏")
     public @ResponseBody String postInsert(int pPostId){
 //        System.out.println(new Gson().toJson(resume));
 
@@ -255,19 +293,21 @@ public class CenterController {
 
 //    修改密码
     @RequestMapping("/savePwd")
+    //    @Loger(operationType = "修改密码",operationName = "修改密码")
     public @ResponseBody String savePwd(HttpServletRequest req,String oldpwd,String newpwd){
-        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
-        userId= (int) user.getUserId();
+//        UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
+//        userId= (int) user.getUserId();
         int n=0;
         Map map=new HashMap();
         map.put("userId",userId);
-        map.put("oldpwd",oldpwd);
-        map.put("newpwd",newpwd);
+        map.put("oldpwd",MD5Utils.md5(oldpwd));
+        map.put("newpwd",MD5Utils.md5(newpwd));
         UserInfo userInfo=resumeService.findpwd(map);
-        req.getSession().removeAttribute("qUser");
+
         if (null==userInfo){
             return "lose";
         }else {
+            req.getSession().removeAttribute("qUser");
             n=resumeService.savepwd(map);
         }
         String msg="";
@@ -280,6 +320,7 @@ public class CenterController {
 
 //    隐私设置
     @RequestMapping("/saveShow")
+    //    @Loger(operationType = "隐私设置",operationName = "隐私设置")
     public @ResponseBody String saveShow(HttpServletRequest req,String isOpen){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -332,6 +373,7 @@ public class CenterController {
 
 //    简历信息修改
     @RequestMapping("/userInfoUpdate")
+    //    @Loger(operationType = "简历信息修改",operationName = "简历信息修改")
     public @ResponseBody String userInfoUpdate(HttpServletRequest req,Resume resume,String education,String time){
 //        System.out.println(new Gson().toJson(resume));
 //        String time=new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").format(updateTime);
@@ -355,6 +397,7 @@ public class CenterController {
 
 //    工作经历
     @RequestMapping("/historyCommit")
+    //    @Loger(operationType = "工作经历添加",operationName = "工作经历添加")
     public @ResponseBody String historyCommit(HttpServletRequest req,WorkExperience workExperience,String time){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -371,6 +414,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/historySave")
+    //    @Loger(operationType = "工作经历修改",operationName = "工作经历修改")
     public @ResponseBody String historySave(HttpServletRequest req,WorkExperience workExperience,String time){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
@@ -387,6 +431,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/historyDelete")
+    //    @Loger(operationType = "工作经历删除",operationName = "工作经历删除")
     public @ResponseBody String historyDelect(HttpServletRequest req,int weId,String time){
         Resume resume=new Resume();
         req.setAttribute("updateTime",time);
@@ -403,6 +448,7 @@ public class CenterController {
 
 //    项目经历
     @RequestMapping("/projectCommit")
+    //    @Loger(operationType = "项目经历添加",operationName = "项目经历添加")
     public @ResponseBody String projectCommit(HttpServletRequest req,ProjectExperience projectExperience,String time){
         Resume resume=new Resume();
         req.setAttribute("updateTime",time);
@@ -418,6 +464,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/projectSave")
+    //    @Loger(operationType = "项目经历修改",operationName = "项目经历修改")
     public @ResponseBody String projectSave(HttpServletRequest req,ProjectExperience projectExperience,String time){
         Resume resume=new Resume();
         req.setAttribute("updateTime",time);
@@ -432,6 +479,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/projectDelete")
+    //    @Loger(operationType = "项目经历删除",operationName = "项目经历删除")
     public @ResponseBody String projectDelect(int peId,String time){
         Resume resume=new Resume();
         resume.setUpdateTime(time);
@@ -448,6 +496,7 @@ public class CenterController {
 
 //    教育背景
     @RequestMapping("/educationCommit")
+    //    @Loger(operationType = "添加经历修改",operationName = "添加经历修改")
     public @ResponseBody String educationCommit(EducationalBackground educationalBackground,String time){
 //        System.out.println(new Gson().toJson(educationalBackground));
         Resume resume=new Resume();
@@ -461,6 +510,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/educationSave")
+    //    @Loger(operationType = "教育背景修改",operationName = "教育背景修改")
     public @ResponseBody String educationSave(EducationalBackground educationalBackground,HttpServletRequest req,String time){
 //        System.out.println(new Gson().toJson(educationalBackground));
         Resume resume=new Resume();
@@ -474,6 +524,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/educationDelete")
+    //    @Loger(operationType = "教育背景删除",operationName = "教育背景删除")
     public @ResponseBody String educationDelect(int ebId,String time){
         System.out.println("edid="+ebId);
 
@@ -488,6 +539,7 @@ public class CenterController {
         return msg;
     }
     @RequestMapping("/expectWorkUpdate")
+    //    @Loger(operationType = "期望工作修改",operationName = "期望工作修改")
     public @ResponseBody String expectWorkUpdate(Resume resume,HttpServletRequest req,String time){
 //        Resume resume=new Resume();
 
@@ -502,6 +554,7 @@ public class CenterController {
     }
 
     @RequestMapping("/selfEvaUpdate")
+    //    @Loger(operationType = "个人优势修改",operationName = "个人优势修改")
     public @ResponseBody String selfEvaUpdate(Resume resume,HttpServletRequest req,String time){
 //        Resume resume=new Resume();
 
@@ -528,7 +581,7 @@ public class CenterController {
         map.put("workCity",workCity);
         map.put("page",page);
         map.put("limit",limit);
-        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+        if (null==findPosition||findPosition.trim().equals("")||findPosition.equals("职位类型")){
             position="职位类型";
         }else if (findPosition.equals("不限")){
             position=findPosition;
@@ -610,11 +663,7 @@ public class CenterController {
         releaseTime="发布时间";
         search="搜索职位";
         position="职位类型";
-//        if (null==search||search.equals("".trim())){
-//
-//        }else {
-//            map.put("search","%"+search+"%");
-//        }
+
 
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
@@ -650,25 +699,26 @@ public class CenterController {
         req.setAttribute("pt",pt);
         req.setAttribute("wz",wz);
 
-
+        System.out.println("77777777"+findSearch.trim()+"88888888");
         int page=0;
         int curr=1;
         int limit=10;
         List<Industry> industrys=resumeService.industrys();
         req.setAttribute("industrys",industrys);
         Map map=new HashMap();
-        if (findWorkCity.equals("全国")){
-
+        if (null==findWorkCity||findWorkCity.equals("全国")){
+            workCity="全国";
+            findWorkCity="全国";
         }else {
             map.put("workCity",findWorkCity);
         }
         search=findSearch;
-        if (findSearch.equals("".trim())){
-
+        if (null==findSearch||findSearch.trim().equals("")){
+            search="";
         }else {
             map.put("search","%"+findSearch+"%");
         }
-        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+        if (null==findPosition||findPosition.trim().equals("")||findPosition.equals("职位类型")){
             position="职位类型";
         }else {
             position=findPosition;
@@ -738,7 +788,7 @@ public class CenterController {
         System.out.println(findWorkCity+"!!!!!!!!!");
         System.out.println(findEducation+"??????????");
         search=findSearch;
-        if (findSearch.equals("".trim())||findSearch==null){
+        if (findSearch.trim().equals("")||findSearch==null){
 
         }else {
             map.put("search","%"+findSearch+"%");
@@ -906,7 +956,7 @@ public class CenterController {
 //        int limit=2;
         Map map=new HashMap();
         System.out.println(findPosition+"??????????????!!!!!!!!!!");
-        if (null==findPosition||findPosition.equals("".trim())||findPosition.equals("职位类型")){
+        if (null==findPosition||findPosition.trim().equals("")||findPosition.equals("职位类型")){
             position="职位类型";
         }else if (findPosition.equals("不限")){
             position=findPosition;
@@ -916,9 +966,9 @@ public class CenterController {
         }
         System.out.println(position+"11111111111??????????????");
         String nowCity=(String) req.getSession().getAttribute("nowCity");
-        if (findWorkCity==null||findWorkCity.equals("".trim())){
+        if (findWorkCity==null||findWorkCity.trim().equals("")){
             System.out.println("99999");
-            if (findWorkCity==null||findWorkCity.equals("".trim())){
+            if (findWorkCity==null||findWorkCity.trim().equals("")){
                 workCity="全国";
             }else {
                 workCity=nowCity;
@@ -933,8 +983,9 @@ public class CenterController {
         }
         System.out.println(workCity+"???????????????????");
         search=findSearch;
-        if (findSearch==null||findSearch.equals("".trim())){
 
+        if (findSearch==null||findSearch.trim().equals("")||findSearch.equals("搜索职位".trim())){
+            search="";
         }else {
             map.put("search","%"+findSearch+"%");
         }
@@ -1054,7 +1105,7 @@ public class CenterController {
         List<PostPosition> postPositions=resumeService.jobs(map);
         List<PostPosition> jobsCount=resumeService.jobsCount(map);
         int count=jobsCount.size();
-        search=findSearch;
+//        search=findSearch;
 //        if (null==findSearch||findSearch.equals("".trim())){
 //            search="职位类型";
 //        }
@@ -1090,15 +1141,17 @@ public class CenterController {
     }
 //    投递简历
     @RequestMapping("/sendResume")
+    //    @Loger(operationType = "投递简历",operationName = "投递简历")
     public @ResponseBody String sendResume(HttpServletRequest req,int pPostId){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         userId= (int) user.getUserId();
         Resume r=resumeService.resume(userId);
+        System.out.println(new Gson().toJson(r));
         Delivery delivery=resumeService.findDelivery(userId,pPostId);
         if (null!=delivery){
             return "repetition";
         }
-        if (r.getClan().equals("".trim())||r.getBirthday().equals("".trim())||r.getSchool().equals("".trim())||r.getEducation().getEducation().equals("".trim())||r.getSelfEva().equals("".trim())||r.getAddress().equals("".trim())||r.getExpectWork().equals("".trim())||r.getProjectExperiences().size()==0||r.getWorkExperiences().size()==0||r.getEducationalBackgrounds().size()==0){
+        if (r.getClan()==null||r.getBirthday()==null||r.getSchool()==null||r.getSelfEva()==null||r.getAddress()==null||r.getExpectWork()==null||r.getSex().trim().equals("")||r.getIndustry().trim().equals("")||r.getClan().trim().equals("")||r.getBirthday().trim().equals("")||r.getSchool().trim().equals("")||r.getEducationId()==0||r.getSelfEva().trim().equals("")||r.getAddress().trim().equals("")||r.getExpectWork().trim().equals("")||r.getProjectExperiences().size()==0||r.getWorkExperiences().size()==0||r.getEducationalBackgrounds().size()==0){
             return "lose";
         }
         int n=resumeService.sendResume(userId,pPostId);
@@ -1111,6 +1164,7 @@ public class CenterController {
 
 
     @RequestMapping("/photoUpdate")
+    //    @Loger(operationType = "头像修改简历",operationName = "头像修改简历")
     public @ResponseBody String photoUpdate(MultipartFile imgFile, HttpServletRequest req) throws Exception {
 
 //        创建文件夹路径
@@ -1162,6 +1216,7 @@ public class CenterController {
         if (resumeService.findTtelephone(newPhone).size()!=0){
             return "lose";
         }
+        String msg=PhoneCodeUtil.sendCode(newPhone,code);
         req.getSession().setAttribute("vCodeMenu",code);
         req.getSession().setAttribute("newPhone",newPhone);
         System.out.println(code+"???????????????????"+newPhone);
@@ -1169,6 +1224,7 @@ public class CenterController {
     }
 
     @RequestMapping("/updatePhone")
+    //    @Loger(operationType = "修改手机号",operationName = "修改手机号")
     public @ResponseBody String updatePhone(HttpServletRequest req,String vCode){
         String newPhone= (String) req.getSession().getAttribute("newPhone");
         System.out.println(vCode);
@@ -1189,6 +1245,7 @@ public class CenterController {
 
 
     @RequestMapping("/saveName")
+    //    @Loger(operationType = "修改用户名",operationName = "修改用户名")
     public @ResponseBody String saveName(HttpServletRequest req,String newName){
         UserInfo userInfo=new UserInfo();
         userInfo.setUserId(userId);

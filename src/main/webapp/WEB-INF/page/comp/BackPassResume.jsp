@@ -177,15 +177,15 @@
             id: 'testReload',
             cols:[[
                 {type: 'checkbox', fixed: 'left',width: 50},
-                {field:'realName',title:'姓名',fixed: 'left',width:"10%"},
-                {field:'clan',title:'民族',hide:'true'},
-                {field:'politicalStatus',title:'政治面貌',hide:'true'},
-                {field:'birthday',title:'出生日期',hide:'true'},
-                {field:'contactInfo',title:'联系方式',hide:'true'},
-                {field:'school',title:'毕业院校',hide:'true'},
-                {field:'profession',title:'专业',hide:'true'},
+                {field:'realName',title:'姓名',fixed: 'left',width:"10%",templet:'<div>{{d.resume.realName}}</div>'},
+                {field:'clan',title:'民族',hide:'true',templet:'<div>{{d.resume.clan}}</div>'},
+                {field:'politicalStatus',title:'政治面貌',hide:'true',templet:'<div>{{d.resume.politicalStatus}}</div>'},
+                {field:'birthday',title:'出生日期',hide:'true',templet:'<div>{{d.resume.birthday}}</div>'},
+                {field:'contactInfo',title:'联系方式',hide:'true',templet:'<div>{{d.resume.contactInfo}}</div>'},
+                {field:'school',title:'毕业院校',hide:'true',templet:'<div>{{d.resume.school}}</div>'},
+                {field:'profession',title:'专业',hide:'true',templet:'<div>{{d.resume.profession}}</div>'},
                 {field:'isGraduate',title:'是否应届生',width:"10%",templet:function (d) {
-                        if(d.isGraduate==1){
+                        if(d.resume.isGraduate==1){
                             res = "是";
                         }else{
                             res = "否";
@@ -193,23 +193,20 @@
                         return res;
                     }},
                 {field:'profession',title:'应聘岗位',templet:'<div>{{d.postPosition.postName}}</div>',width:"15%"},
-                {field:'wrokYear',title:'工作时间',sort:true,width:"15%"},
-                {field:'education',title:'学历',templet:'<div>{{d.education.education}}</div>',width:"15%"},
-                {field:'qualiCer',title:'资格证书',hide:'true'},
-                {field:'selfEva',title:'自我评价',hide:'true'},
-                {field:'address',title:'地址',hide:'true'},
-                {field:'deliTime',title:'投递时间',sort:true,templet:'<div>{{d.delivery.deliTime}}</div>',width:"15%"},
-                {field:'educationalBackgrounds',title:'教育背景',sort:true,templet:'<div>{{d.educationalBackgrounds}}</div>' ,hide:'true'},
-                {field:'workExperiences',title:'工作经验',sort:true,templet:'<div>{{d.workExperiences}}</div>' ,hide:'true'},
-                {field:'projectExperiences',title:'项目经验',sort:true,templet:'<div>{{d.projectExperiences}}</div>' ,hide:'true'},
+                {field:'wrokYear',title:'工作时间',sort:true,width:"15%",templet:'<div>{{d.resume.wrokYear}}</div>'},
+                {field:'education',title:'学历',width:"15%"},
+                {field:'qualiCer',title:'资格证书',hide:'true',templet:'<div>{{d.resume.qualiCer}}</div>'},
+                {field:'selfEva',title:'自我评价',hide:'true',templet:'<div>{{d.resume.selfEva}}</div>'},
+                {field:'address',title:'地址',hide:'true',templet:'<div>{{d.resume.address}}</div>'},
+                {field:'deliTime',title:'投递时间',sort:true,width:"15%"},
                 {title:'操作',toolbar:'#btns',width:"20%"}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            var deliID = data.delivery.deliveryId;
-            var resumeID = data.resumeId;
+            var deliID = data.deliveryId;
+            var resumeID = data.resume.resumeId;
             if(obj.event === 'del'){
                 layer.confirm('是否删除选中的简历',{
                     btn:['删除','取消'],

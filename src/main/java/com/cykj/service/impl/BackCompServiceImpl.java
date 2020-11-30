@@ -3,12 +3,14 @@ package com.cykj.service.impl;
 import com.cykj.entity.*;
 import com.cykj.mapper.*;
 import com.cykj.service.BackCompService;
+import com.cykj.util.MD5Utils;
 import com.cykj.utils.MyUtil;
 import com.cykj.utils.WordUtil;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +61,9 @@ public class BackCompServiceImpl implements BackCompService {
     @Resource
     private CompRecordMapper compRecordMapper;
 
+    @Resource
+    private PayRecordMapper payRecordMapper;
+
     @Override
     public TableInfo findUnviTalent(Map<String, Object> map) {
         List<Talent> unviTalentOnPage = talentMapper.findUnviTalentOnPage(map);
@@ -103,6 +108,10 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Override
     public String postPosition(PostPosition postPosition) {
+        PostPosition repName = postPositionMapper.findRepName(postPosition.getPostName(), postPosition.getCompanyId());
+        if(repName!=null){
+            return "5";
+        }
         int provinceID = Integer.parseInt(postPosition.getProvince());
         postPosition.setProvince(provinceMapper.findByID(provinceID).getProvinceName());
         int n = postPositionMapper.addPostPosition(postPosition);
@@ -110,7 +119,11 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public String rePostPosition(PostPosition postPosition) {
+    public String rePostPosition(PostPosition postPosition,long compID) {
+        PostPosition repName = postPositionMapper.findRepName(postPosition.getPostName(), compID);
+        if(repName!=null){
+            return "3";
+        }
         int n = postPositionMapper.addPostPosition(postPosition);
         return n>0? "1":"2";
     }
@@ -133,20 +146,29 @@ public class BackCompServiceImpl implements BackCompService {
 
     @Override
     public TableInfo findAllResume(Map<String, Object> map) {
-        List<Resume> resumes = resumeMapper.findAllResume(map);
-        List<Resume> num = resumeMapper.findAllResumeNum(map);
-        System.out.println(num.size());
-        TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num.size(),resumes );
+        List<Delivery> resumes = deliveryMapper.findAllResume(map);//2020-11-28
+        int num = deliveryMapper.findAllResumeNum(map);//2020-11-28
+        System.out.println(num+"数量");
+        TableInfo tableInfo = new TableInfo(0,"企业查找的简历",num,resumes );
         return tableInfo;
     }
 
     @Override
-    public int changeDeliStand(List<Resume> list,int standID) {
+    public TableInfo findScreeResume(Map<String, Object> map) {
+        List<Delivery> resumes = deliveryMapper.findScreeResume(map);//2020-11-28
+        int num = deliveryMapper.findScreeResumeNum(map);//2020-11-28
+        System.out.println(num+"数量");
+        TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num,resumes );
+        return tableInfo;
+    }
+
+    @Override
+    public int changeDeliStand(List<Delivery> list,int standID) {
         int n = 0;
-        for (Resume resume : list) {
+        for (Delivery delivery : list) {
             Map<String,Object> map = new HashMap<>();
             map.put("standID",standID);
-            map.put("deliID",resume.getDelivery().getDeliveryId());
+            map.put("deliID",delivery.getDeliveryId());
             int i = deliveryMapper.changeDeliStand(map);
             n = n+i;
         }
@@ -174,12 +196,12 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
-    public int delResume(List<Resume> list, int standID) {
+    public int delResume(List<Delivery> list, int standID) {
         int n = 0;
-        for (Resume resume : list) {
+        for (Delivery delivery : list) {
             Map<String,Object> map = new HashMap<>();
             map.put("standID",standID);
-            map.put("deliID",resume.getDelivery().getDeliveryId());
+            map.put("deliID",delivery.getDeliveryId());
             map.put("feedTime",new Date());
             map.put("feedInfo","您被企业拒绝，请再接再厉");
             int i = deliveryMapper.delResume(map);
@@ -297,9 +319,11 @@ public class BackCompServiceImpl implements BackCompService {
     public String changePwd(String newPwd, String pwd, int compID) {
         String findPwd = backUserMapper.findPwd(compID);
         String msg = "";
+        pwd = MD5Utils.md5(pwd);
         if(!pwd.equals(findPwd)){
             msg = "1";
         }else{
+            newPwd = MD5Utils.md5(newPwd);
             int n = backUserMapper.changePwd(newPwd,compID);
             if(n>0){
                 msg = "2";
@@ -336,18 +360,50 @@ public class BackCompServiceImpl implements BackCompService {
         }else{
             map.put("jobStand","在职月内到岗");
         }
+        if(resume.getExpectWork()!=null){
+            map.put("expectWork",resume.getExpectWork());
+        }else{
+            map.put("expectWork","暂无");
+        }
 
-        map.put("expectWork",resume.getExpectWork());
-        map.put("industry",resume.getIndustry());
-        map.put("address",resume.getAddress());
-        map.put("contactInfo",resume.getContactInfo());
-        map.put("selfEva",resume.getSelfEva());
+        if(resume.getIndustry()!=null){
+            map.put("industry",resume.getIndustry());
+        }else{
+            map.put("industry","暂无");
+        }
 
-        map.put("school1",resume.getEducationalBackgrounds().get(0).getEbSchool());
-        map.put("schBegin1",resume.getEducationalBackgrounds().get(0).getSchBeginTime());
-        map.put("edu1",resume.getEducationalBackgrounds().get(0).getEbEducation());
-        map.put("schEnd1",resume.getEducationalBackgrounds().get(0).getSchEndTime());
-        map.put("schoolExp1",resume.getEducationalBackgrounds().get(0).getSchExperience());
+        if(resume.getAddress()!=null){
+            map.put("address",resume.getAddress());
+        }else{
+            map.put("address","暂无");
+        }
+
+        if(resume.getContactInfo()!=null){
+            map.put("contactInfo",resume.getContactInfo());
+        }else{
+            map.put("contactInfo","暂无");
+        }
+
+        if(resume.getSelfEva()!=null){
+            map.put("selfEva",resume.getSelfEva());
+        }else{
+            map.put("selfEva","暂无");
+        }
+
+        if(resume.getEducationalBackgrounds()!=null&&resume.getEducationalBackgrounds().size()!=0){
+            map.put("school1",resume.getEducationalBackgrounds().get(0).getEbSchool());
+            map.put("schBegin1",resume.getEducationalBackgrounds().get(0).getSchBeginTime());
+            map.put("edu1",resume.getEducationalBackgrounds().get(0).getEbEducation());
+            map.put("schEnd1",resume.getEducationalBackgrounds().get(0).getSchEndTime());
+            map.put("schoolExp1",resume.getEducationalBackgrounds().get(0).getSchExperience());
+        }else{
+            map.put("school1","未填写");
+            map.put("schBegin1","未填写");
+            map.put("edu1","未填写");
+            map.put("schEnd1","未填写");
+            map.put("schoolExp1","未填写");
+        }
+
         if(resume.getEducationalBackgrounds().size()==2){
             map.put("school2",resume.getEducationalBackgrounds().get(1).getEbSchool());
             map.put("schBegin2",resume.getEducationalBackgrounds().get(1).getSchBeginTime());
@@ -355,19 +411,28 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("schEnd2",resume.getEducationalBackgrounds().get(1).getSchEndTime());
             map.put("schoolExp2",resume.getEducationalBackgrounds().get(1).getSchExperience());
         }else{
-            map.put("school2","");
-            map.put("schBegin2","");
-            map.put("edu2","");
-            map.put("schEnd2","");
-            map.put("schoolExp2","");
+            map.put("school2","未填写");
+            map.put("schBegin2","未填写");
+            map.put("edu2","未填写");
+            map.put("schEnd2","未填写");
+            map.put("schoolExp2","未填写");
+        }
+        if(resume.getWorkExperiences()!=null&&resume.getWorkExperiences().size()!=0){
+            map.put("compName1",resume.getWorkExperiences().get(0).getCompanyName());
+            map.put("begin1",resume.getWorkExperiences().get(0).getBeginTime());
+            map.put("post1",resume.getWorkExperiences().get(0).getCompanyPost());
+            map.put("end1",resume.getWorkExperiences().get(0).getEndTime());
+            map.put("trade1",resume.getWorkExperiences().get(0).getDuties());
+            map.put("performace1",resume.getWorkExperiences().get(0).getPerformance());
+        }else{
+            map.put("compName1","未填写");
+            map.put("begin1","未填写");
+            map.put("post1","未填写");
+            map.put("end1","未填写");
+            map.put("trade1","未填写");
+            map.put("performace1","未填写");
         }
 
-        map.put("compName1",resume.getWorkExperiences().get(0).getCompanyName());
-        map.put("begin1",resume.getWorkExperiences().get(0).getBeginTime());
-        map.put("post1",resume.getWorkExperiences().get(0).getCompanyPost());
-        map.put("end1",resume.getWorkExperiences().get(0).getEndTime());
-        map.put("trade1",resume.getWorkExperiences().get(0).getDuties());
-        map.put("performace1",resume.getWorkExperiences().get(0).getPerformance());
         if(resume.getWorkExperiences().size()==2){
             map.put("compName2",resume.getWorkExperiences().get(1).getCompanyName());
             map.put("begin2",resume.getWorkExperiences().get(1).getBeginTime());
@@ -376,21 +441,30 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("trade2",resume.getWorkExperiences().get(1).getDuties());
             map.put("performace2",resume.getWorkExperiences().get(1).getPerformance());
         }else{
-            map.put("compName2","");
-            map.put("begin2","");
-            map.put("post2","");
-            map.put("end2","");
-            map.put("trade2","");
-            map.put("performace2","");
+            map.put("compName2","未填写");
+            map.put("begin2","未填写");
+            map.put("post2","未填写");
+            map.put("end2","未填写");
+            map.put("trade2","未填写");
+            map.put("performace2","未填写");
         }
 
+        if(resume.getProjectExperiences()!=null&&resume.getProjectExperiences().size()!=0){
+            map.put("projectName1",resume.getProjectExperiences().get(0).getProName());
+            map.put("proBegin1",resume.getProjectExperiences().get(0).getProBeginTime());
+            map.put("proPost1",resume.getProjectExperiences().get(0).getProPost());
+            map.put("proEnd1",resume.getProjectExperiences().get(0).getProEndTime());
+            map.put("proDes1",resume.getProjectExperiences().get(0).getProDescription());
+            map.put("proWork1",resume.getProjectExperiences().get(0).getProPerformance());
+        }else{
+            map.put("projectName1","未填写");
+            map.put("proBegin1","未填写");
+            map.put("proPost1","未填写");
+            map.put("proEnd1","未填写");
+            map.put("proDes1","未填写");
+            map.put("proWork1","未填写");
+        }
 
-        map.put("projectName1",resume.getProjectExperiences().get(0).getProName());
-        map.put("proBegin1",resume.getProjectExperiences().get(0).getProBeginTime());
-        map.put("proPost1",resume.getProjectExperiences().get(0).getProPost());
-        map.put("proEnd1",resume.getProjectExperiences().get(0).getProEndTime());
-        map.put("proDes1",resume.getProjectExperiences().get(0).getProDescription());
-        map.put("proWork1",resume.getProjectExperiences().get(0).getProPerformance());
 
         if(resume.getProjectExperiences().size()==2){
             map.put("projectName2",resume.getProjectExperiences().get(1).getProName());
@@ -400,15 +474,17 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("proDes2",resume.getProjectExperiences().get(1).getProDescription());
             map.put("proWork2",resume.getProjectExperiences().get(1).getProPerformance());
         }else{
-            map.put("projectName2","");
-            map.put("proBegin2","");
-            map.put("proPost2","");
-            map.put("proEnd2","");
-            map.put("proDes2","");
-            map.put("proWork2","");
+            map.put("projectName2","未填写");
+            map.put("proBegin2","未填写");
+            map.put("proPost2","未填写");
+            map.put("proEnd2","未填写");
+            map.put("proDes2","未填写");
+            map.put("proWork2","未填写");
         }
         WordUtil wordUtil = new WordUtil();
+        System.out.println(photoPath+resume.getPhoto()+"我的");
         String imageBase = wordUtil.getImageBase(photoPath+resume.getPhoto());
+        System.out.println(imageBase);
         map.put("image",imageBase);
         String path = wordUtil.createWord(map, MyUtil.RESUME,savePath);
         return path;
@@ -435,7 +511,7 @@ public class BackCompServiceImpl implements BackCompService {
         int provinceID = Integer.parseInt(backUser.getProvince());
         Province province = provinceMapper.findByID(provinceID);
         backUser.setProvince(province.getProvinceName());
-
+        backUser.setPwd(MD5Utils.md5(backUser.getPwd()));
         int n = backUserMapper.addComp(backUser);
         if(n<0){
             return 4;
@@ -484,10 +560,23 @@ public class BackCompServiceImpl implements BackCompService {
     }
 
     @Override
+    public String downFeeResume(HttpServletRequest request) {
+        BackUser backUser = (BackUser)request.getSession().getAttribute("admin");
+        long fee = Long.parseLong(parameterMapper.findDownFee(56).getParamValues());
+        PayRecord payRecord = new PayRecord(fee,backUser.getbUserId(),"下载简历","减少");
+        if(backUser.getBalance()<fee) return "1";
+        long newBanlace = (backUser.getBalance()-fee);
+        backUserMapper.updateBalance(newBanlace,backUser.getbUserId());
+        payRecordMapper.addPayRecord(payRecord);
+        backUser.setBalance(newBanlace);
+        request.getSession().setAttribute("admin",backUser);
+        return "2";
+    }
+
+    @Override
     public String findDownFee() {
         return parameterMapper.findDownFee(56).getParamValues();
     }
-
     @Override
     public String compfindChat(int compID) {
         List<CompRecord> list = compRecordMapper.findCompChatRec(compID);
@@ -530,6 +619,26 @@ public class BackCompServiceImpl implements BackCompService {
     @Override
     public int readCompMsg(int compID, int userID) {
         return compRecordMapper.readCompMsg(compID,userID);
+    }
+
+    @Override
+    public int changeFee(String money) {
+        return parameterMapper.changeFee(money);
+    }
+
+    @Override
+    public void test() {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("compID",3);
+//        map.put("standID",20);
+//        map.put("offset",0);
+//        map.put("limit",5);
+//        List<Delivery> allResume = deliveryMapper.findAllResume(map);
+//        System.out.println("allress"+allResume.size());
+//        for (Delivery delivery : allResume) {
+//            System.out.println(delivery);
+//            System.out.println(delivery.getResume());
+//        }
     }
 
 

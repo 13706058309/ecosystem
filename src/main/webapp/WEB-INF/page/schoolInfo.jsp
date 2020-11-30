@@ -24,29 +24,31 @@
     <div id="container">
         <div class="clearfix">
             <div class="content_l">
-<%--                <div class="c_detail"><div style="background-color:#fff;width: 800px;height: " class="c_logo">--%>
+                <span style="margin-left: 350px">点击图片可替换</span>
+                <div class="c_detail"><div style="margin-left: 300px;width: 200px;" class="c_logo">
 
-<%--                    <div class="info-flex-item header-upload">--%>
-<%--                        <div class="header-box">--%>
-<%--                            <div class="header-mask" ></div>--%>
+                    <div class="info-flex-item header-upload">
 
-<%--                            <c:choose>--%>
-<%--                                <c:when test="${not empty shool.logo}">--%>
-<%--                                    <img src="${pageContext.request.contextPath}/uploadLogo${shool.logo}" id="headImg" class="header-img" style="width: 100%;height: 100%">--%>
-<%--                                </c:when>--%>
+                        <div class="header-box">
 
-<%--                                <c:otherwise>--%>
-<%--                                    <img src="${pageContext.request.contextPath}/style/images/logo_default.png" id="headImg" class="header-img" style="width:100%;height: 100%">--%>
-<%--                                </c:otherwise>--%>
-<%--                            </c:choose>--%>
-<%--                            <form id="imgsForm" enctype="multipart/form-data">--%>
-<%--                                <input type ="file"  class="head-input" id="uploadFiles" name="uploadFiles" style="width: 800px"--%>
-<%--                                       accept="image/*" />--%>
-<%--                            </form>--%>
-<%--                            <span style="display: block">点击替换logo</span>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                            <div class="header-mask" ></div>
+
+                            <c:choose>
+                                <c:when test="${not empty shool.logo}">
+                                    <img src="${pageContext.request.contextPath}/uploadLogo${shool.logo}" id="photoEcho" class="header-img" style="width: 100%;height: 100%">
+                                </c:when>
+
+                                <c:otherwise>
+                                    <img src="${pageContext.request.contextPath}/style/images/logo_default.png" id="photoEcho" class="header-img" style="width:100%;height: 100%">
+                                </c:otherwise>
+                            </c:choose>
+                            <form id="photoUpLoad" enctype="multipart/form-data">
+                                <input type ="file"  class="head-input" id="photo" name="photo" style="width: 800px" accept="image/*" />
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
                     <div class="c_box companyName">
                     </div>
                 </div>
@@ -78,32 +80,6 @@
                     </div>
                 </div>
 
-<%--                <div id="coreValue113">--%>
-<%--                    <div class="profile_wrap">--%>
-<%--                        <dl class="c_section newIntro dn" style="display: none;" id="bUserName1">--%>
-<%--                            <dt>--%>
-<%--                                <h2 class="layui-icon  layui-icon-username">校长</h2>--%>
-<%--                            </dt>--%>
-<%--                            <dd>--%>
-<%--                                <form id="companyValueForm1">--%>
-<%--                                    <textarea   id="bUserName"  style="height: 15%">${shool.bUserName}</textarea>--%>
-<%--                                    <div class="clear"></div>--%>
-<%--                                    <a id="delValues1" class="btn_small" onclick="change2()">确定</a>--%>
-<%--                                    <a id="delValue1" class="btn_cancel_s" onclick="hidden2()">取消</a>--%>
-<%--                                </form>--%>
-<%--                            </dd>--%>
-<%--                        </dl>--%>
-<%--                        <dl class="c_section" style="display: block" id="bUserName2">--%>
-<%--                            <dt>--%>
-<%--                                <h2 class="layui-icon  layui-icon-username">校长</h2>--%>
-<%--                            </dt>--%>
-<%--                            <dd>--%>
-<%--                                <div class="c_intro" id="coreValues133" style="width: 800px;text-align: center">${shool.bUserName}</div>--%>
-<%--                                <a title="编辑" id="editValue1" class="c_edit"  onclick="show2()"></a>--%>
-<%--                            </dd>--%>
-<%--                        </dl>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <div id="coreValue2123">
                     <div class="profile_wrap">
                         <dl class="c_section newIntro dn" style="display: none;" id="infoIntr1">
@@ -124,7 +100,7 @@
                                 <h2 class="layui-icon layui-icon-form">简介</h2>
                             </dt>
                             <dd>
-                                <div class="c_intro" id="coreValues2" style="width: 800px">${shool.infoIntr}</div>
+                                <div class="c_intro" id="coreValues2" >${shool.infoIntr}</div>
                                 <a title="编辑" id="editValue2" class="c_edit"  onclick="show3()"></a>
                             </dd>
                         </dl>
@@ -186,7 +162,7 @@
                     <div class="profile_wrap">
                         <dl class="c_section newIntro dn" style="display: none;" id="contactInfo1">
                             <dt>
-                                <h2 class="layui-icon  layui-icon-cellphone">电话</h2>
+                                <h2 class="layui-icon  layui-icon-cellphone">联系方式</h2>
                             </dt>
                             <dd>
                                 <form id="companyValueForm21">
@@ -199,7 +175,7 @@
                         </dl>
                         <dl class="c_section" style="display: block;width: 800px;" id="contactInfo2">
                             <dt>
-                                <h2 class="layui-icon  layui-icon-cellphone" >电话</h2>
+                                <h2 class="layui-icon  layui-icon-cellphone" >联系方式</h2>
                             </dt>
                             <dd>
                                 <div class="c_intro" id="coreValues21" style="width: 800px;text-align: center">${shool.contactInfo}</div>
@@ -309,13 +285,68 @@
         $("#email1").css("display","none");
         $("#email2").css("display","block");
     }
+    $("#photo").change(function(){
+        var file = this.files[0];
+        console.log(file);
+        if(!file){
+            return false;
+        }
 
+        var maxSize = 1024*5 ; //图片最大KB
+        if(!/(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file.type)){
+            top.alertLocal("请上传gif,jpeg,jpg,png格式的图片！");
+            return false;
+        }
+        if(file.size > maxSize* 1024){
+            top.alertLocal("请上传"+5+"M以下的图片");
+            return false;
+        }
+        var photos = $("#photo").val();
+        var form = new FormData(document.getElementById("photoUpLoad"))
+        $.ajax({
+            url:path+"/rec/uploadLogo",
+            data:form,
+            processData:false,
+            contentType:false,
+            type:"post",
+            beforeSend:function(){
+                if (photos.length === 0) return false;
+                return true;
+
+            },
+            success:function (info) {
+                if(info=='1'){
+                    layer.msg('上传成功');
+                    var objUrl = getObjectURL(file) ;
+                    if (objUrl) {
+                        $("#photoEcho").attr("src", objUrl) ;
+                    }
+                }else{
+                    layer.msg('系统繁忙，上传失败')
+                }
+            },
+        })
+
+    }) ;
+
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
 
 
 
 
     function change1() {
-        var newCompName = $("#newCompName").val();
+        var newCompName = $("#newCompName").val().trim();
         $.ajax({
             url:path+"/talent/changeSchoolInfo",
             data:"newCompName="+newCompName,
@@ -324,6 +355,14 @@
             beforeSend:function () {
                 if(newCompName.length==0){
                     layer.msg("请填写完整");
+                    return false;
+                }
+                if(newCompName.length>15){
+                    layer.msg("学校名称限制15字");
+                    return false;
+                }
+                if(!( /^[\u4e00-\u9fa5\\w]+$/.test(newCompName))){
+                    layer.msg("学校名称只能是汉字");
                     return false;
                 }
                 return true;
@@ -341,33 +380,7 @@
             }
         })
     }
-    function change2() {
-        var bUserName = $("#bUserName").val();
-        $.ajax({
-            url:path+"/talent/changeSchoolInfo",
-            data:"bUserName="+bUserName,
-            type:"post",
-            typeData:"text",
-            beforeSend:function () {
-                if(bUserName.length==0){
-                    layer.msg("请填写完整");
-                    return false;
-                }
-                return true;
-            },
-            success:function (data) {
-                if(data=='1'){
-                    layer.msg("修改成功",{
-                        time:1000,
-                        end:function () {
-                            location.reload();
-                        }
-                    })
 
-                }
-            }
-        })
-    }
     function change3() {
         var infoIntr = $("#infoIntr").val();
         $.ajax({
@@ -378,6 +391,10 @@
             beforeSend:function () {
                 if(infoIntr.length==0){
                     layer.msg("请填写完整");
+                    return false;
+                }
+                if(infoIntr.length>200){
+                    layer.msg("简介限制200字");
                     return false;
                 }
                 return true;
@@ -407,6 +424,10 @@
                     layer.msg("请填写完整");
                     return false;
                 }
+                if(coreValue.length>30){
+                    layer.msg("校训限制30字");
+                    return false;
+                }
                 return true;
             },
             success:function (data) {
@@ -432,6 +453,10 @@
             beforeSend:function () {
                 if(address.length==0){
                     layer.msg("请填写完整");
+                    return false;
+                }
+                if(address.length>30){
+                    layer.msg("地址限制30字");
                     return false;
                 }
                 return true;
@@ -461,6 +486,14 @@
                     layer.msg("请填写完整");
                     return false;
                 }
+                if(contactInfo.length>12){
+                    layer.msg("联系方式限制12字");
+                    return false;
+                }
+                if(!(/^((\d{11})|(\d{7,8})|(\d{4}|\d{3})-(\d{7,8}))$/.test(contactInfo))){
+                    layer.msg("格式错误");
+                    return false;
+                }
                 return true;
             },
             success:function (data) {
@@ -488,6 +521,16 @@
                     layer.msg("请填写完整");
                     return false;
                 }
+                if(email.length>30){
+                    layer.msg("邮件限制30字");
+                    return false;
+                }
+                var patterns = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                if(!patterns.test(email)){
+                    layer.msg("邮箱格式不正确");
+                    return false;
+                }
+
                 return true;
             },
             success:function (data) {

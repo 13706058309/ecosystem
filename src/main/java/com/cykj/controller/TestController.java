@@ -50,6 +50,7 @@ public class TestController {
 
     @RequestMapping("/reg")
     public String reg(){
+        backCompServiceImpl.test();
         return "comp/BackReg";
     }
 

@@ -1,11 +1,14 @@
 package com.cykj.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.cykj.entity.*;
 import com.cykj.service.TalentService;
 
 import com.google.gson.Gson;
 
+
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.FileUtils;
 
 
@@ -23,19 +26,18 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.io.*;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.*;
 
@@ -424,12 +426,16 @@ public class TalentController {
 
         int limit = Integer.parseInt(request.getParameter("limit"));
         int page = Integer.parseInt(request.getParameter("page"));
+
+
         String school = request.getParameter("school");
         String profession = request.getParameter("profession");
         String endTime = request.getParameter("endTime");
         String beginTime = request.getParameter("beginTime");
 
         Map<String,Object> map = new HashMap<>();
+
+
         if(school!=null&&school.length()!=0){
             map.put("school",school);
         }
@@ -466,7 +472,11 @@ public class TalentController {
         int page = Integer.parseInt(request.getParameter("page"));
         String postName = request.getParameter("postName");
         String industryName = request.getParameter("industryName");
+        String companyName = request.getParameter("companyName");
         Map<String,Object> map = new HashMap<>();
+        if(companyName!=null&&companyName.length()!=0){
+            map.put("companyName",companyName);
+        }
         if(postName!=null&&postName.length()!=0){
             map.put("postName",postName);
         }
@@ -493,39 +503,54 @@ public class TalentController {
     @RequestMapping("/recommendSure")
     public @ResponseBody  String recommendSure(HttpServletRequest request) throws IOException {
         int companyID = Integer.parseInt(request.getParameter("companyID"));
-        String talentIds = request.getParameter("talentIds");
-        char[] talentIdsChar=talentIds.toCharArray();
-        if (talentIdsChar.length==1){
-            if(talentService.findCompAndtalent(companyID,talentIdsChar[0])){
-                int a= talentService.addCompAndtalent(companyID,talentIdsChar[0]);
-                if(a>0){
-                    return  "推荐成功";
-                }else{
-                    return  "推荐失败";
-                }
-            }else{
-                return  "该人才已推荐过了";
-            }
-        }else {
-            for (int i = 0; i < talentIdsChar.length; i += 2) {
-                if (talentService.findCompAndtalent(companyID, talentIdsChar[i])) {
-                    int a = talentService.addCompAndtalent(companyID, talentIdsChar[i]);
-                    if (a > 0) {
-                        if(i==talentIdsChar.length-1){
-                            return "成功推荐"+(i+2)/2+"名人才";
-                        }
+        String talentIds=request.getParameter("talentIds");
+//        List<Talent> list = new Gson().fromJson(msg,new TypeToken<List<Talent>>(){}.getType());
+//        char[] talentIdsChar=talentIds.toCharArray();
+        String[] arr = talentIds.split(","); // 用,分割
 
-                    } else {
-                        return "推荐失败";
+
+            if (arr.length==1){
+                if(talentService.findCompAndtalent(companyID, arr[0])){
+                    int a= talentService.addCompAndtalent(companyID,arr[0]);
+                    if(a>0){
+                        return  "推荐成功";
+                    }else{
+                        return  "推荐失败";
                     }
-                } else {
-                    return "存在已推荐过的人才，请重新选择";
+                }else{
+                    return  "该人才已推荐过了";
+                }
+            }else {
+                for (int i = 0; i < arr.length;i++) {
+                    if (talentService.findCompAndtalent(companyID,  arr[i])) {
+                        int a = talentService.addCompAndtalent(companyID, arr[i]);
+                        if (a > 0) {
+                            if(i==arr.length-1){
+                                return "成功推荐"+(i+1)+"名人才";
+                            }
+
+                        } else {
+                            return "推荐失败";
+                        }
+                    } else {
+                        return "存在已推荐过的人才，请重新选择";
+                    }
                 }
             }
-        }
+
+
+
     return "";
     }
-
+    @RequestMapping("/all")
+    public String  all(HttpServletRequest request, HttpServletResponse response)  {
+        System.out.println("dhf");
+        List<BackUserNum> list=talentService.all();
+        request.setAttribute("list",list);
+        String s="新增总企业数：";
+        request.setAttribute("s",s);
+        return "backUserNum";
+    }
     @RequestMapping("/backUserNumMonth")
     public String  backUserNumMonth(HttpServletRequest request, HttpServletResponse response)  {
         List<BackUserNum> list=talentService.backUserNumMonth();

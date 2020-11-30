@@ -76,9 +76,9 @@
         <div class="layui-input-inline">
             <select class="layui-input" id="wrokYear">
                 <option value="0">不限</option>
-                <option value="1">1年以下</option>
-                <option value="3">3年以下</option>
-                <option value="5">5年以下</option>
+                <option value="1">1年及以下</option>
+                <option value="3">3年及以下</option>
+                <option value="5">5年及以下</option>
                 <option value="10">10年以下</option>
             </select>
         </div>
@@ -190,9 +190,9 @@
             id: 'testReload',
             cols:[[
                 {type: 'checkbox', fixed: 'left'},
-                {field:'realName',title:'姓名', fixed: 'left'},
+                {field:'realName',title:'姓名', fixed: 'left',templet:'<div>{{d.resume.realName}}</div>'},
                 {field:'isGraduate',title:'是否应届生',templet:function (d) {
-                        if(d.isGraduate==1){
+                        if(d.resume.isGraduate==1){
                             res = "是";
                         }else{
                             res = "否";
@@ -200,16 +200,16 @@
                         return res;
                     }},
                 {field:'profession',title:'应聘岗位',templet:'<div>{{d.postPosition.postName}}</div>'},
-                {field:'wrokYear',title:'工作时间',sort:true},
-                {field:'education',title:'学历',templet:'<div>{{d.education.education}}</div>'},
-                {field:'deliTime',title:'投递时间',sort:true,templet:'<div>{{d.delivery.deliTime}}</div>'},
+                {field:'wrokYear',title:'工作时间',sort:true,templet:'<div>{{d.resume.wrokYear}}</div>'},
+                {field:'education',title:'学历'},
+                {field:'deliTime',title:'投递时间'},
                 {title:'操作',toolbar:'#btns',width:250}
             ]]
         });
 
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            var deliID = data.delivery.deliveryId;
+            var deliID = data.deliveryId;
 
             if(obj.event === 'refuse'){
                 layer.confirm('是否过滤选中的简历',{

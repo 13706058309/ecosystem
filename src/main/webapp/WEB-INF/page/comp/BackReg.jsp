@@ -521,7 +521,6 @@
         geocoder.getLocation(address, function(status, result) {
             if (status === 'complete'&&result.geocodes.length) {
                 var lnglat = result.geocodes[0].location
-                alert(lnglat.lng);
                 $("#lat").val(lnglat.lat);
                 $("#lng").val(lnglat.lng);
                 return "1";
