@@ -472,7 +472,11 @@ public class TalentController {
         int page = Integer.parseInt(request.getParameter("page"));
         String postName = request.getParameter("postName");
         String industryName = request.getParameter("industryName");
+        String companyName = request.getParameter("companyName");
         Map<String,Object> map = new HashMap<>();
+        if(companyName!=null&&companyName.length()!=0){
+            map.put("companyName",companyName);
+        }
         if(postName!=null&&postName.length()!=0){
             map.put("postName",postName);
         }
