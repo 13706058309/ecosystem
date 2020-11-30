@@ -41,7 +41,6 @@
 
     {{#  if(d.stateId==29){ }}
     <button class="layui-btn  layui-btn-primary  layui-btn-xs" lay-event="chakancs">查看</button>
-    <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="downxuqiu">发送短信</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="pingshen">评审</a>
     {{#  } }}
 
@@ -304,7 +303,7 @@
                     var name = data.trueName;
                     var cerid = data.cerRecordId;
                     var userid = data.userId;
-
+                    alert(userid);
                     layer.confirm('是否分发:' + filename + '证书,给予'+name, function (index) {
                         $.ajax({
                             url:  '${pageContext.request.contextPath}/backzhengshu/xiugaicerwanchengzhuangtai?cerid='+cerid+'&userid='+userid,//请求服务端地址值
@@ -315,6 +314,7 @@
                                 if (msg=='success'){
                                     layer.msg('确认成功', {icon: 6});
                                     layer.closeAll();//关闭所有的弹出层
+                                    location.href='${pageContext.request.contextPath}/backzhengshu/pingshenzhengshuliebiao'
                                 }else if (msg=='fail'){
                                     layer.msg('确认失败，网络波动', {icon: 5});
                                 }

@@ -3,6 +3,7 @@ package com.cykj.controller;
 
 import com.baidu.aip.ocr.AipOcr;
 import com.cykj.entity.*;
+import com.cykj.log.Loger;
 import com.cykj.service.CerRecordService;
 import com.cykj.service.CerUserService;
 import com.cykj.service.CertificateService;
@@ -124,6 +125,7 @@ public class CertificateController {
     @RequestMapping("/upupzhengshu")
     public @ResponseBody String querenzhengshu(HttpServletRequest request,String username,String usernumber,String phone,String fileid) throws ParseException {
         String msg = "";
+
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
 
 
@@ -149,7 +151,7 @@ public class CertificateController {
                 }else if (betweenDate>3){
                     //创建一条数据
                     CerRecord cerRecord1 = new CerRecord();
-                    cerRecord1.setStateId(userInfo.getUserId());
+                    cerRecord1.setUserId(userInfo.getUserId());
                     cerRecord1.setFileId(fileid1);
                     cerRecord1.setStateId(23);
                     cerRecord1.setTrueName(username);
@@ -170,7 +172,7 @@ public class CertificateController {
         }else {
             //创建一条数据
             CerRecord cerRecord2 = new CerRecord();
-            cerRecord2.setStateId(userInfo.getUserId());
+            cerRecord2.setUserId(userInfo.getUserId());
             cerRecord2.setFileId(fileid1);
             cerRecord2.setStateId(23);
             cerRecord2.setTrueName(username);
@@ -196,6 +198,7 @@ public class CertificateController {
     //个人中心申请证书列表
     @RequestMapping("/zxzsliebiao")
     public  String zhongxinzhengshuliebiao() {
+
         return "certificate/ApplicationForm";
     }
 

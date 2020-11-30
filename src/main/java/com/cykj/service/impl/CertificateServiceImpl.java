@@ -3,6 +3,7 @@ package com.cykj.service.impl;
 import com.cykj.entity.Certificate;
 import com.cykj.entity.Field;
 import com.cykj.entity.TableInfo;
+import com.cykj.mapper.CerRecordMapper;
 import com.cykj.mapper.CertificateMapper;
 import com.cykj.service.CertificateService;
 import javafx.scene.control.Tab;
@@ -18,6 +19,8 @@ import java.util.Map;
 public class CertificateServiceImpl implements CertificateService {
     @Resource
     CertificateMapper certificateMapper;
+    @Resource
+    CerRecordMapper cerRecordMapper;
     /**
      * @return
      * @param获取证书首页列表
@@ -77,12 +80,17 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     /**
-     * @param fieldName
+     * @param field
      * @return 增加证书类型
      */
     @Override
-    public int insertfield(String fieldName) {
-        return certificateMapper.insertfield(fieldName);
+    public int insertfield(Field field) {
+        int n=0;
+       int c = certificateMapper.insertfield(field);
+       if (c>0){
+           n=cerRecordMapper.findzssqlastid();
+       }
+        return n;
     }
 
     /**

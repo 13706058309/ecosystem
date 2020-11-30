@@ -78,7 +78,7 @@
         </div>
     </div>
     <div id="main">
-    <div class="job-banner" style="background-color: #00c2b3;">
+    <div class="job-banner" style="background-color: white;">
         <div class="inner home-inner" >
             <div class="job-primary detail-box">
 <%--                <div class="pos-bread">--%>
@@ -110,7 +110,7 @@
                     <div class="btn-container">
                         <!-- 未登录 -->
                         <c:if test="${not empty qUser}">
-                        <a class="btn btn-startchat" onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${post.backUser.bUserId}')" style="background-color: #0C0C0C">立即沟通</a>
+                        <a class="btn btn-startchat" onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${post.backUser.bUserId}')" style="background-color: #00c2b3">立即沟通</a>
                         </c:if>
                     </div>
 
@@ -214,7 +214,7 @@
 
 
                     <div class="job-sec">
-                        <h3>工作地址</h3>
+                        <h3>公司地址：${post.backUser.address}</h3>
                         <div class="job-location">
 
                             <div style="width: 100%;height: 50%" id="container">
