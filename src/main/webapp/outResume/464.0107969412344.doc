@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?mso-application progid="Word.Document"?>
+<pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
+    <pkg:part pkg:name="/_rels/.rels" pkg:contentType="application/vnd.openxmlformats-package.relationships+xml"
+              pkg:padding="512">
+        <pkg:xmlData>
+            <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+                <Relationship Id="rId3"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties"
+                              Target="docProps/app.xml"/>
+                <Relationship Id="rId2"
+                              Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties"
+                              Target="docProps/core.xml"/>
+                <Relationship Id="rId1"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
+                              Target="word/document.xml"/>
+                <Relationship Id="rId4"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties"
+                              Target="docProps/custom.xml"/>
+            </Relationships>
+        </pkg:xmlData>
+    </pkg:part>
+    <pkg:part pkg:name="/word/_rels/document.xml.rels"
+              pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:padding="256">
+        <pkg:xmlData>
+            <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+                <Relationship Id="rId8"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable"
+                              Target="fontTable.xml"/>
+                <Relationship Id="rId3"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings"
+                              Target="settings.xml"/>
+                <Relationship Id="rId7" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+                              Target="media/image1.jpeg"/>
+                <Relationship Id="rId2"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
+                              Target="styles.xml"/>
+                <Relationship Id="rId1"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml"
+                              Target="../customXml/item1.xml"/>
+                <Relationship Id="rId6"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/endnotes"
+                              Target="endnotes.xml"/>
+                <Relationship Id="rId5"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes"
+                              Target="footnotes.xml"/>
+                <Relationship Id="rId4"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings"
+                              Target="webSettings.xml"/>
+                <Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme"
+                              Target="theme/theme1.xml"/>
+            </Relationships>
+        </pkg:xmlData>
+    </pkg:part>
+    <pkg:part pkg:name="/word/document.xml"
+              pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml">
+        <pkg:xmlData>
+            <w:document xmlns:ve="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:o="urn:schemas-microsoft-com:office:office"
+                        xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+                        xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
+                        xmlns:v="urn:schemas-microsoft-com:vml"
+                        xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+                        xmlns:w10="urn:schemas-microsoft-com:office:word"
+                        xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+                        xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml">
+                <w:body>
+                    <w:tbl>
+                        <w:tblPr>
+                            <w:tblStyle w:val="a3"/>
+                            <w:tblW w:w="8920" w:type="dxa"/>
+                            <w:tblLook w:val="04A0"/>
+                        </w:tblPr>
+                        <w:tblGrid>
+                            <w:gridCol w:w="1556"/>
+                            <w:gridCol w:w="1674"/>
+                            <w:gridCol w:w="1556"/>
+                            <w:gridCol w:w="1638"/>
+                            <w:gridCol w:w="2496"/>
+                        </w:tblGrid>
+                        <w:tr w:rsidR="00F2727C">
+                            <w:trPr>
+                                <w:trHeight w:val="567"/>
+                            </w:trPr>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="8920" w:type="dxa"/>
+                                    <w:gridSpan w:val="5"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>简历详情</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                        </w:tr>
+                        <w:tr w:rsidR="00F2727C" w:rsidTr="00F50604">
+                            <w:trPr>
+                                <w:trHeight w:val="329"/>
+                            </w:trPr>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>姓名</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00673C24">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>小改</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>民族</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1710" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t xml:space="preserve">汉</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="2083" w:type="dxa"/>
+                                    <w:vMerge w:val="restart"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="004E1A5F">
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:noProof/>
+                                        </w:rPr>
+                                        <w:drawing>
+                                            <wp:inline distT="0" distB="0" distL="0" distR="0">
+                                                <wp:extent cx="1422344" cy="1486894"/>
+                                                <wp:effectExtent l="19050" t="0" r="6406" b="0"/>
+                                                <wp:docPr id="1" name="图片 0" descr="4.jpg"/>
+                                                <wp:cNvGraphicFramePr>
+                                                    <a:graphicFrameLocks noChangeAspect="1"
+                                                                         xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                                                </wp:cNvGraphicFramePr>
+                                                <a:graphic
+                                                        xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                                                    <a:graphicData
+                                                            uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                                        <pic:pic
+                                                                xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                                            <pic:nvPicPr>
+                                                                <pic:cNvPr id="0" name="4.jpg"/>
+                                                                <pic:cNvPicPr/>
+                                                            </pic:nvPicPr>
+                                                            <pic:blipFill>
+                                                                <a:blip r:embed="rId7" cstate="print"/>
+                                                                <a:stretch>
+                                                                    <a:fillRect/>
+                                                                </a:stretch>
+                                                            </pic:blipFill>
+                                                            <pic:spPr>
+                                                                <a:xfrm>
+                                                                    <a:off x="0" y="0"/>
+                                                                    <a:ext cx="1425980" cy="1490695"/>
+                                                                </a:xfrm>
+                                                                <a:prstGeom prst="rect">
+                                                                    <a:avLst/>
+                                                                </a:prstGeom>
+                                                            </pic:spPr>
+                                                        </pic:pic>
+                                                    </a:graphicData>
+                                                </a:graphic>
+                                            </wp:inline>
+                                        </w:drawing>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                        </w:tr>
+                        <w:tr w:rsidR="00F2727C" w:rsidTr="00F50604">
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>政治面貌</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>群众</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>出生年月日</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1710" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>1994-07-19</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="2083" w:type="dxa"/>
+                                    <w:vMerge/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F2727C"/>
+                            </w:tc>
+                        </w:tr>
+                        <w:tr w:rsidR="00F2727C" w:rsidTr="00F50604">
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>性别</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>女</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>工作年限</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1710" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>2</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="2083" w:type="dxa"/>
+                                    <w:vMerge/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F2727C"/>
+                            </w:tc>
+                        </w:tr>
+                        <w:tr w:rsidR="00F2727C" w:rsidTr="00F50604">
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>学历</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>硕士</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>专业</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1710" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>电子信息</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="2083" w:type="dxa"/>
+                                    <w:vMerge/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F2727C"/>
+                            </w:tc>
+                        </w:tr>
+                        <w:tr w:rsidR="00F2727C" w:rsidTr="00F50604">
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>毕业学校</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>厦门大学</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>就业状态</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1710" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:spacing w:line="360" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>为就业</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="2083" w:type="dxa"/>
+                                    <w:vMerge/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F2727C"/>
+                            </w:tc>
+                        </w:tr>
+                        <w:tr w:rsidR="00F2727C" w:rsidTr="00F50604">
+                            <w:trPr>
+                                <w:trHeight w:val="567"/>
+                            </w:trPr>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="480" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>期望工作</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="3418" w:type="dxa"/>
+                                    <w:gridSpan w:val="2"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604" w:rsidP="00F50604">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>里看见撒旦浪费了萨芬尽量快点睡觉了房间来看待世界幅度萨芬吉萨</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1710" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="480" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>意向行业</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="2083" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>研究</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                        </w:tr>
+                        <w:tr w:rsidR="00F2727C" w:rsidTr="00F50604">
+                            <w:trPr>
+                                <w:trHeight w:val="537"/>
+                            </w:trPr>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="1709" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00A40885">
+                                    <w:pPr>
+                                        <w:spacing w:line="480" w:lineRule="auto"/>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>地址</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
+                                    <w:tcW w:w="3418" w:type="dxa"/>
+                                    <w:gridSpan w:val="2"/>
+                                </w:tcPr>
+                                <w:p w:rsidR="00F2727C" w:rsidRDefault="00F50604">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>FreeMarker template error (DEBUG mode; use RETHROW in production!):
+The following has evaluated to null or missing:
+==> address  [in template "resume.ftl" at line 642, column 48]
+
+----
+Tip: If the failing expression is known to legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
+
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: ${address}  [in template "resume.ftl" at line 642, column 46]
+----
+
+Java stack trace (for programmers):
+----
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:134)
+	at freemarker.core.EvalUtil.coerceModelToTextualCommon(EvalUtil.java:481)
+	at freemarker.core.EvalUtil.coerceModelToStringOrMarkup(EvalUtil.java:401)
+	at freemarker.core.EvalUtil.coerceModelToStringOrMarkup(EvalUtil.java:370)
+	at freemarker.core.DollarVariable.calculateInterpolatedStringOrMarkup(DollarVariable.java:100)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:63)
+	at freemarker.core.Environment.visit(Environment.java:334)
+	at freemarker.core.Environment.visit(Environment.java:340)
+	at freemarker.core.Environment.process(Environment.java:313)
+	at freemarker.template.Template.process(Template.java:383)
+	at com.cykj.utils.WordUtil.createWord(WordUtil.java:86)
+	at com.cykj.service.impl.BackCompServiceImpl.outResume(BackCompServiceImpl.java:453)
+	at com.cykj.controller.CompController.outResume(CompController.java:613)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)

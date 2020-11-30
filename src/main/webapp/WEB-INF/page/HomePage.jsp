@@ -9,6 +9,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+
+    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
+
+
     <script id="allmobilize" charset="utf-8" src="../style/js/allmo8bilize.min.js"></script>
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=g7rHhDj9qFSGZF3qr9ZDOc7xLix7MLDo"></script>
@@ -38,10 +43,27 @@
     <script type="text/javascript"></script>
     <script type="text/javascript" src="../style/js/conv.js"></script>
     <script src="../js/homePage.js"></script>
+
+    <style>
+        #dropdown1:hover #dropdown2 {
+            display:block;
+        }
+        #dropdown2 {
+            display: none;
+            /*transition:all.5s;*/
+        }
+    </style>
+
+
 </head>
 <body style="background-color: #f6f6f8">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <%--切换城市弹窗--%>
+
+
+
+
+
 <div id="choiceCity" style="display: none">
     <div style="padding: 20px 20px">
         <b style="font-size: 15px">亲爱的用户您好：</b>
@@ -70,49 +92,107 @@
     </div>
 </div>
 <div id="body">
-    <div id="header">
-        <div class="wrapper">
-            <a class="logo">
-                <img src="../style/images/logo.png" width="230" height="85"/>
-            </a>
-            <ul class="reset" id="navheader">
-                <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
-                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
-                <li><a href="${pageContext.request.contextPath}/center/job?findWorkCity=${nowCity}" rel="nofollow">职位</a></li>
-                <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
-            </ul>
-            <ul class="loginTop" style="font-size: 18px;height: 68px;">
-                <c:if test="${qUser==null}">
-                    <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
-                    <li>|</li>
-                    <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
+
+
+    <div id="header" style="background-color:#00c2b3;height: 100px" >
+        <div class="inner home-inner" >
+            <div class="logo" style="width: 150px;height: 70px">
+
+                <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            </div>
+            <div class="nav-city" style="margin-top: 2%" onclick="cutCity()">
+                <a id="city" class="layui-icon layui-icon-location" style="font-size: 15px; color: #0C0C0C;"></a>
+                            <a style="font-size: 15px">[切换城市]</a>
+<%--                <p class="nav-city-box" ka="header-switch-city"><i class="icon-poi"></i><span class="nav-city-selected" style="color: #0b2e13">厦门</span><span class="switchover-city">[切换城市]</span></p>--%>
+<%--                <div class="city-box">--%>
+<%--                    <ul class="dorpdown-province">--%>
+<%--                    </ul>--%>
+<%--                    <div class="dorpdown-city"></div>--%>
+<%--                </div>--%>
+            </div>
+            <div class="nav" style="margin-top: 20px">
+                <ul>
+                    <li class="cur"><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                    <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job?findWorkCity=${nowCity}">职位</a></li>
+                    <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                    <%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                    <li><a href="${pageContext.request.contextPath}/project" >项目</a></li>
+                    <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                    <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+                </ul>
+            </div>
+
+            <div class="user-nav" style="margin-top: 20px">
+                <c:if test="${empty qUser}">
+                    <div class="btns" style="margin-top: 10%">
+                        <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline">注册</a>
+                        <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline">登录</a>
+                    </div>
                 </c:if>
-                <c:if test="${qUser!=null}">
-                    <div style="margin: 10px 0px 20px 350px">
-                        <div style="float: left;margin: 0px -90px;">
-                            <div>
-                                    ${qUser.userName}
-                            </div>
-<%--                            <div style="margin: 100px;margin: -40px -50px;">--%>
-<%--                                <img src="../style/images/logo.png" width="50px" height="50px"/>--%>
+                <c:if test="${not empty qUser}">
+                    <ul>
+                            <%--                <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
+                        <li class="nav-figure">
+                            <div id="dropdown1">
+                            <a >
+                                <span class="label-text" >${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                            </a>
+                            <div class="dropdown" id="dropdown2" >
+                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                                <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                            </div></div>
+                        </li>
+                    </ul></c:if>
+            </div>
+        </div>
+    </div>
+
+
+
+<%--    <div id="header">--%>
+<%--        <div class="wrapper">--%>
+<%--            <a class="logo">--%>
+<%--                <img src="../style/images/logo.png" width="230" height="85"/>--%>
+<%--            </a>--%>
+<%--            <ul class="reset" id="navheader">--%>
+<%--                <li class="current"><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>--%>
+<%--                <li><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>--%>
+<%--                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>--%>
+<%--                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>--%>
+<%--                <li><a href="${pageContext.request.contextPath}/center/job?findWorkCity=${nowCity}" rel="nofollow">职位</a></li>--%>
+<%--                <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>--%>
+<%--            </ul>--%>
+<%--            <ul class="loginTop" style="font-size: 18px;height: 68px;">--%>
+<%--                <c:if test="${qUser==null}">--%>
+<%--                    <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>--%>
+<%--                    <li>|</li>--%>
+<%--                    <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${qUser!=null}">--%>
+<%--                    <div style="margin: 10px 0px 20px 350px">--%>
+<%--                        <div style="float: left;margin: 0px -90px;">--%>
+<%--                            <div>--%>
+<%--                                    ${qUser.userName}--%>
 <%--                            </div>--%>
-                        </div>
-                    </div>
-                    <div style="margin: 35px 230px;width: 200px;">
-                        <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px" onclick="window.open('${pageContext.request.contextPath}/center/jianli')">个人中心</button>
-<%--                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a" onclick="exit()">退出</button>--%>
-                        <a href="${pageContext.request.contextPath}/homePage/quitAccount" >退出登录</a>
-                    </div>
-                </c:if>
-            </ul>
-        </div>
-        <div style="float: right" onclick="cutCity()">
-            <a id="city" class="layui-icon layui-icon-location" style="font-size: 15px; color: #0C0C0C;"></a>
-            <a style="font-size: 15px">[切换城市]</a>
-        </div>
-    </div><!-- end #header -->
+<%--&lt;%&ndash;                            <div style="margin: 100px;margin: -40px -50px;">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <img src="../style/images/logo.png" width="50px" height="50px"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </div>&ndash;%&gt;--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div style="margin: 35px 230px;width: 200px;">--%>
+<%--                        <button type="button" class="layui-btn layui-btn-sm layui-btn-radiu layui-btn-primary" style="width: 70px;height: 27px" onclick="window.open('${pageContext.request.contextPath}/center/jianli')">个人中心</button>--%>
+<%--&lt;%&ndash;                        <button type="button" class="layui-btn layui-btn-sm" style="width: 70px;height: 27px;background-color: #e46a4a" onclick="exit()">退出</button>&ndash;%&gt;--%>
+<%--                        <a href="${pageContext.request.contextPath}/homePage/quitAccount" >退出登录</a>--%>
+<%--                    </div>--%>
+<%--                </c:if>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--        <div style="float: right" onclick="cutCity()">--%>
+<%--            <a id="city" class="layui-icon layui-icon-location" style="font-size: 15px; color: #0C0C0C;"></a>--%>
+<%--            <a style="font-size: 15px">[切换城市]</a>--%>
+<%--        </div>--%>
+<%--    </div><!-- end #header -->--%>
 
     <%-----------------------------------------------------------------------------------------搜索框--%>
 

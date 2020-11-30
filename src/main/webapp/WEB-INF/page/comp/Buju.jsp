@@ -217,7 +217,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td width="33%"><h3>邻域</h3></td>
+                                    <td width="33%"><h3>领域</h3></td>
                                     <td width="67%"><h3>${comp.industrys[0].industryName}</h3></td>
                                 </tr>
 

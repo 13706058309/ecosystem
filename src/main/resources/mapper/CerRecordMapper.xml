@@ -161,6 +161,7 @@ where 1=1  and c.stateId in (29,30,31)
         <id property="cerRecordId" column="cerRecordId"></id>
         <result property="trueName" column="trueName"></result>
         <result property="idNumber" column="idNumber"></result>
+        <result property="fileId" column="fileId"></result>
         <result property="stateId" column="stateId"></result>
         <result property="beginTime" column="beginTime"></result>
         <result property="cerTestReport" column="cerTestReport"></result>

@@ -148,6 +148,15 @@ public class BackCompServiceImpl implements BackCompService {
         List<Delivery> resumes = deliveryMapper.findAllResume(map);//2020-11-28
         int num = deliveryMapper.findAllResumeNum(map);//2020-11-28
         System.out.println(num+"数量");
+        TableInfo tableInfo = new TableInfo(0,"企业查找的简历",num,resumes );
+        return tableInfo;
+    }
+
+    @Override
+    public TableInfo findScreeResume(Map<String, Object> map) {
+        List<Delivery> resumes = deliveryMapper.findScreeResume(map);//2020-11-28
+        int num = deliveryMapper.findScreeResumeNum(map);//2020-11-28
+        System.out.println(num+"数量");
         TableInfo tableInfo = new TableInfo(0,"高校推荐人才",num,resumes );
         return tableInfo;
     }
@@ -348,12 +357,36 @@ public class BackCompServiceImpl implements BackCompService {
         }else{
             map.put("jobStand","在职月内到岗");
         }
+        if(resume.getExpectWork()!=null){
+            map.put("expectWork",resume.getExpectWork());
+        }else{
+            map.put("expectWork","暂无");
+        }
 
-        map.put("expectWork",resume.getExpectWork());
-        map.put("industry",resume.getIndustry());
-        map.put("address",resume.getAddress());
-        map.put("contactInfo",resume.getContactInfo());
-        map.put("selfEva",resume.getSelfEva());
+        if(resume.getIndustry()!=null){
+            map.put("industry",resume.getIndustry());
+        }else{
+            map.put("industry","暂无");
+        }
+
+        if(resume.getAddress()!=null){
+            map.put("address",resume.getAddress());
+        }else{
+            map.put("address","暂无");
+        }
+
+        if(resume.getContactInfo()!=null){
+            map.put("contactInfo",resume.getContactInfo());
+        }else{
+            map.put("contactInfo","暂无");
+        }
+
+        if(resume.getSelfEva()!=null){
+            map.put("selfEva",resume.getSelfEva());
+        }else{
+            map.put("selfEva","暂无");
+        }
+
         if(resume.getEducationalBackgrounds()!=null&&resume.getEducationalBackgrounds().size()!=0){
             map.put("school1",resume.getEducationalBackgrounds().get(0).getEbSchool());
             map.put("schBegin1",resume.getEducationalBackgrounds().get(0).getSchBeginTime());
@@ -361,11 +394,11 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("schEnd1",resume.getEducationalBackgrounds().get(0).getSchEndTime());
             map.put("schoolExp1",resume.getEducationalBackgrounds().get(0).getSchExperience());
         }else{
-            map.put("school1","");
-            map.put("schBegin1","");
-            map.put("edu1","");
-            map.put("schEnd1","");
-            map.put("schoolExp1","");
+            map.put("school1","未填写");
+            map.put("schBegin1","未填写");
+            map.put("edu1","未填写");
+            map.put("schEnd1","未填写");
+            map.put("schoolExp1","未填写");
         }
 
         if(resume.getEducationalBackgrounds().size()==2){
@@ -375,11 +408,11 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("schEnd2",resume.getEducationalBackgrounds().get(1).getSchEndTime());
             map.put("schoolExp2",resume.getEducationalBackgrounds().get(1).getSchExperience());
         }else{
-            map.put("school2","");
-            map.put("schBegin2","");
-            map.put("edu2","");
-            map.put("schEnd2","");
-            map.put("schoolExp2","");
+            map.put("school2","未填写");
+            map.put("schBegin2","未填写");
+            map.put("edu2","未填写");
+            map.put("schEnd2","未填写");
+            map.put("schoolExp2","未填写");
         }
         if(resume.getWorkExperiences()!=null&&resume.getWorkExperiences().size()!=0){
             map.put("compName1",resume.getWorkExperiences().get(0).getCompanyName());
@@ -389,12 +422,12 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("trade1",resume.getWorkExperiences().get(0).getDuties());
             map.put("performace1",resume.getWorkExperiences().get(0).getPerformance());
         }else{
-            map.put("compName1","");
-            map.put("begin1","");
-            map.put("post1","");
-            map.put("end1","");
-            map.put("trade1","");
-            map.put("performace1","");
+            map.put("compName1","未填写");
+            map.put("begin1","未填写");
+            map.put("post1","未填写");
+            map.put("end1","未填写");
+            map.put("trade1","未填写");
+            map.put("performace1","未填写");
         }
 
         if(resume.getWorkExperiences().size()==2){
@@ -405,12 +438,12 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("trade2",resume.getWorkExperiences().get(1).getDuties());
             map.put("performace2",resume.getWorkExperiences().get(1).getPerformance());
         }else{
-            map.put("compName2","");
-            map.put("begin2","");
-            map.put("post2","");
-            map.put("end2","");
-            map.put("trade2","");
-            map.put("performace2","");
+            map.put("compName2","未填写");
+            map.put("begin2","未填写");
+            map.put("post2","未填写");
+            map.put("end2","未填写");
+            map.put("trade2","未填写");
+            map.put("performace2","未填写");
         }
 
         if(resume.getProjectExperiences()!=null&&resume.getProjectExperiences().size()!=0){
@@ -421,12 +454,12 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("proDes1",resume.getProjectExperiences().get(0).getProDescription());
             map.put("proWork1",resume.getProjectExperiences().get(0).getProPerformance());
         }else{
-            map.put("projectName1","");
-            map.put("proBegin1","");
-            map.put("proPost1","");
-            map.put("proEnd1","");
-            map.put("proDes1","");
-            map.put("proWork1","");
+            map.put("projectName1","未填写");
+            map.put("proBegin1","未填写");
+            map.put("proPost1","未填写");
+            map.put("proEnd1","未填写");
+            map.put("proDes1","未填写");
+            map.put("proWork1","未填写");
         }
 
 
@@ -438,12 +471,12 @@ public class BackCompServiceImpl implements BackCompService {
             map.put("proDes2",resume.getProjectExperiences().get(1).getProDescription());
             map.put("proWork2",resume.getProjectExperiences().get(1).getProPerformance());
         }else{
-            map.put("projectName2","");
-            map.put("proBegin2","");
-            map.put("proPost2","");
-            map.put("proEnd2","");
-            map.put("proDes2","");
-            map.put("proWork2","");
+            map.put("projectName2","未填写");
+            map.put("proBegin2","未填写");
+            map.put("proPost2","未填写");
+            map.put("proEnd2","未填写");
+            map.put("proDes2","未填写");
+            map.put("proWork2","未填写");
         }
         WordUtil wordUtil = new WordUtil();
         System.out.println(photoPath+resume.getPhoto()+"我的");

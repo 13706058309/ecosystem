@@ -378,7 +378,7 @@
             $("#tip18").css("display","none");
             return false;
         }
-        if(jobDescription.trim().length>100){
+        if(jobDescription.trim().length>200){
             $("#tip18").css("display","block");
             $("#tip17").css("display","none");
             return false;
