@@ -226,7 +226,7 @@
                 <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="compName(${hc.bUserId})">
                     <div class="comLogo" style="float: left">
                         <img src="${pageContext.request.contextPath}/uploadLogo${hc.logo}" width="60"
-                             height="60" alt="CCIC"/>
+                             height="60" alt="CCIC"/>r
                     </div>
                     <div style="float: right">
                         <h3 title="CCIC" style="margin: 2px 5px;width: 183px;text-overflow:ellipsis;" align="center">
