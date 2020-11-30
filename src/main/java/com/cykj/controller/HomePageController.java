@@ -134,7 +134,7 @@ public class HomePageController {
             conditionMap.put("chooseScale",chooseScale);
         }
         int n=0;
-        int li=4;
+        int li=8;
         if (curr==null ){
             n=1;
 
@@ -172,6 +172,8 @@ public class HomePageController {
         BackUser backUser = companyService.findProfile(bUserId);
         List<PostPosition> postPositions = companyService.findPost(bUserId);
         int size = postPositions.size();  //该公司在招岗位数
+
+        UserInfo qUser = (UserInfo) request.getSession().getAttribute("qUser");
 
         request.setAttribute("backUser",backUser);
         request.setAttribute("postPositions",postPositions);

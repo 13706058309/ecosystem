@@ -59,10 +59,10 @@ public interface CertificateService {
 
     /**
      *
-     * @param fieldName
+     * @param field
      * @return 增加证书类型
      */
-    public int insertfield(@Param("fieldName")String fieldName);
+    public int insertfield(Field field);
 
 
     /**

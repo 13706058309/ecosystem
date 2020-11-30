@@ -1,6 +1,7 @@
 package com.cykj.controller;
 
 import com.cykj.entity.BackUser;
+import com.cykj.util.MD5Utils;
 import com.cykj.utils.Pages;
 import com.cykj.entity.RoleInfo;
 import com.cykj.entity.TableInfo;
@@ -133,9 +134,10 @@ public class SystemController {
     //管理员密码重置
     @RequestMapping("/resetPassword")
     @Loger(operationType = "管理员密码重置", operationName = "管理员密码重置")
-    public void resetPassword(String bUserId, String pwd, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void backResetPassword(String bUserId, String pwd, HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println(bUserId + "后端用户id");
         System.out.println(pwd + "后端用户密码");
+        pwd = MD5Utils.md5(pwd);
         boolean isSuccess = userServiceImpI.resetPassword(bUserId, pwd);
         if (isSuccess) {
             response.getWriter().write("success");
@@ -167,7 +169,7 @@ public class SystemController {
     //修改前端用户状态
     @RequestMapping("/changeUserState")
     @Loger(operationType = "修改前端用户状态", operationName = "修改前端用户状态")
-    public void changeUserState(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void backChangeUserState(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userId = request.getParameter("userId");
         String accStandId = request.getParameter("accStandId");
         System.out.println("修改的是用户ID:" + userId);
@@ -183,7 +185,7 @@ public class SystemController {
     //修改企业状态changeEnterpriseState
     @RequestMapping("/changeEnterpriseState")
     @Loger(operationType = "修改企业状态", operationName = "修改企业状态")
-    public void changeEnterpriseState(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void backChangeEnterpriseState(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String bUserId = request.getParameter("bUserId");
         String stateId = request.getParameter("stateId");
         System.out.println("修改的是企业ID:" + bUserId);
@@ -199,7 +201,7 @@ public class SystemController {
     //删除前端用户
     @RequestMapping("/deleteUser")
     @Loger(operationType = "删除前端用户", operationName = "删除前端用户")
-    public void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {//删除用户
+    public void backDeleteUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {//删除用户
         String userId = req.getParameter("userId");
         String accStandId = req.getParameter("accStandId");
         System.out.println("获取用户的id:" + userId);
@@ -216,7 +218,7 @@ public class SystemController {
     //修改后端用户状态
     @RequestMapping("/changeBackUserState")
     @Loger(operationType = "修改后端用户状态", operationName = "修改后端用户状态")
-    public void changeBackUserState(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void backChangeBackUserState(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String bUserId = request.getParameter("bUserId");
         String stateId = request.getParameter("stateId");
         System.out.println("修改的是用户ID:" + bUserId);
@@ -242,7 +244,7 @@ public class SystemController {
     //删除后端用户
     @RequestMapping("/deleteBackUser")
     @Loger(operationType = "删除后端用户", operationName = "删除后端用户")
-    public void deleteBackUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {//删除用户
+    public void backDeleteBackUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {//删除用户
         String bUserId = req.getParameter("bUserId");
         String stateId = req.getParameter("stateId");
         System.out.println("获取用户的id:" + bUserId);
@@ -259,7 +261,7 @@ public class SystemController {
     //新增管理员
     @RequestMapping("/add")  //新增界面模板
     @Loger(operationType = "新增管理员", operationName = "新增管理员")
-    public void add(String bUserName, String account, String pwd, String contactInfo, int roleIds, String stateId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void backAdd(String bUserName, String account, String pwd, String contactInfo, int roleIds, String stateId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         BackUser backUser = new BackUser();
         System.out.println(bUserName + "+名字");
         System.out.println(account + "+账号");
@@ -311,7 +313,7 @@ public class SystemController {
     //新增学校
     @RequestMapping("/addSchool")  //新增界面模板
     @Loger(operationType = "新增学校", operationName = "新增学校")
-    public void addSchool(String bUserName, String account, String pwd, String contactInfo, String address, String infoIntr,
+    public void backAddSchool(String bUserName, String account, String pwd, String contactInfo, String address, String infoIntr,
                           String email, int roleIds, String stateId, String compName, String coreValue, HttpServletRequest request, HttpServletResponse response) throws IOException {
         BackUser backUser = new BackUser();
         System.out.println(bUserName + "+校长名字");
@@ -352,7 +354,8 @@ public class SystemController {
     //======================================================================================================
     //下载
     @RequestMapping(value = "/upload")
-    public ResponseEntity<byte[]> upload(int bUserId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+    @Loger(operationType = "新增学校", operationName = "下载企业营业执照")
+    public ResponseEntity<byte[]> backUpload(int bUserId,HttpServletRequest request,HttpServletResponse response) throws IOException {
         BackUser backUser = userServiceImpI.findByID(bUserId);
 
         String path2 = backUser.getBusiLice();

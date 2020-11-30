@@ -24,41 +24,48 @@
     <link rel="stylesheet" href="../layui/css/layui.css">
     <script src="../layui/layui.js"></script>
     <script src="../js/companylist.js"></script>
+    <link href="${pageContext.request.contextPath}/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <body style="background-color: #f6f6f8">
 <div id="body">
-    <div id="header">
-        <div class="wrapper">
-            <a class="logo">
-                <img src="../style/images/logo.png" width="200" height="80">
-            </a>
-            <ul class="reset" id="navheader">
-                <li ><a href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li class="current"><a href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
-                <li><a href="${pageContext.request.contextPath}/course/homePage" target="_blank">课程</a></li>
-                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
-                <li><a href="${pageContext.request.contextPath}/center/job" rel="nofollow">职位</a></li>
-                <li><a href="${pageContext.request.contextPath}/zhengshu/cshouye" rel="nofollow">我的证书</a></li>
-            </ul>
-            <ul class="loginTop" style="font-size: 18px;height: 68px;">
-                <c:if test="${qUser==null}">
-                    <li><a href="${pageContext.request.contextPath}/golog/login" rel="nofollow">登录</a></li>
-                    <li>|</li>
-                    <li><a href="${pageContext.request.contextPath}/golog/reg" rel="nofollow">注册</a></li>
-                </c:if>
-                <c:if test="${qUser!=null}">
-                    <div style="margin: 10px 0px 20px 350px">
-                        <div style="float: left;margin: 0px -90px;">
-                            <div style="margin: -10px 20px;">
-                                    欢迎您 &nbsp;:&nbsp;&nbsp;${qUser.userName}
-                            </div>
-                                <%--                            <div style="margin: 100px;margin: -40px -50px;">--%>
-                                <%--                                <img src="../style/images/logo.png" width="50px" height="50px"/>--%>
-                                <%--                            </div>--%>
-                        </div>
+    <div id="header" style="background-color: #00c2b3;height: 95px" >
+        <div class="inner home-inner" >
+            <div class="logo" style="width: 150px;height: 70px">
+                <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+            </div>
+            <div class="nav" style="margin-top: 45px">
+                <ul>
+                    <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                    <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                    <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                    <%--                    <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                    <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                    <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                    <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+                </ul>
+            </div>
+
+            <div class="user-nav" style="margin-top: 20px">
+                <c:if test="${empty qUser}">
+                    <div class="btns" style="margin-top: 10%">
+                        <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline">注册</a>
+                        <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline">登录</a>
                     </div>
                 </c:if>
-            </ul>
+                <c:if test="${not empty qUser}">
+                    <ul>
+                        <li class="nav-figure">
+                            <a >
+                                <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                            </a>
+                            <div class="dropdown">
+                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                                <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                            </div>
+                        </li>
+                    </ul></c:if>
+            </div>
         </div>
     </div>
     <div id="container">
@@ -66,7 +73,7 @@
             <div class="content_l">
                 <form id="companyListForm" name="companyListForm" method="get">
                     <dl class="hc_tag">
-                        <dd>
+                        <dd style="height: 300px">
                             <dl>
                                 <dt>公司地点：</dt>
                                 <dd>
@@ -140,9 +147,9 @@
                     <div style="font-size: 18px;color: #44D0C7;font-family: 华文新魏;margin: 18px 30px" align="right" >
                         共&nbsp;${companyList}&nbsp;家公司
                     </div>
-                    <ul class="hc_list reset" style="width: 100%;margin: 0px 22px">
+                    <ul class="hc_list reset" style="width: 100%;margin: 0px 22px;height: 370px">
                         <c:forEach items="${backUserList}" var="company">
-                            <li style="margin: 3px 5px;width: 264px;height: 120px" onclick="companyProfile(${company.backUser.bUserId})">
+                            <li style="margin: 10px 5px;width: 264px;height: 120px" onclick="companyProfile(${company.backUser.bUserId})">
                                 <div class="comLogo" style="float: left">
                                     <img src="${pageContext.request.contextPath}/uploadLogo${company.backUser.logo}" width="60"
                                          height="60" alt="CCIC"/>
@@ -156,7 +163,7 @@
                                 </div>
                                 <ul class="reset ctags" style="margin-top: 73px;">
                                     <li>${company.backUser.scale}</li>
-                                    <li>${company.backUser.product}</li>
+<%--                                    <li>${company.backUser.product}</li>--%>
                                 </ul>
                             </li>
                         </c:forEach>
@@ -182,8 +189,6 @@
     </div>
 </div>
 </div><%--  id=body  end  --%>
-
 <script type="text/javascript" src="../style/js/core.min.js"></script>
-
 </body>
 </html>

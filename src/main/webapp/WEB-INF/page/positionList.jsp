@@ -77,7 +77,7 @@
         </div>
     </div>
 </div>
-<div class="demoTable" style="margin-left: 5%">
+<div class="demoTable" style="margin-left: 10%;width: 1200px">
     <div class="layui-form-item">
         <label class="layui-form-label">公司:</label>
         <div class="layui-input-inline">
@@ -91,7 +91,7 @@
         <div class="layui-input-inline">
             <input type="tel" id="postName" lay-verify="required|phone" autocomplete="off" class="layui-input">
         </div>
-        <div class="layui-input-inline" style="margin-left: 8%">
+        <div class="layui-input-inline" style="margin-left: 1%">
             <button type="button" class="layui-btn layui-btn-radius layui-btn-lg"  data-type="reload"style="width: 100px">搜索</button>
         </div>
     </div>

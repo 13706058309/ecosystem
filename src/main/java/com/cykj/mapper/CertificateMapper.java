@@ -34,7 +34,7 @@ public interface CertificateMapper {
     public int upcershowState(@Param("cerShowState")int cerShowState,@Param("cerId")long cerId);
 
     //增加证书类型
-    public int insertfield(@Param("fieldName")String fieldName);
+    public int insertfield(Field field);
 
     //证书类型
     public Field findfieldid(@Param("fieldName")String fieldName);

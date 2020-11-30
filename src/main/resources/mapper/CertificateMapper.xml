@@ -75,9 +75,10 @@
     <update id="upbackzhengshuxuqiu" >
         update certificate set cerRequirement = #{cerRequirement} where cerId= #{cerId}
     </update>
+
     <insert id="insertcertificate" parameterType="com.cykj.entity.Certificate" keyProperty="cerId" useGeneratedKeys="true">
-      insert into certificate(imgUrl, fieldId, cerSketch, cerTrait, cerHeadPortrait, cerShowState, cerChangeTime, certificationFee, cerRequirement)
-        value (#{imgUrl},#{fieldId},#{cerSketch},#{cerTrait},#{cerHeadPortrait},#{cerShowState},#{cerChangeTime},#{certificationFee},#{cerRequirement})
+      insert into certificate(imgUrl, fieldId, cerSketch, cerTrait, cerHeadPortrait, cershowState, cerChangeTime, certificationFee, cerRequirement)
+        value (#{imgUrl},#{fieldId},#{cerSketch},#{cerTrait},#{cerHeadPortrait},#{cershowState},#{cerChangeTime},#{certificationFee},#{cerRequirement})
     </insert>
 
     <select id="finduname"  resultType="integer">
@@ -86,7 +87,7 @@
     <select id="findfieldid"  resultType="integer">
     select * from field where fieldName= #{fieldName}
     </select>
-    <insert id="insertfield"  keyProperty="fieldId" useGeneratedKeys="true">
+    <insert id="insertfield" parameterType="com.cykj.entity.Field" keyProperty="fieldId" useGeneratedKeys="true">
        insert into field(fieldName) value (#{fieldName})
     </insert>
 </mapper>
