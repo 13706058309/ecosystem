@@ -212,7 +212,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 100px" >姓名</label>
                                         <div class="layui-input-inline" >
-                                            <input type="text" id="realName" name="realName" required  lay-verify="required" placeholder="请输入姓名" maxlength="20" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')"        autocomplete="off" class="layui-input" value="${resume.realName}">
+                                            <input type="text" id="realName" name="realName" required  lay-verify="required" placeholder="请输入姓名" maxlength="20" onblur="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')"        autocomplete="off" class="layui-input" value="${resume.realName}">
                                         </div>
                                         <label class="layui-form-label" style="width: 100px">民族</label>
                                         <div class="layui-input-inline">
@@ -222,7 +222,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label" style="width: 100px">政治面貌</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" id="politicalStatus" name="politicalStatus" required  lay-verify="required" placeholder="请输入政治面貌" maxlength="15" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" autocomplete="off" class="layui-input" value="${resume.politicalStatus}">
+                                            <input type="text" id="politicalStatus" name="politicalStatus" required  lay-verify="required" placeholder="请输入政治面貌" maxlength="15" onblur="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" autocomplete="off" class="layui-input" value="${resume.politicalStatus}">
                                         </div>
                                         <label class="layui-form-label" style="width: 100px">联系方式</label>
                                         <div class="layui-input-inline">
@@ -1071,7 +1071,7 @@
         jobStand=$('#jobStandId').val();
         educationId=$('#edId').val();
         jobStandId=$('#jobId').val();
-        wrokyear=$('#wrokyear').val();
+        wrokyear=$('#wrokYear').val();
         // $("#educationId").find("option[text='1']").attr("selected",true);
         // $(".sex").find("input[value='男']").attr("checked",true);
 
