@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html><head>
     <meta charset="UTF-8">
     <title>视频界面</title>
@@ -103,9 +103,11 @@
 <div style="width: 100%;height: 20px;"></div>
 <div>
 <div>
-    <div style="float:left;margin-left: 193px">
-        <video controls="controls" preload="auto" height="360">
-            <source src="http://117.27.136.49:8078/mp4/1Python语言概述.mp4" type="video/mp4">
+    <div style="float:left;margin-left: 193px;width: 640px">
+        <video controls="controls" preload="auto" height="360" width="100%">
+<%--            <source src="http://117.27.136.49:8078/mp4/1Python语言概述.mp4" type="video/mp4">--%>
+<%--            <source src="http://47.116.134.152:8080/videos/跑.mp4" type="video/mp4">--%>
+            <source src="${currPlayUnit.videoUrl}" type="video/mp4">
             当前浏览器不支持直接播放，请更新浏览器版本或者更换浏览器进行视频观看
         </video>
         <div style="height: 40px;margin-top: 20px;font-size: 20px;">

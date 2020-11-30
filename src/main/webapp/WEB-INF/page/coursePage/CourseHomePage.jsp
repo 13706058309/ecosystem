@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Title</title>
+    <title>课程首页</title>
 
     <link rel="stylesheet" type="text/css" href="http://cymooc.org:80/common/css/bootstrap.css"/>
     <link rel="stylesheet" href="http://cymooc.org:80/common/css/course.css"/>
