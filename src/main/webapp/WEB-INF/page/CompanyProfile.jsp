@@ -186,9 +186,9 @@
                                         </div>
                                         <c:if test="${not empty qUser}">
                                             <div class="startchat-box">
-                                                <a ka="job-7-chat" href="javascript:;" class="btn btn-startchat"
+                                                <button ka="job-7-chat"  class="btn btn-startchat"
                                                    onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${backUser.bUserId}')">
-                                                    立即沟通</a>
+                                                    立即沟通</button>
                                             </div>
                                         </c:if>
                                     </li>

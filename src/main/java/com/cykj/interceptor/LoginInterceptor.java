@@ -1,5 +1,7 @@
 package com.cykj.interceptor;
 
+import com.cykj.entity.BackUser;
+import com.cykj.entity.UserInfo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +17,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         httpServletRequest.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("text/html;charset=UTF-8");
         boolean flag = true;
+
         return flag;
     }
 
