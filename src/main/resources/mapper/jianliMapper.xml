@@ -217,7 +217,7 @@
         select pp.*,b.*  from delivery d left join userInfo u on u.userId=d.userID
             left join postPosition pp on d.pPostID=pp.pPostID
             left join backUser b on pp.companyId=b.bUserId
-            where d.userId=#{userId} limit #{page},#{size};
+            where d.userId=#{userId} order by  delitime desc limit #{page},#{size};
     </select>
     <resultMap id="findPosition" type="com.cykj.entity.PostPosition">
         <id property="pPostId" column="pPostId"></id>
@@ -267,13 +267,18 @@
 
 
     <select id="communication" parameterType="java.lang.Integer" resultType="com.cykj.entity.BackUser">
-        select DISTINCT b.bUserID,b.* from backUser b left join compRecord c on b.bUserID=c.tCompID
-            left join userInfo u on c.userID =u.userId where u.userID=#{userId}
-               limit #{page},#{size};
+
+
+    select u.* from
+    (select max(recoredTime),userID,max(compRecID) as cID from compRecord where userID = #{userId} group by tCompID) t
+       left join compRecord r on t.cID = r.compRecID left join backUser u on r.tCompID = u.bUserID order by recoredTime desc  limit #{page},#{size};
     </select>
     <select id="communicationCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.BackUser">
-        select DISTINCT b.bUserID,b.* from backUser b left join compRecord c on b.bUserID=c.tCompID
-            left join userInfo u on c.userID =u.userId where u.userID=#{userId} ;
+
+select u.* from
+    (select max(recoredTime),userID,max(compRecID) as cID from compRecord where userID = #{userId} group by tCompID) t
+       left join compRecord r on t.cID = r.compRecID left join backUser u on r.tCompID = u.bUserID order by recoredTime desc ;
+
     </select>
 
     <select id="deliveryPostsCount" parameterType="java.lang.Integer" resultType="com.cykj.entity.PostPosition">
