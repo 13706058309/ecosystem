@@ -38,14 +38,14 @@ public interface CourseMapper {
 
 
     String findOption();
-//public List<Course> findCourse();
-//public List<Course> search(String courseName);
+
     /**
      * 根据领域ID查询课程信息，ID为0时，查询所有
      * @param conditionMap
      * @return 返回课程列表
      */
     public List<Course> selectCourseByFieldId(Map<String,Object> conditionMap);
+
 
     public int selectCount(long fieldId);
 
@@ -69,5 +69,29 @@ public interface CourseMapper {
      */
     public List selectRelatedCourses(long courseId);
 
+    /**
+     * 根据课程ID查询当前播放视频所属的课程名
+     * @param courseId
+     * @return
+     */
     public String selectCourseNameByCourseId(long courseId);
+
+    /**
+     * 根据章节ID更新该章节所属课程的播放量
+     * @param unitId
+     * @return
+     */
+    public void updateTotalPlayTimesByUnitId (long unitId);
+
+    /**
+     * 课程被收藏时，根据课程Id给课程表的被收藏字段加1
+     * @param courseId
+     */
+    public void increaseCollectionNumberByCourseId(long courseId);
+
+    /**
+     *课程被取消收藏时，根据课程Id给课程表的被收藏字段减1
+     * @param courseId
+     */
+    public void decreaseCollectionNumberByCourseId(long courseId);
 }
