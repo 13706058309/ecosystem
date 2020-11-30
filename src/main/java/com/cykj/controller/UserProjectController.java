@@ -1,21 +1,18 @@
 package com.cykj.controller;
 
 import com.alipay.api.AlipayApiException;
+import com.aliyuncs.utils.StringUtils;
 import com.cykj.entity.*;
 import com.cykj.service.ParameterService;
 import com.cykj.service.ProjectService;
 import com.cykj.service.UserProjectService;
-import com.cykj.service.impl.ProjectServiceImpl;
+import com.cykj.util.ProjectMpp;
 import com.cykj.util.TableInfo;
 import com.cykj.util.TaskInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.sf.mpxj.MPXJException;
-import net.sf.mpxj.ProjectFile;
-import net.sf.mpxj.Relation;
-import net.sf.mpxj.Task;
+import net.sf.mpxj.*;
 import net.sf.mpxj.mpp.MPPReader;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -310,9 +307,7 @@ public class UserProjectController {
                     int lastTaskId1 = lastMap1.get("taskId");
                     taskInfo.setParent_id(lastTaskId1);
                 }else if(taskOutLineLevel < lastTaskOutLineLevel){
-
                     tempTaskOutLine.set(taskOutLineLevel, map);
-
                     Map<String,Integer> lastMap2 = tempTaskOutLine.get(taskOutLineLevel-1);
                     int lastTaskId2 = lastMap2.get("taskId");
                     taskInfo.setParent_id(lastTaskId2);
@@ -321,6 +316,4 @@ public class UserProjectController {
         }
         return taskList;
     }
-
-
 }

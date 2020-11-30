@@ -79,7 +79,7 @@ function findProjectOrder(curr,limit){
             var projectList=$("#order_list");
             if (pageCounts!==res.count){
                 $("#pageCounts").val(res.count);
-                pageCounts=$("#pageCounts").val();
+                pageCounts=res.count;
                 getPage();
             }
             projectList.children().remove();
