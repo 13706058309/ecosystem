@@ -69,6 +69,7 @@
         <result property="roleId" column="roleId"></result>
         <result property="stateId" column="stateId"></result>
         <result property="balance" column="balance"></result>
+        <result property="coreValue" column="coreValue"></result>
         <association property="states"  javaType="com.cykj.entity.Parameter">
             <id property="paramId" column="paramId"></id>
             <result property="paramName" column="paramName"></result>

@@ -85,7 +85,8 @@
         where p.companyID=b.bUserID and p.postID=p2.postID and d.departID=p2.departID and i.industryID=d.industryID and p.postStandID=6
         <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
         <if test="postName!=null">and p2.postName like concat('%',#{postName},'%')</if>
-        limit #{limit} offset #{offset}
+        <if test="companyName!=null">and b.compName like concat('%',#{companyName},'%')</if>
+        order by p.releaseTime desc limit #{limit} offset #{offset}
     </select>
     <resultMap id="result" type="com.cykj.entity.Positions">
         <result property="companyID" column="companyID"></result>
@@ -99,6 +100,7 @@
         where p.companyID=b.bUserID and p.postID=p2.postID and d.departID=p2.departID and i.industryID=d.industryID and p.postStandID=6
         <if test="industryName!=null">and i.industryName like concat('%',#{industryName},'%')</if>
         <if test="postName!=null">and p2.postName like concat('%',#{postName},'%')</if>
+        <if test="companyName!=null">and b.compName like concat('%',#{companyName},'%')</if>
     </select>
     <select id="selectPosition" parameterType="java.util.HashMap"  resultMap="result1">
         select p.postID,p.postName,d.departName,i.industryName from position p,depart d,industry i where i.industryID=d.industryID and d.departID=p.departID

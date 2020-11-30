@@ -6,7 +6,7 @@
     <select id="findCompChatRec" resultMap="getCompChat">
             select r.*,u.headImgUrl,u.userName,u.telephone from
             (select max(recoredTime),userID,max(compRecID) as cID from compRecord where tCompID = #{compID} group by userID) t
-                left join compRecord r on t.cID = r.compRecID left join userInfo u on r.userID = u.userId limit 10;
+                left join compRecord r on t.cID = r.compRecID left join userInfo u on r.userID = u.userId order by recoredTime desc limit 10;
     </select>
 
     <resultMap id="getCompChat" type="com.cykj.entity.CompRecord">
@@ -36,7 +36,7 @@
     <select id="getChatComp" resultMap="findComp">
             select r.*,u.bUserName,u.logo from
     (select max(recoredTime),userID,max(compRecID) as cID from compRecord where userID = #{userID} group by tCompID) t
-        left join compRecord r on t.cID = r.compRecID left join backUser u on r.tCompID = u.bUserID limit 10
+        left join compRecord r on t.cID = r.compRecID left join backUser u on r.tCompID = u.bUserID order by recoredTime desc limit 10
     </select>
 
     <resultMap id="findComp" type="com.cykj.entity.CompRecord">
