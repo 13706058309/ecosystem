@@ -700,7 +700,7 @@ public class CompController {
         if(!vCode.equals(saveCode)){
             return "3";
         }
-//        pwd = MD5Utils.md5(pwd);
+        pwd = MD5Utils.md5(pwd);
         int n = backCompService.changePwdByPhone(pwd,phone);
 
         return n>0?"1":"4";
