@@ -299,7 +299,7 @@
                                                         <li ka="user-resume-edit-expectation0" class="">
                                                             <div class="primary-info">
                                                                 <div class="info-labels"><span class="prev-line"><span
-                                                                        class="label-text"><i class="fz-resume fz-job"></i> 反馈信息：${post.delivery.feedBackInfo}
+                                                                        class="label-text" title="${post.delivery.feedBackInfo}"><i class="fz-resume fz-job"></i> 反馈信息：${post.delivery.feedBackInfo}
                                                         </span></span>
 <%--                                                                    <span class="prev-line"><i--%>
 <%--                                                                        class="fz-resume fz-salary"></i> ${post.education} </span><span--%>
@@ -381,7 +381,7 @@
                                                         <li ka="user-resume-edit-expectation0" class="">
                                                             <div class="primary-info">
                                                                 <div class="info-labels"><span class="prev-line"><span
-                                                                        class="label-text"><i class="fz-resume fz-job"></i> 公司简介：${post.infoIntr}
+                                                                        class="label-text" title="${post.infoIntr}"><i class="fz-resume fz-job"></i> 公司简介：${post.infoIntr}
                                                         </span></span>
                                                                         <%--                                                                    <span class="prev-line"><i--%>
                                                                         <%--                                                                        class="fz-resume fz-salary"></i> ${post.education} </span><span--%>
@@ -597,7 +597,7 @@
 
     });
     function postInfo(id) {
-        location.href="postInfo?lid="+id;
+        window.open("postInfo?lid="+id);
     }
 </script>
 </body>

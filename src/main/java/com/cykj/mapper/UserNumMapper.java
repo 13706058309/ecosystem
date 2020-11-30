@@ -23,4 +23,7 @@ public interface UserNumMapper {
 
 
     List<BackUserNum> userNumHalfYear();
+
+
+    List<BackUserNum> all();
 }

@@ -53,8 +53,8 @@ public class LoginController {
         request.getSession().removeAttribute("vCode");
         if (sVCode.equalsIgnoreCase(vCode)) {
 //            启用MD5解开即可
-//            UserInfo userInfo = loginServiceImpl.log(account,MD5Utils.md5(pwd));
-            UserInfo userInfo = loginServiceImpl.log(account, pwd);
+            UserInfo userInfo = loginServiceImpl.log(account,MD5Utils.md5(pwd));
+//            UserInfo userInfo = loginServiceImpl.log(account, pwd);
 
             if (userInfo != null) {
                 System.out.println(userInfo.toString());
@@ -105,8 +105,8 @@ public class LoginController {
         request.getSession().removeAttribute("vCode");
         if (sVCode.equalsIgnoreCase(vCode)) {
 //            启用MD5解开即可
-//            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
-            BackUser backUser = loginServiceImpl.adminLog(account, password);
+            BackUser backUser = loginServiceImpl.adminLog(account,MD5Utils.md5(password));
+//            BackUser backUser = loginServiceImpl.adminLog(account, password);
             if (backUser == null) {
                 System.out.println("用户名或密码错误!");
                 return "noAcc";
@@ -344,14 +344,12 @@ public class LoginController {
         resume.setRealName(userInfo.getUserName());
         System.out.println("执行注册!");
 
-
-
         String account = userInfo.getAccount();
         String savePhone = (String) request.getSession().getAttribute("recPhone");
         String saveCode = (String) request.getSession().getAttribute("recCode");
         System.out.println("前端传过来的手机:"+userInfo.getTelephone()+"验证码:"+vmesCode);
 //        启用MD5解开即可
-//        userInfo.setPwd(MD5Utils.md5(userInfo.getPwd()));
+        userInfo.setPwd(MD5Utils.md5(userInfo.getPwd()));
         if (saveCode != null&&!saveCode.equalsIgnoreCase(vmesCode)){
             System.out.println("验证码错误!");
             return "1";
@@ -381,7 +379,7 @@ public class LoginController {
 
     @RequestMapping("/adminMain")
 //    @Loger(operationName = "登录后跳转菜单")
-    public String adminMain(HttpServletRequest request, HttpServletResponse response) {
+    public String adminMain(HttpServletRequest request) {
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
         if (backUser != null) {
             List<Menu> menuList = powerServiceImpl.findExistMenu(backUser.getRoleId());
@@ -393,7 +391,7 @@ public class LoginController {
     }
 
     @RequestMapping("/toMain")
-    public String toMain(HttpServletRequest request, HttpServletResponse response) {
+    public String toMain(HttpServletRequest request) {
         BackUser backUser = new BackUser();
         backUser.setRoleId(1);
         backUser.setBUserName("测试1");
