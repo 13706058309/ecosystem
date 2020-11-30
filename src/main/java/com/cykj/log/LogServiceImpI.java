@@ -1,6 +1,7 @@
 package com.cykj.log;
 
 import com.cykj.entity.BackLog;
+import com.cykj.mapper.LogMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
