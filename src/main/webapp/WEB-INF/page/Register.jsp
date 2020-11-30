@@ -59,8 +59,7 @@
             <input type="text" name="telephone"  id="telephone" placeholder="请输入您的手机" maxlength="11" >
             <input type="button" name="mesCode" id="mesCode" value="点击获取验证码" onclick="sendMes()">
             <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码" maxlength="4">
-            <input type="text" name="address"  id="address" placeholder="请输入您的地址" >
-<%--            <input type="button" value="是否为应届生" onclick="isStu()">--%>
+            <input type="text" name="address"  id="address" placeholder="请输入您的地址" maxlength="30">
             <a onclick="ajax_reg()"><input type="button" value="提交"></a>
             <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a>或者<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
@@ -114,14 +113,7 @@
             }
         })
 
-        //地址限制必须有汉字
-        $("#address").blur(function () {
-            var pattern = /[\u4e00-\u9fa5]{6,12}$/;
-            if(!pattern.test($(this).val())){
-                alert("必须是汉字且6字以上，最多12位");
-                $(this).val("");
-            }
-        })
+
 
     })
 
@@ -208,16 +200,18 @@
                     return false;
                 }
                 if (vmesCode.length==0){
-                    alert("验证码不能改空!")
+                    alert("验证码不能为空!");
+                    return false;
                 }
-                // if(telephone.length==0){
-                //     alert("请填写手机号!");
-                //     return false;
-                // }
+                if(address.length==0){
+                    alert("地址不能为空,请填入30字以内有效地址!");
+                    return false;
+                }
                 return true;
             },
             success:function (info) {
                 // alert(info);
+
                 if(info=='regsuccess'){
                     var mes = confirm("恭喜您注册成功!是否去登录呢?");
                     if (mes == true){
@@ -241,17 +235,6 @@
                 }
             },
         })
-    }
-
-    //是否为应届生
-    function isStu() {
-        var stu = confirm("是否为应届生？");
-        if(stu == true){
-
-        } else{
-            prompt("请输入您的工作经验!");
-
-        }
     }
 
 </script>

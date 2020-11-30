@@ -152,7 +152,7 @@
         </div>
     </form>
 </div>
-<div class="demoTable" style="margin-left: 10%">
+<div class="demoTable" style="margin-left: 10%;width: 1200px">
     <div class="layui-form-item">
         <label class="layui-form-label">行业:</label>
         <div class="layui-input-inline">

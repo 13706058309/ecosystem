@@ -77,8 +77,12 @@
         </div>
     </div>
 </div>
-<div class="demoTable" style="margin-left: 20%">
+<div class="demoTable" style="margin-left: 10%;width: 1200px">
     <div class="layui-form-item">
+        <label class="layui-form-label">公司:</label>
+        <div class="layui-input-inline">
+            <input type="tel" id="companyName" lay-verify="required|phone" autocomplete="off" class="layui-input">
+        </div>
         <label class="layui-form-label">行业:</label>
         <div class="layui-input-inline">
             <input type="tel" id="industryName" lay-verify="required|phone" autocomplete="off" class="layui-input">
@@ -87,7 +91,7 @@
         <div class="layui-input-inline">
             <input type="tel" id="postName" lay-verify="required|phone" autocomplete="off" class="layui-input">
         </div>
-        <div class="layui-input-inline" style="margin-left: 8%">
+        <div class="layui-input-inline" style="margin-left: 1%">
             <button type="button" class="layui-btn layui-btn-radius layui-btn-lg"  data-type="reload"style="width: 100px">搜索</button>
         </div>
     </div>
@@ -140,7 +144,7 @@
                     cols: [[ //表头
 
                         {field: 'industryName', title: '行业',sort: true }
-                        ,{field: 'compName', title: '发布者', sort: true}
+                        ,{field: 'compName', title: '公司', sort: true}
                         ,{field: 'postName', title: '岗位', sort: true}
                         ,{field: 'releaseTime', title: '发布时间', sort: true}
                         ,{title:'操作',toolbar:'#btns',width:100}
@@ -171,6 +175,7 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
+                        companyName:$('#companyName').val(),
                         postName: $('#postName').val(),
                         industryName: $('#industryName').val(),
                     }

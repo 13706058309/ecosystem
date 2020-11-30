@@ -3,6 +3,7 @@ package com.cykj.controller;
 import com.cykj.entity.*;
 import com.cykj.log.Loger;
 import com.cykj.service.BackCompService;
+import com.cykj.util.MD5Utils;
 import com.cykj.utils.GaoDeMapUtil;
 import com.cykj.utils.MyUtil;
 import com.cykj.utils.PhoneCodeUtil;
@@ -67,8 +68,8 @@ public class CompController {
     }
     //删除高校推荐人才
     @RequestMapping("/delUnviTalent")
-//    @Loger(operationType="后端日志",operationName="企业删除高校人才")
-    public @ResponseBody String delUnviTalent(int compAndTalId){
+    @Loger(operationType="后端日志",operationName="企业删除高校人才")
+    public @ResponseBody String backDelUnviTalent(int compAndTalId){
         int n = backCompService.delUnviTalent(15,compAndTalId);
         String msg = "";
         if(n>0){
@@ -80,8 +81,8 @@ public class CompController {
     }
     //批量删除高校推荐人才
     @RequestMapping("/delAllUnviTalent")
-//    @Loger(operationType="后端日志",operationName="企业批量删除高校人才")
-    public @ResponseBody String delAllUnviTalent(String msg){
+    @Loger(operationType="后端日志",operationName="企业批量删除高校人才")
+    public @ResponseBody String backDelAllUnviTalent(String msg){
         List<Talent> list = new Gson().fromJson(msg,new TypeToken<List<Talent>>(){}.getType());
         int s = 0;
         for (Talent talent : list) {
@@ -118,14 +119,17 @@ public class CompController {
     }
     //公司上线岗位
     @RequestMapping("/postPosition")
-//    @Loger(operationType="后端日志",operationName="上线岗位")
-    public @ResponseBody String postPosition(PostPosition postPosition,HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="上线岗位")
+    public @ResponseBody String backPostPosition(PostPosition postPosition,HttpServletRequest request){
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
 //        int compID = 3;
+        System.out.println(backUser.getProduct()+"-"+backUser.getFinanStage()+"-"+backUser.getHomePage()+"-"+backUser.getScale()+"-"+backUser.getCoreValue()+"-"
+                +backUser.getInfoIntr()+"-"+backUser.getLogo());
         if(backUser.getProduct()==null||backUser.getFinanStage()==null||backUser.getHomePage()==null||backUser.getScale()==null
         ||backUser.getCoreValue()==null||backUser.getInfoIntr()==null||backUser.getLogo()==null){
             return "3";
         }
+
         int compID = (int) backUser.getbUserId();
         postPosition.setCompanyId(compID);
         String msg = backCompService.postPosition(postPosition);
@@ -156,8 +160,8 @@ public class CompController {
     }
     //删除岗位
     @RequestMapping("/delPositionStand")
-//    @Loger(operationType="后端日志",operationName="删除岗位")
-    public @ResponseBody String delPositionStand(int pPostId,HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="删除岗位")
+    public @ResponseBody String backDelPositionStand(int pPostId,HttpServletRequest request){
 
         Map<String,Object> map = new HashMap<>();
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
@@ -173,8 +177,8 @@ public class CompController {
 
     //下线岗位
     @RequestMapping("/offLinePosition")
-//    @Loger(operationType="后端日志",operationName="下线岗位")
-    public @ResponseBody String offLinePosition(int pPostId, HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="下线岗位")
+    public @ResponseBody String backOffLinePosition(int pPostId, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
         int compID = (int) backUser.getbUserId();
@@ -211,8 +215,8 @@ public class CompController {
     }
     //重新上线岗位
     @RequestMapping("/onLinePosition")
-//    @Loger(operationType="后端日志",operationName="重新上线岗位")
-    public @ResponseBody String onLinePosition(String position,HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="重新上线岗位")
+    public @ResponseBody String backOnLinePosition(String position,HttpServletRequest request){
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
         long compID = backUser.getbUserId();
         PostPosition postPosition = new Gson().fromJson(position,PostPosition.class);
@@ -256,16 +260,16 @@ public class CompController {
     }
     //批量过滤简历
     @RequestMapping("/scerrResume")
-//    @Loger(operationType="后端日志",operationName="企业批量过滤简历")
-    public @ResponseBody String scerrResume(String msg){
+    @Loger(operationType="后端日志",operationName="企业批量过滤简历")
+    public @ResponseBody String backScerrResume(String msg){
         List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.changeDeliStand(list,10);
         return successNum+"";
     }
     //过滤当个简历
     @RequestMapping("/scerrResumeOne")
-//    @Loger(operationType="后端日志",operationName="企业过滤单个简历")
-    public @ResponseBody String scerrResumeOne(int deliID){
+    @Loger(operationType="后端日志",operationName="企业过滤单个简历")
+    public @ResponseBody String backScerrResumeOne(int deliID){
         int n = backCompService.changeDeliStand(deliID,10);
         return n+"";
     }
@@ -297,16 +301,16 @@ public class CompController {
 
     //待定单个简历
     @RequestMapping("/deterResumeOne")
-//    @Loger(operationType="后端日志",operationName="企业待定简历")
-    public @ResponseBody String deterResumeOne(int deliID){
+    @Loger(operationType="后端日志",operationName="企业待定简历")
+    public @ResponseBody String backDeterResumeOne(int deliID){
         int n = backCompService.changeDeliStand(deliID,11);
         return n+"";
     }
 
     //批量待定单个简历
     @RequestMapping("/deterResume")
-//    @Loger(operationType="后端日志",operationName="企业批量待定简历")
-    public @ResponseBody String deterResume(String msg){
+    @Loger(operationType="后端日志",operationName="企业批量待定简历")
+    public @ResponseBody String backDeterResume(String msg){
         List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
 
         int successNum = backCompService.changeDeliStand(list,11);
@@ -315,24 +319,24 @@ public class CompController {
 
     //删除单个简历
     @RequestMapping("/delResumeOne")
-//    @Loger(operationType="后端日志",operationName="企业删除单个简历")
-    public @ResponseBody String delResumeOne(int deliID){
+    @Loger(operationType="后端日志",operationName="企业删除单个简历")
+    public @ResponseBody String backDelResumeOne(int deliID){
         int n = backCompService.delResume(deliID,9);
         return n+"";
     }
 
     //删除已通知面试的单个简历
     @RequestMapping("/delPassResumeOne")
-//    @Loger(operationType="后端日志",operationName="删除已通知面试简历")
-    public @ResponseBody String delPassResumeOne(int deliID){
+    @Loger(operationType="后端日志",operationName="删除已通知面试简历")
+    public @ResponseBody String backDelPassResumeOne(int deliID){
         int n = backCompService.changeDeliStand(deliID,21);
         return n+"";
     }
 
     //批量删除简历
     @RequestMapping("/delResume")
-//    @Loger(operationType="后端日志",operationName="企业批量高校人才")
-    public @ResponseBody String delResume(String msg){
+    @Loger(operationType="后端日志",operationName="企业批量高校人才")
+    public @ResponseBody String backDelResume(String msg){
 
         List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.delResume(list,9);
@@ -341,8 +345,8 @@ public class CompController {
 
     //批量删除通知面试简历
     @RequestMapping("/delPassResume")
-//    @Loger(operationType="后端日志",operationName="企业批量删除通知面试的简历")
-    public @ResponseBody String delPassResume(String msg){
+    @Loger(operationType="后端日志",operationName="企业批量删除通知面试的简历")
+    public @ResponseBody String backDelPassResume(String msg){
 
         List<Delivery> list = new Gson().fromJson(msg,new TypeToken<List<Delivery>>(){}.getType());
         int successNum = backCompService.changeDeliStand(list,21);
@@ -375,8 +379,8 @@ public class CompController {
 
     //通知面试简历
     @RequestMapping("/passResume")
-//    @Loger(operationType="后端日志",operationName="企业通知面试")
-    public @ResponseBody String passResume(int deliID,String msg){
+    @Loger(operationType="后端日志",operationName="企业通知面试")
+    public @ResponseBody String backPassResume(int deliID,String msg){
         int n = backCompService.passResume(deliID,12,msg);
         return n+"";
     }
@@ -447,14 +451,14 @@ public class CompController {
     }
     //修改发布的岗位
     @RequestMapping("/changePostPosition")
-    //    @Loger(operationType="后端日志",operationName="企业发布岗位")
-    public @ResponseBody String changePostPosition(PostPosition postPosition){
+        @Loger(operationType="后端日志",operationName="企业发布岗位")
+    public @ResponseBody String backChangePostPosition(PostPosition postPosition){
         return backCompService.updatePostPosition(postPosition);
     }
     //企业修改发布岗位的岗位类型
     @RequestMapping("/changePostID")
-    //    @Loger(operationType="后端日志",operationName="企业修改岗位类型")
-    public @ResponseBody String changePostID(PostPosition postPosition){
+    @Loger(operationType="后端日志",operationName="企业修改岗位类型")
+    public @ResponseBody String backChangePostID(PostPosition postPosition){
         String msg = backCompService.updatePostPosition(postPosition);
         String postName = backCompService.findPostName((int) postPosition.getPostId());
         return msg.equals("1")? postName:"2";
@@ -504,8 +508,8 @@ public class CompController {
     }
 
     @RequestMapping("/changeCompInfo")
-    //    @Loger(operationType="后端日志",operationName="企业修改企业信息")
-    public @ResponseBody String changeCompInfo(BackUser backUser, HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="企业修改企业信息")
+    public @ResponseBody String backChangeCompInfo(BackUser backUser, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
         int compID = (int) bUser.getbUserId();
@@ -558,8 +562,8 @@ public class CompController {
     }
 
     @RequestMapping("/uploadLogo")
-    //    @Loger(operationType="后端日志",operationName="企业上传logo")
-    public @ResponseBody String uploadLogo(MultipartFile photo,HttpServletRequest request) throws IOException {
+    @Loger(operationType="后端日志",operationName="企业上传logo")
+    public @ResponseBody String backUploadLogo(MultipartFile photo,HttpServletRequest request) throws IOException {
         String msg = "";
         System.out.println("tupin"+photo);
         String path = request.getSession().getServletContext().getRealPath("/uploadLogo/");
@@ -588,16 +592,16 @@ public class CompController {
     }
 
     @RequestMapping("/compChangePwd")
-    //    @Loger(operationType="后端日志",operationName="修改密码")
-    public @ResponseBody String compChangePwd(String newPwd,String pwd,HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="修改密码")
+    public @ResponseBody String backCompChangePwd(String newPwd,String pwd,HttpServletRequest request){
         BackUser bUser = (BackUser) request.getSession().getAttribute("admin");
         int compID = (int) bUser.getbUserId();
         return backCompService.changePwd(newPwd,pwd,compID);
     }
 
     @RequestMapping("/outTalentResum")
-    //    @Loger(operationType="后端日志",operationName="导出人才简历")
-    public ResponseEntity<byte[]> outTalentResum(int talentID,HttpServletRequest request) throws IOException {
+    @Loger(operationType="后端日志",operationName="导出人才简历")
+    public ResponseEntity<byte[]> backOutTalentResum(int talentID,HttpServletRequest request) throws IOException {
         String savePath = request.getSession().getServletContext().getRealPath("/outResume/");
         Talent talent = backCompService.findTalentByID(talentID);
         System.out.println(talent);
@@ -630,8 +634,8 @@ public class CompController {
     }
 
     @RequestMapping("/outResume")
-    //    @Loger(operationType="后端日志",operationName="导出简历")
-    public ResponseEntity<byte[]> outResume(int resumeID,HttpServletRequest request) throws IOException {
+    @Loger(operationType="后端日志",operationName="导出简历")
+    public ResponseEntity<byte[]> backOutResume(int resumeID,HttpServletRequest request) throws IOException {
         String savePath = request.getSession().getServletContext().getRealPath("/outResume/");
         String photoPath = request.getSession().getServletContext().getRealPath("");
         String path = backCompService.outResume(resumeID,savePath,photoPath);
@@ -648,8 +652,8 @@ public class CompController {
     }
     //修改密码发送验证码
     @RequestMapping("/sendCode")
-    //    @Loger(operationType="后端日志",operationName="修改密码发生验证码")
-    public @ResponseBody String sendCode(String phone,HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="修改密码发生验证码")
+    public @ResponseBody String backSendCode(String phone,HttpServletRequest request){
         BackUser backUser = backCompService.findByPhone(phone);
         if(backUser==null) return "2";
 
@@ -667,8 +671,8 @@ public class CompController {
     }
     //注册发送验证码
     @RequestMapping("/regSendCode")
-    //    @Loger(operationType="后端日志",operationName="注册发生验证码")
-    public @ResponseBody String regSendCode(String phone,HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="注册发生验证码")
+    public @ResponseBody String backRegSendCode(String phone,HttpServletRequest request){
         BackUser backUser = backCompService.findByPhone(phone);
         if(backUser!=null) return "2";
 
@@ -686,8 +690,8 @@ public class CompController {
     }
     //企业找回密码
     @RequestMapping("/findPwd")
-    //    @Loger(operationType="后端日志",operationName="用户找回密码")
-    public @ResponseBody String findPwd(String phone,String vCode,String pwd,HttpServletRequest request){
+    @Loger(operationType="后端日志",operationName="用户找回密码")
+    public @ResponseBody String backFindPwd(String phone,String vCode,String pwd,HttpServletRequest request){
         String savePhone = (String) request.getSession().getAttribute("phone");
         String saveCode = (String)request.getSession().getAttribute("code");
         if(!phone.equals(savePhone)){
@@ -696,6 +700,7 @@ public class CompController {
         if(!vCode.equals(saveCode)){
             return "3";
         }
+        pwd = MD5Utils.md5(pwd);
         int n = backCompService.changePwdByPhone(pwd,phone);
 
         return n>0?"1":"4";
@@ -755,14 +760,14 @@ public class CompController {
     }
     //关闭下载简历收费
     @RequestMapping("/closeFee")
-    //    @Loger(operationType="后端日志",operationName="关闭下载简历收费")
-    public  @ResponseBody String closeFee(){
+    @Loger(operationType="后端日志",operationName="关闭下载简历收费")
+    public  @ResponseBody String backCloseFee(){
         return backCompService.changeFeeStand(1);
     }
     //打开下载简历i收费
     @RequestMapping("/openFee")
-    //    @Loger(operationType="后端日志",operationName="开启下载简历收费")
-    public  @ResponseBody String openFee(){
+    @Loger(operationType="后端日志",operationName="开启下载简历收费")
+    public  @ResponseBody String backOpenFee(){
 
         return backCompService.openFee(2);
     }
@@ -871,8 +876,8 @@ public class CompController {
     }
 
     @RequestMapping("/changeFee")
-    //    @Loger(operationType="后端日志",operationName="修改费用")
-    public @ResponseBody String changeFee(String money){
+    @Loger(operationType="后端日志",operationName="修改费用")
+    public @ResponseBody String backChangeFee(String money){
         int result = backCompService.changeFee(money);
         return result>0? "success":"failed";
     }
