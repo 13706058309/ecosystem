@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.mapper.UserNumMapper">
+    <select id="all"   resultType="com.cykj.entity.BackUserNum">
+        select count(bUserID) as num,b.province as name from backUser b WHERE b.roleId=1 group by name
+    </select>
     <select id="backUserNumMonth"   resultType="com.cykj.entity.BackUserNum">
         select * from (
         select count(0) NUM,'第1周' as name from backUser t where  t.roleId=1 and t.bRegTime between

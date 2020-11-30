@@ -12,4 +12,207 @@
                 set deliStandId = #{standID}, feedBackTime = #{feedTime},feedBackInfo=#{feedInfo}
                 where deliveryId = #{deliID}
         </update>
+
+
+        <select id="findAllResume" parameterType="java.util.Map" resultMap="results">
+                select r.*,e.education,d.deliTime,d.deliveryId,p.postName from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+                where p.companyID = #{compID} and deliStandID = #{standID}
+
+                <if test="beginTime!=null">
+                        and deliTime >= #{beginTime}
+                </if>
+
+                <if test="endTime!=null">
+                        and deliTime &lt;= #{endTime}
+                </if>
+
+                <if test="postName!=null">
+                        and p.postName like #{postName}
+                </if>
+                <if test="isGraduate!=null">
+                        and isGraduate = #{isGraduate}
+                </if>
+                <if test="wrokYear!=null">
+                        and wrokYear >= #{wrokYear}
+                </if>
+                <if test="educationId!=null">
+                        and e.educationID &lt;= #{educationId}
+                </if>
+                <if test="userName!=null">
+                        and r.realName >= #{userName}
+                </if>
+                <if test="evdu!=null">
+                        and e.educationID = #{evdu}
+                </if>
+
+                order by deliTime desc limit #{offset}, #{limit}
+        </select>
+
+        <resultMap id="results" type="com.cykj.entity.Delivery">
+
+                <id property="deliveryId" column="deliveryId"></id>
+                <result property="deliTime" column="deliTime"></result>
+                <result property="education" column="education"></result>
+
+                <association property="resume" column="resumeId" javaType="com.cykj.entity.Resume">
+                        <id property="resumeId" column="resumeId"></id>
+                        <result property="realName" column="realName"></result>
+                        <result property="clan" column="clan"></result>
+                        <result property="photo" column="photo"></result>
+                        <result property="politicalStatus" column="politicalStatus"></result>
+                        <result property="birthday" column="birthday"></result>
+                        <result property="contactInfo" column="contactInfo"></result>
+                        <result property="school" column="school"></result>
+                        <result property="educationId" column="educationId"></result>
+                        <result property="profession" column="profession"></result>
+                        <result property="wrokYear" column="wrokYear"></result>
+                        <result property="qualiCer" column="qualiCer"></result>
+                        <result property="selfEva" column="selfEva"></result>
+                        <result property="isShow" column="isShow"></result>
+                        <result property="address" column="address"></result>
+                        <result property="updateTime" column="updateTime"></result>
+                        <result property="isGraduate" column="isGraduate"></result>
+                        <result property="sex" column="sex"></result>
+                        <result property="expectWork" column="expectWork"></result>
+                        <result property="jobStandId" column="jobStandId"></result>
+                        <result property="industry" column="industry"></result>
+                </association>
+                <association property="postPosition" column="pPostId" javaType="com.cykj.entity.PostPosition">
+                        <id property="pPostId" column="pPostId"></id>
+                        <result property="postName" column="postName"></result>
+                </association>
+
+        </resultMap>
+
+
+        <select id="findAllResumeNum" parameterType="java.util.Map" resultType="int">
+                select count(*) from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+                where p.companyID = #{compID} and deliStandID = #{standID}
+
+                <if test="beginTime!=null">
+                        and deliTime >= #{beginTime}
+                </if>
+
+                <if test="endTime!=null">
+                        and deliTime &lt;= #{endTime}
+                </if>
+
+                <if test="postName!=null">
+                        and p.postName like #{postName}
+                </if>
+                <if test="isGraduate!=null">
+                        and isGraduate = #{isGraduate}
+                </if>
+                <if test="wrokYear!=null">
+                        and wrokYear >= #{wrokYear}
+                </if>
+                <if test="educationId!=null">
+                        and e.educationID &lt;= #{educationId}
+                </if>
+
+                <if test="userName!=null">
+                        and r.realName like #{userName}
+                </if>
+
+                <if test="evdu!=null">
+                        and e.educationID = #{evdu}
+                </if>
+
+        </select>
+
+
+        <select id="findScreeResume" parameterType="java.util.Map" resultMap="results">
+                select r.*,e.education,d.deliTime,d.deliveryId,p.postName from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+                where p.companyID = #{compID} and deliStandID = #{standID}
+
+                <if test="beginTime!=null">
+                        and deliTime >= #{beginTime}
+                </if>
+
+                <if test="endTime!=null">
+                        and deliTime &lt;= #{endTime}
+                </if>
+
+                <if test="postName!=null">
+                        and p.postName like #{postName}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId!=null">
+                        and ( wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId==null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear})
+                </if>
+
+                <if test="isGraduate==null and wrokYear==null and educationId!=null">
+                        and e.educationID &lt;= #{educationId}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId==null">
+                        and  isGraduate = #{isGraduate}
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId==null">
+                        and  wrokYear &lt;= #{wrokYear}
+                </if>
+
+
+                order by deliTime desc limit #{offset}, #{limit}
+
+        </select>
+
+        <select id="findScreeResumeNum" parameterType="java.util.Map" resultType="int">
+                select count(*) from delivery d left join resume r on d.userID = r.userID left join postPosition p on d.pPostID = p.pPostID left join education e on r.educationID = e.educationID
+                where p.companyID = #{compID} and deliStandID = #{standID}
+
+                <if test="beginTime!=null">
+                        and deliTime >= #{beginTime}
+                </if>
+
+                <if test="endTime!=null">
+                        and deliTime &lt;= #{endTime}
+                </if>
+
+                <if test="postName!=null">
+                        and p.postName like #{postName}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId!=null">
+                        and ( wrokYear &lt;= #{wrokYear} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId!=null">
+                        and ( isGraduate = #{isGraduate} or e.educationID &lt;= #{educationId})
+                </if>
+
+                <if test="isGraduate!=null and wrokYear!=null and educationId==null">
+                        and ( isGraduate = #{isGraduate} or wrokYear &lt;= #{wrokYear})
+                </if>
+
+                <if test="isGraduate==null and wrokYear==null and educationId!=null">
+                        and e.educationID &lt;= #{educationId}
+                </if>
+
+                <if test="isGraduate!=null and wrokYear==null and educationId==null">
+                        and  isGraduate = #{isGraduate}
+                </if>
+
+                <if test="isGraduate==null and wrokYear!=null and educationId==null">
+                        and  wrokYear &lt;= #{wrokYear}
+                </if>
+
+        </select>
 </mapper>

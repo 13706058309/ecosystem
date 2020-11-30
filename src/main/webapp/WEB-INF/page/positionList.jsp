@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="../js/jquery-3.5.1.js"></script>
@@ -30,12 +30,13 @@
 <body>
 
 <script id="btns" type="text/html">
-    <a class="layui-btn layui-btn-xs" lay-event="recommend">推荐</a>
+
+    <button  class="layui-btn layui-btn-xs"   lay-event="recommend">推荐</button>
 </script>
 <br><br>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
 <div id="talentDiv" style="display: none" >
-    <div class="talentTable" style="margin-left: 20%">
+    <div class="talentTable" style="margin-left: 10%">
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">起始时间:</label>
@@ -51,7 +52,7 @@
             </div>
         </div>
 
-        <div class="layui-form-item">
+        <div class="layui-form-item" >
             <label class="layui-form-label">高校名称:</label>
             <div class="layui-input-inline">
                 <input type="tel" id="school" lay-verify="required|phone" autocomplete="off" class="layui-input">
@@ -59,14 +60,13 @@
             <label class="layui-form-label">专业:</label>
             <div class="layui-input-inline">
                 <input type="tel" id="profession" lay-verify="required|phone" autocomplete="off" class="layui-input">
+<%--                <button type="button" class="layui-btn  layui-btn-lg" data-type="reload"style="width: 100px">搜索</button>--%>
             </div>
 
-            <div class="layui-input-inline" style="margin-left: 70%">
-                <br>
+            <div class="layui-input-inline" >
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <button type="button" class="layui-btn  layui-btn-lg" data-type="reload"style="width: 100px">搜索</button>
             </div>
-
-
         </div>
     </div>
 
@@ -74,7 +74,6 @@
     <div class="layui-inline">
         <div class="layui-input-inline" style="margin-left: 400px">
             <button type="button" class="layui-btn layui-btn-lg " onclick="back()">返回</button>
-
         </div>
     </div>
 </div>
@@ -155,11 +154,13 @@
                 companyID=data.companyID;
                 layer.open({
                     type: 1,
-                    offset: '40px',
+
+                    offset: '30px',
                     area:["1000px","650px"],
                     content:$("#talentDiv"),
                 })
             }
+
         });
 
         $ = layui.$, active = {
@@ -183,14 +184,15 @@
         });
 
     })
+
     layui.use('table',function () {
         var table = layui.table;
         table.render({
             elem:'#talentTable',
-            height:325,
+            height:350,
             limits:[5,10],
             limit:5,
-            url: 'findTalent' ,//数据接口,
+            url: 'findTalent',//数据接口,
             toolbar: '#toolbarDemo', //开启头部工具栏，并为其绑定左侧模板
             defaultToolbar: ['filter',  { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
             title: ''
@@ -202,11 +204,11 @@
             cols: [[ //表头
                 // {type:'radio'}
                 {type:'checkbox'}
-                ,{field: 'talentId', title: '人才ID',width: 188 }
-                ,{field: 'talentName', title: '名字', width: 188}
-                ,{field: 'school', title: '学校', width: 188}
-                ,{field:'profession',title:'专业',width: 188}
-                ,{field:'education',title:'学历',width: 188}
+                ,{field: 'talentId', title: '人才ID',width: 160 }
+                ,{field: 'talentName', title: '名字', width: 160}
+                ,{field: 'school', title: '学校', width: 160}
+                ,{field:'profession',title:'专业',width: 160}
+                ,{field:'education',title:'学历',width: 160}
             ]]
         });
         //头工具栏事件
@@ -261,7 +263,8 @@
         });
     })
     function back(){
-        layer.close(layer.index);
+
+        location.reload();
     }
 </script>
 </html>

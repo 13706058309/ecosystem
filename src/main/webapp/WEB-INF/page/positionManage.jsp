@@ -465,8 +465,16 @@ function addPosition() {
         type:"get",
         typeData:"text",
         beforeSend:function () {
-            if(postName.length==0||departId.length==0){
+            if(postName.length==0){
                 layer.msg("请填写完整");
+                return false;
+            }
+            if($("#industry1").val().trim()=="请选择"){
+                layer.msg("请选择所属行业");
+                return false;
+            }
+            if($("#depart1").val().trim()=="请选择"){
+                layer.msg("请选择所属部门");
                 return false;
             }
             if(postName.length>10){
@@ -500,6 +508,10 @@ function addPosition() {
             beforeSend:function () {
                 if(departName.length==0){
                     layer.msg("请填写完整");
+                    return false;
+                }
+                if($("#industry2").val().trim()=="请选择"){
+                    layer.msg("请选择所属行业");
                     return false;
                 }
                 if(departName.length>10){

@@ -128,14 +128,14 @@ public class BacCertificateController {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
-//        String realpath   = request.getServletContext().getRealPath("/wtqupload");
-        String realpath = this.getClass().getClassLoader().getResource("").getPath() + "static";
+        String realpath   = request.getServletContext().getRealPath("/wtqupload");
+//        String realpath = this.getClass().getClassLoader().getResource("").getPath() + "static";
         System.out.println("下载的路径是" + realpath);
 
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);
         String lujing = cerRecord.getCerReviewVideo();
         String filename = lujing.substring(lujing.lastIndexOf("/") + 1);
-
+        realpath= realpath+lujing.substring(0,lujing.lastIndexOf("/")+1);
         File file = new File(realpath, filename);//吧下载文件构成文件处理，  filename 前台传送的文件名称
         System.out.println(file.getAbsoluteFile());
 
@@ -193,7 +193,7 @@ public class BacCertificateController {
         CerRecord cerRecord = cerRecordService.findcerRecordup(cerid);
         String lujing = cerRecord.getDocUrl();
         String filename = lujing.substring(lujing.lastIndexOf("/") + 1);
-
+        realpath= realpath+lujing.substring(0,lujing.lastIndexOf("/")+1);
         File file = new File(realpath, filename);//吧下载文件构成文件处理，  filename 前台传送的文件名称
         System.out.println(file.getAbsoluteFile());
 
@@ -217,7 +217,7 @@ public class BacCertificateController {
         //获取文件名，以及重命名文件
         String fileName = multipartFile.getOriginalFilename();
         //获取上传目录
-        String path = this.getClass().getClassLoader().getResource("").getPath() + "static/wtqfile";
+        String path = request.getSession().getServletContext().getRealPath("/wtqupload");
 
         //获取当天日期为后面创建日期
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -231,7 +231,7 @@ public class BacCertificateController {
         System.out.println("file" + file);
         System.out.println(fileName);
 
-        String prosturl = "/wtqfile/" + date + "/" + fileName;
+        String prosturl = "/" + date + "/" + fileName;
         int n = cerRecordService.upcertestreport(prosturl,cerid);
         TableInfo tableInfo = new TableInfo();
         if (n > 0) {
@@ -358,7 +358,7 @@ public class BacCertificateController {
         String docname = mtfile.getOriginalFilename();
 
         //获取上传目录
-        String path = this.getClass().getClassLoader().getResource("").getPath() + "static/wtqfile";
+        String path = request.getSession().getServletContext().getRealPath("/wtqupload");
 
         //获取当天日期为后面创建日期
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -371,8 +371,8 @@ public class BacCertificateController {
         fileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
         docname =  UUID.randomUUID().toString() + docname.substring(docname.lastIndexOf("."));
 
-        String videourl = "/wtqfile/" + date + "/" + fileName;
-        String finalporsturl = "/wtqfile/" + date + "/" + docname;
+        String videourl = "/" + date + "/" + fileName;
+        String finalporsturl = "/" + date + "/" + docname;
 
         CerRecord  cerRecord = cerRecordService.findcerRecordup(cerid);
         int cerFinalScore = cerRecord.getCerTestScore()+finalsocre;
@@ -496,6 +496,7 @@ public class BacCertificateController {
 
             //获取上传目录
             String path = request.getServletContext().getRealPath("/wtqupload");
+            String imagepath = request.getServletContext().getRealPath("/imagewtq");
             //this.getClass().getClassLoader().getResource("").getPath() + "static/wtqfile";
 
             //获取当天日期为后面创建日期
@@ -512,8 +513,8 @@ public class BacCertificateController {
             cerimagefilename =  UUID.randomUUID().toString() + cerimagefilename.substring(cerimagefilename.lastIndexOf("."));
 
             String xuqiuurl = "/" + date + "/" + xuqiufilename;
-            String touxiangurl = "/" + date + "/" + touxiangfilename;
-            String tupianurl = "/" + date + "/" + cerimagefilename;
+            String touxiangurl =   "/imagewtq/" + touxiangfilename;
+            String tupianurl =  "/imagewtq/" + cerimagefilename;
 
             Field field = certificateService.findfieldid(zhengshuname);
             Certificate certificate = new Certificate();
@@ -531,8 +532,8 @@ public class BacCertificateController {
             if (c>0){
                 msg = "success";
                 xuqiufile.transferTo(new File(file, xuqiufilename));
-                touxiangfile.transferTo(new File(file, touxiangfilename));
-                cerimagefile.transferTo(new File(file, cerimagefilename));
+                touxiangfile.transferTo(new File(imagepath, touxiangfilename));
+                cerimagefile.transferTo(new File(imagepath, cerimagefilename));
             }else {
                 msg = "fail";
             }

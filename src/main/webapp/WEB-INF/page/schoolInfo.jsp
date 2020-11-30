@@ -124,7 +124,7 @@
                                 <h2 class="layui-icon layui-icon-form">简介</h2>
                             </dt>
                             <dd>
-                                <div class="c_intro" id="coreValues2" style="width: 800px">${shool.infoIntr}</div>
+                                <div class="c_intro" id="coreValues2" >${shool.infoIntr}</div>
                                 <a title="编辑" id="editValue2" class="c_edit"  onclick="show3()"></a>
                             </dd>
                         </dl>
@@ -186,7 +186,7 @@
                     <div class="profile_wrap">
                         <dl class="c_section newIntro dn" style="display: none;" id="contactInfo1">
                             <dt>
-                                <h2 class="layui-icon  layui-icon-cellphone">电话</h2>
+                                <h2 class="layui-icon  layui-icon-cellphone">联系方式</h2>
                             </dt>
                             <dd>
                                 <form id="companyValueForm21">
@@ -199,7 +199,7 @@
                         </dl>
                         <dl class="c_section" style="display: block;width: 800px;" id="contactInfo2">
                             <dt>
-                                <h2 class="layui-icon  layui-icon-cellphone" >电话</h2>
+                                <h2 class="layui-icon  layui-icon-cellphone" >联系方式</h2>
                             </dt>
                             <dd>
                                 <div class="c_intro" id="coreValues21" style="width: 800px;text-align: center">${shool.contactInfo}</div>
@@ -315,7 +315,7 @@
 
 
     function change1() {
-        var newCompName = $("#newCompName").val();
+        var newCompName = $("#newCompName").val().trim();
         $.ajax({
             url:path+"/talent/changeSchoolInfo",
             data:"newCompName="+newCompName,
@@ -326,6 +326,19 @@
                     layer.msg("请填写完整");
                     return false;
                 }
+                if(newCompName.length>15){
+                    layer.msg("学校名称限制15字");
+                    return false;
+                }
+                if(!( /^[\u4e00-\u9fa5\\w]+$/.test(newCompName))){
+                    layer.msg("学校名称只能是汉字");
+                    return false;
+                }
+                // if(!newCompName.endsWith("大学")||!newCompName.endsWith("学院")){
+                //     layer.msg("学校名称限制15字");
+                //     return false;
+                // }
+
                 return true;
             },
             success:function (data) {
@@ -341,33 +354,33 @@
             }
         })
     }
-    function change2() {
-        var bUserName = $("#bUserName").val();
-        $.ajax({
-            url:path+"/talent/changeSchoolInfo",
-            data:"bUserName="+bUserName,
-            type:"post",
-            typeData:"text",
-            beforeSend:function () {
-                if(bUserName.length==0){
-                    layer.msg("请填写完整");
-                    return false;
-                }
-                return true;
-            },
-            success:function (data) {
-                if(data=='1'){
-                    layer.msg("修改成功",{
-                        time:1000,
-                        end:function () {
-                            location.reload();
-                        }
-                    })
-
-                }
-            }
-        })
-    }
+    // function change2() {
+    //     var bUserName = $("#bUserName").val();
+    //     $.ajax({
+    //         url:path+"/talent/changeSchoolInfo",
+    //         data:"bUserName="+bUserName,
+    //         type:"post",
+    //         typeData:"text",
+    //         beforeSend:function () {
+    //             if(bUserName.length==0){
+    //                 layer.msg("请填写完整");
+    //                 return false;
+    //             }
+    //             return true;
+    //         },
+    //         success:function (data) {
+    //             if(data=='1'){
+    //                 layer.msg("修改成功",{
+    //                     time:1000,
+    //                     end:function () {
+    //                         location.reload();
+    //                     }
+    //                 })
+    //
+    //             }
+    //         }
+    //     })
+    // }
     function change3() {
         var infoIntr = $("#infoIntr").val();
         $.ajax({
@@ -378,6 +391,10 @@
             beforeSend:function () {
                 if(infoIntr.length==0){
                     layer.msg("请填写完整");
+                    return false;
+                }
+                if(infoIntr.length>200){
+                    layer.msg("简介限制200字");
                     return false;
                 }
                 return true;
@@ -407,6 +424,10 @@
                     layer.msg("请填写完整");
                     return false;
                 }
+                if(coreValue.length>30){
+                    layer.msg("校训限制30字");
+                    return false;
+                }
                 return true;
             },
             success:function (data) {
@@ -432,6 +453,10 @@
             beforeSend:function () {
                 if(address.length==0){
                     layer.msg("请填写完整");
+                    return false;
+                }
+                if(address.length>30){
+                    layer.msg("地址限制30字");
                     return false;
                 }
                 return true;
@@ -461,6 +486,14 @@
                     layer.msg("请填写完整");
                     return false;
                 }
+                if(contactInfo.length>12){
+                    layer.msg("联系方式限制12字");
+                    return false;
+                }
+                if(!(/^((\d{11})|(\d{7,8})|(\d{4}|\d{3})-(\d{7,8}))$/.test(contactInfo))){
+                    layer.msg("格式错误");
+                    return false;
+                }
                 return true;
             },
             success:function (data) {
@@ -488,6 +521,16 @@
                     layer.msg("请填写完整");
                     return false;
                 }
+                if(email.length>30){
+                    layer.msg("邮件限制30字");
+                    return false;
+                }
+                var patterns = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                if(!patterns.test(email)){
+                    layer.msg("邮箱格式不正确");
+                    return false;
+                }
+
                 return true;
             },
             success:function (data) {

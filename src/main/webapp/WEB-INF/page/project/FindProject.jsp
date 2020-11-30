@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/project/findProject.css">
     <script src="${pageContext.request.contextPath}/js/project/findProject.js" charset="UTF-8"></script>
 </head>
-<body bgcolor="#f5f5f5">
+<body bgcolor="#f5f5f5" style="height: 900px">
 <input type="hidden" id="pageCounts" value="0">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div class="header-top-warp-v1">
@@ -28,7 +28,7 @@
             <ul class="header-top-left">
 <%--                首页URL--%>
                 <li class="item-homeurl">
-                    <a><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>
+                    <a href="${pageContext.request.contextPath}/homePage/home"><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>
                 </li>
             </ul>
 <%--            用户信息，项目--%>
@@ -39,15 +39,18 @@
                             <span class="hover-title">${qUser.userName}</span>
                         </li>
                         <li style="float: left;position: relative;">
-                            <span class="hover-title">我的项目</span>
+                            <span class="hover-title"><a href="${pageContext.request.contextPath}/userProject/projectOfUser">我的项目</a></span>
+                        </li>
+                        <li style="float: left;position: relative;">
+                            <span class="hover-title"><a href="javaScript:;" onclick="userExit()">注销</a></span>
                         </li>
                     </c:if>
                     <c:if test="${empty qUser}">
                         <li style="float: left;position: relative;">
-                            <span class="hover-title">登录</span>
+                            <span class="hover-title"><a href="${pageContext.request.contextPath}/golog/login" >登录</a></span>
                         </li>
                         <li style="float: left;position: relative;">
-                            <span class="hover-title">注册</span>
+                            <span class="hover-title"><a href="${pageContext.request.contextPath}/golog/reg">注册</a></span>
                         </li>
                     </c:if>
                 </ul>
@@ -59,7 +62,7 @@
         <div class="page-main header-body-main">
             <%--                头部 logo--%>
             <div class="header-body-logotitle" style="vertical-align: middle">
-                <img src="${pageContext.request.contextPath}/style/images/logo.png" style="margin-left: 0px" width="150" height="60" alt="钱程无忧-关注你的钱程"/>
+                <img src="${pageContext.request.contextPath}/style/images/logo.png"  style="margin-left: 0px" width="150" height="60" alt="钱程无忧-关注你的钱程"/>
                 <i class="i1"></i>
                 <span style="font-size: 2em;font-family:'华文楷体';color:#44D0C7 ">找项目</span>
             </div>

@@ -58,7 +58,10 @@ public class TalentServiceImpl implements TalentService {
 
         return n;
     }
-
+    @Override
+    public List<BackUserNum> all() {
+        return userNumMapper.all();
+    }
     @Override
     public List<BackUserNum> backUserNumMonth() {
 
@@ -154,13 +157,15 @@ public class TalentServiceImpl implements TalentService {
     }
 
 
+
+
     @Override
-    public boolean findCompAndtalent(int companyID, char c) {
+    public boolean findCompAndtalent(int companyID, String c) {
         return talentMapper.selectCompAndtalent(companyID,c)==null;
     }
 
     @Override
-    public int addCompAndtalent(int companyID, char c) {
+    public int addCompAndtalent(int companyID, String c) {
 
         int n = talentMapper.addCompAndtalent(companyID,c);
 
