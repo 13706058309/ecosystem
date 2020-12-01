@@ -1,4 +1,4 @@
-var path;
+﻿var path;
 $(function(){
     path=$("#path").val();
     var nav=$("#headerbody"); //得到导航对象

@@ -1,4 +1,4 @@
-var path;
+﻿var path;
 $(function () {
     path=$("#path").val();
     layui.use(['table','laypage','layer','element'], function(){
