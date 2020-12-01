@@ -62,10 +62,7 @@ function addProject(){
         url:path+"/parameter/findCommission",
         type:"post",
         beforeSend:function(){
-            if (!$("#xieYi").prop('checked')){
-                alert("请阅读并同意协议！");
-                return false;
-            }
+
             return true;
         },success:function (data) {
             layui.use("layer",function () {
@@ -77,6 +74,7 @@ function addProject(){
                     var projectCondition=textareaTo($("#projectCondition").val());
                     var fieldId=$("#fieldId").val();
                     var docUrl=$("#docUrl").val();
+
                     var vNow = new Date();
                     var sNow = "";
                     sNow += String(vNow.getFullYear());
@@ -106,12 +104,37 @@ function addProject(){
                                 alert("请阅读并同意协议！");
                                 return false;
                             }
+                            if (!(/^[\d]*$/.test(money))){
+                                alert("请输入整数金额！");
+                                return false;
+                            }
+
+                            if (docUrl==="" || docUrl.length<1){
+                                alert("请上传文件！")
+                                return false;
+                            }
+
+                            if (fieldId==="" || fieldId<1){
+                                alert("请选择项目类型！");
+                                return false;
+                            }
+
+                            if (projectSynopsis==="" || projectSynopsis.trim().length<1){
+                                alert("请对项目进行一个简单的描述！")
+                            }
+
+                            if (projectCondition==="" || projectCondition.trim().length<1){
+                                if (!confirm("您还没有填写申请人的要求，是否继续发布？")){
+                                    return false;
+                                }
+                            }
+
+                            return true;
                         },
                         success:function (res) {
                             console.log(res);
                             if (res!=null){
                                 location.href= path +"/project/alipayTradePagePay?WIDout_trade_no="+res.pOrderNum+'&WIDtotal_amount='+res.trueMoney+'&WIDsubject='+"项目预算资金+佣金";
-                                // location.href=path+"/project/projectManage";
                             }
                         }
                     })

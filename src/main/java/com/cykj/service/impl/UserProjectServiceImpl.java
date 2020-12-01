@@ -7,10 +7,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
-import com.cykj.entity.AlipayConfig;
-import com.cykj.entity.Parameter;
-import com.cykj.entity.ProjectInfo;
-import com.cykj.entity.UserProject;
+import com.cykj.entity.*;
 import com.cykj.mapper.ParameterMapper;
 import com.cykj.mapper.ProjectInfoMapper;
 import com.cykj.mapper.UserProjectMapper;
@@ -55,12 +52,16 @@ public class UserProjectServiceImpl implements UserProjectService {
         UserProject condition=new UserProject();
         condition.setUserId(userProject.getUserId());
         condition.setProjectId(userProject.getProjectId());
+        System.out.println(userProject.getUserId()+"====================================================="+userProject.getProjectId());
         List<UserProject> userProjectList=userProjectMapper.findUserProjectAll(condition);
         if (userProjectList.size()>0){
             boolean flag=true;
             for (int i=0;i<userProjectList.size();i++){
-                if (userProjectList.get(i).getStates().getParamName()!=null
-                        &&userProjectList.get(i).getStates().getParamName().trim().equals("已申请")){
+                if (userProjectList.get(i).getStates().getParamName().trim().equals("已申请")){
+                    flag=false;
+                    break;
+                }
+                if (userProjectList.get(i).getStates().getParamName().trim().equals("待付款")){
                     flag=false;
                     break;
                 }
@@ -260,6 +261,20 @@ public class UserProjectServiceImpl implements UserProjectService {
         return msg.toUpperCase();
     }
 
+    /**
+     * 查询项目的申请人
+     *
+     * @param projectId
+     * @param paramId
+     * @return
+     */
+    @Override
+    public List<Resume> findUserByProjectInfo(String projectId, String paramId) {
+
+
+        return userProjectMapper.findUserByProjectId(projectId,paramId);
+    }
+
     //处理用户付款成功后的异步回调业务代码
     public void notifyUrl(HttpServletRequest request)throws Exception{
         //获取支付宝POST过来反馈信息
@@ -377,20 +392,16 @@ public class UserProjectServiceImpl implements UserProjectService {
             userProject.setParamId(49);
             int n=userProjectMapper.changeState(userProject);
             if (n>0){
-
-
                 System.out.println("申请成功！");
-                Map<String,Object> parameterCondition=new HashMap<>();
-                parameterCondition.put("paramType","项目订单状态");
-                List<Parameter> parameters=parameterMapper.findParameter(parameterCondition);
-                request.setAttribute("parameters",parameters);
-
             }else{
                 System.out.println("申请失败！");
             }
             System.out.println("success");
 
-
+            Map<String,Object> parameterCondition=new HashMap<>();
+            parameterCondition.put("paramType","项目订单状态");
+            List<Parameter> parameters=parameterMapper.findParameter(parameterCondition);
+            request.setAttribute("parameters",parameters);
             return "project/ProjectOfUser";
         }else {
             String result = "验签失败";
