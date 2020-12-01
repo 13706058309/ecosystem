@@ -113,7 +113,19 @@ public class ProjectController {
         Map<String,Object> condition=new HashMap<>();
         condition.put("bUserId",project.getBackUser().getbUserId());
         condition.put("stateName","已发布");
-        List<ProjectInfo> projectInfos=projectServiceImpl.findProjectAll(condition,1,3);
+        List<ProjectInfo> projectInfos=projectServiceImpl.findProjectAll(condition,1,4);
+        int index=3;
+        for (int i=0;i<projectInfos.size();i++){
+            if (projectInfos.get(i).getProjectId()==Long.parseLong(projectId)){
+                index=i;
+                break;
+            }
+            if (i==3){
+                index=3;
+            }
+
+        }
+        projectInfos.remove(index);
         request.setAttribute("projectLists",projectInfos);
         return "project/ProjectDetail";
     }
