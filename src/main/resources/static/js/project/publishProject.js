@@ -1,4 +1,4 @@
-var path;
+﻿var path;
 $(function () {
     path=$("#path").val();
     layui.use(["upload","form","element","layer"], function(){

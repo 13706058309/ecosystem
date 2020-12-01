@@ -64,18 +64,18 @@
                  onclick="changeImg()">
             <input type="text" name="vCode" id="vCode" placeholder="请输入图形验证码">
             <a onclick="ajax_Login()"><input type="button" value="登录"></a>
-            <p class="message">换种方式登录？<a href="javascript:">手机登录</a>或者<a
+            <p class="message"><a href="javascript:">手机登录</a>&nbsp|&nbsp<a
                     href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
-            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码</a>&nbsp|&nbsp<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
         <form class="login-form">
             <input type="text" name="phoneNumber" id="phone" placeholder="请输入手机号">
             <input type="button" name="mesCode" id="mesCode" value="点击获取验证码" onclick="sendMes()" class="btn btn-danger">
             <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码">
             <a onclick="mesLog()"><input type="button" value="登录"></a>
-            <p class="message">换种方式登录？<a href="javascript:">账号登录</a>或者<a
+            <p class="message"><a href="javascript:">账号登录</a>&nbsp|&nbsp<a
                     href="${pageContext.request.contextPath}/golog/reg">注册</a></p>
-            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码?</a><a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/forget">忘记密码</a>&nbsp|&nbsp<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
     </div>
 </div>
@@ -176,6 +176,7 @@
             },
             success:function (info) {
                 if(info == 'success'){
+                    layer.msg("登录成功!");
                     location.href = path + "/homePage/home";
                 } else if(info == 'j'){
                     alert("此账号已被禁用!");

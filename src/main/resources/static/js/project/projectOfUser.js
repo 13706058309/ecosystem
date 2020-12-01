@@ -1,4 +1,4 @@
-var path;
+﻿var path;
 var pageCounts=$("#pageCounts").val();
 $(function(){
     layui.use(["element","upload"],function () {
