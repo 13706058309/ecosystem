@@ -25,7 +25,6 @@
     <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css/course/homePage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"  media="all">
-
 </head>
 
 <body>
