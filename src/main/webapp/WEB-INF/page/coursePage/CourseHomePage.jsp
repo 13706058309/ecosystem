@@ -25,6 +25,9 @@
     <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css/course/homePage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"  media="all">
+
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 </head>
 
 <body>
