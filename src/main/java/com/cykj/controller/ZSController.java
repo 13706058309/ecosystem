@@ -37,7 +37,7 @@ public class ZSController {
 
     @RequestMapping("/getZs")
 //    @Loger(operationName = "证书分页")
-    public @ResponseBody String getZs(String page, String limit, HttpServletResponse response){
+    public @ResponseBody String getZs(String page, String limit){
         System.out.println("证书分页");
         List<Certificate> certificates = certificateServiceImpl.findAll(page, limit);
         TableInfo tableInfo = new TableInfo(0,"证书分页列表",certificates.size(),certificates);

@@ -121,7 +121,7 @@
                 changeImg();
                 console.log(info);
                 if (info == 'success'){
-                    layer.msg("登陆成功!");
+                    layer.msg("登陆成功!",{icon: 6});
                     location.href = path+"/golog/adminMain";
                 } else if (info=='noAcc'){
                     layer.msg("用户名或密码错误!");

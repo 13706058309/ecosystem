@@ -20,6 +20,9 @@
     <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/uc.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/css/ux.css">
+
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 </head>
 <%--评价弹出框--%>
 <div id="publish" style="display: none;">
@@ -103,21 +106,14 @@
 
 <div style="width: 100%;height: 20px;"></div>
 <div>
-<div>
-    <div style="float:left;margin-left: 193px;width: 640px">
+<div style="width: 1120px;margin: 0 auto;position: center">
+    <div style="float:left;margin-left: 76px;width: 640px;">
         <video controls="controls" preload="auto" height="360" width="100%">
-<%--            <source src="http://117.27.136.49:8078/mp4/1Python语言概述.mp4" type="video/mp4">--%>
-<%--            <source src="http://47.116.134.152:8080/videos/跑.mp4" type="video/mp4">--%>
             <source src="${currPlayUnit.videoUrl}" type="video/mp4">
             当前浏览器不支持直接播放，请更新浏览器版本或者更换浏览器进行视频观看
         </video>
         <div style="height: 40px;margin-top: 20px;font-size: 20px;">
             ${currCourseName}
-<%--            <a class="shareDiv" onclick="_WXShare()">--%>
-<%--                <span style="border: none; float:right">--%>
-<%--                    <img src="http://cymooc.org:80/common/images/course/fx.png">分享--%>
-<%--                </span>--%>
-<%--            </a>--%>
         </div>
 
     </div>
@@ -132,7 +128,7 @@
     </div>
     <diV id="clearFloat"></diV>
 </div>
-
+</div>
 <!--左下角tab切换区域-->
 <div class="safe">
     <div class="courseLeft" style="margin-left: 75px;">
@@ -227,7 +223,7 @@
                             "                        <div class=\"dataDiv\">\n" +
                             "                            <a href=\""+controllerUrl+data[i].dataUrl+"&dataId="+data[i].dataId+"\"><span>"+data[i].dataName.split(".")[0]+"</span></a>\n" +
                             "                        </div>\n" +
-                            "                    </div>");
+                            "                    </div><br/>");
                     }
                 } else {
                         var html = "";
@@ -468,8 +464,12 @@
                     ,anim:1//弹窗从上掉落
                     ,yes: function(index){
                         // ajax异步提交评价内容
-                        publish();
-                        layer.close(index);
+                        if($('#component-course-editor-textarea').val().length<5){
+                            console.log($('#component-course-editor-textarea').val().length);
+                        }else {
+                            publish();
+                            layer.close(index);
+                        }
                     }
                     ,btn2:function (index) {
                         layer.close(index);
@@ -488,7 +488,7 @@
     function publish(){
         var appraiseText = $('#component-course-editor-textarea').val();
         var appraiseTime = getNowTime();
-        // var userId = $('#userId').val();
+
         var userId = 1;
         var unitId = $('#unitId').val();
         var basePath = $('#basePath').val();

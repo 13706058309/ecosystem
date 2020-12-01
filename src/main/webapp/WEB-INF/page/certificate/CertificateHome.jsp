@@ -130,7 +130,22 @@
         <a rel="nofollow" title="回到顶部" id="backtop"></a>
     </div><!-- end #container -->
 <!-- end #body -->
-
+<div id="linkbox">
+    <dl style="margin-left: 25%">
+        <dt>友情链接</dt>
+        <dd>
+            <a href="http://lieyunwang.com/" target="_blank">猎云网</a> <span>|</span>
+            <a href="http://www.chuanke.com/" target="_blank">传课网</a> <span>|</span>
+            <a href="http://se.360.cn/" target="_blank">360安全浏览器</a> <span>|</span>
+            <a href="http://www.zhongchou.cn" target="_blank">众筹网</a><span>|</span>
+            <a href="http://www.zhubajie.com/" target="_blank">创意服务外包</a><span>|</span>
+            <a href="http://www.thinkphp.cn/" target="_blank">thinkphp</a><span>|</span>
+            <a href="http://www.meitu.com/" target="_blank">美图公司</a><span>|</span>
+            <a href="http://iwebad.com/" target="_blank">网络广告人社区</a>
+            <a href="h/af/flink.html" target="_blank" class="more">更多</a>
+        </dd>
+    </dl>
+</div>
 <script>
     function shenqingpanduan(fileid,filename) {
         $.ajax({
