@@ -325,7 +325,8 @@
 
     //下载模板
     function downLoad() {
-        window.open("${pageContext.request.contextPath}/talent/download?fileName=简历.xls");
+        location.href='${pageContext.request.contextPath}/talent/download?fileName=简历.xls';
+
 
     }
     function uploads() {
