@@ -61,7 +61,7 @@
             <input type="password" name="pwd" id="pwd" placeholder="请输入您的新密码" maxlength="12">
             <input type="password" name="pwd1"  id="pwd1" placeholder="请确认您的密码" maxlength="12">
             <a onclick="findPwd()"><input type="button" value="提交"></a>
-            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a>或者<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a>&nbsp|&nbsp<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
     </div>
 </div>
