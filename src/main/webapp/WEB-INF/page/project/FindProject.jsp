@@ -30,40 +30,6 @@
 <input type="hidden" id="pageCounts" value="0">
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div class="header-top-warp-v1">
-<%--    <div class="header-top">--%>
-<%--        <div class="page-main header-top-main">--%>
-<%--            <ul class="header-top-left">--%>
-<%--&lt;%&ndash;                首页URL&ndash;%&gt;--%>
-<%--                <li class="item-homeurl">--%>
-<%--                    <a href="${pageContext.request.contextPath}/homePage/home"><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>--%>
-<%--                </li>--%>
-<%--            </ul>--%>
-<%--&lt;%&ndash;            用户信息，项目&ndash;%&gt;--%>
-<%--            <div class="header-top-right">--%>
-<%--                <ul class="header-top-user">--%>
-<%--                    <c:if test="${not empty qUser}">--%>
-<%--                        <li style="float: left;position: relative;">--%>
-<%--                            <span class="hover-title">${qUser.userName}</span>--%>
-<%--                        </li>--%>
-<%--                        <li style="float: left;position: relative;">--%>
-<%--                            <span class="hover-title"><a href="${pageContext.request.contextPath}/userProject/projectOfUser">我的项目</a></span>--%>
-<%--                        </li>--%>
-<%--                        <li style="float: left;position: relative;">--%>
-<%--                            <span class="hover-title"><a href="javaScript:;" onclick="userExit()">注销</a></span>--%>
-<%--                        </li>--%>
-<%--                    </c:if>--%>
-<%--                    <c:if test="${empty qUser}">--%>
-<%--                        <li style="float: left;position: relative;">--%>
-<%--                            <span class="hover-title"><a href="${pageContext.request.contextPath}/golog/login" >登录</a></span>--%>
-<%--                        </li>--%>
-<%--                        <li style="float: left;position: relative;">--%>
-<%--                            <span class="hover-title"><a href="${pageContext.request.contextPath}/golog/reg">注册</a></span>--%>
-<%--                        </li>--%>
-<%--                    </c:if>--%>
-<%--                </ul>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
 <%-- logo   和 搜索--%>
 
     <div id="header" style="background-color:#00c2b3;height: 80px" >
