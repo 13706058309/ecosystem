@@ -3,6 +3,7 @@ package com.cykj.controller;
 
 import com.baidu.aip.ocr.AipOcr;
 import com.cykj.entity.*;
+import com.cykj.log.Loger;
 import com.cykj.service.CerRecordService;
 import com.cykj.service.CerUserService;
 import com.cykj.service.CertificateService;
@@ -124,7 +125,10 @@ public class CertificateController {
     @RequestMapping("/upupzhengshu")
     public @ResponseBody String querenzhengshu(HttpServletRequest request,String username,String usernumber,String phone,String fileid) throws ParseException {
         String msg = "";
+
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
+        if (userInfo != null){
+
 
 
         long fileid1 = Long.parseLong(fileid);
@@ -149,7 +153,7 @@ public class CertificateController {
                 }else if (betweenDate>3){
                     //创建一条数据
                     CerRecord cerRecord1 = new CerRecord();
-                    cerRecord1.setStateId(userInfo.getUserId());
+                    cerRecord1.setUserId(userInfo.getUserId());
                     cerRecord1.setFileId(fileid1);
                     cerRecord1.setStateId(23);
                     cerRecord1.setTrueName(username);
@@ -170,7 +174,7 @@ public class CertificateController {
         }else {
             //创建一条数据
             CerRecord cerRecord2 = new CerRecord();
-            cerRecord2.setStateId(userInfo.getUserId());
+            cerRecord2.setUserId(userInfo.getUserId());
             cerRecord2.setFileId(fileid1);
             cerRecord2.setStateId(23);
             cerRecord2.setTrueName(username);
@@ -185,7 +189,7 @@ public class CertificateController {
                 msg= k+"";
             }
         }
-
+        }
         return msg;
     }
 
@@ -196,50 +200,52 @@ public class CertificateController {
     //个人中心申请证书列表
     @RequestMapping("/zxzsliebiao")
     public  String zhongxinzhengshuliebiao() {
+
         return "certificate/ApplicationForm";
     }
 
     @RequestMapping(value = "/getcersqlist",produces = "text/html;charset=utf-8")
     public @ResponseBody
     String finddoclist(String page, String limit, String top, String down, String fieldName,HttpServletRequest request) {
-
+        String listJson ="";
         Map<String, Object> usersMap = new LinkedHashMap<>();
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
-        if (fieldName != null  && !"".equals(fieldName.trim())) {
-            usersMap.put("fieldName","%"+fieldName+"%" );
-        }
+        if (userInfo != null) {
+            if (fieldName != null && !"".equals(fieldName.trim())) {
+                usersMap.put("fieldName", "%" + fieldName + "%");
+            }
 
-        if (top != null && !"".equals(top.trim())) {
-            usersMap.put("top",top);
-        }
-        if (down != null  && !"".equals(down.trim())){
-            usersMap.put("down",down);
-        }
-        usersMap.put("userid",userInfo.getUserId());
-        // 查找数据条数
+            if (top != null && !"".equals(top.trim())) {
+                usersMap.put("top", top);
+            }
+            if (down != null && !"".equals(down.trim())) {
+                usersMap.put("down", down);
+            }
+            usersMap.put("userid", userInfo.getUserId());
+            // 查找数据条数
 
-        int count = cerRecordService.findcersqlistsize(usersMap);  // 查找数据条数
-        // 查找数据条数
-        int page1 = Integer.parseInt(page);
-        int limit1 = Integer.parseInt(limit);
-        int page_temp = page1;
-        int limit_temp = limit1;
-        if (count < page1 * limit1) {
-            limit1 = count - (page1 - 1) * limit1;
+            int count = cerRecordService.findcersqlistsize(usersMap);  // 查找数据条数
+            // 查找数据条数
+            int page1 = Integer.parseInt(page);
+            int limit1 = Integer.parseInt(limit);
+            int page_temp = page1;
+            int limit_temp = limit1;
+            if (count < page1 * limit1) {
+                limit1 = count - (page1 - 1) * limit1;
+            }
+            page1 = (page_temp - 1) * limit_temp;
+            usersMap.put("page", page1);
+            usersMap.put("limit", limit1);
+
+            List<CerRecord> cerRecordList = cerRecordService.findcersqlist(usersMap);
+            System.out.println("集合" + cerRecordList.size());
+            TableInfo tableinfo = new TableInfo();
+            tableinfo.setCode(0);
+            tableinfo.setCount(count);
+            tableinfo.setMsg("申请证书列表数据信息");
+            tableinfo.setData(cerRecordList);
+            listJson = new Gson().toJson(tableinfo);
         }
-        page1 = (page_temp - 1) * limit_temp;
-        usersMap.put("page",page1);
-        usersMap.put("limit",limit1);
-
-        List<CerRecord> cerRecordList =cerRecordService.findcersqlist(usersMap);
-        System.out.println("集合"+cerRecordList.size());
-        TableInfo tableinfo = new TableInfo();
-        tableinfo.setCode(0);
-        tableinfo.setCount(count);
-        tableinfo.setMsg("申请证书列表数据信息");
-        tableinfo.setData(cerRecordList);
-        String listJson = new Gson().toJson(tableinfo);
-
         return listJson;
     }
 
@@ -298,16 +304,20 @@ public class CertificateController {
     @RequestMapping("/zxzstushi")
     public  String zhongxinzhengshutushi(HttpServletRequest request) {
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
-        List<CerUser> cerUserList =  cerUserService.findceruserlist(userInfo.getUserId());
-        request.setAttribute("cerUserList",cerUserList);
+        if (userInfo != null) {
+            List<CerUser> cerUserList = cerUserService.findceruserlist(userInfo.getUserId());
+            request.setAttribute("cerUserList", cerUserList);
+        }
         return "certificate/CertificateGraphic";
     }
     //个人中心开发证书项目
     @RequestMapping("/zxzskaifa")
     public  String zhongxinzhengshuxiangmu(HttpServletRequest request) {
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("qUser");
-        List<CerRecord> cerRecordList = cerRecordService.findcerKFList(userInfo.getUserId()+"");
-        request.setAttribute("kaifacerRecordList",cerRecordList);
+        if (userInfo != null) {
+            List<CerRecord> cerRecordList = cerRecordService.findcerKFList(userInfo.getUserId() + "");
+            request.setAttribute("kaifacerRecordList", cerRecordList);
+        }
         return "certificate/DevelopmentProject";
     }
     //用户上传项目

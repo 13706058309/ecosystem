@@ -1,10 +1,13 @@
 package com.cykj.mapper;
 
+import com.cykj.entity.Resume;
+import com.cykj.entity.UserInfo;
 import com.cykj.entity.UserProject;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.print.DocFlavor;
 import java.util.List;
 import java.util.Map;
 
@@ -52,4 +55,11 @@ public interface UserProjectMapper {
      * @return
      */
     int changeState(UserProject userProject);
+
+    /**
+     * 查询申请人信息
+     * @return
+     */
+    List<Resume> findUserByProjectId(@Param("projectId") String projectId, @Param("paramId")String paramId);
+
 }

@@ -142,15 +142,17 @@
 <div id="modal" class="modal">
 
     <!-- 弹窗内容 -->
-    <div class="modal-content">
+    <div class="modal-content" style="margin-top: -40px">
         <div class="modal-header">
             <span class="close" onclick="guanbi()">&times;</span>
             <h2 id="ming" style="text-align: center"></h2>
         </div>
         <div class="modal-body" id="modal-body" style="background-size:100% 100%;">
-            <label id="mingcheng" style="position: relative;top: 340px;left: 120px;font-size: 23px"></label>
-            <label id="shijian" style="position: relative;top: 480px;left: 400px"></label>
-            <label id="cshiren" style="position: relative;top: 452px;left: 250px;"></label>
+            <label id="mingcheng"style="position: absolute;top: 370px;left: 100px;font-size: 25px"></label>
+            <label id="zhengshulei" style="position: absolute;top: 354px;left: 355px;font-size: 40px"></label>
+            <label id="shijian" style="position: absolute;top: 522px;left: 500px"></label>
+            <label id="cshiren" style="position: absolute;top: 495px;left: 475px"></label>
+
         </div>
 
     </div>
@@ -196,6 +198,7 @@
 
                     $('#ming').text(ming+"证书");
                     $('#mingcheng').text(mingzi);
+                    $('#zhengshulei').text(ming);
                     $('#shijian').text(shijian);
                     $('#cshiren').text(xxx+"/人才生态系统计算机语言认证中心");
                     $('#modal-body').css("background-image","url("+path+url+")");
@@ -204,13 +207,16 @@
 
                 } else if (obj.event === 'baogao') {
                      var mingzi = data.cerRecord.trueName;
-                     var id = data.cerRecord;
+                     var id = data.cerId;
                     layer.confirm('是否下载:' + mingzi + '的项目报告', function (index) {
+                        layer.closeAll();//关闭所有的弹出层
                         location.href='${pageContext.request.contextPath}/zhengshu/finaldownload?cerid='+id;
                     });
                 } else if (obj.event === 'shipin') {
                     var mingzi = data.cerRecord.trueName;
+                    var id = data.cerId;
                     layer.confirm('是否下载:' + mingzi + '的评审视频', function (index) {
+                        layer.closeAll();//关闭所有的弹出层
                         location.href='${pageContext.request.contextPath}/backzhengshu/psvideodownload?cerid='+id;
                     });
                 }

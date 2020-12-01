@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Title</title>
+    <title>课程首页</title>
 
     <link rel="stylesheet" type="text/css" href="http://cymooc.org:80/common/css/bootstrap.css"/>
     <link rel="stylesheet" href="http://cymooc.org:80/common/css/course.css"/>
@@ -22,7 +22,7 @@
     <link href="http://cymooc.org:80/common/css/style.css" type="text/css"rel="stylesheet" media="all">
     <link href="http://cymooc.org:80/common/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cymooc.org:80/common/css/flexslider.css" type="text/css" media="screen" property="" />
-
+    <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css/course/homePage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"  media="all">
 
@@ -35,6 +35,51 @@
 <input type="hidden" id="basepath" value="${pageContext.request.contextPath}"/>
 <input type="hidden" id="fieldId" value="0"/>
 <input type="hidden" id="count" value="${count}"/>
+
+<div id="header" style="background-color:#00c2b3;height: 80px" >
+    <div class="inner home-inner" >
+        <div class="logo" style="width: 150px;height: 70px">
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+        </div>
+        <div class="nav" style="margin-top: 20px">
+            <ul>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                <%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+            </ul>
+        </div>
+
+        <div class="user-nav" style="margin-top: 20px">
+            <c:if test="${empty qUser}">
+                <div class="btns" style="margin-top: 10%">
+                    <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline" style="background-color: #228b81;border: 0px;margin-top: -30px;">注册</a>
+                    <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline" style="background-color: #228b81;border: 0px;margin-top: -30px;">登录</a>
+                </div>
+            </c:if>
+            <c:if test="${not empty qUser}">
+                <ul>
+                        <%--                <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
+                    <li class="nav-figure">
+                        <a >
+                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                        </a>
+                        <div class="dropdown">
+                            <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                            <a href="${pageContext.request.contextPath}/userProject/projectOfUser" ka="header-personal">我的项目<span>项目订单</span></a>
+                            <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                            <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                        </div>
+                    </li>
+                </ul>
+            </c:if>
+        </div>
+    </div>
+</div>
+
 <!-- 菜单栏  -->
 <div style=" overflow:hidden;height: 100%;margin: 0 auto;margin-top:20px;width: 1100px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <div class="course-all">
@@ -170,23 +215,18 @@
     function loadCoursesInfo(fieldId,curr,limit,isField,isLatest,isHot) {
         var latest = null;
         var hot = null;
-        // console.log(fieldId);
-        // console.log(isField+"    "+isLatest+"    "+isHot);
         if (isField == true){
             fieldId = $("#fieldId").val();
         }
         if (isLatest == true){
             fieldId = $("#fieldId").val();
             latest="latest";
-            // console.log(latest);
         }
         if (isHot == true){
             fieldId = $("#fieldId").val();
             hot="hot";
-            // console.log(hot);
         }
 
-        // console.log(fieldId)
         $.ajax({
             url: "selectCourseByFieldId?fieldId=" + fieldId + "&curr=" + curr + "&limit=" + limit + "&latest="+latest+"&hot="+hot
             , method: "post"

@@ -39,7 +39,7 @@
     </style>
 </head>
 <body>
-
+<div>
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <div id="header" style="background-color: #00c2b3;height: 80px" >
     <div class="inner home-inner" >
@@ -69,6 +69,7 @@
                         </a>
                         <div class="dropdown">
                             <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                            <a href="${pageContext.request.contextPath}/userProject/projectOfUser" ka="header-personal">我的项目<span>项目订单</span></a>
                             <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
                             <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
                         </div>
@@ -192,7 +193,7 @@
 </div>
 
 </div>
-
+</div>
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>

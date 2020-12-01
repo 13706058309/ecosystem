@@ -1,6 +1,7 @@
 package com.cykj.controller;
 
 import com.cykj.entity.*;
+import com.cykj.log.Loger;
 import com.cykj.service.CerRecordService;
 import com.cykj.service.CerUserService;
 import com.cykj.service.CertificateService;
@@ -60,14 +61,14 @@ public class BacCertificateController {
 
     //后台证书界面
     @RequestMapping("/backzhengshuliebiao")
-    public String backzhengshuliebiao() {
+    public String zhengshuliebiaogl() {
 
         return "certificate/BackCertificateList";
     }
 
     //后台申请证书界面
     @RequestMapping("/backSQchulizhengshuliebiao")
-    public String backSQchulizhengshuliebiao() {
+    public String SQchulizhengshuliebiao() {
 
         return "certificate/BackApplyCerList";
     }
@@ -124,7 +125,8 @@ public class BacCertificateController {
 
     //后台用户下载评审视频
     @RequestMapping(value = "/psvideodownload", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> finalreportdownload(HttpServletRequest request, String cerid) throws IOException {
+    @Loger(operationType = "后端日志",operationName = "下载评审视频")
+    public ResponseEntity<byte[]> backfinalreportdownload(HttpServletRequest request, String cerid) throws IOException {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
@@ -182,7 +184,8 @@ public class BacCertificateController {
 
     //后台下载证书项目进行评价
     @RequestMapping(value = "/backzsxmdownload", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> xiazaixiangmudownload(HttpServletRequest request, String cerid) throws IOException {
+    @Loger(operationType = "后端日志",operationName = "下载证书项目")
+    public ResponseEntity<byte[]> backxiazaixiangmudownload(HttpServletRequest request, String cerid) throws IOException {
 
         System.out.println("当前是下载情况");
         //获取下载文件路径
@@ -209,8 +212,9 @@ public class BacCertificateController {
 
     //测试人员上传测试报告
     @RequestMapping("/ceshifileupload")
+    @Loger(operationType = "后端日志",operationName = "上传测试报告")
     public @ResponseBody
-    String upload(@RequestParam("file") MultipartFile multipartFile, String cerid, HttpServletRequest request) throws IOException, ParseException {
+    String backupload(@RequestParam("file") MultipartFile multipartFile, String cerid, HttpServletRequest request) throws IOException, ParseException {
         System.out.println("8888888888888888888888888888888888888888888888");
         String msg = "";
         System.out.println("当前id"+cerid);
@@ -252,8 +256,9 @@ public class BacCertificateController {
 
     //测试人员打分测试分数
     @RequestMapping(value = "/uptestsorce")
+    @Loger(operationType = "后端日志",operationName = "打分测试分数")
     public @ResponseBody
-    String xiugaizhuangtai(String cerid,String score) {
+    String backxiugaizhuangtai(String cerid,String score) {
         String msg ="";
         int sscore = Integer.parseInt(score);
         if (0<sscore && sscore<=29){
@@ -320,34 +325,39 @@ public class BacCertificateController {
 
     //修改申请证书状态为申请证书成功
     @RequestMapping(value = "/xiugaicerwanchengzhuangtai")
+    @Loger(operationType = "后端日志",operationName = "修改状态")
     public @ResponseBody
-    String xiugaizhuangtai(long cerid,long userid) {
+    String backxiugaizhuangtai(long cerid,long userid,HttpServletRequest request) {
         String msg ="";
         long standid = 33;
-        int n = cerRecordService.upcersqstandid(standid,cerid);
-        if (n!=0){
-            String dangqiantime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            CerUser cerUser = new CerUser();
-            cerUser.setCerId(cerid);
-            cerUser.setGainTime(dangqiantime);
-            cerUser.setbUserId(18);
-            cerUser.setUserId(userid);
-            int c =cerUserService.insertCerUser(cerUser);
-            if (c>0){
-                msg = "success";
-            }else {
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        if (backUser!=null) {
+            int n = cerRecordService.upcersqstandid(standid, cerid);
+            if (n != 0) {
+                String dangqiantime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                CerUser cerUser = new CerUser();
+                cerUser.setCerId(cerid);
+                cerUser.setGainTime(dangqiantime);
+                cerUser.setbUserId(backUser.getbUserId());
+                cerUser.setUserId(userid);
+                int c = cerUserService.insertCerUser(cerUser);
+                if (c > 0) {
+                    msg = "success";
+                } else {
+                    msg = "fail";
+                }
+            } else {
                 msg = "fail";
             }
-        }else {
-            msg = "fail";
         }
         return msg;
     }
 
     //测试人员上传测试报告
     @RequestMapping("/pingshenfileupload")
+    @Loger(operationType = "后端日志",operationName = "上传评审视频分数")
     public @ResponseBody
-    String pingshenupload(@RequestParam("videoup")MultipartFile multipartFile,@RequestParam("fileup")MultipartFile mtfile,@RequestParam("cerid")String cerid,@RequestParam("finalsocre")int finalsocre, HttpServletRequest request) throws IOException, ParseException {
+    String backpingshenupload(@RequestParam("videoup")MultipartFile multipartFile,@RequestParam("fileup")MultipartFile mtfile,@RequestParam("cerid")String cerid,@RequestParam("finalsocre")int finalsocre, HttpServletRequest request) throws IOException, ParseException {
         System.out.println("8888888888888888888888888888888888888888888888");
         String msg = "";
         System.out.println("当前id"+cerid);
@@ -454,8 +464,9 @@ public class BacCertificateController {
 
     //证书名字双向验证
     @RequestMapping(value = "/upcershowState")
+    @Loger(operationType = "后端日志",operationName = "修改状态")
     public @ResponseBody
-    String shangjiaxia(long id,int stateId) {
+    String backshangjiaxia(long id,int stateId) {
         String msg ="";
 
         int n = certificateService.upcershowState(stateId,id);
@@ -473,8 +484,9 @@ public class BacCertificateController {
 
     //后台新增证书
     @RequestMapping("/insertzhengshu")
+    @Loger(operationType = "后端日志",operationName = "新增证书")
     public @ResponseBody
-    String insertzhengshu(@RequestParam("xuqiu")MultipartFile xuqiufile,
+    String backinsertzhengshu(@RequestParam("xuqiu")MultipartFile xuqiufile,
                           @RequestParam("touxiang")MultipartFile touxiangfile,
                           @RequestParam("cerimage")MultipartFile cerimagefile,
                           @RequestParam("zhengshuname")String zhengshuname,
@@ -485,8 +497,10 @@ public class BacCertificateController {
                          ) throws IOException {
         System.out.println("8888888888888888888888888888888888888888888888");
         String msg = "";
-        int n = certificateService.insertfield(zhengshuname);
-        if (n>0){
+        Field field  = new Field();
+        field.setFieldName(zhengshuname);
+        int n = certificateService.insertfield(field);
+        if (n!=0){
             //获取需求文件，以及重命名文件
             String xuqiufilename = xuqiufile.getOriginalFilename();
             //获取证书头像，以及重命名文件
@@ -516,9 +530,11 @@ public class BacCertificateController {
             String touxiangurl =   "/imagewtq/" + touxiangfilename;
             String tupianurl =  "/imagewtq/" + cerimagefilename;
 
-            Field field = certificateService.findfieldid(zhengshuname);
+
+
+            System.out.println("新增的ID"+n);
             Certificate certificate = new Certificate();
-            certificate.setFieldId(field.getFieldId());
+            certificate.setFieldId(n);
             certificate.setImgUrl(tupianurl);
             certificate.setCerSketch(jiansu);
             certificate.setCerTrait(tdian);
@@ -547,8 +563,9 @@ public class BacCertificateController {
 
     //后台修改证书
     @RequestMapping("/backxiugaizhengshu")
+    @Loger(operationType = "后端日志",operationName = "修改证书")
     public @ResponseBody
-    String xiugaizhengshu( @RequestParam("tdian")String tdian,
+    String backxiugaizhengshu( @RequestParam("tdian")String tdian,
                           @RequestParam("jiansu")String jiansu,
                           @RequestParam("feiyong")int feiyong,
                           @RequestParam("cerId")String cerId,
@@ -576,8 +593,9 @@ public class BacCertificateController {
     }
     //后台修改证书需求
     @RequestMapping("/backxiugaizhengshuxuqiu")
+    @Loger(operationType = "后端日志",operationName = "修改证书需求")
     public @ResponseBody
-    String xiugaizhengshuxuqiu( @RequestParam("xuqiu")MultipartFile xuqiufile,
+    String backxiugaizhengshuxuqiu( @RequestParam("xuqiu")MultipartFile xuqiufile,
                                 @RequestParam("cerId")String cerId,
                            HttpServletRequest request
     ) throws IOException {
@@ -660,8 +678,9 @@ public class BacCertificateController {
 
     //证书名字双向验证
     @RequestMapping(value = "/upbackzhengshustandid")
+    @Loger(operationType = "后端日志",operationName = "修改状态")
     public @ResponseBody
-    String upzhengshushenqingstand(long standid,long cerid) {
+    String backupzhengshushenqingstand(long standid,long cerid) {
         String msg ="";
         int n = cerRecordService.upcersqstandid(standid,cerid);
 

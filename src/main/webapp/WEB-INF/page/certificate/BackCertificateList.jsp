@@ -489,7 +489,7 @@
                             //模拟接口调用
                             if(msg == 'success'){
                                 //修改提示信息
-                                that.tip = '已经存在,请更换'
+                                that.tip = '重复使用！'
                                 $('#panduan').css('color','red');
                                 $('#filedname').val("no");
                             }else{

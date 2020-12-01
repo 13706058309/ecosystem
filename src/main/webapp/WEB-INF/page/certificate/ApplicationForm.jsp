@@ -49,6 +49,7 @@
                     </a>
                     <div class="dropdown">
                         <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                        <a href="${pageContext.request.contextPath}/userProject/projectOfUser" ka="header-personal">我的项目<span>项目订单</span></a>
                         <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
                         <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
                     </div>
@@ -109,7 +110,7 @@
         </div>
     </div>
     </div>
-    <div>
+    </div>
 <script type="text/html" id="barDemo">
 
     {{#  if(d.stateId==22){ }}
@@ -185,7 +186,8 @@
                             }
                         });
                     });
-                } else if (obj.event === 'daifukuan') {
+                }
+                else if (obj.event === 'daifukuan') {
                     var fileid = data.field.fieldId;
                     var cerid = data.cerRecordId;
                     console.log("当前id"+fileid);
@@ -213,12 +215,19 @@
                         }
                     });
 
-                } else if (obj.event === 'downxuqiu') {
+                }
+                else if (obj.event === 'downxuqiu') {
                     var fileid = data.field.fieldId;
                     var filename = data.field.fieldName;
                         layer.confirm('是否下载:' + filename + '的证书项目需求', function (index) {
+                            layer.closeAll();
                         location.href="${pageContext.request.contextPath}/zhengshu/filedownload?fileid="+fileid;
 
+                    });
+                }
+                else if (obj.event === 'tiaozhun') {
+                    layer.confirm('是否进入证书项目', function (index) {
+                        location.href="${pageContext.request.contextPath}/zhengshu/zxzskaifa";
                     });
                 }
             });
