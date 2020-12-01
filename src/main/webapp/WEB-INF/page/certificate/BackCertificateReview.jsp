@@ -303,7 +303,7 @@
                     var name = data.trueName;
                     var cerid = data.cerRecordId;
                     var userid = data.userId;
-                    alert(userid);
+
                     layer.confirm('是否分发:' + filename + '证书,给予'+name, function (index) {
                         $.ajax({
                             url:  '${pageContext.request.contextPath}/backzhengshu/xiugaicerwanchengzhuangtai?cerid='+cerid+'&userid='+userid,//请求服务端地址值

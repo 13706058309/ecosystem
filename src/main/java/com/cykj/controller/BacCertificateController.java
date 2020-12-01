@@ -61,14 +61,14 @@ public class BacCertificateController {
 
     //后台证书界面
     @RequestMapping("/backzhengshuliebiao")
-    public String backzhengshuliebiao() {
+    public String zhengshuliebiaogl() {
 
         return "certificate/BackCertificateList";
     }
 
     //后台申请证书界面
     @RequestMapping("/backSQchulizhengshuliebiao")
-    public String backSQchulizhengshuliebiao() {
+    public String SQchulizhengshuliebiao() {
 
         return "certificate/BackApplyCerList";
     }
