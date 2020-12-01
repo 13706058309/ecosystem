@@ -1,15 +1,18 @@
 package com.cykj.controller;
 
 import com.alipay.api.AlipayApiException;
+import com.aliyuncs.utils.StringUtils;
 import com.cykj.entity.*;
 import com.cykj.service.ParameterService;
 import com.cykj.service.ProjectService;
 import com.cykj.service.UserProjectService;
-import com.cykj.service.impl.ProjectServiceImpl;
+import com.cykj.util.ProjectMpp;
 import com.cykj.util.TableInfo;
+import com.cykj.util.TaskInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.sf.mpxj.*;
+import net.sf.mpxj.mpp.MPPReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,10 +21,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/userProject")
@@ -180,6 +182,138 @@ public class UserProjectController {
          return userProjectServiceImpl.refund(request,response,session);
     }
 
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("/mpp")
+    public @ResponseBody List<TaskInfo> readFile(HttpServletRequest request){
+
+        List<TaskInfo> taskList = new ArrayList<TaskInfo>();
+        try{
+            String path= request.getSession().getServletContext().getRealPath("/uploadDemand");
+            File file = new File(path+"/进度规划.mpp");
+            MPPReader mppRead = new MPPReader();
+            ProjectFile pf = mppRead.read(file);
+            System.out.println("MPXJUtils.method [readFile]: fileName-" + file.getName());
+
+            List<Task> tasks = pf.getAllTasks();
+            System.out.println("MPXJUtils.method [readFile]: taskSize-" + tasks.size());
+
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+
+                Integer task_id = task.getID();
+                Integer task_unique_id = task.getUniqueID();
+                Integer task_outline_level = task.getOutlineLevel();
+                double task_duration = task.getDuration().getDuration();
+                Date task_start_date = task.getStart();
+                Date task_finish_date = task.getFinish();
+//                Integer task_parent_id=task.getParentTask().getID();
+                String task_name=task.getName();
+                List<Relation> task_predecessors = task.getPredecessors();
+                System.out.println("MPXJUtils.method [readFile] taskInfo:" + task_id + "|" + task_unique_id + "|" + task_outline_level + "|" + task_duration + "|" + task_start_date + "|" + task_finish_date + "|" + task_predecessors);
+
+                // 封装TaskInfo
+                java.sql.Date sqlStartDate=new java.sql.Date(task_start_date.getTime());
+//                java.sql.Date sqlStartDate = Str2Date.getUKDate(task_start_date.toString());            // StartDate转换
+                java.sql.Date sqlFinishDate = new java.sql.Date(task_finish_date.getTime());
+                // FinishDate转换
+                StringBuffer sb = new StringBuffer();
+                if(task_predecessors != null){
+                    if(task_predecessors.size() > 0){
+                        for(Relation relation : task_predecessors){
+                            Integer targetTaskId = relation.getTargetTask().getID();
+                            if(sb.length() == 0){
+                                sb.append(targetTaskId);
+                            }else{
+                                sb.append(","+targetTaskId);
+                            }
+                        }
+                    }
+                }
+                String task_predecessors_str = sb.toString();                                           // 任务流文本
+                TaskInfo taskInfo = new TaskInfo();
+                taskInfo.setTask_id(task_id);
+                taskInfo.setTask_unique_id(task_unique_id);
+                taskInfo.setTask_outline_level(task_outline_level);
+                taskInfo.setTask_duration(task_duration);
+//                taskInfo.setParent_id(task_parent_id);
+                taskInfo.setTask_start_date(sqlStartDate);
+                taskInfo.setTask_finish_date(sqlFinishDate);
+                taskInfo.setTask_name(task_name);
+                taskInfo.setTask_predecessors(task_predecessors_str);
+                taskList.add(taskInfo);
+            }
+        }catch (MPXJException e) {
+            System.out.println("MPXJUtils.method [readFile]: MPXJException-" + e);
+            return null;
+        } catch (Exception e) {
+            System.out.println("MPXJUtils.method [readFile]: MPXJException-" + e);
+            return null;
+        }
+        List<TaskInfo> taskLists=refreshTaskInfo(taskList);
+        return taskLists;
+    }
 
 
+    public  List<TaskInfo> refreshTaskInfo(List<TaskInfo> taskList){
+
+        List<Map<String,Integer>> tempTaskOutLine = new ArrayList<Map<String,Integer>>();
+        for(TaskInfo taskInfo : taskList){
+
+            int taskId = taskInfo.getTask_id();
+            int taskOutLineLevel = taskInfo.getTask_outline_level();
+            int listSize = tempTaskOutLine.size();
+            System.out.println("MPXJUtils.method [refreshTaskInfo1]: taskId-" + taskId + ",taskOutLineLevel-" + taskOutLineLevel + ",listSize-" + listSize);
+
+            // 初始化taskOutLineLevel
+            if(listSize > 2){
+                if(taskOutLineLevel == 1){
+                    for(int i=listSize;i>2;i--){
+                        tempTaskOutLine.remove(i-1);
+                    }
+                    listSize = 2;
+                    System.out.println("MPXJUtils.method [refreshTaskInfo2]: taskId-" + taskId + ",taskOutLineLevel-" + taskOutLineLevel + ",listSize-" + listSize);
+                }
+            }
+            Map<String,Integer> map = new HashMap<String,Integer>();
+            map.put("taskId", taskId);
+            map.put("taskOutLineLevel", taskOutLineLevel);
+
+            if(listSize == 0){
+
+                if(taskOutLineLevel == 0){
+                    tempTaskOutLine.add(map);
+                }else{
+                    return null;
+                }
+
+            }else{
+
+                Map<String,Integer> lastMap = tempTaskOutLine.get(listSize-1);
+                int lastTaskId = lastMap.get("taskId");
+                int lastTaskOutLineLevel = lastMap.get("taskOutLineLevel");
+
+                if(taskOutLineLevel > lastTaskOutLineLevel){
+
+                    tempTaskOutLine.add(map);
+                    taskInfo.setParent_id(lastTaskId);
+                }else if(taskOutLineLevel == lastTaskOutLineLevel){
+
+                    tempTaskOutLine.set(taskOutLineLevel, map);
+
+                    Map<String,Integer> lastMap1 = tempTaskOutLine.get(taskOutLineLevel-1);
+                    int lastTaskId1 = lastMap1.get("taskId");
+                    taskInfo.setParent_id(lastTaskId1);
+                }else if(taskOutLineLevel < lastTaskOutLineLevel){
+                    tempTaskOutLine.set(taskOutLineLevel, map);
+                    Map<String,Integer> lastMap2 = tempTaskOutLine.get(taskOutLineLevel-1);
+                    int lastTaskId2 = lastMap2.get("taskId");
+                    taskInfo.setParent_id(lastTaskId2);
+                }
+            }
+        }
+        return taskList;
+    }
 }

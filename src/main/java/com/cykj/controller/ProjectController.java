@@ -3,10 +3,9 @@ package com.cykj.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
-import com.cykj.entity.BackUser;
-import com.cykj.entity.Parameter;
-import com.cykj.entity.ProjectInfo;
-import com.cykj.entity.UserProject;
+import com.cykj.entity.*;
+import com.cykj.mapper.ProjectInfoMapper;
+import com.cykj.service.CerUserService;
 import com.cykj.service.ParameterService;
 import com.cykj.service.ProjectService;
 import com.cykj.service.UserProjectService;
@@ -42,6 +41,10 @@ public class ProjectController {
 
     @Resource
     UserProjectService userProjectServiceImpl;
+
+    @Resource
+    CerUserService cerUserServiceImpl;
+
     /**
      * 前端用户找项目首页
      * @param request
@@ -110,7 +113,19 @@ public class ProjectController {
         Map<String,Object> condition=new HashMap<>();
         condition.put("bUserId",project.getBackUser().getbUserId());
         condition.put("stateName","已发布");
-        List<ProjectInfo> projectInfos=projectServiceImpl.findProjectAll(condition,1,3);
+        List<ProjectInfo> projectInfos=projectServiceImpl.findProjectAll(condition,1,4);
+        int index=3;
+        for (int i=0;i<projectInfos.size();i++){
+            if (projectInfos.get(i).getProjectId()==Long.parseLong(projectId)){
+                index=i;
+                break;
+            }
+            if (i==3){
+                index=3;
+            }
+
+        }
+        projectInfos.remove(index);
         request.setAttribute("projectLists",projectInfos);
         return "project/ProjectDetail";
     }
@@ -165,8 +180,85 @@ public class ProjectController {
      *
      */
     @RequestMapping("/projectEvolve")
-    public String goProjectEvolve(){
+    public String goProjectEvolve(HttpServletRequest request,String projectId){
+        Map<String,Object> result=new HashMap<>();
+        BackUser backUser=(BackUser) request.getSession().getAttribute("admin");
+        ProjectInfo condition =new ProjectInfo();
+        condition.setProjectId(Long.parseLong(projectId));
+        ProjectInfo projectInfo=projectServiceImpl.findProject(condition);
+
+        if (projectInfo.getUserInfo()!=null){
+            //查询已获取的证书
+            List<CerUser> cerLists=cerUserServiceImpl.findceruserlist(projectInfo.getUserId());
+            if (cerLists.size()>0){
+                result.put("cerLists",cerLists);
+            }
+            UserProject condition_1=new UserProject();
+            condition_1.setParamId(52);
+            condition_1.setUserId(projectInfo.getUserInfo().getUserId());
+            List<UserProject> userProjects=userProjectServiceImpl.findUserProject(condition_1);
+            if (userProjects!=null && userProjects.size()>0){
+                long moneyTotal=0;
+                for (int i=0;i<userProjects.size();i++){
+                    moneyTotal+=userProjects.get(i).getProjectInfo().getMoney();
+                }
+                result.put("userProjects",userProjects);
+                result.put("moneyTotal",moneyTotal);
+            }
+
+        }
+        result.put("project",projectInfo);
+        List<Resume> applicants=userProjectServiceImpl.findUserByProjectInfo(projectId,"49");
+        if (applicants.size()>0){
+            result.put("applicants",applicants);
+        }
+        request.setAttribute("projectEvolve",result);
         return "project/ProjectEvolve";
+    }
+    @RequestMapping("/findUser")
+    public @ResponseBody String findUser(HttpServletRequest request,String projectId) throws JsonProcessingException {
+        List<Resume> applicants=userProjectServiceImpl.findUserByProjectInfo(projectId,"49");
+        TableInfo tableInfo=new TableInfo();
+        tableInfo.setCode(0);
+        tableInfo.setCount(applicants.size());
+        tableInfo.setData(applicants);
+        return new ObjectMapper().writeValueAsString(tableInfo);
+    }
+    @RequestMapping("/chooseApplicant")
+    public @ResponseBody String chooseApplicant(String userId,String projectId){
+        String msg="";
+        UserProject condition_1=new UserProject();
+        condition_1.setProjectId(Long.parseLong(projectId));
+        List<UserProject> userProjects=userProjectServiceImpl.findUserProject(condition_1);
+        if (userProjects!=null && userProjects.size()>0){
+            for (int i=0;i<userProjects.size();i++){
+                UserProject condition_2=new UserProject();
+                if (Long.parseLong(userId)==userProjects.get(i).getUserId() && userProjects.get(i).getParamId()==49){
+                    condition_2.setParamId(50);
+                    condition_2.setId(userProjects.get(i).getId());
+                    int n=userProjectServiceImpl.updateState(condition_2);
+                    if (n>0){
+                        ProjectInfo condition_3=new ProjectInfo();
+                        condition_3.setProjectId(Long.parseLong(projectId));
+                        condition_3.setStateId(36);
+                        condition_3.setUserId(Long.parseLong(userId));
+                        int res=projectServiceImpl.updateState(condition_3);
+                        if (res>0){
+                            System.out.println("承接成功！");
+                        }
+                        msg="success";
+                    }
+                }else if ( userProjects.get(i).getParamId()==48 || userProjects.get(i).getParamId()==49){
+                    condition_2.setParamId(51);
+                    condition_2.setId(userProjects.get(i).getId());
+                    int n=userProjectServiceImpl.updateState(condition_2);
+                    if (n>0){
+                        System.out.println("修改成功！");
+                    }
+                }
+            }
+        }
+        return msg;
     }
 
     /**
@@ -216,7 +308,6 @@ public class ProjectController {
 
     @RequestMapping("/uploadDemandFile")
     public @ResponseBody String upload(@RequestParam("file") MultipartFile demandfile , HttpServletRequest request) throws JsonProcessingException {
-        System.out.println("222222222222222222222222222222222222222222");
 //        1获取上传的目录路径
         String path = request.getSession().getServletContext().getRealPath("/uploadDemand");
         //2以天维单位创建文件夹

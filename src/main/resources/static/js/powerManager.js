@@ -37,7 +37,7 @@ function showTree(listMap) {
                 var idArr=new Array();
                 for (var i=0;i<checkedData.length;i++){
                     //子节点全选，父节点也要删除；获取父节点ID
-                    if (checkedData[i].children.length==checkedData[i].childrenSize){
+                    if (checkedData[i].children.length===checkedData[i].children.length){
                         idArr.push(checkedData[i].id);
                         console.log(checkedData[i]);
                     }
@@ -77,12 +77,12 @@ function showTree(listMap) {
                     var flag=true;
                     //遍历父节点，判断要添加的父节点是否已近存在
                     for (var j=0;j<exist.length;j++){
-                        if (exist[j].id==checkedData[i].id){
+                        if (exist[j].id===checkedData[i].id){
                             flag=false;
                         }
                     }
                     //父节点不存在,添加到数组中
-                    if (flag==true){
+                    if (flag===true){
                         idArr.push(checkedData[i].id);
                     }
                     for (var k=0;k<(checkedData[i].children.length);k++){
@@ -103,12 +103,12 @@ function showTree(listMap) {
                 for (var i=0;i<notExist.length;i++){
                     var flag=true;
                     for (var k=0;k<exist.length;k++){
-                        if (exist[k].id==notExist[i].id){
+                        if (exist[k].id===notExist[i].id){
                             flag=false;
                         }
                     }
                     //父节点不存在,添加到数组中
-                    if (flag==true){
+                    if (flag===true){
                         idArr.push(notExist[i].id);
                     }
 
@@ -179,7 +179,7 @@ function modifyPower(code,arr,layer,tree) {
                     return false;
                 }
             }
-            if (code=="add"){
+            if (code==="add"){
                 if (arr.length<1){
                     layer.msg("请选择未分配菜单中的权限！");
                     return false;
@@ -188,7 +188,7 @@ function modifyPower(code,arr,layer,tree) {
             return true;
         },
         success:function (res) {
-            if (res=="success"){
+            if (res==="success"){
                 layer.alert("修改成功！");
                 findExistMenu(roleId);
             }

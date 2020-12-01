@@ -250,7 +250,11 @@ public class CourseController {
 //    }
 
 
-    // 初始化领域和课程信息并返回课程首页
+    /**
+     * 初始化领域和课程信息并返回课程首页
+     * @param request http请求对象
+     * @return
+     */
     @RequestMapping("/homePage")
     public String returnHomePage(HttpServletRequest request){
         // 获取所有领域

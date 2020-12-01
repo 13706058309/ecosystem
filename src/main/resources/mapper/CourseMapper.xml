@@ -119,4 +119,16 @@
     <select id="selectCourseNameByCourseId" parameterType="java.lang.Long" resultType="java.lang.String">
         select courseName from course where courseId=#{courseId}
     </select>
+
+    <update id="increaseCollectionNumberByCourseId" parameterType="java.lang.Long">
+        update course set collectionNumber=collectionNumber+1 where courseId=#{courseId}
+    </update>
+
+    <update id="decreaseCollectionNumberByCourseId" parameterType="java.lang.Long">
+        update course set collectionNumber=collectionNumber-1 where courseId=#{courseId}
+    </update>
+
+    <update id="updateTotalPlayTimesByUnitId" parameterType="java.lang.Long">
+        update course set totalPlayTimes=totalPlayTimes+1 where courseId=(select courseId from unit where unitId=#{unitId})
+    </update>
 </mapper>
