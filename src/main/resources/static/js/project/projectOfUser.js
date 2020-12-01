@@ -116,8 +116,8 @@ function findProjectOrder(curr,limit){
                         "                        </div>\n" +
                         "                    </div>\n" +
                         "                    <div class=\"fl\" style=\"width: 182px;height: 100px;background-color:white;border-bottom: 1px solid #efefef;border-left: 1px solid #efefef;\">\n" +
-                        "                        <p class=\"total\" style=\"\">项目金额: ￥"+project.projectInfo.money+"</p>\n" +
-                        "                        <p class=\"payMoney\">保证金： ￥"+project.payMoney+"</p>\n" +
+                        "                        <p class=\"total\" style=\" margin-top: 20px\">项目金额: ￥"+project.projectInfo.money+"</p>\n" +
+                        "                        <p class=\"payMoney\" style=\" margin-top: 20px\">保证金： ￥"+project.payMoney+"</p>\n" +
                         "                    </div>\n" +
                         "                    <div class=\"fl\" style=\"width: 200px;height: 100px;background-color:white;border-left: 1px solid #efefef;border-bottom: 1px solid #efefef;\">\n" +
                         "                        <p class=\"state\">订单状态 <span style=\"color: #000000\"> : &nbsp;"+project.states.paramName+"</span></p>\n" +
