@@ -628,7 +628,7 @@ public class CenterController {
 
 
 
-    @RequestMapping("/clearjob")
+    @RequestMapping("/job")
     public String clearjob(HttpServletRequest req){
         List<Industry> industrys=resumeService.industrys();
         req.setAttribute("industrys",industrys);
@@ -918,7 +918,7 @@ public class CenterController {
 
         return "FindJob";
     }
-    @RequestMapping("/job")
+    @RequestMapping("/clearjob")
     public String pageJob(HttpServletRequest req,String findworkYear,String findSearch,String findWorkCity,String findEducation,String findSalary,String findFinanStage,String findScale,String findReleaseTime,String curr,String limit,String findPosition){
         UserInfo user= (UserInfo) req.getSession().getAttribute("qUser");
         if (user==null){
