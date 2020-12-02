@@ -362,7 +362,7 @@
                 <dl class="condition-city show-condition-district">
                     <dd class="city-wrapper">
                         <input type="hidden" value="${workCity}" id="workCity">
-                        <a href="javascript:;" class="disabled" title="厦门web前端招聘" id="findWorkCity" >${workCity}</a>
+                        <a href="javascript:;" class="disabled" title="" id="findWorkCity" >${workCity}</a>
 
                         <em class="icon-arrow-right"></em>
 <%--                        <a href="javascript:;" class="link-district selected">--%>
@@ -800,6 +800,7 @@
         findworkYear=condition.innerText;
         //+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition
         location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+
     }
     function workCity(condition) {
         findworkYear=condition.innerText;
