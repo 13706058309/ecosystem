@@ -411,6 +411,24 @@ public class TalentController {
 
     @RequestMapping( "/download")
     public ResponseEntity<byte[]> download(HttpServletRequest request,String fileName) throws IOException {
+
+//        String realpath   = request.getServletContext().getRealPath("/upload");
+//        realpath=realpath+"\\2020\\";
+//
+//        String filename  = fileName.substring(fileName.lastIndexOf("/")+1);
+//        realpath= realpath+fileName.substring(0,fileName.lastIndexOf("/")+1);
+//
+//        File file = new File(realpath,filename);//吧下载文件构成文件处理，  filename 前台传送的文件名称
+//
+//        HttpHeaders httpHeaders = new HttpHeaders();//设置头信息
+//        String downfilename = new String(filename.getBytes("UTF-8"),"iso-8859-1");
+//        //设置想要的文件名
+//        httpHeaders.setContentDispositionFormData("attachment",downfilename);
+//        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//        //MEDIATYpe 互联网媒介类型  contentype  具体请求的媒体类型信息
+//        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
+//
+
         String realPath=request.getServletContext().getRealPath("/upload");
         realPath=realPath+"\\2020\\";
         File file=new File(realPath,fileName);
@@ -544,7 +562,7 @@ public class TalentController {
     }
     @RequestMapping("/all")
     public String  all(HttpServletRequest request, HttpServletResponse response)  {
-        System.out.println("dhf");
+
         List<BackUserNum> list=talentService.all();
         request.setAttribute("list",list);
         String s="新增总企业数：";
@@ -552,7 +570,7 @@ public class TalentController {
         return "backUserNum";
     }
     @RequestMapping("/backUserNumMonth")
-    public String  backUserNumMonth(HttpServletRequest request, HttpServletResponse response)  {
+    public String  bUserNumMonth(HttpServletRequest request, HttpServletResponse response)  {
         List<BackUserNum> list=talentService.backUserNumMonth();
         request.setAttribute("list",list);
         String s="本月新增企业：";
@@ -561,7 +579,7 @@ public class TalentController {
         return "backUserNum";
     }
     @RequestMapping("/backUserNumWeek")
-    public String  backUserNumWeek(HttpServletRequest request, HttpServletResponse response)  {
+    public String  bUserNumWeek(HttpServletRequest request, HttpServletResponse response)  {
         List<BackUserNum> list=talentService.backUserNumWeek();
         request.setAttribute("list",list);
         String s="本周新增企业：";
@@ -570,7 +588,7 @@ public class TalentController {
         return "backUserNum";
     }
     @RequestMapping("/backUserNumHalfYear")
-    public String  backUserNumHalfYear(HttpServletRequest request, HttpServletResponse response)  {
+    public String  bUserNumHalfYear(HttpServletRequest request, HttpServletResponse response)  {
         List<BackUserNum> list=talentService.backUserNumHalfYear();
         request.setAttribute("list",list);
         String s="近半年新增企业：";

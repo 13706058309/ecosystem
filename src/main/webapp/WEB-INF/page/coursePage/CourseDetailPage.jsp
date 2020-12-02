@@ -23,12 +23,62 @@
     <link href="http://cymooc.org:80/common/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cymooc.org:80/common/css/flexslider.css" type="text/css" media="screen" property="" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css/course/detailPage.css"/>
-    <script type="text/javascript">var ctx = ''</script>
-    <script type="text/javascript">var sessions = ''</script>
+    <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
+
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 </head>
+
 <body>
 <input type="hidden" id="basePath" value="${pageContext.request.contextPath}"/>
 <input type="hidden" id="courseId" value="${course.courseId}"/>
+<input type="hidden" id="userId" value="${qUser.userId}"/>
+<div id="header" style="background-color:#00c2b3;height: 80px" >
+    <div class="inner home-inner" >
+        <div class="logo" style="width: 150px;height: 70px">
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px"><span>钱程无忧</span></a>
+        </div>
+        <div class="nav" style="margin-top: 20px">
+            <ul>
+                <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                <%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>
+                <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
+            </ul>
+        </div>
+
+        <div class="user-nav" style="margin-top: 20px">
+            <c:if test="${empty qUser}">
+                <div class="btns" style="margin-top: 10%">
+                    <a href="${pageContext.request.contextPath}/golog/reg" ka="header-register" class="btn btn-outline" style="background-color: #228b81;border: 0px;">注册</a>
+                    <a href="${pageContext.request.contextPath}/golog/login" class="btn btn-outline" style="background-color: #228b81;border: 0px;">登录</a>
+                </div>
+            </c:if>
+            <c:if test="${not empty qUser}">
+                <ul>
+                        <%--                <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
+                    <li class="nav-figure">
+                        <div id="dropdown1">
+                        <a>
+                            <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                        </a>
+                        <div class="dropdown" id="dropdown2">
+                            <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                            <a href="${pageContext.request.contextPath}/userProject/projectOfUser" ka="header-personal">我的项目<span>项目订单</span></a>
+                            <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                            <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                        </div></div>
+                    </li>
+                </ul>
+            </c:if>
+        </div>
+    </div>
+</div>
+
 <div class="safe" style="margin-bottom: 20px;margin-top: 20px">
     <div class="courseDiv">
         <img src="${pageContext.request.contextPath}${course.courseImgUrl}" class="floatL" style="width: 385px;height: 270px;display: block;margin: 15px;"/>
@@ -86,7 +136,6 @@
         <div class="tabs">
             <div id="courseList" class="coursetab hoverTab">课程目录</div>
             <div id="courseIntroduce" class="coursetab">相关评价</div>
-<%--            <div id="courseMaterial" class="coursetab">课程详情</div>--%>
         </div>
         <iframe id="courseIframe" src="" width="820px" scrolling="yes"  data-pro="10607"></iframe>
     </div>
@@ -126,9 +175,11 @@
 </div>
 <div class="clear"></div>
 </div>
+<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+
+</div>
 <div class="clear"></div>
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/layui/layui.js"/>
 <script src="http://cymooc.org:80/common/js/course/courses.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -139,6 +190,8 @@
         var collectTime = getNowTime();
         if (userId==undefined){
             userId="0";
+            alert("请先登录");
+            return;
         }
         var jsonData = {"courseId":courseId,"userId":userId,"collectTime":collectTime}
         $.ajax({
@@ -154,17 +207,6 @@
                 }else {
                     tip = "服务器繁忙，请稍后再试";
                 }
-                // layui.use('layer', function(){
-                //     var layer = layui.layer;
-                //     layer.open({
-                //         type: 1,
-                //         content: '<div style="width:300px;height: 60px;text-align: center;margin-top: 20%;color: green;">'+tip+'</div>',
-                //         btn:['确定'],
-                //         yes:function (index) {
-                //             layer.close(index);
-                //         }
-                //     });
-                // });
                 confirm(tip);
             }
         });
@@ -274,13 +316,14 @@
 
                 break;
             case '1':
-                $('.tabs').children().attr('class','coursetab');
-                $('#courseIntroduce').addClass('hoverTab');
-                $('#courseIframe').attr("src",contextPath+"/courseAppraise/evaluationPage?courseId="+courseId+"&page=1"+"&limit=5");
-                break;
-            case '2':
-                $('.tabs').children().attr('class','coursetab');
-                $('#courseMaterial').addClass('hoverTab');
+                var userId = $('#userId').val();
+                if(userId==undefined || userId==""){
+                    alert("请先登录");
+                }else{
+                    $('.tabs').children().attr('class','coursetab');
+                    $('#courseIntroduce').addClass('hoverTab');
+                    $('#courseIframe').attr("src",contextPath+"/courseAppraise/evaluationPage?courseId="+courseId+"&page=1"+"&limit=5");
+                }
                 break;
         }
     }

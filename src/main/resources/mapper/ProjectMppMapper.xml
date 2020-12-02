@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.ProjectMppMapper">
+    <insert id="addProjectMpp">
+        insert into projectMpp(project_id,task_id,task_unique_id,parent_id,task_outline_level,task_name,task_duration,task_start_date,task_finish_date,task_predecessors,task_operator)
+        values
+        <foreach collection="projectMpps" item="projectMpp" separator="," >
+            (#{projectMpp.project_id},
+            #{projectMpp.task_id},
+            #{projectMpp.task_unique_id},
+            #{projectMpp.parent_id},
+            #{projectMpp.task_outline_level},
+            #{projectMpp.task_name},
+            #{projectMpp.task_duration},
+            #{projectMpp.task_start_date},
+            #{projectMpp.task_finish_date},
+            #{projectMpp.task_predecessors},
+            #{projectMpp.task_operator})
+        </foreach>
+    </insert>
+
+    <delete id="delProjectMpp">
+        delete from projectMpp where project_Id =#{projectId}
+    </delete>
+</mapper>

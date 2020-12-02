@@ -2,7 +2,7 @@
         <!DOCTYPE mapper
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cykj.log.LogMapper">
+<mapper namespace="com.cykj.mapper.LogMapper">
         <select id="findLogOnPage" parameterType="java.util.Map" resultMap="resultsHash">
                 select b.*, u.bUserName from backLog b, backUser u where b.bUserId = u.bUserId and bUserName like concat('%',#{bUserName},'%')
                 <if test="startTime!=null">

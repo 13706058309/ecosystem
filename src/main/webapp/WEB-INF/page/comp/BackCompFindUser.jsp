@@ -189,8 +189,6 @@
 </div>
 <table id="userTable" lay-filter="test"></table>
 
-<script  src="${pageContext.request.contextPath}/static/bg/js/tween.js"></script>
-<script  src="${pageContext.request.contextPath}/static/bg/js/bgs.js"></script>
 <canvas id="c"></canvas>
 </body>
 <script>

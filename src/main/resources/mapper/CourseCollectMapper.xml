@@ -14,4 +14,9 @@
     <delete id="deleteCollectionByCourseIdAndUserId" parameterType="java.util.HashMap">
         delete from courseCollect where courseId=#{courseId} and userId=#{userId}
     </delete>
+
+    <select id="selectCollectCoursesByUserId" parameterType="java.lang.Long" resultType="com.cykj.entity.Course">
+        select courseId,courseName,courseImgUrl,collectionNumber,speakerName,speakerHeadImgUrl from course
+        where courseId in (select courseId from courseCollect where userId=#{userId})
+    </select>
 </mapper>

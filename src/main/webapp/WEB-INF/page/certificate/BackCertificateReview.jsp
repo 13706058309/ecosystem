@@ -216,14 +216,13 @@
                 elem: '#LAY_table_user'
                 , url: '${pageContext.request.contextPath}/backzhengshu/getbackcerpingshenlist'
                 , cols: [[
-                    {type: 'numbers', title: 'ID', width: 80}
-                    , {field: 'trueName',title: '申请人', width: 120}
-                    , {field: 'cerPhone',title: '联系号码', width: 150}
-                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 100}
-                    , {field: 'beginTime',title: '申请时间', width: 200, sort: true}
-                    , {field: 'turnoverTime',title: '更新时间', width: 200, sort: true}
-                    , {field: 'cerTestScore',title: '测试分数', width: 120}
-                    , {field: 'cerJudgeScore',title: '评审成绩', width: 120,templet:function (d) {
+                    {type: 'numbers', title: 'ID', width: 60}
+                    , {field: 'trueName',title: '申请人', width: 100}
+                    , {field: 'cerPhone',title: '联系号码', width: 120}
+                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 80}
+                    , {field: 'turnoverTime',title: '更新时间', width: 180, sort: true}
+                    , {field: 'cerTestScore',title: '测试分数', width: 100}
+                    , {field: 'cerJudgeScore',title: '评审成绩', width: 100,templet:function (d) {
                         if (d.cerJudgeScore==0){
                             return "未评审";
                         }else {
@@ -231,7 +230,7 @@
                         }
                         }}
                     , {templet: '<div>{{d.state.paramName}}</div>', title: '当前状态',  width: 120}
-                    , {field: 'score', title: '操作', width: 258, align: 'center', toolbar: '#barDemo'}
+                    , {field: 'score', title: '操作', width: 238, align: 'center', toolbar: '#barDemo'}
                 ]]
                 , id: 'testReload'
                 , page: true
@@ -253,8 +252,8 @@
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         title: "查看"+name+"的申请记录",
-                        area: ['500px', '600px'],
-                        offset: '50px',
+                        area: ['500px', '500px'],
+                        offset: 'auto',
                         content: $("#popUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
                     form.on('submit(xiazaiceshi)', function(massage) {
@@ -281,8 +280,8 @@
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         title: "查看"+name+"的申请记录",
-                        area: ['500px', '700px'],
-                        offset: '10px',
+                        area: ['500px', '550px'],
+                        offset: 'auto',
                         content: $("#PSUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
 
@@ -303,7 +302,7 @@
                     var name = data.trueName;
                     var cerid = data.cerRecordId;
                     var userid = data.userId;
-                    alert(userid);
+
                     layer.confirm('是否分发:' + filename + '证书,给予'+name, function (index) {
                         $.ajax({
                             url:  '${pageContext.request.contextPath}/backzhengshu/xiugaicerwanchengzhuangtai?cerid='+cerid+'&userid='+userid,//请求服务端地址值
@@ -328,7 +327,7 @@
                         type: 1,
                         title: "上传评审结果",
                         area: ['400px', '450px'],
-                        offset: '100px',
+                        offset: 'auto',
                         content: $("#uoloadUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
                     form.on('submit(demo222)', function(massage) {

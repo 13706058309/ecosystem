@@ -11,14 +11,13 @@
 <head>
     <title>后台主页</title>
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
-    <script src="${pageContext.request.contextPath}/layui/layui.js" charset="UTF-8"></script>
-
-
     <script type="text/javascript" src="${pageContext.request.contextPath}/pay/js/amazeui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/pay/js/ui-choose.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/pay/css/amazeui.min.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/pay/css/main.css" />
+    <script src="${pageContext.request.contextPath}/layui/layui.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+
     <script>
         //JavaScript代码区域
 
@@ -95,7 +94,7 @@
                     </p>
                     <div class="tr_rechheadcion">
                         <img src="images/coin.png" alt="" />
-                        <span>当前余额：<span>${admin.balance}人才币</span></span>
+                        <span>当前余额：<span id="balaces">${admin.balance}招兵币</span></span>
                     </div>
                 </div>
                 <div class="tr_rechli am-form-group">
@@ -186,7 +185,7 @@
         </tr>
         <tr>
             <td>当前持有人才币</td>
-            <td>${admin.balance}</td>
+            <td id="balancess">${admin.balance}</td>
         </tr>
     </table>
 </div>
@@ -226,22 +225,38 @@
     }
 
     function showPay() {
-        layer.open({
-            type:1,
-            title:"人才币充值",
-            area:['60%','80%'],
-            offset: ['10%', '30%'],
-            content:$("#pay")
+        $.ajax({
+            url:path+"/rec/getBlance",
+            type:"post",
+            typeData:"text",
+            success:function (info) {
+                $("#balaces").text(info+"人才币");
+                layer.open({
+                    type:1,
+                    title:"人才币充值",
+                    area:['60%','80%'],
+                    offset: ['10%', '30%'],
+                    content:$("#pay")
+                })
+            },
         })
     }
 
     function showBalance() {
-        layer.open({
-            type:1,
-            title:"人才币查看",
-            area:['30%','30%'],
-            offset: ['10%', '30%'],
-            content:$("#balanceDetail")
+        $.ajax({
+            url:path+"/rec/getBlance",
+            type:"post",
+            typeData:"text",
+            success:function (info) {
+                $("#balancess").text(info+"人才币");
+                layer.open({
+                    type:1,
+                    title:"人才币查看",
+                    area:['30%','30%'],
+                    offset: ['10%', '30%'],
+                    content:$("#balanceDetail")
+                })
+            },
         })
     }
 

@@ -1,4 +1,4 @@
-var path;
+﻿var path;
 var pageCounts=$("#pageCounts").val();
 $(function(){
     console.log($("#fieldId").val());

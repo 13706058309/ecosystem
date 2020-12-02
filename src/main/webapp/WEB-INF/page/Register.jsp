@@ -61,7 +61,7 @@
             <input type="text" name="acthCode" id="acthCode" placeholder="请输入短信验证码" maxlength="4">
             <input type="text" name="address"  id="address" placeholder="请输入您的地址" maxlength="30">
             <a onclick="ajax_reg()"><input type="button" value="提交"></a>
-            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a>或者<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
+            <p class="message"><a href="${pageContext.request.contextPath}/golog/login">返回登录</a>&nbsp|&nbsp<a href="${pageContext.request.contextPath}/homePage/home">返回首页</a></p>
         </form>
     </div>
 </div>

@@ -9,15 +9,13 @@
 
   <display-name>Archetype Created Web Application</display-name>
 
-  <!--  <context-param>-->
+<!--    <context-param>-->
 <!--    <param-name>contextConfigLocation</param-name>-->
 <!--    <param-value>classpath:applicationContext.xml</param-value>-->
 <!--  </context-param>-->
 <!--  <listener>-->
 <!--  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
 <!--</listener>-->
-
-
 <!--&lt;!&ndash;加载springmvc文件&ndash;&gt;-->
 <!--  <servlet>-->
 <!--    <servlet-name>spring</servlet-name>-->

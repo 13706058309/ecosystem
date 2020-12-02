@@ -1,4 +1,4 @@
-package com.cykj.log;
+package com.cykj.mapper;
 
 import com.cykj.entity.BackLog;
 import org.apache.ibatis.annotations.Mapper;

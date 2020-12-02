@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" >
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/project/projectOfUser.css">
+
+    <link href="${pageContext.request.contextPath}/css/vendor.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/app.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jianli.css" rel="stylesheet">
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
+
     <script src="${pageContext.request.contextPath}/js/project/projectOfUser.js" charset="UTF-8"></script>
     <style>
         .task-desc-container{
@@ -117,7 +124,7 @@
             white-space: normal !important;
             text-overflow: ellipsis;
             word-wrap: break-word;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
         .total{
@@ -154,40 +161,84 @@
 <input type="hidden" id="path" value="${pageContext.request.contextPath}">
 <input type="hidden" id="stateId" value="">
 <div class="header-top-warp-v1" style="background-color: white">
-    <div class="header-top">
-        <div class="page-main header-top-main">
-            <ul class="header-top-left">
-                <%--                首页URL--%>
-                <li class="item-homeurl">
-                    <a href="${pageContext.request.contextPath}/homePage/home"><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>
-                </li>
-            </ul>
-            <%--            用户信息，项目--%>
-            <div class="header-top-right">
-                <ul class="header-top-user">
-                    <c:if test="${not empty qUser}">
-                        <li style="float: left;position: relative;">
-                            <span class="hover-title">${qUser.userName}</span>
-                        </li>
-                        <li style="float: left;position: relative;">
-                            <span class="hover-title"><a href="${pageContext.request.contextPath}/userProject/projectOfUser">我的项目</a></span>
-                        </li>
-                        <li style="float: left;position: relative;">
-                            <span class="hover-title"><a href="javaScript:;" onclick="userExit()">注销</a></span>
-                        </li>
-                    </c:if>
-                    <c:if test="${empty qUser}">
-                        <li style="float: left;position: relative;">
-                            <span class="hover-title">登录</span>
-                        </li>
-                        <li style="float: left;position: relative;">
-                            <span class="hover-title">注册</span>
-                        </li>
-                    </c:if>
+<%--    <div class="header-top">--%>
+<%--        <div class="page-main header-top-main">--%>
+<%--            <ul class="header-top-left">--%>
+<%--                &lt;%&ndash;                首页URL&ndash;%&gt;--%>
+<%--                <li class="item-homeurl">--%>
+<%--                    <a href="${pageContext.request.contextPath}/homePage/home"><i class="layui-icon layui-icon-home" style="color:#44D0C7;font-size:1.4em"></i>钱程无忧首页</a>--%>
+<%--                </li>--%>
+<%--            </ul>--%>
+<%--            &lt;%&ndash;            用户信息，项目&ndash;%&gt;--%>
+<%--            <div class="header-top-right">--%>
+<%--                <ul class="header-top-user">--%>
+<%--                    <c:if test="${not empty qUser}">--%>
+<%--                        <li style="float: left;position: relative;">--%>
+<%--                            <span class="hover-title">${qUser.userName}</span>--%>
+<%--                        </li>--%>
+<%--                        <li style="float: left;position: relative;">--%>
+<%--                            <span class="hover-title"><a href="${pageContext.request.contextPath}/userProject/projectOfUser">我的项目</a></span>--%>
+<%--                        </li>--%>
+<%--                        <li style="float: left;position: relative;">--%>
+<%--                            <span class="hover-title"><a href="javaScript:;" onclick="userExit()">注销</a></span>--%>
+<%--                        </li>--%>
+<%--                    </c:if>--%>
+<%--                    <c:if test="${empty qUser}">--%>
+<%--                        <li style="float: left;position: relative;">--%>
+<%--                            <span class="hover-title">登录</span>--%>
+<%--                        </li>--%>
+<%--                        <li style="float: left;position: relative;">--%>
+<%--                            <span class="hover-title">注册</span>--%>
+<%--                        </li>--%>
+<%--                    </c:if>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+
+    <div id="header" style="background-color:#00c2b3;height: 80px" >
+        <div class="inner home-inner" >
+            <div class="logo" style="width: 150px;height: 70px">
+                <a  ka="header-home-logo" title="钱程无忧" style="background: url(${pageContext.request.contextPath}/imgs/logo12.jpg) 3px 7px no-repeat;background-size:150px 70px;width: 150px;height: 70px;margin-top: 0px"><span>钱程无忧</span></a>
+            </div>
+            <div class="nav" style="margin-top: 20px">
+                <ul>
+                    <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
+                    <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                    <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
+                    <li><a class="cur" href="${pageContext.request.contextPath}/project" >项目</a></li>
+                    <li class=""><a ka="header-app" href="${pageContext.request.contextPath}/course/homePage">课程</a></li>
+                    <li class=""><a ka="header-article" href="${pageContext.request.contextPath}/zhengshu/cshouye">证书</a></li>
                 </ul>
+            </div>
+
+            <div class="user-nav" style="margin-top: 20px">
+                <c:if test="${empty qUser}">
+                    <div class="btns" style="margin-top: 10%">
+                        <a href="${pageContext.request.contextPath}/golog/reg" style="background: #202329" ka="header-register" class="btn btn-outline">注册</a>
+                        <a href="${pageContext.request.contextPath}/golog/login" style="background: #202329" class="btn btn-outline">登录</a>
+                    </div>
+                </c:if>
+                <c:if test="${not empty qUser}">
+                    <ul>
+                            <%--                <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>--%>
+                        <li class="nav-figure">
+                            <a >
+                                <span class="label-text">${qUser.userName}</span><img src="${pageContext.request.contextPath}${qUser.headImgUrl}" alt=""/>
+                            </a>
+                            <div class="dropdown">
+                                <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/userProject/projectOfUser" ka="header-personal">我的项目<span>项目订单</span></a>
+                                <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
+                                <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
+                            </div>
+                        </li>
+                    </ul></c:if>
             </div>
         </div>
     </div>
+
+
     <%-- logo   和 搜索--%>
     <div id="headerbody" class="header-body">
         <div class="page-main header-body-main" style="background-color: white;">
@@ -223,8 +274,6 @@
                     <input class="layui-input" id="orderNum" style="width: 160px;height: 30px;" placeholder="订单号搜索">
                 </div>
                 <a style="float:left;margin-top:10px;margin-left:5px;font-size: 30px;" onclick="chooseState('')"> <i class="layui-icon layui-icon-search" ></i></a>
-
-
             </div>
         </div>
 
