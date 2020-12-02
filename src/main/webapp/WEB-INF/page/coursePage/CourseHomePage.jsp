@@ -26,15 +26,18 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css/course/homePage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"  media="all">
 
+    <script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js"></script>
+    <script src="https://static.zhipin.com/zhipin-geek/v334/web/geek/js/main.js"></script>
 </head>
 
 <body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"/>
 <script src="http://cymooc.org:80/usersPersonal/js/main.js"></script>
 
-<input type="hidden" id="basepath" value="${pageContext.request.contextPath}"/>
+<input type="hidden" id="basePath" value="${pageContext.request.contextPath}"/>
 <input type="hidden" id="fieldId" value="0"/>
 <input type="hidden" id="count" value="${count}"/>
+<input type="hidden" id="userId" value="${qUser.userId}"/>
 
 <div id="header" style="background-color:#00c2b3;height: 80px" >
     <div class="inner home-inner" >
@@ -233,13 +236,15 @@
             , success: function (object) {
                 object = JSON.parse(object);
                 var fieldId = object.fieldId;
+                var userId = $('#userId').val();
+                console.log(userId);
                 data = object.courses;
                 var msg = object.courses;
                 var str = "";
                 for (var i = 0; i < msg.length; i++) {
-                    str += "<li style=\"width:260px;margin-top: 10px;\" onclick=\"toDetailPage("+msg[i].courseId+")\">";
+                    str += "<li style=\"width:260px;margin-top: 10px;\" onclick=\"toDetailPage("+msg[i].courseId+","+userId+")\">";
                     str += "<div class=\"courselist\" style=\"float:left;width:240px;height:190px;position: relative;\">";
-                    str += "<img style=\"border-radius:3px 3px 0 0;width:240px;height:135px;\" src=\""+$("#basepath").val()+msg[i].courseImgUrl+"\"  title=\"" + msg[i].courseName + "\">";
+                    str += "<img style=\"border-radius:3px 3px 0 0;width:240px;height:135px;\" src=\""+$("#basePath").val()+msg[i].courseImgUrl+"\"  title=\"" + msg[i].courseName + "\">";
                     str += "<div style=\"position: relative;top:20px;\">";
                     str += "<div style=\"float:left;margin-top:-20px;width:230px;color:#8a8a8a;\">";
                     str += "<div style=\"margin-top:5px;margin-left:0px;height:18px;width:180px;\" >";
@@ -260,7 +265,7 @@
                     str += "<span style=\"float:left;display:inline-block;margin-top:5px;margin-left:65px;\">";
                     str += msg[i].speakerName;
                     str += "</span>";
-                    str += "<img src=\"" + $("#basepath").val()+msg[i].speakerHeadImgUrl + "\" style=\"margin-top:-70px;margin-right:15px;width:48px;height: 48px;border-radius: 24px;display:block;float:right;border:3px solid #fff;\"/>";
+                    str += "<img src=\"" + $("#basePath").val()+msg[i].speakerHeadImgUrl + "\" style=\"margin-top:-70px;margin-right:15px;width:48px;height: 48px;border-radius: 24px;display:block;float:right;border:3px solid #fff;\"/>";
                     str += "<div style=\"clear:both\">";
                     str += "</div>";
                     str += "</div>";
@@ -282,10 +287,11 @@
     }
 
     function toDetailPage(courseId,userId) {
+        var basePath=$('#basePath').val();
         if (userId==undefined){
             userId=0;
         }
-        window.open("detailPage?courseId="+courseId+"&userId="+userId);
+        location.href = basePath+"/course/detailPage?courseId="+courseId+"&userId="+userId;
     }
 </script>
 </body>
