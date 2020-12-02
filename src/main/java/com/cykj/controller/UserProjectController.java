@@ -233,6 +233,7 @@ public class UserProjectController {
                 json.put("data","");
             }
         }
+
         List<TaskInfo> taskList = new ArrayList<TaskInfo>();
         try{
             File newMppFile = new File(file,fileName);
@@ -293,7 +294,7 @@ public class UserProjectController {
             return null;
         }
         List<TaskInfo> taskLists=refreshTaskInfo(taskList);
-        String mppUrl="/uploadDemand/"+fileName;
+        String mppUrl="/"+date+"/"+fileName;
         int res=userProjectServiceImpl.addProjectMpp(taskLists,mppUrl);
         return json.toString();
     }

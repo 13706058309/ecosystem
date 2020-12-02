@@ -115,7 +115,15 @@ $(function () {
                 }
             }else if(layEvent==='chooseUser'){
                 location.href=path+"/project/projectEvolve?projectId="+data.projectId;
+            }else if (layEvent==='evolve'){
+                if (data.mppUrl!=null){
+                    location.href=path+data.mppUrl;
+                }else{
+                    alert("对方还未上传项目规划！");
+                }
+
             }
+
         });
     });
 })
