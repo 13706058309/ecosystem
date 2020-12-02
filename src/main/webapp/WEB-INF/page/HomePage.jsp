@@ -84,7 +84,6 @@
         </c:forEach>
     </div>
 </div>
-<%--头部--%>
 <div id="header" style="background-color:#00c2b3;height: 100px;width: 100%" >
     <div class="inner home-inner" >
         <div class="logo" style="width: 150px;height: 70px">
@@ -121,6 +120,7 @@
                             </a>
                             <div class="dropdown" id="dropdown2" >
                                 <a href="${pageContext.request.contextPath}/center/jianli" ka="header-personal">个人中心<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/userProject/projectOfUser" ka="header-personal">我的项目<span>项目订单</span></a>
                                 <a href="${pageContext.request.contextPath}/center/accountSet" ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
                                 <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"  ka="header-logout">退出登录</a>
                             </div></div>
@@ -129,7 +129,9 @@
         </div>
     </div>
 </div>
+
 <div style="width: 1260px;margin: 0 auto">
+
         <%-----------------------------------------------------------------------------------------搜索框--%>
 
         <div class="content" style="margin-bottom: 20px;margin-left: 23%">

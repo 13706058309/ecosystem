@@ -325,7 +325,8 @@
 
     //下载模板
     function downLoad() {
-        window.open("${pageContext.request.contextPath}/talent/download?fileName=简历.xls");
+        location.href='${pageContext.request.contextPath}/talent/download?fileName=jianli.xls';
+
 
     }
     function uploads() {
@@ -344,7 +345,6 @@
                     return false;
                 }
                 if(!file.endsWith(".xls")){
-                // if(file.end!="C:\\fakepath\\简历.xls"){
                     layer.msg("不是简历表格，请先下载模板")
                     return false;
                 }

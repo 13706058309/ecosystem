@@ -61,14 +61,14 @@ public class BacCertificateController {
 
     //后台证书界面
     @RequestMapping("/backzhengshuliebiao")
-    public String backzhengshuliebiao() {
+    public String zhengshuliebiaogl() {
 
         return "certificate/BackCertificateList";
     }
 
     //后台申请证书界面
     @RequestMapping("/backSQchulizhengshuliebiao")
-    public String backSQchulizhengshuliebiao() {
+    public String SQchulizhengshuliebiao() {
 
         return "certificate/BackApplyCerList";
     }
@@ -331,22 +331,24 @@ public class BacCertificateController {
         String msg ="";
         long standid = 33;
         BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
-        int n = cerRecordService.upcersqstandid(standid,cerid);
-        if (n!=0){
-            String dangqiantime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            CerUser cerUser = new CerUser();
-            cerUser.setCerId(cerid);
-            cerUser.setGainTime(dangqiantime);
-            cerUser.setbUserId(backUser.getbUserId());
-            cerUser.setUserId(userid);
-            int c =cerUserService.insertCerUser(cerUser);
-            if (c>0){
-                msg = "success";
-            }else {
+        if (backUser!=null) {
+            int n = cerRecordService.upcersqstandid(standid, cerid);
+            if (n != 0) {
+                String dangqiantime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                CerUser cerUser = new CerUser();
+                cerUser.setCerId(cerid);
+                cerUser.setGainTime(dangqiantime);
+                cerUser.setbUserId(backUser.getbUserId());
+                cerUser.setUserId(userid);
+                int c = cerUserService.insertCerUser(cerUser);
+                if (c > 0) {
+                    msg = "success";
+                } else {
+                    msg = "fail";
+                }
+            } else {
                 msg = "fail";
             }
-        }else {
-            msg = "fail";
         }
         return msg;
     }

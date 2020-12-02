@@ -84,22 +84,6 @@ public class CourseServiceImpl implements CourseService {
         return findOption;
     }
 
-//    @Resource
-//    private CourseMapper courseMapper;
-//    @Override
-//    public List<Course> findCourse() {
-//        System.out.println("已经走到了CourseServiceImpl! 显示列表方法");
-//        return courseMapper.findCourse();
-//    }
-//
-//    @Override
-//    public List<Course> search(String courseName) {
-//        System.out.println("已经走到了CourseServiceImpl! 搜索按钮监听");
-//        System.out.println("CourseServiceImpl里的courseName值为："+courseName);
-//        return courseMapper.search(courseName);
-//    }
-
-
     /**
      * 根据领域ID查询该领域下的课程信息
      * @param fieldId 领域ID
@@ -160,5 +144,20 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public String selectCourseNameByCourseId(long courseId){
         return courseMapper.selectCourseNameByCourseId(courseId);
+    }
+
+    @Override
+    public void updateTotalPlayTimesByUnitId(String unitId) {
+        courseMapper.updateTotalPlayTimesByUnitId(Long.parseLong(unitId));
+    }
+
+    @Override
+    public void increaseCollectionNumberByCourseId(String courseId) {
+        courseMapper.increaseCollectionNumberByCourseId(Long.parseLong(courseId));
+    }
+
+    @Override
+    public void decreaseCollectionNumberByCourseId(String courseId) {
+        courseMapper.decreaseCollectionNumberByCourseId(Long.parseLong(courseId));
     }
 }

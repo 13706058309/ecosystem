@@ -31,7 +31,7 @@
         {{#  } }}
         {{#  if(d.states.paramName=="已承接"){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>
-        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="evolve">查看进度</a>
+<%--        <a class="layui-btn layui-bg-orange layui-btn-xs" lay-event="evolve">查看进度</a>--%>
         {{#  } }}
         {{#  if(d.states.paramName=="待验收"){ }}
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看详情</a>

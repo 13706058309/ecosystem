@@ -11,19 +11,22 @@
     <groupId>com.example</groupId>
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <packaging>war</packaging>
+
+
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
+
     <dependencies>
 <!--        mpp解析-->
         <dependency>
             <groupId>net.sf.mpxj</groupId>
             <artifactId>mpxj</artifactId>
-            <version>5.2.2</version>
+            <version>7.1.0</version>
         </dependency>
 
         <!-- 引入poi -->
@@ -196,10 +199,23 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+
         <!-- thymeleaf模板 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>
@@ -209,6 +225,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

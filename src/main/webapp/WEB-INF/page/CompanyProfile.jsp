@@ -81,6 +81,8 @@
                             <div class="dropdown">
                                 <a href="${pageContext.request.contextPath}/center/jianli"
                                    ka="header-personal">个人中心<span>编辑简历</span></a>
+                                <a href="${pageContext.request.contextPath}/userProject/projectOfUser"
+                                   ka="header-personal">我的项目<span>项目订单</span></a>
                                 <a href="${pageContext.request.contextPath}/center/accountSet"
                                    ka="account_manage">账号设置<span>重置密码|更换手机号|隐私设置|修改用户名</span></a>
                                 <a href="${pageContext.request.contextPath}/homePage/quitAccount?city=${workCity}"
@@ -170,9 +172,9 @@
                                         </div>
                                         <c:if test="${not empty qUser}">
                                             <div class="startchat-box">
-                                                <a ka="job-7-chat" href="javascript:;" class="btn btn-startchat"
+                                                <button ka="job-7-chat"  class="btn btn-startchat"
                                                    onclick="window.open('${pageContext.request.contextPath}/rec/userChat?compID=${backUser.bUserId}')">
-                                                    立即沟通</a>
+                                                    立即沟通</button>
                                             </div>
                                         </c:if>
                                     </li>

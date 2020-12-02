@@ -165,92 +165,11 @@ public class CourseController {
     }
 
 
-
-
-
-    //    @RequestMapping("updateCourse")
-//    @Loger(operationType = "表格执行更改",operationName = "表格执行更改")
-//    public void updateCourse(Integer courseId_table,String courseName_table,String courseImgURL_table,String courseIntroduce_table,String speakerHeadImgUrl_table
-//    ,String courseName,String courseIntroduce,String courseImgURL,String speakerHeadImgUrl){
-//        System.out.println("走入更改控制类");
-//        System.out.println("面板上的获取值："+courseId_table+courseName_table+courseImgURL_table+courseIntroduce_table+speakerHeadImgUrl_table);
-//        System.out.println("输入框的获取值："+courseName+courseIntroduce+courseImgURL+speakerHeadImgUrl);
-//
-//        Map<String,Object> map = new HashMap<>();
-//
-//        map.put("courseId_table",courseId_table);
-//        map.put("courseName_table",courseName_table);
-//        map.put("courseImgURL_table",courseImgURL_table);
-//        map.put("courseIntroduce_table",courseIntroduce_table);
-//        map.put("speakerHeadImgUrl_table",speakerHeadImgUrl_table);
-//        map.put("courseName",courseName);
-//        map.put("courseIntroduce",courseIntroduce);
-//        map.put("courseImgURL",courseImgURL);
-//        map.put("speakerHeadImgUrl",speakerHeadImgUrl);
-//
-//        int course = courseServiceImpl.updateCourse(map);
-//
-//
-////        Map<String,Object> map = new HashMap<>();
-//        if (courseId_table != 0){
-////            map.put("courseId",courseId);
-////            int course = courseServiceImpl.deleteCourse(courseId);
-//        }//
-
-
-
-
-
-
-
-
-//    @RequestMapping("findCourse")
-//    public void  findCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        System.out.println("已经走到了控制类的findCourse");
-//        List<Course> courseList = null;
-//        courseList =courseServiceimpl.findCourse();
-//        TableInfo tableInfo = new TableInfo();
-//        tableInfo.setCode(0);
-//        tableInfo.setCount(100);
-//        tableInfo.setMsg("信息");
-//        tableInfo.setData(courseList);
-//
-//        String remsg = new Gson().toJson(tableInfo);
-//        System.out.println("打印remsg:"+remsg);
-//        resp.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = resp.getWriter();
-//        out.write(remsg);
-//        out.flush();
-//        out.close();
-//
-//    }
-
-
-
-//    @RequestMapping("search")
-//    public void  search(HttpServletRequest req, HttpServletResponse resp,String courseName) throws IOException {
-//        System.out.println("哇哦！ 响应成功，走入search！");
-//        System.out.println("courseName的值为:"+courseName);
-//        List<Course> courseList = null;
-//        courseList =courseServiceimpl.search(courseName);
-//        TableInfo tableInfo = new TableInfo();
-//        tableInfo.setCode(0);
-//        tableInfo.setCount(100);
-//        tableInfo.setMsg("信息");
-//        tableInfo.setData(courseList);
-//
-//        String remsg = new Gson().toJson(tableInfo);
-//        System.out.println("打印remsg:"+remsg);
-//        resp.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = resp.getWriter();
-//        out.write(remsg);
-//        out.flush();
-//        out.close();
-//
-//    }
-
-
-    // 初始化领域和课程信息并返回课程首页
+    /**
+     * 初始化领域和课程信息并返回课程首页
+     * @param request http请求对象
+     * @return
+     */
     @RequestMapping("/homePage")
     public String returnHomePage(HttpServletRequest request){
         // 获取所有领域
@@ -311,9 +230,14 @@ public class CourseController {
 
     // 返回课程详情页
     @RequestMapping("/detailPage")
-    public String returnDetailPage(HttpServletRequest request,String courseId){
+    public String returnDetailPage(HttpServletRequest request,String courseId,String userId){
         Course course = courseServiceImpl.selectCourseById(courseId);
         List relatedCourses = courseServiceImpl.selectRelatedCourses(courseId);
+        CourseCollect isCollectedCourse = courseCollectServiceImpl.isCollectedByCourseIdAndUserId(courseId,userId);
+
+        System.out.println(isCollectedCourse);
+
+        request.setAttribute("courseCollect",isCollectedCourse);
         request.setAttribute("course",course);
         request.setAttribute("relatedCourses",relatedCourses);
         return "coursePage/CourseDetailPage";
