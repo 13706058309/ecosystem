@@ -14,10 +14,10 @@ public class PayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxci21SoLTNLhNpFX7/hu7Wkv5rRvKuWk4pp/EK5rR9n7XhJh9guhzyoGYIn2OwBGsCTHsFvYqz+yC8CxmIt2FoNjmj/3uKvMI9RUMn3DXsPBf/jNP94hrXbC+yp6GoZEn3Bx3YQF0qR9w1+R8mFr6R6xiFoofNOLOkcJW5/3nRbvfZamiEBz1L3hhWM+mNdmHt5vufpla+rBVoByityF17Q8nShrukVtyuQsKpqy4NalQ/60fu/s4mcGsq8y/Lmy/SZfZDZLU1UPDY2ObguZHvMUiI4ZrmxLzaeZZ5LUntg29vk9519zS4Mr/ye2fRZTFB2/XeMVKMuWTmM6Vn6V1wIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "http://localhost:8080/springboot/notifyUrl";
+    public static String notify_url = "http://47.116.134.152:8080/springboot/notifyUrl";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String return_url = "http://localhost:8080/springboot/returnUrl";
+    public static String return_url = "http://47.116.134.152:8080/springboot/returnUrl";
 
     // 签名方式
     public static String sign_type = "RSA2";

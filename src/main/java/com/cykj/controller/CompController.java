@@ -881,4 +881,10 @@ public class CompController {
         int result = backCompService.changeFee(money);
         return result>0? "success":"failed";
     }
+
+    @RequestMapping("/getBlance")
+    public @ResponseBody String getBlance(HttpServletRequest request){
+        BackUser backUser = (BackUser) request.getSession().getAttribute("admin");
+        return backUser.getBalance()+"";
+    }
 }

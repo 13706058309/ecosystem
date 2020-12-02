@@ -34,17 +34,17 @@ public class TestController {
     }
 
     @RequestMapping("/backScerrningResumes")
-    public String backScerrningResumes(){
+    public String sbackScerrningResumes(){
         return "comp/BackScerrningResumes";
     }
 
     @RequestMapping("/backOffline")
-    public String backOffline(){
+    public String sbackOffline(){
         return "comp/BackOfflinePosition";
     }
 
     @RequestMapping("/backOnline")
-    public String backOnline(){
+    public String sbackOnline(){
         return "comp/BackOnlinePosition";
     }
 

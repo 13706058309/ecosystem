@@ -187,7 +187,7 @@ public class UserProjectController {
      * @return
      */
     @RequestMapping("/mpp")
-    public @ResponseBody List<TaskInfo> readFile(HttpServletRequest request){
+    public @ResponseBody List<TaskInfo> readFile(HttpServletRequest request,String projectId){
 
         List<TaskInfo> taskList = new ArrayList<TaskInfo>();
         try{
@@ -202,21 +202,18 @@ public class UserProjectController {
 
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-
                 Integer task_id = task.getID();
                 Integer task_unique_id = task.getUniqueID();
                 Integer task_outline_level = task.getOutlineLevel();
                 double task_duration = task.getDuration().getDuration();
                 Date task_start_date = task.getStart();
                 Date task_finish_date = task.getFinish();
-//                Integer task_parent_id=task.getParentTask().getID();
                 String task_name=task.getName();
                 List<Relation> task_predecessors = task.getPredecessors();
                 System.out.println("MPXJUtils.method [readFile] taskInfo:" + task_id + "|" + task_unique_id + "|" + task_outline_level + "|" + task_duration + "|" + task_start_date + "|" + task_finish_date + "|" + task_predecessors);
 
                 // 封装TaskInfo
                 java.sql.Date sqlStartDate=new java.sql.Date(task_start_date.getTime());
-//                java.sql.Date sqlStartDate = Str2Date.getUKDate(task_start_date.toString());            // StartDate转换
                 java.sql.Date sqlFinishDate = new java.sql.Date(task_finish_date.getTime());
                 // FinishDate转换
                 StringBuffer sb = new StringBuffer();
@@ -234,11 +231,11 @@ public class UserProjectController {
                 }
                 String task_predecessors_str = sb.toString();                                           // 任务流文本
                 TaskInfo taskInfo = new TaskInfo();
+                taskInfo.setProject_id(Integer.parseInt(projectId));
                 taskInfo.setTask_id(task_id);
                 taskInfo.setTask_unique_id(task_unique_id);
                 taskInfo.setTask_outline_level(task_outline_level);
                 taskInfo.setTask_duration(task_duration);
-//                taskInfo.setParent_id(task_parent_id);
                 taskInfo.setTask_start_date(sqlStartDate);
                 taskInfo.setTask_finish_date(sqlFinishDate);
                 taskInfo.setTask_name(task_name);
@@ -253,6 +250,7 @@ public class UserProjectController {
             return null;
         }
         List<TaskInfo> taskLists=refreshTaskInfo(taskList);
+        userProjectServiceImpl.addProjectMpp(taskList);
         return taskLists;
     }
 
@@ -266,7 +264,6 @@ public class UserProjectController {
             int taskOutLineLevel = taskInfo.getTask_outline_level();
             int listSize = tempTaskOutLine.size();
             System.out.println("MPXJUtils.method [refreshTaskInfo1]: taskId-" + taskId + ",taskOutLineLevel-" + taskOutLineLevel + ",listSize-" + listSize);
-
             // 初始化taskOutLineLevel
             if(listSize > 2){
                 if(taskOutLineLevel == 1){

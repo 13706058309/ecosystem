@@ -3,6 +3,7 @@ package com.cykj.util;
 import java.sql.Date;
 
 public class TaskInfo {
+    private int mpp_Id; //Id
     private int project_id;							// 所属项目ID
     private int task_id;							// 任务ID
     private int task_unique_id;						// 任务唯一ID
@@ -14,6 +15,15 @@ public class TaskInfo {
     private java.sql.Date task_finish_date;			// 任务结束时间
     private String task_predecessors;				// 任务流
     private String task_operator;					// 负责人
+
+
+    public int getMpp_Id() {
+        return mpp_Id;
+    }
+
+    public void setMpp_Id(int mpp_Id) {
+        this.mpp_Id = mpp_Id;
+    }
 
     public int getProject_id() {
         return project_id;

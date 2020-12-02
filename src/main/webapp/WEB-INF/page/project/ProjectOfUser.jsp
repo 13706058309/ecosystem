@@ -124,7 +124,7 @@
             white-space: normal !important;
             text-overflow: ellipsis;
             word-wrap: break-word;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
         .total{

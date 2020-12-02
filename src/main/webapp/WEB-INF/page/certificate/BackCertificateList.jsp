@@ -179,12 +179,12 @@
                 elem: '#LAY_table_user'
                 , url: '${pageContext.request.contextPath}/backzhengshu/getbackzhengshulist'
                 , cols: [[
-                    {type: 'numbers', title: 'ID', width: 80}
-                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 150}
-                    , {field: 'cerTrait',title: '证书特点', width: 300, sort: true}
-                    , {field: 'cerChangeTime',title: '更新时间', width: 150, sort: true}
-                    , {field: 'certificationFee',title: '证书费用', width: 150, sort: true}
-                    , {field: 'cershowState',title: '当前状态', width: 200, sort: true,templet:function (d) {
+                    {type: 'numbers', title: 'ID', width: 60}
+                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 90}
+                    , {field: 'cerTrait',title: '证书特点', width: 260}
+                    , {field: 'cerChangeTime',title: '更新时间', width: 120}
+                    , {field: 'certificationFee',title: '证书费用', width: 100}
+                    , {field: 'cershowState',title: '当前状态', width: 100,templet:function (d) {
                 if (d.cershowState==1){
                     return "已上架";
                 }else if (d.cershowState==2) {
@@ -195,7 +195,7 @@
                 ]]
                 , id: 'testReload'
                 , page: true
-                , height: 500
+                , height: 450
             });
 
             table.on('tool(user)', function (obj) {
@@ -259,7 +259,7 @@
                         type: 1,
                         title: "修改证书操作中",
                         area: ['600px', '500px'],
-                        offset: '100px',
+                        offset: 'auto',
                         content: $("#xiugaiUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
                     form.on('submit(demo22)', function(massage) {
@@ -309,7 +309,7 @@
                         type: 1,
                         title: "修改证书需求中",
                         area: ['500px', '350px'],
-                        offset: '100px',
+                        offset: 'auto',
                         content: $("#fileUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
                     var id = data.cerId;
@@ -459,7 +459,7 @@
             //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
             type: 1,
             title: "新增证书操作中",
-            area: ['600px', '750px'],
+            area: ['600px', '500px'],
             offset: '10px',
             content: $("#popUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
         });
