@@ -76,13 +76,13 @@
                 elem: '#LAY_table_user'
                 , url: '${pageContext.request.contextPath}/backzhengshu/getbackcerceshilist'
                 , cols: [[
-                    {type: 'numbers', title: 'ID', width: 80}
-                    , {field: 'trueName',title: '申请人', width: 150}
+                    {type: 'numbers', title: 'ID', width: 60}
+                    , {field: 'trueName',title: '申请人', width: 100}
                     , {field: 'cerPhone',title: '联系号码', width: 150}
-                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 150}
-                    , {field: 'beginTime',title: '申请时间', width: 200, sort: true}
-                    , {field: 'turnoverTime',title: '更新时间', width: 200, sort: true}
-                    , {templet: '<div>{{d.state.paramName}}</div>', title: '当前状态',  width: 150}
+                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 80}
+                    , {field: 'beginTime',title: '申请时间', width: 180, sort: true}
+                    , {field: 'turnoverTime',title: '更新时间', width: 180, sort: true}
+                    , {templet: '<div>{{d.state.paramName}}</div>', title: '当前状态',  width: 100}
                     , {field: 'score', title: '操作', width: 258, align: 'center', toolbar: '#barDemo'}
                 ]]
                 , id: 'testReload'
