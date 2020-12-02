@@ -800,6 +800,7 @@
         findworkYear=condition.innerText;
         //+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition
         location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+
     }
     function workCity(condition) {
         findworkYear=condition.innerText;
