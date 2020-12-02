@@ -67,7 +67,7 @@
                 <option value="1">高中</option>
                 <option value="2">大专</option>
                 <option value="3">本科</option>
-                <option value="4">硕士/option>
+                <option value="4">硕士</option>
                 <option value="5">博士</option>
             </select>
         </div>

@@ -127,7 +127,7 @@
         </if>
 
         <if test="profession!=null">
-            and r.profession = #{profession}
+            and r.profession like #{profession}
         </if>
 
         <if test="sex!=null">
@@ -184,7 +184,7 @@
         </if>
 
         <if test="profession!=null">
-            and r.profession = #{profession}
+            and r.profession like #{profession}
         </if>
 
         <if test="sex!=null">

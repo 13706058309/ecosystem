@@ -21,7 +21,9 @@
                 <if test="projectUrl!=null">
                     projectUrl=#{projectUrl}
                 </if>
-
+                <if test="mppUrl !=null">
+                    mppUrl=#{mppUrl}
+                </if>
             </set>
         where 1=1
         <if test="projectId !=null and projectId>0">
@@ -114,6 +116,7 @@
     <resultMap id="projectMap" type="com.cykj.entity.ProjectInfo">
         <id property="projectId" column="projectId"></id>
         <result property="bUserId" column="bUserID"></result>
+        <result property="mppUrl" column="mppUrl"></result>
         <result property="projectName" column="projectName"></result>
         <result property="projectSynopsis" column="projectSynopsis"></result>
         <result property="projectCondition" column="projectCondition"></result>

@@ -25,6 +25,18 @@
 
         </resultMap>
 
+
+        <select id="findLogNum" parameterType="java.util.Map" resultType="int">
+                select count(*) from backLog b, backUser u where b.bUserId = u.bUserId and bUserName like concat('%',#{bUserName},'%')
+                <if test="startTime!=null">
+                        and operaTime >= #{startTime}
+                </if>
+                <if test="endTime!=null">
+                        and operaTime &lt;= #{endTime}
+                </if>
+                order by operaTime desc limit #{offset}, #{limit}
+        </select>
+
         <insert id="addLog">
                INSERT INTO backLog( bUserId, operatime, matter)VALUES (#{bUserId},now(),#{matter});
         </insert>

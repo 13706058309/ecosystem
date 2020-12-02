@@ -39,7 +39,7 @@
                     <dd><a href="#" onclick="showPay()">积分充值</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="#" onclick="exitLogin()">退了</a></li>
+            <li class="layui-nav-item"><a href="#" onclick="exitLogin()">注销</a></li>
         </ul>
     </div>
     <div  class="layui-side layui-bg-black">

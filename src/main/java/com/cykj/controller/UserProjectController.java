@@ -2,12 +2,10 @@ package com.cykj.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
-import com.aliyuncs.utils.StringUtils;
 import com.cykj.entity.*;
 import com.cykj.service.ParameterService;
 import com.cykj.service.ProjectService;
 import com.cykj.service.UserProjectService;
-import com.cykj.util.ProjectMpp;
 import com.cykj.util.TableInfo;
 import com.cykj.util.TaskInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -137,7 +135,7 @@ public class UserProjectController {
 
 
     @RequestMapping("/updateUrl")
-    public @ResponseBody String updateUrl(HttpServletRequest request,ProjectInfo projectInfo){
+    public @ResponseBody String updateUrl(HttpServletRequest request,ProjectInfo projectInfo,String id){
         String msg="";
         System.out.println("2222222222222222");
         projectInfo.setStateId(37);
@@ -145,6 +143,12 @@ public class UserProjectController {
         if (n>0){
             msg="success";
         }
+
+        System.out.println("id：==============================="+id);
+        UserProject userProject=new UserProject();
+        userProject.setId(Long.parseLong(id));
+        userProject.setParamId(61);
+        int res=userProjectServiceImpl.updateState(userProject);
         return msg;
     }
 
@@ -270,7 +274,7 @@ public class UserProjectController {
                 }
                 String task_predecessors_str = sb.toString();                                           // 任务流文本
                 TaskInfo taskInfo = new TaskInfo();
-                taskInfo.setProject_id(55);
+                taskInfo.setProject_id(Integer.parseInt(projectId));
                 taskInfo.setTask_id(task_id);
                 taskInfo.setTask_unique_id(task_unique_id);
                 taskInfo.setTask_outline_level(task_outline_level);
@@ -289,7 +293,8 @@ public class UserProjectController {
             return null;
         }
         List<TaskInfo> taskLists=refreshTaskInfo(taskList);
-        userProjectServiceImpl.addProjectMpp(taskLists);
+        String mppUrl="/uploadDemand/"+fileName;
+        int res=userProjectServiceImpl.addProjectMpp(taskLists,mppUrl);
         return json.toString();
     }
 

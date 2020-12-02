@@ -261,7 +261,7 @@
     </div>
     <div class="page-main main-div task-desc-container" style="background-color:white;margin-top: 10px;padding:0px;" >
         <div style="background-color: #eff1ff;">
-            <ul class="layui-nav layui-input-inline" lay-filter="param"  style="background-color: #eff1ff;height: 40px;margin-bottom:5px;vertical-align: middle;width: 800px">
+            <ul class="layui-nav layui-input-inline" lay-filter="param"  style="background-color: #eff1ff;height: 40px;margin-bottom:5px;vertical-align: middle;width: 1000px">
                 <li class="layui-nav-item" style="line-height: 40px"><a class="params" href="javascript:;" style="text-decoration: none;color: #414141" onclick="chooseState('')">全部订单</a></li>
                 <c:if test="${not empty parameters}">
                     <c:forEach items="${parameters}" var="parameter">
@@ -269,12 +269,12 @@
                     </c:forEach>
                 </c:if>
             </ul>
-            <div   style="vertical-align:middle;height: 40px;margin-left: 20px;display: inline-block;">
-                <div class="layui-input-inline" style="float: left;margin-top: 5px">
-                    <input class="layui-input" id="orderNum" style="width: 160px;height: 30px;" placeholder="订单号搜索">
-                </div>
-                <a style="float:left;margin-top:10px;margin-left:5px;font-size: 30px;" onclick="chooseState('')"> <i class="layui-icon layui-icon-search" ></i></a>
+        </div>
+        <div   style="vertical-align:middle;height: 40px;width: 300px;margin-left:800px;display:block;">
+            <div class="layui-input-inline" style="float: left;margin-top: 5px">
+                <input class="layui-input" id="orderNum" style="width: 160px;height: 30px;" placeholder="订单号搜索">
             </div>
+            <a style="float:left;margin-top:10px;margin-left:5px;font-size: 30px;" onclick="chooseState('')"> <i class="layui-icon layui-icon-search" ></i></a>
         </div>
 
         <div class="order-info" style="margin-top: 10px">

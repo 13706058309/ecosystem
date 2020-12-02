@@ -22,6 +22,7 @@ public class ProjectInfo {
   private Parameter field;
   private String pOrderNum;
   private long trueMoney;
+  private String mppUrl;
 
   public ProjectInfo() {
   }
@@ -185,5 +186,13 @@ public class ProjectInfo {
 
   public void setProjectUrl(String projectUrl) {
     this.projectUrl = projectUrl;
+  }
+
+  public String getMppUrl() {
+    return mppUrl;
+  }
+
+  public void setMppUrl(String mppUrl) {
+    this.mppUrl = mppUrl;
   }
 }
