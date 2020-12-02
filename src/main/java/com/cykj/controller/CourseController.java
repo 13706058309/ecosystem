@@ -168,7 +168,7 @@ public class CourseController {
     /**
      * 初始化领域和课程信息并返回课程首页
      * @param request http请求对象
-     * @return
+     * @return 课程首页的相对路径
      */
     @RequestMapping("/homePage")
     public String returnHomePage(HttpServletRequest request){
@@ -184,21 +184,19 @@ public class CourseController {
 
     /**
      * 根据领域ID和分页参数获取指定领域下的所有课程，分页展示
-     * @param request 请求对象
      * @param response 响应对象
      * @param fieldId   指定领域的ID
      * @param curr  layui中的当前页参数
      * @param limit layui中的每页数据条数
      * @param latest 最新课程
      * @param hot 最热课程
-     * @return
+     * @return 无返回值
      */
     @RequestMapping("/selectCourseByFieldId")
-    public void selectCourseByFieldId(HttpServletRequest request, HttpServletResponse response,String fieldId, int curr, int limit,String latest,String hot){
+    public void selectCourseByFieldId(HttpServletResponse response,String fieldId, int curr, int limit,String latest,String hot){
         if (fieldId==null){
             fieldId="0";
         }
-//        System.out.println("fieldId: "+fieldId+"   curr: "+curr+"   limit: "+limit+"   latest: "+latest+"   hot: "+hot);
         long fid = Long.parseLong(fieldId);
         // 获取指定领域下的所有课程信息
         List<Course> courses = courseServiceImpl.selectCourseByFieldId(fid,curr,limit,latest,hot);
@@ -209,7 +207,6 @@ public class CourseController {
             map.put("count",courseServiceImpl.selectCount(fid));
         }
         if ( curr==1 && (!latest.equals("null") ||  !hot.equals("null"))){
-            System.out.println(123);
             map.put("count",limit);
         }
 
@@ -228,22 +225,33 @@ public class CourseController {
         }
     }
 
-    // 返回课程详情页
+    /**
+     * 进入课程详情页
+     * @param request
+     * @param courseId 要查看的课程ID
+     * @param userId  当前在线用户的ID
+     * @return 课程详情页的相对路径
+     */
     @RequestMapping("/detailPage")
     public String returnDetailPage(HttpServletRequest request,String courseId,String userId){
+        // 查询查看的课程所属的详细信息
         Course course = courseServiceImpl.selectCourseById(courseId);
+        // 查询与该课程相关的5门课程
         List relatedCourses = courseServiceImpl.selectRelatedCourses(courseId);
+        // 查询该课程是否已被当前用户收藏
         CourseCollect isCollectedCourse = courseCollectServiceImpl.isCollectedByCourseIdAndUserId(courseId,userId);
 
-        System.out.println(isCollectedCourse);
-
+        // 以上查询到的信息保存在request域中，加载详情页时，从此域中将数据取出并展示在页面上
         request.setAttribute("courseCollect",isCollectedCourse);
         request.setAttribute("course",course);
         request.setAttribute("relatedCourses",relatedCourses);
         return "coursePage/CourseDetailPage";
     }
 
-    // 返回相关评价页
+    /**
+     * 进入相关评价页
+     * @return 相关评价页的相对路径
+     */
     @RequestMapping("/evaluationPage")
     public String returnEvaluationPage(){ return  "coursePage/CourseEvaluationPage";}
 }
