@@ -183,13 +183,6 @@
                 </div>
             </div>
         </div>
-        <div style="float: right">
-            <div>
-                公司高管：
-                <br>啦啦啦
-            </div>
-
-        </div>
     </div>
 </div>
 
