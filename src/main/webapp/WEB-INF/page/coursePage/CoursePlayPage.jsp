@@ -489,7 +489,7 @@
         var appraiseText = $('#component-course-editor-textarea').val();
         var appraiseTime = getNowTime();
 
-        var userId = 1;
+        var userId = $('#userId').val();
         var unitId = $('#unitId').val();
         var basePath = $('#basePath').val();
         var jsonData = {"unitId":unitId,"userId":userId,"appraiseText":appraiseText,"appraiseTime":appraiseTime};
