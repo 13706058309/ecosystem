@@ -10,9 +10,12 @@ import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.cykj.entity.*;
 import com.cykj.mapper.ParameterMapper;
 import com.cykj.mapper.ProjectInfoMapper;
+import com.cykj.mapper.ProjectMppMapper;
 import com.cykj.mapper.UserProjectMapper;
 import com.cykj.service.UserProjectService;
+import com.cykj.util.ProjectMpp;
 import com.cykj.util.ProjectPayConfig;
+import com.cykj.util.TaskInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,8 @@ import java.util.Map;
 @Service
 public class UserProjectServiceImpl implements UserProjectService {
 
+    @Resource
+    ProjectMppMapper projectMppMapper;
     @Resource
     UserProjectMapper userProjectMapper;
 
@@ -273,6 +278,18 @@ public class UserProjectServiceImpl implements UserProjectService {
 
 
         return userProjectMapper.findUserByProjectId(projectId,paramId);
+    }
+
+    /**
+     * 上传项目进度
+     *
+     * @param projectMpps
+     * @return
+     */
+    @Override
+    public int addProjectMpp(List<TaskInfo> projectMpps) {
+        projectMppMapper.delProjectMpp(projectMpps.get(0).getProject_id());
+        return projectMppMapper.addProjectMpp(projectMpps);
     }
 
     //处理用户付款成功后的异步回调业务代码

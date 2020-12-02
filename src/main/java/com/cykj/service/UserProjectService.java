@@ -4,6 +4,10 @@ import com.alipay.api.AlipayApiException;
 import com.cykj.entity.Resume;
 import com.cykj.entity.UserInfo;
 import com.cykj.entity.UserProject;
+import com.cykj.util.ProjectMpp;
+import com.cykj.util.TaskInfo;
+import org.apache.ibatis.annotations.Param;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -84,4 +88,10 @@ public interface UserProjectService {
      */
     List<Resume> findUserByProjectInfo(String projectId, String paramId);
 
+    /**
+     * 上传项目进度
+     * @param projectMpps
+     * @return
+     */
+    int addProjectMpp(List<TaskInfo> projectMpps);
 }
