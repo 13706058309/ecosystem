@@ -59,7 +59,7 @@
         <div class="nav" style="margin-top: 20px">
             <ul>
                 <li class=""><a ka="header-home" href="${pageContext.request.contextPath}/homePage/home">首页</a></li>
-                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/job">职位</a></li>
+                <li class=""><a ka="header-job" href="${pageContext.request.contextPath}/center/clearjob">职位</a></li>
                 <li class=""><a class="nav-school" ka="header-school" href="${pageContext.request.contextPath}/homePage/companylist">公司</a></li>
 <%--                <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">校招</a></li>--%>
                 <li><a href="${pageContext.request.contextPath}/project" target="_blank">项目</a></li>

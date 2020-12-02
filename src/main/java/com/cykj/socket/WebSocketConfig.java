@@ -2,6 +2,7 @@ package com.cykj.socket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
@@ -16,6 +17,7 @@ public class WebSocketConfig {
      * PS：如果使用外部容器 则无需提供ServerEndpointExporter。
      */
     @Bean
+    @Profile({"dev", "test"})
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
