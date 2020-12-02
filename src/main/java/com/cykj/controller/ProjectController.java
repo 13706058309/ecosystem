@@ -306,11 +306,18 @@ public class ProjectController {
         return msg;
     }
 
+    /**
+     * 文件上传
+     * @param demandfile
+     * @param request
+     * @return
+     * @throws JsonProcessingException
+     */
     @RequestMapping("/uploadDemandFile")
     public @ResponseBody String upload(@RequestParam("file") MultipartFile demandfile , HttpServletRequest request) throws JsonProcessingException {
 //        1获取上传的目录路径
         String path = request.getSession().getServletContext().getRealPath("/uploadDemand");
-        //2以天维单位创建文件夹
+        //2以天为单位创建文件夹
         String date=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 //        3创建目录
         File file=new File(path,date);

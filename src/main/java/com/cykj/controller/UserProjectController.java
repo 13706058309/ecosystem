@@ -1,5 +1,6 @@
 package com.cykj.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.aliyuncs.utils.StringUtils;
 import com.cykj.entity.*;
@@ -15,7 +16,9 @@ import net.sf.mpxj.*;
 import net.sf.mpxj.mpp.MPPReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -186,16 +190,51 @@ public class UserProjectController {
      *
      * @return
      */
-    @RequestMapping("/mpp")
-    public @ResponseBody List<TaskInfo> readFile(HttpServletRequest request,String projectId){
-
+    @RequestMapping("/uploadMppFile")
+    public @ResponseBody String readFile(@RequestParam("file") MultipartFile mppFile , HttpServletRequest request, String projectId){
+//        1获取上传的目录路径
+        String path = request.getSession().getServletContext().getRealPath("/uploadDemand");
+        //2以天为单位创建文件夹
+        String date=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//        3创建目录
+        File file=new File(path,date);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+//        4文件上传
+        TableInfo tableInfo=new TableInfo();
+        JSONObject json=new JSONObject();
+//        4.1获取原始文件名
+        String fileName=mppFile.getOriginalFilename();
+        if (fileName!=null){
+            fileName= UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
+            System.out.println(UUID.randomUUID().toString());
+            try {
+//               4.2文件上传
+                mppFile.transferTo(new File(file,fileName));
+                json.put("code",0);
+                json.put("msg","success");
+                JSONObject data=new JSONObject();
+                data.put("docUrl","/uploadDemand/"+date+"/"+fileName);
+                json.put("data",data);
+                System.out.println("/uploadDemand/"+date+"/"+fileName);
+                tableInfo.setCode(0);
+                tableInfo.setMsg("success");
+            } catch (IOException e) {
+                e.printStackTrace();
+//                tableInfo.setCode(1);
+//                tableInfo.setMsg("failed");
+                json.put("code",1);
+                json.put("msg","failed");
+                json.put("data","");
+            }
+        }
         List<TaskInfo> taskList = new ArrayList<TaskInfo>();
         try{
-            String path= request.getSession().getServletContext().getRealPath("/uploadDemand");
-            File file = new File(path+"/进度规划.mpp");
+            File newMppFile = new File(file,fileName);
             MPPReader mppRead = new MPPReader();
-            ProjectFile pf = mppRead.read(file);
-            System.out.println("MPXJUtils.method [readFile]: fileName-" + file.getName());
+            ProjectFile pf = mppRead.read(newMppFile);
+            System.out.println("MPXJUtils.method [readFile]: fileName-" + newMppFile.getName());
 
             List<Task> tasks = pf.getAllTasks();
             System.out.println("MPXJUtils.method [readFile]: taskSize-" + tasks.size());
@@ -231,7 +270,7 @@ public class UserProjectController {
                 }
                 String task_predecessors_str = sb.toString();                                           // 任务流文本
                 TaskInfo taskInfo = new TaskInfo();
-                taskInfo.setProject_id(Integer.parseInt(projectId));
+                taskInfo.setProject_id(55);
                 taskInfo.setTask_id(task_id);
                 taskInfo.setTask_unique_id(task_unique_id);
                 taskInfo.setTask_outline_level(task_outline_level);
@@ -250,8 +289,8 @@ public class UserProjectController {
             return null;
         }
         List<TaskInfo> taskLists=refreshTaskInfo(taskList);
-        userProjectServiceImpl.addProjectMpp(taskList);
-        return taskLists;
+        userProjectServiceImpl.addProjectMpp(taskLists);
+        return json.toString();
     }
 
 
