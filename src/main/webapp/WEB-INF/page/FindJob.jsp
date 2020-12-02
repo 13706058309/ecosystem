@@ -524,7 +524,7 @@
                             </div>
                         </span>
                 </div>
-                <a href="clearjob">清空筛选条件</a>
+                <a href="job">清空筛选条件</a>
             </div>
         </div>
     </div>
@@ -799,37 +799,37 @@
     function workYear(condition) {
         findworkYear=condition.innerText;
         //+"&curr="+curr+"&limit="+limit+"&findPosition="+findposition
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function workCity(condition) {
         findworkYear=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
 
     }
     function education(condition) {
         findEducation=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
 
     }
     function salary(condition) {
         findSalary=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function financing(condition) {
         findFinanStage=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function scale(condition) {
         findScale=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function releaseTime(condition) {
         findReleaseTime=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     function findCity(condition) {
         findWorkCity=condition.innerText;
-        location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
+        location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition;
     }
     // function findPosition(condition) {
     //     findposition=condition.innerText;
@@ -970,7 +970,7 @@
             lev3=lev3.replace(/\+/g,"%2B");
             lev3=lev3.replace(/\#/g,"%23");
             findposition=lev3;
-            location.href="job?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition+'';
+            location.href="clearjob?findworkYear="+findworkYear+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr=1"+"&limit="+limit+"&findPosition="+findposition+'';
 
             if($(this).parent().parent().next().children(".qrm-lev").html()==""){
                 // 去掉输入框的高亮状态
@@ -1040,7 +1040,7 @@
                 console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
                 console.log(obj.limit); //得到每页显示的条数
                 if(!first){
-                    location.href="job?findworkYear="+findworkYear+"&findPosition="+findposition+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+obj.curr+"&limit="+obj.limit;
+                    location.href="clearjob?findworkYear="+findworkYear+"&findPosition="+findposition+"&findSearch="+search+"&findWorkCity="+findWorkCity+"&findEducation="+findEducation+"&findSalary="+findSalary+"&findFinanStage="+findFinanStage+"&findScale="+findScale+"&findReleaseTime="+findReleaseTime+"&curr="+obj.curr+"&limit="+obj.limit;
                 }
             }
         });
@@ -1092,9 +1092,9 @@
 
     });
 
-    function gt() {
-        location.href="/springboot/center/jianli"
-    }
+    // function gt() {
+    //     location.href="/springboot/center/jianli"
+    // }
 </script>
 
 
