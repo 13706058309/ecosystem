@@ -21,7 +21,7 @@
         display: none; /* 默认隐藏 */
         position: fixed;
         z-index: 1;
-        padding-top: 100px;
+        padding-top: 50px;
         left: 0;
         top: 0;
         width: 100%;
@@ -38,8 +38,8 @@
         margin: auto;
         padding: 0;
         border: 1px solid #888;
-        width: 800px;
-        height: 600px;
+        width: 700px;
+        height: 450px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
         -webkit-animation-name: animatetop;
         -webkit-animation-duration: 0.4s;
@@ -123,7 +123,7 @@
             申请人：
                 <div class="layui-inline">
                 <input class="layui-input" name="trueName" id="trueName" style="width: 250px;height: 40px" type="text" autocomplete="off" placeholder="请输入用户名" >
-                </div>
+                </div><br>
             评审员：
                     <div class="layui-inline">
                     <input class="layui-input" name="bUserName" id="bUserName" style="width: 250px;height: 40px" type="text" autocomplete="off" placeholder="请输入审核员" >
@@ -148,10 +148,10 @@
             <h2 id="ming" style="text-align: center"></h2>
         </div>
         <div class="modal-body" id="modal-body" style="background-size:100% 100%;">
-            <label id="mingcheng"style="position: absolute;top: 370px;left: 100px;font-size: 25px"></label>
-            <label id="zhengshulei" style="position: absolute;top: 354px;left: 355px;font-size: 40px"></label>
-            <label id="shijian" style="position: absolute;top: 522px;left: 500px"></label>
-            <label id="cshiren" style="position: absolute;top: 495px;left: 475px"></label>
+            <label id="mingcheng"style="position: absolute;top: 365px;left: 80px;font-size: 25px"></label>
+            <label id="zhengshulei" style="position: absolute;top: 354px;left: 310px;font-size: 35px"></label>
+            <label id="shijian" style="position: absolute;top: 516px;left: 430px"></label>
+            <label id="cshiren" style="position: absolute;top: 490px;left: 410px"></label>
 
         </div>
 
@@ -172,19 +172,18 @@
                 elem: '#LAY_table_user'
                 , url: '${pageContext.request.contextPath}/backzhengshu/getbackceruserlist'
                 , cols: [[
-                    {type: 'numbers', title: 'ID', width: 80}
-                    , {templet: '<div>{{d.cerRecord.trueName}}</div>',title: '申请人', width: 120}
-                    , {templet: '<div>{{d.cerRecord.cerPhone}}</div>', title: '联系号码', width: 200}
-                    , {templet: '<div>{{d.backUser.bUserName}}</div>', title: '评审员', width: 120}
-                    , {field: 'gainTime',title: '获得时间', width: 200 ,sort: true}
+                    {type: 'numbers', title: 'ID', width: 60}
+                    , {templet: '<div>{{d.cerRecord.trueName}}</div>',title: '申请人', width: 100}
+                    , {templet: '<div>{{d.cerRecord.cerPhone}}</div>', title: '联系号码', width: 180}
+                    , {templet: '<div>{{d.backUser.bUserName}}</div>', title: '评审员', width: 100}
+                    , {field: 'gainTime',title: '获得时间', width: 180 ,sort: true}
                     , {field: 'name',title: '证书', width: 100, sort: true}
                     , {templet: '<div>{{d.cerRecord.cerFinalScore}}</div>', title: '总分数', width: 100}
                     , {field: 'score', title: '操作', width: 250, align: 'center', toolbar: '#barDemo'}
                 ]]
                 , id: 'testReload'
                 , page: true
-                ,Width:800
-                , height: 500
+                , height: 460
             });
 
             table.on('tool(user)', function (obj) {
@@ -200,7 +199,7 @@
                     $('#mingcheng').text(mingzi);
                     $('#zhengshulei').text(ming);
                     $('#shijian').text(shijian);
-                    $('#cshiren').text(xxx+"/人才生态系统计算机语言认证中心");
+                    $('#cshiren').text(xxx+"/人才生态系统语言认证中心");
                     $('#modal-body').css("background-image","url("+path+url+")");
                     var modal = document.getElementById("modal");
                     modal.style.display = "block";

@@ -51,7 +51,6 @@ public class CourseCollectController {
 
     @RequestMapping("/collectCourses")
     public void selectCollectCourses(HttpServletResponse response,String userId) throws IOException {
-        System.out.println(userId);
         List<Course> courses = courseCollectServiceImpl.selectCollectCoursesByUserId(userId);
         String jsonData = new Gson().toJson(courses);
         response.getWriter().write(jsonData);

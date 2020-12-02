@@ -127,13 +127,13 @@
                 elem: '#LAY_table_user'
                 , url: '${pageContext.request.contextPath}/backzhengshu/getbackSQshenhelist'
                 , cols: [[
-                    {type: 'numbers', title: 'ID', width: 80}
-                    , {field: 'trueName',title: '申请人', width: 150}
-                    , {field: 'cerPhone',title: '联系号码', width: 150}
-                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 150}
-                    , {field: 'beginTime',title: '申请时间', width: 200}
-                    , {field: 'turnoverTime',title: '更新时间', width: 200}
-                    , {templet: '<div>{{d.state.paramName}}</div>', title: '当前状态',  width: 150}
+                    {type: 'numbers', title: 'ID', width: 60}
+                    , {field: 'trueName',title: '申请人', width: 100}
+                    , {field: 'cerPhone',title: '联系号码', width: 120}
+                    , {templet: '<div>{{d.field.fieldName}}</div>', title: '证书类型', width: 80}
+                    , {field: 'beginTime',title: '申请时间', width: 120}
+                    , {field: 'turnoverTime',title: '更新时间', width: 120}
+                    , {templet: '<div>{{d.state.paramName}}</div>', title: '当前状态',  width: 100}
                     , {field: 'score', title: '操作', width: 258, align: 'center', toolbar: '#barDemo'}
                 ]]
                 , id: 'testReload'
@@ -189,8 +189,8 @@
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         title: "查看当前"+name+"申请记录",
-                        area: ['600px', '600px'],
-                        offset: '50px',
+                        area: ['500px', '500px'],
+                        offset: 'auto',
                         content: $("#chakanUpdateTest") //引用的弹出层的页面层的方式加载修改界面表单
                     });
                     form.on('submit(demo44)', function(massage) {

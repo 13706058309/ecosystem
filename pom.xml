@@ -29,17 +29,6 @@
             <artifactId>mpxj</artifactId>
             <version>7.1.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>net.sf.mpxj</groupId>-->
-<!--            <artifactId>mpxj</artifactId>-->
-<!--            <version>5.6.4</version>-->
-<!--        </dependency>-->
-
-        <dependency>
-            <groupId>net.sf.jacob-project</groupId>
-            <artifactId>jacob</artifactId>
-            <version>1.14.3</version>
-        </dependency>
 
         <!-- 引入poi -->
 
@@ -216,8 +205,6 @@
         </dependency>
 
     </dependencies>
-
-
 
     <build>
         <plugins>
