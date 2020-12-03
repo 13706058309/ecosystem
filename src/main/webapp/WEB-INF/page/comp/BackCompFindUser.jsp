@@ -7,17 +7,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
-    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/BackCompFindUser.css">
-    <script src="${pageContext.request.contextPath}/js/comp/Common.js"></script>
 
 
 <html>
 <head>
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/BackCompFindUser.css">
+    <script src="${pageContext.request.contextPath}/js/comp/Common.js"></script>
+
 </head>
 <style>
     * {
@@ -26,9 +27,11 @@
         margin:0;
     }
 
-    canvas {
+    .layui-form-select dl{
         display: block;
+        z-index: 9999;
     }
+
 </style>
 <body>
 
@@ -39,10 +42,8 @@
 <h1 style="text-align: center">招聘查找</h1>
 <br>
 <input type="hidden" value="${pageContext.request.contextPath}" id="path">
-<div class="demoTable layui-form" style="margin-left: 12%">
+<div class="demoTable " style="margin-left: 12%" >
     <div class="layui-form-item">
-
-        <div class="layui-inline">
             <label class="layui-form-label">学历</label>
             <div class="layui-input-inline">
                 <select class="layui-input" id="evdu">
@@ -54,16 +55,16 @@
                     <option value="5">博士</option>
                 </select>
             </div>
-        </div>
 
-        <div class="layui-inline">
+
+
             <label class="layui-form-label">专业:</label>
             <div class="layui-input-inline">
                 <input type="tel" id="profession"  class="layui-input">
             </div>
-        </div>
 
-        <div class="layui-inline">
+
+
             <label class="layui-form-label">性别:</label>
             <div class="layui-input-inline">
                 <select class="layui-input" id="sex">
@@ -72,11 +73,11 @@
                     <option value="女">女</option>
                 </select>
             </div>
-        </div>
+
     </div>
 
     <div class="layui-form-item">
-        <div class="layui-inline">
+
             <label class="layui-form-label">是否应届</label>
             <div class="layui-input-inline">
                 <select class="layui-input" id="isGraduate">
@@ -85,20 +86,20 @@
                     <option value="2">非应届生</option>
                 </select>
             </div>
-        </div>
 
-        <div class="layui-inline">
+
+
             <label class="layui-form-label">工作经验</label>
             <div class="layui-input-inline">
                 <select class="layui-input" id="wrokYear">
                     <option value="0">不限</option>
-                    <option value="1">1年以下</option>
-                    <option value="3">3年以下</option>
-                    <option value="5">5年以下</option>
-                    <option value="10">10年以下</option>
+                    <option value="1">1年以上</option>
+                    <option value="3">3年以上</option>
+                    <option value="5">5年以上</option>
+                    <option value="10">10年以上</option>
                 </select>
             </div>
-        </div>
+
 
         <div class="layui-inline">
             <div class="layui-input-inline"  style="margin-left: 40%">
@@ -107,6 +108,8 @@
         </div>
     </div>
 </div>
+
+
 <div id="detailDiv" style="display: none;padding: 3%">
     <table class="layui-table">
         <tr><td colspan="6">简历详情</td></tr>
@@ -189,31 +192,19 @@
 </div>
 <table id="userTable" lay-filter="test"></table>
 
-<canvas id="c"></canvas>
 </body>
 <script>
     var resumeID = "";
     var layer;
     var path = $("#path").val();
     var index;
-    var form;
-    <%
-        String resumeID = (String) request.getSession().getAttribute("resumeID");
-        if(resumeID!=null){
-            out.write("resumeID="+resumeID);
-            request.getSession().removeAttribute("resumeID");
-        }
+    let form;
 
-    %>
-    layui.use(['laydate','layer','form'],function () {
+    layui.use(['form','layer','table'],function () {
+        var table = layui.table;
         form = layui.form;
         form.render();
         layer = layui.layer;
-    })
-
-    layui.use('table',function () {
-        var table = layui.table;
-
         table.render({
             elem:'#userTable',
             height:310,
@@ -276,12 +267,7 @@
         layer.close(index);
     }
 
-$(function () {
-   if(resumeID.length!=0){
-        location.href = path+"/rec/outResume?resumeID="+resumeID;
-        resumeID == "";
-   }
-})
 
 </script>
+
 </html>
