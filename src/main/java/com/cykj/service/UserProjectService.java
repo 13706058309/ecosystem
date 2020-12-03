@@ -2,11 +2,8 @@ package com.cykj.service;
 
 import com.alipay.api.AlipayApiException;
 import com.cykj.entity.Resume;
-import com.cykj.entity.UserInfo;
 import com.cykj.entity.UserProject;
-import com.cykj.util.ProjectMpp;
 import com.cykj.util.TaskInfo;
-import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -93,5 +90,5 @@ public interface UserProjectService {
      * @param projectMpps
      * @return
      */
-    int addProjectMpp(List<TaskInfo> projectMpps);
+    int addProjectMpp(List<TaskInfo> projectMpps,String fileName);
 }

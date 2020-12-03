@@ -39,7 +39,7 @@
                         and e.educationID &lt;= #{educationId}
                 </if>
                 <if test="userName!=null">
-                        and r.realName >= #{userName}
+                        and r.realName like #{userName}
                 </if>
                 <if test="evdu!=null">
                         and e.educationID = #{evdu}

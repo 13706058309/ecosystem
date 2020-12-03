@@ -131,6 +131,7 @@
             <result property="publishTime" column="publishTime"></result>
             <result property="pOrderNum" column="pOrderNum"></result>
             <result property="projectId" column="projectId"></result>
+            <result property="mppUrl" column="mppUrl"></result>
             <association property="backUser" javaType="com.cykj.entity.BackUser">
                 <id property="bUserId" column="bUserID"></id>
                 <result property="bUserName" column="bUserName"></result>

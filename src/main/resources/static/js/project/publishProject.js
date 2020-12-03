@@ -21,7 +21,7 @@ $(function () {
                     layer.msg("上传成功！");
                 }else{
                     $("#uploadState").html("<i class='layui-icon' title='上传失败!'>&#x1006;</i>");
-                    $("#fileUrl").val("");
+                    $("#docUrl").val("");
                     layer.msg("上传失败！");
                 }
                 }

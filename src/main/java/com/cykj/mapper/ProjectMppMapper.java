@@ -1,6 +1,5 @@
 package com.cykj.mapper;
 
-import com.cykj.util.ProjectMpp;
 import com.cykj.util.TaskInfo;
 import org.apache.ibatis.annotations.Param;
 

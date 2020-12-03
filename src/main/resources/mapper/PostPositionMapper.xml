@@ -41,6 +41,10 @@
             and releaseTime &lt;= #{endTime}
         </if>
 
+        <if test="postName!=null">
+            and postName like #{postName}
+        </if>
+
         <if test="educationId!=null">
             and educationId like #{educationId}
         </if>

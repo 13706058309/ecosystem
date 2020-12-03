@@ -19,7 +19,7 @@ $(function(){
                     layer.msg("上传成功！");
                 }else{
                     $("#uploadState").html("<i class='layui-icon' title='上传失败!'>&#x1006;</i>");
-                    $("#fileUrl").val("");
+                    $("#docUrl").val("");
                     layer.msg("上传失败！");
                 }
             }
@@ -27,6 +27,45 @@ $(function(){
                 var percent = n + '%' //获取进度百分比
                 console.log(percent);
                 element.progress('progress', percent); //可配合 layui 进度条元素使用
+                //以下系 layui 2.5.6 新增
+                console.log(elem); //得到当前触发的元素 DOM 对象。可通过该元素定义的属性值匹配到对应的进度条。
+            }
+            ,error: function(){
+                //请求异常回调
+                console.log("11111111111");
+            }
+        });
+        var uploadMpp = upload.render({
+            elem: '#uploadMppFile' //绑定元素
+            ,url: path+ '/userProject/uploadMppFile' //上传接口
+            ,accept: 'file'
+            ,exts: 'mpp'
+            ,auto:false
+            ,bindAction:"#submitMpp"
+            ,before: function(obj){
+                layer.load(); //上传loading
+                this.data={'projectId':$("#project_Id").val()};
+            }
+            ,done: function(res){
+                //上传完毕回调
+                console.log(res);
+                if (res.code===0){
+                    $("#uploadState2").html("<i class='layui-icon' title='上传成功!'>&#x1005;</i>");
+                    // $("#mppUrl").val(res.data.docUrl);
+                    // console.log($("#fileUrl").val());
+                    closeUp();
+                    layer.msg("上传成功！");
+
+                }else{
+                    $("#uploadState2").html("<i class='layui-icon' title='上传失败!'>&#x1006;</i>");
+                    // $("#mppUrl").val("");
+                    layer.msg("上传失败！");
+                }
+            }
+            ,progress: function(n, elem){
+                var percent = n + '%' //获取进度百分比
+                console.log(percent);
+                element.progress('progressMpp', percent); //可配合 layui 进度条元素使用
                 //以下系 layui 2.5.6 新增
                 console.log(elem); //得到当前触发的元素 DOM 对象。可通过该元素定义的属性值匹配到对应的进度条。
             }
@@ -159,7 +198,10 @@ function findProjectOrder(curr,limit){
                             "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
                         $("#caoZuo"+project.id).append(" <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
-                            "                            <a href='javascript:;' onclick='uploadProject("+project.projectInfo.projectId+")'> 上传项目</a>\n" +
+                            "                            <a href='javascript:;' onclick='uploadMpp("+project.projectInfo.projectId+")'> 项目规划</a>\n" +
+                            "                        </div>\n");
+                        $("#caoZuo"+project.id).append(" <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
+                            "                            <a href='javascript:;' onclick='uploadProject("+project.projectInfo.projectId+","+project.id+")'> 上传项目</a>\n" +
                             "                        </div>\n");
                     }
                     if (project.states.paramName==='申请失败'){
@@ -167,6 +209,15 @@ function findProjectOrder(curr,limit){
                             "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
                             "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
                             "                        </div>");
+                    }
+                    if (project.states.paramName==='待验收'){
+                        $("#caoZuo"+project.id).append(
+                            "                        <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
+                            "                            <a href='javascript:;' onclick=\"xiangQing('"+project.projectId+"')\">查看详情</a>\n" +
+                            "                        </div>");
+                        $("#caoZuo"+project.id).append(" <div class=\"text-center\" style=\"margin-top: 10px\">\n" +
+                            "                            <a href='javascript:;' onclick='uploadProject("+project.projectInfo.projectId+","+project.id+")'> 重新上传</a>\n" +
+                            "                        </div>\n");
                     }
                     if (project.states.paramName==='已完成'){
                         $("#caoZuo"+project.id).append(
@@ -193,12 +244,13 @@ function xiangQing(projectId) {
 function updateProjectFile(){
     var projectId=$("#projectId").val();
     var projectUrl=$("#docUrl").val();
+    var id=$("#id").val();
     console.log("projectId+  "+$("#projectId").val());
     console.log($("#docUrl").val());
     $.ajax({
         url:path+"/userProject/updateUrl",
         type:"post",
-        data:{"projectId":projectId,"projectUrl":projectUrl},
+        data:{"projectId":projectId,"projectUrl":projectUrl,"id":id},
         dataType:"text",
         beforeSend:function () {
             if (projectUrl==""){
@@ -225,9 +277,11 @@ function updateProjectFile(){
     })
 }
 
-function uploadProject(projectId){
+function uploadProject(projectId,id){
     $("#projectId").val(projectId);
+    $("#id").val(id);
     console.log(projectId);
+    console.log(id);
     layui.use("layer",function () {
         var layer=layui.layer;
         layer.open({
@@ -240,6 +294,24 @@ function uploadProject(projectId){
         });
     })
 }
+function uploadMpp(projectId){
+    $("#project_Id").val(projectId);
+    console.log("项目Id"+projectId);
+    layui.use("layer",function () {
+        var layer=layui.layer;
+        layer.open({
+            //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+            type: 1,
+            title: "项目规划",
+            area: ['400px',"200px"],
+            offset: '100px',
+            content: $("#uploadMpp") //引用的弹出层的页面层的方式加载修改界面表单
+        });
+    })
+}
+
+
+
 
 function delOrder(id) {
     if (confirm("确定删除该订单吗？")){
@@ -321,11 +393,19 @@ function closeUp() {
         var element=layui.element;
         layer.closeAll();
         element.progress('progress', 0);
+        element.progress('progressMpp', 0);
     });
     $("#uploadState").html("");
     $("#projectId").val("");
     $("#docUrl").val("");
     $("#uploadUpdateTest").css("display","none");
+    $("#id").val("");
+
+    $("#uploadState2").html("");
+    $("#project_Id").val("");
+    $("#mppUrl").val("");
+    $("#uploadMpp").css("display","none");
+
 }
 function findProject(){
     location.href=path+"/project?projectName="+$("#projectName").val();
